@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "npx ts-node .",
-    "lint": "eslint .",
+    "lint": "eslint src/**/*.{ts,tsx,js,jsx}",
     "type-check": "tsc --noEmit"
   },
   "keywords": [],
