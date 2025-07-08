@@ -1,0 +1,55 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+
+jobs:
+  lint-and-typecheck:
+    name: Lint and Type Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            **/*.{ts,tsx,js,jsx}
+            !**/node_modules/**
+            !**/.next/**
+            !**/dist/**
+
+      - name: Run ESLint on changed files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
+          pnpm turbo lint --filter=...[${{ github.event.pull_request.base.sha || 'HEAD~1' }}]
+
+      - name: Run TypeScript type check
+        run: pnpm turbo type-check --filter=...[${{ github.event.pull_request.base.sha || 'HEAD~1' }}]
+
+      - name: Run full lint if no changed files detected
+        if: steps.changed-files.outputs.any_changed == 'false'
+        run: pnpm turbo lint
