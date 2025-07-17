@@ -12,6 +12,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "react": "^19.0.0",
+    "@types/react": "^19"
+  },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.1",
     "@storybook/addon-a11y": "^9.0.17",

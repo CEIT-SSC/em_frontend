@@ -55,6 +55,13 @@ importers:
   packages/core: {}
 
   packages/ui:
+    dependencies:
+      '@types/react':
+        specifier: ^19
+        version: 19.1.8
+      react:
+        specifier: ^19.0.0
+        version: 19.1.0
     devDependencies:
       '@chromatic-com/storybook':
         specifier: ^4.0.1
