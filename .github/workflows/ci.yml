@@ -47,10 +47,10 @@ jobs:
         if: steps.changed-files.outputs.any_changed == 'true'
         run: |
           echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
-          pnpm turbo lint --filter=...[${{ github.event.pull_request.base.sha || 'HEAD~1' }}]
+          pnpm turbo lint
 
       - name: Run TypeScript type check
-        run: pnpm turbo type-check --filter=...[${{ github.event.pull_request.base.sha || 'HEAD~1' }}]
+        run: pnpm turbo type-check
 
       - name: Run full lint if no changed files detected
         if: steps.changed-files.outputs.any_changed == 'false'
