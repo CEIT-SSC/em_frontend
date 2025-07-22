@@ -31,5 +31,8 @@
     "../../**/*.tsx",
     "../../.next/types/**/*.ts",
     ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "../../packages/ui/stories/**/*"
   ]
 }
