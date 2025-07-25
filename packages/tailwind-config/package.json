@@ -1,0 +1,22 @@
+{
+  "name": "@ssc/tailwind-config",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Shared Tailwind CSS configuration",
+  "main": "tailwind.config.js",
+  "exports": {
+    ".": "./tailwind.config.js",
+    "./postcss": "./postcss.config.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.0",
+    "tailwindcss": "3"
+  }
+}
