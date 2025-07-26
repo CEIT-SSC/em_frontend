@@ -55,7 +55,7 @@ export const Small: Story = {
 
 export const Outline: Story = {
     args: {
-        mode: "outline",
-        label: 'Button',
+      mode: "outline",
+      label: 'Button',
     }
 }
