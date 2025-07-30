@@ -23,7 +23,7 @@ const TextField = ({ label, id, name, guidance = "" }: Props) => {
         />
       </fieldset>
       {guidance && (
-        <p className="flex gap-1 text-[#676A6E]">
+        <p className="flex items-center gap-1 text-[#676A6E]">
           <HiOutlineExclamation size={20} />
           {guidance}
         </p>

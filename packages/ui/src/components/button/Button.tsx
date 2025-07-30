@@ -1,17 +1,18 @@
 import React from "react";
-import type { ReactNode } from "react";
+import { IconType } from "react-icons";
+import clsx from "clsx";
 
 interface Props {
   mode?: "primary" | "secondary" | "outline";
-  size?: "small" | "medium" | "large";
+  size?: Size;
   label?: string;
-  backgroundColor?: string;
-  prefixIcon?: () => ReactNode;
-  suffixIcon?: () => ReactNode;
+  className?: string;
+  prefixIcon?: IconType;
+  suffixIcon?: IconType;
   onClick?: () => void;
 }
 
-enum Size {
+export enum Size {
   small = "min-h-9 min-w-16",
   medium = "min-h-12 min-w-20",
   large = "min-h-15 min-w-24",
@@ -19,53 +20,44 @@ enum Size {
 
 enum Variant {
   primary = "bg-linear-45 from-[#FF715B] from-40% to-[#CB48B7] to-80%",
+  secondary = "",
   outline = "text-transparent bg-clip-text " + primary,
-}
-
-enum BackgroundColors {
-  transparent = "bg-transparent",
-  blue = "bg-blue-500",
 }
 
 const Button = ({
   mode = "secondary",
-  size = "medium",
+  size = Size.medium,
   label = "",
-  backgroundColor = "transparent",
-  prefixIcon,
-  suffixIcon,
+  className = "",
+  prefixIcon: PrefixIcon,
+  suffixIcon: SuffixIcon,
   onClick,
 }: Props) => {
-  const getBackgroundClass = () => {
-    if (mode === "secondary") {
-      return (
-        BackgroundColors[backgroundColor as keyof typeof BackgroundColors] ||
-        "bg-transparent"
-      );
-    }
-    return Variant[mode];
-  };
-
-  const background =
-    mode === "secondary" ? getBackgroundClass() : Variant.primary;
+  const isSecondary = mode === "secondary";
 
   return (
     <div
-      className={"w-fit h-fit rounded-lg overflow-hidden p-px " + background}
+      className={clsx("w-fit h-fit rounded-lg overflow-hidden p-px", {
+        [Variant.primary]: !isSecondary,
+        "bg-transparent": isSecondary,
+      })}
     >
-      <div className={mode === "outline" ? "bg-black rounded-lg" : ""}>
+      <div className={clsx({ "bg-black rounded-lg": mode === "outline" })}>
         <button
-          className={[
-            Size[size],
-            "px-3 py-2 cursor-pointer",
+          className={clsx(
+            size,
+            "px-3 py-2 cursor-pointer rounded-lg",
             "flex gap-2 justify-center items-center",
-            getBackgroundClass(),
-          ].join(" ")}
+            className,
+            {
+              [Variant[mode]]: !isSecondary,
+            }
+          )}
           onClick={onClick}
         >
-          {prefixIcon && prefixIcon()}
+          {PrefixIcon && <PrefixIcon />}
           {label}
-          {suffixIcon && suffixIcon()}
+          {SuffixIcon && <SuffixIcon />}
         </button>
       </div>
     </div>
