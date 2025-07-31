@@ -6,10 +6,10 @@ export default {
   content: [
     "./stories/**/*.{js,ts,jsx,tsx,mdx}",
     "./.storybook/**/*.{js,ts,jsx,tsx}",
+    "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     ...tailwindConfig.theme,
   },
   plugins: [],
-}
-
+};

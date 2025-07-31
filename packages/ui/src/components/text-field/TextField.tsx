@@ -11,7 +11,7 @@ interface Props {
 const TextField = ({ label, id, name, guidance = "" }: Props) => {
   return (
     <div>
-      <fieldset className="relative rounded-xl p-px bg-[#4F5154] focus-within:bg-linear-45 from-[#FF715B] from-40% to-[#CB48B7] to-80%">
+      <fieldset className="relative rounded-xl p-px bg-[#4F5154] focus-within:default-gradient">
         <legend className="absolute top-0 start-4 -translate-y-1/2 bg-black mx-2">
           {label}
         </legend>

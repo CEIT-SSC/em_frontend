@@ -72,6 +72,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4
+        version: 4.1.8
       '@types/react':
         specifier: ^19
         version: 19.1.8
