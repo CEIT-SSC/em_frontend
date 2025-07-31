@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { fn } from 'storybook/test';
 
-import Button, { Size } from './Button';
+import Button, { Size, Variant } from './Button';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -28,7 +28,7 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {
-    mode: 'primary',
+    variant: Variant.primary,
     label: 'Button',
   },
 };
@@ -42,7 +42,7 @@ export const Secondary: Story = {
 export const Large: Story = {
   args: {
     size: Size.large,
-    mode: "primary",
+    variant: Variant.primary,
     label: 'Button',
   },
 };
@@ -50,14 +50,14 @@ export const Large: Story = {
 export const Small: Story = {
   args: {
     size: Size.small,
-    mode: "primary",
+    variant: Variant.primary,
     label: 'Button',
   },
 };
 
 export const Outline: Story = {
     args: {
-      mode: "outline",
+      variant: Variant.outline,
       label: 'Button',
     }
 }
