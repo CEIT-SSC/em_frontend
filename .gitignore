@@ -46,6 +46,8 @@ next-env.d.ts
 /.turbo/**
 /**/*/.turbo
 .next
+/.next
+/.next/**
 
 # storybook
 *storybook.log

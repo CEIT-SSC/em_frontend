@@ -17,7 +17,8 @@ const eslintConfig = [
   ...storybook.configs["flat/recommended"],
   {
     rules: {
-      "import/no-anonymous-default-export": "off"
+      "import/no-anonymous-default-export": "off",
+    "no-unused-vars": "off",
     }
   }
 ];

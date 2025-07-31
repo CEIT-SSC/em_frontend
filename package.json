@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@9.0.0",
+  "type": "module",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "devDependencies": {
     "turbo": "^2.5.4"
+  },
+  "scripts": {
+    "lint": "turbo run lint",
+    "lint:fix": "lint:fix --filter=core"
   }
 }
