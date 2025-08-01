@@ -18,6 +18,9 @@ export const TailwindTest = () => {
         <div className="bg-pink-300 h-16 rounded"></div>
         <div className="bg-yellow-300 h-16 rounded"></div>
       </div>
+      <div className="bg-linear-45 from-[#FF715B] from-40% to-[#CB48B7] to-80% text-white p-4 rounded-lg">
+        Gradient background test
+      </div>
     </div>
   );
 };
