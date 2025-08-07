@@ -2,6 +2,7 @@ import { HiArrowLeft } from "react-icons/hi";
 import FeatureCard from "./components/FeatureCard";
 import Navbar from "./components/Navbar";
 import Button, { Variant } from "@ui/components/button/Button";
+import MiniEvent from "./components/MiniEvent";
 
 export default function Home() {
   return (
@@ -42,9 +43,13 @@ export default function Home() {
           <FeatureCard />
           <FeatureCard />
         </div>
-        <div className="px-12 py-6 flex flex-col gap-6">
+        <div className="px-12 py-6 flex flex-col gap-8">
           <h2 className="text-5xl font-bold text-center">رویداد ها</h2>
-          <div></div>
+          <div className="flex justify-evenly">
+            <MiniEvent />
+            <MiniEvent />
+            <MiniEvent />
+          </div>
         </div>
       </main>
     </div>
