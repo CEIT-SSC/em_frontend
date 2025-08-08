@@ -3,12 +3,12 @@ import FeatureCard from "./components/FeatureCard";
 import Navbar from "./components/Navbar";
 import Button, { Variant } from "@ui/components/button/Button";
 import MiniEvent from "./components/MiniEvent";
+import TeamMemberCard from "./components/TeamMemberCard";
 
 export default function Home() {
   return (
     <div>
       <main>
-        <Navbar />
         <div className="flex gap-10">
           <img
             src="portal.png"
@@ -25,6 +25,7 @@ export default function Home() {
               با افراد هم‌فکر ارتباط برقرار کنید!
             </p>
             <Button
+              className="min-h-12 min-w-20 w-fit h-fit rounded-lg overflow-hidden p-px px-3 py-2 cursor-pointer flex gap-2 justify-center items-center"
               variant={Variant.primary}
               label="رویداد های پیش رو"
               suffixIcon={HiArrowLeft}
@@ -49,6 +50,28 @@ export default function Home() {
             <MiniEvent />
             <MiniEvent />
             <MiniEvent />
+          </div>
+        </div>
+        <div className="py-6">
+          <h2 className="text-5xl/[150%] font-bold text-center">تیم ما</h2>
+          <p className="text-[18px]/[150%] font-bold text-(--TextWhite) text-center">
+            منتخب انتخابات دور 19ام انجمن علمی مهندسی کامپیوتر امیرکبیر
+          </p>
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-16 py-8 px-4">
+            <TeamMemberCard />
+            <TeamMemberCard />
+            <TeamMemberCard />
+            <TeamMemberCard />
+            <TeamMemberCard />
+          </div>
+        </div>
+        <div className="flex flex-col gap-8 px-12 py-6">
+          <h2 className="text-5xl/[150%] font-bold text-center">حامیان ما</h2>
+          <div className="flex justify-center gap-9">
+            <img src="tapsi.svg" alt="tapsi" />
+            <img src="digi.svg" alt="digikala" />
+            <img src="bazar.svg" alt="bazar" />
+            <img src="snapp.svg" alt="snapp" />
           </div>
         </div>
       </main>
