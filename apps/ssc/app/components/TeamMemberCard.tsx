@@ -1,12 +1,12 @@
+import Image from "next/image";
 import React from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { HiArrowLeft } from "react-icons/hi";
 
 const TeamMemberCard = () => {
   return (
-    <div className="w-104 h-129 border rounded-3xl overflow-hidden">
-      <div className="h-75 default-gradient flex justify-center">
-        <img src="member.png" alt="member photo" className="h-75" />
+    <div className="w-104 min-h-129 border rounded-3xl overflow-hidden">
+      <div className="h-75 default-gradient flex justify-center items-end">
+        <Image width={280} height={280} src="/member.png" alt="member photo" />
       </div>
       <div className="flex flex-col gap-2.5 py-2.5 px-4">
         <div className="flex justify-between items-center">

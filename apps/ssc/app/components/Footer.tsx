@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const Footer = () => {
@@ -32,7 +33,13 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-box justify-center items-center">
-        <img src="logo.png" alt="ssc logo" className="w-25 h-30" />
+        <Image
+          width={100}
+          height={120}
+          src="/logo.png"
+          alt="ssc logo"
+          className="w-25 h-30"
+        />
       </div>
     </footer>
   );

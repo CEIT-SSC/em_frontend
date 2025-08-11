@@ -4,7 +4,7 @@ import { HiArrowLeft, HiOutlineArchive } from "react-icons/hi";
 
 const FeatureCard = () => {
   return (
-    <div className="w-100 h-110 p-2 flex flex-col justify-between gap-6 overflow-hidden">
+    <div className="w-100 min-h-110 p-2 flex flex-col justify-between gap-6 overflow-hidden">
       <HiOutlineArchive size={48} />
       <h3 className="text-[32px] font-bold">عنوان توضیح</h3>
       <p className="text-2xl text-(--TextWhite)">
@@ -15,7 +15,7 @@ const FeatureCard = () => {
       <Button
         className="-ms-3"
         label="اطلاعات بیشتر"
-        suffixIcon={HiArrowLeft}
+        // suffixIcon={HiArrowLeft}
       />
     </div>
   );

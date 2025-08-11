@@ -1,4 +1,5 @@
 import Button, { Variant, Size } from "@ui/components/button/Button";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -7,7 +8,13 @@ const Navbar = () => {
     <nav>
       <div className="flex justify-between items-center p-6">
         <div className="flex items-center gap-8">
-          <img src="logo.png" alt="ssc logo" className="w-[50px] h-[60px]" />
+          <Image
+            src="/logo.png"
+            alt="ssc logo"
+            width={50}
+            height={60}
+            className="w-[50px] h-[60px]"
+          />
           <Link href={"alaki"}>خانه</Link>
           <Link href={"alaki"}>رویداد ها</Link>
           <Link href={"alaki"}>دریافت مدرک</Link>
