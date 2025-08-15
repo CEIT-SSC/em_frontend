@@ -19,9 +19,9 @@ export enum Size {
 }
 
 const sizeClasses = {
-  [Size.small]: "min-h-9 min-w-16",
-  [Size.medium]: "min-h-12 min-w-20",
-  [Size.large]: "min-h-15 min-w-24",
+  [Size.small]: "h-9 min-w-16",
+  [Size.medium]: "h-12 min-w-20",
+  [Size.large]: "h-15 min-w-24",
 };
 
 export enum Variant {
@@ -46,25 +46,36 @@ const Button = ({
   onClick,
 }: Props) => {
   const isSecondary = variant === Variant.secondary;
+  const isOutline = variant === Variant.outline;
+
+  const radiusClass =
+    className.match(/\brounded(?:-[^\s]+)?\b/) || "rounded-lg";
 
   return (
     <div
-      className={clsx("w-fit h-fit rounded-lg overflow-hidden p-px", {
-        "default-gradient": !isSecondary,
-        "bg-transparent": isSecondary,
-      })}
+      className={clsx(
+        "overflow-hidden p-px",
+        sizeClasses[size],
+        {
+          "default-gradient": !isSecondary,
+          "bg-transparent": isSecondary,
+        },
+        className,
+        radiusClass
+      )}
     >
       <div
-        className={clsx({ "bg-black rounded-lg": variant === Variant.outline })}
+        className={clsx(
+          "w-full h-full",
+          { "bg-black": isOutline },
+          radiusClass
+        )}
       >
         <button
           className={clsx(
-            sizeClasses[size],
-            "px-3 py-2 cursor-pointer",
+            "w-full h-full px-3 py-2 cursor-pointer",
             "flex gap-2 justify-center items-center",
-            className,
-            variantClasses[variant],
-            { "rounded-lg": !isSecondary }
+            variantClasses[variant]
           )}
           onClick={onClick}
         >
