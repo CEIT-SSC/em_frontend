@@ -22,6 +22,8 @@ const EventList = async () => {
       poster: "/event.png",
       is_active: false,
       landing_url: "acpc",
+      description: "just an event",
+      manager: "the manager",
     },
   ];
 

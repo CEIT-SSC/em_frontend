@@ -9,6 +9,8 @@ export interface Event {
   poster: string;
   is_active: boolean;
   landing_url: string;
+  description: string;
+  manager: string;
 }
 
 const MiniEvent = ({ event }: { event: Event }) => {
@@ -38,15 +40,9 @@ const MiniEvent = ({ event }: { event: Event }) => {
               </span>
             )}
           </div>
-          <p className="text-[14px]">
-            دانشکده مهندسی کامپیوتر دانشگاه صنعتی امیرکبیر (پلی تکنیک تهران)
-          </p>
+          <p className="text-[14px]">{event.manager}</p>
         </div>
-        <p className="text-(--TextWhite)">
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-          استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
-          ستون و سطرآنچنان که لازم است، و برای شرایط فعلی
-        </p>
+        <p className="text-(--TextWhite)">{event.description}</p>
         <div className="w-full flex justify-between items-center">
           <a
             className="border rounded-full px-3 py-2"
