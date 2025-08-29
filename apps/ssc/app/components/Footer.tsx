@@ -3,18 +3,18 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-[#292F36] p-9 flex justify-between">
-      <div className="footer-box">
-        <h3>زبان</h3>
-        <div>
+    <footer className="w-full border-t border-[#292F36] p-9 flex justify-between">
+      <div className="flex flex-col gap-4">
+        <h3 className="text-3xl font-bold">زبان</h3>
+        <div className="flex flex-col gap-2">
           <p>فارسی</p>
           <p>English</p>
           <p>Arabic</p>
         </div>
       </div>
-      <div className="footer-box">
-        <h3>ارتباط با ما</h3>
-        <div>
+      <div className="flex-col gap-4 hidden md:flex">
+        <h3 className="text-3xl font-bold">ارتباط با ما</h3>
+        <div className="flex flex-col gap-2">
           <a href="">تلگرام</a>
           <a href="">یوتیوب</a>
           <a href="">لینکدین</a>
@@ -22,9 +22,9 @@ const Footer = () => {
           <a href="">contact.ssc@gmail.com</a>
         </div>
       </div>
-      <div className="footer-box">
-        <h3>رویداد ها</h3>
-        <div>
+      <div className="flex-col gap-4 hidden md:flex">
+        <h3 className="text-3xl font-bold">رویداد ها</h3>
+        <div className="flex flex-col gap-2">
           <a href="">مسابقات ACPC</a>
           <a href="">گیم کرفت (Game Craft)</a>
           <a href="">دوره های AAISS</a>

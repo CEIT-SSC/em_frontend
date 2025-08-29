@@ -1,30 +1,59 @@
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
-const TeamMemberCard = () => {
+interface TeamMemberCardProps {
+  name: string;
+  position: string;
+  photoUrl: string;
+  githubUrl?: string;
+  linkedinUrl?: string;
+}
+
+const TeamMemberCard = ({
+  name,
+  position,
+  photoUrl,
+  githubUrl,
+  linkedinUrl,
+}: TeamMemberCardProps) => {
   return (
-    <div className="w-104 min-h-129 border rounded-3xl overflow-hidden">
-      <div className="h-75 default-gradient flex justify-center items-end">
-        <Image width={280} height={280} src="/member.png" alt="member photo" />
+    <div className="w-96 border rounded-3xl overflow-hidden">
+      <div className="relative h-1/2 min-h-44">
+        <div className="h-3/4 default-gradient flex justify-center items-end" />
+        <Image
+          width={200}
+          height={200}
+          src={photoUrl}
+          alt="member photo"
+          className="absolute top-1/2 left-1/2 translate-[-50%] w-36 h-36 rounded-full object-cover border-2 border-mainWhite"
+        />
       </div>
-      <div className="flex flex-col gap-2.5 py-2.5 px-4">
-        <div className="flex justify-between items-center">
-          <h4 className="text-2xl/[150%] font-semibold">اشکان چاجی</h4>
-          <p className="text-(--TextWhite) font-semibold">دبیر انجمن علمی</p>
+      <div className="flex flex-col gap-2.5 py-4 px-4">
+        <div className="flex flex-col justify-between items-center gap-4">
+          <h4 className="text-4xl font-semibold text-mainWhite">{name}</h4>
+          <p className="text-whiteText font-semibold">{position}</p>
         </div>
-        <p className="text-(--TextWhite)/[150%]">
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-          استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
-          ستون و سطرآنچنان که لازم است، و برای شرایط فعلی
-        </p>
-        <div className="flex justify-center gap-2.5 text-2xl">
-          <a href="">
-            <FaGithub />
-          </a>
-          <a href="">
-            <FaLinkedin />
-          </a>
+        <div className="relative flex justify-center gap-4 text-2xl py-4">
+          <div className="absolute w-full h-0.5 bg-whiteText opacity-20 top-1/2 -translate-y-1/2 -z-1"></div>
+          {githubUrl && (
+            <Link
+              href={githubUrl}
+              target="_blank"
+              className="bg-background p-2 border-1 border-white rounded-full flex"
+            >
+              <FaGithub />
+            </Link>
+          )}
+          {linkedinUrl && (
+            <Link
+              href={linkedinUrl}
+              target="_blank"
+              className="bg-background p-2 border-1 border-white rounded-full flex"
+            >
+              <FaLinkedin />
+            </Link>
+          )}
         </div>
       </div>
     </div>

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import clsx from "clsx";
+import ProgressBar from "./components/ProgressBar";
+import Providers from "./components/Providers";
 
 const vazirmatn = localFont({
   src: "../public/Vazirmatn.ttf",
@@ -20,10 +21,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa">
-      <body className={`${vazirmatn.className} antialiased`} dir="rtl">
-        <Navbar />
-        {children}
-        <Footer />
+      <body className={clsx("antialiased", vazirmatn.className)} dir="rtl">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

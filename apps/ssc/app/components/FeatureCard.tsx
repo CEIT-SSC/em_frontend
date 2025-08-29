@@ -1,22 +1,17 @@
-import Button from "@ui/components/button/Button";
-import React from "react";
-import { HiArrowLeft, HiOutlineArchive } from "react-icons/hi";
+import { IconType } from "react-icons";
 
-const FeatureCard = () => {
+interface Props {
+  icon: IconType;
+  title: string;
+  description: string;
+}
+
+const FeatureCard = ({ icon: Icon, title, description }: Props) => {
   return (
-    <div className="w-100 min-h-110 p-2 flex flex-col justify-between gap-6 overflow-hidden">
-      <HiOutlineArchive size={48} />
-      <h3 className="text-[32px] font-bold">عنوان توضیح</h3>
-      <p className="text-2xl text-(--TextWhite)">
-        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
-        از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
-        سطرآنچنان که لازم است، و برای شرایط فعلی
-      </p>
-      <Button
-        className="-ms-3"
-        label="اطلاعات بیشتر"
-        // suffixIcon={HiArrowLeft}
-      />
+    <div className="w-full p-2 flex flex-col justify-between gap-4 overflow-hidden">
+      <Icon size={48} />
+      <h3 className="text-3xl font-bold text-center">{title}</h3>
+      <p className="text-2xl text-whiteText text-center">{description}</p>
     </div>
   );
 };
