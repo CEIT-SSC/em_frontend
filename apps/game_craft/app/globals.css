@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Font imports */
+@import url('/fonts/Estedad-v7.3/estedad.css');
+@import url('/fonts/vazirmatn-v33.003/Vazirmatn-font-face.css');
+@import url('/fonts/IRANYekanX/fontiran.css');
+@import url('/fonts/SF_Pro_Rounded/sfProRounded.css');
+
 /* Custom CSS variables for theme support */
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -25,6 +31,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  font-family: 'Estedad', 'Vazirmatn', sans-serif;
 }
 
 /* RTL support */
@@ -34,4 +41,13 @@ body {
 
 [dir="ltr"] {
   text-align: left;
+}
+
+/* Ant Design custom styles */
+.ant-message {
+  font-family: 'Estedad', 'Vazirmatn', sans-serif;
+}
+
+.ant-notification {
+  font-family: 'Estedad', 'Vazirmatn', sans-serif;
 }

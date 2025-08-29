@@ -1,4 +1,7 @@
+import createNextIntlPlugin from 'next-intl/plugin';
 import type { NextConfig } from 'next'
+
+const withNextIntl = createNextIntlPlugin('./lib/i18n.ts');
 
 const nextConfig: NextConfig = {
   transpilePackages: ['@ssc/ui', '@ssc/utils', '@ssc/core'],
@@ -10,4 +13,4 @@ const nextConfig: NextConfig = {
   }
 }
 
-export default nextConfig
+export default withNextIntl(nextConfig);
