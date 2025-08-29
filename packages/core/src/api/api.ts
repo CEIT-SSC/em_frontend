@@ -1,7 +1,7 @@
-import { apiPath, ApiPath } from "@core/types/ApiPaths";
-import { StorageKeys } from "@core/types/StorageKeys";
-import isProduction from "@core/utils/isProduction";
 import axios from "axios";
+import isProduction from "../utils/isProduction";
+import { StorageKeys } from "../types/StorageKeys";
+import { ApiPath, apiPath } from "../types/ApiPaths";
 
 const localhost = "http://localhost:3000";
 export const BASE_URL = isProduction ? process.env.BASE_URL : localhost;
