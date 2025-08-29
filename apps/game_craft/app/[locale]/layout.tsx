@@ -5,6 +5,7 @@ import { locales } from '@/lib/navigation';
 import { Locale } from '@/lib/navigation';
 import ThemeProvider from '@/components/providers/ThemeProvider';
 import AntDesignProvider from '@/components/providers/AntDesignProvider';
+import AuthProvider from '@/components/providers/AuthProvider';
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -34,9 +35,11 @@ export default async function LocaleLayout({
       <body className="min-h-screen bg-background text-foreground">
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
-            <AntDesignProvider locale={locale} direction={direction}>
-              {children}
-            </AntDesignProvider>
+            <AuthProvider>
+              <AntDesignProvider locale={locale} direction={direction}>
+                {children}
+              </AntDesignProvider>
+            </AuthProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
