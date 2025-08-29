@@ -15,11 +15,6 @@
     "isolatedModules": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "paths": {
-      "@ssc/ui/*": ["packages/ui/src/*"],
-      "@ssc/utils/*": ["packages/utils/src/*"],
-      "@ssc/core/*": ["packages/core/src/*"]
-    }
   },
   "include": ["apps/next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
