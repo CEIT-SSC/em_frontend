@@ -1,6 +1,6 @@
-import { Api } from "@core/api/api";
-import { ApiPath, apiPath } from "@core/types/ApiPaths";
 import { AxiosResponse } from "axios";
+import { Api } from "../api";
+import { apiPath, ApiPath } from "../../types/ApiPaths";
 
 interface RegisterRequest {
   email: string;

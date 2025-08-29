@@ -1,19 +1,19 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { fn } from 'storybook/test';
+import { fn } from "storybook/test";
 
-import Button, { Size, Variant } from './Button';
+import { Button, ButtonSize, ButtonVariant } from "./Button";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: 'Components/Button',
+  title: "Components/Button",
   component: Button,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    layout: 'centered',
+    layout: "centered",
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   // argTypes: {
   //   backgroundColor: { control: 'color' },
@@ -28,36 +28,36 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {
-    variant: Variant.primary,
-    label: 'Button',
+    variant: ButtonVariant.PRIMARY,
+    label: "Button",
   },
 };
 
 export const Secondary: Story = {
   args: {
-    label: 'Button',
+    label: "Button",
   },
 };
 
 export const Large: Story = {
   args: {
-    size: Size.large,
-    variant: Variant.primary,
-    label: 'Button',
+    size: ButtonSize.LARGE,
+    variant: ButtonVariant.PRIMARY,
+    label: "Button",
   },
 };
 
 export const Small: Story = {
   args: {
-    size: Size.small,
-    variant: Variant.primary,
-    label: 'Button',
+    size: ButtonSize.SMALL,
+    variant: ButtonVariant.PRIMARY,
+    label: "Button",
   },
 };
 
 export const Outline: Story = {
-    args: {
-      variant: Variant.outline,
-      label: 'Button',
-    }
-}
+  args: {
+    variant: ButtonVariant.OUTLINE,
+    label: "Button",
+  },
+};

@@ -1,26 +1,56 @@
 @import "tailwindcss";
+@import "@ssc/ui/styles.css";
 
 :root {
-  --background: #ffffff;
+  --background: hwb(0 100% 0%);
   --foreground: #171717;
+  --secondary-background: #292F36;
+  --TextWhite: #c7c7c7;
+  --MainRed: #931621;
+}
+
+.bprogress .bar {
+  --bprogress-color: linear-gradient(45deg, #ff715b -15%, #cb48b7 100%);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-secondary-background: var(--secondary-background);
+  --color-whiteText: var(--TextWhite);
+  --color-mainRed: var(--MainRed);
+  --color-mainWhite: #F3F7F0;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #171717;
     --foreground: #ededed;
   }
 }
 
+@layer utilities {
+  .default-gradient, .bg-gradient {
+    background-image: linear-gradient(45deg, #ff715b -15%, #cb48b7 100%);
+  }
+
+  .text-gradient {
+    background: linear-gradient(45deg, #ff715b -15%, #cb48b7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  line-height: normal;
+}
+
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: #f3f7f0;
   font-family: Arial, Helvetica, sans-serif;
 }
+

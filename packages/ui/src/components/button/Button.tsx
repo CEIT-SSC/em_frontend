@@ -2,9 +2,9 @@ import React from "react";
 import { IconType } from "react-icons";
 import clsx from "clsx";
 
-interface Props {
-  variant?: Variant;
-  size?: Size;
+export interface ButtonProps {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   label?: string;
   className?: string;
   prefixIcon?: IconType;
@@ -12,58 +12,76 @@ interface Props {
   onClick?: () => void;
 }
 
-export enum Size {
-  small,
-  medium,
-  large,
+export enum ButtonSize {
+  SMALL,
+  MEDIUM,
+  LARGE,
 }
 
 const sizeClasses = {
-  [Size.small]: "min-h-9 min-w-16",
-  [Size.medium]: "min-h-12 min-w-20",
-  [Size.large]: "min-h-15 min-w-24",
+  [ButtonSize.SMALL]: "h-9 min-w-16 leading-[1.5rem]",
+  [ButtonSize.MEDIUM]: "h-12 min-w-20",
+  [ButtonSize.LARGE]: "h-15 min-w-24",
 };
 
-export enum Variant {
-  primary,
-  secondary,
-  outline,
+export enum ButtonVariant {
+  PRIMARY,
+  SECONDARY,
+  OUTLINE,
+  TEXT,
 }
 
 const variantClasses = {
-  [Variant.primary]: "default-gradient",
-  [Variant.secondary]: "",
-  [Variant.outline]: "text-transparent bg-clip-text default-gradient",
+  [ButtonVariant.PRIMARY]: "default-gradient",
+  [ButtonVariant.SECONDARY]: "",
+  [ButtonVariant.OUTLINE]: "text-transparent bg-clip-text default-gradient",
 };
 
-const Button = ({
-  variant = Variant.secondary,
-  size = Size.medium,
+export const Button = ({
+  variant = ButtonVariant.SECONDARY,
+  size = ButtonSize.MEDIUM,
   label = "",
   className = "",
   prefixIcon: PrefixIcon,
   suffixIcon: SuffixIcon,
   onClick,
-}: Props) => {
-  const isSecondary = variant === Variant.secondary;
+}: ButtonProps) => {
+  const isSecondary = variant === ButtonVariant.SECONDARY;
+  const isText = variant === ButtonVariant.TEXT;
+  const isOutline = variant === ButtonVariant.OUTLINE;
+
+  const radiusClass =
+    className.match(/\brounded(?:-[^\s]+)?\b/) || "rounded-lg";
 
   return (
     <div
-      className={clsx("w-fit h-fit rounded-lg overflow-hidden p-px", {
-        "default-gradient": !isSecondary,
-        "bg-transparent": isSecondary,
-      })}
+      className={clsx(
+        "overflow-hidden p-px",
+        sizeClasses[size],
+        {
+          "default-gradient": !isSecondary && !isText,
+          "bg-transparent": isSecondary,
+        },
+        className,
+        radiusClass
+      )}
     >
       <div
-        className={clsx({ "bg-black rounded-lg": variant === Variant.outline })}
+        className={clsx("h-full", {
+          "bg-black rounded-lg": variant === ButtonVariant.OUTLINE,
+        })}
       >
         <button
           className={clsx(
-            sizeClasses[size],
-            "px-3 py-2 cursor-pointer rounded-lg",
+            "w-full h-full px-3 py-2 cursor-pointer",
             "flex gap-2 justify-center items-center",
+            "text-lg text-bold",
             className,
-            variantClasses[variant]
+            variantClasses[variant],
+
+            {
+              "rounded-lg": !isSecondary,
+            }
           )}
           onClick={onClick}
         >
@@ -75,5 +93,3 @@ const Button = ({
     </div>
   );
 };
-
-export default Button;

@@ -1,10 +1,20 @@
 {
   "name": "@ssc/ui",
   "version": "1.0.0",
-  "type": "module",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "require": "./lib/index.js",
+      "import": "./lib/index.js"
+    },
+    "./styles.css": "./lib/styles.css"
+  },
   "scripts": {
+    "dev": "tsc --watch & tailwindcss -i ./src/styles.css -o ./lib/styles.css --watch",
+    "build": "tsc && tailwindcss -i ./src/styles.css -o ./lib/styles.css --minify",
     "test": "echo \"Error: no test specified\" && exit 1",
     "type-check": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
@@ -34,6 +44,7 @@
     "postcss": "^8.5.0",
     "storybook": "^9.0.17",
     "tailwindcss": "^3.4.0",
+    "typescript": "^5",
     "vitest": "^3.2.4"
   }
 }
