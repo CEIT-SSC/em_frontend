@@ -67,7 +67,7 @@ export const Button = ({
       )}
     >
       <div
-        className={clsx({
+        className={clsx("h-full", {
           "bg-black rounded-lg": variant === ButtonVariant.OUTLINE,
         })}
       >

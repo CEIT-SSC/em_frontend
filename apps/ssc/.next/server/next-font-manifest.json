@@ -1,9 +1,12 @@
 {
   "app": {
-    "[project]/apps/ssc/app/_not-found/page": [
+    "[project]/apps/ssc/app/(auth)/login/page": [
       "static/media/Vazirmatn-s.p.bc63cb15.ttf"
     ],
-    "[project]/apps/ssc/app/page": [
+    "[project]/apps/ssc/app/(landings)/page": [
+      "static/media/Vazirmatn-s.p.bc63cb15.ttf"
+    ],
+    "[project]/apps/ssc/app/_not-found/page": [
       "static/media/Vazirmatn-s.p.bc63cb15.ttf"
     ]
   },

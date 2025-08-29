@@ -32,7 +32,7 @@ const Footer = () => {
           <a href="">لینوکس فست</a>
         </div>
       </div>
-      <div className="footer-box justify-center items-center">
+      <div className="flex justify-center items-center">
         <Image
           width={100}
           height={120}

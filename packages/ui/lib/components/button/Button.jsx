@@ -38,7 +38,7 @@ const Button = ({ variant = ButtonVariant.SECONDARY, size = ButtonSize.MEDIUM, l
             "default-gradient": !isSecondary && !isText,
             "bg-transparent": isSecondary,
         }, className, radiusClass)}>
-      <div className={(0, clsx_1.default)({
+      <div className={(0, clsx_1.default)("h-full", {
             "bg-black rounded-lg": variant === ButtonVariant.OUTLINE,
         })}>
         <button className={(0, clsx_1.default)("w-full h-full px-3 py-2 cursor-pointer", "flex gap-2 justify-center items-center", "text-lg text-bold", className, variantClasses[variant], {
