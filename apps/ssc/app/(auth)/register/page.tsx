@@ -1,6 +1,5 @@
-import { Button, ButtonSize, ButtonVariant, TextField } from "@ssc/ui";
+import { Button, ButtonVariant, TextField } from "@ssc/ui";
 import Link from "next/link";
-import { MdArrowBack } from "react-icons/md";
 
 const page = () => {
   return (
