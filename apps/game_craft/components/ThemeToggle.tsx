@@ -5,7 +5,20 @@ import { MoonOutlined, SunOutlined } from '@ant-design/icons'
 import { useTheme } from '@/components/providers/ThemeProvider'
 
 export default function ThemeToggle() {
-  const { darkMode, toggleTheme } = useTheme()
+  const { darkMode, toggleTheme, mounted } = useTheme()
+
+  // Don't render anything until mounted to prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <Button
+        type="text"
+        className="fixed top-4 right-4"
+        disabled
+      >
+        Theme
+      </Button>
+    )
+  }
 
   return (
     <Button

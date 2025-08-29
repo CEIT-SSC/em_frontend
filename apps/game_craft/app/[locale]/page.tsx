@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from 'antd';
 import { useTranslations } from 'next-intl';
 import { GameCraftTimeline } from '@/components/shared/Timeline';
