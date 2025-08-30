@@ -11,7 +11,7 @@ const { useToken } = theme
 
 export default function SignUpPage() {
   const { token } = useToken()
-  const t = useTranslations('auth')
+  const t = useTranslations('app.auth')
   const [displayName, setDisplayName] = useState('')
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')

@@ -10,7 +10,7 @@ const { useToken } = theme
 
 export default function LoginPage() {
   const { token } = useToken()
-  const t = useTranslations('auth')
+  const t = useTranslations('app.auth')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)

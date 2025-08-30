@@ -11,7 +11,7 @@ const { useToken } = theme
 
 export default function ForgotPasswordPage() {
   const { token } = useToken()
-  const t = useTranslations('auth')
+  const t = useTranslations('app.auth')
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [resetSent, setResetSent] = useState(false)
