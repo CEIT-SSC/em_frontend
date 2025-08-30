@@ -33,15 +33,6 @@ const defaultTheme = {
   },
 }
 
-const lightTheme = {
-  ...defaultTheme,
-  algorithm: theme.defaultAlgorithm,
-  token: {
-    ...defaultTheme.token,
-    colorBgBase: "#f5f5f5",
-  }
-}
-
 const darkTheme = {
   ...defaultTheme,
   algorithm: theme.darkAlgorithm,
@@ -57,27 +48,22 @@ export default function AntDesignProvider({
   direction
 }: AntDesignProviderProps) {
   const { darkMode } = useTheme()
-  const selectedTheme = darkMode ? darkTheme : lightTheme
 
   // Configure global message and notification
   message.config({
-    top: 0,
-    duration: 3,
+    top: 100,
+    duration: 2,
     maxCount: 3,
-    rtl: direction === 'rtl',
-    prefixCls: 'my-message',
   })
 
   notification.config({
-    placement: 'bottomLeft',
-    duration: 3,
-    rtl: direction === 'rtl',
-    prefixCls: 'my-notification',
+    placement: 'topRight',
+    duration: 4.5,
   })
 
   return (
     <ConfigProvider
-      theme={selectedTheme}
+      theme={darkMode ? darkTheme : defaultTheme}
       direction={direction}
     >
       {children}

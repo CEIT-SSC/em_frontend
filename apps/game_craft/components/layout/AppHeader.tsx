@@ -1,71 +1,66 @@
 'use client'
 
-import { Button, Divider, Flex, Grid, Layout, Space, Switch, theme } from 'antd'
-import { useEffect, useState } from 'react'
-import { usePathname } from 'next/navigation'
-import { useTranslations, useLocale } from 'next-intl'
-import { MenuOutlined, MoonFilled, SunFilled } from '@ant-design/icons'
-import Image from 'next/image'
-import { Link, useRouter } from '@/lib/navigation'
-import { useTheme } from '@/components/providers/ThemeProvider'
-import { useAuth } from '@/components/providers/AuthProvider'
-import { useMainNavigations } from '@/lib/config/navigation'
-import MainDrawer from './MainDrawer'
+import { Button, Divider, Flex, Grid, Layout, Space, Switch, theme } from 'antd';
+import { useEffect, useState } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { MenuOutlined, MoonFilled, SunFilled } from '@ant-design/icons';
+import Image from 'next/image';
 
-const { useToken } = theme
-const { Header } = Layout
-const { useBreakpoint } = Grid
+const { useToken } = theme;
+const { Header } = Layout;
+const { useBreakpoint } = Grid;
 
-interface AppHeaderProps {
-  className?: string
+interface NavigationItem {
+  name: string;
+  route: string;
 }
 
-export default function AppHeader({ className = '' }: AppHeaderProps) {
-  const mainNavigations = useMainNavigations()
-  const [shadow, setShadow] = useState(false)
-  const pathname = usePathname()
-  const { token } = useToken()
-  const t = useTranslations('app')
-  const locale = useLocale()
-  const { darkMode, toggleTheme } = useTheme()
-  const { isAuthenticated, logout, user } = useAuth()
-  const screens = useBreakpoint()
-  const [drawerOpen, setDrawerOpen] = useState(false)
-  const router = useRouter()
+export function AppHeader() {
+  const [shadow, setShadow] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+  const { token } = useToken();
+  const t = useTranslations('app');
+  const screens = useBreakpoint();
+
+  // Main navigation items matching the React project
+  const mainNavigations: NavigationItem[] = [
+    { name: t('mainNavigation.home'), route: '/' },
+    { name: t('mainNavigation.news'), route: '/news' },
+    { name: t('mainNavigation.faq'), route: '/faq' },
+    { name: t('mainNavigation.staffs'), route: '/staffs' },
+    { name: t('mainNavigation.history'), route: '/history' },
+    { name: t('mainNavigation.sponsors'), route: '/sponsors' },
+    { name: t('mainNavigation.dashboard'), route: '/dashboard' },
+  ];
 
   const toggleDrawerOpen = () => {
-    setDrawerOpen(!drawerOpen)
-  }
+    setDrawerOpen(!drawerOpen);
+  };
+
+  const toggleTheme = () => {
+    setDarkMode(!darkMode);
+  };
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
-      setShadow(true)
+      setShadow(true);
     } else {
-      setShadow(false)
+      setShadow(false);
     }
-  }
+  };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
-  const isActive = (path: string) => pathname === path
-
-  const handleLanguageSwitch = () => {
-    const newLocale = locale === 'fa' ? 'en' : 'fa'
-    router.replace(pathname, { locale: newLocale })
-  }
-
-  const handleLogout = async () => {
-    try {
-      await logout()
-    } catch (error) {
-      console.error('Logout error:', error)
-    }
-  }
+  const isActive = (path: string) => pathname === path;
 
   return (
     <Header
@@ -83,34 +78,31 @@ export default function AppHeader({ className = '' }: AppHeaderProps) {
         boxShadow: shadow ? '0 10px 20px rgba(0, 0, 0, 0.5)' : 'none',
         padding: '0.5rem 2rem',
       }}
-      className={className}
     >
       {screens.lg ? (
         <Flex align="center" justify="space-between" style={{ width: '100%', height: '100%' }}>
           <Flex align="center" justify="center" style={{ height: '100%' }} gap="large">
-            <Link href="/">
-              <Image
-                src="/svg/dark-3d.svg"
-                alt="GameCraft Logo"
-                width={60}
-                height={60}
-                style={{ height: '80%', width: 'auto', maxHeight: '60px' }}
-              />
-            </Link>
+            <Image
+              src="/assets/svg/dark-3d.svg"
+              alt="gamecraft-logo"
+              width={60}
+              height={60}
+              style={{ height: '80%', width: 'auto', maxHeight: '60px' }}
+            />
 
             <Space size="small">
-              {mainNavigations.map(item => (
-                <Link key={item.route} href={item.route}>
-                  <Button
-                    type="primary"
-                    style={{
-                      fontWeight: 'bolder',
-                      ...(isActive(item.route) ? { color: token.colorPrimary } : {})
-                    }}
-                  >
-                    {item.name}
-                  </Button>
-                </Link>
+              {mainNavigations.map((item) => (
+                <Button
+                  key={item.route}
+                  type="primary"
+                  onClick={() => router.push(item.route)}
+                  style={{
+                    fontWeight: 'bolder',
+                    ...(isActive(item.route) ? { color: '#01B582' } : {}),
+                  }}
+                >
+                  {item.name}
+                </Button>
               ))}
             </Space>
           </Flex>
@@ -121,54 +113,39 @@ export default function AppHeader({ className = '' }: AppHeaderProps) {
               shape="circle"
               onClick={toggleTheme}
               size="large"
-              icon={darkMode ?
-                <MoonFilled style={{ color: 'white' }} /> :
-                <SunFilled style={{ color: 'white' }} />
+              icon={
+                darkMode ? (
+                  <MoonFilled style={{ color: 'white' }} />
+                ) : (
+                  <SunFilled style={{ color: 'white' }} />
+                )
               }
             />
             <Switch
               checkedChildren="En"
               unCheckedChildren="Fa"
-              checked={locale !== 'fa'}
-              onClick={handleLanguageSwitch}
+              checked={true} // Default to English for now
+              defaultChecked
             />
             <Divider
               type="vertical"
               style={{ height: '50%', borderWidth: '4px', borderRadius: '8px', margin: 0 }}
             />
             <Space size="small">
-              {isAuthenticated && user ? (
-                <>
-                  <span style={{ color: 'white', fontWeight: 'bold' }}>
-                    {user.username}
-                  </span>
-                  <Link href="/dashboard">
-                    <Button type="primary" style={{ fontWeight: 'bolder' }}>
-                      {t('mainNavigation.dashboard')}
-                    </Button>
-                  </Link>
-                  <Button
-                    type="primary"
-                    style={{ fontWeight: 'bolder' }}
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Link href="/auth/signup">
-                    <Button type="primary" style={{ fontWeight: 'bolder' }}>
-                      {t('auth.signUp')}
-                    </Button>
-                  </Link>
-                  <Link href="/auth/login">
-                    <Button type="primary" style={{ fontWeight: 'bolder' }}>
-                      {t('auth.login')}
-                    </Button>
-                  </Link>
-                </>
-              )}
+              <Button
+                type="primary"
+                style={{ fontWeight: 'bolder' }}
+                onClick={() => router.push('/signup')}
+              >
+                {t('auth.signUp')}
+              </Button>
+              <Button
+                type="primary"
+                style={{ fontWeight: 'bolder' }}
+                onClick={() => router.push('/login')}
+              >
+                {t('auth.login')}
+              </Button>
             </Space>
           </Flex>
         </Flex>
@@ -181,18 +158,16 @@ export default function AppHeader({ className = '' }: AppHeaderProps) {
             icon={<MenuOutlined />}
             onClick={toggleDrawerOpen}
           />
-          <Link href="/">
-            <Image
-              src="/svg/dark-3d.svg"
-              alt="GameCraft Logo"
-              width={60}
-              height={60}
-              style={{ height: '60%', width: 'auto', maxHeight: '60px' }}
-            />
-          </Link>
-          <MainDrawer open={drawerOpen} toggleDrawerOpen={toggleDrawerOpen} />
+          <Image
+            src="/assets/svg/dark-3d.svg"
+            alt="gamecraft-logo"
+            width={60}
+            height={60}
+            style={{ height: '60%', width: 'auto', maxHeight: '60px' }}
+          />
+          {/* Mobile drawer would go here */}
         </Flex>
       )}
     </Header>
-  )
+  );
 }

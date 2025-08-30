@@ -1,10 +1,18 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { User } from '@/lib/api/services/user'
-import { login as apiLogin, logout as apiLogout, AuthResponse } from '@/lib/api/services/auth'
-import { getCurrentUser } from '@/lib/api/services/user'
-import storage from '@/lib/utils/storage'
+
+interface User {
+  id: string
+  email: string
+  name: string
+}
+
+interface AuthResponse {
+  success: boolean
+  user?: User
+  message?: string
+}
 
 interface AuthContextType {
   user: User | null
@@ -33,81 +41,60 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
-  const isAuthenticated = !!user
-
-  // Initialize auth state on mount
   useEffect(() => {
+    // Check for existing authentication on mount
     const initializeAuth = async () => {
-      const token = storage.get<string>('token')
-
-      if (token) {
-        try {
-          const userData = await getCurrentUser()
-          setUser(userData)
-        } catch (error) {
-          // Token is invalid, clear storage
-          storage.remove('token')
-          storage.remove('refreshToken')
-          storage.remove('user')
+      try {
+        const token = localStorage.getItem('authToken')
+        if (token) {
+          // In a real app, you would validate the token with your API
+          // For now, we'll just set loading to false
         }
+      } catch (error) {
+        console.error('Error initializing auth:', error)
+      } finally {
+        setIsLoading(false)
       }
-
-      setIsLoading(false)
     }
 
     initializeAuth()
   }, [])
 
   const login = async (email: string, password: string): Promise<AuthResponse> => {
+    setIsLoading(true)
     try {
-      const response = await apiLogin(email, password)
-
-      if (response.access) {
-        storage.set('token', response.access)
-        if (response.refresh) {
-          storage.set('refreshToken', response.refresh)
-        }
-        if (response.user) {
-          setUser(response.user as User)
-          storage.set('user', response.user)
-        }
+      // Mock login implementation
+      // In a real app, this would call your API
+      const mockUser: User = {
+        id: '1',
+        email,
+        name: email.split('@')[0]
       }
 
-      return response
+      setUser(mockUser)
+      localStorage.setItem('authToken', 'mock-token')
+
+      return { success: true, user: mockUser }
     } catch (error) {
-      throw error
+      return { success: false, message: 'Login failed' }
+    } finally {
+      setIsLoading(false)
     }
   }
 
   const logout = async (): Promise<void> => {
-    try {
-      await apiLogout()
-      setUser(null)
-      storage.remove('token')
-      storage.remove('refreshToken')
-      storage.remove('user')
-    } catch (error) {
-      // Even if API call fails, clear local state
-      setUser(null)
-      storage.remove('token')
-      storage.remove('refreshToken')
-      storage.remove('user')
-    }
+    setUser(null)
+    localStorage.removeItem('authToken')
   }
 
   const refreshUser = async (): Promise<void> => {
-    try {
-      const userData = await getCurrentUser()
-      setUser(userData)
-      storage.set('user', userData)
-    } catch (error) {
-      console.error('Failed to refresh user data:', error)
-    }
+    // Mock refresh implementation
+    // In a real app, this would fetch current user from API
   }
 
   const value: AuthContextType = {
     user,
-    isAuthenticated,
+    isAuthenticated: !!user,
     isLoading,
     login,
     logout,
