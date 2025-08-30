@@ -1,19 +1,28 @@
+'use client'
+
+import { Flex, Layout, theme } from 'antd'
+
+const { useToken } = theme
+
 export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const { token } = useToken()
+
   return (
-    <div
-      className="min-h-screen w-full bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: "url('/images/pattern.svg')"
-      }}
-    >
-      <div className="min-h-screen w-full bg-gradient-to-br from-purple-600/10 to-blue-600/10">
+    <Flex style={{ width: '100vw', height: '100vh' }}>
+      <Layout
+        style={{
+          height: '100%',
+          width: '100%',
+          backgroundImage: "url('/images/pattern.svg')",
+          backgroundColor: token.colorPrimary
+        }}
+      >
         {children}
-      </div>
-    </div>
+      </Layout>
+    </Flex>
   );
 }
-

@@ -150,7 +150,9 @@
       "sendResetLink": "Send Reset Link",
       "backToLogin": "Back to Login",
       "resetLinkSent": "Reset link has been sent to your email",
-      "resetLinkError": "Failed to send reset link. Please try again."
+      "resetLinkError": "Failed to send reset link. Please try again.",
+      "rememberPassword": "Remember your password?",
+      "sendAnotherLink": "Send Another Link"
     },
     "intro": {
       "title": "GameCraft",

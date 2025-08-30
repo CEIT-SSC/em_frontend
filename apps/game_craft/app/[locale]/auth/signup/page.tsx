@@ -1,35 +1,29 @@
 'use client'
 
+import { Button, Col, Divider, Flex, Input, Row, theme, Typography } from 'antd'
 import { useState } from 'react'
-import { Button, Form, Input, Card, message, Flex } from 'antd'
-import { UserOutlined, LockOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons'
 import { useTranslations } from 'next-intl'
-import { useAuth } from '@/components/providers/AuthProvider'
-import { useRouter } from '@/lib/navigation'
-import { register } from '@/lib/api/services/auth'
+import { Link } from '@/lib/navigation'
+import Image from 'next/image'
+import { message } from 'antd'
+
+const { useToken } = theme
 
 export default function SignUpPage() {
+  const { token } = useToken()
+  const t = useTranslations('auth')
+  const [displayName, setDisplayName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const t = useTranslations('app.auth')
-  const router = useRouter()
 
-  const onFinish = async (values: {
-    username: string
-    email: string
-    phoneNumber: string
-    password: string
-    confirmPassword: string
-  }) => {
-    if (values.password !== values.confirmPassword) {
-      message.error('Passwords do not match!')
-      return
-    }
-
+  const handleSignUp = async () => {
     try {
       setLoading(true)
-      await register(values.username, values.email, values.phoneNumber, values.password)
+      // TODO: Implement signup API call
+      console.log('SignUp:', { displayName, email, phoneNumber, password })
       message.success('Registration successful! Please login.')
-      router.push('/auth/login')
     } catch (error) {
       console.error('Registration error:', error)
       message.error('Registration failed. Please try again.')
@@ -39,101 +33,134 @@ export default function SignUpPage() {
   }
 
   return (
-    <Flex
-      align="center"
-      justify="center"
-      style={{
-        minHeight: '80vh',
-        padding: '2rem',
-      }}
-    >
-      <Card title="Sign Up" className="w-full max-w-md">
-        <Form
-          name="signup"
-          onFinish={onFinish}
-          layout="vertical"
-          size="large"
+    <Flex style={{ width: '100%', height: '100%', padding: '1rem' }}>
+      <Row style={{ height: '100%', width: '100%' }}>
+        <Col
+          span={24}
+          order={2}
+          md={{ span: 12, order: 1 }}
         >
-          <Form.Item
-            name="username"
-            label="Username"
-            rules={[
-              { required: true, message: 'Please input your username!' },
-              { min: 3, message: 'Username must be at least 3 characters!' }
-            ]}
+          <Flex
+            align="center"
+            justify="center"
+            style={{ width: '100%', height: '100%' }}
           >
-            <Input
-              prefix={<UserOutlined />}
-              placeholder="Enter your username"
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="email"
-            label="Email"
-            rules={[
-              { required: true, message: 'Please input your email!' },
-              { type: 'email', message: 'Please enter a valid email!' }
-            ]}
-          >
-            <Input
-              prefix={<MailOutlined />}
-              placeholder="Enter your email"
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="phoneNumber"
-            label="Phone Number"
-            rules={[
-              { required: true, message: 'Please input your phone number!' }
-            ]}
-          >
-            <Input
-              prefix={<PhoneOutlined />}
-              placeholder="Enter your phone number"
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="password"
-            label="Password"
-            rules={[
-              { required: true, message: 'Please input your password!' },
-              { min: 6, message: 'Password must be at least 6 characters!' }
-            ]}
-          >
-            <Input.Password
-              prefix={<LockOutlined />}
-              placeholder="Enter your password"
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="confirmPassword"
-            label="Confirm Password"
-            rules={[
-              { required: true, message: 'Please confirm your password!' }
-            ]}
-          >
-            <Input.Password
-              prefix={<LockOutlined />}
-              placeholder="Confirm your password"
-            />
-          </Form.Item>
-
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="w-full"
-              loading={loading}
+            {/* SignUp Form */}
+            <Flex
+              vertical
+              align="center"
+              justify="space-between"
+              style={{
+                padding: '1rem',
+                borderRadius: token.borderRadius,
+                minWidth: '300px',
+                minHeight: '400px',
+                backgroundColor: token.colorBgBase,
+                width: '25vw',
+                height: '50vh'
+              }}
             >
-              Sign Up
-            </Button>
-          </Form.Item>
-        </Form>
-      </Card>
+              <Flex
+                vertical
+                align="center"
+                justify="center"
+                gap="small"
+                style={{ width: '100%' }}
+              >
+                <Divider type="horizontal" variant="solid" style={{ margin: 0 }}>
+                  <Image
+                    src="/images/light-3d-bulb.svg"
+                    alt="logo"
+                    width={50}
+                    height={50}
+                  />
+                </Divider>
+
+                <Input
+                  placeholder={t('displayName')}
+                  size="large"
+                  variant="filled"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                />
+
+                <Input
+                  placeholder={t('email')}
+                  size="large"
+                  variant="filled"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+
+                <Input
+                  placeholder={t('phoneNumber')}
+                  size="large"
+                  variant="filled"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+
+                <Input.Password
+                  placeholder={t('password')}
+                  size="large"
+                  variant="filled"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Flex>
+
+              <Flex
+                vertical
+                align="center"
+                justify="center"
+                style={{ width: '100%' }}
+                gap="small"
+              >
+                <Button
+                  type="primary"
+                  size="large"
+                  style={{ width: '100%' }}
+                  loading={loading}
+                  onClick={handleSignUp}
+                >
+                  {t('register')}
+                </Button>
+                <Flex align="center" justify="center" gap="small">
+                  <Typography.Text type="secondary">
+                    {t('alreadyHaveAccount')}
+                  </Typography.Text>
+                  <Link href="/auth/login">
+                    {t('login')}
+                  </Link>
+                </Flex>
+              </Flex>
+            </Flex>
+          </Flex>
+        </Col>
+        <Col
+          span={0}
+          order={1}
+          md={{ span: 12, order: 2 }}
+        >
+          <Flex
+            vertical
+            align="center"
+            justify="center"
+            style={{ height: '100%', width: '100%' }}
+            gap={1}
+          >
+            <Typography.Title style={{ color: token.colorBgBase, fontWeight: 'bolder' }}>
+              {t('signUp')}
+            </Typography.Title>
+            <Image
+              src="/images/dark-3d.svg"
+              alt="logo"
+              width={100}
+              height={100}
+            />
+          </Flex>
+        </Col>
+      </Row>
     </Flex>
   )
 }
