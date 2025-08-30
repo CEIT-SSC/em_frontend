@@ -5,6 +5,11 @@
       "game": "Game",
       "craft": "Craft"
     },
+    "intro": {
+      "title": "GameCraft 2024",
+      "subtitle": "Ultimate Game Development Competition",
+      "description": "Join the ultimate game development competition and showcase your creativity with fellow developers from around the world."
+    },
     "mainNavigation": {
       "home": "Home",
       "news": "News",
@@ -40,6 +45,48 @@
         "title": "Judging",
         "schedule": "December"
       }
+    },
+    "prizes": {
+      "title": "Competition Prizes",
+      "first": {
+        "title": "First Place",
+        "amount": "$5,000"
+      },
+      "second": {
+        "title": "Second Place",
+        "amount": "$3,000"
+      },
+      "third": {
+        "title": "Third Place",
+        "amount": "$1,000"
+      },
+      "special": {
+        "title": "Special Award",
+        "amount": "$500"
+      }
+    },
+    "workshops": {
+      "offline": {
+        "title": "Offline Workshops",
+        "description": "Join our in-person workshops to learn game development techniques from industry experts."
+      },
+      "online": {
+        "title": "Online Workshops",
+        "description": "Access our comprehensive online workshop series from anywhere in the world."
+      }
+    },
+    "sponsors": {
+      "title": "Our Sponsors"
+    },
+    "aboutUs": {
+      "title": "About GameCraft",
+      "description": "GameCraft is an annual game development competition that brings together creative minds to build innovative games. Our mission is to foster creativity, collaboration, and technical excellence in the gaming industry."
+    },
+    "buttons": {
+      "staffs": "Meet Our Team",
+      "learnMore": "Learn More",
+      "watchNow": "Watch Now",
+      "registerNow": "Register Now"
     },
     "staffs": {
       "title": "Our Team",
