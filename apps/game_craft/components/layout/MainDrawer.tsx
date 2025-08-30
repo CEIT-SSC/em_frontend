@@ -1,68 +1,71 @@
-'use client'
+"use client";
 
-import { Button, Drawer, Flex, Switch, theme } from 'antd'
-import { useTranslations, useLocale } from 'next-intl'
-import { usePathname } from 'next/navigation'
-import { MoonFilled, SunFilled } from '@ant-design/icons'
-import { useRouter } from '@/lib/navigation'
-import { useTheme } from '@/components/providers/ThemeProvider'
-import { useAuth } from '@/components/providers/AuthProvider'
-import { useMainNavigations } from '@/lib/config/navigation'
+import { Button, Drawer, Flex, Switch, theme } from "antd";
+import { useTranslations, useLocale } from "next-intl";
+import { usePathname } from "next/navigation";
+import { MoonFilled, SunFilled } from "@ant-design/icons";
+import { useRouter } from "@/lib/navigation";
+import { useTheme } from "next-themes";
+import { useAuth } from "@/components/providers/AuthProvider";
+import { useMainNavigations } from "@/lib/config/navigation";
 
-const { useToken } = theme
+const { useToken } = theme;
 
 interface MainDrawerProps {
-  open: boolean
-  toggleDrawerOpen: () => void
+  open: boolean;
+  toggleDrawerOpen: () => void;
 }
 
-export default function MainDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
-  const t = useTranslations('app')
-  const locale = useLocale()
-  const mainNavigations = useMainNavigations()
-  const pathname = usePathname()
-  const { token } = useToken()
-  const { darkMode, toggleTheme } = useTheme()
-  const { isAuthenticated, user, logout } = useAuth()
-  const router = useRouter()
+export default function MainDrawer({
+  open,
+  toggleDrawerOpen,
+}: MainDrawerProps) {
+  const t = useTranslations("app");
+  const locale = useLocale();
+  const mainNavigations = useMainNavigations();
+  const pathname = usePathname();
+  const { token } = useToken();
+  const { theme, setTheme } = useTheme();
+  const { isAuthenticated, user, logout } = useAuth();
+  const router = useRouter();
 
-  const isActive = (path: string) => pathname === path
+  const isActive = (path: string) => pathname === path;
 
   const handleLanguageSwitch = () => {
-    const newLocale = locale === 'fa' ? 'en' : 'fa'
+    const newLocale = locale === "fa" ? "en" : "fa";
     // Remove the current locale from the pathname and get the clean path
-    const currentPath = pathname.replace(`/${locale}`, '') || '/'
-    router.replace(currentPath, { locale: newLocale })
-  }
+    const currentPath = pathname.replace(`/${locale}`, "") || "/";
+    router.replace(currentPath, { locale: newLocale });
+  };
 
   const handleNavigation = (route: string) => {
-    toggleDrawerOpen()
-    router.push(route)
-  }
+    toggleDrawerOpen();
+    router.push(route);
+  };
 
   const handleLogout = async () => {
     try {
-      await logout()
-      toggleDrawerOpen()
+      await logout();
+      toggleDrawerOpen();
     } catch (error) {
-      console.error('Logout error:', error)
+      console.error("Logout error:", error);
     }
-  }
+  };
 
   return (
     <Drawer
-      placement={locale === 'fa' ? 'right' : 'left'}
+      placement={locale === "fa" ? "right" : "left"}
       open={open}
       width={300}
       closable={true}
-      title={t('name')}
+      title={t("name")}
       mask={true}
       maskClosable={true}
       onClose={toggleDrawerOpen}
       zIndex={100000000}
       style={{
         backgroundColor: token.colorBgBase,
-        backdropFilter: 'blur(10px)',
+        backdropFilter: "blur(10px)",
       }}
     >
       <Flex
@@ -70,8 +73,8 @@ export default function MainDrawer({ open, toggleDrawerOpen }: MainDrawerProps) 
         align="center"
         justify="start"
         style={{
-          width: '100%',
-          height: '100%',
+          width: "100%",
+          height: "100%",
         }}
       >
         <Flex
@@ -80,7 +83,7 @@ export default function MainDrawer({ open, toggleDrawerOpen }: MainDrawerProps) 
           justify="center"
           gap="small"
           style={{
-            width: '100%',
+            width: "100%",
           }}
         >
           <Flex
@@ -88,34 +91,34 @@ export default function MainDrawer({ open, toggleDrawerOpen }: MainDrawerProps) 
             justify="space-around"
             gap="small"
             style={{
-              width: '100%'
+              width: "100%",
             }}
           >
             <Button
               type="text"
               shape="circle"
-              onClick={toggleTheme}
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               size="large"
-              icon={darkMode ? <MoonFilled /> : <SunFilled />}
+              icon={theme === "dark" ? <MoonFilled /> : <SunFilled />}
             />
             <Switch
               checkedChildren="En"
               unCheckedChildren="Fa"
-              checked={locale !== 'fa'}
+              checked={locale !== "fa"}
               onClick={handleLanguageSwitch}
             />
           </Flex>
 
-          {mainNavigations.map(item => (
+          {mainNavigations.map((item) => (
             <Button
               key={item.route}
               type="dashed"
               size="large"
               onClick={() => handleNavigation(item.route)}
               style={{
-                width: '100%',
-                fontWeight: 'bolder',
-                ...(isActive(item.route) ? { color: token.colorPrimary } : {})
+                width: "100%",
+                fontWeight: "bolder",
+                ...(isActive(item.route) ? { color: token.colorPrimary } : {}),
               }}
             >
               {item.name}
@@ -127,7 +130,7 @@ export default function MainDrawer({ open, toggleDrawerOpen }: MainDrawerProps) 
             justify="center"
             gap="small"
             style={{
-              width: '100%'
+              width: "100%",
             }}
           >
             {isAuthenticated && user ? (
@@ -136,9 +139,9 @@ export default function MainDrawer({ open, toggleDrawerOpen }: MainDrawerProps) 
                   style={{ flex: 1 }}
                   size="large"
                   type="dashed"
-                  onClick={() => handleNavigation('/dashboard')}
+                  onClick={() => handleNavigation("/dashboard")}
                 >
-                  {t('mainNavigation.dashboard')}
+                  {t("mainNavigation.dashboard")}
                 </Button>
                 <Button
                   style={{ flex: 1 }}
@@ -155,17 +158,17 @@ export default function MainDrawer({ open, toggleDrawerOpen }: MainDrawerProps) 
                   style={{ flex: 1 }}
                   size="large"
                   type="dashed"
-                  onClick={() => handleNavigation('/auth/login')}
+                  onClick={() => handleNavigation("/auth/login")}
                 >
-                  {t('auth.login')}
+                  {t("auth.login")}
                 </Button>
                 <Button
                   style={{ flex: 1 }}
                   type="primary"
                   size="large"
-                  onClick={() => handleNavigation('/auth/signup')}
+                  onClick={() => handleNavigation("/auth/signup")}
                 >
-                  {t('auth.signUp')}
+                  {t("auth.signUp")}
                 </Button>
               </>
             )}
@@ -173,5 +176,5 @@ export default function MainDrawer({ open, toggleDrawerOpen }: MainDrawerProps) 
         </Flex>
       </Flex>
     </Drawer>
-  )
+  );
 }

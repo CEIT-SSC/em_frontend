@@ -1,41 +1,43 @@
-'use client'
+"use client";
 
-import { Divider, Flex, Grid, theme, Typography } from 'antd'
-import { usePathname } from 'next/navigation'
-import { useState } from 'react'
-import { useDashboardNavigations } from '@/lib/config/dashboard-navigation'
-import DashboardHeader from './DashboardHeader'
-import DashboardNavigationCard from './DashboardNavigationCard'
-import LogoWithText from '@/components/shared/LogoWithText'
-import MainDrawer from './MainDrawer'
+import { Divider, Flex, Grid, theme, Typography } from "antd";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { useDashboardNavigations } from "@/lib/config/dashboard-navigation";
+import DashboardHeader from "./DashboardHeader";
+import DashboardNavigationCard from "./DashboardNavigationCard";
+import LogoWithText from "@/components/shared/LogoWithText";
+import MainDrawer from "./MainDrawer";
+import { useResponsive } from "@/lib/hooks/useResponsive";
 
-const { useToken } = theme
-const { useBreakpoint } = Grid
+const { useToken } = theme;
 
 interface DashboardLayoutProps {
-  children: React.ReactNode
-  locale: string
+  children: React.ReactNode;
+  locale: string;
 }
 
 export function DashboardLayout({ children, locale }: DashboardLayoutProps) {
-  const screens = useBreakpoint()
-  const { token } = useToken()
-  const dashboardNavigations = useDashboardNavigations()
-  const pathname = usePathname()
-  const [drawerOpen, setDrawerOpen] = useState(false)
+  const screens = useResponsive();
+  const { token } = useToken();
+  const dashboardNavigations = useDashboardNavigations();
+  const pathname = usePathname();
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const toggleDrawerOpen = () => {
-    setDrawerOpen(!drawerOpen)
-  }
+    setDrawerOpen(!drawerOpen);
+  };
 
-  const currentPage = dashboardNavigations.find(item => pathname.includes(item.route))
+  const currentPage = dashboardNavigations.find((item) =>
+    pathname.includes(item.route)
+  );
 
   return (
     <Flex
       vertical
       style={{
-        width: '100%',
-        height: '100vh',
+        width: "100%",
+        height: "100vh",
       }}
     >
       <DashboardHeader onMenuClick={toggleDrawerOpen} />
@@ -46,15 +48,15 @@ export function DashboardLayout({ children, locale }: DashboardLayoutProps) {
         justify="start"
         flex={1}
         style={{
-          width: '100%',
+          width: "100%",
           backgroundColor: token.colorPrimary,
-          backgroundImage: 'url(/images/pattern.svg)',
-          padding: '1rem',
+          backgroundImage: "url(/images/pattern.svg)",
+          padding: "1rem",
         }}
         gap="large"
       >
         {screens.lg ? (
-          <Flex align="center" justify="center" style={{ width: '100%' }}>
+          <Flex align="center" justify="center" style={{ width: "100%" }}>
             <LogoWithText />
           </Flex>
         ) : null}
@@ -63,12 +65,12 @@ export function DashboardLayout({ children, locale }: DashboardLayoutProps) {
           align="start"
           justify="center"
           style={{
-            width: '100%',
+            width: "100%",
           }}
           gap="small"
         >
           {screens.lg ? (
-            <Flex flex={1} style={{ position: "sticky", top: '.5rem' }}>
+            <Flex flex={1} style={{ position: "sticky", top: ".5rem" }}>
               <DashboardNavigationCard />
             </Flex>
           ) : null}
@@ -80,7 +82,7 @@ export function DashboardLayout({ children, locale }: DashboardLayoutProps) {
             justify="start"
             style={{
               backgroundColor: token.colorBgBase,
-              height: '100%',
+              height: "100%",
               borderRadius: token.borderRadius,
             }}
           >
@@ -89,8 +91,8 @@ export function DashboardLayout({ children, locale }: DashboardLayoutProps) {
               align="center"
               justify="start"
               style={{
-                width: '100%',
-                height: '100%',
+                width: "100%",
+                height: "100%",
               }}
             >
               <Flex
@@ -98,18 +100,18 @@ export function DashboardLayout({ children, locale }: DashboardLayoutProps) {
                 align="center"
                 justify="center"
                 style={{
-                  width: '100%',
+                  width: "100%",
                   padding: token.padding,
-                  paddingBottom: 0
+                  paddingBottom: 0,
                 }}
               >
-                <Typography.Title level={3} style={{ margin: 0, fontWeight: 950 }}>
+                <Typography.Title
+                  level={3}
+                  style={{ margin: 0, fontWeight: 950 }}
+                >
                   {currentPage?.name}
                 </Typography.Title>
-                <Divider
-                  type="horizontal"
-                  variant="dashed"
-                />
+                <Divider type="horizontal" variant="dashed" />
               </Flex>
 
               <Flex
@@ -117,9 +119,9 @@ export function DashboardLayout({ children, locale }: DashboardLayoutProps) {
                 align="center"
                 justify="start"
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  overflow: 'auto'
+                  width: "100%",
+                  height: "100%",
+                  overflow: "auto",
                 }}
               >
                 {children}
@@ -135,5 +137,5 @@ export function DashboardLayout({ children, locale }: DashboardLayoutProps) {
         locale={locale}
       />
     </Flex>
-  )
+  );
 }

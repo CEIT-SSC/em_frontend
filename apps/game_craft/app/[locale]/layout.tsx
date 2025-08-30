@@ -1,10 +1,13 @@
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import { routing } from '@/lib/routing';
-import ThemeProvider from '@/components/providers/ThemeProvider';
-import AntDesignProvider from '@/components/providers/AntDesignProvider';
-import AuthProvider from '@/components/providers/AuthProvider';
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { routing } from "@/lib/routing";
+import { ThemeProvider } from "next-themes";
+import AntDesignProvider from "@/components/providers/AntDesignProvider";
+import AuthProvider from "@/components/providers/AuthProvider";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import Providers from "@/components/Providers";
+import "../globals.css";
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -17,7 +20,7 @@ export function generateStaticParams() {
 
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: LocaleLayoutProps) {
   // Await params in Next.js 15
   const { locale } = await params;
@@ -30,20 +33,22 @@ export default async function LocaleLayout({
   // Providing all messages to the client side is the easiest way to get started
   const messages = await getMessages();
 
-  const direction = locale === 'fa' ? 'rtl' : 'ltr';
+  const direction = locale === "fa" ? "rtl" : "ltr";
 
   return (
     <html lang={locale} dir={direction} suppressHydrationWarning>
-      <body className="min-h-screen bg-background text-foreground" suppressHydrationWarning>
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider>
-            <AuthProvider>
-              <AntDesignProvider locale={locale} direction={direction}>
-                {children}
-              </AntDesignProvider>
-            </AuthProvider>
-          </ThemeProvider>
-        </NextIntlClientProvider>
+      <body>
+        <ThemeProvider themes={["light", "dark"]}>
+          <AntdRegistry>
+            <NextIntlClientProvider messages={messages}>
+              <AuthProvider>
+                <AntDesignProvider locale={locale} direction={direction}>
+                  <Providers>{children}</Providers>
+                </AntDesignProvider>
+              </AuthProvider>
+            </NextIntlClientProvider>
+          </AntdRegistry>
+        </ThemeProvider>
       </body>
     </html>
   );
