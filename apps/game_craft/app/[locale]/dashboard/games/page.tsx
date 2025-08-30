@@ -1,3 +1,5 @@
+'use client'
+
 import { useTranslations } from 'next-intl'
 import { Flex, Typography, Card, Row, Col, Button, Tag } from 'antd'
 import { PlayCircleOutlined, TrophyOutlined, CalendarOutlined } from '@ant-design/icons'

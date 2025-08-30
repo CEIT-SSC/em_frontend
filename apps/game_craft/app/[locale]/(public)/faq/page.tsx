@@ -1,3 +1,5 @@
+'use client'
+
 import { useTranslations } from 'next-intl'
 import { Flex, Typography, Card, Collapse, Space } from 'antd'
 import { QuestionCircleOutlined } from '@ant-design/icons'

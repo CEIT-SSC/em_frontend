@@ -1,3 +1,5 @@
+'use client'
+
 import { useTranslations } from 'next-intl'
 import { Flex, Typography, Card, Row, Col, Space, Tag, Button } from 'antd'
 import { ReadOutlined, CalendarOutlined, UserOutlined } from '@ant-design/icons'

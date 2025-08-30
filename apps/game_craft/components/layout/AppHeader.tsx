@@ -34,7 +34,7 @@ export function AppHeader() {
     { name: t('mainNavigation.faq'), route: '/faq' },
     { name: t('mainNavigation.staffs'), route: '/staffs' },
     { name: t('mainNavigation.history'), route: '/history' },
-    { name: t('mainNavigation.sponsors'), route: '/sponsors' },
+    { name: t('mainNavigation.sponsors'), route: '/sponsor' },
     { name: t('mainNavigation.dashboard'), route: '/dashboard' },
   ];
 
