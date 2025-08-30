@@ -5,7 +5,6 @@ import { routing } from '@/lib/routing';
 import ThemeProvider from '@/components/providers/ThemeProvider';
 import AntDesignProvider from '@/components/providers/AntDesignProvider';
 import AuthProvider from '@/components/providers/AuthProvider';
-import { ClientLayout } from '@/components/layout/ClientLayout';
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -40,9 +39,7 @@ export default async function LocaleLayout({
           <ThemeProvider>
             <AuthProvider>
               <AntDesignProvider locale={locale} direction={direction}>
-                <ClientLayout>
-                  {children}
-                </ClientLayout>
+                {children}
               </AntDesignProvider>
             </AuthProvider>
           </ThemeProvider>
