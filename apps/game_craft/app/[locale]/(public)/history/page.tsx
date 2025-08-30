@@ -1,86 +1,58 @@
 'use client'
 
+import { Empty, Flex, Grid, theme, Typography } from 'antd'
 import { useTranslations } from 'next-intl'
-import { Flex, Typography, Card, Timeline, Space } from 'antd'
-import { HistoryOutlined, TrophyOutlined, RocketOutlined } from '@ant-design/icons'
-import { GameCraftTimeline } from '@/components/shared/Timeline'
+import Wave from '@/components/shared/Wave'
+
+const { useToken } = theme
+const { useBreakpoint } = Grid
 
 export default function HistoryPage() {
+  const { token } = useToken()
+  const screens = useBreakpoint()
   const t = useTranslations('app')
-
-  const historyItems = [
-    {
-      color: '#1890ff',
-      dot: <TrophyOutlined />,
-      children: (
-        <div>
-          <Typography.Title level={4}>GameCraft 2023</Typography.Title>
-          <Typography.Paragraph>
-            Our most successful event with over 200 participants and amazing game submissions.
-          </Typography.Paragraph>
-        </div>
-      )
-    },
-    {
-      color: '#52c41a',
-      dot: <RocketOutlined />,
-      children: (
-        <div>
-          <Typography.Title level={4}>GameCraft 2022</Typography.Title>
-          <Typography.Paragraph>
-            The first hybrid event combining online workshops with in-person presentations.
-          </Typography.Paragraph>
-        </div>
-      )
-    },
-    {
-      color: '#faad14',
-      dot: <HistoryOutlined />,
-      children: (
-        <div>
-          <Typography.Title level={4}>GameCraft 2021</Typography.Title>
-          <Typography.Paragraph>
-            Virtual edition due to pandemic, but still delivered high-quality workshops and mentorship.
-          </Typography.Paragraph>
-        </div>
-      )
-    }
-  ]
+  const historyViewPadding = screens.lg ? '3rem 5rem' : '3rem 2rem'
 
   return (
     <Flex
       vertical
+      align="center"
+      justify="center"
       style={{
         width: '100%',
-        minHeight: '80vh',
-        padding: '2rem',
-        maxWidth: '1200px',
-        margin: '0 auto'
+        minHeight: '100%',
+        backgroundColor: token.colorPrimary,
+        backgroundImage: "url('/images/pattern.svg')",
       }}
-      gap="large"
     >
-      <Card>
-        <Space direction="vertical" size="large" style={{ width: '100%' }}>
-          <div style={{ textAlign: 'center' }}>
-            <HistoryOutlined style={{ fontSize: '48px', color: '#1890ff', marginBottom: '1rem' }} />
-            <Typography.Title level={1}>
-              {t('mainNavigation.history')}
-            </Typography.Title>
-            <Typography.Paragraph style={{ fontSize: '18px' }}>
-              A journey through GameCraft's evolution and achievements
-            </Typography.Paragraph>
-          </div>
-
-          <Timeline
-            mode="left"
-            items={historyItems}
-            style={{ marginTop: '2rem' }}
-          />
-        </Space>
-      </Card>
-
-      {/* Include the current year timeline */}
-      <GameCraftTimeline />
+      <Flex
+        vertical
+        align="center"
+        justify="center"
+        style={{
+          width: '100%',
+          padding: historyViewPadding
+        }}
+      >
+        <Typography.Title style={{ color: 'white' }}>
+          {t('mainNavigation.history')}
+        </Typography.Title>
+        <Flex
+          vertical
+          align="center"
+          justify="center"
+          style={{
+            width: '100%',
+            minHeight: '200px',
+            backgroundColor: token.colorBgBase,
+            borderRadius: token.borderRadius,
+            padding: token.padding
+          }}
+        >
+          <Empty description="No history yet" />
+        </Flex>
+      </Flex>
+      <Wave width="100%" height="auto" fill={token.colorPrimary} style={{ transform: 'scaleY(-1) translateY(-2px)' }} />
     </Flex>
   )
 }

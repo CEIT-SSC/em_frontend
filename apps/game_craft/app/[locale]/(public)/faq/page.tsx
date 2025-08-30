@@ -1,67 +1,156 @@
 'use client'
 
+import { Flex, Grid, theme, Typography, Collapse, Space, Card } from 'antd'
 import { useTranslations } from 'next-intl'
-import { Flex, Typography, Card, Collapse, Space } from 'antd'
 import { QuestionCircleOutlined } from '@ant-design/icons'
+import Wave from '@/components/shared/Wave'
+
+const { useToken } = theme
+const { useBreakpoint } = Grid
 
 export default function FAQPage() {
+  const { token } = useToken()
+  const screens = useBreakpoint()
   const t = useTranslations('app')
+  const faqViewPadding = screens.lg ? '3rem 5rem' : '3rem 2rem'
 
-  const faqItems = [
+  const items = [
     {
       key: '1',
-      label: 'What is GameCraft?',
-      children: 'GameCraft is an annual game development competition organized by AUT Computer Engineering students. It provides workshops and mentorship for aspiring game developers.'
+      label: (
+        <Space>
+          <QuestionCircleOutlined style={{ color: token.colorPrimary }} />
+          <Typography.Text strong style={{ fontSize: '16px' }}>
+            {t('faq.howToParticipate.title')}
+          </Typography.Text>
+        </Space>
+      ),
+      children: (
+        <Typography.Paragraph style={{ fontSize: '16px', lineHeight: 1.6 }}>
+          {t('faq.howToParticipate.content')}
+        </Typography.Paragraph>
+      ),
     },
     {
       key: '2',
-      label: 'How can I participate?',
-      children: 'You can register through our platform, attend workshops, form teams, and submit your game projects during the competition period.'
+      label: (
+        <Space>
+          <QuestionCircleOutlined style={{ color: token.colorPrimary }} />
+          <Typography.Text strong style={{ fontSize: '16px' }}>
+            {t('faq.competitionRules.title')}
+          </Typography.Text>
+        </Space>
+      ),
+      children: (
+        <Typography.Paragraph style={{ fontSize: '16px', lineHeight: 1.6 }}>
+          {t('faq.competitionRules.content')}
+        </Typography.Paragraph>
+      ),
     },
     {
       key: '3',
-      label: 'What are the prizes?',
-      children: 'Winners receive cash prizes, certificates, and opportunities for internships with partner companies.'
+      label: (
+        <Space>
+          <QuestionCircleOutlined style={{ color: token.colorPrimary }} />
+          <Typography.Text strong style={{ fontSize: '16px' }}>
+            {t('faq.judgingCriteria.title')}
+          </Typography.Text>
+        </Space>
+      ),
+      children: (
+        <Typography.Paragraph style={{ fontSize: '16px', lineHeight: 1.6 }}>
+          {t('faq.judgingCriteria.content')}
+        </Typography.Paragraph>
+      ),
     },
     {
       key: '4',
-      label: 'Do I need prior experience?',
-      children: 'No prior experience is required! Our workshops are designed for beginners and intermediate developers alike.'
-    }
+      label: (
+        <Space>
+          <QuestionCircleOutlined style={{ color: token.colorPrimary }} />
+          <Typography.Text strong style={{ fontSize: '16px' }}>
+            {t('faq.submissionDeadline.title')}
+          </Typography.Text>
+        </Space>
+      ),
+      children: (
+        <Typography.Paragraph style={{ fontSize: '16px', lineHeight: 1.6 }}>
+          {t('faq.submissionDeadline.content')}
+        </Typography.Paragraph>
+      ),
+    },
   ]
 
   return (
     <Flex
+      align="center"
+      justify="center"
       vertical
       style={{
         width: '100%',
-        minHeight: '80vh',
-        padding: '2rem',
-        maxWidth: '1200px',
-        margin: '0 auto'
+        backgroundColor: token.colorPrimary,
       }}
-      gap="large"
     >
-      <Card>
-        <Space direction="vertical" size="large" style={{ width: '100%' }}>
-          <div style={{ textAlign: 'center' }}>
-            <QuestionCircleOutlined style={{ fontSize: '48px', color: '#1890ff', marginBottom: '1rem' }} />
-            <Typography.Title level={1}>
-              {t('mainNavigation.faq')}
-            </Typography.Title>
-            <Typography.Paragraph style={{ fontSize: '18px' }}>
-              Find answers to commonly asked questions about GameCraft 2024
-            </Typography.Paragraph>
-          </div>
+      <Flex
+        align="center"
+        justify="center"
+        style={{
+          width: '100%',
+          backgroundImage: "url('/images/pattern.svg')",
+          backgroundSize: 'fit',
+          backgroundPosition: 'center',
+          padding: faqViewPadding,
+          position: 'relative',
+        }}
+      >
+        <Card
+          style={{
+            backgroundColor: token.colorBgBase,
+            width: '100%',
+            maxWidth: '1000px',
+            borderRadius: token.borderRadiusLG,
+            boxShadow: token.boxShadow,
+            border: 'none',
+          }}
+        >
+          <Flex vertical align="center" gap="large" style={{ width: '100%' }}>
+            <Space direction="vertical" align="center" size={16}>
+              <Typography.Title
+                level={1}
+                style={{
+                  fontWeight: 900,
+                  color: token.colorPrimary,
+                  textAlign: 'center',
+                  margin: 0,
+                }}
+              >
+                {t('faq.title')}
+              </Typography.Title>
+              <Typography.Text
+                type="secondary"
+                style={{
+                  fontSize: '18px',
+                  textAlign: 'center',
+                }}
+              >
+                {t('faq.competitionConditions')}
+              </Typography.Text>
+            </Space>
 
-          <Collapse
-            items={faqItems}
-            size="large"
-            ghost
-            expandIconPosition="end"
-          />
-        </Space>
-      </Card>
+            <Collapse
+              items={items}
+              ghost
+              size="large"
+              style={{
+                width: '100%',
+                backgroundColor: 'transparent',
+              }}
+              expandIconPosition="end"
+            />
+          </Flex>
+        </Card>
+      </Flex>
+      <Wave width="100%" height="auto" fill={token.colorPrimary} style={{ transform: 'scaleY(-1) translateY(-2px)' }} />
     </Flex>
   )
 }

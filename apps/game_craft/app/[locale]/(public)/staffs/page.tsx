@@ -1,92 +1,164 @@
 'use client'
 
+import { Avatar, Col, Flex, Grid, Row, theme, Typography } from 'antd'
 import { useTranslations } from 'next-intl'
-import { Flex, Typography, Card, Row, Col, Avatar, Space } from 'antd'
-import { TeamOutlined, GithubOutlined, LinkedinOutlined } from '@ant-design/icons'
+import { UserOutlined } from '@ant-design/icons'
+import Wave from '@/components/shared/Wave'
+
+const { useToken } = theme
+const { useBreakpoint } = Grid
 
 export default function StaffsPage() {
+  const { token } = useToken()
+  const screens = useBreakpoint()
   const t = useTranslations('app')
+  const staffViewPadding = screens.lg ? '3rem 5rem' : '3rem 2rem'
 
-  const staffMembers = [
+  // Sample staff data matching React project structure
+  const staffs = [
     {
-      id: 1,
-      name: 'Mahdi Haeri',
-      role: 'Project Manager',
-      avatar: '/images/2024/staffs/mahdiHaeri.jpg',
-      description: 'Leading the GameCraft 2024 organization and coordinating all activities.'
+      teamTitle: t('staffs.organizingTeam.title'),
+      teamMembers: [
+        {
+          name: 'Mahdi Haeri',
+          role: 'Project Manager',
+          imageUrl: '/images/2024/staffs/mahdiHaeri.jpg'
+        },
+        {
+          name: 'Team Lead',
+          role: 'Technical Lead',
+          imageUrl: null
+        }
+      ]
     },
     {
-      id: 2,
-      name: 'Technical Team Lead',
-      role: 'Development Lead',
-      avatar: '/svg/avatar-1.svg',
-      description: 'Overseeing technical aspects and platform development.'
-    },
-    {
-      id: 3,
-      name: 'Workshop Coordinator',
-      role: 'Education Lead',
-      avatar: '/svg/avatar-2.svg',
-      description: 'Managing workshop schedules and educational content.'
+      teamTitle: t('staffs.technicalTeam.title'),
+      teamMembers: [
+        {
+          name: 'Developer 1',
+          role: 'Frontend Developer',
+          imageUrl: null
+        },
+        {
+          name: 'Developer 2',
+          role: 'Backend Developer',
+          imageUrl: null
+        }
+      ]
     }
   ]
 
-  return (
+  const StaffCard = ({ staff }: { staff: any }) => (
     <Flex
+      align="center"
+      justify="center"
       vertical
       style={{
         width: '100%',
-        minHeight: '80vh',
-        padding: '2rem',
-        maxWidth: '1200px',
-        margin: '0 auto'
+        height: '300px',
+        backgroundColor: token.colorBgContainer,
+        boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+        borderRadius: '2rem',
+        padding: token.padding,
+        position: 'relative',
       }}
-      gap="large"
+      gap="small"
     >
-      <Card>
-        <Space direction="vertical" size="large" style={{ width: '100%' }}>
-          <div style={{ textAlign: 'center' }}>
-            <TeamOutlined style={{ fontSize: '48px', color: '#1890ff', marginBottom: '1rem' }} />
-            <Typography.Title level={1}>
-              {t('mainNavigation.staffs')}
-            </Typography.Title>
-            <Typography.Paragraph style={{ fontSize: '18px' }}>
-              Meet the dedicated team behind GameCraft 2024
-            </Typography.Paragraph>
-          </div>
+      <Flex
+        vertical
+        align="center"
+        justify="center"
+        gap="middle"
+      >
+        <Avatar
+          size={140}
+          icon={<UserOutlined />}
+          src={staff.imageUrl}
+        />
+        <Flex vertical align="center" justify="center" style={{ width: '100%' }}>
+          <Typography.Title level={4} style={{ margin: 0, fontWeight: 700 }}>
+            {staff.name}
+          </Typography.Title>
+          <Typography.Text type="secondary">
+            {staff.role}
+          </Typography.Text>
+        </Flex>
+      </Flex>
+    </Flex>
+  )
 
-          <Row gutter={[24, 24]}>
-            {staffMembers.map((member) => (
-              <Col xs={24} md={8} key={member.id}>
-                <Card hoverable>
-                  <Space direction="vertical" size="middle" style={{ width: '100%', textAlign: 'center' }}>
-                    <Avatar
-                      src={member.avatar}
-                      size={120}
-                      icon={<TeamOutlined />}
-                    />
-                    <div>
-                      <Typography.Title level={4} style={{ margin: 0 }}>
-                        {member.name}
-                      </Typography.Title>
-                      <Typography.Text type="secondary">
-                        {member.role}
-                      </Typography.Text>
-                    </div>
-                    <Typography.Paragraph>
-                      {member.description}
-                    </Typography.Paragraph>
-                    <Space>
-                      <GithubOutlined style={{ fontSize: '20px', cursor: 'pointer' }} />
-                      <LinkedinOutlined style={{ fontSize: '20px', cursor: 'pointer' }} />
-                    </Space>
-                  </Space>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </Space>
-      </Card>
+  const StaffContainer = () => (
+    <Flex
+      vertical
+      align="center"
+      justify="center"
+      style={{
+        width: '100%',
+        backgroundColor: token.colorBgBase,
+        borderRadius: token.borderRadius,
+        padding: '3rem 1rem',
+      }}
+    >
+      <Typography.Title
+        level={1}
+        style={{
+          fontWeight: 900,
+          color: token.colorPrimary
+        }}
+      >
+        {t('staffs.title')}
+      </Typography.Title>
+      <Flex vertical align="center" justify="center" style={{ width: '100%' }} gap={50}>
+        {staffs.map((team, index) => (
+          <Flex
+            key={index}
+            vertical
+            align="center"
+            justify="center"
+            style={{ width: '100%' }}
+            gap="small"
+          >
+            <Typography.Title
+              level={2}
+              style={{
+                color: token.colorPrimary,
+                fontWeight: 800,
+              }}
+            >
+              {team.teamTitle}
+            </Typography.Title>
+            <Row
+              align="middle"
+              justify="center"
+              gutter={[16, 16]}
+              style={{
+                width: '100%',
+              }}
+            >
+              {team.teamMembers.map((staff, index) => (
+                <Col key={index} span={24} sm={12} md={8} lg={6} xxl={4}>
+                  <StaffCard staff={staff} />
+                </Col>
+              ))}
+            </Row>
+          </Flex>
+        ))}
+      </Flex>
+    </Flex>
+  )
+
+  return (
+    <Flex
+      align="center"
+      justify="center"
+      style={{
+        width: '100%',
+        backgroundColor: token.colorPrimary,
+        backgroundImage: "url('/images/pattern.svg')",
+        padding: staffViewPadding
+      }}
+    >
+      <StaffContainer />
     </Flex>
   )
 }

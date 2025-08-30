@@ -7,11 +7,11 @@ import Wave from '@/components/shared/Wave'
 const { useToken } = theme
 const { useBreakpoint } = Grid
 
-export default function SponsorsPage() {
+export default function NewsPage() {
   const { token } = useToken()
   const screens = useBreakpoint()
   const t = useTranslations('app')
-  const sponsorsViewPadding = screens.lg ? '3rem 5rem' : '3rem 2rem'
+  const newsViewPadding = screens.lg ? '3rem 5rem' : '3rem 2rem'
 
   return (
     <Flex
@@ -31,11 +31,11 @@ export default function SponsorsPage() {
         justify="center"
         style={{
           width: '100%',
-          padding: sponsorsViewPadding
+          padding: newsViewPadding
         }}
       >
         <Typography.Title style={{ color: 'white' }}>
-          {t('mainNavigation.sponsors')}
+          {t('mainNavigation.news')}
         </Typography.Title>
         <Flex
           vertical
@@ -49,10 +49,11 @@ export default function SponsorsPage() {
             padding: token.padding
           }}
         >
-          <Empty description="No sponsors yet" />
+          <Empty description="No news yet" />
         </Flex>
       </Flex>
-      <Wave width="100%" height="auto" fill={token.colorPrimary} style={{ transform: 'scaleY(-1) translateY(-2px)' }} />
+      {/* Wave component commented out in React project but keeping structure */}
+      {/* <Wave width="100%" height="auto" fill={token.colorPrimary} style={{ transform: 'scaleY(-1) translateY(-2px)' }} /> */}
     </Flex>
   )
 }
