@@ -1,107 +1,72 @@
-'use client'
+'use client';
 
-import { useTranslations } from 'next-intl'
-import { Flex, Typography, Card, List, Button, Space, Empty, Badge, InputNumber } from 'antd'
-import { ShoppingCartOutlined, DeleteOutlined, PlusOutlined, MinusOutlined } from '@ant-design/icons'
+import { Flex, theme, Row, Col } from 'antd';
+import { WorkshopCard } from '@/components/shared/WorkshopCard';
+import { PayBox } from '@/components/shared/PayBox';
+
+const { useToken } = theme;
 
 export default function ShoppingBagPage() {
-  const t = useTranslations('app.dashboard')
+  const { token } = useToken();
 
-  // Mock shopping cart data
+  // Sample cart items matching the React project
   const cartItems = [
     {
-      id: 1,
-      title: 'Unity Game Development Workshop',
-      price: 150000,
-      quantity: 1,
-      instructor: 'John Doe'
+      title: "توسعه بازی با Unity",
+      description: "آموزش اصول پایه ای برنامه نویسی و توسعه بازی های دو بعدی و سه بعدی با موتور یونیتی",
+      instructor: "امیر حسینی",
+      date: "1404/1/22، 9:00",
+      price: "25,000",
+      isInPerson: true,
+      onAddToCart: () => console.log("Removing Unity workshop from cart")
     },
     {
-      id: 2,
-      title: 'Advanced C# Programming',
-      price: 200000,
-      quantity: 1,
-      instructor: 'Jane Smith'
+      title: "طراحی گرافیک برای بازی‌ها",
+      description: "اصول طراحی شخصیت، محیط و رابط کاربری برای بازی های دیجیتال",
+      instructor: "سارا محمدی",
+      date: "1404/2/5، 14:00",
+      price: "20,000",
+      isInPerson: false,
+      onAddToCart: () => console.log("Removing Graphics workshop from cart")
+    },
+    {
+      title: "برنامه‌نویسی پیشرفته بازی",
+      description: "تکنیک‌های پیشرفته برنامه‌نویسی، بهینه‌سازی کد و الگوریتم‌های هوش مصنوعی",
+      instructor: "محمد رضایی",
+      date: "1404/2/10، 10:30",
+      price: "30,000",
+      isInPerson: true,
+      onAddToCart: () => console.log("Removing Advanced Programming workshop from cart")
     }
-  ]
-
-  const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+  ];
 
   return (
     <Flex
       vertical
+      flex={1}
       style={{
         width: '100%',
-        height: '100%',
-        padding: '1rem',
+        overflow: "hidden"
       }}
-      gap="large"
     >
-      <Card>
-        <Typography.Title level={2}>
-          <ShoppingCartOutlined /> {t('shoppingBag')}
-        </Typography.Title>
-        <Typography.Paragraph>
-          Review your selected workshops and complete your registration.
-        </Typography.Paragraph>
+      <Flex
+        flex={1}
+        style={{
+          width: '100%',
+          padding: token.padding,
+          overflow: "auto"
+        }}
+      >
+        <Row gutter={[16, 16]} style={{ width: '100%' }}>
+          {cartItems.map((item, index) => (
+            <Col key={index} xs={24} sm={12} lg={8}>
+              <WorkshopCard workshop={item} />
+            </Col>
+          ))}
+        </Row>
+      </Flex>
 
-        {cartItems.length > 0 ? (
-          <Space direction="vertical" size="large" style={{ width: '100%' }}>
-            <List
-              itemLayout="horizontal"
-              dataSource={cartItems}
-              renderItem={(item) => (
-                <List.Item
-                  actions={[
-                    <Space key="quantity">
-                      <Button size="small" icon={<MinusOutlined />} />
-                      <InputNumber
-                        min={1}
-                        max={10}
-                        value={item.quantity}
-                        size="small"
-                        style={{ width: '60px' }}
-                      />
-                      <Button size="small" icon={<PlusOutlined />} />
-                    </Space>,
-                    <Button key="delete" danger type="text" icon={<DeleteOutlined />} />
-                  ]}
-                >
-                  <List.Item.Meta
-                    title={item.title}
-                    description={`Instructor: ${item.instructor} • ${item.price.toLocaleString()} Toman`}
-                  />
-                </List.Item>
-              )}
-            />
-
-            <Card type="inner">
-              <Flex justify="space-between" align="center">
-                <Typography.Title level={4} style={{ margin: 0 }}>
-                  Total Amount:
-                </Typography.Title>
-                <Typography.Title level={3} style={{ margin: 0, color: '#1890ff' }}>
-                  {totalPrice.toLocaleString()} Toman
-                </Typography.Title>
-              </Flex>
-              <Button
-                type="primary"
-                size="large"
-                style={{ width: '100%', marginTop: '1rem' }}
-              >
-                Proceed to Payment
-              </Button>
-            </Card>
-          </Space>
-        ) : (
-          <Empty
-            image={Empty.PRESENTED_IMAGE_SIMPLE}
-            description="Your shopping bag is empty"
-          >
-            <Button type="primary">Browse Workshops</Button>
-          </Empty>
-        )}
-      </Card>
+      <PayBox />
     </Flex>
-  )
+  );
 }

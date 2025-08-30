@@ -14,9 +14,10 @@ const { useBreakpoint } = Grid
 
 interface DashboardLayoutProps {
   children: React.ReactNode
+  locale: string
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+export function DashboardLayout({ children, locale }: DashboardLayoutProps) {
   const screens = useBreakpoint()
   const { token } = useToken()
   const dashboardNavigations = useDashboardNavigations()
@@ -27,7 +28,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     setDrawerOpen(!drawerOpen)
   }
 
-  const currentPage = dashboardNavigations.find(item => item.route === pathname)
+  const currentPage = dashboardNavigations.find(item => pathname.includes(item.route))
 
   return (
     <Flex
@@ -47,16 +48,16 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         style={{
           width: '100%',
           backgroundColor: token.colorPrimary,
-          backgroundImage: 'url(/svg/pattern.svg)',
+          backgroundImage: 'url(/images/pattern.svg)',
           padding: '1rem',
         }}
         gap="large"
       >
-        {screens.lg && (
+        {screens.lg ? (
           <Flex align="center" justify="center" style={{ width: '100%' }}>
             <LogoWithText />
           </Flex>
-        )}
+        ) : null}
 
         <Flex
           align="start"
@@ -64,57 +65,67 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           style={{
             width: '100%',
           }}
-          gap="small"
+          gap="large"
         >
-          {screens.lg && (
-            <Flex flex={1} style={{ position: 'sticky', top: '.5rem' }}>
-              <DashboardNavigationCard />
-            </Flex>
-          )}
-
           <Flex
-            flex={3}
             vertical
-            align="center"
-            justify="start"
             style={{
               backgroundColor: token.colorBgBase,
-              height: '100%',
               borderRadius: token.borderRadius,
+              width: '100%',
+              maxWidth: 1200,
+              minHeight: 600,
             }}
           >
             <Flex
-              vertical
-              align="center"
-              justify="start"
+              vertical={!screens.lg}
               style={{
                 width: '100%',
                 height: '100%',
               }}
             >
-              <Flex
-                vertical
-                align="center"
-                justify="center"
+              {screens.lg ? (
+                <Flex
+                  vertical
+                  style={{
+                    width: '300px',
+                    minWidth: '300px',
+                    padding: token.padding,
+                  }}
+                >
+                  <DashboardNavigationCard />
+                </Flex>
+              ) : null}
+
+              <Divider
+                type={screens.lg ? 'vertical' : 'horizontal'}
                 style={{
-                  width: '100%',
-                  padding: token.padding,
-                  paddingBottom: 0
+                  height: screens.lg ? '100%' : 'auto',
+                  margin: 0
                 }}
-              >
-                <Typography.Title level={3} style={{ margin: 0, fontWeight: 950 }}>
-                  {currentPage?.name || 'Dashboard'}
-                </Typography.Title>
-                <Divider type="horizontal" variant="dashed" />
-              </Flex>
+              />
 
               <Flex
                 vertical
                 flex={1}
                 style={{
-                  width: '100%',
+                  padding: token.padding,
+                  minHeight: '500px',
                 }}
               >
+                {currentPage && (
+                  <Typography.Title
+                    level={3}
+                    style={{
+                      margin: 0,
+                      marginBottom: token.margin,
+                      fontWeight: 800,
+                      color: token.colorPrimary
+                    }}
+                  >
+                    {currentPage.name}
+                  </Typography.Title>
+                )}
                 {children}
               </Flex>
             </Flex>
@@ -122,10 +133,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </Flex>
       </Flex>
 
-      {/* Mobile drawer for navigation */}
-      {!screens.lg && (
-        <MainDrawer open={drawerOpen} toggleDrawerOpen={toggleDrawerOpen} />
-      )}
+      <MainDrawer
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        locale={locale}
+      />
     </Flex>
   )
 }

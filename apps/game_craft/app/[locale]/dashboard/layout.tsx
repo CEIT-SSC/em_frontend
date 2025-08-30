@@ -1,9 +1,16 @@
-import DashboardLayout from '@/components/layout/DashboardLayout'
+import { DashboardLayout } from '@/components/layout/DashboardLayout';
 
-export default function DashboardRootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return <DashboardLayout>{children}</DashboardLayout>
+interface DashboardLayoutProps {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}
+
+export default async function Layout({ children, params }: DashboardLayoutProps) {
+  const { locale } = await params;
+
+  return (
+    <DashboardLayout locale={locale}>
+      {children}
+    </DashboardLayout>
+  );
 }
