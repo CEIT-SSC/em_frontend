@@ -99,20 +99,20 @@
       "scientificTeam": {
         "title": "Scientific Team"
       },
+      "graphicTeam": {
+        "title": "Graphic Team"
+      },
       "marketingTeam": {
         "title": "Marketing Team"
       },
       "contentCreationTeam": {
         "title": "Content Creation Team"
       },
-      "graphicTeam": {
-        "title": "Graphic Design Team"
+      "operationsTeam": {
+        "title": "Operations Team"
       },
       "financeTeam": {
         "title": "Finance Team"
-      },
-      "operationsTeam": {
-        "title": "Operations Team"
       }
     },
     "dashboard": {
@@ -134,25 +134,33 @@
       "forgotPassword": "Forgot Password"
     },
     "auth": {
-      "login": "Login",
-      "signUp": "Sign Up",
-      "logout": "Logout",
-      "register": "Register",
-      "email": "Email",
-      "password": "Password",
-      "displayName": "Display Name",
-      "phoneNumber": "Phone Number",
-      "forgotPassword": "Forgot Password?",
-      "doNotHaveAccount": "Don't have an account?",
-      "alreadyHaveAccount": "Already have an account?",
-      "resetPassword": "Reset Password",
-      "resetPasswordInstructions": "Enter your email address and we'll send you instructions to reset your password.",
-      "sendResetLink": "Send Reset Link",
-      "backToLogin": "Back to Login",
-      "resetLinkSent": "Reset link has been sent to your email",
-      "resetLinkError": "Failed to send reset link. Please try again.",
-      "rememberPassword": "Remember your password?",
-      "sendAnotherLink": "Send Another Link"
+      "login": {
+        "title": "Login",
+        "email": "Email",
+        "password": "Password",
+        "rememberMe": "Remember me",
+        "forgotPassword": "Forgot password?",
+        "loginButton": "Login",
+        "noAccount": "Don't have an account?",
+        "signUp": "Sign up"
+      },
+      "signup": {
+        "title": "Sign Up",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "signupButton": "Sign Up",
+        "hasAccount": "Already have an account?",
+        "login": "Login"
+      },
+      "forgotPassword": {
+        "title": "Forgot Password",
+        "email": "Email",
+        "sendButton": "Send Reset Link",
+        "backToLogin": "Back to Login"
+      }
     },
     "intro": {
       "title": "GameCraft",
@@ -234,5 +242,15 @@
   },
   "common": {
     "currency": "Toman"
+  },
+  "metadata": {
+    "home": {
+      "title": "GameCraft 2024 - Ultimate Game Development Competition",
+      "description": "Join the ultimate game development competition and showcase your creativity with fellow developers from around the world."
+    },
+    "staffs": {
+      "title": "Our Team - GameCraft 2024",
+      "description": "Meet the dedicated team behind GameCraft 2024 - our organizing, technical, scientific, and creative teams working to make this competition amazing."
+    }
   }
 }
