@@ -5,11 +5,6 @@
       "game": "Game",
       "craft": "Craft"
     },
-    "intro": {
-      "title": "GameCraft 2024",
-      "subtitle": "Ultimate Game Development Competition",
-      "description": "Join the ultimate game development competition and showcase your creativity with fellow developers from around the world."
-    },
     "mainNavigation": {
       "home": "Home",
       "news": "News",
@@ -46,48 +41,6 @@
         "schedule": "December"
       }
     },
-    "prizes": {
-      "title": "Competition Prizes",
-      "first": {
-        "title": "First Place",
-        "amount": "$5,000"
-      },
-      "second": {
-        "title": "Second Place",
-        "amount": "$3,000"
-      },
-      "third": {
-        "title": "Third Place",
-        "amount": "$1,000"
-      },
-      "special": {
-        "title": "Special Award",
-        "amount": "$500"
-      }
-    },
-    "workshops": {
-      "offline": {
-        "title": "Offline Workshops",
-        "description": "Join our in-person workshops to learn game development techniques from industry experts."
-      },
-      "online": {
-        "title": "Online Workshops",
-        "description": "Access our comprehensive online workshop series from anywhere in the world."
-      }
-    },
-    "sponsors": {
-      "title": "Our Sponsors"
-    },
-    "aboutUs": {
-      "title": "About GameCraft",
-      "description": "GameCraft is an annual game development competition that brings together creative minds to build innovative games. Our mission is to foster creativity, collaboration, and technical excellence in the gaming industry."
-    },
-    "buttons": {
-      "staffs": "Meet Our Team",
-      "learnMore": "Learn More",
-      "watchNow": "Watch Now",
-      "registerNow": "Register Now"
-    },
     "staffs": {
       "title": "Our Team",
       "organizingTeam": {
@@ -99,20 +52,20 @@
       "scientificTeam": {
         "title": "Scientific Team"
       },
-      "graphicTeam": {
-        "title": "Graphic Team"
-      },
       "marketingTeam": {
         "title": "Marketing Team"
       },
       "contentCreationTeam": {
         "title": "Content Creation Team"
       },
-      "operationsTeam": {
-        "title": "Operations Team"
+      "graphicTeam": {
+        "title": "Graphic Design Team"
       },
       "financeTeam": {
         "title": "Finance Team"
+      },
+      "operationsTeam": {
+        "title": "Operations Team"
       }
     },
     "dashboard": {
@@ -134,34 +87,23 @@
       "forgotPassword": "Forgot Password"
     },
     "auth": {
+      "login": "Login",
+      "signUp": "Sign Up",
       "logout": "Logout",
-      "login": {
-        "title": "Login",
-        "email": "Email",
-        "password": "Password",
-        "rememberMe": "Remember me",
-        "forgotPassword": "Forgot password?",
-        "loginButton": "Login",
-        "noAccount": "Don't have an account?",
-        "signUp": "Sign up"
-      },
-      "signup": {
-        "title": "Sign Up",
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "email": "Email",
-        "password": "Password",
-        "confirmPassword": "Confirm Password",
-        "signupButton": "Sign Up",
-        "hasAccount": "Already have an account?",
-        "login": "Login"
-      },
-      "forgotPassword": {
-        "title": "Forgot Password",
-        "email": "Email",
-        "sendButton": "Send Reset Link",
-        "backToLogin": "Back to Login"
-      }
+      "register": "Register",
+      "email": "Email",
+      "password": "Password",
+      "displayName": "Display Name",
+      "phoneNumber": "Phone Number",
+      "forgotPassword": "Forgot Password?",
+      "doNotHaveAccount": "Don't have an account?",
+      "alreadyHaveAccount": "Already have an account?",
+      "resetPassword": "Reset Password",
+      "resetPasswordInstructions": "Enter your email address and we'll send you instructions to reset your password.",
+      "sendResetLink": "Send Reset Link",
+      "backToLogin": "Back to Login",
+      "resetLinkSent": "Reset link has been sent to your email",
+      "resetLinkError": "Failed to send reset link. Please try again."
     },
     "intro": {
       "title": "GameCraft",
@@ -213,6 +155,12 @@
         "title": "Submission Deadline",
         "content": "The final submission deadline is December 15th, 2024. Teams must submit their complete game package by this date. Late submissions will not be accepted. Make sure to test your game thoroughly before submission and include all required documentation."
       }
+    },
+    "buttons": {
+      "staffs": "Our Team",
+      "learnMore": "Learn More",
+      "watchNow": "Watch Now",
+      "registerNow": "Register Now"
     }
   },
   "button": {
@@ -243,15 +191,6 @@
   },
   "common": {
     "currency": "Toman"
-  },
-  "metadata": {
-    "home": {
-      "title": "GameCraft 2024 - Ultimate Game Development Competition",
-      "description": "Join the ultimate game development competition and showcase your creativity with fellow developers from around the world."
-    },
-    "staffs": {
-      "title": "Our Team - GameCraft 2024",
-      "description": "Meet the dedicated team behind GameCraft 2024 - our organizing, technical, scientific, and creative teams working to make this competition amazing."
-    }
   }
 }
+

@@ -83,9 +83,9 @@ export function OnlineWorkshop({ padding = '3rem 2rem', backgroundColor }: Onlin
           level={screens.md ? 1 : 2}
           style={{
             margin: 0,
-            fontWeight: 900,
-            textAlign: "center",
-            color: 'white'
+            fontWeight: 'bold',
+            color: token.colorTextBase,
+            textAlign: 'center',
           }}
         >
           {t('workshop.onlineWorkshops')}
