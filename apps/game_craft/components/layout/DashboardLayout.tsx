@@ -65,67 +65,63 @@ export function DashboardLayout({ children, locale }: DashboardLayoutProps) {
           style={{
             width: '100%',
           }}
-          gap="large"
+          gap="small"
         >
+          {screens.lg ? (
+            <Flex flex={1} style={{ position: "sticky", top: '.5rem' }}>
+              <DashboardNavigationCard />
+            </Flex>
+          ) : null}
+
           <Flex
+            flex={3}
             vertical
+            align="center"
+            justify="start"
             style={{
               backgroundColor: token.colorBgBase,
+              height: '100%',
               borderRadius: token.borderRadius,
-              width: '100%',
-              maxWidth: 1200,
-              minHeight: 600,
             }}
           >
             <Flex
-              vertical={!screens.lg}
+              vertical
+              align="center"
+              justify="start"
               style={{
                 width: '100%',
                 height: '100%',
               }}
             >
-              {screens.lg ? (
-                <Flex
-                  vertical
-                  style={{
-                    width: '300px',
-                    minWidth: '300px',
-                    padding: token.padding,
-                  }}
-                >
-                  <DashboardNavigationCard />
-                </Flex>
-              ) : null}
-
-              <Divider
-                type={screens.lg ? 'vertical' : 'horizontal'}
+              <Flex
+                vertical
+                align="center"
+                justify="center"
                 style={{
-                  height: screens.lg ? '100%' : 'auto',
-                  margin: 0
+                  width: '100%',
+                  padding: token.padding,
+                  paddingBottom: 0
                 }}
-              />
+              >
+                <Typography.Title level={3} style={{ margin: 0, fontWeight: 950 }}>
+                  {currentPage?.name}
+                </Typography.Title>
+                <Divider
+                  type="horizontal"
+                  variant="dashed"
+                />
+              </Flex>
 
               <Flex
                 vertical
-                flex={1}
+                align="center"
+                justify="start"
                 style={{
-                  padding: token.padding,
-                  minHeight: '500px',
+                  width: '100%',
+                  height: '100%',
+                  overflow: 'auto'
                 }}
               >
-                {currentPage && (
-                  <Typography.Title
-                    level={3}
-                    style={{
-                      margin: 0,
-                      marginBottom: token.margin,
-                      fontWeight: 800,
-                      color: token.colorPrimary
-                    }}
-                  >
-                    {currentPage.name}
-                  </Typography.Title>
-                )}
                 {children}
               </Flex>
             </Flex>

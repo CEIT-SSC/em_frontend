@@ -134,6 +134,7 @@
       "forgotPassword": "Forgot Password"
     },
     "auth": {
+      "logout": "Logout",
       "login": {
         "title": "Login",
         "email": "Email",

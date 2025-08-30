@@ -2,6 +2,7 @@
 
 import { Flex, Typography } from 'antd'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 
 interface LogoWithTextProps {
   variant?: 'dark' | 'light'
@@ -16,42 +17,45 @@ export default function LogoWithText({
 }: LogoWithTextProps) {
   const t = useTranslations('app')
 
+  const logoSrc = variant === 'dark' ? '/images/dark-3d.svg' : '/images/light-3d.svg'
+
   return (
     <Flex
       align="center"
       justify="center"
       className={className}
-      vertical
     >
-      <div style={{
-        width: size,
-        height: size,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: '1rem'
-      }}>
-        <svg
-          viewBox="0 0 200 200"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          style={{ width: '100%', height: '100%' }}
-        >
-          <circle cx="100" cy="100" r="80" fill={variant === 'dark' ? '#1890ff' : '#ffffff'} />
-          <circle cx="100" cy="70" r="20" fill={variant === 'dark' ? '#ffffff' : '#1890ff'} />
-          <rect x="85" y="110" width="30" height="40" fill={variant === 'dark' ? '#ffffff' : '#1890ff'} />
-          <polygon points="100,160 85,180 115,180" fill={variant === 'dark' ? '#ffffff' : '#1890ff'} />
-        </svg>
-      </div>
       <Typography.Title
         level={3}
         style={{
-          margin: 0,
-          color: variant === 'dark' ? '#ffffff' : '#000000',
-          textAlign: 'center'
+          margin: '-5px',
+          fontWeight: 1000,
+          opacity: '0.2',
+          color: 'white',
         }}
       >
-        {t('name')}
+        {t('logo.game')}
+      </Typography.Title>
+
+      <Image
+        src={logoSrc}
+        alt="GameCraft Logo"
+        width={size}
+        height={size}
+        style={{ zIndex: 10 }}
+        priority
+      />
+
+      <Typography.Title
+        level={3}
+        style={{
+          margin: '-5px',
+          fontWeight: 1000,
+          opacity: '0.2',
+          color: 'white',
+        }}
+      >
+        {t('logo.craft')}
       </Typography.Title>
     </Flex>
   )

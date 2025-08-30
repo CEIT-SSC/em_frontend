@@ -1,11 +1,11 @@
 'use client'
 
-import { Button, Flex, Grid, Image, theme, Typography } from 'antd'
+import { Button, Flex, Grid, Image, theme, Typography, Avatar, Divider } from 'antd'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 import { useRouter } from '@/lib/navigation'
 import { useDashboardNavigations } from '@/lib/config/dashboard-navigation'
-import { useAuth } from '@/components/providers/AuthProvider'
+import { UserOutlined, LogoutOutlined } from '@ant-design/icons'
 
 const { useToken } = theme
 const { useBreakpoint } = Grid
@@ -21,7 +21,6 @@ export default function DashboardNavigationCard({ onNavigate }: DashboardNavigat
   const pathname = usePathname()
   const dashboardNavigations = useDashboardNavigations()
   const screens = useBreakpoint()
-  const { user, logout } = useAuth()
 
   const handleNavigation = (route: string) => {
     router.push(route)
@@ -30,16 +29,18 @@ export default function DashboardNavigationCard({ onNavigate }: DashboardNavigat
     }
   }
 
-  const handleLogout = async () => {
-    try {
-      await logout()
-      router.push('/')
-    } catch (error) {
-      console.error('Logout error:', error)
-    }
+  const handleLogout = () => {
+    router.push('/')
   }
 
-  const isActive = (route: string) => pathname === route
+  const isActive = (route: string) => pathname.includes(route)
+
+  // Sample user data - in a real app, this would come from auth context
+  const userData = {
+    name: 'کاربر گرامی',
+    email: 'user@example.com',
+    avatar: '/images/2024/staffs/mahdiHaeri.jpg' // Using one of the staff images as sample
+  }
 
   return (
     <Flex
@@ -53,7 +54,14 @@ export default function DashboardNavigationCard({ onNavigate }: DashboardNavigat
         padding: screens.lg ? token.padding : 0
       }}
     >
-      <Flex vertical align="center" justify="center" style={{ width: '100%' }} gap="small">
+      {/* User Profile Section */}
+      <Flex
+        vertical
+        align="center"
+        justify="center"
+        style={{ width: '100%' }}
+        gap="small"
+      >
         <Flex
           vertical
           align="center"
@@ -65,55 +73,79 @@ export default function DashboardNavigationCard({ onNavigate }: DashboardNavigat
             style={{
               width: '30%',
               borderRadius: '50%',
-              overflow: 'hidden',
+              overflow: "hidden",
               aspectRatio: '1/1',
             }}
           >
             <Image
-              src={user?.avatar || '/svg/avatar-1.svg'}
+              src={userData.avatar}
               width="100%"
               height="auto"
+              preview={false}
+              fallback="/images/avatar-placeholder.png"
               placeholder={
-                <img src="/svg/avatar-1.svg" alt="user-image" width="100%" height="auto" />
+                <Avatar
+                  size={64}
+                  icon={<UserOutlined />}
+                  style={{ backgroundColor: token.colorPrimary }}
+                />
               }
             />
           </Flex>
-          <Typography.Title level={4} style={{ fontWeight: 800 }}>
-            {user?.username || 'User'}
+
+          <Typography.Title level={4} style={{ fontWeight: 800, margin: 0, textAlign: 'center' }}>
+            {userData.name}
           </Typography.Title>
+
+          <Typography.Text type="secondary" style={{ fontSize: 12, textAlign: 'center' }}>
+            {userData.email}
+          </Typography.Text>
         </Flex>
 
-        <Flex
-          vertical
-          align="center"
-          justify="center"
-          style={{ width: '100%' }}
-          gap="small"
-        >
+        <Divider style={{ margin: '12px 0' }} />
+
+        {/* Navigation Buttons */}
+        <Flex vertical style={{ width: '100%' }} gap="small">
           {dashboardNavigations.map(item => (
             <Button
               key={item.route}
-              type={isActive(item.route) ? 'primary' : 'dashed'}
+              type={isActive(item.route) ? 'primary' : 'text'}
               size="large"
               style={{
                 width: '100%',
-                ...(isActive(item.route) ? { backgroundColor: token.colorPrimary } : {})
+                textAlign: 'start',
+                justifyContent: 'flex-start',
+                height: 'auto',
+                padding: '12px 16px',
+                fontWeight: isActive(item.route) ? 600 : 400,
               }}
               onClick={() => handleNavigation(item.route)}
+              icon={item.icon}
             >
               {item.name}
             </Button>
           ))}
-          <Button
-            danger
-            type="dashed"
-            size="large"
-            style={{ width: '100%' }}
-            onClick={handleLogout}
-          >
-            {t('auth.logout')}
-          </Button>
         </Flex>
+
+        <Divider style={{ margin: '12px 0' }} />
+
+        {/* Logout Button */}
+        <Button
+          type="text"
+          danger
+          size="large"
+          style={{
+            width: '100%',
+            textAlign: 'start',
+            justifyContent: 'flex-start',
+            height: 'auto',
+            padding: '12px 16px',
+          }}
+          onClick={handleLogout}
+          icon={<LogoutOutlined />}
+        >
+          {t('auth.logout')}
+        </Button>
       </Flex>
     </Flex>
   )
