@@ -47,7 +47,7 @@ export default function AntDesignProvider({
   locale,
   direction
 }: AntDesignProviderProps) {
-  const { darkMode } = useTheme()
+  const { darkMode, mounted } = useTheme()
 
   // Configure global message and notification
   message.config({
@@ -60,6 +60,15 @@ export default function AntDesignProvider({
     placement: 'topRight',
     duration: 4.5,
   })
+
+  // Don't render theme-dependent content until mounted to prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <ConfigProvider theme={defaultTheme} direction={direction}>
+        {children}
+      </ConfigProvider>
+    )
+  }
 
   return (
     <ConfigProvider

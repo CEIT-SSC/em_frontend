@@ -7,6 +7,7 @@ import { useRouter } from '@/lib/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { MenuOutlined, MoonFilled, SunFilled } from '@ant-design/icons';
 import Image from 'next/image';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 const { useToken } = theme;
 const { Header } = Layout;
@@ -20,13 +21,13 @@ interface NavigationItem {
 export function AppHeader() {
   const [shadow, setShadow] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
   const { token } = useToken();
   const t = useTranslations('app');
   const screens = useBreakpoint();
+  const { darkMode, toggleTheme } = useTheme();
 
   // Main navigation items matching the React project
   const mainNavigations: NavigationItem[] = [
@@ -41,10 +42,6 @@ export function AppHeader() {
 
   const toggleDrawerOpen = () => {
     setDrawerOpen(!drawerOpen);
-  };
-
-  const toggleTheme = () => {
-    setDarkMode(!darkMode);
   };
 
   const handleLanguageSwitch = () => {
