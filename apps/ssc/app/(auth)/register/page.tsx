@@ -2,10 +2,8 @@
 
 import { Button, ButtonVariant, PhoneNumberField, TextField } from "@ssc/ui";
 import Link from "next/link";
-
-const page = () => {
-import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { useState } from "react";
@@ -89,7 +87,7 @@ const Page = () => {
           router.push("/login");
         }, 2000);
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error("Registration error:", error);
 
       if (error.response?.data?.message) {
