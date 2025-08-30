@@ -30,7 +30,9 @@ export default function MainDrawer({ open, toggleDrawerOpen }: MainDrawerProps) 
 
   const handleLanguageSwitch = () => {
     const newLocale = locale === 'fa' ? 'en' : 'fa'
-    router.replace(pathname, { locale: newLocale })
+    // Remove the current locale from the pathname and get the clean path
+    const currentPath = pathname.replace(`/${locale}`, '') || '/'
+    router.replace(currentPath, { locale: newLocale })
   }
 
   const handleNavigation = (route: string) => {

@@ -3,8 +3,8 @@
 import { Button, Divider, Flex, Grid, Layout, Space, Switch, theme } from 'antd';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { useRouter, Link } from '@/lib/navigation';
-import { useTranslations } from 'next-intl';
+import { useRouter } from '@/lib/navigation';
+import { useTranslations, useLocale } from 'next-intl';
 import { MenuOutlined, MoonFilled, SunFilled } from '@ant-design/icons';
 import Image from 'next/image';
 
@@ -23,6 +23,7 @@ export function AppHeader() {
   const [darkMode, setDarkMode] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const locale = useLocale();
   const { token } = useToken();
   const t = useTranslations('app');
   const screens = useBreakpoint();
@@ -44,6 +45,12 @@ export function AppHeader() {
 
   const toggleTheme = () => {
     setDarkMode(!darkMode);
+  };
+
+  const handleLanguageSwitch = () => {
+    const newLocale = locale === 'fa' ? 'en' : 'fa';
+    const currentPath = pathname.replace(`/${locale}`, '') || '/';
+    router.replace(currentPath, { locale: newLocale });
   };
 
   const handleScroll = () => {
@@ -84,7 +91,7 @@ export function AppHeader() {
         <Flex align="center" justify="space-between" style={{ width: '100%', height: '100%' }}>
           <Flex align="center" justify="center" style={{ height: '100%' }} gap="large">
             <Image
-              src="/assets/svg/dark-3d.svg"
+              src="/images/dark-3d.svg"
               alt="gamecraft-logo"
               width={60}
               height={60}
@@ -125,8 +132,8 @@ export function AppHeader() {
             <Switch
               checkedChildren="En"
               unCheckedChildren="Fa"
-              checked={true} // Default to English for now
-              defaultChecked
+              checked={locale !== 'fa'}
+              onClick={handleLanguageSwitch}
             />
             <Divider
               type="vertical"
@@ -151,22 +158,20 @@ export function AppHeader() {
           </Flex>
         </Flex>
       ) : (
-        <Flex align="center" justify="space-between" style={{ height: '100%', width: '100%' }}>
-          <Button
-            shape="circle"
-            type="primary"
-            size="large"
-            icon={<MenuOutlined />}
-            onClick={toggleDrawerOpen}
-          />
+        <Flex align="center" justify="space-between" style={{ width: '100%', height: '100%' }}>
           <Image
-            src="/assets/svg/dark-3d.svg"
+            src="/images/dark-3d.svg"
             alt="gamecraft-logo"
-            width={60}
-            height={60}
-            style={{ height: '60%', width: 'auto', maxHeight: '60px' }}
+            width={40}
+            height={40}
+            style={{ height: '70%', width: 'auto' }}
           />
-          {/* Mobile drawer would go here */}
+          <Button
+            type="text"
+            icon={<MenuOutlined style={{ color: 'white', fontSize: '1.5rem' }} />}
+            onClick={toggleDrawerOpen}
+            size="large"
+          />
         </Flex>
       )}
     </Header>
