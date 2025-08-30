@@ -32,7 +32,12 @@ body {
     )
     rgb(var(--background-start-rgb));
   font-family: 'Estedad', 'Vazirmatn', sans-serif;
+  margin: 0;
 }
+
+/* .bprogress .bar {
+  --bprogress-color: linear-gradient(45deg, rgb(214, 219, 220) -15%, rgb(255, 255, 255) 100%);
+} */
 
 /* RTL support */
 [dir="rtl"] {

@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import { Empty, Flex, Grid, theme, Typography } from 'antd'
-import { useTranslations } from 'next-intl'
-import Wave from '@/components/shared/Wave'
+import { Empty, Flex, Grid, theme, Typography } from "antd";
+import { useTranslations } from "next-intl";
+import Wave from "@/components/shared/Wave";
+import { useResponsive } from "@/lib/hooks/useResponsive";
 
-const { useToken } = theme
-const { useBreakpoint } = Grid
+const { useToken } = theme;
 
 export default function NewsPage() {
-  const { token } = useToken()
-  const screens = useBreakpoint()
-  const t = useTranslations('app')
-  const newsViewPadding = screens.lg ? '3rem 5rem' : '3rem 2rem'
+  const { token } = useToken();
+  const screens = useResponsive();
+  const t = useTranslations("app");
+  const newsViewPadding = screens.lg ? "3rem 5rem" : "3rem 2rem";
 
   return (
     <Flex
@@ -19,8 +19,8 @@ export default function NewsPage() {
       align="center"
       justify="center"
       style={{
-        width: '100%',
-        minHeight: '100%',
+        width: "100%",
+        minHeight: "100%",
         backgroundColor: token.colorPrimary,
         backgroundImage: "url('/images/pattern.svg')",
       }}
@@ -30,23 +30,23 @@ export default function NewsPage() {
         align="center"
         justify="center"
         style={{
-          width: '100%',
-          padding: newsViewPadding
+          width: "100%",
+          padding: newsViewPadding,
         }}
       >
-        <Typography.Title style={{ color: 'white' }}>
-          {t('mainNavigation.news')}
+        <Typography.Title style={{ color: "white" }}>
+          {t("mainNavigation.news")}
         </Typography.Title>
         <Flex
           vertical
           align="center"
           justify="center"
           style={{
-            width: '100%',
-            minHeight: '200px',
+            width: "100%",
+            minHeight: "200px",
             backgroundColor: token.colorBgBase,
             borderRadius: token.borderRadius,
-            padding: token.padding
+            padding: token.padding,
           }}
         >
           <Empty description="No news yet" />
@@ -55,5 +55,5 @@ export default function NewsPage() {
       {/* Wave component commented out in React project but keeping structure */}
       {/* <Wave width="100%" height="auto" fill={token.colorPrimary} style={{ transform: 'scaleY(-1) translateY(-2px)' }} /> */}
     </Flex>
-  )
+  );
 }

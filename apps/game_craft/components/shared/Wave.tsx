@@ -1,22 +1,25 @@
-import { CSSProperties } from 'react'
+import { CSSProperties } from "react";
 
 interface WaveProps {
-  width?: string | number
-  fill?: string
-  style?: CSSProperties
-  className?: string
+  width?: string | number;
+  height?: string | number;
+  fill?: string;
+  style?: CSSProperties;
+  className?: string;
 }
 
 export default function Wave({
-  width = '100%',
-  fill = 'red',
+  width = "100%",
+  height,
+  fill = "red",
   style = {},
-  className = ''
+  className = "",
 }: WaveProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={width}
+      height={height}
       viewBox="0 0 1280 170.667"
       fill={fill}
       style={style}
@@ -29,5 +32,5 @@ export default function Wave({
         transform="translate(0 -128)"
       />
     </svg>
-  )
+  );
 }
