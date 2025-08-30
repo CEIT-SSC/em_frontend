@@ -2,7 +2,8 @@
 
 import { Button, Divider, Flex, Grid, Layout, Space, Switch, theme } from 'antd';
 import { useEffect, useState } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import { useRouter, Link } from '@/lib/navigation';
 import { useTranslations } from 'next-intl';
 import { MenuOutlined, MoonFilled, SunFilled } from '@ant-design/icons';
 import Image from 'next/image';
@@ -135,14 +136,14 @@ export function AppHeader() {
               <Button
                 type="primary"
                 style={{ fontWeight: 'bolder' }}
-                onClick={() => router.push('/signup')}
+                onClick={() => router.push('/auth/signup')}
               >
                 {t('auth.signUp')}
               </Button>
               <Button
                 type="primary"
                 style={{ fontWeight: 'bolder' }}
-                onClick={() => router.push('/login')}
+                onClick={() => router.push('/auth/login')}
               >
                 {t('auth.login')}
               </Button>

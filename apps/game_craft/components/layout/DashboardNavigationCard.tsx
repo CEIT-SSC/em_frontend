@@ -2,7 +2,8 @@
 
 import { Button, Flex, Grid, Image, theme, Typography } from 'antd'
 import { useTranslations } from 'next-intl'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
+import { useRouter } from '@/lib/navigation'
 import { useDashboardNavigations } from '@/lib/config/dashboard-navigation'
 import { useAuth } from '@/components/providers/AuthProvider'
 

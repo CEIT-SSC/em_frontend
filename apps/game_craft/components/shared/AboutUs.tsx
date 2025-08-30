@@ -1,9 +1,9 @@
 'use client'
 
-import { Button, Col, Flex, Row, Typography, theme } from 'antd';
-import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { Button, Col, Flex, Grid, Row, theme, Typography } from 'antd'
+import Image from 'next/image'
+import { useRouter } from '@/lib/navigation'
+import { useTranslations } from 'next-intl'
 
 const { useToken } = theme;
 
@@ -47,7 +47,7 @@ export function AboutUs({ padding = '3rem 2rem', backgroundColor }: AboutUsProps
               type="primary"
               size="large"
               style={{ backgroundColor: '#01B582' }} // Using colorAction from theme
-              onClick={() => router.push('/staff')}
+              onClick={() => router.push('/staffs')}
             >
               {t('buttons.staffs')}
             </Button>
