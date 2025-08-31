@@ -1,95 +1,108 @@
-'use client';
+"use client";
 
-import { Card, Flex, Image, theme, Typography, Button, Tag } from 'antd';
-import { PlayCircleOutlined, DownloadOutlined } from '@ant-design/icons';
+import React from "react";
+import { Button, Flex, theme, Typography } from "antd";
+import { HeartOutlined } from "@ant-design/icons";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 const { useToken } = theme;
 
-export function GameCard() {
-  const { token } = useToken();
+interface GameCardProps {
+  gameName?: string;
+  gameDescription?: string;
+  gameImage?: string;
+}
 
-  // Sample game data for preview
-  const gameData = {
-    title: "Space Explorer",
-    description: "An exciting space adventure game where you explore distant galaxies and fight alien enemies.",
-    screenshots: [
-      "/images/game-screenshot-1.jpg",
-      "/images/game-screenshot-2.jpg"
-    ],
-    developer: "Your Team Name",
-    status: "In Development"
-  };
+export const GameCard: React.FC<GameCardProps> = ({
+  gameName = "Game Name",
+  gameDescription = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores dicta obcaecati quae! Ab aspernatur blanditiis dignissimos eum fugiat itaque maxime modi nisi non omnis ratione repellat sed suscipit, totam vero.",
+  gameImage = "/images/logo/gameTestImage.jpg"
+}) => {
+  const { token } = useToken();
+  const t = useTranslations("app.dashboard.games");
 
   return (
-    <Card
+    <Flex
+      vertical
+      align="center"
+      justify="center"
       style={{
-        width: '100%',
-        maxWidth: 400,
+        width: "100%",
+        height: "450px",
+        padding: token.paddingXS,
+        borderRadius: token.borderRadius,
+        backgroundColor: token.colorBgContainer,
+        boxShadow: "0 0 10px rgba(0,0,0,0.1)",
       }}
-      cover={
-        <div style={{ position: 'relative' }}>
-          <Image
-            alt="Game Screenshot"
-            src="/images/game-placeholder.jpg"
-            style={{
-              width: '100%',
-              height: 200,
-              objectFit: 'cover'
-            }}
-            fallback="/images/game-placeholder.jpg"
-          />
-          <Flex
-            align="center"
-            justify="center"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: 'rgba(0, 0, 0, 0.3)',
-              opacity: 0,
-              transition: 'opacity 0.3s',
-            }}
-            className="game-overlay"
-          >
-            <PlayCircleOutlined
-              style={{
-                fontSize: 48,
-                color: 'white',
-                cursor: 'pointer'
-              }}
-            />
-          </Flex>
-        </div>
-      }
-      actions={[
-        <Button key="play" type="text" icon={<PlayCircleOutlined />}>
-          Play Demo
-        </Button>,
-        <Button key="download" type="text" icon={<DownloadOutlined />}>
-          Download
-        </Button>
-      ]}
     >
-      <Card.Meta
-        title={
-          <Flex justify="space-between" align="center">
-            <Typography.Title level={4} style={{ margin: 0 }}>
-              {gameData.title}
-            </Typography.Title>
-            <Tag color="blue">{gameData.status}</Tag>
-          </Flex>
-        }
-        description={
-          <Flex vertical gap="small">
-            <Typography.Text>{gameData.description}</Typography.Text>
-            <Typography.Text type="secondary">
-              Developer: {gameData.developer}
-            </Typography.Text>
-          </Flex>
-        }
-      />
-    </Card>
+      <Flex
+        vertical
+        flex={1}
+        align="center"
+        justify="center"
+        style={{
+          width: "100%",
+        }}
+        gap="small"
+      >
+        <div
+          style={{
+            width: "100px",
+            height: "100px",
+            borderRadius: token.borderRadius,
+            overflow: "hidden",
+          }}
+        >
+          <Image
+            src={gameImage}
+            width={100}
+            height={100}
+            style={{
+              borderRadius: token.borderRadius,
+              objectFit: "cover",
+            }}
+            alt="Game Image"
+          />
+        </div>
+
+        <Typography.Title level={4} style={{ fontWeight: 900, margin: 0 }}>
+          {gameName}
+        </Typography.Title>
+      </Flex>
+
+      <Flex
+        vertical
+        flex={2}
+        align="center"
+        justify="space-between"
+        style={{
+          width: "100%",
+          borderRadius: token.borderRadius,
+          padding: token.paddingSM,
+        }}
+      >
+        <Typography.Paragraph>{gameDescription}</Typography.Paragraph>
+
+        <Flex
+          align="center"
+          justify="center"
+          style={{
+            width: "100%",
+          }}
+          gap="small"
+        >
+          <Button
+            type="dashed"
+            shape="circle"
+            size="large"
+            icon={<HeartOutlined />}
+          />
+          <Button type="dashed" size="large" block>
+            {t("download")}
+          </Button>
+        </Flex>
+      </Flex>
+    </Flex>
   );
-}
+};

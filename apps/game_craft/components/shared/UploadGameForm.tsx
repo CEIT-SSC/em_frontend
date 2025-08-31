@@ -1,12 +1,15 @@
-'use client';
+"use client";
 
-import { Button, Flex, Input, theme, Typography, Upload, Form } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import React from "react";
+import { Button, Flex, Input, theme, Typography, Upload } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import { useTranslations } from "next-intl";
 
 const { useToken } = theme;
 
-export function UploadGameForm() {
+export const UploadGameForm: React.FC = () => {
   const { token } = useToken();
+  const t = useTranslations("app.dashboard.games");
 
   return (
     <Flex
@@ -14,82 +17,73 @@ export function UploadGameForm() {
       align="center"
       justify="space-between"
       style={{
-        width: '100%',
+        width: "100%",
       }}
       gap="small"
     >
-      <Form
-        layout="vertical"
-        style={{ width: '100%', maxWidth: 400 }}
+      <Upload
+        type="drag"
+        listType="text"
+        style={{
+          height: "100px",
+          width: "100px",
+          borderRadius: token.borderRadius,
+        }}
       >
-        <Form.Item label="Game Title" name="title">
-          <Input placeholder="Enter your game title" />
-        </Form.Item>
-
-        <Form.Item label="Description" name="description">
-          <Input.TextArea
-            rows={4}
-            placeholder="Describe your game"
+        <Flex
+          vertical
+          align="center"
+          justify="center"
+          style={{
+            width: "100%",
+            height: "100%",
+          }}
+          gap="small"
+        >
+          <PlusOutlined />
+          <Typography.Text>{t("upload")}</Typography.Text>
+        </Flex>
+      </Upload>
+      <Flex
+        vertical
+        align="center"
+        justify="center"
+        style={{
+          width: "100%",
+        }}
+        gap="small"
+      >
+        <Flex
+          style={{
+            width: "100%",
+          }}
+          gap="small"
+        >
+          <Input
+            variant="filled"
+            placeholder={t("gameName")}
+            size="large"
+            allowClear
           />
-        </Form.Item>
+          <Input
+            variant="filled"
+            placeholder={t("gameLink")}
+            size="large"
+            allowClear
+          />
+        </Flex>
 
-        <Form.Item label="Game File" name="gameFile">
-          <Upload.Dragger
-            name="gameFile"
-            multiple={false}
-            style={{
-              borderRadius: token.borderRadius,
-            }}
-          >
-            <Flex
-              vertical
-              align="center"
-              justify="center"
-              style={{
-                padding: token.padding,
-              }}
-              gap="small"
-            >
-              <PlusOutlined style={{ fontSize: 24 }} />
-              <Typography.Text>
-                Click or drag game file to upload
-              </Typography.Text>
-              <Typography.Text type="secondary" style={{ fontSize: 12 }}>
-                Supports .zip, .rar files
-              </Typography.Text>
-            </Flex>
-          </Upload.Dragger>
-        </Form.Item>
+        <Input.TextArea
+          variant="filled"
+          placeholder={t("gameDescription")}
+          autoSize={{ minRows: 4, maxRows: 4 }}
+          allowClear
+        />
+      </Flex>
 
-        <Form.Item label="Screenshots" name="screenshots">
-          <Upload
-            listType="picture-card"
-            multiple
-          >
-            <Flex
-              vertical
-              align="center"
-              justify="center"
-              gap="small"
-            >
-              <PlusOutlined />
-              <Typography.Text style={{ fontSize: 12 }}>
-                Upload Screenshots
-              </Typography.Text>
-            </Flex>
-          </Upload>
-        </Form.Item>
-
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            style={{ width: '100%' }}
-          >
-            Submit Game
-          </Button>
-        </Form.Item>
-      </Form>
+      <Button block type="primary" size="large">
+        {t("submitGame")}
+      </Button>
     </Flex>
   );
-}
+};

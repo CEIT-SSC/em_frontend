@@ -76,7 +76,16 @@
         "teamMembers": "افراد تیم",
         "addTeammate": "افزودن هم تیمی"
       },
-      "games": "بازی‌ها",
+      "games": {
+        "label": "بازی‌ها",
+        "upload": "آپلود",
+        "gameName": "نام بازی",
+        "gameLink": "لینک بازی",
+        "gameDescription": "توضیحات بازی",
+        "submitGame": "ثبت بازی",
+        "preview": "پیش‌نمایش",
+        "download": "دانلود"
+      },
       "shoppingBag": "سبد خرید"
     },
     "pages": {

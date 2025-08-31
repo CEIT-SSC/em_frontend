@@ -76,7 +76,16 @@
         "teamMembers": "Team Members",
         "addTeammate": "Add Teammate"
       },
-      "games": "Games",
+      "games": {
+        "label": "Games",
+        "upload": "Upload",
+        "gameName": "Game Name",
+        "gameLink": "Game Link",
+        "gameDescription": "Game Description",
+        "submitGame": "Submit Game",
+        "preview": "Preview",
+        "download": "Download"
+      },
       "shoppingBag": "Shopping Cart"
     },
     "pages": {

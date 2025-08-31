@@ -20,7 +20,7 @@ export const useDashboardNavigations = (): DashboardNavigationItem[] => {
       route: `/${locale}/dashboard/team-status`,
     },
     {
-      name: t('games'),
+      name: t('games.label'),
       route: `/${locale}/dashboard/games`,
     },
     {

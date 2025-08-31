@@ -1,15 +1,17 @@
 "use client";
 
 import { Divider, Flex, Grid, theme, Typography } from "antd";
-import { UploadGameForm } from "@/components/shared/UploadGameForm";
 import { GameCard } from "@/components/shared/GameCard";
-import { useResponsive } from "@/lib/hooks/useResponsive";
+import { UploadGameForm } from "@/components/shared/UploadGameForm";
+import { useTranslations } from "next-intl";
 
 const { useToken } = theme;
+const { useBreakpoint } = Grid;
 
 export default function GamesPage() {
   const { token } = useToken();
-  const screens = useResponsive();
+  const screens = useBreakpoint();
+  const t = useTranslations("app.dashboard.games");
 
   return (
     <Flex
@@ -31,7 +33,9 @@ export default function GamesPage() {
         type={screens.lg ? "vertical" : "horizontal"}
         style={{ height: "100%" }}
       >
-        <Typography.Text type="secondary">Preview</Typography.Text>
+        <Typography.Text type="secondary">
+          {t("preview")}
+        </Typography.Text>
       </Divider>
 
       <Flex
