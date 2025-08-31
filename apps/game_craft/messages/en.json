@@ -72,7 +72,9 @@
       "event": "Events",
       "teamStatus": {
         "label": "Team Status",
-        "teamName": "Team Name"
+        "teamName": "Team Name",
+        "teamMembers": "Team Members",
+        "addTeammate": "Add Teammate"
       },
       "games": "Games",
       "shoppingBag": "Shopping Cart"
@@ -193,4 +195,3 @@
     "currency": "Toman"
   }
 }
-

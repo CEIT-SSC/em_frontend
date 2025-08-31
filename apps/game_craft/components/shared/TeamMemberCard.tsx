@@ -1,82 +1,65 @@
-'use client';
+"use client";
 
-import { Avatar, Card, Flex, theme, Typography } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
-import CrownBadge from './CrownBadge';
+import React from "react";
+import { Flex, theme, Typography } from "antd";
+import Image from "next/image";
+import CrownBadge from "./CrownBadge";
 
 const { useToken } = theme;
 
 interface TeamMemberCardProps {
   isHead?: boolean;
-  member?: {
-    name: string;
-    role: string;
-    avatar?: string;
-  };
+  name?: string;
+  avatar?: string;
 }
 
-export function TeamMemberCard({ isHead = false, member }: TeamMemberCardProps) {
+export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
+  isHead = false,
+  name = "Mahdi Haeri",
+  avatar = "/svg/avatar-1.svg"
+}) => {
   const { token } = useToken();
 
-  const defaultMember = {
-    name: 'نام عضو تیم',
-    role: isHead ? 'سرپرست تیم' : 'عضو تیم',
-    avatar: undefined
-  };
-
-  const memberData = member || defaultMember;
-
-  return (
-    <Card
+  const memberCard = (
+    <Flex
+      align="center"
+      justify="start"
       style={{
-        width: '100%',
+        width: "100%",
+        height: "80px",
+        backgroundColor: isHead ? "rgba(255,215,0, 0.5)" : token.colorBgContainer,
+        boxShadow: token.boxShadowCard,
         borderRadius: token.borderRadius,
-        position: 'relative',
+        padding: token.padding,
+        position: "relative",
       }}
-      bodyStyle={{ padding: token.padding }}
+      gap="small"
     >
-      {isHead && <CrownBadge />}
-
-      <Flex
-        vertical
-        align="center"
-        justify="center"
-        gap="small"
+      <div
+        style={{
+          width: "60px",
+          height: "60px",
+          borderRadius: "50%",
+          overflow: "hidden",
+          flexShrink: 0,
+        }}
       >
-        <Avatar
-          size={64}
-          icon={<UserOutlined />}
-          src={memberData.avatar}
+        <Image
+          src={avatar}
+          alt="user-image"
+          width={60}
+          height={60}
           style={{
-            backgroundColor: token.colorPrimary,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            borderRadius: "50%",
           }}
         />
-
-        <Flex
-          vertical
-          align="center"
-          justify="center"
-          style={{ textAlign: 'center' }}
-        >
-          <Typography.Title
-            level={5}
-            style={{
-              margin: 0,
-              fontWeight: 700,
-              color: isHead ? token.colorWarning : token.colorText
-            }}
-          >
-            {memberData.name}
-          </Typography.Title>
-
-          <Typography.Text
-            type="secondary"
-            style={{ fontSize: 12 }}
-          >
-            {memberData.role}
-          </Typography.Text>
-        </Flex>
-      </Flex>
-    </Card>
+      </div>
+      <Typography.Text>{name}</Typography.Text>
+    </Flex>
   );
-}
+
+  return isHead ? <CrownBadge>{memberCard}</CrownBadge> : memberCard;
+};

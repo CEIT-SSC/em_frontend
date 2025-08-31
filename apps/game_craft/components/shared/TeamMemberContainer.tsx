@@ -1,21 +1,16 @@
-'use client';
+"use client";
 
-import { Button, Col, Flex, Row, theme, Typography } from 'antd';
-import { TeamMemberCard } from './TeamMemberCard';
-import { UserAddOutlined } from '@ant-design/icons';
+import React from "react";
+import { Button, Col, Flex, Row, theme, Typography } from "antd";
+import { UserAddOutlined } from "@ant-design/icons";
+import { useTranslations } from "next-intl";
+import { TeamMemberCard } from "./TeamMemberCard";
 
 const { useToken } = theme;
 
-export function TeamMemberContainer() {
+export const TeamMemberContainer: React.FC = () => {
   const { token } = useToken();
-
-  // Sample team members data
-  const teamMembers = [
-    { name: 'احمد رضایی', role: 'سرپرست تیم', avatar: undefined },
-    { name: 'مریم احمدی', role: 'برنامه‌نویس', avatar: undefined },
-    { name: 'علی حسینی', role: 'طراح گرافیک', avatar: undefined },
-    { name: 'فاطمه کریمی', role: 'طراح بازی', avatar: undefined },
-  ];
+  const t = useTranslations("app.dashboard.teamStatus");
 
   return (
     <Flex
@@ -23,57 +18,40 @@ export function TeamMemberContainer() {
       align="center"
       justify="center"
       style={{
-        width: '100%',
+        width: "100%",
       }}
       gap="small"
     >
       <Row
         align="middle"
         justify="center"
-        style={{ width: '100%' }}
+        style={{ width: "100%" }}
         gutter={[16, 16]}
       >
         <Col span={24}>
-          <Typography.Title level={4} style={{ marginBottom: '1.5rem' }}>
-            افراد تیم
+          <Typography.Title level={4} style={{ marginBottom: "1.5rem" }}>
+            {t("teamMembers")}
           </Typography.Title>
         </Col>
-
-        {teamMembers.map((member, index) => (
-          <Col key={index} span={24} sm={12} lg={8}>
-            <TeamMemberCard
-              isHead={index === 0}
-              member={member}
-            />
+        {[1, 2, 3, 4, 5, 6, 7].map((item, index) => (
+          <Col key={item} span={24} sm={12} lg={8}>
+            <TeamMemberCard isHead={index === 0} />
           </Col>
         ))}
-
-        {/* Add empty slots for remaining team members */}
-        {Array.from({ length: 4 - teamMembers.length }).map((_, index) => (
-          <Col key={`empty-${index}`} span={24} sm={12} lg={8}>
-            <TeamMemberCard />
-          </Col>
-        ))}
-
         <Col span={24} sm={12} lg={8}>
           <Button
             type="text"
             style={{
-              width: '100%',
-              height: '120px',
+              width: "100%",
+              height: "80px",
               borderRadius: token.borderRadius,
-              border: `2px dashed ${token.colorBorder}`,
             }}
-            icon={
-              <UserAddOutlined style={{ fontSize: 24 }} />
-            }
+            icon={<UserAddOutlined style={{ fontSize: "xx-large" }} />}
           >
-            <Typography.Text style={{ marginTop: 8 }}>
-              افزودن هم تیمی
-            </Typography.Text>
+            {t("addTeammate")}
           </Button>
         </Col>
       </Row>
     </Flex>
   );
-}
+};

@@ -1,40 +1,48 @@
-'use client';
+"use client";
 
-import { theme } from 'antd';
-import { CrownOutlined } from '@ant-design/icons';
-
-const { useToken } = theme;
+import React from "react";
+import Image from "next/image";
 
 interface CrownBadgeProps {
-  size?: number;
+  children: React.ReactNode;
 }
 
-export default function CrownBadge({ size = 20 }: CrownBadgeProps) {
-  const { token } = useToken();
-
+const CrownBadge: React.FC<CrownBadgeProps> = ({ children }) => {
   return (
-    <div
-      style={{
-        position: 'absolute',
-        top: -8,
-        right: -8,
-        backgroundColor: token.colorWarning,
-        borderRadius: '50%',
-        width: size + 8,
-        height: size + 8,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
-        zIndex: 10,
-      }}
-    >
-      <CrownOutlined
-        style={{
-          fontSize: size,
-          color: 'white'
-        }}
-      />
+    <div style={styles.wrapper}>
+      <div style={styles.crownContainer}>
+        <Image
+          src="/images/logo/crown.png"
+          alt="Crown"
+          width={40}
+          height={40}
+          style={styles.crownIcon}
+        />
+      </div>
+      {children}
     </div>
   );
-}
+};
+
+const styles = {
+  wrapper: {
+    position: "relative" as const,
+    display: "inline-block",
+    width: "100%",
+    height: "100%",
+  },
+  crownContainer: {
+    position: "absolute" as const,
+    top: 0,
+    right: 0,
+    transform: "translate(50%, -50%)",
+    zIndex: 1,
+  },
+  crownIcon: {
+    width: "40px",
+    height: "40px",
+    transform: "rotate(35deg)",
+  },
+};
+
+export default CrownBadge;

@@ -72,7 +72,9 @@
       "event": "رویدادها",
       "teamStatus": {
         "label": "وضعیت تیم",
-        "teamName": "نام تیم"
+        "teamName": "نام تیم",
+        "teamMembers": "افراد تیم",
+        "addTeammate": "افزودن هم تیمی"
       },
       "games": "بازی‌ها",
       "shoppingBag": "سبد خرید"
@@ -199,4 +201,3 @@
     "currency": "تومان"
   }
 }
-

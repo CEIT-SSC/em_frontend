@@ -7,7 +7,7 @@ import { TeamMemberContainer } from '@/components/shared/TeamMemberContainer'
 const { useToken } = theme
 
 export default function TeamStatusPage() {
-  const t = useTranslations('app.dashboard')
+  const t = useTranslations('app.dashboard.teamStatus')
   const { token } = useToken()
 
   return (
@@ -20,16 +20,8 @@ export default function TeamStatusPage() {
         padding: token.padding,
       }}
     >
-      <Typography.Title
-        level={3}
-        style={{
-          margin: 0,
-          fontWeight: 900,
-          color: token.colorPrimary,
-          marginBottom: token.marginLG,
-        }}
-      >
-        {t('teamStatus.teamName')}
+      <Typography.Title level={3} style={{ margin: 0, fontWeight: 900, color: token.colorPrimary }}>
+        {t('teamName')}
       </Typography.Title>
       <TeamMemberContainer />
     </Flex>
