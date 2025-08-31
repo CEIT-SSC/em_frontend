@@ -1,7 +1,7 @@
 "use client";
 
 import { ConfigProvider, message, notification, theme } from "antd";
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
 interface AntDesignProviderProps {
@@ -10,13 +10,20 @@ interface AntDesignProviderProps {
   direction: "ltr" | "rtl";
 }
 
-const defaultTheme = {
+const lightTheme = {
   token: {
     fontFamily: "Estedad, Vazirmatn, sans-serif",
     borderRadius: 16,
     colorPrimary: "#3c3a7d",
     colorInfo: "#3c3a7d",
-    colorAction: "#01B582",
+    colorSuccess: "#01B582",
+    colorWarning: "#faad14",
+    colorError: "#ff4d4f",
+    colorBgBase: "#ffffff",
+    colorBgContainer: "#ffffff",
+    colorBgElevated: "#ffffff",
+    colorText: "#000000d9",
+    colorTextSecondary: "#00000073",
   },
   components: {
     Timeline: {
@@ -24,21 +31,42 @@ const defaultTheme = {
       tailColor: "#01B582",
       tailWidth: 10,
     },
+    Button: {
+      colorPrimary: "#3c3a7d",
+      colorPrimaryHover: "#4c4a8d",
+      colorPrimaryActive: "#2c2a6d",
+    },
+    Layout: {
+      colorBgHeader: "#3c3a7d",
+      colorBgBody: "#f5f5f5",
+    },
     Switch: {},
     Collapse: {},
     Message: {
-      contentBg: "red",
-      colorBgBase: "red",
+      colorBgBase: "#ffffff",
     },
   },
 };
 
 const darkTheme = {
-  ...defaultTheme,
   algorithm: theme.darkAlgorithm,
   token: {
-    ...defaultTheme.token,
+    ...lightTheme.token,
     colorBgBase: "#1E1E1E",
+    colorBgContainer: "#262626",
+    colorBgElevated: "#2a2a2a",
+    colorText: "#ffffffd9",
+    colorTextSecondary: "#ffffff73",
+  },
+  components: {
+    ...lightTheme.components,
+    Layout: {
+      colorBgHeader: "#3c3a7d",
+      colorBgBody: "#1E1E1E",
+    },
+    Message: {
+      colorBgBase: "#262626",
+    },
   },
 };
 
@@ -47,26 +75,44 @@ export default function AntDesignProvider({
   locale,
   direction,
 }: AntDesignProviderProps) {
-  const { theme, setTheme } = useTheme();
+  const { theme: currentTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Wait for theme to be mounted to avoid hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Configure global message and notification
-  message.config({
-    top: 100,
-    duration: 2,
-    maxCount: 3,
-  });
-
-  notification.config({
-    placement: "topRight",
-    duration: 4.5,
-  });
-
   useEffect(() => {
-    console.log("!@!", theme);
-  }, [theme]);
+    message.config({
+      top: 100,
+      duration: 2,
+      maxCount: 3,
+    });
+
+    notification.config({
+      placement: "topRight",
+      duration: 4.5,
+    });
+  }, []);
+
+  // Use resolvedTheme or fallback to currentTheme, defaulting to 'light'
+  const effectiveTheme = mounted ? (resolvedTheme || currentTheme || 'light') : 'light';
+
+  // Debug logging
+  useEffect(() => {
+    console.log('🎨 Theme Debug:', {
+      currentTheme,
+      resolvedTheme,
+      effectiveTheme,
+      mounted
+    });
+  }, [currentTheme, resolvedTheme, effectiveTheme, mounted]);
+
   return (
     <ConfigProvider
-      theme={theme === "dark" ? darkTheme : defaultTheme}
+      theme={effectiveTheme === "dark" ? darkTheme : lightTheme}
       direction={direction}
     >
       {children}

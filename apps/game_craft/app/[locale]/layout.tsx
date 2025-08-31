@@ -38,7 +38,12 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={direction} suppressHydrationWarning>
       <body>
-        <ThemeProvider themes={["light", "dark"]}>
+        <ThemeProvider
+          themes={["light", "dark"]}
+          defaultTheme="light"
+          enableSystem={true}
+          attribute="data-theme"
+        >
           <AntdRegistry>
             <NextIntlClientProvider messages={messages}>
               <AuthProvider>

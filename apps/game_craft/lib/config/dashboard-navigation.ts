@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 
 export interface DashboardNavigationItem {
   name: string
@@ -8,23 +8,24 @@ export interface DashboardNavigationItem {
 
 export const useDashboardNavigations = (): DashboardNavigationItem[] => {
   const t = useTranslations('app.dashboard')
+  const locale = useLocale()
 
   return [
     {
       name: t('event'),
-      route: '/dashboard/events',
+      route: `/${locale}/dashboard/events`,
     },
     {
       name: t('teamStatus.label'),
-      route: '/dashboard/team-status',
+      route: `/${locale}/dashboard/team-status`,
     },
     {
       name: t('games'),
-      route: '/dashboard/games',
+      route: `/${locale}/dashboard/games`,
     },
     {
       name: t('shoppingBag'),
-      route: '/dashboard/shopping-bag',
+      route: `/${locale}/dashboard/shopping-bag`,
     }
   ]
 }

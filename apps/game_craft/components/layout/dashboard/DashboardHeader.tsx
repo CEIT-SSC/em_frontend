@@ -3,21 +3,18 @@
 import { Button, Flex, Grid, Layout, theme } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
+import { DashboardDrawer } from "./DashboardDrawer";
 import Image from "next/image";
-import { Link } from "@/lib/navigation";
-import { useResponsive } from "@/lib/hooks/useResponsive";
 
 const { Header } = Layout;
 const { useToken } = theme;
+const { useBreakpoint } = Grid;
 
-interface DashboardHeaderProps {
-  onMenuClick: () => void;
-}
-
-export default function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
+export function DashboardHeader() {
   const { token } = useToken();
-  const screens = useResponsive();
+  const screens = useBreakpoint();
   const [shadow, setShadow] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -34,12 +31,13 @@ export default function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
     };
   }, []);
 
-  // Only show on mobile screens
-  if (screens.lg) {
-    return null;
+  function toggleDrawerOpen() {
+    setDrawerOpen(!drawerOpen);
   }
 
-  return (
+  return screens.lg ? (
+    <></>
+  ) : (
     <Header
       style={{
         position: "sticky",
@@ -66,17 +64,16 @@ export default function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
           type="primary"
           size="large"
           icon={<MenuOutlined />}
-          onClick={onMenuClick}
+          onClick={() => toggleDrawerOpen()}
         />
-        <Link href="/dashboard">
-          <Image
-            src="/svg/dark-3d.svg"
-            alt="GameCraft Logo"
-            width={60}
-            height={60}
-            style={{ height: "60%", width: "auto", maxHeight: "60px" }}
-          />
-        </Link>
+        <Image
+          src="/svg/dark-3d.svg"
+          alt="gamecraft-logo"
+          width={60}
+          height={40}
+          style={{ height: "60%", width: "auto", maxHeight: "60px" }}
+        />
+        <DashboardDrawer open={drawerOpen} toggleDrawerOpen={toggleDrawerOpen} />
       </Flex>
     </Header>
   );
