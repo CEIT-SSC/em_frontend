@@ -20,7 +20,7 @@
 body {
   width: auto;
   min-height: 100vh;
-  font-family: var(--font-estedad), var(--font-vazirmatn), sans-serif, Roboto;
+  font-family: var(--font-estedad), var(--font-vazirmatn), sans-serif;
   background-color: lightyellow;
   overflow: auto;
   overflow-x: hidden;
@@ -31,4 +31,10 @@ body {
 ::-webkit-scrollbar {
   scrollbar-width: none;
   display: none;
+}
+
+/* Debug font variables */
+:root {
+  --font-estedad: 'Estedad';
+  --font-vazirmatn: 'Vazirmatn';
 }

@@ -14,12 +14,12 @@ import "../globals.css";
 const estedad = localFont({
   src: [
     {
-      path: "../../public/fonts/Estedad-v7.3/webfonts/statics/Estedad-ExtraLight.woff2",
+      path: "../../public/fonts/Estedad-v7.3/webfonts/statics/Estedad-Thin.woff2",
       weight: "100",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Estedad-v7.3/webfonts/statics/Estedad-Thin.woff2",
+      path: "../../public/fonts/Estedad-v7.3/webfonts/statics/Estedad-ExtraLight.woff2",
       weight: "200",
       style: "normal",
     },
@@ -46,6 +46,16 @@ const estedad = localFont({
     {
       path: "../../public/fonts/Estedad-v7.3/webfonts/statics/Estedad-Bold.woff2",
       weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Estedad-v7.3/webfonts/statics/Estedad-ExtraBold.woff2",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Estedad-v7.3/webfonts/statics/Estedad-Black.woff2",
+      weight: "900",
       style: "normal",
     },
   ],
@@ -88,6 +98,16 @@ const vazirmatn = localFont({
     {
       path: "../../public/fonts/vazirmatn-v33.003/fonts/webfonts/Vazirmatn-Bold.woff2",
       weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/vazirmatn-v33.003/fonts/webfonts/Vazirmatn-ExtraBold.woff2",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/vazirmatn-v33.003/fonts/webfonts/Vazirmatn-Black.woff2",
+      weight: "900",
       style: "normal",
     },
   ],
