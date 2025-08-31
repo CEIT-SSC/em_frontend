@@ -2,32 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Font imports */
-@import url('/fonts/Estedad-v7.3/estedad.css');
-@import url('/fonts/vazirmatn-v33.003/Vazirmatn-font-face.css');
-@import url('/fonts/IRANYekanX/fontiran.css');
-@import url('/fonts/SF_Pro_Rounded/sfProRounded.css');
-
-/* Custom CSS variables for theme support */
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  font-family: 'Estedad', 'Vazirmatn', sans-serif;
-  margin: 0;
-}
-
 /* RTL support */
 [dir="rtl"] {
   text-align: right;
@@ -35,4 +9,26 @@ body {
 
 [dir="ltr"] {
   text-align: left;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: auto;
+  min-height: 100vh;
+  font-family: var(--font-estedad), var(--font-vazirmatn), sans-serif, Roboto;
+  background-color: lightyellow;
+  overflow: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+::-webkit-scrollbar {
+  scrollbar-width: none;
+  display: none;
 }

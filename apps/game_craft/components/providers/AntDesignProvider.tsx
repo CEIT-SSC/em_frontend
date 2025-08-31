@@ -12,7 +12,7 @@ interface AntDesignProviderProps {
 
 const lightTheme = {
   token: {
-    fontFamily: "Estedad, Vazirmatn, sans-serif",
+    fontFamily: "var(--font-estedad), var(--font-vazirmatn), sans-serif",
     borderRadius: 16,
     colorPrimary: "#3c3a7d",
     colorInfo: "#3c3a7d",
@@ -75,7 +75,7 @@ export default function AntDesignProvider({
   locale,
   direction,
 }: AntDesignProviderProps) {
-  const { theme: currentTheme, resolvedTheme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   // Wait for theme to be mounted to avoid hydration mismatch
@@ -97,22 +97,21 @@ export default function AntDesignProvider({
     });
   }, []);
 
-  // Use resolvedTheme or fallback to currentTheme, defaulting to 'light'
-  const effectiveTheme = mounted ? (resolvedTheme || currentTheme || 'light') : 'light';
-
-  // Debug logging
-  useEffect(() => {
-    console.log('🎨 Theme Debug:', {
-      currentTheme,
-      resolvedTheme,
-      effectiveTheme,
-      mounted
-    });
-  }, [currentTheme, resolvedTheme, effectiveTheme, mounted]);
+  // Don't render until mounted to prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <ConfigProvider
+        theme={lightTheme}
+        direction={direction}
+      >
+        {children}
+      </ConfigProvider>
+    );
+  }
 
   return (
     <ConfigProvider
-      theme={effectiveTheme === "dark" ? darkTheme : lightTheme}
+      theme={resolvedTheme === "dark" ? darkTheme : lightTheme}
       direction={direction}
     >
       {children}
