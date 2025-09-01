@@ -18,13 +18,14 @@ const page = () => {
       </p>
       <TextField
         name="alaki"
-        id="a"
+        id="username"
         label="نام کاربری"
         placeholder="نام کاربری خود را وارد کنید"
       />
       <TextField
         name="alaki"
-        id="b"
+        id="password"
+        type="password"
         label="رمز عبور"
         guidance="رمز عبور باید شامل حروف بزرگ، حروف کوچک و عدد باشد"
         placeholder="رمز عبور خود را وارد کنید"

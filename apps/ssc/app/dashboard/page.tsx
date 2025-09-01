@@ -30,7 +30,12 @@ const page = () => {
           <TextField id="university" name="info" label="دانشگاه" />
         </div>
         <div className="pt-3">
-          <TextField id="student-number" name="info" label="شماره دانشجویی" />
+          <TextField
+            id="student-number"
+            name="info"
+            type="number"
+            label="شماره دانشجویی"
+          />
         </div>
       </div>
       <div className="flex justify-center py-6 px-32">
