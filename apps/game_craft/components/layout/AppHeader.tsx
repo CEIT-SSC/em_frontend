@@ -4,7 +4,6 @@ import {
   Button,
   Divider,
   Flex,
-  Grid,
   Layout,
   Space,
   Switch,
@@ -74,7 +73,11 @@ export function AppHeader() {
     };
   }, []);
 
-  const isActive = (path: string) => pathname === path;
+  // Fix active route detection by removing locale from pathname
+  const isActive = (path: string) => {
+    const pathWithoutLocale = pathname.replace(`/${locale}`, "") || "/";
+    return pathWithoutLocale === path;
+  };
 
   return (
     <Header
@@ -121,7 +124,7 @@ export function AppHeader() {
                   onClick={() => router.push(item.route)}
                   style={{
                     fontWeight: "bolder",
-                    ...(isActive(item.route) ? { color: "#01B582" } : {}),
+                    ...(isActive(item.route) ? { color: token.green} : {}),
                   }}
                 >
                   {item.name}
