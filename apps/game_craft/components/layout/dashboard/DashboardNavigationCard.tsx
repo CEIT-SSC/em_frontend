@@ -66,7 +66,7 @@ export function DashboardNavigationCard({open, toggleDrawerOpen}: DashboardNavig
                         }}
                     >
                         <Image
-                            src="/images/avatar-placeholder.png"
+                            src="/images/2024/staffs/mahdiHaeri.jpg"
                             width="100%"
                             height="auto"
                             alt="user-avatar"
