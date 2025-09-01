@@ -22,8 +22,9 @@ export function DashboardNavigationCard({open, toggleDrawerOpen}: DashboardNavig
     const screens = useBreakpoint();
 
     const handleLogout = () => {
-        // Add logout logic here
-        console.log("Logout functionality to be implemented");
+        // Clear user session or token here
+        // Redirect to login page
+        router.push('/');
     };
 
     // Function to check if a route is active
