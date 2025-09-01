@@ -12,7 +12,6 @@ export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <AppHeader />
-        hello
       <Layout.Content style={{backgroundColor: 'white'}}>
         {children}
       </Layout.Content>

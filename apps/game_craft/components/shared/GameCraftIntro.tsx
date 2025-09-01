@@ -118,36 +118,27 @@ export function GameCraftIntro({padding = "3rem 2rem", backgroundColor}: GameCra
                                 wrap
                             >
                                 <Button
-                                    type="primary"
-                                    size="large"
+                                    type="text"
                                     shape="circle"
                                     icon={<XOutlined style={{fontSize: "2rem"}}/>}
                                     style={{
-                                        width: "3.5rem",
-                                        height: "3.5rem",
-                                        background: "#01B582",
+                                        padding: "2rem",
                                     }}
                                 />
                                 <Button
-                                    type="primary"
-                                    size="large"
+                                    type="text"
                                     shape="circle"
                                     icon={<InstagramOutlined style={{fontSize: "2rem"}}/>}
                                     style={{
-                                        width: "4rem",
-                                        height: "4rem",
-                                        background: "#01B582",
+                                        padding: "2rem",
                                     }}
                                 />
                                 <Button
-                                    type="primary"
-                                    size="large"
+                                    type="text"
                                     shape="circle"
                                     icon={<YoutubeFilled style={{fontSize: "2rem"}}/>}
                                     style={{
-                                        width: "3.5rem",
-                                        height: "3.5rem",
-                                        background: "#01B582",
+                                        padding: "2rem",
                                     }}
                                 />
                             </Flex>
