@@ -37,8 +37,8 @@ const lightTheme = {
       colorPrimaryActive: "#2c2a6d",
     },
     Layout: {
-      colorBgHeader: "#3c3a7d",
-      colorBgBody: "#f5f5f5",
+      headerBg: "#3c3a7d",
+      bodyBg: "#f5f5f5",
     },
     Switch: {},
     Collapse: {},
@@ -61,8 +61,8 @@ const darkTheme = {
   components: {
     ...lightTheme.components,
     Layout: {
-      colorBgHeader: "#3c3a7d",
-      colorBgBody: "#1E1E1E",
+      headerBg: "#3c3a7d",
+      bodyBg: "#1E1E1E",
     },
     Message: {
       colorBgBase: "#262626",
