@@ -21,7 +21,8 @@ export default function NewsPage() {
       style={{
         width: "100%",
         minHeight: "100%",
-        backgroundColor: token.colorPrimary,
+        // backgroundColor: token.colorPrimary,
+          backgroundColor: 'red',
         backgroundImage: "url('/images/pattern.svg')",
       }}
     >
@@ -52,8 +53,8 @@ export default function NewsPage() {
           <Empty description="No news yet" />
         </Flex>
       </Flex>
-      {/* Wave component commented out in React project but keeping structure */}
-      {/* <Wave width="100%" height="auto" fill={token.colorPrimary} style={{ transform: 'scaleY(-1) translateY(-2px)' }} /> */}
+       {/*Wave component commented out in React project but keeping structure */}
+       {/*<Wave width="100%" height="auto" fill={token.colorPrimary} style={{ transform: 'scaleY(-1) translateY(-2px)' }} />*/}
     </Flex>
   );
 }

@@ -1,106 +1,104 @@
 'use client';
 
-import { Button, ConfigProvider, Divider, Flex, theme, Typography, Input } from 'antd';
+import {Button, Divider, Flex, theme, Typography} from 'antd';
 
-const { useToken } = theme;
+const {useToken} = theme;
 
 export function PayBox() {
-  const { token } = useToken();
+    const {token} = useToken();
 
-  // Sample cart totals
-  const subtotal = 75000;
-  const discount = 0;
-  const total = subtotal - discount;
+    // Sample cart totals
+    const subtotal = 75000;
+    const discount = 0;
+    const total = subtotal - discount;
 
-  return (
-    <ConfigProvider theme={{ token: { colorPrimary: token.colorPrimary } }}>
-      <Flex
-        vertical
-        align="center"
-        justify="center"
-        style={{
-          width: '100%',
-          padding: token.padding,
-          paddingTop: 0,
-          zIndex: 1000,
-        }}
-        gap="small"
-      >
-        <Divider variant="dashed" type="horizontal" />
-
+    return (
         <Flex
-          align="center"
-          justify="space-between"
-          style={{
-            width: '100%',
-          }}
-          gap="middle"
-        >
-          <Typography.Text>
-            کد تخفیف دارید؟
-          </Typography.Text>
-          <Button type="dashed">
-            وارد کردن
-          </Button>
-        </Flex>
-
-        <Flex
-          vertical
-          align="center"
-          justify="center"
-          style={{
-            width: '100%',
-          }}
-          gap="small"
-        >
-          <Flex
+            vertical
             align="center"
-            justify="space-between"
-            style={{ width: '100%' }}
-          >
-            <Typography.Text>جمع کل:</Typography.Text>
-            <Typography.Text strong>
-              {subtotal.toLocaleString()} تومان
-            </Typography.Text>
-          </Flex>
+            justify="center"
+            style={{
+                width: '100%',
+                padding: token.padding,
+                paddingTop: 0,
+                zIndex: 1000,
+            }}
+            gap="small"
+        >
+            <Divider variant="dashed" type="horizontal"/>
 
-          {discount > 0 && (
             <Flex
-              align="center"
-              justify="space-between"
-              style={{ width: '100%' }}
+                align="center"
+                justify="space-between"
+                style={{
+                    width: '100%',
+                }}
+                gap="middle"
             >
-              <Typography.Text type="secondary">تخفیف:</Typography.Text>
-              <Typography.Text type="success">
-                -{discount.toLocaleString()} تومان
-              </Typography.Text>
+                <Typography.Text>
+                    کد تخفیف دارید؟
+                </Typography.Text>
+                <Button type="dashed">
+                    وارد کردن
+                </Button>
             </Flex>
-          )}
 
-          <Divider style={{ margin: '8px 0' }} />
+            <Flex
+                vertical
+                align="center"
+                justify="center"
+                style={{
+                    width: '100%',
+                }}
+                gap="small"
+            >
+                <Flex
+                    align="center"
+                    justify="space-between"
+                    style={{width: '100%'}}
+                >
+                    <Typography.Text>جمع کل:</Typography.Text>
+                    <Typography.Text strong>
+                        {subtotal.toLocaleString()} تومان
+                    </Typography.Text>
+                </Flex>
 
-          <Flex
-            align="center"
-            justify="space-between"
-            style={{ width: '100%' }}
-          >
-            <Typography.Title level={5} style={{ margin: 0 }}>
-              مبلغ نهایی:
-            </Typography.Title>
-            <Typography.Title level={5} style={{ margin: 0, color: token.colorPrimary }}>
-              {total.toLocaleString()} تومان
-            </Typography.Title>
-          </Flex>
+                {discount > 0 && (
+                    <Flex
+                        align="center"
+                        justify="space-between"
+                        style={{width: '100%'}}
+                    >
+                        <Typography.Text type="secondary">تخفیف:</Typography.Text>
+                        <Typography.Text type="success">
+                            -{discount.toLocaleString()} تومان
+                        </Typography.Text>
+                    </Flex>
+                )}
 
-          <Button type="primary" size="large" block style={{ marginTop: token.margin }}>
-            <Flex align="center" justify="center" gap="small">
-              <Typography.Text style={{ fontWeight: 900, color: 'white' }}>
-                پرداخت
-              </Typography.Text>
+                <Divider style={{margin: '8px 0'}}/>
+
+                <Flex
+                    align="center"
+                    justify="space-between"
+                    style={{width: '100%'}}
+                >
+                    <Typography.Title level={5} style={{margin: 0}}>
+                        مبلغ نهایی:
+                    </Typography.Title>
+                    <Typography.Title level={5} style={{margin: 0, color: token.colorPrimary}}>
+                        {total.toLocaleString()} تومان
+                    </Typography.Title>
+                </Flex>
+
+                <Button type="primary" size="large" block style={{marginTop: token.margin}}>
+                    <Flex align="center" justify="center" gap="small">
+                        <Typography.Text style={{fontWeight: 900, color: 'white'}}>
+                            پرداخت
+                        </Typography.Text>
+                    </Flex>
+                </Button>
             </Flex>
-          </Button>
         </Flex>
-      </Flex>
-    </ConfigProvider>
-  );
+    );
 }

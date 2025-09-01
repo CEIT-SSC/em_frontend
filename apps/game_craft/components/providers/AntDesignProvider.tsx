@@ -48,7 +48,7 @@ const lightTheme = {
   },
 };
 
-const darkTheme = {
+export const darkTheme = {
   algorithm: theme.darkAlgorithm,
   token: {
     ...lightTheme.token,
