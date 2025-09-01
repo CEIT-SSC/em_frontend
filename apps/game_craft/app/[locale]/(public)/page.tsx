@@ -25,7 +25,6 @@ export default function HomePage() {
             vertical
             style={{
                 width: "100%",
-                backgroundColor: token.colorBgBase,
             }}
         >
             {/* GameCraft Introduction Section */}
@@ -52,7 +51,7 @@ export default function HomePage() {
             <OfflineWorkshop padding={homeViewPadding} backgroundColor="#4F7B79"/>
             <OnlineWorkshop
                 padding={homeViewPadding}
-                backgroundColor={token.colorPrimary}
+                backgroundColor={"#01B582"}
             />
 
             {/* Sponsors Section */}
@@ -63,8 +62,7 @@ export default function HomePage() {
             <Wave width="100%" height="auto" fill={token.colorPrimary}/>
 
             {/* About Us Section */}
-            <AboutUs padding={homeViewPadding} backgroundColor={token.colorBgBase}/>
-            <Wave width={'100%'} height={'auto'} fill={token.colorPrimary} style={{transform: 'scaleY(-1) translateY(-2px)'}}/>
+            <AboutUs padding={homeViewPadding} backgroundColor={"transparent"}/>
         </Flex>
     );
 }

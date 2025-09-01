@@ -1,21 +1,43 @@
 'use client'
 
-import { Layout } from 'antd'
-import { AppHeader } from './AppHeader'
-import { AppFooter } from './AppFooter'
+import {Layout, theme} from 'antd'
+import {AppHeader} from './AppHeader'
+import {AppFooter} from './AppFooter'
+import Wave from "@/components/shared/Wave";
+import {usePathname} from "next/navigation";
 
 interface MainLayoutProps {
-  children: React.ReactNode
+    children: React.ReactNode
 }
 
-export default function MainLayout({ children }: MainLayoutProps) {
-  return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <AppHeader />
-      <Layout.Content style={{backgroundColor: 'white'}}>
-        {children}
-      </Layout.Content>
-      <AppFooter />
-    </Layout>
-  )
+const {useToken} = theme;
+
+export default function MainLayout({children}: MainLayoutProps) {
+    const {token} = useToken();
+    const pathname = usePathname();
+
+    // if pathname == /[locale]/ --> home page
+    const isHomePage = pathname === '/' || /^\/[a-zA-Z-]+\/?$/.test(pathname);
+
+    return (
+        <Layout style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
+            <AppHeader/>
+            <Layout.Content style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                backgroundColor: isHomePage ? token.colorBgBase : token.colorPrimary,
+                backgroundImage: isHomePage ? null : "url('/images/pattern.svg')",
+            }}>
+                {children}
+                <Wave
+                    width="100%"
+                    height="auto"
+                    fill={token.colorPrimary}
+                    style={{transform: "scaleY(-1) translateY(-2px)"}}
+                />
+            </Layout.Content>
+            <AppFooter/>
+        </Layout>
+    )
 }
