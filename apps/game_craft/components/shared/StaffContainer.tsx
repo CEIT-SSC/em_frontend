@@ -46,8 +46,8 @@ export function StaffContainer() {
             <Typography.Title
               level={2}
               style={{
-                color: token.colorPrimary,
-                fontWeight: 800,
+                color: token.colorAction,
+                fontWeight: 700,
               }}
             >
               {team.teamTitle}
