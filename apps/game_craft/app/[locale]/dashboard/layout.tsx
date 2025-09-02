@@ -98,7 +98,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 <Typography.Title level={3} style={{ margin: 0, fontWeight: 950 }}>
                   {dashboardNavigations.find((item) => item.route === pathname)?.name}
                 </Typography.Title>
-                <Divider type="horizontal" variant="dashed" />
+                <Divider type="horizontal" variant="dashed" style={{borderColor: token.colorBorder}} />
               </Flex>
               <Flex
                 vertical

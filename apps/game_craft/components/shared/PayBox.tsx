@@ -25,7 +25,7 @@ export function PayBox() {
             }}
             gap="small"
         >
-            <Divider variant="dashed" type="horizontal"/>
+            <Divider variant="dashed" type="horizontal" style={{borderColor: token.colorBorder}}/>
 
             <Flex
                 align="center"
@@ -76,7 +76,7 @@ export function PayBox() {
                     </Flex>
                 )}
 
-                <Divider style={{margin: '8px 0'}}/>
+                <Divider variant={"solid"} style={{margin: '8px 0', borderColor: token.colorBorder}}/>
 
                 <Flex
                     align="center"

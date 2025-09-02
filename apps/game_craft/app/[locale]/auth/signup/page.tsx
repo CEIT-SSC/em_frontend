@@ -67,7 +67,7 @@ export default function SignUpPage() {
                                 gap="small"
                                 style={{width: '100%'}}
                             >
-                                <Divider type="horizontal" variant="solid" style={{margin: 0}}>
+                                <Divider type="horizontal" variant="solid" style={{margin: 0, borderColor: token.colorBorder}}>
                                     <Image
                                         src="/images/light-3d-bulb.svg"
                                         alt="logo"
