@@ -51,7 +51,7 @@ export default function HomePage() {
             <OfflineWorkshop padding={homeViewPadding} backgroundColor="#4F7B79"/>
             <OnlineWorkshop
                 padding={homeViewPadding}
-                backgroundColor={"#01B582"}
+                backgroundColor={token.colorAction}
             />
 
             {/* Sponsors Section */}

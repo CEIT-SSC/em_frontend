@@ -46,7 +46,7 @@ export function AboutUs({ padding = '3rem 2rem', backgroundColor }: AboutUsProps
             <Button
               type="primary"
               size="large"
-              style={{ backgroundColor: '#01B582' }} // Using colorAction from theme
+              style={{ backgroundColor: token.colorAction}} // Using colorAction from theme
               onClick={() => router.push('/staffs')}
             >
               {t('buttons.staffs')}

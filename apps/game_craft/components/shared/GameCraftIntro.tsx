@@ -84,7 +84,7 @@ export function GameCraftIntro({padding = "3rem 2rem", backgroundColor}: GameCra
                             <Typography.Title
                                 level={1}
                                 style={{
-                                    color: "#01B582", // colorAction from theme
+                                    color: token.colorAction,
                                     fontWeight: 1000,
                                     fontSize: screens.lg ? "5rem" : screens.md ? "4rem" : "3rem",
                                     marginBottom: "1rem",

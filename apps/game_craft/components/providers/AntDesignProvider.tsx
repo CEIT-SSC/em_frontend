@@ -23,6 +23,7 @@ const lightTheme = {
         colorBgElevated: "#ffffff",
         colorText: "#000000d9",
         colorTextSecondary: "#00000073",
+        colorAction: "#01B582" // Custom brand color
     },
     components: {
         Timeline: {

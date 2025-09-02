@@ -134,7 +134,7 @@ export default function LoginPage() {
                         style={{height: '100%', width: '100%'}}
                         gap={1}
                     >
-                        <Typography.Title style={{color: "#01b582", fontWeight: 600, margin: 0}}>
+                        <Typography.Title style={{color: token.colorAction, fontWeight: 600, margin: 0}}>
                             {t('login')}
                         </Typography.Title>
                         <Image
