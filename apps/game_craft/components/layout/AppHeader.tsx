@@ -124,7 +124,7 @@ export function AppHeader() {
                   onClick={() => router.push(item.route)}
                   style={{
                     fontWeight: "bolder",
-                    ...(isActive(item.route) ? { color: token.green} : {}),
+                    ...(isActive(item.route) ? { color: "#01B582"} : {}),
                   }}
                 >
                   {item.name}
