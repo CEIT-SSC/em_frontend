@@ -1,9 +1,7 @@
 "use client";
 
-import { Row, Col, theme } from "antd";
+import { Row, Col} from "antd";
 import { WorkshopCard } from "./WorkshopCard";
-
-const { useToken } = theme;
 
 interface Workshop {
   title: string;

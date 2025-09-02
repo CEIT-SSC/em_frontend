@@ -1,6 +1,6 @@
 "use client";
 
-import {Flex, Grid, theme, Typography} from "antd";
+import {Flex, theme, Typography} from "antd";
 import Wave from "../../common/Wave";
 import {WorkshopGrid} from "./WorkshopGrid";
 import {useTranslations} from "next-intl";
@@ -13,10 +13,7 @@ interface OnlineWorkshopProps {
     backgroundColor?: string;
 }
 
-export function OnlineWorkshop({
-                                   padding = "3rem 2rem",
-                                   backgroundColor,
-                               }: OnlineWorkshopProps) {
+export function OnlineWorkshop({padding = "3rem 2rem", backgroundColor,}: OnlineWorkshopProps) {
     const {token} = useToken();
     const screens = useResponsive();
     const t = useTranslations();

@@ -1,6 +1,6 @@
 "use client";
 
-import {Flex, Grid, Typography} from "antd";
+import {Flex, Typography} from "antd";
 import {WorkshopGrid} from "./WorkshopGrid";
 import {useTranslations} from "next-intl";
 import {useResponsive} from "@/lib/hooks/useResponsive";
@@ -10,10 +10,7 @@ interface OfflineWorkshopProps {
     backgroundColor?: string;
 }
 
-export function OfflineWorkshop({
-                                    padding = "3rem 2rem",
-                                    backgroundColor,
-                                }: OfflineWorkshopProps) {
+export function OfflineWorkshop({padding = "3rem 2rem", backgroundColor,}: OfflineWorkshopProps) {
     const screens = useResponsive();
     const t = useTranslations();
 
