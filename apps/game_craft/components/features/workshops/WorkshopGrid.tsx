@@ -22,8 +22,6 @@ interface WorkshopGridProps {
 }
 
 export function WorkshopGrid({ workshops = [] }: WorkshopGridProps) {
-  const { token } = useToken();
-
   return (
     <Row
       gutter={[

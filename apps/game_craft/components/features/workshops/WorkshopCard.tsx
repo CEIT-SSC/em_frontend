@@ -41,7 +41,7 @@ export function WorkshopCard({
   const colorStripes = ["#4CAF50", "#2196F3", "#FFC107", "#F44336"];
   const textPrimary = token.colorText;
   const textSecondary = token.colorTextSecondary;
-  const headerBg = coverImage ? `url(${coverImage})` : token.colorBgContainer;
+  // const headerBg = coverImage ? `url(${coverImage})` : token.colorBgContainer;
   const borderColor = token.colorBorder;
 
   return (

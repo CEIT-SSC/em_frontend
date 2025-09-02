@@ -1,16 +1,21 @@
-import createNextIntlPlugin from 'next-intl/plugin';
-import type { NextConfig } from 'next'
+import createNextIntlPlugin from "next-intl/plugin";
+import type { NextConfig } from "next";
 
-const withNextIntl = createNextIntlPlugin('./lib/i18n.ts');
+const withNextIntl = createNextIntlPlugin("./lib/i18n.ts");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
 
 const nextConfig: NextConfig = {
-  transpilePackages: ['@ssc/ui', '@ssc/utils', '@ssc/core'],
-  experimental: {
-    optimizePackageImports: ['antd']
+  transpilePackages: ["@ssc/ui", "@ssc/utils", "@ssc/core"],
+  modularizeImports: {
+    antd: {
+      transform: "antd/lib/{{member}}",
+    },
   },
   images: {
-    domains: []
-  }
-}
+    domains: [],
+  },
+};
 
-export default withNextIntl(nextConfig);
+export default withBundleAnalyzer(withNextIntl(nextConfig));

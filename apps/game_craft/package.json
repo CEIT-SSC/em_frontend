@@ -7,7 +7,7 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start",
+    "start": "NEXT_DEBUG=true next start",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
@@ -25,10 +25,12 @@
     "next-themes": "^0.4.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-lottie": "^1.2.10",
     "react-responsive": "^10.0.1",
     "utils": "workspace:*"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^15.5.2",
     "@ssc/tailwind-config": "workspace:*",
     "@types/node": "^22.18.0",
     "@types/react": "^19.1.12",
