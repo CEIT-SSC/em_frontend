@@ -34,14 +34,16 @@ const Button = ({ variant = ButtonVariant.SECONDARY, size = ButtonSize.MEDIUM, l
     const isText = variant === ButtonVariant.TEXT;
     const isOutline = variant === ButtonVariant.OUTLINE;
     const radiusClass = className.match(/\brounded(?:-[^\s]+)?\b/) || "rounded-lg";
-    return (<div className={(0, clsx_1.default)("inline-flex justify-center items-center overflow-hidden p-px", sizeClasses[size], {
+    return (<div className={(0, clsx_1.default)("inline-flex justify-center items-center overflow-hidden p-px", {
             "default-gradient": !isSecondary && !isText,
+            [sizeClasses[size]]: !isText,
         }, className, radiusClass)}>
       <div className={(0, clsx_1.default)("h-full w-full", {
-            "bg-black rounded-lg": variant === ButtonVariant.OUTLINE,
+            "bg-black rounded-lg": isOutline,
         })}>
-        <button className={(0, clsx_1.default)("w-full h-full px-3 py-2 cursor-pointer", "flex gap-2 justify-center items-center", "text-lg text-bold", variantClasses[variant], {
+        <button className={(0, clsx_1.default)("w-full h-full cursor-pointer", "flex gap-2 justify-center items-center", "text-bold", variantClasses[variant], {
             "rounded-lg": !isSecondary,
+            "px-3 py-2": !isText,
         })} onClick={onClick}>
           {PrefixIcon && <PrefixIcon />}
           {label}

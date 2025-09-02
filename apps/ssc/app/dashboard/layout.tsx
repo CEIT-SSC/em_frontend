@@ -43,7 +43,7 @@ export default function RootLayout({
         </div>
         <Button
           size={ButtonSize.SMALL}
-          className="bg-red-700 rounded-lg text-[12px]"
+          className="bg-red-700 rounded-lg text-[12px] font-bold"
           label="خروج از حساب کاربری"
         />
       </div>

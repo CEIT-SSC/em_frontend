@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, ButtonSize, TextField } from "@ssc/ui";
 import { HiOutlineClipboardCopy, HiPlus } from "react-icons/hi";
+import Team from "../components/teams/Team";
 
 const page = () => {
   const userId = "sampleId";
@@ -16,12 +17,16 @@ const page = () => {
           prefixIcon={HiPlus}
         />
         <Button
+          className="text-[20px]"
           size={ButtonSize.SMALL}
           label={buttonText}
           suffixIcon={HiOutlineClipboardCopy}
         />
       </div>
-      <div className="flex flex-col gap-2.5 p-2.5">teams list</div>
+      <div className="flex flex-col gap-2.5 p-2.5">
+        <Team name="We are the best" memberCount={10} />
+        <Team name="They are the best" memberCount={4} />
+      </div>
     </>
   );
 };
