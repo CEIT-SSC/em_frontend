@@ -18,7 +18,7 @@ import Image from "next/image";
 import {useTheme} from "next-themes";
 import {useResponsive} from "@/lib/hooks/useResponsive";
 import {DashboardDrawer} from "@/components/layout/dashboard";
-import MainDrawer from "@/components/layout/MainDrawer";
+import AppDrawer from "@/components/layout/AppDrawer";
 
 const {useToken} = theme;
 const {Header} = Layout;
@@ -207,7 +207,7 @@ export function AppHeader() {
                         height={40}
                         style={{height: "60%", width: "auto", maxHeight: "60px"}}
                     />
-                    <MainDrawer open={drawerOpen} toggleDrawerOpen={toggleDrawerOpen}/>
+                    <AppDrawer open={drawerOpen} toggleDrawerOpen={toggleDrawerOpen}/>
                 </Flex>
             )}
         </Header>

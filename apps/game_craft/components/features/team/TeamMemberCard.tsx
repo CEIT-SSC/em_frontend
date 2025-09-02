@@ -3,7 +3,7 @@
 import React from "react";
 import { Flex, theme, Typography } from "antd";
 import Image from "next/image";
-import CrownBadge from "./CrownBadge";
+import CrownBadge from "../../common/CrownBadge";
 
 const { useToken } = theme;
 

@@ -1,14 +1,14 @@
 "use client";
 
 import {Flex, Grid, theme} from "antd";
-import {GameCraftTimeline} from "@/components/shared/Timeline";
-import {GameCraftIntro} from "@/components/shared/GameCraftIntro";
-import {Prizes} from "@/components/shared/Prizes";
-import {AboutUs} from "@/components/shared/AboutUs";
-import {OfflineWorkshop} from "@/components/shared/OfflineWorkshop";
-import {OnlineWorkshop} from "@/components/shared/OnlineWorkshop";
-import {Sponsors} from "@/components/shared/Sponsors";
-import Wave from "@/components/shared/Wave";
+import {GameCraftTimeline} from "@/components/features/Timeline";
+import {GameCraftIntro} from "@/components/features/home/GameCraftIntro";
+import {Prizes} from "@/components/features/home/Prizes";
+import {AboutUs} from "@/components/features/home/AboutUs";
+import {OfflineWorkshop} from "@/components/features/workshops/OfflineWorkshop";
+import {OnlineWorkshop} from "@/components/features/workshops/OnlineWorkshop";
+import {Sponsors} from "@/components/features/home/Sponsors";
+import Wave from "@/components/common/Wave";
 import {useResponsive} from "@/lib/hooks/useResponsive";
 
 const {useToken} = theme;

@@ -1,8 +1,8 @@
 "use client";
 
 import {Divider, Flex, Grid, theme, Typography} from "antd";
-import {GameCard} from "@/components/shared/GameCard";
-import {UploadGameForm} from "@/components/shared/UploadGameForm";
+import {GameCard} from "@/components/features/games/GameCard";
+import {UploadGameForm} from "@/components/features/games/UploadGameForm";
 import {useTranslations} from "next-intl";
 import {darkTheme} from "@/components/providers/AntDesignProvider";
 

@@ -16,7 +16,7 @@ interface MainDrawerProps {
   toggleDrawerOpen: () => void;
 }
 
-export default function MainDrawer({
+export default function AppDrawer({
   open,
   toggleDrawerOpen,
 }: MainDrawerProps) {

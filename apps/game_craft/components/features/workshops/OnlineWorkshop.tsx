@@ -1,7 +1,7 @@
 "use client";
 
 import {Flex, Grid, theme, Typography} from "antd";
-import Wave from "./Wave";
+import Wave from "../../common/Wave";
 import {WorkshopGrid} from "./WorkshopGrid";
 import {useTranslations} from "next-intl";
 import {useResponsive} from "@/lib/hooks/useResponsive";

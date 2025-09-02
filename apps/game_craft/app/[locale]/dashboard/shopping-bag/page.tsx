@@ -1,8 +1,8 @@
 'use client';
 
 import { Flex, theme, Row, Col } from 'antd';
-import { WorkshopCard } from '@/components/shared/WorkshopCard';
-import { PayBox } from '@/components/shared/PayBox';
+import { WorkshopCard } from '@/components/features/workshops/WorkshopCard';
+import { PayBox } from '@/components/features/cart/PayBox';
 
 const { useToken } = theme;
 

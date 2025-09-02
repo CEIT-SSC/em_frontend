@@ -3,7 +3,7 @@
 import {Layout, theme} from 'antd'
 import {AppHeader} from './AppHeader'
 import {AppFooter} from './AppFooter'
-import Wave from "@/components/shared/Wave";
+import Wave from "@/components/common/Wave";
 import {usePathname} from "next/navigation";
 
 interface MainLayoutProps {

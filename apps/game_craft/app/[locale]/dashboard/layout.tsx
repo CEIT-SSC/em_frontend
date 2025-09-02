@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useDashboardNavigations } from "@/lib/config/dashboard-navigation";
 import { DashboardHeader } from "@/components/layout/dashboard/DashboardHeader";
 import { DashboardNavigationCard } from "@/components/layout/dashboard/DashboardNavigationCard";
-import LogoWithText from "@/components/shared/LogoWithText";
+import LogoWithText from "@/components/common/LogoWithText";
 
 const { useToken } = theme;
 const { useBreakpoint } = Grid;

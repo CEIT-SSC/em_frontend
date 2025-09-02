@@ -2,7 +2,7 @@
 
 import { Flex, theme, Typography } from 'antd'
 import { useTranslations } from 'next-intl'
-import { TeamMemberContainer } from '@/components/shared/TeamMemberContainer'
+import { TeamMemberContainer } from '@/components/features/team/TeamMemberContainer'
 
 const { useToken } = theme
 

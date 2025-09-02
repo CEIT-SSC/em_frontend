@@ -2,7 +2,7 @@
 
 import { Flex, theme, Typography } from 'antd';
 import { useTranslations } from 'next-intl';
-import { WorkshopGrid } from '@/components/shared/WorkshopGrid';
+import { WorkshopGrid } from '@/components/features/workshops/WorkshopGrid';
 
 const { useToken } = theme;
 
