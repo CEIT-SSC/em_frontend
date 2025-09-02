@@ -166,7 +166,6 @@ export default async function LocaleLayout({
         >
         <body>
         <ThemeProvider
-            themes={["light", "dark"]}
             defaultTheme="light"
             enableSystem={true}
             attribute="data-theme"
@@ -174,7 +173,7 @@ export default async function LocaleLayout({
             <AntdRegistry>
                 <NextIntlClientProvider messages={messages}>
                     <AuthProvider>
-                        <AntDesignProvider locale={locale} direction={direction}>
+                        <AntDesignProvider direction={direction}>
                             <Providers>{children}</Providers>
                         </AntDesignProvider>
                     </AuthProvider>
