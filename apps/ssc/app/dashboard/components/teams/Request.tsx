@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
 import React from "react";
 import { HiCheckCircle, HiXCircle } from "react-icons/hi";
 import { Button, ButtonVariant } from "@ssc/ui";
 import { toast } from "react-toastify";
+import CustomToast from "../../../components/CustomToast";
 
 interface Props {
   name: string;
@@ -24,13 +25,31 @@ const Request = ({ name, memberCount }: Props) => {
           variant={ButtonVariant.TEXT}
           className="text-[#C81E1ECC]"
           prefixIcon={HiXCircle}
-          onClick={() => toast.error("toast error!")}
+          onClick={() =>
+            toast(
+              <CustomToast
+                title="کاربر یافت نشد"
+                message="کاربری با آیدی ذکر شده یافت نشد."
+              />,
+              {
+                type: "error",
+              }
+            )
+          }
         />
         <Button
           variant={ButtonVariant.TEXT}
           className="text-[#1F825A]"
           prefixIcon={HiCheckCircle}
-          onClick={() => toast.success("toast success!")}
+          onClick={() =>
+            toast(
+              <CustomToast
+                title="درخواست شما ارسال شد"
+                message="درخواست عضویت با موفقیت ارسال شد."
+              />,
+              { type: "success" }
+            )
+          }
         />
       </div>
     </div>
