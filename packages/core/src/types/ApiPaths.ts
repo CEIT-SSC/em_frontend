@@ -5,6 +5,9 @@ export enum ApiPath {
   AUTH_LOGOUT = "/accounts/token/blacklist/",
   AUTH_REGISTER = "/register/",
 
+  // Google Authentication
+  AUTH_GOOGLE = "/auth/google/",
+
   // Presentation endpoints
   PRESENTATIONS = "/presentations/",
   PRESENTATION_BY_ID = "/presentations/",
@@ -21,6 +24,13 @@ export enum ApiPath {
   ORDERS_HISTORY = "/orders/history/",
   ORDERS_HISTORY_BY_ID = "/orders/history/",
   ORDERS_INITIATE_PAYMENT = "/orders/",
+
+  // User Profile endpoints
+  USER_PROFILE = "/profile/",
+  USER_CHANGE_PASSWORD = "/change-password/",
+  USER_FORGOT_PASSWORD = "/forgot-password/",
+  USER_VERIFY_EMAIL = "/verify-email/",
+  USER_RESEND_VERIFY_EMAIL = "/resend-verify-email/",
 }
 
 export const apiPath = (path: ApiPath): string => {

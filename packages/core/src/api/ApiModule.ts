@@ -1,6 +1,7 @@
 import { AuthApi } from "./Authentication/auth.api";
 import { ShopApi } from "./Shopping/shop.api";
 import { PresentationsApi } from "./Presentations/presentations.api";
+import { UserProfileApi } from "./UserProfile/userProfile.api";
 
 /**
  * Main API class that provides a centralized entry point for all API operations.
@@ -19,11 +20,13 @@ import { PresentationsApi } from "./Presentations/presentations.api";
  * const products = await api.shop.getCart();
  * const events = await api.events.getEvents();
  * const presentations = await api.presentations.getPresentations();
+ * const profile = await api.userProfile.getProfile();
  */
 export class API {
   private _auth?: AuthApi;
   private _shop?: ShopApi;
   private _presentations?: PresentationsApi;
+  private _userProfile?: UserProfileApi;
 
   constructor() {}
 
@@ -48,7 +51,14 @@ export class API {
     return this._presentations;
   }
 
-  public isLoaded(apiName: "auth" | "shop" | "presentations"): boolean {
+  get userProfile(): UserProfileApi {
+    if (!this._userProfile) {
+      this._userProfile = new UserProfileApi();
+    }
+    return this._userProfile;
+  }
+
+  public isLoaded(apiName: "auth" | "shop" | "presentations" | "userProfile"): boolean {
     switch (apiName) {
       case "auth":
         return !this._auth;
@@ -56,6 +66,8 @@ export class API {
         return !this._shop;
       case "presentations":
         return !this._presentations;
+      case "userProfile":
+        return !this._userProfile;
       default:
         return false;
     }
