@@ -3,8 +3,8 @@ import isProduction from "../utils/isProduction";
 import { StorageKeys } from "../types/StorageKeys";
 import { ApiPath, apiPath } from "../types/ApiPaths";
 
-const localhost = "http://localhost:3000";
-export const BASE_URL = isProduction ? process.env.BASE_URL : localhost;
+const localhost = "https://aut-ssc.ir";
+export const BASE_URL = isProduction() ? process.env.BASE_URL : localhost;
 
 export const Api = axios.create({
   baseURL: BASE_URL,

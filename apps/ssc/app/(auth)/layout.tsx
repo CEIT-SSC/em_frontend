@@ -1,5 +1,5 @@
 import { MdArrowBack } from "react-icons/md";
-import { Button, ButtonSize } from "@ssc/ui";
+import { Button, ButtonSize, ButtonVariant } from "@ssc/ui";
 import Link from "next/link";
 
 export default function RootLayout({
@@ -22,8 +22,9 @@ export default function RootLayout({
       <div className="absolute max-w-[600px] h-max bg-secondary-background rounded-3xl p-6 flex flex-col gap-4">
         <Link href={"/"} className="flex justify-end">
           <Button
-            className="flex justify-end border rounded-full"
+            className="flex justify-end bg-none !rounded-full text-whiteText"
             size={ButtonSize.SMALL}
+            variant={ButtonVariant.OUTLINE}
             label="بازگشت"
             suffixIcon={MdArrowBack}
           />

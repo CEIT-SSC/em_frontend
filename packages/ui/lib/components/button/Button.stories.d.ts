@@ -1,7 +1,7 @@
 import type { StoryObj } from "@storybook/react-vite";
 declare const meta: {
     title: string;
-    component: ({ variant, size, label, className, prefixIcon: PrefixIcon, suffixIcon: SuffixIcon, onClick, }: import("./Button").ButtonProps) => import("react").JSX.Element;
+    component: ({ label, variant, size, loading, className, prefixIcon: PrefixIcon, suffixIcon: SuffixIcon, onClick, }: import("./Button").ButtonProps) => import("react").JSX.Element;
     parameters: {
         layout: string;
     };

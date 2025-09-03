@@ -5,9 +5,17 @@ const nextConfig: NextConfig = {
   webpack(config) {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '~': __dirname,
+      "~": __dirname,
     };
     return config;
+  },
+  async rewrites() {
+    return [
+      // {
+      //   source: "/api/:path*", // The incoming request path in your Next.js app
+      //   destination: "https://aut-ssc.ir/api/:path*", // The actual backend URL
+      // },
+    ];
   },
 };
 

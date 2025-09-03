@@ -49,5 +49,5 @@ export class API {
   }
 }
 
-export const api = new API();
+export const ApiModule = new API();
 export default API;

@@ -17,3 +17,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Export all components
 __exportStar(require("./components/button/Button"), exports);
 __exportStar(require("./components/textField/TextField"), exports);
+__exportStar(require("./components/phoneNumberField/phoneNumberField"), exports);

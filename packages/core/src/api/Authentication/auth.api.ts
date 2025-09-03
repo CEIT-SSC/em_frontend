@@ -1,33 +1,33 @@
 import { AxiosResponse } from "axios";
 import { Api } from "../api";
 import { apiPath, ApiPath } from "../../types/ApiPaths";
+import {
+  ErrorResponse,
+  UserRegistration,
+  UserRegistrationSuccess,
+} from "../../types/generated/accounts";
 
-interface RegisterRequest {
-  email: string;
-  password: string;
-  first_name?: string;
-  last_name?: string;
-  phone_number?: string;
-}
-
-interface RegisterResponse {
-  message?: string;
-  email?: string;
-  error?: string;
-}
-
+type RequestResponse<T> = AxiosResponse<T | ErrorResponse>;
 export class AuthApi {
   constructor() {}
 
-  async register(
-    parameters: RegisterRequest
-  ): Promise<AxiosResponse<RegisterResponse>> {
-    const response = await Api.post<
-      RegisterResponse,
-      AxiosResponse<RegisterResponse>,
-      RegisterRequest
-    >(apiPath(ApiPath.AUTH_REGISTER), parameters);
-
-    return response;
+  async register(parameters: {
+    email: string;
+    password: string;
+    firstName?: string;
+    lastName?: string;
+    phoneNumber: string;
+  }): Promise<RequestResponse<UserRegistrationSuccess>> {
+    return await Api.post<
+      UserRegistrationSuccess,
+      RequestResponse<UserRegistrationSuccess>,
+      UserRegistration
+    >(apiPath(ApiPath.AUTH_REGISTER), {
+      email: parameters.email,
+      password: parameters.password,
+      phone_number: parameters.phoneNumber,
+      last_name: parameters.lastName,
+      first_name: parameters.firstName,
+    });
   }
 }

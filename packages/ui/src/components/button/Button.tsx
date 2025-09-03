@@ -1,11 +1,13 @@
 import React from "react";
 import { IconType } from "react-icons";
+import { AiOutlineLoading } from "react-icons/ai";
 import clsx from "clsx";
 
 export interface ButtonProps {
+  label?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
-  label?: string;
+  loading?: boolean;
   className?: string;
   prefixIcon?: IconType;
   suffixIcon?: IconType;
@@ -38,9 +40,10 @@ const variantClasses = {
 };
 
 export const Button = ({
+  label = "",
   variant = ButtonVariant.SECONDARY,
   size = ButtonSize.MEDIUM,
-  label = "",
+  loading = false,
   className = "",
   prefixIcon: PrefixIcon,
   suffixIcon: SuffixIcon,
@@ -50,46 +53,40 @@ export const Button = ({
   const isText = variant === ButtonVariant.TEXT;
   const isOutline = variant === ButtonVariant.OUTLINE;
 
-  const radiusClass =
-    className.match(/\brounded(?:-[^\s]+)?\b/) || "rounded-lg";
-
   return (
     <div
       className={clsx(
-        "overflow-hidden p-px",
-        sizeClasses[size],
+        "h-full overflow-hidden p-px rounded-lg",
         {
           "default-gradient": !isSecondary && !isText,
           "bg-transparent": isSecondary,
+          "bg-black border-1 border-whiteText": isOutline,
         },
-        className,
-        radiusClass
+        sizeClasses[size],
+        variantClasses[variant],
+        className
       )}
     >
-      <div
-        className={clsx("h-full", {
-          "bg-black rounded-lg": variant === ButtonVariant.OUTLINE,
-        })}
+      <button
+        className={clsx(
+          "relative w-full h-full px-3 py-2 cursor-pointer",
+          "text-lg text-bold"
+        )}
+        onClick={onClick}
       >
-        <button
-          className={clsx(
-            "w-full h-full px-3 py-2 cursor-pointer",
-            "flex gap-2 justify-center items-center",
-            "text-lg text-bold",
-            className,
-            variantClasses[variant],
-
-            {
-              "rounded-lg": !isSecondary,
-            }
-          )}
-          onClick={onClick}
+        {loading && (
+          <AiOutlineLoading className=" absolute top-1/2 left-1/2 -translate-1/2 animate-spin" />
+        )}
+        <div
+          className={clsx("flex gap-2 justify-center items-center", {
+            ["opacity-0"]: loading,
+          })}
         >
           {PrefixIcon && <PrefixIcon />}
           {label}
           {SuffixIcon && <SuffixIcon />}
-        </button>
-      </div>
+        </div>
+      </button>
     </div>
   );
 };

@@ -63,7 +63,7 @@ export default function Home() {
           </p>
           <Link href="#events">
             <Button
-              className="min-h-12 min-w-20 w-fit h-fit rounded-lg overflow-hidden p-px px-3 py-2 cursor-pointer flex gap-2 justify-center items-center"
+              className="h-8 min-w-20 w-fit rounded-lg overflow-hidden p-px px-3 py-2 cursor-pointer flex gap-2 justify-center items-center"
               variant={ButtonVariant.PRIMARY}
               label="رویداد های پیش رو"
               // suffixIcon={HiArrowLeft}

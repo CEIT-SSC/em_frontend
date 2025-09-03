@@ -1,9 +1,10 @@
 import React from "react";
 import { IconType } from "react-icons";
 export interface ButtonProps {
+    label?: string;
     variant?: ButtonVariant;
     size?: ButtonSize;
-    label?: string;
+    loading?: boolean;
     className?: string;
     prefixIcon?: IconType;
     suffixIcon?: IconType;
@@ -20,4 +21,4 @@ export declare enum ButtonVariant {
     OUTLINE = 2,
     TEXT = 3
 }
-export declare const Button: ({ variant, size, label, className, prefixIcon: PrefixIcon, suffixIcon: SuffixIcon, onClick, }: ButtonProps) => React.JSX.Element;
+export declare const Button: ({ label, variant, size, loading, className, prefixIcon: PrefixIcon, suffixIcon: SuffixIcon, onClick, }: ButtonProps) => React.JSX.Element;
