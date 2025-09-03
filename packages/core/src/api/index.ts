@@ -5,4 +5,4 @@ export { PresentationsApi } from "./Presentations/presentations.api";
 export { Api, BASE_URL } from "./api";
 export * from "../types/ApiPaths";
 export * from "../types/generated/presentations";
-
+export * from "../types/generated/shopping";
