@@ -24,6 +24,7 @@ export interface Presentation {
   title: string;
   description: string;
   presenters_details: Presenter[];
+  presenter_ids?: number[]; // writeOnly field from OpenAPI
   type: PresentationType;
   is_online: boolean;
   location?: string;
@@ -37,7 +38,13 @@ export interface Presentation {
   is_active: boolean;
 }
 
-export interface PaginatedPresentationList extends PaginatedResponse<Presentation> {}
+// Based on the exact OpenAPI spec response for GET /api/presentations/
+export interface PaginatedPresentationList {
+  count: number;
+  next?: string;
+  previous?: string;
+  results: Presentation[];
+}
 
 // Presentation enrollment related types
 export interface PresentationEnrollment {
@@ -62,7 +69,7 @@ export interface PresentationQueryParams {
   is_online?: boolean;
   is_paid?: boolean;
   page?: number;
-  type?: PresentationType;
+  type?: 'course' | 'talk' | 'workshop';
 }
 
 // Re-export common types for convenience
