@@ -20,6 +20,14 @@ const nextConfig: NextConfig = {
     };
     return config;
   },
+  async rewrites() {
+    return [
+      // {
+      //   source: "/api/:path*", // The incoming request path in your Next.js app
+      //   destination: "https://aut-ssc.ir/api/:path*", // The actual backend URL
+      // },
+    ];
+  },
 };
 
 export default nextConfig;

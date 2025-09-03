@@ -53,9 +53,6 @@ export const Button = ({
   const isText = variant === ButtonVariant.TEXT;
   const isOutline = variant === ButtonVariant.OUTLINE;
 
-  const radiusClass =
-    className.match(/\brounded(?:-[^\s]+)?\b/) || "rounded-lg";
-
   return (
     <div
       className={clsx(

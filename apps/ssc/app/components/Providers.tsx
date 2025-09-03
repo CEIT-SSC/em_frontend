@@ -1,8 +1,8 @@
 "use client";
 
 import { AppProgressProvider as ProgressProvider } from "@bprogress/next";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastProvider } from "./ToastProvider";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -12,7 +12,18 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       shallowRouting
     >
       {children}
-      <ToastProvider />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </ProgressProvider>
   );
 };

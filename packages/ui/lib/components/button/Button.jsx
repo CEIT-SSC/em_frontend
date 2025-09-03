@@ -37,6 +37,14 @@ const Button = ({ label = "", variant = ButtonVariant.SECONDARY, size = ButtonSi
     const radiusClass = className.match(/\brounded(?:-[^\s]+)?\b/) || "rounded-lg";
     return (<div className={(0, clsx_1.default)("overflow-hidden p-px", {
             "default-gradient": !isSecondary && !isText,
+            "bg-transparent": isSecondary,
+            "bg-black border-1 border-whiteText": isOutline,
+        }, sizeClasses[size], variantClasses[variant], className)}>
+      <button className={(0, clsx_1.default)("relative w-full h-full px-3 py-2 cursor-pointer", "text-lg text-bold")} onClick={onClick}>
+        {loading && (<ai_1.AiOutlineLoading className=" absolute top-1/2 left-1/2 -translate-1/2 animate-spin"/>)}
+        <div className={(0, clsx_1.default)("flex gap-2 justify-center items-center", {
+            ["opacity-0"]: loading,
+        })}>
             "bg-black border-1 border-whiteText": isOutline,
             [sizeClasses[size]]: !isText,
         }, variantClasses[variant], className, radiusClass)}>
