@@ -48,6 +48,8 @@ next-env.d.ts
 .next
 /.next
 /.next/**
+lib
+dist
 
 # storybook
 *storybook.log
