@@ -72,7 +72,13 @@ export function OnlineWorkshop({
             );
         }
 
-        return <WorkshopGrid presentations={presentations} onAddToCart={handleAddToCart} />;
+        return (
+            <WorkshopGrid
+                presentations={presentations}
+                onAddToCart={handleAddToCart}
+                workshopImage="/images/Luigi.jpg" // Pass Luigi image for online workshops
+            />
+        );
     };
 
     return (

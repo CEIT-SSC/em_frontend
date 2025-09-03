@@ -68,7 +68,13 @@ export function OfflineWorkshop({
             );
         }
 
-        return <WorkshopGrid presentations={presentations} onAddToCart={handleAddToCart} />;
+        return (
+            <WorkshopGrid
+                presentations={presentations}
+                onAddToCart={handleAddToCart}
+                workshopImage="/images/SuperMario.jpg" // Pass SuperMario image for offline workshops
+            />
+        );
     };
 
     return (

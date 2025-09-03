@@ -9,9 +9,10 @@ const { useToken } = theme;
 interface WorkshopGridProps {
   presentations?: Presentation[];
   onAddToCart?: (presentation: Presentation) => void;
+  workshopImage?: string; // Add optional image prop
 }
 
-export function WorkshopGrid({ presentations = [], onAddToCart }: WorkshopGridProps) {
+export function WorkshopGrid({ presentations = [], onAddToCart, workshopImage }: WorkshopGridProps) {
   return (
     <Row
       gutter={[
@@ -44,6 +45,7 @@ export function WorkshopGrid({ presentations = [], onAddToCart }: WorkshopGridPr
           <WorkshopCard
             presentation={presentation}
             onAddToCart={() => onAddToCart?.(presentation)}
+            workshopImage={workshopImage} // Pass the image prop to WorkshopCard
           />
         </Col>
       ))}

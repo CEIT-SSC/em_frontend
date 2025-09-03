@@ -8,17 +8,20 @@ import {
 } from "@ant-design/icons";
 import { useTranslations } from "next-intl";
 import { Presentation } from "@ssc/core";
+import Image from "next/image";
 
 const { useToken } = theme;
 
 interface WorkshopCardProps {
   presentation: Presentation;
   onAddToCart: () => void;
+  workshopImage?: string; // Add optional image prop
 }
 
 export function WorkshopCard({
   presentation,
   onAddToCart,
+  workshopImage, // Add image prop
 }: WorkshopCardProps) {
   const { token } = useToken();
   const t = useTranslations();
@@ -66,6 +69,17 @@ export function WorkshopCard({
     return `${presentation.price}`;
   };
 
+  // Get workshop image - use prop if provided, otherwise fallback to default
+  const getWorkshopImage = () => {
+    if (workshopImage) {
+      return workshopImage;
+    }
+    // Fallback to current logic if no image prop provided
+    return presentation.is_online
+      ? "/images/Luigi.jpg"
+      : "/images/SuperMario.jpg";
+  };
+
   return (
     <Card
       style={{
@@ -97,6 +111,17 @@ export function WorkshopCard({
           paddingTop: "56.25%" // 16:9 aspect ratio
         }}
       >
+        {/* Workshop Image */}
+        <Image
+          src={getWorkshopImage()}
+          alt={presentation.is_online ? "Online Workshop" : "Offline Workshop"}
+          fill
+          style={{
+            objectFit: "cover",
+          }}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+
         {/* Colored Stripes */}
         <div
           style={{
@@ -105,6 +130,7 @@ export function WorkshopCard({
             left: 0,
             right: 0,
             display: "flex",
+            zIndex: 1,
           }}
         >
           {colorStripes.map((color, index) => (
