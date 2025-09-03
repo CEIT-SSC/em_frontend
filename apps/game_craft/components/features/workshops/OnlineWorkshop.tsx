@@ -1,10 +1,12 @@
 "use client";
 
-import {Flex, Grid, theme, Typography} from "antd";
+import {Flex, Grid, theme, Typography, Spin, Alert} from "antd";
 import Wave from "../../common/Wave";
 import {WorkshopGrid} from "./WorkshopGrid";
 import {useTranslations} from "next-intl";
 import {useResponsive} from "@/lib/hooks/useResponsive";
+import {usePresentations} from "@/lib/hooks/usePresentations";
+import {Presentation} from "@ssc/core";
 
 const {useToken} = theme;
 
@@ -21,50 +23,57 @@ export function OnlineWorkshop({
     const screens = useResponsive();
     const t = useTranslations();
 
-    // Sample online workshop data matching the React project
-    const onlineWorkshops = [
-        {
-            title: "برنامه‌نویسی بازی با C#",
-            description:
-                "آموزش پایه‌های برنامه‌نویسی C# برای توسعه بازی‌های کامپیوتری",
-            instructor: "علی کریمی",
-            date: "1404/2/15، 10:00",
-            price: "15,000",
-            isInPerson: false,
-            onAddToCart: () => console.log("Added C# programming workshop to cart"),
-        },
-        {
-            title: "طراحی سه بعدی کاراکتر",
-            description:
-                "آموزش اصول مدل‌سازی و طراحی کاراکترهای سه بعدی برای بازی‌ها",
-            instructor: "مریم صادقی",
-            date: "1404/2/20، 14:00",
-            price: "18,000",
-            isInPerson: false,
-            onAddToCart: () =>
-                console.log("Added 3D character design workshop to cart"),
-        },
-        {
-            title: "هوش مصنوعی در بازی‌ها",
-            description:
-                "آشنایی با تکنیک‌های پیاده‌سازی هوش مصنوعی در بازی‌های ویدیویی",
-            instructor: "دکتر حسین رضایی",
-            date: "1404/3/5، 16:00",
-            price: "20,000",
-            isInPerson: false,
-            onAddToCart: () => console.log("Added AI in games workshop to cart"),
-        },
-        {
-            title: "طراحی صدا برای بازی",
-            description:
-                "اصول طراحی و تولید افکت‌های صوتی و موسیقی برای بازی‌های دیجیتال",
-            instructor: "مهدی حسینی",
-            date: "1404/3/10، 15:30",
-            price: "12,000",
-            isInPerson: false,
-            onAddToCart: () => console.log("Added sound design workshop to cart"),
-        },
-    ];
+    // Fetch online workshops (presentations) from API
+    const { presentations, loading, error, refetch } = usePresentations({
+        eventId: 1, // Set to event ID 1 as requested
+        isOnline: true, // Only online presentations
+        type: 'workshop' // Only workshop type presentations
+    });
+
+    const handleAddToCart = (presentation: Presentation) => {
+        // TODO: Implement add to cart functionality
+        console.log("Added presentation to cart:", presentation.title);
+        // You can integrate with cart API here
+    };
+
+    const renderContent = () => {
+        if (loading) {
+            return (
+                <Flex justify="center" align="center" style={{ minHeight: "200px" }}>
+                    <Spin size="large" />
+                </Flex>
+            );
+        }
+
+        if (error) {
+            return (
+                <Alert
+                    message={t("workshop.error")}
+                    description={error}
+                    type="error"
+                    showIcon
+                    action={
+                        <button onClick={refetch}>
+                            {t("common.retry")}
+                        </button>
+                    }
+                />
+            );
+        }
+
+        if (presentations.length === 0) {
+            return (
+                <Alert
+                    message={t("workshop.noWorkshops")}
+                    description={t("workshop.noOnlineWorkshops")}
+                    type="info"
+                    showIcon
+                />
+            );
+        }
+
+        return <WorkshopGrid presentations={presentations} onAddToCart={handleAddToCart} />;
+    };
 
     return (
         <Flex
@@ -99,7 +108,7 @@ export function OnlineWorkshop({
                     {t("workshop.onlineWorkshops")}
                 </Typography.Title>
 
-                <WorkshopGrid workshops={onlineWorkshops}/>
+                {renderContent()}
             </Flex>
             <Wave
                 width="100%"

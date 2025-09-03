@@ -201,12 +201,26 @@
   },
   "workshop": {
     "inPerson": "حضوری",
+    "online": "آنلاین",
     "addToCart": "اضافه به سبد خرید",
+    "enroll": "ثبت نام",
     "presenters": "ارائه دهندگان",
+    "unknownPresenter": "ارائه‌دهنده نامشخص",
     "onlineWorkshops": "کارگاه‌های آنلاین",
-    "offlineWorkshops": "کارگاه‌های حضوری"
+    "offlineWorkshops": "کارگاه‌های حضوری",
+    "free": "رایگان",
+    "error": "خطا در بارگذاری کارگاه‌ها",
+    "noWorkshops": "کارگاهی موجود نیست",
+    "noOnlineWorkshops": "در حال حاضر هیچ کارگاه آنلاینی موجود نیست",
+    "noOfflineWorkshops": "در حال حاضر هیچ کارگاه حضوری موجود نیست",
+    "type": {
+      "course": "دوره",
+      "talk": "سخنرانی",
+      "workshop": "کارگاه"
+    }
   },
   "common": {
-    "currency": "تومان"
+    "currency": "تومان",
+    "retry": "تلاش دوباره"
   }
 }

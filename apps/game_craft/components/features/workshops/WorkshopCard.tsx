@@ -7,30 +7,17 @@ import {
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { useTranslations } from "next-intl";
+import { Presentation } from "@ssc/core";
 
 const { useToken } = theme;
 
 interface WorkshopCardProps {
-  title: string;
-  description: string;
-  instructor: string;
-  instructorImage?: string;
-  date: string;
-  price: string;
-  isInPerson: boolean;
-  coverImage?: string;
+  presentation: Presentation;
   onAddToCart: () => void;
 }
 
 export function WorkshopCard({
-  title,
-  description,
-  instructor,
-  instructorImage,
-  date,
-  price,
-  isInPerson,
-  coverImage,
+  presentation,
   onAddToCart,
 }: WorkshopCardProps) {
   const { token } = useToken();
@@ -41,8 +28,43 @@ export function WorkshopCard({
   const colorStripes = ["#4CAF50", "#2196F3", "#FFC107", "#F44336"];
   const textPrimary = token.colorText;
   const textSecondary = token.colorTextSecondary;
-  // const headerBg = coverImage ? `url(${coverImage})` : token.colorBgContainer;
   const borderColor = token.colorBorder;
+
+  // Format date and time
+  const formatDateTime = (dateTimeString: string) => {
+    const date = new Date(dateTimeString);
+    return date.toLocaleString('fa-IR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
+  // Get main presenter name
+  const getMainPresenter = () => {
+    if (presentation.presenters_details && presentation.presenters_details.length > 0) {
+      return presentation.presenters_details[0].name;
+    }
+    return t('workshop.unknownPresenter');
+  };
+
+  // Get presenter image
+  const getPresenterImage = () => {
+    if (presentation.presenters_details && presentation.presenters_details.length > 0) {
+      return presentation.presenters_details[0].presenter_picture;
+    }
+    return undefined;
+  };
+
+  // Format price
+  const formatPrice = () => {
+    if (!presentation.is_paid || !presentation.price) {
+      return t('workshop.free');
+    }
+    return `${presentation.price}`;
+  };
 
   return (
     <Card
@@ -72,11 +94,7 @@ export function WorkshopCard({
       <div
         style={{
           position: "relative",
-          paddingTop: "56.25%", // 16:9 aspect ratio
-          backgroundImage: coverImage ? `url(${coverImage})` : undefined,
-          backgroundColor: coverImage ? undefined : token.colorBgContainer,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          paddingTop: "56.25%" // 16:9 aspect ratio
         }}
       >
         {/* Colored Stripes */}
@@ -118,20 +136,44 @@ export function WorkshopCard({
             }}
             ellipsis={{ rows: 2 }}
           >
-            {title}
+            {presentation.title}
           </Typography.Title>
-          {isInPerson && (
+          <Flex gap="small">
+            {!presentation.is_online && (
+              <Badge
+                style={{
+                  backgroundColor: "transparent",
+                  color: token.colorPrimary,
+                  border: `1px solid ${token.colorPrimary}`,
+                  borderRadius: "4px",
+                  padding: "0 8px",
+                }}
+                count={t("workshop.inPerson")}
+              />
+            )}
+            {presentation.is_online && (
+              <Badge
+                style={{
+                  backgroundColor: "transparent",
+                  color: token.colorSuccess,
+                  border: `1px solid ${token.colorSuccess}`,
+                  borderRadius: "4px",
+                  padding: "0 8px",
+                }}
+                count={t("workshop.online")}
+              />
+            )}
             <Badge
               style={{
                 backgroundColor: "transparent",
-                color: token.colorPrimary,
-                border: `1px solid ${token.colorPrimary}`,
+                color: token.colorInfo,
+                border: `1px solid ${token.colorInfo}`,
                 borderRadius: "4px",
                 padding: "0 8px",
               }}
-              count={t("workshop.inPerson")}
+              count={t(`workshop.type.${presentation.type}`)}
             />
-          )}
+          </Flex>
         </Flex>
 
         {/* Description */}
@@ -144,16 +186,23 @@ export function WorkshopCard({
           }}
           ellipsis={{ rows: 3 }}
         >
-          {description}
+          {presentation.description}
         </Typography.Paragraph>
 
         {/* Date and Time */}
         <Flex align="center" gap="small">
           <ClockCircleOutlined style={{ color: token.colorPrimary }} />
           <Typography.Text style={{ color: textSecondary, fontSize: "14px" }}>
-            {date}
+            {formatDateTime(presentation.start_time)}
           </Typography.Text>
         </Flex>
+
+        {/* Location/Link */}
+        {presentation.location && !presentation.is_online && (
+          <Typography.Text style={{ color: textSecondary, fontSize: "14px" }}>
+            📍 {presentation.location}
+          </Typography.Text>
+        )}
 
         {/* Presenters Label */}
         <Typography.Text
@@ -169,8 +218,8 @@ export function WorkshopCard({
         {/* Instructor */}
         <Flex gap="small" align="center">
           <Avatar
-            src={instructorImage}
-            icon={!instructorImage && <UserOutlined />}
+            src={getPresenterImage()}
+            icon={!getPresenterImage() && <UserOutlined />}
             size={32}
           />
           <Typography.Text
@@ -180,7 +229,7 @@ export function WorkshopCard({
             }}
             ellipsis
           >
-            {instructor}
+            {getMainPresenter()}
           </Typography.Text>
         </Flex>
 
@@ -201,7 +250,7 @@ export function WorkshopCard({
               fontSize: "16px",
             }}
           >
-            {price} {t("common.currency")}
+            {formatPrice()} {presentation.is_paid && t("common.currency")}
           </Typography.Title>
           <Button
             type="primary"
@@ -211,8 +260,9 @@ export function WorkshopCard({
               borderRadius: "8px",
               height: "36px",
             }}
+            disabled={!presentation.is_active}
           >
-            {t("workshop.addToCart")}
+            {presentation.is_paid ? t("workshop.addToCart") : t("workshop.enroll")}
           </Button>
         </Flex>
       </Flex>

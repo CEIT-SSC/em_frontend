@@ -2,26 +2,16 @@
 
 import { Row, Col, theme } from "antd";
 import { WorkshopCard } from "./WorkshopCard";
+import { Presentation } from "@ssc/core";
 
 const { useToken } = theme;
 
-interface Workshop {
-  title: string;
-  description: string;
-  instructor: string;
-  instructorImage?: string;
-  date: string;
-  price: string;
-  isInPerson: boolean;
-  coverImage?: string;
-  onAddToCart: () => void;
-}
-
 interface WorkshopGridProps {
-  workshops?: Workshop[];
+  presentations?: Presentation[];
+  onAddToCart?: (presentation: Presentation) => void;
 }
 
-export function WorkshopGrid({ workshops = [] }: WorkshopGridProps) {
+export function WorkshopGrid({ presentations = [], onAddToCart }: WorkshopGridProps) {
   return (
     <Row
       gutter={[
@@ -38,9 +28,9 @@ export function WorkshopGrid({ workshops = [] }: WorkshopGridProps) {
         padding: "16px 0",
       }}
     >
-      {workshops.map((workshop, index) => (
+      {presentations.map((presentation) => (
         <Col
-          key={index}
+          key={presentation.id}
           xs={24} // 1 card per row on mobile (<576px)
           sm={24} // 1 card per row on small screens (≥576px)
           md={12} // 2 cards per row on medium screens (≥768px)
@@ -51,7 +41,10 @@ export function WorkshopGrid({ workshops = [] }: WorkshopGridProps) {
             marginBottom: "24px",
           }}
         >
-          <WorkshopCard {...workshop} />
+          <WorkshopCard
+            presentation={presentation}
+            onAddToCart={() => onAddToCart?.(presentation)}
+          />
         </Col>
       ))}
     </Row>

@@ -1,9 +1,11 @@
 "use client";
 
-import {Flex, Grid, Typography} from "antd";
+import {Flex, Grid, Typography, Spin, Alert} from "antd";
 import {WorkshopGrid} from "./WorkshopGrid";
 import {useTranslations} from "next-intl";
 import {useResponsive} from "@/lib/hooks/useResponsive";
+import {usePresentations} from "@/lib/hooks/usePresentations";
+import {Presentation} from "@ssc/core";
 
 interface OfflineWorkshopProps {
     padding?: string;
@@ -17,57 +19,57 @@ export function OfflineWorkshop({
     const screens = useResponsive();
     const t = useTranslations();
 
-    // Sample offline workshop data matching the React project
-    const offlineWorkshops = [
-        {
-            title: "کارگاه گیم دیزاین",
-            description:
-                "آشنایی با اصول طراحی بازی و مکانیک‌های جذاب برای بازی‌سازها",
-            instructor: "حسن محمدی",
-            date: "1404/2/5، 09:00",
-            price: "25,000",
-            isInPerson: true,
-            onAddToCart: () => console.log("Added Game Design workshop to cart"),
-        },
-        {
-            title: "آموزش موتور Unreal",
-            description: "آشنایی با محیط توسعه آنریل انجین و ساخت بازی سه بعدی",
-            instructor: "امیر حسینی",
-            date: "1404/2/10، 13:00",
-            price: "30,000",
-            isInPerson: true,
-            onAddToCart: () => console.log("Added Unreal Engine workshop to cart"),
-        },
-        {
-            title: "تست و دیباگ بازی",
-            description: "روش‌های تست و عیب‌یابی در فرآیند توسعه بازی‌های ویدیویی",
-            instructor: "زهرا کریمی",
-            date: "1404/2/15، 10:00",
-            price: "20,000",
-            isInPerson: true,
-            onAddToCart: () => console.log("Added Testing workshop to cart"),
-        },
-        {
-            title: "مدیریت پروژه بازی",
-            description: "اصول مدیریت و برنامه‌ریزی پروژه‌های بازی‌سازی",
-            instructor: "دکتر علی احمدی",
-            date: "1404/2/20، 14:00",
-            price: "22,000",
-            isInPerson: true,
-            onAddToCart: () =>
-                console.log("Added Project Management workshop to cart"),
-        },
-        {
-            title: "بازاریابی بازی‌های موبایل",
-            description: "استراتژی‌های بازاریابی و مانتیزیشن برای بازی‌های موبایلی",
-            instructor: "سارا رضایی",
-            date: "1404/2/25، 16:00",
-            price: "18,000",
-            isInPerson: true,
-            onAddToCart: () =>
-                console.log("Added Mobile Game Marketing workshop to cart"),
-        },
-    ];
+    // Fetch offline workshops (presentations) from API
+    const { presentations, loading, error, refetch } = usePresentations({
+        eventId: 1, // Set to event ID 1 as requested
+        isOnline: false, // Only offline presentations
+        type: 'workshop' // Only workshop type presentations
+    });
+
+    const handleAddToCart = (presentation: Presentation) => {
+        // TODO: Implement add to cart functionality
+        console.log("Added presentation to cart:", presentation.title);
+        // You can integrate with cart API here
+    };
+
+    const renderContent = () => {
+        if (loading) {
+            return (
+                <Flex justify="center" align="center" style={{ minHeight: "200px" }}>
+                    <Spin size="large" />
+                </Flex>
+            );
+        }
+
+        if (error) {
+            return (
+                <Alert
+                    message={t("workshop.error")}
+                    description={error}
+                    type="error"
+                    showIcon
+                    action={
+                        <button onClick={refetch}>
+                            {t("common.retry")}
+                        </button>
+                    }
+                />
+            );
+        }
+
+        if (presentations.length === 0) {
+            return (
+                <Alert
+                    message={t("workshop.noWorkshops")}
+                    description={t("workshop.noOfflineWorkshops")}
+                    type="info"
+                    showIcon
+                />
+            );
+        }
+
+        return <WorkshopGrid presentations={presentations} onAddToCart={handleAddToCart} />;
+    };
 
     return (
         <Flex
@@ -93,7 +95,7 @@ export function OfflineWorkshop({
                 {t("workshop.offlineWorkshops")}
             </Typography.Title>
 
-            <WorkshopGrid workshops={offlineWorkshops}/>
+            {renderContent()}
         </Flex>
     );
 }

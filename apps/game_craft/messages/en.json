@@ -195,12 +195,26 @@
   },
   "workshop": {
     "inPerson": "In Person",
+    "online": "Online",
     "addToCart": "Add to Cart",
+    "enroll": "Enroll",
     "presenters": "Presenters",
+    "unknownPresenter": "Unknown Presenter",
     "onlineWorkshops": "Online Workshops",
-    "offlineWorkshops": "In-Person Workshops"
+    "offlineWorkshops": "In-Person Workshops",
+    "free": "Free",
+    "error": "Failed to load workshops",
+    "noWorkshops": "No workshops available",
+    "noOnlineWorkshops": "No online workshops are currently available",
+    "noOfflineWorkshops": "No in-person workshops are currently available",
+    "type": {
+      "course": "Course",
+      "talk": "Talk",
+      "workshop": "Workshop"
+    }
   },
   "common": {
-    "currency": "Toman"
+    "currency": "Toman",
+    "retry": "Retry"
   }
 }
