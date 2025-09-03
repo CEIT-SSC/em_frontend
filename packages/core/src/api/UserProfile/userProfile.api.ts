@@ -4,6 +4,10 @@ import { apiPath, ApiPath } from "../../types/ApiPaths";
 import {
   UserProfile,
   UserProfileUpdate,
+  MessageResponse,
+  ErrorResponse,
+} from "../../types/generated/userProfile";
+import {
   ChangePassword,
   SimpleForgotPassword,
   EmailVerification,
@@ -15,9 +19,7 @@ import {
   TokenBlacklist,
   UserRegistration,
   UserRegistrationSuccess,
-  MessageResponse,
-  ErrorResponse,
-} from "../../types/generated/userProfile";
+} from "../../types/generated/accounts";
 
 type RequestResponse<T> = AxiosResponse<T | ErrorResponse>;
 

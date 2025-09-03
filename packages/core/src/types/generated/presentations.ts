@@ -1,5 +1,7 @@
 // Generated types for Presentations API based on swagger documentation
 
+import type { ErrorResponse, MessageResponse, PaginatedResponse } from './common';
+
 export interface Presenter {
   id: number;
   name: string;
@@ -35,20 +37,7 @@ export interface Presentation {
   is_active: boolean;
 }
 
-export interface PaginatedPresentationList {
-  count: number;
-  next?: string;
-  previous?: string;
-  results: Presentation[];
-}
-
-export interface ErrorResponse {
-  error: string;
-}
-
-export interface MessageResponse {
-  message: string;
-}
+export interface PaginatedPresentationList extends PaginatedResponse<Presentation> {}
 
 // Presentation enrollment related types
 export interface PresentationEnrollment {
@@ -75,3 +64,6 @@ export interface PresentationQueryParams {
   page?: number;
   type?: PresentationType;
 }
+
+// Re-export common types for convenience
+export type { ErrorResponse, MessageResponse };

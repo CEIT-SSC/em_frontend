@@ -1,5 +1,8 @@
 // Generated types for Cart and Shopping APIs based on swagger documentation
 
+import type { ErrorResponse, MessageResponse, PaginatedResponse } from './common';
+import type { Presentation } from './presentations';
+
 export interface Cart {
   id: number;
   user: number;
@@ -103,16 +106,6 @@ export interface PaymentInitiateResponse {
 }
 
 // Supporting types from other modules (simplified versions for cart context)
-export interface Presentation {
-  id: number;
-  title: string;
-  description: string;
-  price?: string;
-  is_paid: boolean;
-  start_time: string;
-  end_time: string;
-}
-
 export interface SoloCompetition {
   id: number;
   title: string;
@@ -131,10 +124,5 @@ export interface CompetitionTeamDetail {
   created_at: string;
 }
 
-export interface ErrorResponse {
-  error: string;
-}
-
-export interface MessageResponse {
-  message: string;
-}
+// Re-export common types for convenience
+export type { ErrorResponse, MessageResponse };
