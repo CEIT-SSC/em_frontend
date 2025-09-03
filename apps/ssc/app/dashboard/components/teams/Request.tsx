@@ -1,6 +1,9 @@
+'use client';
+
 import React from "react";
 import { HiCheckCircle, HiXCircle } from "react-icons/hi";
 import { Button, ButtonVariant } from "@ssc/ui";
+import { toast } from "react-toastify";
 
 interface Props {
   name: string;
@@ -21,11 +24,13 @@ const Request = ({ name, memberCount }: Props) => {
           variant={ButtonVariant.TEXT}
           className="text-[#C81E1ECC]"
           prefixIcon={HiXCircle}
+          onClick={() => toast.error("toast error!")}
         />
         <Button
           variant={ButtonVariant.TEXT}
           className="text-[#1F825A]"
           prefixIcon={HiCheckCircle}
+          onClick={() => toast.success("toast success!")}
         />
       </div>
     </div>
