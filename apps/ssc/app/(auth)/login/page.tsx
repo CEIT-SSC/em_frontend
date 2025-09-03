@@ -43,12 +43,12 @@ const page = () => {
           />
           <div className="flex gap-3.5">
             <Button
-              className="w-48"
+              className="w-48 bg-secondary-background text-whiteText"
               variant={ButtonVariant.OUTLINE}
               label="ورود با گیتهاب"
             />
             <Button
-              className="w-48"
+              className="w-48 bg-secondary-background text-whiteText"
               variant={ButtonVariant.OUTLINE}
               label="ورود با گوگل"
             />

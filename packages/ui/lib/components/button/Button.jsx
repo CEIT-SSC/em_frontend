@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Button = exports.ButtonVariant = exports.ButtonSize = void 0;
 const react_1 = __importDefault(require("react"));
+const ai_1 = require("react-icons/ai");
 const clsx_1 = __importDefault(require("clsx"));
 var ButtonSize;
 (function (ButtonSize) {
@@ -29,26 +30,25 @@ const variantClasses = {
     [ButtonVariant.SECONDARY]: "",
     [ButtonVariant.OUTLINE]: "text-transparent bg-clip-text default-gradient",
 };
-const Button = ({ variant = ButtonVariant.SECONDARY, size = ButtonSize.MEDIUM, label = "", className = "", prefixIcon: PrefixIcon, suffixIcon: SuffixIcon, onClick, }) => {
+const Button = ({ label = "", variant = ButtonVariant.SECONDARY, size = ButtonSize.MEDIUM, loading = false, className = "", prefixIcon: PrefixIcon, suffixIcon: SuffixIcon, onClick, }) => {
     const isSecondary = variant === ButtonVariant.SECONDARY;
     const isText = variant === ButtonVariant.TEXT;
     const isOutline = variant === ButtonVariant.OUTLINE;
-    const radiusClass = className.match(/\brounded(?:-[^\s]+)?\b/) || "rounded-lg";
-    return (<div className={(0, clsx_1.default)("overflow-hidden p-px", sizeClasses[size], {
+    return (<div className={(0, clsx_1.default)("h-full overflow-hidden p-px rounded-lg", {
             "default-gradient": !isSecondary && !isText,
             "bg-transparent": isSecondary,
-        }, className, radiusClass)}>
-      <div className={(0, clsx_1.default)("h-full", {
-            "bg-black rounded-lg": variant === ButtonVariant.OUTLINE,
+            "bg-black border-1 border-whiteText": isOutline,
+        }, sizeClasses[size], variantClasses[variant], className)}>
+      <button className={(0, clsx_1.default)("relative w-full h-full px-3 py-2 cursor-pointer", "text-lg text-bold")} onClick={onClick}>
+        {loading && (<ai_1.AiOutlineLoading className=" absolute top-1/2 left-1/2 -translate-1/2 animate-spin"/>)}
+        <div className={(0, clsx_1.default)("flex gap-2 justify-center items-center", {
+            ["opacity-0"]: loading,
         })}>
-        <button className={(0, clsx_1.default)("w-full h-full px-3 py-2 cursor-pointer", "flex gap-2 justify-center items-center", "text-lg text-bold", className, variantClasses[variant], {
-            "rounded-lg": !isSecondary,
-        })} onClick={onClick}>
           {PrefixIcon && <PrefixIcon />}
           {label}
           {SuffixIcon && <SuffixIcon />}
-        </button>
-      </div>
+        </div>
+      </button>
     </div>);
 };
 exports.Button = Button;
