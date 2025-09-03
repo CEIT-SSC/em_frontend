@@ -50,6 +50,8 @@ Api.interceptors.response.use(
       } catch (refreshError) {
         return Promise.reject(refreshError);
       }
+    } else {
+      return Promise.reject(error);
     }
   }
 );
