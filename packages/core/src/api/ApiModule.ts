@@ -1,5 +1,7 @@
 import { AuthApi } from "./Authentication/auth.api";
 import { ShopApi } from "./Shopping/shop.api";
+import { PresentationsApi } from "./Presentations/presentations.api";
+import { UserProfileApi } from "./UserProfile/userProfile.api";
 
 /**
  * Main API class that provides a centralized entry point for all API operations.
@@ -17,12 +19,17 @@ import { ShopApi } from "./Shopping/shop.api";
  * const response = await api.auth.register({...});
  * const products = await api.shop.getCart();
  * const events = await api.events.getEvents();
+ * const presentations = await api.presentations.getPresentations();
+ * const profile = await api.userProfile.getProfile();
  */
 export class API {
   private _auth?: AuthApi;
   private _shop?: ShopApi;
+  private _presentations?: PresentationsApi;
+  private _userProfile?: UserProfileApi;
 
   constructor() {}
+
   get auth(): AuthApi {
     if (!this._auth) {
       this._auth = new AuthApi();
@@ -37,17 +44,35 @@ export class API {
     return this._shop;
   }
 
-  public isLoaded(apiName: "auth" | "shop"): boolean {
+  get presentations(): PresentationsApi {
+    if (!this._presentations) {
+      this._presentations = new PresentationsApi();
+    }
+    return this._presentations;
+  }
+
+  get userProfile(): UserProfileApi {
+    if (!this._userProfile) {
+      this._userProfile = new UserProfileApi();
+    }
+    return this._userProfile;
+  }
+
+  public isLoaded(apiName: "auth" | "shop" | "presentations" | "userProfile"): boolean {
     switch (apiName) {
       case "auth":
         return !this._auth;
       case "shop":
         return !this._shop;
+      case "presentations":
+        return !this._presentations;
+      case "userProfile":
+        return !this._userProfile;
       default:
         return false;
     }
   }
 }
 
-export const api = new API();
+export const ApiModule = new API();
 export default API;

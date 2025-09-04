@@ -1,0 +1,38 @@
+import { useTranslations } from 'next-intl'
+
+export interface NavigationItem {
+  name: string
+  route: string
+  icon?: React.ReactNode
+}
+
+export const useMainNavigations = (): NavigationItem[] => {
+  const t = useTranslations('app.mainNavigation')
+
+  return [
+    {
+      name: t('home'),
+      route: '/',
+    },
+    {
+      name: t('news'),
+      route: '/blog',
+    },
+    {
+      name: t('faq'),
+      route: '/faq',
+    },
+    {
+      name: t('staffs'),
+      route: '/staffs',
+    },
+    {
+      name: t('history'),
+      route: '/history',
+    },
+    {
+      name: t('sponsors'),
+      route: '/sponsor',
+    },
+  ]
+}

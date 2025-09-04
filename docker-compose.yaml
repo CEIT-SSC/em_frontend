@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  gamecraft:
+    build:
+      context: .
+      dockerfile: apps/game_craft/Dockerfile
+    container_name: gamecraft
+    ports:
+      - "3000:3000"   # maps host:container
+    environment:
+      NODE_ENV: production
+    restart: always
+
+#  ssc:
+#    build:
+#      context: .
+#      dockerfile: apps/ssc/Dockerfile
+#    container_name: ssc
+#    ports:
+#      - "3001:3001"
+#    environment:
+#      NODE_ENV: production
+#
+#  auth:
+#    build:
+#      context: .
+#      dockerfile: apps/auth/Dockerfile
+#    container_name: auth
+#    ports:
+#      - "3002:3002"
+#    environment:
+#      NODE_ENV: production
+
