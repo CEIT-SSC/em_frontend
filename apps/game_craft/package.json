@@ -1,0 +1,43 @@
+{
+  "name": "@ssc/game_craft",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "NEXT_DEBUG=true next start",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^6.0.0",
+    "@ant-design/nextjs-registry": "^1.1.0",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "@bprogress/next": "^3.2.12",
+    "@ssc/core": "workspace:*",
+    "@ssc/ui": "workspace:*",
+    "antd": "^5.27.1",
+    "axios": "^1.11.0",
+    "clsx": "^2.1.1",
+    "next": "^15.5.2",
+    "next-intl": "^3.26.5",
+    "next-themes": "^0.4.6",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-lottie": "^1.2.10",
+    "react-responsive": "^10.0.1",
+    "utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^15.5.2",
+    "@ssc/tailwind-config": "workspace:*",
+    "@types/node": "^22.18.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.9.2"
+  }
+}
