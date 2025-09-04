@@ -48,7 +48,8 @@ next-env.d.ts
 .next
 /.next
 /.next/**
-lib
+packages/core/lib
+packages/ui/lib
 dist
 
 # storybook
