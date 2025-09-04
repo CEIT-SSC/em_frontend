@@ -1,11 +1,9 @@
-import { Flex, Timeline, Typography, theme } from "antd";
+import { Flex, Timeline, Typography } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import TimelineDot from "./TimelineDot";
 import TimelineLabel from "./TimelineLabel";
 import TimelineChildren from "./TimelineChildren";
-
-const { useToken } = theme;
 
 interface GameCraftTimelineProps {
   padding?: string | number;
@@ -18,7 +16,6 @@ export default function GameCraftTimeline({
   backgroundColor = "transparent",
   className = "",
 }: GameCraftTimelineProps) {
-  const { token } = useToken();
   const t = useTranslations("app.timeline");
 
   const items = [
@@ -35,7 +32,7 @@ export default function GameCraftTimeline({
         <TimelineChildren title={t("step2.title")} time={t("step2.schedule")} />
       ),
       label: (
-        <TimelineLabel logo="/svg/timline-2.svg" alt="Presentations Begin" />
+        <TimelineLabel logo="/svg/timline-2.svg" alt="Registration Deadline" />
       ),
     },
     {
@@ -50,16 +47,14 @@ export default function GameCraftTimeline({
       children: (
         <TimelineChildren title={t("step4.title")} time={t("step4.schedule")} />
       ),
-      label: (
-        <TimelineLabel logo="/svg/timline-4.svg" alt="Competition Begin" />
-      ),
+      label: <TimelineLabel logo="/svg/timline-4.svg" alt="Workshops End" />,
     },
     {
       dot: <TimelineDot />,
       children: (
         <TimelineChildren title={t("step5.title")} time={t("step5.schedule")} />
       ),
-      label: <TimelineLabel logo="/svg/timline-5.svg" alt="Game Jam" />,
+      label: <TimelineLabel logo="/svg/timline-5.svg" alt="Game Development" />,
     },
     {
       dot: <TimelineDot />,
@@ -67,13 +62,6 @@ export default function GameCraftTimeline({
         <TimelineChildren title={t("step6.title")} time={t("step6.schedule")} />
       ),
       label: <TimelineLabel logo="/svg/timline-6.svg" alt="Judging" />,
-    },
-    {
-      dot: <TimelineDot />,
-      children: (
-        <TimelineChildren title={t("step7.title")} time={t("step7.schedule")} />
-      ),
-      label: <TimelineLabel logo="/svg/timline-6.svg" alt="Results & Closing Ceremony" />,
     },
   ];
 
@@ -103,7 +91,7 @@ export default function GameCraftTimeline({
         }}
       >
         <Image
-          src="/assets/svg/bubble-light-purple.svg"
+          src="/svg/bubble-light-purple.svg"
           alt="Background bubble"
           fill
           style={{
@@ -120,12 +108,7 @@ export default function GameCraftTimeline({
       >
         {t("title")}
       </Typography.Title>
-      <Timeline
-        items={items}
-        mode="alternate"
-        className="[&>li]:!pb-20 md:[&>li]:!pb-6"
-        style={{ width: "100%" }}
-      />
+      <Timeline items={items} mode="alternate" style={{ width: "100%" }} />
     </Flex>
   );
 }

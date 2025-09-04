@@ -36,26 +36,32 @@ export function WorkshopCard({
   // Format date and time
   const formatDateTime = (dateTimeString: string) => {
     const date = new Date(dateTimeString);
-    return date.toLocaleString('fa-IR', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
+    return date.toLocaleString("fa-IR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
   // Get main presenter name
   const getMainPresenter = () => {
-    if (presentation.presenters_details && presentation.presenters_details.length > 0) {
+    if (
+      presentation.presenters_details &&
+      presentation.presenters_details.length > 0
+    ) {
       return presentation.presenters_details[0].name;
     }
-    return t('workshop.unknownPresenter');
+    return t("workshop.unknownPresenter");
   };
 
   // Get presenter image
   const getPresenterImage = () => {
-    if (presentation.presenters_details && presentation.presenters_details.length > 0) {
+    if (
+      presentation.presenters_details &&
+      presentation.presenters_details.length > 0
+    ) {
       return presentation.presenters_details[0].presenter_picture;
     }
     return undefined;
@@ -64,10 +70,10 @@ export function WorkshopCard({
   // Format price
   const formatPrice = () => {
     if (!presentation.is_paid || !presentation.price) {
-      return t('workshop.free');
+      return t("workshop.free");
     }
     const price = parseFloat(presentation.price);
-    return price.toLocaleString('fa-IR');
+    return price.toLocaleString("fa-IR");
   };
 
   // Get workshop image - use prop if provided, otherwise fallback to default
@@ -109,7 +115,7 @@ export function WorkshopCard({
       <div
         style={{
           position: "relative",
-          paddingTop: "56.25%" // 16:9 aspect ratio
+          paddingTop: "56.25%", // 16:9 aspect ratio
         }}
       >
         {/* Workshop Image */}
@@ -232,7 +238,7 @@ export function WorkshopCard({
         )}
         {presentation.online_link && presentation.is_online && (
           <Typography.Text style={{ color: textSecondary, fontSize: "14px" }}>
-            🔗 {t('workshop.onlineLink')}
+            🔗 {t("workshop.onlineLink")}
           </Typography.Text>
         )}
 
@@ -297,7 +303,9 @@ export function WorkshopCard({
             }}
             disabled={!presentation.is_active}
           >
-            {presentation.is_paid ? t("workshop.addToCart") : t("workshop.enroll")}
+            {presentation.is_paid
+              ? t("workshop.addToCart")
+              : t("workshop.enroll")}
           </Button>
         </Flex>
       </Flex>

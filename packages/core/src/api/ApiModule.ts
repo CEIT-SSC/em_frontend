@@ -2,6 +2,8 @@ import { AxiosInstance } from "axios";
 import { AuthApi } from "./Authentication/auth.api";
 import { ShopApi } from "./Shopping/shop.api";
 import { ProfileApi } from "./Profile/profile.api";
+import { PresentationsApi } from "./Presentations/presentations.api";
+import { UserProfileApi } from "./UserProfile/userProfile.api";
 
 /**
  * Main API class that provides a centralized entry point for all API operations.

@@ -6,11 +6,11 @@ import { useResponsive } from "@/lib/hooks/useResponsive";
 
 const { useToken } = theme;
 
-export default function SponsorsPage() {
+export default function HistoryPage() {
   const { token } = useToken();
   const screens = useResponsive();
   const t = useTranslations("app");
-  const sponsorsViewPadding = screens.lg ? "3rem 5rem" : "3rem 2rem";
+  const historyViewPadding = screens.lg ? "3rem 5rem" : "3rem 2rem";
 
   return (
     <Flex
@@ -29,11 +29,11 @@ export default function SponsorsPage() {
         justify="center"
         style={{
           width: "100%",
-          padding: sponsorsViewPadding,
+          padding: historyViewPadding,
         }}
       >
         <Typography.Title style={{ color: "white" }}>
-          {t("mainNavigation.sponsors")}
+          {t("mainNavigation.history")}
         </Typography.Title>
         <Flex
           vertical
@@ -47,7 +47,7 @@ export default function SponsorsPage() {
             padding: token.padding,
           }}
         >
-          <Empty description="No sponsors yet" />
+          <Empty description="No history yet" />
         </Flex>
       </Flex>
     </Flex>

@@ -10,7 +10,11 @@ interface WorkshopGridProps {
   workshopImage?: string; // Add optional image prop
 }
 
-export function WorkshopGrid({ presentations = [], onAddToCart, workshopImage }: WorkshopGridProps) {
+export function WorkshopGrid({
+  presentations = [],
+  onAddToCart,
+  workshopImage,
+}: WorkshopGridProps) {
   return (
     <Row
       gutter={[

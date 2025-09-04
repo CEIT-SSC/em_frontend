@@ -137,7 +137,7 @@ const Page = () => {
           />
           <div className="w-full flex gap-3.5">
             {/* <Button
-              className="w-48 bg-secondary-background text-whiteText"
+              className="w-48 bg-secondary-background text-whiteText bg-secondary-background text-whiteText"
               variant={ButtonVariant.OUTLINE}
               label="ورود با گیتهاب"
             /> */}
