@@ -48,6 +48,8 @@ next-env.d.ts
 .next
 /.next
 /.next/**
+packages/ui/lib/
+packages/core/lib/
 
 # storybook
 *storybook.log
