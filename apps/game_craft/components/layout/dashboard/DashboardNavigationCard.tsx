@@ -9,11 +9,10 @@ const {useToken} = theme;
 const {useBreakpoint} = Grid;
 
 interface DashboardNavigationCardProps {
-    open?: boolean;
     toggleDrawerOpen?: () => void;
 }
 
-export function DashboardNavigationCard({open, toggleDrawerOpen}: DashboardNavigationCardProps) {
+export function DashboardNavigationCard({toggleDrawerOpen}: DashboardNavigationCardProps) {
     const t = useTranslations();
     const {token} = useToken();
     const router = useRouter();

@@ -1,11 +1,9 @@
-import { Flex, Timeline, Typography, theme } from 'antd'
+import { Flex, Timeline, Typography } from 'antd'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import TimelineDot from './TimelineDot'
 import TimelineLabel from './TimelineLabel'
 import TimelineChildren from './TimelineChildren'
-
-const { useToken } = theme
 
 interface GameCraftTimelineProps {
   padding?: string | number
@@ -18,7 +16,6 @@ export default function GameCraftTimeline({
   backgroundColor = 'transparent',
   className = ''
 }: GameCraftTimelineProps) {
-  const { token } = useToken()
   const t = useTranslations('app.timeline')
 
   const items = [

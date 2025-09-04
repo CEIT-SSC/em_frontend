@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Col, Flex, Grid, Row, theme, Typography } from 'antd'
+import { Button, Col, Flex, Row, theme, Typography } from 'antd'
 import Image from 'next/image'
 import { useRouter } from '@/lib/navigation'
 import { useTranslations } from 'next-intl'

@@ -1,14 +1,12 @@
 'use client';
 
 import { Flex, theme, Typography } from 'antd';
-import { useTranslations } from 'next-intl';
 import { WorkshopGrid } from '@/components/features/workshops/WorkshopGrid';
 
 const { useToken } = theme;
 
 export default function EventsPage() {
   const { token } = useToken();
-  const t = useTranslations('app.dashboard');
 
   // Sample workshop data matching the React project
   const workshopData = [

@@ -1,6 +1,6 @@
 "use client";
 
-import {Flex, theme} from "antd";
+import {Flex} from "antd";
 import {StaffContainer} from "./StaffContainer";
 import {useResponsive} from "@/lib/hooks/useResponsive";
 

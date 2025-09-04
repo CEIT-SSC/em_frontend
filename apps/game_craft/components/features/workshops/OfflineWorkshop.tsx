@@ -1,6 +1,6 @@
 "use client";
 
-import {Flex, Grid, Typography, Spin, Alert} from "antd";
+import {Flex, Typography, Spin, Alert} from "antd";
 import {WorkshopGrid} from "./WorkshopGrid";
 import {useTranslations} from "next-intl";
 import {useResponsive} from "@/lib/hooks/useResponsive";

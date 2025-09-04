@@ -1,10 +1,8 @@
 "use client";
 
-import { Row, Col, theme } from "antd";
+import { Row, Col } from "antd";
 import { WorkshopCard } from "./WorkshopCard";
 import { Presentation } from "@ssc/core";
-
-const { useToken } = theme;
 
 interface WorkshopGridProps {
   presentations?: Presentation[];

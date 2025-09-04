@@ -17,7 +17,6 @@ import {MenuOutlined, MoonFilled, SunFilled} from "@ant-design/icons";
 import Image from "next/image";
 import {useTheme} from "next-themes";
 import {useResponsive} from "@/lib/hooks/useResponsive";
-import {DashboardDrawer} from "@/components/layout/dashboard";
 import AppDrawer from "@/components/layout/AppDrawer";
 
 const {useToken} = theme;

@@ -1,6 +1,6 @@
 "use client";
 
-import {Flex, Grid, theme, Typography, Spin, Alert} from "antd";
+import {Flex, theme, Typography, Spin, Alert} from "antd";
 import Wave from "../../common/Wave";
 import {WorkshopGrid} from "./WorkshopGrid";
 import {useTranslations} from "next-intl";
