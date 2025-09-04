@@ -102,7 +102,7 @@ export default function EventsPage() {
         <Typography.Title level={4} style={{ fontWeight: 800, marginBottom: 0 }}>
           کارگاه ها
         </Typography.Title>
-        <WorkshopGrid workshops={workshopData} />
+        {/*<WorkshopGrid workshops={workshopData} />*/}
       </Flex>
 
       <Flex
@@ -117,7 +117,7 @@ export default function EventsPage() {
         <Typography.Title level={4} style={{ fontWeight: 800, marginBottom: 0 }}>
           ارائه ها
         </Typography.Title>
-        <WorkshopGrid workshops={presentationData} />
+        {/*<WorkshopGrid workshops={presentationData} />*/}
       </Flex>
     </Flex>
   );

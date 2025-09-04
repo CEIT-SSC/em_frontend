@@ -28,7 +28,7 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
         width: "100%",
         height: "80px",
         backgroundColor: isHead ? "rgba(255,215,0, 0.5)" : token.colorBgContainer,
-        boxShadow: token.boxShadowCard,
+        boxShadow: token.boxShadow,
         borderRadius: token.borderRadius,
         padding: token.padding,
         position: "relative",

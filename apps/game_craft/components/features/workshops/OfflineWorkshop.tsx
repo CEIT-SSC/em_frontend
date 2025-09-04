@@ -45,7 +45,7 @@ export function OfflineWorkshop({
             return (
                 <Alert
                     message={t("workshop.error")}
-                    description={error}
+                    description={error.message}
                     type="error"
                     showIcon
                     action={

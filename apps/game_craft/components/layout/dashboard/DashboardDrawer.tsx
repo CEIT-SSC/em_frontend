@@ -82,7 +82,7 @@ export function DashboardDrawer({ open, toggleDrawerOpen }: DashboardDrawerProps
             onClick={toggleLanguage}
           />
         </Flex>
-        <DashboardNavigationCard open={open} toggleDrawerOpen={toggleDrawerOpen} />
+        <DashboardNavigationCard toggleDrawerOpen={toggleDrawerOpen} />
       </Flex>
     </Drawer>
   );

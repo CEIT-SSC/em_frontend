@@ -61,11 +61,11 @@ export default function ShoppingBagPage() {
         }}
       >
         <Row gutter={[16, 16]} style={{ width: '100%' }}>
-          {cartItems.map((item, index) => (
-            <Col key={index} xs={24} sm={12} lg={8}>
-              <WorkshopCard presentation={item} onAddToCart={item.onAddToCart} />
-            </Col>
-          ))}
+          {/*{cartItems.map((item, index) => (*/}
+          {/*  <Col key={index} xs={24} sm={12} lg={8}>*/}
+          {/*    <WorkshopCard presentation={item} onAddToCart={item.onAddToCart} />*/}
+          {/*  </Col>*/}
+          {/*))}*/}
         </Row>
       </Flex>
 

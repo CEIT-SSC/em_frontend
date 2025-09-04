@@ -6,7 +6,6 @@ import {
     ConfigProvider,
     Flex,
     Row,
-    theme,
     Typography,
 } from "antd";
 import {InstagramOutlined, XOutlined, YoutubeFilled} from "@ant-design/icons";
@@ -16,7 +15,6 @@ import {useResponsive} from "@/lib/hooks/useResponsive";
 import {darkTheme} from "@/components/providers/AntDesignProvider";
 import {customColors} from "@/config/colors";
 
-const {useToken} = theme;
 
 interface GameCraftIntroProps {
     padding?: string;
@@ -24,7 +22,6 @@ interface GameCraftIntroProps {
 }
 
 export function GameCraftIntro({padding = "3rem 2rem", backgroundColor}: GameCraftIntroProps) {
-    const {token} = useToken();
     const t = useTranslations("app");
     const screens = useResponsive();
 
