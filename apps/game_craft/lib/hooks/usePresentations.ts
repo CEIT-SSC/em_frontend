@@ -6,7 +6,6 @@ import { PresentationsApi, Presentation, PresentationQueryParams } from "@ssc/co
 export interface UsePresentationsParams extends PresentationQueryParams {
   eventId?: number;
   isOnline?: boolean;
-  type?: string;
 }
 
 export interface UsePresentationsReturn {
