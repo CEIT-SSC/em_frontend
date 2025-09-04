@@ -18,6 +18,7 @@ import Image from "next/image";
 import {useTheme} from "next-themes";
 import {useResponsive} from "@/lib/hooks/useResponsive";
 import AppDrawer from "@/components/layout/AppDrawer";
+import {customColors} from "@/config/colors";
 
 const {useToken} = theme;
 const {Header} = Layout;
@@ -125,7 +126,7 @@ export function AppHeader() {
                                     onClick={() => router.push(item.route)}
                                     style={{
                                         fontWeight: "bolder",
-                                        ...(isActive(item.route) ? {color: token.colorAction} : {}),
+                                        ...(isActive(item.route) ? {color: customColors.colorAction} : {}),
                                     }}
                                 >
                                     {item.name}

@@ -14,6 +14,7 @@ import {useTranslations} from "next-intl";
 import Image from "next/image";
 import {useResponsive} from "@/lib/hooks/useResponsive";
 import {darkTheme} from "@/components/providers/AntDesignProvider";
+import {customColors} from "@/config/colors";
 
 const {useToken} = theme;
 
@@ -84,7 +85,7 @@ export function GameCraftIntro({padding = "3rem 2rem", backgroundColor}: GameCra
                             <Typography.Title
                                 level={1}
                                 style={{
-                                    color: token.colorAction,
+                                    color: customColors.colorAction,
                                     fontWeight: 1000,
                                     fontSize: screens.lg ? "5rem" : screens.md ? "4rem" : "3rem",
                                     marginBottom: "1rem",

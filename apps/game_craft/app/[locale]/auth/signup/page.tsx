@@ -6,6 +6,7 @@ import {useTranslations} from 'next-intl'
 import {Link} from '@/lib/navigation'
 import Image from 'next/image'
 import {message} from 'antd'
+import { customColors } from '@/config/colors'
 
 const {useToken} = theme
 
@@ -149,7 +150,7 @@ export default function SignUpPage() {
                         style={{height: '100%', width: '100%'}}
                         gap={1}
                     >
-                        <Typography.Title style={{color: token.colorAction, fontWeight: 600, margin: 0}}>
+                        <Typography.Title style={{color: customColors.colorAction, fontWeight: 600, margin: 0}}>
                             {t('signUp')}
                         </Typography.Title>
                         <Image

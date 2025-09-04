@@ -10,6 +10,7 @@ import {OnlineWorkshop} from "@/components/features/workshops/OnlineWorkshop";
 import {Sponsors} from "@/components/features/home/Sponsors";
 import Wave from "@/components/common/Wave";
 import {useResponsive} from "@/lib/hooks/useResponsive";
+import {customColors} from "@/config/colors";
 
 const {useToken} = theme;
 
@@ -45,11 +46,11 @@ export default function HomePage() {
             <Wave
                 width="100%"
                 height="auto"
-                fill="#4F7B79"
+                fill={customColors.colorOfflineWorkshop}
                 style={{transform: "scaleY(-1) translateY(-2px)"}}
             />
-            <OfflineWorkshop padding={homeViewPadding} backgroundColor="#4F7B79"/>
-            <OnlineWorkshop padding={homeViewPadding} backgroundColor={token.colorAction}/>
+            <OfflineWorkshop padding={homeViewPadding} backgroundColor={customColors.colorOfflineWorkshop}/>
+            <OnlineWorkshop padding={homeViewPadding} backgroundColor={customColors.colorAction}/>
 
             {/* Sponsors Section */}
             <Sponsors

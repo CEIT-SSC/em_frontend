@@ -8,6 +8,7 @@ import {
 } from "antd";
 import { ReactNode, useEffect } from "react";
 import { useTheme } from "next-themes";
+import { customColors } from "@/config/colors";
 
 interface AntDesignProviderProps {
   children: ReactNode;
@@ -18,9 +19,9 @@ const lightTheme = {
   token: {
     fontFamily: "var(--font-estedad), var(--font-vazirmatn), sans-serif",
     borderRadius: 16,
-    colorPrimary: "#3c3a7d",
-    colorInfo: "#3c3a7d",
-    colorSuccess: "#01B582",
+    colorPrimary: customColors.colorPrimary,
+    colorInfo: customColors.colorPrimary,
+    colorSuccess: customColors.colorAction,
     colorWarning: "#faad14",
     colorError: "#ff4d4f",
     colorBgBase: "#ffffff",
@@ -28,21 +29,20 @@ const lightTheme = {
     colorBgElevated: "#ffffff",
     colorText: "#000000d9",
     colorTextSecondary: "#00000073",
-    colorAction: "#01B582", // Custom brand color
   },
   components: {
     Timeline: {
       dotBg: "transparent",
-      tailColor: "#01B582",
+      tailColor: customColors.colorAction,
       tailWidth: 10,
     },
     Button: {
-      colorPrimary: "#3c3a7d",
+      colorPrimary: customColors.colorPrimary,
       colorPrimaryHover: "#4c4a8d",
       colorPrimaryActive: "#2c2a6d",
     },
     Layout: {
-      headerBg: "#3c3a7d",
+      headerBg: customColors.colorPrimary,
       bodyBg: "#f5f5f5",
     },
     Switch: {},

@@ -4,6 +4,7 @@ import {Col, Flex, Row, theme, Typography} from 'antd';
 import {StaffCard} from './StaffCard';
 import {useStaffs} from '@/config/staffs';
 import {useTranslations} from 'next-intl';
+import {customColors} from "@/config/colors";
 
 const {useToken} = theme;
 
@@ -46,7 +47,7 @@ export function StaffContainer() {
                         <Typography.Title
                             level={2}
                             style={{
-                                color: token.colorAction,
+                                color: customColors.colorAction,
                                 fontWeight: 700,
                             }}
                         >
