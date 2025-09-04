@@ -12,30 +12,33 @@ export default function ShoppingBagPage() {
   // Sample cart items matching the React project
   const cartItems = [
     {
+      id: 1,
       title: "توسعه بازی با Unity",
       description: "آموزش اصول پایه ای برنامه نویسی و توسعه بازی های دو بعدی و سه بعدی با موتور یونیتی",
       instructor: "امیر حسینی",
       date: "1404/1/22، 9:00",
       price: "25,000",
-      isInPerson: true,
+      is_online: false, // Changed from isInPerson: true
       onAddToCart: () => console.log("Removing Unity workshop from cart")
     },
     {
+      id: 2,
       title: "طراحی گرافیک برای بازی‌ها",
       description: "اصول طراحی شخصیت، محیط و رابط کاربری برای بازی های دیجیتال",
       instructor: "سارا محمدی",
       date: "1404/2/5، 14:00",
       price: "20,000",
-      isInPerson: false,
+      is_online: true, // Changed from isInPerson: false
       onAddToCart: () => console.log("Removing Graphics workshop from cart")
     },
     {
+      id: 3,
       title: "برنامه‌نویسی پیشرفته بازی",
       description: "تکنیک‌های پیشرفته برنامه‌نویسی، بهینه‌سازی کد و الگوریتم‌های هوش مصنوعی",
       instructor: "محمد رضایی",
       date: "1404/2/10، 10:30",
       price: "30,000",
-      isInPerson: true,
+      is_online: false, // Changed from isInPerson: true
       onAddToCart: () => console.log("Removing Advanced Programming workshop from cart")
     }
   ];
@@ -60,7 +63,7 @@ export default function ShoppingBagPage() {
         <Row gutter={[16, 16]} style={{ width: '100%' }}>
           {cartItems.map((item, index) => (
             <Col key={index} xs={24} sm={12} lg={8}>
-              <WorkshopCard workshop={item} />
+              <WorkshopCard presentation={item} onAddToCart={item.onAddToCart} />
             </Col>
           ))}
         </Row>
