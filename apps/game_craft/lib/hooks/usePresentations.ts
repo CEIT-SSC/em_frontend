@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { PresentationsApi, Presentation, PresentationQueryParams } from "@ssc/core";
 
 export interface UsePresentationsParams extends PresentationQueryParams {
@@ -30,7 +30,8 @@ export function usePresentations(params?: UsePresentationsParams): UsePresentati
   const [hasPrevious, setHasPrevious] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
 
-  const presentationsApi = new PresentationsApi();
+  // Memoize the API instance to prevent recreation on every render
+  const presentationsApi = useMemo(() => new PresentationsApi(), []);
 
   const fetchPresentations = useCallback(async () => {
     try {
@@ -83,7 +84,7 @@ export function usePresentations(params?: UsePresentationsParams): UsePresentati
     } finally {
       setLoading(false);
     }
-  }, [params?.eventId, params?.isOnline, params?.type, params?.page, params?.is_paid]);
+  }, [params?.eventId, params?.isOnline, params?.type, params?.page, params?.is_paid, presentationsApi]);
 
   useEffect(() => {
     fetchPresentations();

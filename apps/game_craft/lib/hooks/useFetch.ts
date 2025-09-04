@@ -8,9 +8,9 @@ export interface UseFetchState<T> {
   error: Error | null;
 }
 
-export interface UseFetchOptions {
+export interface UseFetchOptions<T> {
   immediate?: boolean;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data: T) => void;
   onError?: (error: Error) => void;
 }
 
@@ -20,10 +20,10 @@ export interface UseFetchOptions {
  * @param params - Parameters to pass to the API function
  * @param options - Additional options for the fetch behavior
  */
-export function useFetch<T = any, P = any>(
+export function useFetch<T = unknown, P = unknown>(
   apiFunc: (params?: P) => Promise<T>,
   params?: P,
-  options: UseFetchOptions = {}
+  options: UseFetchOptions<T> = {}
 ): UseFetchState<T> & { refetch: (newParams?: P) => Promise<void> } {
   const { immediate = true, onSuccess, onError } = options;
 

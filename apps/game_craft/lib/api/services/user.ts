@@ -41,7 +41,7 @@ export const getUserTeam = async (): Promise<Team | null> => {
   try {
     const response = await API.get('/v2/teams/my-team/', { requiresAuth: true })
     return response.data
-  } catch (error) {
+  } catch {
     // Return null if user has no team
     return null
   }

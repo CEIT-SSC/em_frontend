@@ -73,7 +73,9 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     setIsLoading(true);
     try {
       // Mock login implementation
-      // In a real app, this would call your API
+      // In a real app, this would call your API and use the password
+      void password; // Explicitly mark as used to satisfy ESLint
+
       const mockUser: User = {
         id: "1",
         email,
@@ -84,7 +86,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       localStorage.setItem("authToken", "mock-token");
 
       return { success: true, user: mockUser };
-    } catch (error) {
+    } catch {
       return { success: false, message: "Login failed" };
     } finally {
       setIsLoading(false);
