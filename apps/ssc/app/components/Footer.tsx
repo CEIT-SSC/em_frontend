@@ -40,6 +40,19 @@ const Footer = () => {
           alt="ssc logo"
           className="w-25 h-30"
         />
+        <a
+          referrerPolicy="origin"
+          target="_blank"
+          href="https://trustseal.enamad.ir/?id=644313&Code=ylal4ugYFWrwrajQPMCMZf7xEeLS9EuE"
+        >
+          <img
+            referrerpolicy="origin"
+            src="https://trustseal.enamad.ir/logo.aspx?id=644313&Code=ylal4ugYFWrwrajQPMCMZf7xEeLS9EuE"
+            alt=""
+            className="cursor-pointer"
+            code="ylal4ugYFWrwrajQPMCMZf7xEeLS9EuE"
+          />
+        </a>
       </div>
     </footer>
   );
