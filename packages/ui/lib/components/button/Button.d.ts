@@ -9,6 +9,8 @@ export interface ButtonProps {
     prefixIcon?: IconType;
     suffixIcon?: IconType;
     onClick?: () => void;
+    type?: "button" | "submit" | "reset";
+    disable?: boolean;
 }
 export declare enum ButtonSize {
     SMALL = 0,
@@ -21,4 +23,4 @@ export declare enum ButtonVariant {
     OUTLINE = 2,
     TEXT = 3
 }
-export declare const Button: ({ label, variant, size, loading, className, prefixIcon: PrefixIcon, suffixIcon: SuffixIcon, onClick, }: ButtonProps) => React.JSX.Element;
+export declare const Button: ({ label, variant, size, loading, className, prefixIcon: PrefixIcon, suffixIcon: SuffixIcon, onClick, type, disable, }: ButtonProps) => React.JSX.Element;

@@ -12,6 +12,8 @@ export interface ButtonProps {
   prefixIcon?: IconType;
   suffixIcon?: IconType;
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
+  disable?: boolean;
 }
 
 export enum ButtonSize {
@@ -48,6 +50,8 @@ export const Button = ({
   prefixIcon: PrefixIcon,
   suffixIcon: SuffixIcon,
   onClick,
+  type,
+  disable = false,
 }: ButtonProps) => {
   const isSecondary = variant === ButtonVariant.SECONDARY;
   const isText = variant === ButtonVariant.TEXT;
@@ -58,20 +62,26 @@ export const Button = ({
       className={clsx(
         "h-full overflow-hidden p-px rounded-lg",
         {
-          "default-gradient": !isSecondary && !isText,
           "bg-transparent": isSecondary,
           "bg-black border-1 border-whiteText": isOutline,
         },
         sizeClasses[size],
         variantClasses[variant],
+        {
+          "!bg-none bg-gray-500 text-gray-300": disable,
+        },
         className
       )}
     >
       <button
         className={clsx(
           "relative w-full h-full px-3 py-2 cursor-pointer",
-          "text-lg text-bold"
+          "text-lg text-bold",
+          {
+            "!cursor-not-allowed": disable,
+          }
         )}
+        type={type}
         onClick={onClick}
       >
         {loading && (

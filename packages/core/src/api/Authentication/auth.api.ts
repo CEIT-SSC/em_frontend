@@ -1,13 +1,15 @@
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { Api } from "../api";
 import { apiPath, ApiPath } from "../../types/ApiPaths";
 import {
+  EmailVerification,
   ErrorResponse,
+  MessageResponse,
   UserRegistration,
   UserRegistrationSuccess,
 } from "../../types/generated/accounts";
 
-type RequestResponse<T> = AxiosResponse<T | ErrorResponse>;
+type RequestResponse<T> = AxiosResponse<T | MessageResponse | ErrorResponse>;
 export class AuthApi {
   constructor() {}
 
@@ -28,6 +30,29 @@ export class AuthApi {
       phone_number: parameters.phoneNumber,
       last_name: parameters.lastName,
       first_name: parameters.firstName,
+    });
+  }
+
+  async resendOtp(email: string): Promise<RequestResponse<null>> {
+    return await Api.post<null, RequestResponse<null>, { email: string }>(
+      apiPath(ApiPath.AUTH_RESEND_OTP),
+      {
+        email,
+      }
+    );
+  }
+
+  async verifyEmail(
+    email: string,
+    otp: string
+  ): Promise<RequestResponse<null>> {
+    return await Api.post<
+      MessageResponse,
+      RequestResponse<null>,
+      EmailVerification
+    >(apiPath(ApiPath.AUTH_VERIFY_EMAIL), {
+      email: email,
+      code: otp,
     });
   }
 }
