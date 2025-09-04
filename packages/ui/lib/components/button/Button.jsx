@@ -30,17 +30,25 @@ const variantClasses = {
     [ButtonVariant.SECONDARY]: "",
     [ButtonVariant.OUTLINE]: "text-transparent bg-clip-text default-gradient",
 };
-const Button = ({ label = "", variant = ButtonVariant.SECONDARY, size = ButtonSize.MEDIUM, loading = false, className = "", prefixIcon: PrefixIcon, suffixIcon: SuffixIcon, onClick, }) => {
+const Button = ({ label = "", variant = ButtonVariant.SECONDARY, size = ButtonSize.MEDIUM, loading = false, className = "", prefixIcon: PrefixIcon, suffixIcon: SuffixIcon, onClick, type, disable = false, }) => {
     const isSecondary = variant === ButtonVariant.SECONDARY;
     const isText = variant === ButtonVariant.TEXT;
     const isOutline = variant === ButtonVariant.OUTLINE;
+<<<<<<< HEAD
     const radiusClass = className.match(/\brounded(?:-[^\s]+)?\b/) || "rounded-lg";
     return (<div className={(0, clsx_1.default)("overflow-hidden p-px", {
             "default-gradient": !isSecondary && !isText,
+=======
+    return (<div className={(0, clsx_1.default)("h-full overflow-hidden p-px rounded-lg", {
+>>>>>>> 3b1063e (implements email verification)
             "bg-transparent": isSecondary,
             "bg-black border-1 border-whiteText": isOutline,
-        }, sizeClasses[size], variantClasses[variant], className)}>
-      <button className={(0, clsx_1.default)("relative w-full h-full px-3 py-2 cursor-pointer", "text-lg text-bold")} onClick={onClick}>
+        }, sizeClasses[size], variantClasses[variant], {
+            "!bg-none bg-gray-500 text-gray-300": disable,
+        }, className)}>
+      <button className={(0, clsx_1.default)("relative w-full h-full px-3 py-2 cursor-pointer", "text-lg text-bold", {
+            "!cursor-not-allowed": disable,
+        })} type={type} onClick={onClick}>
         {loading && (<ai_1.AiOutlineLoading className=" absolute top-1/2 left-1/2 -translate-1/2 animate-spin"/>)}
         <div className={(0, clsx_1.default)("flex gap-2 justify-center items-center", {
             ["opacity-0"]: loading,

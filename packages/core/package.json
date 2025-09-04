@@ -2,8 +2,13 @@
   "name": "@ssc/core",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
-  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+      "types": "./lib/index.d.ts",
+      "require": "./lib/index.js",
+      "import": "./lib/index.js"
+  },
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc ",
