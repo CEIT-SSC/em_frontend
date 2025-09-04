@@ -166,9 +166,12 @@ importers:
       react-otp-input:
         specifier: ^3.1.1
         version: 3.1.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+<<<<<<< HEAD
       react-redux:
         specifier: ^9.2.0
         version: 9.2.0(@types/react@19.1.8)(react@19.1.0)(redux@5.0.1)
+=======
+>>>>>>> d615edd (implements email verification)
       react-toastify:
         specifier: ^11.0.5
         version: 11.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -4035,6 +4038,7 @@ packages:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
@@ -4051,6 +4055,8 @@ packages:
 =======
 =======
 >>>>>>> 1448c50 (Ci/cd (#15))
+=======
+>>>>>>> a198d6e (implements email verification)
   react-otp-input@3.1.1:
     resolution: {integrity: sha512-bjPavgJ0/Zmf/AYi4onj8FbH93IjeD+e8pWwxIJreDEWsU1ILR5fs8jEJmMGWSBe/yyvPP6X/W6Mk9UkOCkTPw==}
     peerDependencies:
@@ -4070,6 +4076,8 @@ packages:
       redux:
         optional: true
 =======
+=======
+>>>>>>> d615edd (implements email verification)
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
@@ -4083,7 +4091,17 @@ packages:
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16.8.0'
+<<<<<<< HEAD
 >>>>>>> 95f9918 (Ci/cd (#15))
+=======
+=======
+  react-otp-input@3.1.1:
+    resolution: {integrity: sha512-bjPavgJ0/Zmf/AYi4onj8FbH93IjeD+e8pWwxIJreDEWsU1ILR5fs8jEJmMGWSBe/yyvPP6X/W6Mk9UkOCkTPw==}
+    peerDependencies:
+      react: '>=16.8.6 || ^17.0.0 || ^18.0.0'
+      react-dom: '>=16.8.6 || ^17.0.0 || ^18.0.0'
+>>>>>>> 3b1063e (implements email verification)
+>>>>>>> d615edd (implements email verification)
 
   react-toastify@11.0.5:
     resolution: {integrity: sha512-EpqHBGvnSTtHYhCPLxML05NLY2ZX0JURbAdNYa6BUkk+amz4wbKBQvoKQAB0ardvSarUBuY4Q4s1sluAzZwkmA==}
@@ -8842,6 +8860,7 @@ snapshots:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   react-is@18.3.1: {}
 
   react-lottie@1.2.10(react@19.1.1):
@@ -8861,6 +8880,8 @@ snapshots:
 =======
 =======
 >>>>>>> 1448c50 (Ci/cd (#15))
+=======
+>>>>>>> a198d6e (implements email verification)
   react-otp-input@3.1.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       react: 19.1.0
@@ -8876,6 +8897,8 @@ snapshots:
       '@types/react': 19.1.8
       redux: 5.0.1
 =======
+=======
+>>>>>>> d615edd (implements email verification)
   react-is@18.3.1: {}
 
   react-lottie@1.2.10(react@19.1.1):
@@ -8892,7 +8915,16 @@ snapshots:
       prop-types: 15.8.1
       react: 19.1.1
       shallow-equal: 3.1.0
+<<<<<<< HEAD
 >>>>>>> 95f9918 (Ci/cd (#15))
+=======
+=======
+  react-otp-input@3.1.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+>>>>>>> 3b1063e (implements email verification)
+>>>>>>> d615edd (implements email verification)
 
   react-toastify@11.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
