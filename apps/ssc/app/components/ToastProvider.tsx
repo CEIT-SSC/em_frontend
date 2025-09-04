@@ -2,7 +2,7 @@
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { HiCheckCircle, HiXCircle } from "react-icons/hi";
+import { HiCheck, HiX } from "react-icons/hi";
 
 export function ToastProvider() {
   return (
@@ -21,14 +21,24 @@ export function ToastProvider() {
         width: "fit-content",
         padding: "8px",
         display: "flex",
-        gap: "36px",
+        gap: "42px",
       }}
       icon={({ type }) => {
         switch (type) {
           case "error":
-            return <HiXCircle className="overflow-visible" size={64} />;
+            return (
+              <HiX
+                className="overflow-visible bg-gradient rounded-full text-[#1B1B1B]"
+                size={64}
+              />
+            );
           case "success":
-            return <HiCheckCircle className="overflow-visible" size={64} />;
+            return (
+              <HiCheck
+                className="overflow-visible bg-gradient rounded-full text-[#1B1B1B]"
+                size={64}
+              />
+            );
           default:
             return null;
         }
