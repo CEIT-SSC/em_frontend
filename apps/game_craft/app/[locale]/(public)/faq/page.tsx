@@ -3,15 +3,13 @@
 import { Flex, theme, Typography, Collapse, Space, Card } from "antd";
 import { useTranslations } from "next-intl";
 import { QuestionCircleOutlined } from "@ant-design/icons";
-import { useResponsive } from "@/lib/hooks/useResponsive";
 
 const { useToken } = theme;
 
 export default function FAQPage() {
   const { token } = useToken();
-  const screens = useResponsive();
   const t = useTranslations("app");
-  const faqViewPadding = screens.lg ? "3rem 5rem" : "3rem 2rem";
+  const faqViewPadding = "!py-12 !px-4 md:!px-12 lg:!px-20";
 
   const items = [
     {
@@ -93,11 +91,11 @@ export default function FAQPage() {
       <Flex
         align="center"
         justify="center"
+        className={faqViewPadding}
         style={{
           width: "100%",
           backgroundSize: "fit",
           backgroundPosition: "center",
-          padding: faqViewPadding,
           position: "relative",
         }}
       >
