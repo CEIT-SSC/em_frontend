@@ -1,39 +1,5 @@
 "use client";
 
-<<<<<<< Updated upstream
-import { Button, ButtonVariant, TextField } from "@ssc/ui";
-import Link from "next/link";
-import { SubmitHandler, useForm } from "react-hook-form";
-
-type Inputs = {
-  username: string;
-  email: string;
-  password: string;
-  repeatPassword: string;
-};
-
-const page = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h3 className="text-4xl font-bold">ثبت نام</h3>
-      <p className="text-[20px]/[150%] font-bold">
-        حساب کاربری دارید؟ وارد شوید کنید{" "}
-        <Link
-          className="default-gradient text-transparent bg-clip-text"
-          href="/login"
-        >
-          وارد شوید
-        </Link>
-      </p>
-=======
 import { Button, ButtonVariant, PhoneNumberField, TextField } from "@ssc/ui";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -180,7 +146,6 @@ const Page = () => {
         />
       </div>
 
->>>>>>> Stashed changes
       <TextField
         name="email"
         id="email"

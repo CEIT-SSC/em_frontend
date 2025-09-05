@@ -51,7 +51,6 @@ const Footer = () => {
             src="https://trustseal.enamad.ir/logo.aspx?id=644313&Code=ylal4ugYFWrwrajQPMCMZf7xEeLS9EuE"
             alt=""
             className="cursor-pointer"
-            loading="lazy"
           />
         </Link>
       </div>
