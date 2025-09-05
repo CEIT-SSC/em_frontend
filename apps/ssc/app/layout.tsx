@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa">
-      <meta name="enamad" content="55068479" />
+      <meta name="enamad" content="65758640" />
       <body className={clsx("antialiased", vazirmatn.className)} dir="rtl">
         <Providers>{children}</Providers>
       </body>
