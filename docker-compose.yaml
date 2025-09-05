@@ -7,7 +7,7 @@ services:
       dockerfile: apps/game_craft/Dockerfile
     container_name: gamecraft
     ports:
-      - "3000:3000"   # maps host:container
+      - "3005:3000"   # maps host:container
     environment:
       NODE_ENV: production
     restart: always
