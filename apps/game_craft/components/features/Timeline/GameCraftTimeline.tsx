@@ -73,7 +73,7 @@ export default function GameCraftTimeline({
       children: (
         <TimelineChildren title={t("step7.title")} time={t("step7.schedule")} />
       ),
-      label: <TimelineLabel logo="/svg/timline-6.svg" alt="Result & Finish" />,
+      label: <TimelineLabel logo="/svg/timline-6.svg" alt="Results & Closing Ceremony" />,
     },
   ];
 
