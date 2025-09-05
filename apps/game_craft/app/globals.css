@@ -18,11 +18,11 @@
 }
 
 html {
-    cursor: url("/cursor/Super Mario Hand & Head--pointer--SweezyCursors..cur"), pointer;
+    cursor: url("/cursor/SuperMarioHand-pointer.cur"), pointer;
 }
 
 .ant-btn:not(:disabled):hover {
-    cursor: url("/cursor/Super Mario Hand & Head--cursor--SweezyCursors..cur"), auto;
+    cursor: url("/cursor/SuperMarioHand-cursor.cur"), auto;
 }
 
 body {
