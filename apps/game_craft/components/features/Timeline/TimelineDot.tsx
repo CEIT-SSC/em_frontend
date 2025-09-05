@@ -13,8 +13,8 @@ export default function TimelineDot({
     <Flex
       align="center"
       justify="center"
+      className="w-[10vw] md:w-[5vw]"
       style={{
-        width: size,
         aspectRatio: 1,
       }}
     >

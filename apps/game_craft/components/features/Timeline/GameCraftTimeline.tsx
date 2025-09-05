@@ -120,7 +120,12 @@ export default function GameCraftTimeline({
       >
         {t("title")}
       </Typography.Title>
-      <Timeline items={items} mode="alternate" style={{ width: "100%" }} />
+      <Timeline
+        items={items}
+        mode="alternate"
+        className="[&>li]:!pb-20 md:[&>li]:!pb-6"
+        style={{ width: "100%" }}
+      />
     </Flex>
   );
 }
