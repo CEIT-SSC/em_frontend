@@ -2,6 +2,8 @@
 
 import { Button, ButtonVariant, PhoneNumberField, TextField } from "@ssc/ui";
 import Link from "next/link";
+
+const page = () => {
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
