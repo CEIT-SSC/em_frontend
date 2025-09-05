@@ -70,6 +70,9 @@
       },
       "operationsTeam": {
         "title": "Operations Team"
+      },
+      "decorationTeam": {
+        "title": "Decoration Team"
       }
     },
     "dashboard": {

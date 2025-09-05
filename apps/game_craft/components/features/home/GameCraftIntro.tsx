@@ -14,6 +14,8 @@ import Image from "next/image";
 import {useResponsive} from "@/lib/hooks/useResponsive";
 import {darkTheme} from "@/components/providers/AntDesignProvider";
 import {customColors} from "@/config/colors";
+import {gameCraftSocialLinks} from "@/config/socialLinks";
+import {TelegramIcon} from "@/components/common/TelegramIcon";
 
 
 interface GameCraftIntroProps {
@@ -119,25 +121,28 @@ export function GameCraftIntro({padding = "3rem 2rem", backgroundColor}: GameCra
                                     type="text"
                                     shape="circle"
                                     icon={<XOutlined style={{fontSize: "2rem"}}/>}
-                                    style={{
-                                        padding: "2rem",
-                                    }}
+                                    style={{padding: "2rem"}}
+                                    href={gameCraftSocialLinks.twitter}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 />
                                 <Button
                                     type="text"
                                     shape="circle"
                                     icon={<InstagramOutlined style={{fontSize: "2rem"}}/>}
-                                    style={{
-                                        padding: "2rem",
-                                    }}
+                                    style={{padding: "2rem"}}
+                                    href={gameCraftSocialLinks.instagram}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 />
                                 <Button
                                     type="text"
                                     shape="circle"
-                                    icon={<YoutubeFilled style={{fontSize: "2rem"}}/>}
-                                    style={{
-                                        padding: "2rem",
-                                    }}
+                                    icon={<TelegramIcon color={"currentColor"} size={"3rem"}/>}
+                                    style={{padding: "2rem",}}
+                                    href={gameCraftSocialLinks.telegram}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 />
                             </Flex>
                         </Flex>
