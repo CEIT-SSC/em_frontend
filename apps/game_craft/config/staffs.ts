@@ -320,11 +320,11 @@ export function useStaffs(): StaffTeam[] {
   return [
     organizingTeam,
     technicalTeam,
+    graphicTeam,
     scientificTeam,
-    marketingTeam,
-    operationsTeam,
     contentCreationTeam,
     financeTeam,
-    graphicTeam,
+    marketingTeam,
+    operationsTeam,
   ];
 }
