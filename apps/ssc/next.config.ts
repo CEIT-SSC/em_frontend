@@ -2,9 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // turbopack: {
-    // resolveAlias: {
-    //   "~": __dirname,
-    // },
+  // resolveAlias: {
+  //   "~": __dirname,
+  // },
   // async rewrites() {
   //   return [
   //     {
