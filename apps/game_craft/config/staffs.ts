@@ -101,9 +101,9 @@ export function useStaffs(): StaffTeam[] {
         teamTitle: t('graphicTeam.title'),
         teamMembers: [
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '/images/2025/staffs/BehradHozouri.jpg',
                 name: 'بهراد حضوری ',
-                role: 'طراح گرافیک'
+                role: 'سرپرست تیم گرافیک'
             },
             {
                 imageUrl: '/images/2024/staffs/',
@@ -111,7 +111,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'طراح گرافیک'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '/images/2025/staffs/FatemehSadatMoujani.jpeg',
                 name: 'فاطمه سادات موجانی',
                 role: 'طراح گرافیک'
             },
@@ -180,6 +180,11 @@ export function useStaffs(): StaffTeam[] {
             {
                 imageUrl: '/images/2025/staffs/AliAghaee.jpg',
                 name: 'محمدعلی آقائی',
+                role: 'عضو تیم رسانه'
+            },
+            {
+                imageUrl: '/images/2025/staffs/AshkanChaji.jpg',
+                name: 'اشکان چاجی',
                 role: 'عضو تیم رسانه'
             },
             {
@@ -309,7 +314,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم اجرایی'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '/images/2025/staffs/SoroushNanbakhsh.jpg',
                 name: 'سروش نانبخش',
                 role: 'عضو تیم اجرایی'
             },
@@ -376,7 +381,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم تزئینات'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '/images/2025/staffs/MohammadEshratabadi.jpg',
                 name: 'محمد عشرت‌آبادی',
                 role: 'عضو تیم تزئینات'
             },
