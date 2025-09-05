@@ -53,7 +53,9 @@ export default function RootLayout({
           label="خروج از حساب کاربری"
         />
       </div>
-      <div className="w-full px-4 py-12 md:p-12">{children}</div>
+      <div className="w-full px-4 pt-12 pb-100 md:p-12 md:pb-12">
+        {children}
+      </div>
     </div>
   );
 }

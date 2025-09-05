@@ -8,13 +8,19 @@ export function ToastProvider() {
   return (
     <ToastContainer
       position="bottom-center"
-      autoClose={3000}
+      autoClose={4000}
       hideProgressBar={true}
       closeButton={false}
       newestOnTop={false}
       closeOnClick
+      rtl={true}
       draggable
+      pauseOnFocusLoss
       pauseOnHover
+      style={{
+        marginBottom: "2rem",
+        gap: "1rem",
+      }}
       toastStyle={{
         borderRadius: "999px",
         background: "#1B1B1B",
