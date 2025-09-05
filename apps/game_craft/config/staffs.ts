@@ -193,7 +193,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم رسانه'
             },
             {
-                imageUrl: '/images/2025/staffs/',
+                imageUrl: '/images/2025/staffs/ParnianEsfahani.jpg',
                 name: 'پرنیان اصفهانیان',
                 role: 'عضو تیم رسانه'
             },
@@ -249,7 +249,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم اجرایی'
             },
             {
-                imageUrl: '/images/2025/staffs/',
+                imageUrl: '/images/2025/staffs/ParnianEsfahani.jpg',
                 name: 'پرنیان اصفهانیان',
                 role: 'عضو تیم اجرایی'
             },
