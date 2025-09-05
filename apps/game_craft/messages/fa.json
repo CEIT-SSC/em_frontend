@@ -66,6 +66,9 @@
       },
       "operationsTeam": {
         "title": "تیم اجرایی"
+      },
+      "decorationTeam": {
+        "title": "تیم تزئینات"
       }
     },
     "dashboard": {

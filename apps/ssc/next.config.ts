@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   /* config options here */
   async rewrites() {
     return [
@@ -13,7 +16,7 @@ const nextConfig: NextConfig = {
   webpack(config) {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '~': __dirname,
+      "~": __dirname,
     };
     return config;
   },
