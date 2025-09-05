@@ -18,13 +18,13 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t('organizingTeam.title'),
     teamMembers: [
       {
-        imageUrl: '/images/2024/staffs/bitaShayegan.jpg',
-        name: 'بیتا شایگان',
+        imageUrl: '/images/2025/staffs/DelaraamRoohani.png',
+        name: 'دلارام روحانی',
         role: 'دبیر رویداد'
       },
       {
-        imageUrl: '/images/2024/staffs/arminHamedazimi.jpg',
-        name: 'آرمین حامدعظیمی',
+        imageUrl: '/images/2025/staffs/MohammadJavadAkbari.jpg',
+        name: 'محمدجواد اکبری',
         role: 'دبیر انجمن علمی'
       },
     ]
@@ -34,32 +34,22 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t('technicalTeam.title'),
     teamMembers: [
       {
-        imageUrl: '/images/2024/staffs/alirezaZare.png',
-        name: 'علیرضا زارع',
+        imageUrl: '/images/2024/staffs/',
+        name: 'امیرحسین عقیقی',
         role: 'سرپرست تیم فنی'
       },
       {
-        imageUrl: '/images/2024/staffs/alirezaYousefpour.jpg',
-        name: 'علیرضا یوسف پور',
-        role: 'توسعه دهنده و اسکرام مستر'
-      },
-      {
-        imageUrl: '/images/2024/staffs/sinaSadeghi.jpg',
-        name: 'سینا صادقی',
-        role: 'دواپس'
-      },
-      {
-        imageUrl: '/images/2024/staffs/mohammadJavadAkbari.jpg',
+        imageUrl: '/images/2025/staffs/MohammadJavadAkbari.jpg',
         name: 'محمد جواد اکبری',
         role: 'توسعه دهنده بک اند'
       },
       {
-        imageUrl: '/images/2024/staffs/pouryaFahimi.png',
+        imageUrl: '/images/2025/staffs/PouryaFahimi.jpg',
         name: 'پوریا فهیمی',
         role: 'توسعه دهنده فرانت اند'
       },
       {
-        imageUrl: '/images/2024/staffs/mahdiHaeri.jpg',
+        imageUrl: '/images/2025/staffs/MahdiHaeri.jpg',
         name: 'مهدی حائری',
         role: 'توسعه دهنده فرانت اند'
       },
@@ -70,18 +60,33 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t('scientificTeam.title'),
     teamMembers: [
       {
-        imageUrl: '/images/2024/staffs/mahdiehTahami.jpg',
-        name: 'مهدیه تهامی',
+        imageUrl: '/images/2025/staffs/AlirezaSafari.jpg',
+        name: 'علی رضا صفری ',
         role: 'سرپرست تیم علمی'
       },
       {
-        imageUrl: '/images/2024/staffs/amirabbasEntezari.jpg',
-        name: 'امیرعباس انتظاری',
+        imageUrl: '/images/2025/staffs/MoeinEnayati.png',
+        name: 'معین عنایتی',
         role: 'عضو تیم علمی'
       },
       {
-        imageUrl: '/images/2024/staffs/sabaSeyedtabaei.jpg',
-        name: 'صبا سیدطبایی',
+        imageUrl: '/images/2025/staffs/AlirezaAtharifard.jpg',
+        name: 'علیرضا اطهری فرد',
+        role: 'عضو تیم علمی'
+      },
+      {
+        imageUrl: '/images/2025/staffs/AminRezaeeyan.jpg',
+        name: 'امین رضائیان ',
+        role: 'عضو تیم علمی'
+      },
+      {
+        imageUrl: '/images/2025/staffs/RezaAdinepour.jpg',
+        name: 'رضا آدینه پور',
+        role: 'عضو تیم علمی'
+      },
+      {
+        imageUrl: '/images/2024/staffs/',
+        name: 'علیرضا نیکوئی',
         role: 'عضو تیم علمی'
       },
     ]
@@ -91,8 +96,23 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t('graphicTeam.title'),
     teamMembers: [
       {
-        imageUrl: '/images/2024/staffs/baharRafinezhad.jpg',
+        imageUrl: '/images/2024/staffs/',
+        name: 'بهراد حضوری ',
+        role: 'طراح گرافیک'
+      },
+      {
+        imageUrl: '/images/2024/staffs/',
         name: 'بهار رفیع نژاد',
+        role: 'طراح گرافیک'
+      },
+      {
+        imageUrl: '/images/2024/staffs/',
+        name: 'فاطمه سادات موجانی',
+        role: 'طراح گرافیک'
+      },
+      {
+        imageUrl: '/images/2025/staffs/MoeinEnayati.png',
+        name: 'معین عنایتی',
         role: 'طراح گرافیک'
       },
     ]
@@ -102,38 +122,38 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t('marketingTeam.title'),
     teamMembers: [
       {
-        imageUrl: '/images/2024/staffs/mostafaDallaki.png',
-        name: 'مصطفی دلاکی',
+        imageUrl: '/images/2025/staffs/PouryaFahimi.jpg',
+        name: 'پوریا فهیمی',
         role: 'سرپرست تیم مارکتینگ'
       },
       {
-        imageUrl: '/images/2024/staffs/sobhan.png',
-        name: 'سبحان حیدری',
+        imageUrl: '/images/2025/staffs/RoseNazeri.jpg',
+        name: 'رز ناظری',
         role: 'عضو تیم مارکتینگ'
       },
       {
-        imageUrl: '/images/2024/staffs/mahdiNajibpour.png',
+        imageUrl: '/images/2025/staffs/MahdiNajibpour.png',
         name: 'مهدی نجیب پور',
         role: 'عضو تیم مارکتینگ'
       },
       {
-        imageUrl: '/images/2024/staffs/arianMohseni.png',
+        imageUrl: '/images/2025/staffs/AlirezaYousefpour.jpg',
+        name: 'علیرضا یوسف پور',
+        role: 'عضو تیم مارکتینگ'
+      },
+      {
+        imageUrl: '/images/2025/staffs/ElnazBaharvand.jpg',
+        name: 'الناز بهاروند',
+        role: 'عضو تیم مارکتینگ'
+      },
+      {
+        imageUrl: '/images/2025/staffs/ArianMohseni.png',
         name: 'آرین محسنی',
         role: 'عضو تیم مارکتینگ'
       },
       {
-        imageUrl: '/images/2024/staffs/mohammadRafiHajiliDavaji.png',
+        imageUrl: '/images/2025/staffs/MohammadrafiDavaji.jpg',
         name: 'محمد رفیع حاجیلی دوجی',
-        role: 'عضو تیم مارکتینگ'
-      },
-      {
-        imageUrl: '/images/2024/staffs/delaraamRoohani.png',
-        name: 'دلارام روحانی',
-        role: 'عضو تیم مارکتینگ'
-      },
-      {
-        imageUrl: '/images/2024/staffs/arshiyaHashemzadeh.jpg',
-        name: 'عرشیا هاشم‌زاده',
         role: 'عضو تیم مارکتینگ'
       },
     ]
@@ -143,15 +163,25 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t('contentCreationTeam.title'),
     teamMembers: [
       {
-        imageUrl: '/images/2024/staffs/mohamadaliHajifathali.png',
-        name: 'محمدعلی حاجی فتحعلی',
+        imageUrl: '/images/2025/staffs/AvaMostanbet.jpg',
+        name: 'آوا مستنبط',
         role: 'سرپرست تیم رسانه'
       },
       {
-        imageUrl: '/images/2024/staffs/ashkanChaji.png',
-        name: 'اشکان چاجی',
+        imageUrl: '/images/2025/staffs/',
+        name: 'یسنا رضائیان',
         role: 'عضو تیم رسانه'
-      }
+      },
+      {
+        imageUrl: '/images/2025/staffs/ParnianJavadi.jpg',
+        name: 'پرنیان اصفهانیان',
+        role: 'عضو تیم رسانه'
+      },
+      {
+        imageUrl: '/images/2025/staffs/AliAghaee.jpg',
+        name: 'محمدعلی آقائی',
+        role: 'عضو تیم رسانه'
+      },
     ]
   };
 
@@ -159,18 +189,113 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t('operationsTeam.title'),
     teamMembers: [
       {
-        imageUrl: '/images/2024/staffs/seyedAliDastan.png',
-        name: 'سیدعلی محمد داستان',
+        imageUrl: '/images/2025/staffs/AliMohamadi.jpg',
+        name: 'علی محمدی',
         role: 'عضو تیم اجرایی'
       },
       {
-        imageUrl: '/images/2024/staffs/poor3a.jpg',
-        name: 'پوریا صادقی',
+        imageUrl: '/images/2025/staffs/HessamHosseinian.jpg',
+        name: 'حسام حسینیان ',
         role: 'عضو تیم اجرایی'
       },
       {
-        imageUrl: '/images/2024/staffs/amirhosseinSabouri.jpg',
-        name: 'امیرحسین صبوری خسروشاهی',
+        imageUrl: '/images/2025/staffs/MelikaGhasemipour.jpg',
+        name: 'ملیکا قاسمی پور',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2024/staffs/',
+        name: 'علیرضا نوروزبیکی',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2024/staffs/',
+        name: 'امیر بیژه',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2025/staffs/MatinDehghanipor.jpg',
+        name: 'متین دهقانی پور',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2025/staffs/',
+        name: 'پرنیان اصفهانیان',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2025/staffs/ParsaSamareh.jpg',
+        name: 'پارسا ثمره افسری',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2024/staffs/',
+        name: 'علی مقدم',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2024/staffs/',
+        name: 'محمد میرزاکلهری',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2025/staffs/NargesTakallu.jpg',
+        name: 'نرگس تکلو',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2024/staffs/',
+        name: 'یسنا رضائیان',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2025/staffs/SetayeshYavari.jpg',
+        name: 'ستایش یاوری',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2025/staffs/ZahraSheikhi.jpg',
+        name: 'زهرا شیخی',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2025/staffs/AsalJlz.jpg',
+        name: 'عسل جلیل زاده',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2024/staffs/',
+        name: 'مهرداد عابدی',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2024/staffs/',
+        name: 'آرتینا همتی',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2025/staffs/ParnianJavadi.jpg',
+        name: 'پرنیان جوادی',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2025/staffs/RezaAdinepour.jpg',
+        name: 'رضا آدینه پور',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2025/staffs/AmiraliZakeri.jpg',
+        name: 'امیرعلی ذاکری',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2024/staffs/',
+        name: 'سروش نانبخش',
+        role: 'عضو تیم اجرایی'
+      },
+      {
+        imageUrl: '/images/2025/staffs/ArminaMotaghi.jpg',
+        name: 'آرمینا متقی',
         role: 'عضو تیم اجرایی'
       },
     ]
@@ -180,18 +305,13 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t('financeTeam.title'),
     teamMembers: [
       {
-        imageUrl: '/images/2024/staffs/leila.jpeg',
-        name: 'لیلا',
+        imageUrl: '/images/2025/staffs/AmirabbasEntezari.jpg',
+        name: 'امیرعباس انتظاری',
         role: 'اسپانسرشیپ'
       },
       {
-        imageUrl: '/images/2024/staffs/bagherHosseini.png',
-        name: 'باقر حسینی',
-        role: 'مسئول مالی'
-      },
-      {
-        imageUrl: '/images/2024/staffs/parsaHamidi.png',
-        name: 'پارسا حمیدی',
+        imageUrl: '/images/2025/staffs/SabaSeyedtabaei.jpg',
+        name: 'صبا‌سیدطبایی',
         role: 'مسئول مالی'
       },
     ]
