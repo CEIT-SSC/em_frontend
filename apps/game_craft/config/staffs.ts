@@ -34,7 +34,7 @@ export function useStaffs(): StaffTeam[] {
         teamTitle: t('technicalTeam.title'),
         teamMembers: [
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '/images/2025/staffs/AmirhosseinAghighi.jpg',
                 name: 'امیرحسین عقیقی',
                 role: 'سرپرست تیم فنی'
             },
@@ -188,7 +188,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم رسانه'
             },
             {
-                imageUrl: '/images/2025/staffs/',
+                imageUrl: '/images/2025/staffs/hero.gif',
                 name: 'یسنا رضائیان',
                 role: 'عضو تیم رسانه'
             },
@@ -259,7 +259,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم اجرایی'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '/images/2025/staffs/AliMoghaddam.jpg',
                 name: 'علی مقدم',
                 role: 'عضو تیم اجرایی'
             },
@@ -274,7 +274,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم اجرایی'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '/images/2024/staffs/hero.gif',
                 name: 'یسنا رضائیان',
                 role: 'عضو تیم اجرایی'
             },
@@ -396,7 +396,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم تزئینات'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '/images/2025/staffs/hero.gif',
                 name: 'یسنا رضائیان',
                 role: 'عضو تیم تزئینات'
             },
