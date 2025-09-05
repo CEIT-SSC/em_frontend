@@ -1,6 +1,6 @@
 'use client'
 
-import {Layout, theme} from 'antd'
+import {FloatButton, Layout, theme} from 'antd'
 import {AppHeader} from "@/components/layout/AppHeader";
 import {AppFooter} from "@/components/layout/AppFooter";
 import Wave from "@/components/common/Wave";
@@ -38,6 +38,7 @@ export default function MainLayout({children}: MainLayoutProps) {
                 />
             </Layout.Content>
             <AppFooter/>
+            <FloatButton.BackTop style={{insetInlineStart: 24}}/>
         </Layout>
     )
 }

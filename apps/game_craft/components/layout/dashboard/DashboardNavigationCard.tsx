@@ -92,7 +92,7 @@ export function DashboardNavigationCard({toggleDrawerOpen}: DashboardNavigationC
                             size="large"
                             style={{width: "100%"}}
                             onClick={() => {
-                                router.push(item.route);
+                                router.replace(item.route);
                                 if (toggleDrawerOpen) {
                                     toggleDrawerOpen();
                                 }
