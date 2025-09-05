@@ -1,13 +1,15 @@
 {
-  "name": "core",
+  "name": "@ssc/core",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
+  "type": "module",
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc ",
     "test": "npx ts-node .",
     "lint": "eslint src/**/*.{ts,tsx,js,jsx}",
+    "lint:fix": "eslint src/**/*.{ts,tsx,js,jsx} --fix",
     "type-check": "tsc --noEmit"
   },
   "keywords": [],

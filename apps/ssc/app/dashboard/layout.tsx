@@ -1,6 +1,6 @@
 import { Button, ButtonSize } from "@ssc/ui";
 import Image from "next/image";
-import Tabs from "./components/Tabs/Tabs";
+import Tabs from "./components/tabs/Tabs";
 import Link from "next/link";
 
 export default function RootLayout({
@@ -9,13 +9,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex min-h-[100vh]">
-      <div className="w-100 py-9 px-8 flex flex-col justify-between border-l border-(--TextWhite)/10 shadow-[0px_0px_10px_0px_rgba(199,199,199,40)]">
-        <Link href="/" className="flex gap-1">
-          <div className="w-16 h-16 justify-items-center content-center">
-            <Image width={50} height={60} src="/logo.png" alt="ssc logo" />
+    <div className="flex flex-col md:flex-row min-h-[100vh]">
+      <div className="w-full md:w-100 md:py-9 md:px-8 p-4 flex flex-col justify-between border-l border-(--TextWhite)/10 shadow-[0px_0px_10px_0px_rgba(199,199,199,40)]">
+        <Link href="/" className="flex items-center gap-1">
+          <div className="w-16 md:w-20 aspect-square justify-items-center content-center">
+            <Image
+              width={50}
+              height={60}
+              src="/logo.png"
+              alt="ssc logo"
+              className="md:scale-125"
+            />
           </div>
-          <div className="text-center">
+          <div className="md:text-[16px] text-[12px]">
             <p>انجمن علمی</p>
             <p>مهندسی کامپیوتر</p>
             <p>دانشگاه پلی تکنیک تهران</p>
@@ -47,7 +53,7 @@ export default function RootLayout({
           label="خروج از حساب کاربری"
         />
       </div>
-      <div className="w-full p-12">{children}</div>
+      <div className="w-full px-4 py-12 md:p-12">{children}</div>
     </div>
   );
 }

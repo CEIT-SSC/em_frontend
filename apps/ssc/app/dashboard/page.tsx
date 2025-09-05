@@ -6,7 +6,7 @@ const page = () => {
   return (
     <div className="flex flex-col gap-2.5">
       <h2 className="text-5xl font-bold">اطلاعات من</h2>
-      <div className="py-8 px-4 flex flex-col gap-4">
+      <div className="py-8 md:px-4 flex flex-col gap-4">
         <div className="flex flex-col items-center gap-2.5">
           <Image
             width={128}
@@ -21,11 +21,11 @@ const page = () => {
             label="ویرایش عکس"
           />
         </div>
-        <div className="flex pt-3 gap-3">
+        <div className="flex flex-col md:flex-row pt-3 gap-3">
           <TextField id="first-name" name="info" label="نام" />
           <TextField id="last-name" name="info" label="نام خانوادگی" />
         </div>
-        <div className="flex pt-3 gap-3">
+        <div className="flex flex-col md:flex-row pt-3 gap-3">
           <TextField id="first-name" name="info" label="مقطع تحصیلی" />
           <TextField id="university" name="info" label="دانشگاه" />
         </div>
@@ -38,7 +38,7 @@ const page = () => {
           />
         </div>
       </div>
-      <div className="flex justify-center py-6 px-32">
+      <div className="flex justify-center py-6 md:px-32">
         <Button
           className="bg-(--MainGray) text-whiteText w-full"
           size={ButtonSize.SMALL}

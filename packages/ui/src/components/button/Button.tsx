@@ -21,7 +21,7 @@ export enum ButtonSize {
 }
 
 const sizeClasses = {
-  [ButtonSize.SMALL]: "h-9 min-w-16 leading-[1.5rem]",
+  [ButtonSize.SMALL]: "h-fit min-w-16 leading-[1.5rem]",
   [ButtonSize.MEDIUM]: "h-12 min-w-20",
   [ButtonSize.LARGE]: "h-15 min-w-24",
 };
@@ -53,25 +53,28 @@ export const Button = ({
   const isText = variant === ButtonVariant.TEXT;
   const isOutline = variant === ButtonVariant.OUTLINE;
 
+  const radiusClass =
+    className.match(/\brounded(?:-[^\s]+)?\b/) || "rounded-lg";
+
   return (
     <div
       className={clsx(
-        "h-full overflow-hidden p-px rounded-lg",
+        "overflow-hidden p-px",
         {
           "default-gradient": !isSecondary && !isText,
-          "bg-transparent": isSecondary,
           "bg-black border-1 border-whiteText": isOutline,
+          [sizeClasses[size]]: !isText,
         },
-        sizeClasses[size],
         variantClasses[variant],
-        className
+        className,
+        radiusClass
       )}
     >
       <button
-        className={clsx(
-          "relative w-full h-full px-3 py-2 cursor-pointer",
-          "text-lg text-bold"
-        )}
+        className={clsx("relative w-full h-full cursor-pointer", "text-bold", {
+          "px-3 py-2": !isText,
+          "p-1": isText,
+        })}
         onClick={onClick}
       >
         {loading && (

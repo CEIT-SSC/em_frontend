@@ -1,7 +1,7 @@
 import type { StoryObj } from "@storybook/react-vite";
 declare const meta: {
     title: string;
-    component: ({ label, id, name, type, errorText, guidance, placeholder, }: import("./TextField").TextFieldProps) => import("react").JSX.Element;
+    component: import("react").ForwardRefExoticComponent<import("./TextField").TextFieldProps & import("react").RefAttributes<HTMLInputElement>>;
     parameters: {
         layout: string;
     };

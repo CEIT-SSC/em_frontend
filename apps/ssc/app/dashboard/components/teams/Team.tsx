@@ -24,7 +24,6 @@ const Team = ({ name, memberCount }: Props) => {
             className="text-whiteText"
             prefixIcon={HiPencil}
           />
-
           <Button
             variant={ButtonVariant.TEXT}
             className="text-[#1F825A]"
@@ -43,14 +42,16 @@ const Team = ({ name, memberCount }: Props) => {
   };
 
   return (
-    <div className="flex justify-between items-center p-6 rounded-2xl bg-[#43434340]">
+    <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-y-3 p-4 md:p-6 rounded-2xl bg-[#43434340]">
       <div className="flex flex-col gap-2.5 px-2.5">
         <h4 className="text-2xl/[150%] font-bold">{name}</h4>
         <p className="text-whiteText font-bold">
           {"تعداد اعضا: " + memberCount}
         </p>
       </div>
-      <div className="flex p-2.5 gap-2.5 text-2xl">{showOptions()}</div>
+      <div className="flex justify-center md:p-2.5 gap-2.5 text-3xl">
+        {showOptions()}
+      </div>
     </div>
   );
 };

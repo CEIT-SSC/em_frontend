@@ -23,7 +23,7 @@ const page = () => {
           suffixIcon={HiOutlineClipboardCopy}
         />
       </div>
-      <div className="flex flex-col gap-2.5 p-2.5">
+      <div className="flex flex-col gap-2.5 py-2.5 md:px-2.5">
         <Team name="We are the best" memberCount={10} />
         <Team name="They are the best" memberCount={4} />
       </div>
