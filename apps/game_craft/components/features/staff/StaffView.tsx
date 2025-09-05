@@ -1,8 +1,5 @@
-"use client";
-
 import { Flex, theme } from "antd";
 import { StaffContainer } from "./StaffContainer";
-import { useResponsive } from "@/lib/hooks/useResponsive";
 
 export function StaffView() {
   const staffViewPadding = "!py-12 !px-4 md:!px-12 lg:!px-20";
