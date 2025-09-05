@@ -175,7 +175,7 @@ export function useStaffs(): StaffTeam[] {
             {
                 imageUrl: '/images/2025/staffs/ShadiYousefabadi.jpg',
                 name: 'شادی یوسف آبادی',
-                role: 'عضو تیم تزئینات'
+                role: 'عضو تیم رسانه'
             },
             {
                 imageUrl: '/images/2025/staffs/AliAghaee.jpg',
@@ -246,7 +246,7 @@ export function useStaffs(): StaffTeam[] {
             {
                 imageUrl: '/images/2025/staffs/ShadiYousefabadi.jpg',
                 name: 'شادی یوسف آبادی',
-                role: 'عضو تیم تزئینات'
+                role: 'عضو تیم اجرایی'
             },
             {
                 imageUrl: '/images/2025/staffs/',
