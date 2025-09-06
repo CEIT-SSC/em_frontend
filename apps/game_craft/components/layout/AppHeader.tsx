@@ -9,9 +9,9 @@ import {MenuOutlined, MoonFilled, SunFilled} from "@ant-design/icons";
 import Image from "next/image";
 import {useTheme} from "next-themes";
 import {useResponsive} from "@/lib/hooks/useResponsive";
-import {DashboardDrawer} from "@/components/layout/dashboard";
 import AppDrawer from "@/components/layout/AppDrawer";
 import {customColors} from "@/config/colors";
+import {useSound} from "@/components/providers/SoundProvider";
 
 const {useToken} = theme;
 const {Header} = Layout;
@@ -31,6 +31,7 @@ export function AppHeader() {
     const t = useTranslations("app");
     const screens = useResponsive();
     const {theme, setTheme} = useTheme();
+    const {playSound} = useSound();
 
     // Main navigation items matching the React project
     const mainNavigations: NavigationItem[] = [
@@ -117,6 +118,7 @@ export function AppHeader() {
                                     key={item.route}
                                     type="primary"
                                     onClick={() => router.push(item.route)}
+                                    onMouseEnter={() => playSound("jump")}
                                     style={{
                                         fontWeight: "bolder",
                                         ...(isActive(item.route) ? {color: customColors.colorAction} : {}),
@@ -167,6 +169,7 @@ export function AppHeader() {
                                 type="primary"
                                 style={{fontWeight: "bolder"}}
                                 onClick={() => router.push("/auth/signup")}
+                                onMouseEnter={() => playSound("coin")}
                             >
                                 {t("auth.signUp")}
                             </Button>
@@ -174,6 +177,7 @@ export function AppHeader() {
                                 type="primary"
                                 style={{fontWeight: "bolder"}}
                                 onClick={() => router.push("/auth/login")}
+                                onMouseEnter={() => playSound("coin")}
                             >
                                 {t("auth.login")}
                             </Button>
