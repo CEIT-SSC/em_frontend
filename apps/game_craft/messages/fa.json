@@ -154,7 +154,15 @@
       }
     },
     "sponsors": {
-      "title": "حامیان"
+      "title": "حامیان",
+      "noSponsors": "هنوز حامی‌ای وجود ندارد",
+      "visitWebsite": "مشاهده وب‌سایت",
+      "tiers": {
+        "platinum": "طلایی ویژه",
+        "gold": "طلایی",
+        "silver": "نقره‌ای",
+        "sponsor": "حامی"
+      }
     },
     "footer": {
       "autGameCraft": "گیم‌کرفت امیرکبیر",

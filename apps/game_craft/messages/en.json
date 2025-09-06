@@ -148,7 +148,15 @@
       }
     },
     "sponsors": {
-      "title": "Sponsors"
+      "title": "Sponsors",
+      "noSponsors": "No sponsors yet",
+      "visitWebsite": "Visit Website",
+      "tiers": {
+        "platinum": "PLATINUM",
+        "gold": "GOLD",
+        "silver": "SILVER",
+        "sponsor": "SPONSOR"
+      }
     },
     "footer": {
       "autGameCraft": "Amirkabir GameCraft",
