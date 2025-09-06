@@ -90,7 +90,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم علمی'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '',
                 name: 'علیرضا نیکوئی',
                 role: 'عضو تیم علمی'
             },
@@ -106,7 +106,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'سرپرست تیم گرافیک'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '',
                 name: 'بهار رفیع نژاد',
                 role: 'طراح گرافیک'
             },
@@ -204,7 +204,7 @@ export function useStaffs(): StaffTeam[] {
         teamTitle: t('operationsTeam.title'),
         teamMembers: [
             {
-                imageUrl: '/images/2025/staffs/',
+                imageUrl: '',
                 name: 'شایسته اکبری',
                 role: 'سرپرست تیم اجرایی'
             },
@@ -219,7 +219,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم اجرایی'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '',
                 name: 'علیرضا نوروزبیکی',
                 role: 'عضو تیم اجرایی'
             },
@@ -229,7 +229,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم اجرایی'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '',
                 name: 'امیر بیژه',
                 role: 'عضو تیم اجرایی'
             },
@@ -264,7 +264,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم اجرایی'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '',
                 name: 'محمد میرزاکلهری',
                 role: 'عضو تیم اجرایی'
             },
@@ -274,7 +274,7 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم اجرایی'
             },
             {
-                imageUrl: '/images/2024/staffs/hero.gif',
+                imageUrl: '/images/2025/staffs/hero.gif',
                 name: 'یسنا رضائیان',
                 role: 'عضو تیم اجرایی'
             },
@@ -289,12 +289,12 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم اجرایی'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '',
                 name: 'مهرداد عابدی',
                 role: 'عضو تیم اجرایی'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '',
                 name: 'آرتینا همتی',
                 role: 'عضو تیم اجرایی'
             },
@@ -386,12 +386,12 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم تزئینات'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '',
                 name: 'امیر بیژه',
                 role: 'عضو تیم تزئینات'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '',
                 name: 'محمد میرزاکلهری',
                 role: 'عضو تیم تزئینات'
             },
@@ -401,27 +401,27 @@ export function useStaffs(): StaffTeam[] {
                 role: 'عضو تیم تزئینات'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '',
                 name: 'نگین عینی پور',
                 role: 'عضو تیم تزئینات'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '',
                 name: 'حسین تقی زاده',
                 role: 'عضو تیم تزئینات'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '',
                 name: 'مبینا هراتی',
                 role: 'عضو تیم تزئینات'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '',
                 name: 'فاطمه شهریاری',
                 role: 'عضو تیم تزئینات'
             },
             {
-                imageUrl: '/images/2024/staffs/',
+                imageUrl: '',
                 name: 'نازلی شایان',
                 role: 'عضو تیم تزئینات'
             },

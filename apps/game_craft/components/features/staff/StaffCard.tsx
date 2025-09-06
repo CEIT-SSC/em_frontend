@@ -8,6 +8,7 @@ import {
     YoutubeFilled
 } from '@ant-design/icons';
 import {StaffMember} from '@/config/staffs';
+import Image from "next/image";
 
 const {useToken} = theme;
 
@@ -40,11 +41,38 @@ export function StaffCard({staff}: StaffCardProps) {
                 justify="center"
                 gap="middle"
             >
-                <Avatar
-                    size={140}
-                    icon={<UserOutlined/>}
-                    src={staff.imageUrl}
-                />
+                {staff.imageUrl ?
+                    <Avatar
+                        size={140}
+                        icon={<UserOutlined/>}
+                        src={staff.imageUrl}
+                    />
+                    :
+                    <Flex
+                        style={{
+                            width: 140,
+                            height: 140,
+                            borderRadius: '50%',
+                            overflow: 'hidden',
+                            backgroundColor: token.colorBgContainer,
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}
+                    >
+                        <Image
+                            src={"/mario/giphy-14.gif"}
+                            alt={"mario question block"}
+                            width={240}
+                            height={240}
+                        />
+                    </Flex>
+                    // <Avatar
+                    //     size={140}
+                    //     icon={<UserOutlined/>}
+                    //     src={"/mario/giphy-16.gif"}
+                    // />
+                }
+
                 <Flex vertical align="center" justify="center" style={{width: '100%'}}>
                     <Typography.Title level={4} style={{margin: 0, fontWeight: 700}}>
                         {staff.name}
