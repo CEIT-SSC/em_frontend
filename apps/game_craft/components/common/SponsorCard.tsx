@@ -1,221 +1,174 @@
-"use client";
+'use client';
 
-import { Typography, Button, Flex, theme, Space } from "antd";
-import { LinkOutlined } from "@ant-design/icons";
+import { Typography, Button, Flex, theme, Tag } from 'antd';
+import { LinkOutlined } from '@ant-design/icons';
 import Image from "next/image";
-import { Sponsor } from "@/config/sponsors";
-import { useResponsive } from "@/lib/hooks/useResponsive";
-import { useTranslations } from "next-intl";
+import { Sponsor } from '@/config/sponsors';
+import { useResponsive } from '@/lib/hooks/useResponsive';
+import { useTranslations } from 'next-intl';
+import { customColors } from '@/config/colors';
 
 const { Text, Title } = Typography;
 const { useToken } = theme;
 
 interface SponsorCardProps {
-  sponsor: Sponsor;
-  index: number;
+    sponsor: Sponsor;
+    index: number;
 }
 
 export default function SponsorCard({ sponsor, index }: SponsorCardProps) {
-  const { token } = useToken();
-  const screens = useResponsive();
-  const t = useTranslations("app.sponsors");
+    const { token } = useToken();
+    const screens = useResponsive();
+    const t = useTranslations("app.sponsors");
 
-  // Responsive configuration
-  const isMobile = !screens.md;
-  const logoSize = isMobile ? 80 : 120;
-  const cardPadding = isMobile ? token.padding : token.paddingLG;
-  const gapSize = isMobile ? token.size : token.sizeXL;
-  const titleLevel = isMobile ? 4 : 3;
+    const isMobile = !screens.md;
 
-  const getTierConfig = (tier: string) => {
-    switch (tier) {
-      case 'platinum':
-        return {
-          label: t('tiers.platinum'),
-          color: token.colorPrimary,
-          bgColor: token.colorPrimary,
-        };
-      case 'gold':
-        return {
-          label: t('tiers.gold'),
-          color: token.colorWarning,
-          bgColor: token.colorWarning,
-        };
-      case 'silver':
-        return {
-          label: t('tiers.silver'),
-          color: token.colorTextSecondary,
-          bgColor: token.colorTextSecondary,
-        };
-      default:
-        return {
-          label: t('tiers.sponsor'),
-          color: token.colorTextSecondary,
-          bgColor: token.colorTextSecondary,
-        };
-    }
-  };
+    const getTierConfig = (tier: string) => {
+        switch (tier) {
+            case 'platinum':
+                return {
+                    label: t('tiers.platinum'),
+                    color: 'blue',
+                };
+            case 'gold':
+                return {
+                    label: t('tiers.gold'),
+                    color: 'gold',
+                };
+            case 'silver':
+                return {
+                    label: t('tiers.silver'),
+                    color: 'default',
+                };
+            default:
+                return {
+                    label: t('tiers.sponsor'),
+                    color: 'default',
+                };
+        }
+    };
 
-  const tierConfig = getTierConfig(sponsor.tier);
+    const tierConfig = getTierConfig(sponsor.tier);
 
-  const handleVisitWebsite = () => {
-    window.open(sponsor.link, "_blank", "noopener,noreferrer");
-  };
+    const handleVisitWebsite = () => {
+        window.open(sponsor.link, "_blank", "noopener,noreferrer");
+    };
 
-  return (
-    <div
-      style={{
-        width: "100%",
-        padding: `${cardPadding}px 0`,
-        transition: 'all 0.3s ease',
-      }}
-    >
-      <Flex
-        vertical={isMobile}
-        style={{
-          alignItems: isMobile ? 'center' : 'center',
-          gap: gapSize,
-          padding: `${cardPadding}px 0`,
-          textAlign: isMobile ? 'center' : 'left',
-        }}
-      >
-        {/* Logo Section */}
-        <div style={{ position: 'relative', flexShrink: 0 }}>
-          {/* Tier Badge */}
-          <div
-            style={{
-              position: 'absolute',
-              top: isMobile ? -6 : -8,
-              left: isMobile ? -6 : -8,
-              padding: `${token.paddingXS}px ${isMobile ? token.paddingXS : token.paddingSM}px`,
-              backgroundColor: tierConfig.bgColor,
-              color: token.colorTextLightSolid,
-              borderRadius: token.borderRadiusSM,
-              fontSize: isMobile ? token.fontSizeXS : token.fontSizeSM,
-              fontWeight: token.fontWeightStrong,
-              boxShadow: token.boxShadowSecondary,
-              transform: 'rotate(-12deg)',
-              zIndex: 10,
-              lineHeight: 1,
-            }}
-          >
-            {tierConfig.label}
-          </div>
-
-          {/* Logo Container */}
-          <div
-            style={{
-              width: `${logoSize}px`,
-              height: `${logoSize}px`,
-              borderRadius: '50%',
-              overflow: 'hidden',
-              position: 'relative',
-              backgroundColor: token.colorBgElevated,
-              boxShadow: token.boxShadowSecondary,
-            }}
-          >
-            <Image
-              src={sponsor.logo}
-              alt={`${sponsor.name} logo`}
-              fill
-              style={{
-                objectFit: 'contain',
-                padding: isMobile ? token.paddingXS : token.paddingSM,
-              }}
-              sizes={`${logoSize}px`}
-            />
-          </div>
-        </div>
-
-        {/* Content Section */}
-        <Flex
-          vertical
-          style={{
-            flex: 1,
-            textAlign: isMobile ? 'center' : 'left',
-            alignItems: isMobile ? 'center' : 'flex-start',
-            width: '100%'
-          }}
-        >
-          <Space direction="vertical" size={isMobile ? "small" : "middle"} style={{ width: '100%' }}>
-            <Title
-              level={titleLevel}
-              style={{
-                margin: 0,
-                color: token.colorText,
-                fontSize: isMobile ? token.fontSizeHeading4 : token.fontSizeHeading3,
-                fontWeight: token.fontWeightStrong,
-              }}
+    return (
+        <Flex vertical gap="large" style={{ width: "100%" }}>
+            {/* Sponsor Content */}
+            <Flex
+                vertical
+                gap="large"
+                style={{
+                    width: "100%",
+                    padding: token.paddingLG,
+                }}
             >
-              {sponsor.name}
-            </Title>
+                {/* Tier Badge */}
+                <Flex justify="end">
+                    <Tag color={tierConfig.color} style={{ fontSize: token.fontSizeSM, fontWeight: 600 }}>
+                        {tierConfig.label}
+                    </Tag>
+                </Flex>
 
-            <Text
-              style={{
-                color: token.colorTextSecondary,
-                fontSize: isMobile ? token.fontSizeSM : token.fontSize,
-                lineHeight: token.lineHeight,
-                display: 'block',
-                maxWidth: isMobile ? '100%' : '80%',
-              }}
-            >
-              {sponsor.description}
-            </Text>
+                <Flex
+                    vertical={isMobile}
+                    gap="large"
+                    align={isMobile ? "center" : "start"}
+                >
+                    {/* Logo Section */}
+                    <Flex
+                        justify="center"
+                        align="center"
+                        style={{
+                            width: isMobile ? 100 : 120,
+                            height: isMobile ? 100 : 120,
+                            borderRadius: "50%",
+                            backgroundColor: customColors.colorAction,
+                            border: `1px solid ${token.colorBorderSecondary}`,
+                            boxShadow: `0 2px 8px ${token.colorFillQuaternary}`,
+                            flexShrink: 0,
+                        }}
+                    >
+                        <Image
+                            src={sponsor.logo}
+                            alt={`${sponsor.name} logo`}
+                            width={isMobile ? 70 : 90}
+                            height={isMobile ? 70 : 90}
+                            style={{
+                                objectFit: 'contain',
+                            }}
+                        />
+                    </Flex>
 
-            <Button
-              type="primary"
-              icon={<LinkOutlined />}
-              onClick={handleVisitWebsite}
-              size={isMobile ? "middle" : "large"}
-              style={{
-                backgroundColor: tierConfig.color,
-                borderColor: tierConfig.color,
-                borderRadius: token.borderRadius,
-                fontWeight: token.fontWeightStrong,
-                fontSize: isMobile ? token.fontSizeSM : token.fontSize,
-                minWidth: isMobile ? '140px' : 'auto',
-              }}
-            >
-              {t('visitWebsite')}
-            </Button>
-          </Space>
+                    {/* Content Section */}
+                    <Flex
+                        vertical
+                        flex={1}
+                        gap="middle"
+                        style={{
+                            textAlign: isMobile ? 'center' : 'start',
+                        }}
+                    >
+                        <Title
+                            level={isMobile ? 4 : 3}
+                            style={{
+                                margin: 0,
+                                fontWeight: 700,
+                            }}
+                        >
+                            {sponsor.name}
+                        </Title>
+
+                        <Text
+                            type="secondary"
+                            style={{
+                                fontSize: isMobile ? token.fontSizeSM : token.fontSize,
+                                lineHeight: 1.6,
+                            }}
+                        >
+                            {sponsor.description}
+                        </Text>
+
+                        <Button
+                            type="text"
+                            icon={<LinkOutlined />}
+                            onClick={handleVisitWebsite}
+                            size={isMobile ? "middle" : "large"}
+                            style={{
+                                alignSelf: isMobile ? "center" : "flex-start",
+                                minWidth: 140,
+                            }}
+                        >
+                            {t('visitWebsite')}
+                        </Button>
+                    </Flex>
+                </Flex>
+            </Flex>
+
+            {/* Coin Divider */}
+            {index < 4 && (
+                <Flex
+                    justify="center"
+                    align="center"
+                    gap="middle"
+                    style={{
+                        paddingBlock: token.paddingLG,
+                    }}
+                >
+                    {[1, 2, 3].map((coinIndex) => (
+                        <Image
+                            key={coinIndex}
+                            src="/mario/giphy-coin.gif"
+                            alt="Coin animation"
+                            width={isMobile ? 30 : 40}
+                            height={isMobile ? 30 : 40}
+                            unoptimized
+                        />
+                    ))}
+                </Flex>
+            )}
         </Flex>
-      </Flex>
-
-      {/* Coin gif divider at the bottom except for the last item */}
-      {index < 4 && (
-        <Flex
-          justify="center"
-          align="center"
-          gap={isMobile ? "middle" : "large"}
-          style={{
-            margin: `${token.marginLG}px 0 0 0`,
-            padding: `${cardPadding}px 0`,
-          }}
-        >
-          <Image
-            src="/mario/giphy-coin.gif"
-            alt="Coin animation"
-            width={isMobile ? 30 : 40}
-            height={isMobile ? 30 : 40}
-            unoptimized
-          />
-          <Image
-            src="/mario/giphy-coin.gif"
-            alt="Coin animation"
-            width={isMobile ? 30 : 40}
-            height={isMobile ? 30 : 40}
-            unoptimized
-          />
-          <Image
-            src="/mario/giphy-coin.gif"
-            alt="Coin animation"
-            width={isMobile ? 30 : 40}
-            height={isMobile ? 30 : 40}
-            unoptimized
-          />
-        </Flex>
-      )}
-    </div>
-  );
+    );
 }
