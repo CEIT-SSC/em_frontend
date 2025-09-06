@@ -27,8 +27,8 @@ export const useMainNavigations = (): NavigationItem[] => {
       route: '/staffs',
     },
     {
-      name: t('history'),
-      route: '/history',
+      name: t('gallery'),
+      route: '/gallery',
     },
     {
       name: t('sponsors'),
