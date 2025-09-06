@@ -14,10 +14,10 @@ export const useMainNavigations = (): NavigationItem[] => {
       name: t('home'),
       route: '/',
     },
-    {
-      name: t('news'),
-      route: '/blog',
-    },
+    // {
+    //   name: t('news'),
+    //   route: '/news',
+    // },
     {
       name: t('faq'),
       route: '/faq',

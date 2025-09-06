@@ -1,6 +1,6 @@
 "use client";
 
-import {Button, Divider, Flex, Layout, Space, Switch, theme} from "antd";
+import {Button, Divider, Flex, Layout, Space, Splitter, Switch, theme} from "antd";
 import {useEffect, useState} from "react";
 import {usePathname} from "next/navigation";
 import {useRouter} from "@/lib/navigation";
@@ -12,14 +12,10 @@ import {useResponsive} from "@/lib/hooks/useResponsive";
 import AppDrawer from "@/components/layout/AppDrawer";
 import {customColors} from "@/config/colors";
 import {useSound} from "@/components/providers/SoundProvider";
+import {useMainNavigations} from "@/lib/config/navigation";
 
 const {useToken} = theme;
 const {Header} = Layout;
-
-interface NavigationItem {
-    name: string;
-    route: string;
-}
 
 export function AppHeader() {
     const [shadow, setShadow] = useState(false);
@@ -33,16 +29,7 @@ export function AppHeader() {
     const {theme, setTheme} = useTheme();
     const {playSound} = useSound();
 
-    // Main navigation items matching the React project
-    const mainNavigations: NavigationItem[] = [
-        {name: t("mainNavigation.home"), route: "/"},
-        {name: t("mainNavigation.news"), route: "/news"},
-        {name: t("mainNavigation.faq"), route: "/faq"},
-        {name: t("mainNavigation.staffs"), route: "/staffs"},
-        {name: t("mainNavigation.history"), route: "/history"},
-        {name: t("mainNavigation.sponsors"), route: "/sponsor"},
-        {name: t("mainNavigation.dashboard"), route: "/dashboard"},
-    ];
+    const mainNavigations = useMainNavigations()
 
     const toggleDrawerOpen = () => {
         setDrawerOpen(!drawerOpen);
@@ -127,6 +114,14 @@ export function AppHeader() {
                                     {item.name}
                                 </Button>
                             ))}
+                            <Button
+                                type="primary"
+                                onClick={() => router.push("/dashboard")}
+                                onMouseEnter={() => playSound("jump")}
+                                style={{fontWeight: "bolder"}}
+                            >
+                                {t("mainNavigation.dashboard")}
+                            </Button>
                         </Space>
                     </Flex>
 
