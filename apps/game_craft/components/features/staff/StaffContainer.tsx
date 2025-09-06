@@ -5,6 +5,7 @@ import {StaffCard} from './StaffCard';
 import {useStaffs} from '@/config/staffs';
 import {useTranslations} from 'next-intl';
 import {customColors} from "@/config/colors";
+import Image from "next/image";
 
 const {useToken} = theme;
 
@@ -23,17 +24,21 @@ export function StaffContainer() {
                 backgroundColor: token.colorBgBase,
                 borderRadius: token.borderRadius,
                 padding: '3rem 1rem',
+                gap: '1rem',
             }}
         >
-            <Typography.Title
-                level={1}
-                style={{
-                    fontWeight: 900,
-                    color: token.colorPrimary
-                }}
-            >
-                {t('title')}
-            </Typography.Title>
+            <Flex vertical align={"center"} justify={"center"}>
+                <Image src={"/mario/mario-friends.png"} width={200} height={200} alt={'mario'}/>
+                <Typography.Title
+                    level={1}
+                    style={{
+                        fontWeight: 900,
+                        color: token.colorPrimary
+                    }}
+                >
+                    {t('title')}
+                </Typography.Title>
+            </Flex>
             <Flex vertical align="center" justify="center" style={{width: '100%'}} gap={50}>
                 {staffs.map((team, index) => (
                     <Flex
