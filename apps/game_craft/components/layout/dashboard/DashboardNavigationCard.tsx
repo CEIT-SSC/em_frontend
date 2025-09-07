@@ -4,6 +4,8 @@ import {Button, Flex, Grid, Image, theme, Typography} from "antd";
 import {useTranslations} from "next-intl";
 import {useRouter, usePathname} from "next/navigation";
 import {useDashboardNavigations} from "@/lib/config/dashboard-navigation";
+import {DotLottieReact} from '@lottiefiles/dotlottie-react';
+// import fireworks from "../../../public/lottie/Fireworks.lottie";
 
 const {useToken} = theme;
 const {useBreakpoint} = Grid;
@@ -57,22 +59,52 @@ export function DashboardNavigationCard({toggleDrawerOpen}: DashboardNavigationC
                     style={{width: "100%"}}
                     gap="small"
                 >
-                    <Flex
+                    <div
                         style={{
-                            width: "30%",
-                            borderRadius: "50%",
-                            overflow: "hidden",
-                            aspectRatio: "1/1",
+                            position: "relative",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            // backgroundColor: 'white',
+                            width: '30%',
+                            aspectRatio: '1/1'
                         }}
                     >
-                        <Image
-                            src="/images/2024/staffs/mahdiHaeri.jpg"
-                            width="100%"
-                            height="auto"
-                            alt="user-avatar"
-                            fallback="/svg/avatar-1.svg"
+                        <Flex
+                            align={"center"}
+                            justify={"center"}
+                            style={{
+                                width: "100%",
+                                borderRadius: "50%",
+                                overflow: "hidden",
+                                aspectRatio: "1/1",
+                                zIndex: 1,
+                            }}
+                        >
+                            <Image
+                                src=""
+                                width="100%"
+                                height="auto"
+                                alt="user-avatar"
+                                fallback="/mario/giphy-1.gif"
+                            />
+                        </Flex>
+                        <DotLottieReact
+                            src={"/lottie/Fireworks.lottie"}
+                            autoplay
+                            loop
+                            style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                                width: "250%",
+                                height: "250%",
+                                gridArea: "1 / 1",
+                                zIndex: 0,
+                            }}
                         />
-                    </Flex>
+                    </div>
                     <Typography.Title level={4} style={{fontWeight: 800, margin: 0}}>
                         Mahdi Haeri
                     </Typography.Title>
