@@ -103,7 +103,7 @@ export default function GameCraftTimeline({
         }}
       >
         <Image
-          src="/svg/bubble-light-purple.svg"
+          src="/assets/svg/bubble-light-purple.svg"
           alt="Background bubble"
           fill
           style={{
