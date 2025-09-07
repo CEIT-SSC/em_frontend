@@ -65,6 +65,7 @@ export function DashboardDrawer({open, toggleDrawerOpen}: DashboardDrawerProps) 
                     gap="small"
                     style={{
                         width: "100%",
+                        zIndex: 2
                     }}
                 >
                     <Button
