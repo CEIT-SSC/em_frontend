@@ -2,13 +2,16 @@
 
 import {Avatar, Button, Flex, theme, Typography} from 'antd';
 import {
-    InstagramOutlined,
+    GithubFilled, GithubOutlined,
+    InstagramOutlined, LinkedinFilled, LinkedinOutlined,
     UserOutlined,
     XOutlined,
     YoutubeFilled
 } from '@ant-design/icons';
 import {StaffMember} from '@/config/staffs';
 import Image from "next/image";
+import {TelegramIcon} from "@/components/common/TelegramIcon";
+import {TiSocialLinkedinCircular} from "react-icons/ti";
 
 const {useToken} = theme;
 
@@ -90,9 +93,25 @@ export function StaffCard({staff}: StaffCardProps) {
                     padding: token.padding,
                 }}
             >
-                <Button type="text" shape="circle" icon={<InstagramOutlined/>}/>
-                <Button type="text" shape="circle" icon={<XOutlined/>}/>
-                <Button type="text" shape="circle" icon={<YoutubeFilled/>}/>
+                <Button
+                    type="text"
+                    shape="circle"
+                    size={"large"}
+                >
+                    <TelegramIcon size={'1.5rem'}/>
+                </Button>
+                <Button
+                    type="text"
+                    shape="circle"
+                >
+                    <GithubFilled style={{fontSize: '1rem'}}/>
+                </Button>
+                <Button
+                    type="text"
+                    shape="circle"
+                >
+                    <LinkedinFilled style={{fontSize: '1rem'}}/>
+                </Button>
             </Flex>
         </Flex>
     );
