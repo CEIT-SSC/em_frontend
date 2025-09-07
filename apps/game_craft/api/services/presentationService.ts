@@ -75,16 +75,32 @@ export class PresentationService {
    */
   static async createPresentation(data: PresentationCreateRequest): Promise<ApiResponse<Presentation>> {
     try {
-      // If presenter_image is a file, use form data
-      if (data.presenter_image instanceof File) {
+      // Check if any presenter has a file image, use form data
+      const hasFileImages = data.presenters_details.some(
+        presenter => presenter.presenter_picture instanceof File
+      );
+
+      if (hasFileImages) {
         const formData = new FormData();
         
+        // Handle presenters_details separately
+        data.presenters_details.forEach((presenter, index) => {
+          formData.append(`presenters_details[${index}][name]`, presenter.name);
+          formData.append(`presenters_details[${index}][email]`, presenter.email);
+          formData.append(`presenters_details[${index}][bio]`, presenter.bio);
+          
+          if (presenter.presenter_picture instanceof File) {
+            formData.append(`presenters_details[${index}][presenter_picture]`, presenter.presenter_picture);
+          } else if (typeof presenter.presenter_picture === 'string') {
+            formData.append(`presenters_details[${index}][presenter_picture]`, presenter.presenter_picture);
+          }
+        });
+
+        // Handle other fields
         Object.entries(data).forEach(([key, value]) => {
-          if (value !== undefined && value !== null) {
+          if (key !== 'presenters_details' && value !== undefined && value !== null) {
             if (Array.isArray(value)) {
               value.forEach(item => formData.append(key, item.toString()));
-            } else if (value instanceof File) {
-              formData.append(key, value);
             } else {
               formData.append(key, value.toString());
             }
@@ -119,16 +135,34 @@ export class PresentationService {
    */
   static async updatePresentation(id: number, data: PresentationUpdateRequest): Promise<ApiResponse<Presentation>> {
     try {
-      // If presenter_image is a file, use form data
-      if (data.presenter_image instanceof File) {
+      // Check if any presenter has a file image, use form data
+      const hasFileImages = data.presenters_details?.some(
+        presenter => presenter.presenter_picture instanceof File
+      );
+
+      if (hasFileImages) {
         const formData = new FormData();
         
+        // Handle presenters_details if provided
+        if (data.presenters_details) {
+          data.presenters_details.forEach((presenter, index) => {
+            formData.append(`presenters_details[${index}][name]`, presenter.name);
+            formData.append(`presenters_details[${index}][email]`, presenter.email);
+            formData.append(`presenters_details[${index}][bio]`, presenter.bio);
+            
+            if (presenter.presenter_picture instanceof File) {
+              formData.append(`presenters_details[${index}][presenter_picture]`, presenter.presenter_picture);
+            } else if (typeof presenter.presenter_picture === 'string') {
+              formData.append(`presenters_details[${index}][presenter_picture]`, presenter.presenter_picture);
+            }
+          });
+        }
+
+        // Handle other fields
         Object.entries(data).forEach(([key, value]) => {
-          if (value !== undefined && value !== null) {
+          if (key !== 'presenters_details' && value !== undefined && value !== null) {
             if (Array.isArray(value)) {
               value.forEach(item => formData.append(key, item.toString()));
-            } else if (value instanceof File) {
-              formData.append(key, value);
             } else {
               formData.append(key, value.toString());
             }
