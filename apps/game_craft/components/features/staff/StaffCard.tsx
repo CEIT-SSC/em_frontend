@@ -2,16 +2,13 @@
 
 import {Avatar, Button, Flex, theme, Typography} from 'antd';
 import {
-    GithubFilled, GithubOutlined,
-    InstagramOutlined, LinkedinFilled, LinkedinOutlined,
+    GithubFilled,
+    LinkedinFilled,
     UserOutlined,
-    XOutlined,
-    YoutubeFilled
 } from '@ant-design/icons';
 import {StaffMember} from '@/config/staffs';
 import Image from "next/image";
 import {TelegramIcon} from "@/components/common/TelegramIcon";
-import {TiSocialLinkedinCircular} from "react-icons/ti";
 
 const {useToken} = theme;
 
@@ -94,21 +91,32 @@ export function StaffCard({staff}: StaffCardProps) {
                 }}
             >
                 <Button
+                    disabled={!staff.telegramUrl}
                     type="text"
                     shape="circle"
                     size={"large"}
+                    href={staff.telegramUrl}
+                    target="_blank"
                 >
                     <TelegramIcon size={'1.5rem'}/>
                 </Button>
                 <Button
+                    disabled={!staff.githubUrl}
                     type="text"
                     shape="circle"
+                    href={staff.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                 >
                     <GithubFilled style={{fontSize: '1rem'}}/>
                 </Button>
                 <Button
+                    disabled={!staff.linkedinUrl}
                     type="text"
                     shape="circle"
+                    href={staff.linkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                 >
                     <LinkedinFilled style={{fontSize: '1rem'}}/>
                 </Button>
