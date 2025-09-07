@@ -5,8 +5,8 @@ import Wave from "../../common/Wave";
 import {WorkshopGrid} from "./WorkshopGrid";
 import {useTranslations} from "next-intl";
 import {useResponsive} from "@/lib/hooks/useResponsive";
-import {usePresentations} from "@/lib/hooks/usePresentations";
-import {Presentation} from "@ssc/core";
+import {usePresentations} from "@/api";
+import type {Presentation} from "@/api";
 
 const {useToken} = theme;
 
@@ -24,17 +24,11 @@ export function OnlineWorkshop({
     const t = useTranslations();
 
     // Fetch online workshops (presentations) from API
-    const { presentations, loading, error, refetch } = usePresentations({
-        eventId: 1, // Set to event ID 1 as requested
-        isOnline: true, // Only online presentations
+    const { presentations, loading, error, refresh } = usePresentations({
+        event: 202501, // GameCraft 2025 event ID
+        is_online: true, // Only online presentations
         type: 'workshop' // Only workshop type presentations
     });
-
-    const handleAddToCart = (presentation: Presentation) => {
-        // TODO: Implement add to cart functionality
-        console.log("Added presentation to cart:", presentation.title);
-        // You can integrate with cart API here
-    };
 
     const renderContent = () => {
         if (loading) {
@@ -49,11 +43,11 @@ export function OnlineWorkshop({
             return (
                 <Alert
                     message={t("workshop.error")}
-                    description={error.message}
+                    description={error}
                     type="error"
                     showIcon
                     action={
-                        <button onClick={refetch}>
+                        <button onClick={refresh}>
                             {t("common.retry")}
                         </button>
                     }
@@ -75,7 +69,6 @@ export function OnlineWorkshop({
         return (
             <WorkshopGrid
                 presentations={presentations}
-                onAddToCart={handleAddToCart}
                 workshopImage="/images/Luigi.jpg" // Pass Luigi image for online workshops
             />
         );

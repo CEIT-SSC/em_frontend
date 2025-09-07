@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { PresentationService } from '../services/presentationService';
 import type { 
   Presentation, 
@@ -19,6 +19,26 @@ export const usePresentations = (initialParams?: PresentationFilterParams) => {
     next: null as string | null,
     previous: null as string | null,
   });
+
+  // Memoize the initial parameters to prevent infinite re-renders
+  const memoizedParams = useMemo(() => initialParams, [
+    initialParams?.event,
+    initialParams?.type,
+    initialParams?.is_online,
+    initialParams?.is_paid,
+    initialParams?.is_active,
+    initialParams?.category,
+    initialParams?.level,
+    initialParams?.language,
+    initialParams?.is_featured,
+    initialParams?.date_from,
+    initialParams?.date_to,
+    initialParams?.search,
+    initialParams?.tags?.join(','),
+    initialParams?.page,
+    initialParams?.page_size,
+    initialParams?.ordering,
+  ]);
 
   const fetchPresentations = useCallback(async (params?: PresentationFilterParams) => {
     setLoading(true);
@@ -42,12 +62,12 @@ export const usePresentations = (initialParams?: PresentationFilterParams) => {
   }, []);
 
   useEffect(() => {
-    fetchPresentations(initialParams);
-  }, [fetchPresentations, initialParams]);
+    fetchPresentations(memoizedParams);
+  }, [fetchPresentations, memoizedParams]);
 
   const refresh = useCallback(() => {
-    fetchPresentations(initialParams);
-  }, [fetchPresentations, initialParams]);
+    fetchPresentations(memoizedParams);
+  }, [fetchPresentations, memoizedParams]);
 
   return {
     presentations,

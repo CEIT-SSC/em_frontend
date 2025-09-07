@@ -4,8 +4,8 @@ import {Flex, Typography, Spin, Alert} from "antd";
 import {WorkshopGrid} from "./WorkshopGrid";
 import {useTranslations} from "next-intl";
 import {useResponsive} from "@/lib/hooks/useResponsive";
-import {usePresentations} from "@/lib/hooks/usePresentations";
-import {Presentation} from "@ssc/core";
+import {usePresentations} from "@/api";
+import type {Presentation} from "@/api";
 
 interface OfflineWorkshopProps {
     padding?: string;
@@ -20,17 +20,11 @@ export function OfflineWorkshop({
     const t = useTranslations();
 
     // Fetch offline workshops (presentations) from API
-    const { presentations, loading, error, refetch } = usePresentations({
-        eventId: 1, // Set to event ID 1 as requested
-        isOnline: false, // Only offline presentations
+    const { presentations, loading, error, refresh } = usePresentations({
+        event: 202501, // GameCraft 2025 event ID
+        is_online: false, // Only offline presentations
         type: 'workshop' // Only workshop type presentations
     });
-
-    const handleAddToCart = (presentation: Presentation) => {
-        // TODO: Implement add to cart functionality
-        console.log("Added presentation to cart:", presentation.title);
-        // You can integrate with cart API here
-    };
 
     const renderContent = () => {
         if (loading) {
@@ -45,11 +39,11 @@ export function OfflineWorkshop({
             return (
                 <Alert
                     message={t("workshop.error")}
-                    description={error.message}
+                    description={error}
                     type="error"
                     showIcon
                     action={
-                        <button onClick={refetch}>
+                        <button onClick={refresh}>
                             {t("common.retry")}
                         </button>
                     }
@@ -71,7 +65,6 @@ export function OfflineWorkshop({
         return (
             <WorkshopGrid
                 presentations={presentations}
-                onAddToCart={handleAddToCart}
                 workshopImage="/images/SuperMario.jpg" // Pass SuperMario image for offline workshops
             />
         );

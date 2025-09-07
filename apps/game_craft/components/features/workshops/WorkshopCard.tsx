@@ -7,20 +7,20 @@ import {
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { useTranslations } from "next-intl";
-import { Presentation } from "@ssc/core";
+import type { Presentation } from "@/api";
 import Image from "next/image";
 
 const { useToken } = theme;
 
 interface WorkshopCardProps {
   presentation: Presentation;
-  onAddToCart: () => void;
+  onAddToCart?: () => void; // Made optional since we're not using it for now
   workshopImage?: string; // Add optional image prop
 }
 
 export function WorkshopCard({
   presentation,
-  onAddToCart,
+  onAddToCart, // Now optional
   workshopImage, // Add image prop
 }: WorkshopCardProps) {
   const { token } = useToken();
@@ -66,7 +66,8 @@ export function WorkshopCard({
     if (!presentation.is_paid || !presentation.price) {
       return t('workshop.free');
     }
-    return `${presentation.price}`;
+    const price = parseFloat(presentation.price);
+    return price.toLocaleString('fa-IR');
   };
 
   // Get workshop image - use prop if provided, otherwise fallback to default
@@ -229,6 +230,11 @@ export function WorkshopCard({
             📍 {presentation.location}
           </Typography.Text>
         )}
+        {presentation.online_link && presentation.is_online && (
+          <Typography.Text style={{ color: textSecondary, fontSize: "14px" }}>
+            🔗 {t('workshop.onlineLink')}
+          </Typography.Text>
+        )}
 
         {/* Presenters Label */}
         <Typography.Text
@@ -281,7 +287,10 @@ export function WorkshopCard({
           <Button
             type="primary"
             icon={<ShoppingCartOutlined />}
-            onClick={onAddToCart}
+            onClick={() => {
+              // TODO: Implement registration/cart functionality
+              console.log(`Action for presentation: ${presentation.title}`);
+            }}
             style={{
               borderRadius: "8px",
               height: "36px",
