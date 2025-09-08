@@ -21,12 +21,14 @@ export const API_CONFIG = {
   endpoints: {
     // Auth
     token: '/o/token/',
+    authorize: '/o/authorize/',
     register: '/register/',
     forgotPassword: '/forgot-password/',
     changePassword: '/change-password/',
     verifyEmail: '/verify-email/',
     resendVerifyEmail: '/resend-verify-email/',
     revokeToken: '/o/revoke-token/',
+    socialGoogle: '/social/google/',
     currentUser: '/me/',
     
     // Profile

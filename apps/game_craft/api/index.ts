@@ -15,6 +15,7 @@ export {
   useFeaturedPresentations,
   useUpcomingPresentations 
 } from './hooks/usePresentations';
+export { useAuth, useCurrentUser } from './hooks/useAuth';
 
 // Utils
 export { PresentationUtils } from './utils/presentationUtils';

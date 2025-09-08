@@ -1,6 +1,6 @@
 # GameCraft API Service
 
-A robust, type-safe API service for the GameCraft application with automatic token management, request/response interceptors, and error handling.
+A robust, type-safe API service for the GameCraft application with comprehensive authentication, automatic token management, request/response interceptors, and error handling.
 
 ## Structure
 
@@ -11,41 +11,96 @@ api/
 ├── types.ts              # TypeScript interfaces and types
 ├── tokenManager.ts       # Token storage and management
 ├── httpClient.ts         # HTTP client with interceptors
-└── services/             # API service modules
-    └── authService.ts    # Authentication service
+├── services/             # API service modules
+│   ├── authService.ts    # Authentication service
+│   └── presentationService.ts # Presentation service
+├── hooks/                # React hooks
+│   ├── useAuth.ts        # Authentication hooks
+│   └── usePresentations.ts # Presentation hooks
+├── utils/                # Utility functions
+│   └── presentationUtils.ts # Presentation utilities
+└── examples/             # Usage examples
+    └── authExamples.ts   # Authentication examples
 ```
 
 ## Features
 
 - **Type Safety**: Full TypeScript support with comprehensive interfaces
+- **Authentication**: Complete OAuth2 implementation with social login support
 - **Token Management**: Automatic token storage, refresh, and validation
 - **Request Interceptors**: Automatic authorization header injection
 - **Response Interceptors**: Automatic token refresh on 401 errors
 - **Error Handling**: Standardized error handling and transformation
 - **File Upload**: Built-in file upload with progress tracking
-- **OAuth2 Support**: Full OAuth2 flow implementation
+- **React Hooks**: Ready-to-use React hooks for common operations
+- **Email Verification**: Built-in email verification flow
+- **Password Management**: Forgot password and change password functionality
 
-## Quick Start
+## Authentication API
+
+### Quick Start
 
 ```typescript
-import { AuthService, httpClient } from './api';
+import { AuthService, useAuth } from './api';
 
-// Login user
+// Service usage
 const tokens = await AuthService.login({
   username: 'user@example.com',
-  password: 'password',
-  grant_type: 'password',
-  client_id: 'your-client-id',
-  client_secret: 'your-client-secret'
+  password: 'password123'
 });
 
-// Make authenticated requests
-const userData = await httpClient.get('/api/user/profile');
+// React hook usage
+const { login, logout, loading, error, isAuthenticated } = useAuth();
 
-// Check authentication status
-if (AuthService.isAuthenticated()) {
-  // User is logged in
-}
+const handleLogin = async () => {
+  await login({
+    username: 'user@example.com',
+    password: 'password123'
+  });
+};
+```
+
+### Authentication Endpoints
+
+| Endpoint | Method | Description |
+|----------|---------|-------------|
+| `/o/token/` | POST | Obtain or refresh OAuth2 tokens |
+| `/o/authorize/` | GET/POST | OAuth2 authorization endpoint |
+| `/o/revoke-token/` | POST | Revoke OAuth2 tokens (logout) |
+| `/register/` | POST | Register new user account |
+| `/verify-email/` | POST | Verify email with code |
+| `/resend-verify-email/` | POST | Resend verification email |
+| `/forgot-password/` | POST | Send password reset email |
+| `/change-password/` | PUT/PATCH | Change user password |
+| `/social/google/` | POST | Start Google SSO flow |
+| `/profile/` | GET/PUT/PATCH | User profile operations |
+
+### Authentication Flow
+
+```typescript
+// 1. Register user
+const registration = await AuthService.register({
+  email: 'user@example.com',
+  password: 'password123',
+  first_name: 'John',
+  last_name: 'Doe',
+  phone_number: '+989123456789'
+});
+
+// 2. Verify email
+await AuthService.verifyEmail({
+  email: 'user@example.com',
+  code: '123456' // from email
+});
+
+// 3. Login
+const tokens = await AuthService.login({
+  username: 'user@example.com',
+  password: 'password123'
+});
+
+// 4. Get user profile
+const user = await AuthService.getCurrentUser();
 ```
 
 ## Configuration
