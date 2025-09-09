@@ -6,9 +6,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useRouter } from "@bprogress/next";
-import { signIn, getSession } from "next-auth/react";
+import { signIn, getSession, useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
+import { BASE_URL } from "@ssc/core";
 
 type Inputs = {
   email: string;
@@ -21,9 +23,11 @@ const loginSchema = z.object({
 });
 
 const Page = () => {
+  const router = useRouter();
+  const params = useSearchParams();
+  const session = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -32,6 +36,17 @@ const Page = () => {
     resolver: zodResolver(loginSchema),
     mode: "onBlur",
   });
+
+  const Authenticated = useCallback(() => {
+    if (session.status === "authenticated" && session.data?.handshakeToken) {
+      const url = new URL(`${BASE_URL}/api/o/authorize`);
+      params?.forEach((value, key) => {
+        url.searchParams.set(key, value);
+      });
+      url.searchParams.set("handshake_token", session.data.handshakeToken);
+      window.location.href = url.toString();
+    }
+  }, [session, params, router]);
 
   const handleGoogleSignIn = async () => {
     try {
@@ -62,23 +77,33 @@ const Page = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       setIsLoading(true);
+      const clientId = params.get("client_id");
+      const codeChallenge = params.get("code_challenge");
+      const redirectUri = params.get("redirect_uri");
+
       const res = await signIn("credentials", {
         redirect: false,
         email: data.email,
         password: data.password,
+        client_id: clientId,
+        code_challenge: codeChallenge,
+        redirect_uri: redirectUri,
         callbackUrl: "/",
       });
       if (res.status === 200) {
         toast.success("ورود موفقیت‌آمیز بود");
-        router.push("/");
+        Authenticated();
+      } else if (res.status === 401) {
+        toast.error("ایمیل یا رمز عبور اشتباه است");
+      } else {
+        toast.error("خطا در هنگام ورود");
       }
     } catch (error) {
-      console.error("Login error:", error);
+      console.log("Login error:", error);
       toast.error("خطا در ورود");
     } finally {
       setIsLoading(false);
     }
-    // dispatch(login(data));
   };
 
   return (
@@ -88,11 +113,14 @@ const Page = () => {
         <p className="text-[20px]/[150%] font-bold">
           حساب کاربری ندارید؟{" "}
           <Link
+            href={{
+              pathname: "/register",
+              query: Object.fromEntries(params.entries()),
+            }}
             className="default-gradient text-transparent bg-clip-text"
-            href="/register"
           >
-            ثبت نام{" "}
-          </Link>
+            ثبت نام
+          </Link>{" "}
           کنید
         </p>
       </div>

@@ -4,9 +4,13 @@ export enum ApiPath {
   AUTH_LOGIN = "/o/token/",
   AUTH_LOGOUT = "/token/blacklist/",
   AUTH_REGISTER = "/register/",
-  AUTH_RESEND_OTP = "/resend-verify-email/",
   AUTH_VERIFY_EMAIL = "/verify-email/",
+  AUTH_RESEND_OTP = "/resend-otp/",
   AUTH_GOOGLE = "/auth/google/",
+  AUTH_AUTHORIZE = "/o/authorize",
+  AUTH_AUTHORIZE_TOKEN = "/o/authorize/refresh",
+
+  // Profile endpoints
   USER_PROFILE = "/profile/",
 }
 

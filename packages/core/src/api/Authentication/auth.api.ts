@@ -1,6 +1,7 @@
 import {
   EmailVerification,
   GrantTypes,
+  handshakeTokenResponse,
   TokenResponse,
   UserRegistration,
   UserRegistrationSuccess,
@@ -8,6 +9,7 @@ import {
 import { ApiClient } from "../ApiClient";
 import { apiPath, ApiPath } from "../../types/ApiPaths";
 import { RequestResponse } from "../../types/api/general";
+import { SearchParams } from "next/dist/server/request/search-params";
 export class AuthApi extends ApiClient {
   async register(parameters: {
     email: string;
@@ -54,13 +56,14 @@ export class AuthApi extends ApiClient {
 
   async login(
     email: string,
-    password: string
+    password: string,
+    client_id: string
   ): Promise<RequestResponse<TokenResponse>> {
     const params = new URLSearchParams({
       grant_type: GrantTypes.Password,
-      username: email, // OAuth2 uses 'username' field, not 'email'
+      username: email,
       password: password,
-      client_id: process.env.SSC_PUBLIC_CLIENT_ID || "",
+      client_id,
     });
 
     return await this.Api.post<TokenResponse, RequestResponse<TokenResponse>>(
@@ -73,6 +76,28 @@ export class AuthApi extends ApiClient {
       }
     );
   }
+
+  async authorizeWithToken(
+    refresh_token: string
+  ): Promise<RequestResponse<handshakeTokenResponse>> {
+    return await this.Api.post<
+      handshakeTokenResponse,
+      RequestResponse<handshakeTokenResponse>
+    >(apiPath(ApiPath.AUTH_AUTHORIZE_TOKEN), { refresh_token });
+  }
+
+  // async authorize(params: URLSearchParams, handshakeToken: string) {
+  //   return await this.Api.get<
+  //     handshakeTokenResponse,
+  //     RequestResponse<handshakeTokenResponse>
+  //   >(apiPath(ApiPath.AUTH_AUTHORIZE), {
+  //     withCredentials: true,
+  //     params: {
+  //       ...Object.fromEntries(params),
+  //       handshake_token: handshakeToken,
+  //     },
+  //   });
+  // }
 
   async googleAuth(googleData: {
     access_token?: string;
@@ -94,3 +119,37 @@ export class AuthApi extends ApiClient {
     );
   }
 }
+
+// async login(
+//     email: string,
+//     password: string,
+//     client_id?: string,
+//     code_challenge?: string,
+//     redirect_uri?: string
+//   ): Promise<RequestResponse<TokenResponse>> {
+//     const params = new URLSearchParams({
+//       username: email,
+//       password: password,
+//       client_id: client_id ?? process.env.SSC_PUBLIC_CLIENT_ID ?? "",
+//       response_type: "code",
+//       allow: "true",
+//       scope: "read write",
+//     });
+
+//     if (redirect_uri) {
+//       params.append("redirect_uri", decodeURI(redirect_uri));
+//     }
+//     if (code_challenge) {
+//       params.append("code_challenge", code_challenge);
+//     }
+
+//     return await this.Api.post<TokenResponse, RequestResponse<TokenResponse>>(
+//       apiPath(ApiPath.AUTH_AUTHORIZE),
+//       params,
+//       {
+//         headers: {
+//           "Content-Type": "application/x-www-form-urlencoded",
+//         },
+//       }
+//     );
+//   }

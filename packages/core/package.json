@@ -11,6 +11,8 @@
       "source": "./src/index.ts"
   },
   "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
     "test": "npx ts-node .",
     "lint": "eslint src/**/*.{ts,tsx,js,jsx}",
     "lint:fix": "eslint src/**/*.{ts,tsx,js,jsx} --fix",

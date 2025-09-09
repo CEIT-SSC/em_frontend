@@ -9,6 +9,7 @@ declare module "next-auth" {
     tokenType?: string;
     expiresIn?: number;
     scope?: string;
+    handshakeToken?: string;
   }
 
   interface User {
@@ -17,6 +18,7 @@ declare module "next-auth" {
     tokenType?: string;
     expiresIn?: number;
     scope?: string;
+    handshakeToken?: string;
   }
 }
 
@@ -28,10 +30,11 @@ declare module "next-auth/jwt" {
     expiresIn?: number;
     scope?: string;
     expiresAt?: number;
+    handshakeToken?: string;
   }
 }
 
-const authOptions: AuthOptions = {
+export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -42,21 +45,45 @@ const authOptions: AuthOptions = {
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
+        client_id: { label: "Client ID", type: "text" },
+        code_challenge: { label: "Code Challenge", type: "text" },
+        redirect_uri: { label: "Redirect URI", type: "text" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
 
+        // Extract OAuth parameters from credentials (passed from frontend)
+        const redirectUri = credentials.redirect_uri;
+
         try {
           const response = await serverApi.auth.login(
             credentials.email,
-            credentials.password
+            credentials.password,
+            process.env.SSC_PUBLIC_CLIENT_ID
           );
-          console.log("!@!", response);
 
           if (response.status === 200 && response.data?.success) {
             const tokenData = response.data.data;
+
+            if (redirectUri) {
+              const { data: handshakeResponse } =
+                await serverApi.auth.authorizeWithToken(
+                  tokenData.refresh_token
+                );
+
+              return {
+                id: "1",
+                email: credentials.email,
+                accessToken: tokenData.access_token,
+                refreshToken: tokenData.refresh_token,
+                tokenType: tokenData.token_type,
+                expiresIn: tokenData.expires_in,
+                scope: tokenData.scope,
+                handshakeToken: handshakeResponse.data.handshake_token,
+              };
+            }
 
             return {
               id: "1",
@@ -68,8 +95,9 @@ const authOptions: AuthOptions = {
               scope: tokenData.scope,
             };
           }
-        } catch (error: unknown) {
-          console.error("Authentication error:", error);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+          console.error("Authentication error:", error.message, error.response);
         }
 
         return null;
@@ -77,7 +105,7 @@ const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user: _user, account }) {
       if (account?.provider === "google") {
         try {
           const response = await serverApi.auth.googleAuth({
@@ -86,13 +114,13 @@ const authOptions: AuthOptions = {
           });
 
           if (response.status === 200 && response.data?.success) {
-            const tokenData = response.data.data;
+            // const tokenData = response.data.data;
             // Store backend tokens in user object
-            const userWithTokens = user;
-            userWithTokens.accessToken = tokenData.access_token;
-            userWithTokens.refreshToken = tokenData.refresh_token;
-            userWithTokens.tokenType = tokenData.token_type;
-            userWithTokens.expiresIn = tokenData.expires_in;
+            // const userWithTokens = user;
+            // userWithTokens.accessToken = tokenData.access_token;
+            // userWithTokens.refreshToken = tokenData.refresh_token;
+            // userWithTokens.tokenType = tokenData.token_type;
+            // userWithTokens.expiresIn = tokenData.expires_in;
             return true;
           } else {
             console.error(
@@ -123,6 +151,7 @@ const authOptions: AuthOptions = {
         token.tokenType = userWithTokens.tokenType;
         token.expiresIn = userWithTokens.expiresIn;
         token.scope = userWithTokens.scope;
+        token.handshakeToken = userWithTokens.handshakeToken;
 
         const expiresAt = Date.now() + (userWithTokens.expiresIn || 0) * 1000;
         token.expiresAt = expiresAt;
@@ -166,6 +195,7 @@ const authOptions: AuthOptions = {
         sessionWithTokens.tokenType = token.tokenType;
         sessionWithTokens.expiresIn = token.expiresIn;
         sessionWithTokens.scope = token.scope;
+        sessionWithTokens.handshakeToken = token.handshakeToken;
       }
 
       return session;

@@ -6,6 +6,7 @@ import z from "zod";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { clientApi } from "~/core/api/client/clientApi";
+import { useSearchParams } from "next/navigation";
 
 type Inputs = {
   email: string;
@@ -55,6 +56,7 @@ interface Props {
 
 export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
+  const params = useSearchParams();
   const {
     register,
     handleSubmit,
@@ -110,7 +112,10 @@ export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
           حساب کاربری دارید؟{" "}
           <Link
             className="default-gradient text-transparent bg-clip-text"
-            href="/login"
+            href={{
+              pathname: "/login",
+              query: Object.fromEntries(params.entries()),
+            }}
           >
             وارد شوید
           </Link>

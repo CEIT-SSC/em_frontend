@@ -60,10 +60,6 @@ export interface TokenResponse {
   scope: string;
 }
 
-export interface UserWithTokens {
-  accessToken?: string;
-  refreshToken?: string;
-  tokenType?: string;
-  expiresIn?: number;
-  scope?: string;
+export interface handshakeTokenResponse {
+  handshake_token: string;
 }
