@@ -8,17 +8,21 @@ import Image from 'next/image'
 import {message} from 'antd'
 import { customColors } from '@/config/colors'
 import { GoogleOutlined } from '@ant-design/icons'
+import { useAuth } from '@/api'
+import { useRouter } from '@/lib/navigation'
 
 const {useToken} = theme
 
 export default function SignUpPage() {
     const {token} = useToken()
     const t = useTranslations('app.auth')
+    const router = useRouter()
+    const { register, loading: authLoading, error: authError } = useAuth()
+    
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [loading, setLoading] = useState(false)
     const [googleLoading, setGoogleLoading] = useState(false)
 
     const handleSignUp = async () => {
@@ -35,6 +39,14 @@ export default function SignUpPage() {
             message.error('Please enter your email')
             return
         }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(email.trim())) {
+            message.error('Please enter a valid email address')
+            return
+        }
+        
         if (!password.trim()) {
             message.error('Please enter your password')
             return
@@ -45,15 +57,45 @@ export default function SignUpPage() {
         }
 
         try {
-            setLoading(true)
-            // TODO: Implement manual signup API call
-            console.log('Manual SignUp:', {firstName, lastName, email, password})
+            // Call the API to register the user
+            console.log('Attempting registration with data:', {
+                email: email.trim(),
+                first_name: firstName.trim(),
+                last_name: lastName.trim()
+            })
+            
+            const result = await register({
+                email: email.trim(),
+                password: password,
+                first_name: firstName.trim(),
+                last_name: lastName.trim(),
+                phone_number: '' // Empty phone number - backend should handle this
+            })
+
             message.success('Registration successful! Please check your email for verification.')
+            console.log('Registration successful:', result)
+            
+            // Clear the form after successful registration
+            setFirstName('')
+            setLastName('')
+            setEmail('')
+            setPassword('')
+            
+            // Optionally redirect to email verification page or login page
+            // router.push('/auth/verify-email')
+            
         } catch (error) {
             console.error('Registration error:', error)
-            message.error('Registration failed. Please try again.')
-        } finally {
-            setLoading(false)
+            // Show the error message from the API if available
+            if (authError && authError.includes('email')) {
+                message.error('This email is already registered. Please use a different email or try logging in.')
+            } else if (authError && authError.includes('password')) {
+                message.error('Password does not meet requirements. Please choose a stronger password.')
+            } else if (authError) {
+                message.error(authError)
+            } else {
+                message.error('Registration failed. Please check your information and try again.')
+            }
         }
     }
 
@@ -115,66 +157,75 @@ export default function SignUpPage() {
                                 </Divider>
 
                                 {/* Manual Registration Form */}
-                                <Space direction="vertical" size="middle" style={{width: '100%'}}>
-                                    <Row gutter={12}>
-                                        <Col span={12}>
-                                            <Input
-                                                placeholder={t('firstName')}
-                                                size="large"
-                                                variant="filled"
-                                                value={firstName}
-                                                onChange={(e) => setFirstName(e.target.value)}
-                                                style={{
-                                                    height: '48px',
-                                                    borderRadius: '8px'
-                                                }}
-                                            />
-                                        </Col>
-                                        <Col span={12}>
-                                            <Input
-                                                placeholder={t('lastName')}
-                                                size="large"
-                                                variant="filled"
-                                                value={lastName}
-                                                onChange={(e) => setLastName(e.target.value)}
-                                                style={{
-                                                    height: '48px',
-                                                    borderRadius: '8px'
-                                                }}
-                                            />
-                                        </Col>
-                                    </Row>
+                                <form 
+                                    onSubmit={(e) => {
+                                        e.preventDefault()
+                                        handleSignUp()
+                                    }}
+                                    style={{width: '100%'}}
+                                >
+                                    <Space direction="vertical" size="middle" style={{width: '100%'}}>
+                                        <Row gutter={12}>
+                                            <Col span={12}>
+                                                <Input
+                                                    placeholder={t('firstName')}
+                                                    size="large"
+                                                    variant="filled"
+                                                    value={firstName}
+                                                    onChange={(e) => setFirstName(e.target.value)}
+                                                    style={{
+                                                        height: '48px',
+                                                        borderRadius: '8px'
+                                                    }}
+                                                />
+                                            </Col>
+                                            <Col span={12}>
+                                                <Input
+                                                    placeholder={t('lastName')}
+                                                    size="large"
+                                                    variant="filled"
+                                                    value={lastName}
+                                                    onChange={(e) => setLastName(e.target.value)}
+                                                    style={{
+                                                        height: '48px',
+                                                        borderRadius: '8px'
+                                                    }}
+                                                />
+                                            </Col>
+                                        </Row>
 
-                                    <Input
-                                        placeholder={t('email')}
-                                        size="large"
-                                        variant="filled"
-                                        type="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        style={{
-                                            height: '48px',
-                                            borderRadius: '8px'
-                                        }}
-                                    />
+                                        <Input
+                                            placeholder={t('email')}
+                                            size="large"
+                                            variant="filled"
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            style={{
+                                                height: '48px',
+                                                borderRadius: '8px'
+                                            }}
+                                        />
 
-                                    <Input.Password
-                                        placeholder={t('password')}
-                                        size="large"
-                                        variant="filled"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        style={{
-                                            height: '48px',
-                                            borderRadius: '8px'
-                                        }}
-                                    />
-                                </Space>
+                                        <Input.Password
+                                            placeholder={t('password')}
+                                            size="large"
+                                            variant="filled"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            style={{
+                                                height: '48px',
+                                                borderRadius: '8px'
+                                            }}
+                                        />
+                                    </Space>
+                                </form>
 
                                 {/* Create Account Button */}
                                 <Button
                                     type="primary"
                                     size="large"
+                                    htmlType="submit"
                                     style={{
                                         width: '100%',
                                         height: '48px',
@@ -184,7 +235,7 @@ export default function SignUpPage() {
                                         fontWeight: 600,
                                         fontSize: '16px'
                                     }}
-                                    loading={loading}
+                                    loading={authLoading}
                                     onClick={handleSignUp}
                                 >
                                     {t('createAccount')}
