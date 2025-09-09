@@ -2,8 +2,8 @@ import { Button, ButtonVariant } from "@ssc/ui";
 import { digitsToHindi, digitsToLatin } from "../../../../utils/digitsToHindi";
 import { FormEventHandler, useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
-import { ApiModule } from "@ssc/core";
 import { toast } from "react-toastify";
+import { clientApi } from "~/core/api/client/clientApi";
 
 interface Props {
   nextStep: () => void;
@@ -38,7 +38,7 @@ export const RegisterStepTwo = ({ nextStep, email: mail }: Props) => {
     }
 
     try {
-      await ApiModule.auth.verifyEmail(mail, digitsToLatin(otp));
+      await clientApi.auth.verifyEmail(mail, digitsToLatin(otp));
       nextStep();
     } catch (error: any) {
       if (error.response?.status === 400) {
@@ -51,7 +51,7 @@ export const RegisterStepTwo = ({ nextStep, email: mail }: Props) => {
 
   const resendOtp = async () => {
     try {
-      await ApiModule.auth.resendOtp(mail);
+      await clientApi.auth.resendOtp(mail);
       toast.success("کد تایید مجددا ارسال شد");
       setRemainingTime(120);
     } catch {

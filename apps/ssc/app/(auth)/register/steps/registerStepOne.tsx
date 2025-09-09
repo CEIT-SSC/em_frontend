@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { ApiModule } from "@ssc/core";
+import { clientApi } from "~/core/api/client/clientApi";
 
 type Inputs = {
   email: string;
@@ -51,6 +51,8 @@ interface Props {
   submitCallback: (mail: string) => void;
 }
 
+// TODO: create a formatter for phone number input to have persian digits in ui
+
 export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -74,8 +76,9 @@ export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
         firstName: data.firstName,
         lastName: data.lastName,
       };
+      // TODO: save this in a redux store so we can restore inputs data after back button clicked
 
-      const response = await ApiModule.auth.register(registrationData);
+      const response = await clientApi.auth.register(registrationData);
       if (response.status === 201 || response.status === 200) {
         submitCallback(registrationData.email);
         nextStep();

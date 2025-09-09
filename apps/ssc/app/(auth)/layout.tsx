@@ -1,14 +1,19 @@
-import { MdArrowBack } from "react-icons/md";
-import { Button, ButtonSize, ButtonVariant } from "@ssc/ui";
-import Link from "next/link";
 import portal from "~/assets/portal.png";
 import Image from "next/image";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession();
+
+  // if (session) {
+  //   redirect("/");
+  // }
+
   return (
     <div className="h-[100vh] md:px-9 flex items-center justify-center">
       <div className="hidden absolute top-0 left-0 w-9/16 h-full py-4 px-6 md:block -z-1">
@@ -27,17 +32,6 @@ export default function RootLayout({
           alt="portal"
           className="top-0 left-0 w-d h-full absolute opacity-12 z-0 object-cover pt-4"
         />
-        <div className="flex justify-end">
-          <Link href={"/"}>
-            <Button
-              className="flex justify-end bg-none !rounded-full text-whiteText"
-              size={ButtonSize.SMALL}
-              variant={ButtonVariant.OUTLINE}
-              label="صفحه اصلی"
-              suffixIcon={MdArrowBack}
-            />
-          </Link>
-        </div>
         <div className="h-full w-full z-1">{children}</div>
       </div>
     </div>

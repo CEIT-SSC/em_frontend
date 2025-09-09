@@ -1,12 +1,9 @@
 import axios from "axios";
-import isProduction from "../utils/isProduction";
-import { StorageKeys } from "../types/StorageKeys";
-import { ApiPath, apiPath } from "../types/ApiPaths";
+import { StorageKeys } from "../../types/StorageKeys";
+import { ApiPath, apiPath } from "../../types/ApiPaths";
+import { BASE_URL } from "../constants";
 
-const localhost = "https://aut-ssc.ir";
-export const BASE_URL = isProduction() ? process.env.BASE_URL : localhost;
-
-export const Api = axios.create({
+export const clientHttpService = axios.create({
   baseURL: BASE_URL,
   timeout: 10000,
   headers: {
@@ -14,7 +11,7 @@ export const Api = axios.create({
   },
 });
 
-Api.interceptors.request.use(
+clientHttpService.interceptors.request.use(
   (request) => {
     const accessToken = localStorage.getItem(StorageKeys.ACCESS_TOKEN);
     if (accessToken) {
@@ -27,7 +24,7 @@ Api.interceptors.request.use(
   }
 );
 
-Api.interceptors.response.use(
+clientHttpService.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
@@ -46,7 +43,7 @@ Api.interceptors.response.use(
         originalRequest.headers[
           "Authorization"
         ] = `Bearer ${response.data.accessToken}`;
-        return Api(originalRequest);
+        return clientHttpService(originalRequest);
       } catch (refreshError) {
         return Promise.reject(refreshError);
       }

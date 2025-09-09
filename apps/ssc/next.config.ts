@@ -6,14 +6,14 @@ const nextConfig: NextConfig = {
     //   "~": __dirname,
     // },
   },
-  async rewrites() {
-    return [
-      // {
-      //   source: "/api/:path*", // The incoming request path in your Next.js app
-      //   destination: "https://aut-ssc.ir/api/:path*", // The actual backend URL
-      // },
-    ];
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/api/:path*", // The incoming request path in your Next.js app
+  //       destination: "https://aut-ssc.ir/:path*", // The actual backend URL
+  //     },
+  //   ];
+  // },
 };
 
 export default nextConfig;
