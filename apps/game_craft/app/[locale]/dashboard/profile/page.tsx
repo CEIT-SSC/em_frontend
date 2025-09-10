@@ -32,6 +32,13 @@ interface UserProfile {
     phoneNumber: string;
 }
 
+interface ProfileFormValues {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+}
+
 export default function ProfilePage() {
     const {token} = useToken();
     const screens = useBreakpoint();
@@ -51,7 +58,7 @@ export default function ProfilePage() {
     const [imageUrl, setImageUrl] = useState<string | undefined>(userProfile.profileImage);
 
     // Handle form submission
-    const onFinish = async (values: any) => {
+    const onFinish = async (values: ProfileFormValues) => {
         setLoading(true);
         try {
             // Simulate API call
