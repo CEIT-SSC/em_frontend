@@ -93,6 +93,25 @@
         "preview": "Preview",
         "download": "Download"
       },
+      "profile": {
+        "label": "Profile",
+        "profileImage": "Profile Image",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phoneNumber": "Phone Number",
+        "updateProfile": "Update Profile",
+        "uploadImage": "Upload Image",
+        "changeImage": "Change Image",
+        "emailLocked": "Email cannot be changed",
+        "personalInformation": "Personal Information",
+        "profilePicture": "Profile Picture",
+        "saveChanges": "Save Changes",
+        "cancel": "Cancel",
+        "profileUpdated": "Profile updated successfully",
+        "invalidImage": "Please upload a valid image file",
+        "maxFileSize": "File size should not exceed 5MB"
+      },
       "shoppingBag": "Shopping Cart"
     },
     "pages": {
