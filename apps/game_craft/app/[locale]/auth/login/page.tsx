@@ -6,25 +6,100 @@ import {useTranslations} from 'next-intl'
 import {Link} from '@/lib/navigation'
 import Image from 'next/image'
 import { customColors } from '@/config/colors'
+import { GoogleOutlined } from '@ant-design/icons'
+import { useAuth } from '@/api'
+import { useRouter } from '@/lib/navigation'
+import { message } from 'antd'
+import { GoogleOAuth } from '@/lib/utils/googleOAuth'
 
 const {useToken} = theme
 
 export default function LoginPage() {
     const {token} = useToken()
     const t = useTranslations('app.auth')
+    const router = useRouter()
+    const { login, loading: authLoading, error: authError } = useAuth()
+    
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [loading, setLoading] = useState(false)
+    const [googleLoading, setGoogleLoading] = useState(false)
 
     const handleLogin = async () => {
+        // Basic validation
+        if (!email.trim()) {
+            message.error('Please enter your email')
+            return
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(email.trim())) {
+            message.error('Please enter a valid email address')
+            return
+        }
+        
+        if (!password.trim()) {
+            message.error('Please enter your password')
+            return
+        }
+
         try {
-            setLoading(true)
-            // TODO: Implement login API call
-            console.log('Login:', {email, password})
-        } catch (e) {
-            console.error(e)
-        } finally {
-            setLoading(false)
+            console.log('Attempting login with:', {
+                username: email.trim()
+            })
+            
+            const result = await login({
+                username: email.trim(),
+                password: password
+            })
+
+            message.success('Login successful!')
+            console.log('Login successful:', result)
+            
+            // Clear form
+            setEmail('')
+            setPassword('')
+            
+            // Redirect to dashboard
+            router.push('/dashboard')
+            
+        } catch (error) {
+            console.error('Login error:', error)
+            // Show the error message from the API if available
+            if (authError && authError.includes('credentials')) {
+                message.error('Invalid email or password. Please check your credentials and try again.')
+            } else if (authError && authError.includes('email')) {
+                message.error('Please verify your email address before logging in.')
+            } else if (authError) {
+                message.error(authError)
+            } else {
+                message.error('Login failed. Please check your credentials and try again.')
+            }
+        }
+    }
+
+    const handleGoogleLogin = async () => {
+        try {
+            setGoogleLoading(true)
+            
+            // Validate Google OAuth configuration
+            if (!GoogleOAuth.validateConfig()) {
+                message.error('Google OAuth is not properly configured. Please contact support.')
+                return
+            }
+            
+            // Store redirect info
+            GoogleOAuth.storeRedirectInfo('login')
+            
+            // Redirect to Google OAuth
+            const googleOAuthURL = GoogleOAuth.buildAuthURL()
+            console.log('Redirecting to Google OAuth:', googleOAuthURL)
+            window.location.href = googleOAuthURL
+            
+        } catch (error) {
+            console.error('Google login error:', error)
+            message.error('Failed to initiate Google login. Please try again.')
+            setGoogleLoading(false)
         }
     }
 
@@ -76,8 +151,10 @@ export default function LoginPage() {
                                     placeholder={t('email')}
                                     size="large"
                                     variant="filled"
+                                    type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    onPressEnter={handleLogin}
                                 />
 
                                 <Input.Password
@@ -86,6 +163,7 @@ export default function LoginPage() {
                                     variant="filled"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
+                                    onPressEnter={handleLogin}
                                 />
 
                                 <Flex align="center" justify="start" style={{width: '100%'}}>
@@ -105,17 +183,56 @@ export default function LoginPage() {
                                 <Button
                                     type="primary"
                                     size="large"
-                                    style={{width: '100%'}}
-                                    loading={loading}
+                                    style={{
+                                        width: '100%',
+                                        backgroundColor: customColors.colorAction,
+                                        borderColor: customColors.colorAction,
+                                        fontWeight: 600
+                                    }}
+                                    loading={authLoading}
                                     onClick={handleLogin}
                                 >
                                     {t('login')}
                                 </Button>
+
+                                <Divider style={{margin: '10px 0'}}>
+                                    <Typography.Text type="secondary">
+                                        {t('or')}
+                                    </Typography.Text>
+                                </Divider>
+
+                                {/* Google Login Button */}
+                                <Button
+                                    icon={<GoogleOutlined />}
+                                    size="large"
+                                    style={{
+                                        width: '100%',
+                                        borderColor: '#db4437',
+                                        color: '#db4437',
+                                        fontWeight: 500,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        gap: '8px'
+                                    }}
+                                    loading={googleLoading}
+                                    onClick={handleGoogleLogin}
+                                >
+                                    {t('continueWithGoogle')}
+                                </Button>
+                                
                                 <Flex align="center" justify="center" gap="small">
                                     <Typography.Text type="secondary">
                                         {t('doNotHaveAccount')}
                                     </Typography.Text>
-                                    <Link href="/auth/signup">
+                                    <Link 
+                                        href="/auth/signup"
+                                        style={{
+                                            color: customColors.colorAction,
+                                            textDecoration: 'none',
+                                            fontWeight: 500
+                                        }}
+                                    >
                                         {t('signUp')}
                                     </Link>
                                 </Flex>

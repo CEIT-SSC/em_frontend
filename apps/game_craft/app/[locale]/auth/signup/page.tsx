@@ -10,6 +10,7 @@ import { customColors } from '@/config/colors'
 import { GoogleOutlined } from '@ant-design/icons'
 import { useAuth } from '@/api'
 import { useRouter } from '@/lib/navigation'
+import { GoogleOAuth } from '@/lib/utils/googleOAuth'
 
 const {useToken} = theme
 
@@ -102,13 +103,24 @@ export default function SignUpPage() {
     const handleGoogleSignUp = async () => {
         try {
             setGoogleLoading(true)
-            // TODO: Implement Google signup
-            console.log('Google SignUp initiated')
-            message.info('Google signup will be implemented soon.')
+            
+            // Validate Google OAuth configuration
+            if (!GoogleOAuth.validateConfig()) {
+                message.error('Google OAuth is not properly configured. Please contact support.')
+                return
+            }
+            
+            // Store redirect info
+            GoogleOAuth.storeRedirectInfo('signup')
+            
+            // Redirect to Google OAuth
+            const googleOAuthURL = GoogleOAuth.buildAuthURL()
+            console.log('Redirecting to Google OAuth:', googleOAuthURL)
+            window.location.href = googleOAuthURL
+            
         } catch (error) {
             console.error('Google signup error:', error)
-            message.error('Google signup failed. Please try again.')
-        } finally {
+            message.error('Failed to initiate Google signup. Please try again.')
             setGoogleLoading(false)
         }
     }
