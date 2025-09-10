@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import clsx from "clsx";
+import ProgressBar from "./components/ProgressBar";
 import Providers from "./components/Providers";
 
 const vazirmatn = localFont({

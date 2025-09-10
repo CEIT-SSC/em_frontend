@@ -36,8 +36,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     ref
   ) => {
     return (
-      <div>
-        <fieldset className="relative rounded-xl p-px border-gray-400 border-1 group focus-within:border-white">
+      <div className="w-full">
+        <fieldset className="relative rounded-xl p-px border-[#4F5154] border-1 group focus-within:border-white">
           <legend className="mr-4 px-1 group-focus-within:px-2 transition-all transition-1s">
             {label}
           </legend>
