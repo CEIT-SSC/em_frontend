@@ -21,8 +21,12 @@ html {
     cursor: url("/cursor/SuperMarioHand-pointer.cur"), pointer;
 }
 
+a,
+.ant-collapse-header:hover,
+.ant-collapse-header:hover *,
+.ant-image-mask:hover,
 .ant-btn:not(:disabled):hover {
-    cursor: url("/cursor/SuperMarioHand-cursor.cur"), auto;
+    cursor: url("/cursor/SuperMarioHand-cursor.cur"), auto !important;
 }
 
 body {

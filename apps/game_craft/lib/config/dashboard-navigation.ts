@@ -12,6 +12,10 @@ export const useDashboardNavigations = (): DashboardNavigationItem[] => {
 
   return [
     {
+      name: t('profile.label'),
+      route: `/${locale}/dashboard/profile`,
+    },
+    {
       name: t('event'),
       route: `/${locale}/dashboard/events`,
     },

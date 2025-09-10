@@ -93,6 +93,25 @@
         "preview": "پیش‌نمایش",
         "download": "دانلود"
       },
+      "profile": {
+        "label": "پروفایل",
+        "profileImage": "تصویر پروفایل",
+        "firstName": "نام",
+        "lastName": "نام خانوادگی",
+        "email": "ایمیل",
+        "phoneNumber": "شماره تلفن",
+        "updateProfile": "بروزرسانی پروفایل",
+        "uploadImage": "آپلود تصویر",
+        "changeImage": "تغییر تصویر",
+        "emailLocked": "ایمیل قابل تغییر نیست",
+        "personalInformation": "اطلاعات شخصی",
+        "profilePicture": "تصویر پروفایل",
+        "saveChanges": "ذخیره تغییرات",
+        "cancel": "لغو",
+        "profileUpdated": "پروفایل با موفقیت بروزرسانی شد",
+        "invalidImage": "لطفاً یک فایل تصویر معتبر آپلود کنید",
+        "maxFileSize": "حجم فایل نباید از ۵ مگابایت بیشتر باشد"
+      },
       "shoppingBag": "سبد خرید"
     },
     "pages": {
