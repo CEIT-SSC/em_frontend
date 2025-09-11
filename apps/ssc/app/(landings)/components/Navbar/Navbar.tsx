@@ -1,8 +1,9 @@
 import Image from "next/image";
 import ActiveLink from "./ActiveLink";
 import AuthData from "./AuthData";
+import HamburgerMenu from "./HamburgerMenu";
 
-const navbarItems = [
+export const navbarItems = [
   { label: "خانه", href: "/" },
   { label: "رویداد ها", href: "/#events" },
   { label: "دریافت مدرک", href: "/certificates" },
@@ -13,7 +14,7 @@ const navbarItems = [
 
 const Navbar = async () => {
   return (
-    <nav className="max-w-full justify-between items-center p-6 xl:px-24 hidden md:flex">
+    <nav className="max-w-full justify-between items-center p-6 xl:px-24 flex">
       <div className="flex items-center gap-8">
         <Image
           src="/logo.png"
@@ -22,15 +23,18 @@ const Navbar = async () => {
           height={60}
           className="w-[50px] h-[60px]"
         />
-        {navbarItems.map((item) => (
-          <ActiveLink href={item.href} key={item.label}>
-            {item.label}
-          </ActiveLink>
-        ))}
+        <div className="hidden md:flex items-center gap-8">
+          {navbarItems.map((item) => (
+            <ActiveLink href={item.href} key={item.label}>
+              {item.label}
+            </ActiveLink>
+          ))}
+        </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="hidden md:flex items-center gap-2">
         <AuthData />
       </div>
+      <HamburgerMenu />
     </nav>
   );
 };
