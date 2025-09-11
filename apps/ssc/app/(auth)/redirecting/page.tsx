@@ -12,16 +12,14 @@ const Redirecting = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const handshake_token = params.get("handshake_token");
-    if (session.status === "authenticated" && session.data?.handshakeToken) {
+    const handshake_token =
+      params.get("handshake_token") ?? session.data.handshakeToken;
+    if (session.status === "authenticated" && handshake_token) {
       const url = new URL(`${BASE_URL}/api/o/authorize`);
       params?.forEach((value, key) => {
         url.searchParams.set(key, value);
       });
-      url.searchParams.set(
-        "handshake_token",
-        handshake_token ?? session.data.handshakeToken
-      );
+      url.searchParams.set("handshake_token", handshake_token);
       window.location.href = url.toString();
     } else {
       router.push("/login");

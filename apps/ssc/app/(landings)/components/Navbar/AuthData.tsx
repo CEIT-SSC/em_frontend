@@ -15,7 +15,9 @@ const AuthData = () => {
   const userData = useAppSelector(userSelector);
 
   useEffect(() => {
-    dispatch(fetchUserData());
+    if (session.status === "authenticated") {
+      dispatch(fetchUserData());
+    }
   }, [session]);
 
   if (session.status === "unauthenticated") {

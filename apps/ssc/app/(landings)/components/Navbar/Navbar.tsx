@@ -31,7 +31,7 @@ const Navbar = async () => {
       <div className="flex items-center gap-2">
         <AuthData />
       </div>
-    </>
+    </nav>
   );
 };
 

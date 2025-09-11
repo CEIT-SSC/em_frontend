@@ -105,7 +105,7 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user: _user, account }) {
+    async signIn({ user, account }) {
       if (account?.provider === "google") {
         try {
           const response = await serverApi.auth.googleAuth({
@@ -114,13 +114,29 @@ export const authOptions: AuthOptions = {
           });
 
           if (response.status === 200 && response.data?.success) {
-            // const tokenData = response.data.data;
-            // Store backend tokens in user object
-            // const userWithTokens = user;
-            // userWithTokens.accessToken = tokenData.access_token;
-            // userWithTokens.refreshToken = tokenData.refresh_token;
-            // userWithTokens.tokenType = tokenData.token_type;
-            // userWithTokens.expiresIn = tokenData.expires_in;
+            const tokenData = response.data.data;
+
+            // Store tokens in user object for later use in jwt callback
+            if (user) {
+              user.accessToken = tokenData.access_token;
+              user.refreshToken = tokenData.refresh_token;
+              user.tokenType = tokenData.token_type;
+              user.expiresIn = tokenData.expires_in;
+              user.scope = tokenData.scope;
+
+              // Get handshake token for OAuth redirect flow
+              try {
+                const { data: handshakeResponse } =
+                  await serverApi.auth.authorizeWithToken(
+                    tokenData.refresh_token
+                  );
+                user.handshakeToken = handshakeResponse.data.handshake_token;
+              } catch (handshakeError) {
+                console.error("Error getting handshake token:", handshakeError);
+                // Continue without handshake token - it might not be required for all flows
+              }
+            }
+
             return true;
           } else {
             console.error(

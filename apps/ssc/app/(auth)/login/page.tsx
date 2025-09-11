@@ -37,6 +37,12 @@ const Page = () => {
     mode: "onBlur",
   });
 
+  useEffect(() => {
+    if (params.get("error")) {
+      toast.error("خطا در فرایند ورود");
+    }
+  }, []);
+
   const Authenticated = async () => {
     const session = await getSession();
     if (session.handshakeToken !== undefined) {
