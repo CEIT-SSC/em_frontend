@@ -1,10 +1,10 @@
 import React from "react";
 import JobList from "./components/JobList";
 import Image from "next/image";
-import circle from "apps/ssc/assets/abstracts/circle.svg";
-import shape1 from "apps/ssc/assets/abstracts/shape1.svg";
-import shape2 from "apps/ssc/assets/abstracts/shape2.svg";
-import ashkan from "apps/ssc/assets/members/ashkan2.png";
+import circle from "~/assets/abstracts/circle.svg";
+import shape1 from "~/assets/abstracts/shape1.svg";
+import shape2 from "~/assets/abstracts/shape2.svg";
+import ashkan from "~/assets/members/ashkan2.png";
 import {
   HiClipboardList,
   HiLightBulb,
