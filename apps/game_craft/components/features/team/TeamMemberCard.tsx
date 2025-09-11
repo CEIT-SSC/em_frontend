@@ -16,7 +16,7 @@ interface TeamMemberCardProps {
 export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
   isHead = false,
   name = "Mahdi Haeri",
-  avatar = "/svg/avatar-1.svg"
+  avatar = "svg/avatar-1.svg",
 }) => {
   const { token } = useToken();
 
@@ -27,7 +27,9 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
       style={{
         width: "100%",
         height: "80px",
-        backgroundColor: isHead ? "rgba(255,215,0, 0.5)" : token.colorBgContainer,
+        backgroundColor: isHead
+          ? "rgba(255,215,0, 0.5)"
+          : token.colorBgContainer,
         boxShadow: token.boxShadow,
         borderRadius: token.borderRadius,
         padding: token.padding,

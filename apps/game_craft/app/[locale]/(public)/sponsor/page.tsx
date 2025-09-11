@@ -2,9 +2,9 @@
 
 import { Empty, Flex, theme, Typography } from "antd";
 import { useTranslations } from "next-intl";
-import { useResponsive } from "@/lib/hooks/useResponsive";
-import { sponsors } from "@/config/sponsors";
-import SponsorCard from "@/components/common/SponsorCard";
+import { useResponsive } from "../../../../lib/hooks/useResponsive";
+import { sponsors } from "../../../../config/sponsors";
+import SponsorCard from "../../../../components/common/SponsorCard";
 
 const { useToken } = theme;
 
@@ -12,29 +12,7 @@ export default function SponsorsPage() {
   const { token } = useToken();
   const screens = useResponsive();
   const t = useTranslations("app");
-  const tSponsors = useTranslations("app.sponsors");
-
-  // Responsive padding configuration
-  const isMobile = !screens.md;
-  const isTablet = screens.md && !screens.lg;
-
-  const getResponsivePadding = () => {
-    if (isMobile) return "2rem 1rem";
-    if (isTablet) return "2.5rem 2rem";
-    return "3rem 5rem";
-  };
-
-  const getContainerPadding = () => {
-    if (isMobile) return token.padding;
-    if (isTablet) return token.paddingLG;
-    return token.padding;
-  };
-
-  const getMaxWidth = () => {
-    if (isMobile) return "100%";
-    if (isTablet) return "800px";
-    return "1200px";
-  };
+  const sponsorsViewPadding = screens.lg ? "3rem 5rem" : "3rem 2rem";
 
   return (
     <Flex
@@ -53,14 +31,16 @@ export default function SponsorsPage() {
         justify="center"
         style={{
           width: "100%",
-          padding: getResponsivePadding(),
+          padding: sponsorsViewPadding,
         }}
       >
         <Typography.Title
           level={isMobile ? 2 : 1}
           style={{
             color: "white",
-            fontSize: isMobile ? token.fontSizeHeading2 : token.fontSizeHeading1,
+            fontSize: isMobile
+              ? token.fontSizeHeading2
+              : token.fontSizeHeading1,
             textAlign: "center",
             marginBottom: isMobile ? token.marginLG : token.marginXL,
           }}
@@ -73,8 +53,7 @@ export default function SponsorsPage() {
           justify="center"
           style={{
             width: "100%",
-            maxWidth: getMaxWidth(),
-            minHeight: isMobile ? "150px" : "200px",
+            minHeight: "200px",
             backgroundColor: token.colorBgBase,
             borderRadius: token.borderRadius,
             padding: getContainerPadding(),
@@ -96,7 +75,7 @@ export default function SponsorsPage() {
             </Flex>
           ) : (
             <Empty
-              description={tSponsors('noSponsors')}
+              description={tSponsors("noSponsors")}
               style={{
                 color: token.colorTextSecondary,
               }}

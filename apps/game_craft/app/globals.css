@@ -50,3 +50,43 @@ body {
     --font-estedad: 'Estedad';
     --font-vazirmatn: 'Vazirmatn';
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* RTL support */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="ltr"] {
+  text-align: left;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: auto;
+  min-height: 100vh;
+  font-family: var(--font-estedad), var(--font-vazirmatn), sans-serif;
+  background-color: lightyellow;
+  overflow: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+::-webkit-scrollbar {
+  scrollbar-width: none;
+  display: none;
+}
+
+/* Debug font variables */
+:root {
+  --font-estedad: 'Estedad';
+  --font-vazirmatn: 'Vazirmatn';
+}

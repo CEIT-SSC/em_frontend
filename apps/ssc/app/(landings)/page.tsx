@@ -15,7 +15,8 @@ import delaraam from "~/assets/members/delaraam.png";
 import javad from "~/assets/members/javad.png";
 import alireza from "~/assets/members/alireza.png";
 import behrad from "~/assets/members/behrad.jpg";
-import notfound from "~/assets/notfound.png";
+import saba from "~/assets/members/saba.jpg";
+// import notfound from "~/assets/notfound.png";
 import ImagesCarousel from "./components/ImagesCarousel/ImagesCarousel";
 import { HiArrowLeft } from "react-icons/hi";
 
@@ -64,6 +65,7 @@ export default function Home() {
           </p>
           <Link href="#events">
             <Button
+              className="h-8 min-w-20 w-fit rounded-lg overflow-hidden p-px px-3 py-2 cursor-pointer flex gap-2 justify-center items-center"
               variant={ButtonVariant.PRIMARY}
               label="رویداد های پیش رو"
               suffixIcon={HiArrowLeft}
@@ -133,7 +135,7 @@ export default function Home() {
           <TeamMemberCard
             name="صبا سیدطبایی"
             position="مسئول مالی"
-            photoUrl={notfound.src}
+            photoUrl={saba.src}
             linkedinUrl="https://www.linkedin.com/in/saba-seyed-tabaei"
           />
           <TeamMemberCard

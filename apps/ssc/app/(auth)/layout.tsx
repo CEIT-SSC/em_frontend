@@ -1,15 +1,14 @@
-import { MdArrowBack } from "react-icons/md";
-import { Button, ButtonSize, ButtonVariant } from "@ssc/ui";
-import Link from "next/link";
+import portal from "~/assets/portal.png";
+import Image from "next/image";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <div className="h-[100vh] px-9 flex items-center justify-center">
-      <div className="absolute top-0 left-0 w-9/16 h-full py-4 px-6">
+    <div className="h-[100vh] md:px-9 flex items-center justify-center">
+      <div className="hidden absolute top-0 left-0 w-9/16 h-full py-4 px-6 md:block -z-1">
         <video
           className="h-full object-cover object-center rounded-2xl"
           autoPlay
@@ -19,17 +18,13 @@ export default function RootLayout({
           <source src="/events/acpc.mp4" />
         </video>
       </div>
-      <div className="absolute max-w-[600px] h-max bg-secondary-background rounded-3xl p-6 flex flex-col gap-4">
-        <Link href={"/"} className="flex justify-end">
-          <Button
-            className="flex justify-end bg-none !rounded-full text-whiteText"
-            size={ButtonSize.SMALL}
-            variant={ButtonVariant.OUTLINE}
-            label="بازگشت"
-            suffixIcon={MdArrowBack}
-          />
-        </Link>
-        {children}
+      <div className="relative w-full h-full md:max-w-[600px] max-h-[100vh] overflow-auto md:h-max bg-secondary-background md:rounded-3xl p-6 flex flex-col gap-4">
+        <Image
+          src={portal}
+          alt="portal"
+          className="top-0 left-0 w-d h-full absolute opacity-15 z-0 object-cover pt-4"
+        />
+        <div className="h-full w-full z-1">{children}</div>
       </div>
     </div>
   );

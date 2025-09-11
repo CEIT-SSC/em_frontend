@@ -8,7 +8,7 @@ import {
 } from "antd";
 import { ReactNode, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { customColors } from "@/config/colors";
+import { customColors } from "../../config/colors";
 
 interface AntDesignProviderProps {
   children: ReactNode;

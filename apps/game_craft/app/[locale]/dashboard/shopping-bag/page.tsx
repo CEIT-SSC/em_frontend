@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Flex, theme, Row, Col } from 'antd';
-import { WorkshopCard } from '@/components/features/workshops/WorkshopCard';
-import { PayBox } from '@/components/features/cart/PayBox';
+import { Flex, theme, Row, Col } from "antd";
+import { WorkshopCard } from "../../../../components/features/workshops/WorkshopCard";
+import { PayBox } from "../../../../components/features/cart/PayBox";
 
 const { useToken } = theme;
 
@@ -14,12 +14,13 @@ export default function ShoppingBagPage() {
     {
       id: 1,
       title: "توسعه بازی با Unity",
-      description: "آموزش اصول پایه ای برنامه نویسی و توسعه بازی های دو بعدی و سه بعدی با موتور یونیتی",
+      description:
+        "آموزش اصول پایه ای برنامه نویسی و توسعه بازی های دو بعدی و سه بعدی با موتور یونیتی",
       instructor: "امیر حسینی",
       date: "1404/1/22، 9:00",
       price: "25,000",
       is_online: false, // Changed from isInPerson: true
-      onAddToCart: () => console.log("Removing Unity workshop from cart")
+      onAddToCart: () => console.log("Removing Unity workshop from cart"),
     },
     {
       id: 2,
@@ -29,18 +30,20 @@ export default function ShoppingBagPage() {
       date: "1404/2/5، 14:00",
       price: "20,000",
       is_online: true, // Changed from isInPerson: false
-      onAddToCart: () => console.log("Removing Graphics workshop from cart")
+      onAddToCart: () => console.log("Removing Graphics workshop from cart"),
     },
     {
       id: 3,
       title: "برنامه‌نویسی پیشرفته بازی",
-      description: "تکنیک‌های پیشرفته برنامه‌نویسی، بهینه‌سازی کد و الگوریتم‌های هوش مصنوعی",
+      description:
+        "تکنیک‌های پیشرفته برنامه‌نویسی، بهینه‌سازی کد و الگوریتم‌های هوش مصنوعی",
       instructor: "محمد رضایی",
       date: "1404/2/10، 10:30",
       price: "30,000",
       is_online: false, // Changed from isInPerson: true
-      onAddToCart: () => console.log("Removing Advanced Programming workshop from cart")
-    }
+      onAddToCart: () =>
+        console.log("Removing Advanced Programming workshop from cart"),
+    },
   ];
 
   return (
@@ -48,19 +51,19 @@ export default function ShoppingBagPage() {
       vertical
       flex={1}
       style={{
-        width: '100%',
-        overflow: "hidden"
+        width: "100%",
+        overflow: "hidden",
       }}
     >
       <Flex
         flex={1}
         style={{
-          width: '100%',
+          width: "100%",
           padding: token.padding,
-          overflow: "auto"
+          overflow: "auto",
         }}
       >
-        <Row gutter={[16, 16]} style={{ width: '100%' }}>
+        <Row gutter={[16, 16]} style={{ width: "100%" }}>
           {/*{cartItems.map((item, index) => (*/}
           {/*  <Col key={index} xs={24} sm={12} lg={8}>*/}
           {/*    <WorkshopCard presentation={item} onAddToCart={item.onAddToCart} />*/}

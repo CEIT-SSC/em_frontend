@@ -1,38 +1,34 @@
 export enum ApiPath {
   // Authentication endpoints
-  AUTH_REFRESH = "/accounts/token/refresh/",
-  AUTH_LOGIN = "/accounts/token/",
-  AUTH_LOGOUT = "/accounts/token/blacklist/",
+  AUTH_TOKEN = "/o/token/",
+  AUTH_LOGOUT = "/o/revoke-token/",
   AUTH_REGISTER = "/register/",
+  AUTH_VERIFY_EMAIL = "/verify-email/",
+  AUTH_RESEND_OTP = "/resend-verify-email/",
+  AUTH_GOOGLE = "/auth/social/google/",
+  AUTH_AUTHORIZE = "/o/authorize",
+  AUTH_AUTHORIZE_TOKEN = "/o/authorize/refresh",
 
-  // Google Authentication
-  AUTH_GOOGLE = "/auth/google/",
-
-  // Presentation endpoints
-  PRESENTATIONS = "/presentations/",
-  PRESENTATION_BY_ID = "/presentations/",
-
-  // Cart endpoints
-  CART = "/cart/",
-  CART_APPLY_DISCOUNT = "/cart/apply-discount/",
-  CART_REMOVE_DISCOUNT = "/cart/remove-discount/",
-  CART_ADD_ITEM = "/cart/items/",
-  CART_REMOVE_ITEM = "/cart/items/",
-
-  // Order endpoints
-  ORDERS_CHECKOUT = "/orders/checkout/",
-  ORDERS_HISTORY = "/orders/history/",
-  ORDERS_HISTORY_BY_ID = "/orders/history/",
-  ORDERS_INITIATE_PAYMENT = "/orders/",
-
-  // User Profile endpoints
+  // Profile endpoints
   USER_PROFILE = "/profile/",
-  USER_CHANGE_PASSWORD = "/change-password/",
-  USER_FORGOT_PASSWORD = "/forgot-password/",
-  USER_VERIFY_EMAIL = "/verify-email/",
-  USER_RESEND_VERIFY_EMAIL = "/resend-verify-email/",
+
+  // Presentations endpoints
+  PRESENTATIONS_GET_LIST = "/presentations/",
+  PRESENTATIONS_GET_DETAILS = "/presentations/{id}/",
 }
 
-export const apiPath = (path: ApiPath): string => {
-  return `/api${path}`;
+export const apiPath = (
+  path: ApiPath,
+  options?: { [key: string]: string | number }
+): string => {
+  let url = path as string;
+  if (options) {
+    Object.keys(options).forEach((key) => {
+      if (options[key] === undefined) throw new Error("Missing option");
+      url = url.replace(`{${key}}`, options[key].toString());
+    });
+  }
+
+  console.log("!@! ", url, options);
+  return url; // was /api/path before
 };

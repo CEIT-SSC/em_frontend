@@ -8,6 +8,6 @@
     "module": "commonjs",
     "target": "es2020"
   },
-  "include": ["src/**/*"],
+  "include": ["src"],
   "exclude": ["node_modules", "lib", "dist", "build"]
 }

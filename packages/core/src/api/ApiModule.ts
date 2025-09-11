@@ -1,7 +1,8 @@
+import { AxiosInstance } from "axios";
 import { AuthApi } from "./Authentication/auth.api";
 import { ShopApi } from "./Shopping/shop.api";
+import { ProfileApi } from "./Profile/profile.api";
 import { PresentationsApi } from "./Presentations/presentations.api";
-import { UserProfileApi } from "./UserProfile/userProfile.api";
 
 /**
  * Main API class that provides a centralized entry point for all API operations.
@@ -22,57 +23,53 @@ import { UserProfileApi } from "./UserProfile/userProfile.api";
  * const presentations = await api.presentations.getPresentations();
  * const profile = await api.userProfile.getProfile();
  */
-export class API {
+export class ApiModule {
   private _auth?: AuthApi;
   private _shop?: ShopApi;
+  private _profile?: ProfileApi;
   private _presentations?: PresentationsApi;
-  private _userProfile?: UserProfileApi;
+  private apiInstance: AxiosInstance;
 
-  constructor() {}
+  constructor(apiInstance: AxiosInstance) {
+    this.apiInstance = apiInstance;
+  }
 
   get auth(): AuthApi {
     if (!this._auth) {
-      this._auth = new AuthApi();
+      this._auth = new AuthApi(this.apiInstance);
     }
     return this._auth;
   }
 
   get shop(): ShopApi {
     if (!this._shop) {
-      this._shop = new ShopApi();
+      this._shop = new ShopApi(this.apiInstance);
     }
     return this._shop;
   }
 
+  get profile(): ProfileApi {
+    if (!this._profile) {
+      this._profile = new ProfileApi(this.apiInstance);
+    }
+    return this._profile;
+  }
+
   get presentations(): PresentationsApi {
     if (!this._presentations) {
-      this._presentations = new PresentationsApi();
+      this._presentations = new PresentationsApi(this.apiInstance);
     }
     return this._presentations;
   }
 
-  get userProfile(): UserProfileApi {
-    if (!this._userProfile) {
-      this._userProfile = new UserProfileApi();
-    }
-    return this._userProfile;
-  }
-
-  public isLoaded(apiName: "auth" | "shop" | "presentations" | "userProfile"): boolean {
+  public isLoaded(apiName: "auth" | "shop"): boolean {
     switch (apiName) {
       case "auth":
         return !this._auth;
       case "shop":
         return !this._shop;
-      case "presentations":
-        return !this._presentations;
-      case "userProfile":
-        return !this._userProfile;
       default:
         return false;
     }
   }
 }
-
-export const ApiModule = new API();
-export default API;

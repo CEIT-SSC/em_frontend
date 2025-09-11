@@ -1,23 +1,47 @@
-'use client';
+"use client";
 
-import { Flex, theme, Typography } from 'antd';
-import { WorkshopGrid } from '@/components/features/workshops/WorkshopGrid';
+import { Flex, theme, Typography, Button, Card, Avatar } from "antd";
+import { useSession, signOut } from "next-auth/react";
+import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const { useToken } = theme;
 
 export default function EventsPage() {
   const { token } = useToken();
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/auth/login");
+    }
+  }, [status, router]);
+
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: "/auth/login" });
+  };
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (!session) {
+    return null;
+  }
 
   // Sample workshop data matching the React project
   const workshopData = [
     {
       title: "توسعه بازی با Unity",
-      description: "آموزش اصول پایه ای برنامه نویسی و توسعه بازی های دو بعدی و سه بعدی با موتور یونیتی",
+      description:
+        "آموزش اصول پایه ای برنامه نویسی و توسعه بازی های دو بعدی و سه بعدی با موتور یونیتی",
       instructor: "امیر حسینی",
       date: "1404/1/22، 9:00",
       price: "25,000",
       isInPerson: true,
-      onAddToCart: () => console.log("Added Unity workshop to cart")
+      onAddToCart: () => console.log("Added Unity workshop to cart"),
     },
     {
       title: "طراحی گرافیک برای بازی‌ها",
@@ -26,17 +50,19 @@ export default function EventsPage() {
       date: "1404/2/5، 14:00",
       price: "20,000",
       isInPerson: false,
-      onAddToCart: () => console.log("Added Graphics workshop to cart")
+      onAddToCart: () => console.log("Added Graphics workshop to cart"),
     },
     {
       title: "برنامه‌نویسی پیشرفته بازی",
-      description: "تکنیک‌های پیشرفته برنامه‌نویسی، بهینه‌سازی کد و الگوریتم‌های هوش مصنوعی",
+      description:
+        "تکنیک‌های پیشرفته برنامه‌نویسی، بهینه‌سازی کد و الگوریتم‌های هوش مصنوعی",
       instructor: "محمد رضایی",
       date: "1404/2/10، 10:30",
       price: "30,000",
       isInPerson: true,
-      onAddToCart: () => console.log("Added Advanced Programming workshop to cart")
-    }
+      onAddToCart: () =>
+        console.log("Added Advanced Programming workshop to cart"),
+    },
   ];
 
   // Sample presentation data matching the React project
@@ -48,7 +74,7 @@ export default function EventsPage() {
       date: "1404/3/15، 16:00",
       price: "رایگان",
       isInPerson: true,
-      onAddToCart: () => console.log("Added Future Games presentation to cart")
+      onAddToCart: () => console.log("Added Future Games presentation to cart"),
     },
     {
       title: "تجربه کاربری در بازی‌ها",
@@ -57,16 +83,17 @@ export default function EventsPage() {
       date: "1404/3/17، 13:00",
       price: "رایگان",
       isInPerson: false,
-      onAddToCart: () => console.log("Added UX presentation to cart")
+      onAddToCart: () => console.log("Added UX presentation to cart"),
     },
     {
       title: "بازاریابی و تجاری‌سازی بازی",
-      description: "استراتژی‌های موفق برای بازاریابی و درآمدزایی از بازی‌های مستقل",
+      description:
+        "استراتژی‌های موفق برای بازاریابی و درآمدزایی از بازی‌های مستقل",
       instructor: "علی رضایی",
       date: "1404/3/20، 15:30",
       price: "15,000",
       isInPerson: true,
-      onAddToCart: () => console.log("Added Marketing presentation to cart")
+      onAddToCart: () => console.log("Added Marketing presentation to cart"),
     },
     {
       title: "داستان‌سرایی در بازی‌ها",
@@ -75,8 +102,8 @@ export default function EventsPage() {
       date: "1404/3/22، 11:00",
       price: "10,000",
       isInPerson: false,
-      onAddToCart: () => console.log("Added Storytelling presentation to cart")
-    }
+      onAddToCart: () => console.log("Added Storytelling presentation to cart"),
+    },
   ];
 
   return (
@@ -85,21 +112,48 @@ export default function EventsPage() {
       align="center"
       justify="center"
       style={{
-        width: '100%',
-        padding: token.padding
+        width: "100%",
+        padding: token.padding,
       }}
       gap="large"
     >
+      {/* User Info Bar */}
+      <Card style={{ width: "100%", marginBottom: "1rem" }}>
+        <Flex justify="space-between" align="center">
+          <Flex align="center" gap="medium">
+            <Avatar size={40} icon={<UserOutlined />} />
+            <div>
+              <Typography.Text strong>
+                Welcome, {session.user?.name || session.user?.email}
+              </Typography.Text>
+              <br />
+              <Typography.Text type="secondary" style={{ fontSize: "12px" }}>
+                Logged in via: {session.provider || "SSC SSO"}
+              </Typography.Text>
+            </div>
+          </Flex>
+          <Button
+            icon={<LogoutOutlined />}
+            onClick={handleLogout}
+            type="default"
+          >
+            Logout
+          </Button>
+        </Flex>
+      </Card>
       <Flex
         vertical
         align="start"
         justify="center"
         style={{
-          width: '100%',
+          width: "100%",
         }}
         gap="medium"
       >
-        <Typography.Title level={4} style={{ fontWeight: 800, marginBottom: 0 }}>
+        <Typography.Title
+          level={4}
+          style={{ fontWeight: 800, marginBottom: 0 }}
+        >
           کارگاه ها
         </Typography.Title>
         {/*<WorkshopGrid workshops={workshopData} />*/}
@@ -110,11 +164,14 @@ export default function EventsPage() {
         align="start"
         justify="center"
         style={{
-          width: '100%',
+          width: "100%",
         }}
         gap="medium"
       >
-        <Typography.Title level={4} style={{ fontWeight: 800, marginBottom: 0 }}>
+        <Typography.Title
+          level={4}
+          style={{ fontWeight: 800, marginBottom: 0 }}
+        >
           ارائه ها
         </Typography.Title>
         {/*<WorkshopGrid workshops={presentationData} />*/}

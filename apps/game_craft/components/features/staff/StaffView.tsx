@@ -1,17 +1,21 @@
-import { Flex, theme } from "antd";
+"use client";
+
+import { Flex } from "antd";
 import { StaffContainer } from "./StaffContainer";
+import { useResponsive } from "@/lib/hooks/useResponsive";
 
 export function StaffView() {
-  const staffViewPadding = "!py-12 !px-4 md:!px-12 lg:!px-20";
+  const screens = useResponsive();
+  const staffViewPadding = screens.lg ? "3rem 5rem" : "3rem 2rem";
 
   return (
     <Flex
       align="center"
       justify="center"
-      className={staffViewPadding}
       style={{
         flex: 1,
         width: "100%",
+        padding: staffViewPadding,
       }}
     >
       <StaffContainer />

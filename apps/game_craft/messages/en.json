@@ -140,7 +140,14 @@
       "sendResetLink": "Send Reset Link",
       "backToLogin": "Back to Login",
       "resetLinkSent": "Reset link has been sent to your email",
-      "resetLinkError": "Failed to send reset link. Please try again."
+      "resetLinkError": "Failed to send reset link. Please try again.",
+      "loginWithSSC": "Login with SSC",
+      "loginWithEmail": "Login with Email",
+      "or": "OR",
+      "invalidCredentials": "Invalid email or password",
+      "loginSuccessful": "Login successful! Redirecting...",
+      "loginFailed": "Login failed. Please try again.",
+      "ssoLoginFailed": "SSO login failed. Please try again."
     },
     "intro": {
       "title": "GameCraft",
@@ -234,6 +241,8 @@
     "enroll": "Enroll",
     "presenters": "Presenters",
     "unknownPresenter": "Unknown Presenter",
+    "noPresenters": "No presenters",
+    "andMore": "and {count} more",
     "onlineWorkshops": "Online Workshops",
     "offlineWorkshops": "In-Person Workshops",
     "free": "Free",
