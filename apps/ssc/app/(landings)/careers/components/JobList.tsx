@@ -1,5 +1,6 @@
 import React from "react";
 import JobOffer, { Offer } from "./JobOffer";
+import { HiFilter, HiSearch } from "react-icons/hi";
 
 const JobList = () => {
   const sampleOffer: Offer = {
@@ -36,8 +37,23 @@ const JobList = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2.5 py-4 px-4 sm:px-12">
-      <div className="flex flex-col gap-9 py-6 sm:px-8">
+    <div className="flex flex-col items-center gap-2.5 py-4 px-4 sm:px-12">
+      <div
+        className="flex gap-2.5 items-center p-4 min-h-20 w-full max-w-250 
+      text-[#A6A6A6] text-[18px]/[150%] sm:text-2xl font-bold border border-white/20 rounded-3xl"
+      >
+        <HiFilter size={36} />
+        <div className="flex items-center w-full gap-1 py-2 px-4 rounded-full bg-[#252525]">
+          <HiSearch />
+          <input
+            className="w-full outline-none"
+            id="job-filter"
+            type="text"
+            placeholder="جستجو بر اساس تگ، عنوان، دسته بندی..."
+          />
+        </div>
+      </div>
+      <div className="flex w-full flex-col gap-9 py-6 sm:px-8">
         <JobOffer offer={sampleOffer} type="job" />
         <JobOffer offer={sampleOffer} type="boot_camp" />
         <JobOffer offer={sampleOffer} type="team" />

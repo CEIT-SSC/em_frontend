@@ -69,8 +69,8 @@ const JobOffer = ({ offer, type }: Props) => {
         <h4 className="text-2xl/[150%] font-bold">{offer.title}</h4>
         <p className="text-2xl text-whiteText">{offer.description}</p>
       </div>
-      <div className="flex flex-col sm:flex-row justify-between sm:pl-6">
-        <div className="flex flex-col sm:flex-row gap-2.5 p-2.5 text-2xl *:flex *:items-center *:gap-2 *:px-2.5">
+      <div className="flex flex-col gap-2.5 sm:flex-row justify-between sm:pl-6">
+        <div className="flex flex-col sm:flex-row gap-2.5 p-2.5 text-2xl *:flex *:items-center *:gap-2 *:sm:px-2.5">
           <div>
             <HiClock size={36} />
             {time}
@@ -85,7 +85,11 @@ const JobOffer = ({ offer, type }: Props) => {
           </div>
         </div>
         <Link href={offer.resume_url}>
-          <Button variant={ButtonVariant.PRIMARY} label="send resume" />
+          <Button
+            className="w-full sm:w-fit"
+            variant={ButtonVariant.PRIMARY}
+            label="ارسال رزومه"
+          />
         </Link>
       </div>
     </div>
