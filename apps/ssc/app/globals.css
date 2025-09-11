@@ -21,6 +21,7 @@
   --color-whiteText: var(--TextWhite);
   --color-mainRed: var(--MainRed);
   --color-mainWhite: #f3f7f0;
+  --color-mainGray: var(--MainGray);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -46,6 +47,24 @@
     background: linear-gradient(45deg, #ff715b -15%, #cb48b7 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  /* Custom scrollbar styles */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #ff715b -15%, #cb48b7 100%);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #ff8a75 -15%, #d563c7 100%);
   }
 }
 

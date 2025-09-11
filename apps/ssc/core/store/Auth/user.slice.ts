@@ -1,7 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { fetchUserData } from "./user.thunk";
-import { boolean } from "zod";
-import { UserProfileResponse } from "@ssc/core/lib/types/api/User/user";
 
 type UserState = {
   loading: boolean;

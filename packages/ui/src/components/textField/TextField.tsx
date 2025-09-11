@@ -4,8 +4,8 @@ import { HiOutlineExclamation } from "react-icons/hi";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 
 export interface TextFieldProps {
+  id?: string;
   label: string;
-  id: string;
   name: string;
   type?: "text" | "email" | "password" | "tel" | "number";
   errorText?: string;
