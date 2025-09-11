@@ -2,7 +2,9 @@
 
 import { Empty, Flex, theme, Typography } from "antd";
 import { useTranslations } from "next-intl";
-import { useResponsive } from "@/lib/hooks/useResponsive";
+import { useResponsive } from "../../../../lib/hooks/useResponsive";
+import { sponsors } from "../../../../config/sponsors";
+import SponsorCard from "../../../../components/common/SponsorCard";
 
 const { useToken } = theme;
 
@@ -32,7 +34,17 @@ export default function SponsorsPage() {
           padding: sponsorsViewPadding,
         }}
       >
-        <Typography.Title style={{ color: "white" }}>
+        <Typography.Title
+          level={isMobile ? 2 : 1}
+          style={{
+            color: "white",
+            fontSize: isMobile
+              ? token.fontSizeHeading2
+              : token.fontSizeHeading1,
+            textAlign: "center",
+            marginBottom: isMobile ? token.marginLG : token.marginXL,
+          }}
+        >
           {t("mainNavigation.sponsors")}
         </Typography.Title>
         <Flex
@@ -44,10 +56,31 @@ export default function SponsorsPage() {
             minHeight: "200px",
             backgroundColor: token.colorBgBase,
             borderRadius: token.borderRadius,
-            padding: token.padding,
+            padding: getContainerPadding(),
+            margin: isMobile ? "0 0.5rem" : "0",
           }}
         >
-          <Empty description="No sponsors yet" />
+          {sponsors.length > 0 ? (
+            <Flex
+              vertical
+              gap={isMobile ? 16 : 24}
+              style={{
+                width: "100%",
+                padding: isMobile ? "0.5rem 0" : "0",
+              }}
+            >
+              {sponsors.map((sponsor, index) => (
+                <SponsorCard key={sponsor.id} sponsor={sponsor} index={index} />
+              ))}
+            </Flex>
+          ) : (
+            <Empty
+              description={tSponsors("noSponsors")}
+              style={{
+                color: token.colorTextSecondary,
+              }}
+            />
+          )}
         </Flex>
       </Flex>
     </Flex>

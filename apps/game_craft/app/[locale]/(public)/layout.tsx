@@ -1,9 +1,9 @@
 "use client";
 
-import { Layout, theme } from "antd";
-import { AppHeader } from "@/components/layout/AppHeader";
-import { AppFooter } from "@/components/layout/AppFooter";
-import Wave from "@/components/common/Wave";
+import { FloatButton, Layout, theme } from "antd";
+import { AppHeader } from "../../../components/layout/AppHeader";
+import { AppFooter } from "../../../components/layout/AppFooter";
+import Wave from "../../../components/common/Wave";
 import { usePathname } from "next/navigation";
 
 interface MainLayoutProps {
@@ -42,6 +42,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
         />
       </Layout.Content>
       <AppFooter />
+      <FloatButton.BackTop style={{ insetInlineStart: 24 }} />
     </Layout>
   );
 }

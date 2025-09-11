@@ -1,13 +1,10 @@
 "use client";
 
 import { Avatar, Button, Flex, theme, Typography } from "antd";
-import {
-  InstagramOutlined,
-  UserOutlined,
-  XOutlined,
-  YoutubeFilled,
-} from "@ant-design/icons";
-import { StaffMember } from "@/config/staffs";
+import { GithubFilled, LinkedinFilled, UserOutlined } from "@ant-design/icons";
+import { StaffMember } from "../../../config/staffs";
+import Image from "next/image";
+import { TelegramIcon } from "../../../components/common/TelegramIcon";
 
 const { useToken } = theme;
 
@@ -35,7 +32,36 @@ export function StaffCard({ staff }: StaffCardProps) {
       gap="small"
     >
       <Flex vertical align="center" justify="center" gap="middle">
-        <Avatar size={140} icon={<UserOutlined />} src={staff.imageUrl} />
+        {
+          staff.imageUrl ? (
+            <Avatar size={140} icon={<UserOutlined />} src={staff.imageUrl} />
+          ) : (
+            <Flex
+              style={{
+                width: 140,
+                height: 140,
+                borderRadius: "50%",
+                overflow: "hidden",
+                backgroundColor: token.colorBgContainer,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Image
+                src={"/mario/giphy-14.gif"}
+                alt={"mario question block"}
+                width={240}
+                height={240}
+              />
+            </Flex>
+          )
+          // <Avatar
+          //     size={140}
+          //     icon={<UserOutlined/>}
+          //     src={"/mario/giphy-16.gif"}
+          // />
+        }
+
         <Flex
           vertical
           align="center"
@@ -56,9 +82,36 @@ export function StaffCard({ staff }: StaffCardProps) {
           padding: token.padding,
         }}
       >
-        <Button type="text" shape="circle" icon={<InstagramOutlined />} />
-        <Button type="text" shape="circle" icon={<XOutlined />} />
-        <Button type="text" shape="circle" icon={<YoutubeFilled />} />
+        <Button
+          disabled={!staff.telegramUrl}
+          type="text"
+          shape="circle"
+          size={"large"}
+          href={staff.telegramUrl}
+          target="_blank"
+        >
+          <TelegramIcon size={"1.5rem"} />
+        </Button>
+        <Button
+          disabled={!staff.githubUrl}
+          type="text"
+          shape="circle"
+          href={staff.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <GithubFilled style={{ fontSize: "1rem" }} />
+        </Button>
+        <Button
+          disabled={!staff.linkedinUrl}
+          type="text"
+          shape="circle"
+          href={staff.linkedinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <LinkedinFilled style={{ fontSize: "1rem" }} />
+        </Button>
       </Flex>
     </Flex>
   );

@@ -5,7 +5,7 @@ import { Flex, theme, Typography, Spin, Alert } from "antd";
 import Wave from "../../common/Wave";
 import { WorkshopGrid } from "./WorkshopGrid";
 import { useTranslations } from "next-intl";
-import { useResponsive } from "@/lib/hooks/useResponsive";
+import { useResponsive } from "../../../lib/hooks/useResponsive";
 
 const { useToken } = theme;
 const { useToken } = theme;

@@ -3,7 +3,7 @@
 import { Button, Flex, Grid, Image, theme, Typography } from "antd";
 import { useTranslations } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
-import { useDashboardNavigations } from "@/lib/config/dashboard-navigation";
+import { useDashboardNavigations } from "../../../lib/config/dashboard-navigation";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 // import fireworks from "../../../public/lottie/Fireworks.lottie";
 

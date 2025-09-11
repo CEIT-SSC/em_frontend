@@ -1,16 +1,16 @@
 "use client";
 
-import { Button, ButtonVariant, TextField } from "@ssc/ui";
+import { Button, ButtonSize, ButtonVariant, TextField } from "@ssc/ui";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { toast } from "react-toastify";
-import { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "@bprogress/next";
 import { signIn, getSession, useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import { BASE_URL } from "@ssc/core";
+import { MdArrowBack } from "react-icons/md";
 
 type Inputs = {
   email: string;
@@ -37,16 +37,14 @@ const Page = () => {
     mode: "onBlur",
   });
 
-  const Authenticated = useCallback(() => {
-    if (session.status === "authenticated" && session.data?.handshakeToken) {
-      const url = new URL(`${BASE_URL}/api/o/authorize`);
-      params?.forEach((value, key) => {
-        url.searchParams.set(key, value);
-      });
-      url.searchParams.set("handshake_token", session.data.handshakeToken);
-      window.location.href = url.toString();
+  const Authenticated = async () => {
+    const session = await getSession();
+    if (session.handshakeToken !== undefined) {
+      router.push(`/redirecting?${params ? params.toString() : ""}`);
+    } else {
+      router.push("/");
     }
-  }, [session, params, router]);
+  };
 
   const handleGoogleSignIn = async () => {
     try {
@@ -106,81 +104,134 @@ const Page = () => {
     }
   };
 
+  useEffect(() => {
+    const handleOAuthRedirect = async () => {
+      if (session.status === "authenticated") {
+        const redirectUri = params.get("redirect_uri");
+        if (redirectUri && redirectUri !== "null") {
+          try {
+            const response = await fetch("/api/auth/authorize-refresh", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+
+            if (response.ok) {
+              const data = await response.json();
+              if (data.success) {
+                router.push(
+                  `/redirecting?${
+                    params ? params.toString() : ""
+                  }&handshake_token=${data.handshakeToken}`
+                );
+              } else {
+                toast.error("خطا در دریافت توکن تأیید هویت");
+              }
+            } else {
+              toast.error("خطا در فرآیند تأیید هویت");
+            }
+          } catch (error) {
+            console.error("Error handling OAuth redirect:", error);
+            toast.error("خطا در فرآیند تأیید هویت");
+          }
+        }
+      }
+    };
+
+    handleOAuthRedirect();
+  }, [session, params, router]);
+
   return (
-    <div className="flex flex-col gap-4 h-max">
-      <div className="flex flex-col gap-2">
-        <h3 className="text-4xl font-bold">ورود</h3>
-        <p className="text-[20px]/[150%] font-bold">
-          حساب کاربری ندارید؟{" "}
-          <Link
-            href={{
-              pathname: "/register",
-              query: Object.fromEntries(params.entries()),
-            }}
-            className="default-gradient text-transparent bg-clip-text"
-          >
-            ثبت نام
-          </Link>{" "}
-          کنید
-        </p>
+    <>
+      <div className="w-full flex justify-end">
+        <Button
+          className="flex justify-end bg-none !rounded-full text-whiteText"
+          size={ButtonSize.SMALL}
+          variant={ButtonVariant.OUTLINE}
+          label="صفحه اصلی"
+          suffixIcon={MdArrowBack}
+          onClick={() => router.push("/")}
+        />
       </div>
+      <div className="flex flex-col gap-4 h-max">
+        <div className="flex flex-col gap-2">
+          <h3 className="text-4xl font-bold">ورود</h3>
+          <p className="text-[20px]/[150%] font-bold">
+            حساب کاربری ندارید؟{" "}
+            <Link
+              href={{
+                pathname: "/register",
+                query: Object.fromEntries(params.entries()),
+              }}
+              className="default-gradient text-transparent bg-clip-text"
+            >
+              ثبت نام
+            </Link>{" "}
+            کنید
+          </p>
+        </div>
 
-      <TextField
-        name="email"
-        id="email"
-        type="email"
-        label="ایمیل"
-        placeholder="ایمیل خود را وارد کنید"
-        errorText={errors.email?.message}
-        disabled={isLoading}
-        required
-        {...register("email")}
-      />
+        <TextField
+          name="email"
+          id="email"
+          type="email"
+          label="ایمیل"
+          placeholder="ایمیل خود را وارد کنید"
+          errorText={errors.email?.message}
+          disabled={isLoading}
+          required
+          {...register("email")}
+        />
 
-      <TextField
-        name="password"
-        id="password"
-        type="password"
-        label="رمز عبور"
-        placeholder="رمز عبور خود را وارد کنید"
-        errorText={errors.password?.message}
-        disabled={isLoading}
-        required
-        {...register("password")}
-      />
-      <div className="flex flex-col items-center py-6 px-9 gap-2.5">
-        <p className="text-whiteText">
-          رمز عبور خود را فراموش کرده اید؟{" "}
-          <a className="default-gradient text-transparent bg-clip-text" href="">
-            بازیابی رمز عبور
-          </a>
-        </p>
-        <div className="w-full md:w-3/4 flex flex-col items-center gap-4">
-          <Button
-            className="w-full"
-            variant={ButtonVariant.PRIMARY}
-            label="ورود"
-            loading={isLoading}
-            onClick={handleSubmit(onSubmit)}
-          />
-          <div className="w-full flex gap-3.5">
-            {/* <Button
+        <TextField
+          name="password"
+          id="password"
+          type="password"
+          label="رمز عبور"
+          placeholder="رمز عبور خود را وارد کنید"
+          errorText={errors.password?.message}
+          disabled={isLoading}
+          required
+          {...register("password")}
+        />
+        <div className="flex flex-col items-center py-6 px-9 gap-2.5">
+          <p className="text-whiteText">
+            رمز عبور خود را فراموش کرده اید؟{" "}
+            <a
+              className="default-gradient text-transparent bg-clip-text"
+              href=""
+            >
+              بازیابی رمز عبور
+            </a>
+          </p>
+          <div className="w-full md:w-3/4 flex flex-col items-center gap-4">
+            <Button
+              className="w-full"
+              variant={ButtonVariant.PRIMARY}
+              label="ورود"
+              loading={isLoading}
+              onClick={handleSubmit(onSubmit)}
+            />
+            <div className="w-full flex gap-3.5">
+              {/* <Button
               className="w-48 bg-secondary-background text-whiteText bg-secondary-background text-whiteText"
               variant={ButtonVariant.OUTLINE}
               label="ورود با گیتهاب"
             /> */}
-            <Button
-              className="w-full bg-secondary-background text-whiteText"
-              variant={ButtonVariant.OUTLINE}
-              label="ورود با گوگل"
-              onClick={handleGoogleSignIn}
-              loading={isGoogleLoading}
-              disable={isLoading || isGoogleLoading}
-            />
+              <Button
+                className="w-full bg-secondary-background text-whiteText"
+                variant={ButtonVariant.OUTLINE}
+                label="ورود با گوگل"
+                onClick={handleGoogleSignIn}
+                loading={isGoogleLoading}
+                disable={isLoading || isGoogleLoading}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

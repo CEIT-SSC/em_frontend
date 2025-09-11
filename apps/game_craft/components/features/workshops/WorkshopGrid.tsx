@@ -2,11 +2,11 @@
 
 import { Row, Col } from "antd";
 import { WorkshopCard } from "./WorkshopCard";
-import type { Presentation } from "@/api";
+import { PresentationOverview } from "@ssc/core";
 
 interface WorkshopGridProps {
-  presentations?: Presentation[];
-  onAddToCart?: (presentation: Presentation) => void; // Made optional
+  presentations?: PresentationOverview[];
+  onAddToCart?: (presentation: PresentationOverview) => void; // Made optional
   workshopImage?: string; // Add optional image prop
 }
 
@@ -45,7 +45,7 @@ export function WorkshopGrid({
           }}
         >
           <WorkshopCard
-            presentation={presentation}
+            id={presentation.id}
             workshopImage={workshopImage} // Pass the image prop to WorkshopCard
           />
         </Col>

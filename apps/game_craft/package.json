@@ -30,7 +30,7 @@
     "react-dom": "^19.1.1",
     "react-lottie": "^1.2.10",
     "react-responsive": "^10.0.1",
-    "utils": "workspace:*"
+    "@ssc/utils": "workspace:*"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^15.5.2",

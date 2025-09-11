@@ -2,7 +2,7 @@
 
 import { Empty, Flex, theme, Typography } from "antd";
 import { useTranslations } from "next-intl";
-import { useResponsive } from "@/lib/hooks/useResponsive";
+import { useResponsive } from "../../../../lib/hooks/useResponsive";
 
 const { useToken } = theme;
 

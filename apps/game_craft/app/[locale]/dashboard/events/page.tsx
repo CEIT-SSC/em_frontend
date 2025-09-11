@@ -1,7 +1,6 @@
 "use client";
 
 import { Flex, theme, Typography, Button, Card, Avatar } from "antd";
-import { WorkshopGrid } from "@/components/features/workshops/WorkshopGrid";
 import { useSession, signOut } from "next-auth/react";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";

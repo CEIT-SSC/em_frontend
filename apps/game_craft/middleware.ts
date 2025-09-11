@@ -3,22 +3,18 @@ import createMiddleware from "next-intl/middleware";
 import { routing } from "./lib/routing";
 import { NextRequest } from "next/server";
 
-// Create the internationalization middleware
 const intlMiddleware = createMiddleware(routing);
 
 // Protected routes that require authentication
 const protectedRoutes = ["/dashboard", "/profile", "/admin"];
 
-// Check if the pathname matches any protected route
 function isProtectedRoute(pathname: string) {
-  // Remove locale prefix to check the actual route
   const pathWithoutLocale = pathname.replace(/^\/(fa|en)/, "") || "/";
   return protectedRoutes.some((route) => pathWithoutLocale.startsWith(route));
 }
 
 export default withAuth(
   function middleware(req) {
-    // Apply internationalization middleware for all routes
     return intlMiddleware(req);
   },
   {
@@ -26,12 +22,10 @@ export default withAuth(
       authorized: ({ token, req }) => {
         const { pathname } = req.nextUrl;
 
-        // Allow access to public routes without authentication
         if (!isProtectedRoute(pathname)) {
           return true;
         }
 
-        // Require authentication for protected routes
         return !!token;
       },
     },
@@ -39,6 +33,7 @@ export default withAuth(
 );
 
 export const config = {
-  // Match internationalized pathnames and protected routes
-  matcher: ["/", "/(fa|en)/:path*"],
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|images|sound|assets|public|svg|.*\\.svg|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.webp|.*\\.ico|.*\\.css|.*\\.js|.*\\.woff|.*\\.woff2|.*\\.ttf|.*\\.otf).*)",
+  ],
 };

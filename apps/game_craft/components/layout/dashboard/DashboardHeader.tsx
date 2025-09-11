@@ -67,13 +67,16 @@ export function DashboardHeader() {
           onClick={() => toggleDrawerOpen()}
         />
         <Image
-          src="/svg/dark-3d.svg"
+          src="svg/dark-3d.svg"
           alt="gamecraft-logo"
           width={60}
           height={40}
           style={{ height: "60%", width: "auto", maxHeight: "60px" }}
         />
-        <DashboardDrawer open={drawerOpen} toggleDrawerOpen={toggleDrawerOpen} />
+        <DashboardDrawer
+          open={drawerOpen}
+          toggleDrawerOpen={toggleDrawerOpen}
+        />
       </Flex>
     </Header>
   );

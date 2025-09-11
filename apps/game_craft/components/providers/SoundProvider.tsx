@@ -13,7 +13,7 @@ import {
   setGlobalVolume,
   toggleMute as toggleHowlerMute,
   SoundKey,
-} from "@/lib/soundManager";
+} from "../../lib/soundManager";
 
 type SoundContextType = {
   playSound: (key: SoundKey) => void;

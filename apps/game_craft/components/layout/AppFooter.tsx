@@ -20,9 +20,9 @@ import {
   YoutubeFilled,
 } from "@ant-design/icons";
 import Image from "next/image";
-import { darkTheme } from "@/components/providers/AntDesignProvider";
-import { gameCraftSocialLinks, sscSocialLinks } from "@/config/socialLinks";
-import { TelegramIcon } from "@/components/common/TelegramIcon";
+import { darkTheme } from "../../components/providers/AntDesignProvider";
+import { gameCraftSocialLinks, sscSocialLinks } from "../../config/socialLinks";
+import { TelegramIcon } from "../../components/common/TelegramIcon";
 
 const { useToken } = theme;
 

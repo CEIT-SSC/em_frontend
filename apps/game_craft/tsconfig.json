@@ -12,20 +12,6 @@
     "noUnusedParameters": false,
     "noUnusedLocals": false,
     "jsx": "preserve",
-    "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@/components/*": [
-        "./components/*"
-      ],
-      "@/lib/*": [
-        "./lib/*"
-      ],
-      "@/types/*": [
-        "./types/*"
-      ]
-    },
     "plugins": [
       {
         "name": "next"

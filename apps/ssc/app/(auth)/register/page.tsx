@@ -31,7 +31,7 @@ const Page = () => {
           className="flex justify-end bg-none !rounded-full text-whiteText"
           size={ButtonSize.SMALL}
           variant={ButtonVariant.OUTLINE}
-          label="صفحه اصلی"
+          label={step > 0 ? "مرحله قبل" : "صفحه اصلی"}
           suffixIcon={MdArrowBack}
           onClick={onBackButtonClick}
         />

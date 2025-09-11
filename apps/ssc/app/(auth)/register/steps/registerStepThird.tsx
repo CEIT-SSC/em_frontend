@@ -1,11 +1,10 @@
 import { Button, ButtonVariant } from "@ssc/ui";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { FaCheckCircle } from "react-icons/fa";
 
-interface Props {}
-
 export const RegisterStepThird = () => {
-  const router = useRouter();
+  const params = useSearchParams();
 
   return (
     <div className="flex flex-col justify-center items-center gap-4 h-max">
@@ -14,12 +13,13 @@ export const RegisterStepThird = () => {
         ثبت نام شما با موفقیت انجام شد
       </p>
       <div className="w-full flex flex-col items-center gap-2.5 px-8 py-4">
-        <Button
-          className="w-full"
-          variant={ButtonVariant.PRIMARY}
-          label="ورود"
-          onClick={() => router.push("/login")}
-        />
+        <Link href={{ href: "/login", query: params.toString() }}>
+          <Button
+            className="w-full"
+            variant={ButtonVariant.PRIMARY}
+            label="ورود"
+          />
+        </Link>
       </div>
     </div>
   );

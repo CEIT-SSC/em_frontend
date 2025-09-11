@@ -12,46 +12,29 @@ import {
 } from "antd";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { useRouter } from "@/lib/navigation";
-import { useTranslations, useLocale } from "next-intl";
-import { MenuOutlined, MoonFilled, SunFilled } from "@ant-design/icons";
-import {
-  Button,
-  Divider,
-  Flex,
-  Layout,
-  Space,
-  Splitter,
-  Switch,
-  theme,
-} from "antd";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { useRouter } from "@/lib/navigation";
+import { useRouter as useNextIntlRouter } from "../../lib/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { MenuOutlined, MoonFilled, SunFilled } from "@ant-design/icons";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { useResponsive } from "@/lib/hooks/useResponsive";
-import { useTheme } from "next-themes";
-import { useResponsive } from "@/lib/hooks/useResponsive";
-import AppDrawer from "@/components/layout/AppDrawer";
-import { customColors } from "@/config/colors";
-import { useSound } from "@/components/providers/SoundProvider";
-import { useMainNavigations } from "@/lib/config/navigation";
-import { customColors } from "@/config/colors";
-import { useSound } from "@/components/providers/SoundProvider";
-import { useMainNavigations } from "@/lib/config/navigation";
+import { useResponsive } from "../../lib/hooks/useResponsive";
+import AppDrawer from "../../components/layout/AppDrawer";
+import { customColors } from "../../config/colors";
+import { useSound } from "../../components/providers/SoundProvider";
+import { useMainNavigations } from "../../lib/config/navigation";
+import { useAuth } from "lib/hooks/useAuth";
+import { useRouter } from "@bprogress/next";
+import { signIn, signOut } from "next-auth/react";
 
-const { useToken } = theme;
-const { Header } = Layout;
 const { useToken } = theme;
 const { Header } = Layout;
 
 export function AppHeader() {
   const [shadow, setShadow] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const router = useRouter();
+  const router = useRouter({
+    customRouter: useNextIntlRouter,
+  });
   const pathname = usePathname();
   const locale = useLocale();
   const { token } = useToken();
@@ -60,19 +43,12 @@ export function AppHeader() {
   const { theme, setTheme } = useTheme();
   const { playSound } = useSound();
   const mainNavigations = useMainNavigations();
+  const { isLoading, isAuthenticated, user } = useAuth();
 
   const toggleDrawerOpen = () => {
     setDrawerOpen(!drawerOpen);
   };
-  const toggleDrawerOpen = () => {
-    setDrawerOpen(!drawerOpen);
-  };
 
-  const handleLanguageSwitch = () => {
-    const newLocale = locale === "fa" ? "en" : "fa";
-    const currentPath = pathname.replace(`/${locale}`, "") || "/";
-    router.replace(currentPath, { locale: newLocale });
-  };
   const handleLanguageSwitch = () => {
     const newLocale = locale === "fa" ? "en" : "fa";
     const currentPath = pathname.replace(`/${locale}`, "") || "/";
@@ -86,20 +62,7 @@ export function AppHeader() {
       setShadow(false);
     }
   };
-  const handleScroll = () => {
-    if (window.scrollY > 0) {
-      setShadow(true);
-    } else {
-      setShadow(false);
-    }
-  };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -114,7 +77,10 @@ export function AppHeader() {
   };
 
   const handleLoginClicked = () => {
-    router.push("/auth/login");
+    // router.push("/auth/login");
+    signIn("ssc", {
+      callbackUrl: "/dashboard",
+    });
   };
 
   return (
@@ -153,70 +119,7 @@ export function AppHeader() {
               height={60}
               style={{ height: "80%", width: "auto", maxHeight: "60px" }}
             />
-  return (
-    <Header
-      style={{
-        position: "sticky",
-        top: 0,
-        right: 0,
-        zIndex: 10000,
-        width: "100%",
-        height: "10vh",
-        minHeight: "60px",
-        maxHeight: "100px",
-        background: token.colorPrimary,
-        transition: "box-shadow 0.3s",
-        boxShadow: shadow ? "0 10px 20px rgba(0, 0, 0, 0.5)" : "none",
-        padding: "0.5rem 2rem",
-      }}
-    >
-      {screens.lg ? (
-        <Flex
-          align="center"
-          justify="space-between"
-          style={{ width: "100%", height: "100%" }}
-        >
-          <Flex
-            align="center"
-            justify="center"
-            style={{ height: "100%" }}
-            gap="large"
-          >
-            <Image
-              src="/images/dark-3d.svg"
-              alt="gamecraft-logo"
-              width={60}
-              height={60}
-              style={{ height: "80%", width: "auto", maxHeight: "60px" }}
-            />
 
-            <Space size="small">
-              {mainNavigations.map((item) => (
-                <Button
-                  key={item.route}
-                  type="primary"
-                  onClick={() => router.push(item.route)}
-                  onMouseEnter={() => playSound("jump")}
-                  style={{
-                    fontWeight: "bolder",
-                    ...(isActive(item.route)
-                      ? { color: customColors.colorAction }
-                      : {}),
-                  }}
-                >
-                  {item.name}
-                </Button>
-              ))}
-              <Button
-                type="primary"
-                onClick={() => router.push("/dashboard")}
-                onMouseEnter={() => playSound("jump")}
-                style={{ fontWeight: "bolder" }}
-              >
-                {t("mainNavigation.dashboard")}
-              </Button>
-            </Space>
-          </Flex>
             <Space size="small">
               {mainNavigations.map((item) => (
                 <Button
@@ -280,22 +183,32 @@ export function AppHeader() {
               }}
             />
             <Space size="small">
-              <Button
-                type="primary"
-                style={{ fontWeight: "bolder" }}
-                onClick={() => router.push("/auth/signup")}
-                onMouseEnter={() => playSound("coin")}
-              >
-                {t("auth.signUp")}
-              </Button>
-              <Button
-                type="primary"
-                style={{ fontWeight: "bolder" }}
-                onClick={handleLoginClicked}
-                onMouseEnter={() => playSound("coin")}
-              >
-                {t("auth.login")}
-              </Button>
+              {!isLoading ? (
+                !isAuthenticated ? (
+                  <>
+                    {/* <Button
+                      type="primary"
+                      style={{ fontWeight: "bolder" }}
+                      onClick={() => router.push("/auth/signup")}
+                      onMouseEnter={() => playSound("coin")}
+                    >
+                      {t("auth.signUp")}
+                    </Button> */}
+                    <Button
+                      type="primary"
+                      style={{ fontWeight: "bolder" }}
+                      onClick={handleLoginClicked}
+                      onMouseEnter={() => playSound("coin")}
+                    >
+                      {t("auth.login")}
+                    </Button>
+                  </>
+                ) : (
+                  <div onClick={() => signOut()}>{user.name}</div>
+                )
+              ) : (
+                <p>loading</p>
+              )}
             </Space>
           </Flex>
         </Flex>
@@ -313,7 +226,7 @@ export function AppHeader() {
             onClick={() => toggleDrawerOpen()}
           />
           <Image
-            src="/svg/dark-3d.svg"
+            src="/images/dark-3d.svg"
             alt="gamecraft-logo"
             width={60}
             height={40}

@@ -4,10 +4,11 @@ import { Button, Drawer, Flex, Switch, theme } from "antd";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
 import { MoonFilled, SunFilled } from "@ant-design/icons";
-import { useRouter } from "@/lib/navigation";
+import { useRouter as useNextIntlRouter } from "../../lib/navigation";
 import { useTheme } from "next-themes";
-import { useAuth } from "@/components/providers/AuthProvider";
-import { useMainNavigations } from "@/lib/config/navigation";
+import { useMainNavigations } from "../../lib/config/navigation";
+import { useAuth } from "../../lib/hooks/useAuth";
+import { useRouter } from "@bprogress/next";
 
 const { useToken } = theme;
 
@@ -24,7 +25,9 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
   const { token } = useToken();
   const { theme, setTheme } = useTheme();
   const { isAuthenticated, user, logout } = useAuth();
-  const router = useRouter();
+  const router = useRouter({
+    customRouter: useNextIntlRouter,
+  });
 
   const isActive = (path: string) => {
     // Remove locale prefix from pathname for comparison

@@ -9,7 +9,6 @@ import {
 import { ApiClient } from "../ApiClient";
 import { apiPath, ApiPath } from "../../types/ApiPaths";
 import { RequestResponse } from "../../types/api/general";
-import { SearchParams } from "next/dist/server/request/search-params";
 export class AuthApi extends ApiClient {
   async register(parameters: {
     email: string;
@@ -67,7 +66,7 @@ export class AuthApi extends ApiClient {
     });
 
     return await this.Api.post<TokenResponse, RequestResponse<TokenResponse>>(
-      apiPath(ApiPath.AUTH_LOGIN),
+      apiPath(ApiPath.AUTH_TOKEN),
       params,
       {
         headers: {
@@ -111,11 +110,24 @@ export class AuthApi extends ApiClient {
     >(apiPath(ApiPath.AUTH_GOOGLE), googleData);
   }
 
-  async refresh(): Promise<RequestResponse<TokenResponse>> {
+  async refresh(
+    refresh_token: string,
+    client_id: string
+  ): Promise<RequestResponse<TokenResponse>> {
+    const params = new URLSearchParams({
+      grant_type: GrantTypes.Refresh,
+      refresh_token,
+      client_id,
+    });
+
     return await this.Api.post<TokenResponse, RequestResponse<TokenResponse>>(
-      apiPath(ApiPath.AUTH_REFRESH),
-      undefined,
-      { withCredentials: true }
+      apiPath(ApiPath.AUTH_TOKEN),
+      params,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
     );
   }
 }

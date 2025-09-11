@@ -67,7 +67,7 @@ export const authOptions: AuthOptions = {
           if (response.status === 200 && response.data?.success) {
             const tokenData = response.data.data;
 
-            if (redirectUri) {
+            if (redirectUri !== "null") {
               const { data: handshakeResponse } =
                 await serverApi.auth.authorizeWithToken(
                   tokenData.refresh_token
@@ -164,7 +164,10 @@ export const authOptions: AuthOptions = {
 
       // Access token has expired, try to refresh it
       try {
-        const response = await serverApi.auth.refresh();
+        const response = await serverApi.auth.refresh(
+          token.refreshToken,
+          process.env.SSC_PUBLIC_CLIENT_ID
+        );
 
         if (response.status === 200 && response.data?.success) {
           const newTokenData = response.data.data;

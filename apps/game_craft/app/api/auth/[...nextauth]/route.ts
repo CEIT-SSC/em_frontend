@@ -1,23 +1,35 @@
+import { BASE_URL } from "@ssc/core";
+import { serverApi } from "lib/api/server/serverApi";
 import NextAuth, { AuthOptions } from "next-auth";
-import { serverApi } from "@/lib/api/server/serverApi";
 import { Provider } from "next-auth/providers";
 import { getRequestConfig } from "next-intl/server";
 
-// Types for SSC OAuth provider
 interface SSCProviderOptions {
   clientId: string;
-  clientSecret: string;
+  clientSecret?: string;
 }
 
 interface SSCProfile {
+  success?: boolean;
+  data?: {
+    id?: number;
+    email: string;
+    first_name?: string;
+    last_name?: string;
+    profile_picture?: string;
+    phone_number?: string;
+    date_joined?: string;
+  };
+
+  // Direct fields for fallback
   id?: number;
   sub?: string;
-  email: string;
+  email?: string;
   first_name?: string;
   last_name?: string;
+  profile_picture?: string;
 }
 
-// Custom OAuth2 Provider for SSC SSO
 function SSCProvider(options: SSCProviderOptions): Provider {
   return {
     id: "ssc",
@@ -26,27 +38,95 @@ function SSCProvider(options: SSCProviderOptions): Provider {
     authorization: {
       url: "http://localhost:3000/login",
       params: {
-        client_id: options.clientId,
         scope: "read write",
         response_type: "code",
       },
     },
     token: {
-      url: "https://aut-ssc.ir/api/o/token/",
+      url: `${BASE_URL}/o/token/`,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      async request(context: any) {
+        const { params, checks } = context;
+        console.log("Full token request context:", context);
+
+        const formData = new URLSearchParams();
+        formData.append("grant_type", "authorization_code");
+        formData.append("code", params.code);
+        formData.append("client_id", process.env.SSC_CLIENT_ID!);
+        formData.append(
+          "redirect_uri",
+          "http://localhost:3001/api/auth/callback/ssc"
+        );
+
+        const codeVerifier = checks?.code_verifier || params.code_verifier;
+        if (codeVerifier) {
+          formData.append("code_verifier", codeVerifier);
+        } else {
+          console.warn("PKCE code_verifier not found in context!");
+        }
+
+        console.log("Sending form data:", Object.fromEntries(formData));
+
+        const response = await fetch(`${BASE_URL}/o/token/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Accept: "application/json",
+          },
+          body: formData,
+        });
+
+        console.log("!@!", response);
+        const result = await response.json();
+        console.log("Token response from Django:", result);
+
+        if (!response.ok) {
+          const errorDetail =
+            result.errors?.detail ||
+            result.error_description ||
+            result.error ||
+            "Token exchange failed";
+          throw new Error(`Token exchange failed: ${errorDetail}`);
+        }
+
+        const tokens = result.data || result;
+
+        if (!tokens.access_token) {
+          console.error("No access_token in response:", tokens);
+          throw new Error("access_token not found in response");
+        }
+
+        return {
+          tokens: {
+            access_token: tokens.access_token,
+            refresh_token: tokens.refresh_token,
+            token_type: tokens.token_type || "Bearer",
+            expires_in: tokens.expires_in,
+            scope: tokens.scope,
+          },
+        };
+      },
     },
     userinfo: {
-      url: "https://aut-ssc.ir/api/profile/",
+      url: `${BASE_URL}/profile/`,
     },
 
     clientId: options.clientId,
-    clientSecret: options.clientSecret,
-    checks: ["pkce"],
+    // Don't include clientSecret for PKCE flow
+    client: {
+      token_endpoint_auth_method: "none",
+    },
+    checks: ["pkce", "state"],
     profile(profile: SSCProfile) {
+      console.log("Processing profile:", profile);
+
+      const userData = profile.data || profile;
+
       return {
-        id: profile.id?.toString() || profile.sub || "",
-        name: `${profile.first_name || ""} ${profile.last_name || ""}`.trim(),
-        email: profile.email,
-        image: null,
+        id: userData.id?.toString() || userData.email || "",
+        name: `${userData.first_name || ""} ${userData.last_name || ""}`.trim(),
+        email: userData.email,
+        image: userData.profile_picture,
       };
     },
   };
@@ -85,13 +165,32 @@ const authOptions: AuthOptions = {
   providers: [
     SSCProvider({
       clientId: process.env.SSC_CLIENT_ID,
-      clientSecret: process.env.SSC_CLIENT_SECRET,
     }),
   ],
+  // debug: true, // Enable debug mode
+  // logger: {
+  //   error(code, metadata) {
+  //     console.error("NextAuth Error:", code, metadata);
+  //   },
+  //   warn(code) {
+  //     console.warn("NextAuth Warning:", code);
+  //   },
+  //   debug(code, metadata) {
+  //     console.log("NextAuth Debug:", code, metadata);
+  //   },
+  // },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
+      console.log("SignIn callback triggered:", {
+        provider: account?.provider,
+        user: user?.email,
+        accountKeys: account ? Object.keys(account) : null,
+        profile: profile,
+      });
+
       if (account?.provider === "ssc") {
         try {
+          console.log("SSC account data:", account);
           // Store OAuth tokens in user object
           const userWithTokens = user;
           userWithTokens.accessToken = account.access_token;
@@ -135,9 +234,9 @@ const authOptions: AuthOptions = {
       }
 
       // Allow credentials provider sign in
-      if (account?.provider === "credentials") {
-        return true;
-      }
+      // if (account?.provider === "credentials") {
+      //   return true;
+      // }
 
       return false;
     },
@@ -157,7 +256,8 @@ const authOptions: AuthOptions = {
       }
 
       // Return previous token if the access token has not expired yet
-      if (Date.now() < (token.expiresAt as number)) {
+      console.log("!@! refreshing", token.expiresAt - Date.now());
+      if (Date.now() < token.expiresAt) {
         return token;
       }
 
@@ -165,33 +265,29 @@ const authOptions: AuthOptions = {
       try {
         // For SSC OAuth tokens, use OAuth2 refresh endpoint
         if (token.provider === "ssc" && token.refreshToken) {
-          const response = await fetch("https://aut-ssc.ir/api/o/token/", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: new URLSearchParams({
-              grant_type: "refresh_token",
-              refresh_token: token.refreshToken as string,
-              client_id: "kdVriPPfTLS4LbwmKj18Q4iiVhhvii8qxVJKKEWp",
-              client_secret: process.env.SSC_CLIENT_SECRET || "",
-            }),
-          });
+          const response = await serverApi.auth.refresh(
+            token.refreshToken,
+            process.env.SSC_CLIENT_ID!
+          );
 
-          if (response.ok) {
-            const refreshedTokens = await response.json();
+          console.log("Refresh response:", response.status);
 
-            if (refreshedTokens.success && refreshedTokens.data) {
-              const newTokenData = refreshedTokens.data;
+          if (response.status === 200) {
+            console.log("Refreshed tokens:", response.data);
+
+            if (response.data.success && response.data.data) {
+              const newTokenData = response.data.data;
               token.accessToken = newTokenData.access_token;
               token.refreshToken =
-                newTokenData.refresh_token || token.refreshToken;
+                newTokenData.refresh_token ?? token.refreshToken;
               token.tokenType = newTokenData.token_type;
               token.expiresIn = newTokenData.expires_in;
 
               // Update expiry time
               const expiresAt = Date.now() + newTokenData.expires_in * 1000;
               token.expiresAt = expiresAt;
+
+              console.log("returning token: ", token);
 
               return token;
             }
@@ -217,6 +313,8 @@ const authOptions: AuthOptions = {
         }
       } catch (error) {
         console.error("Token refresh failed:", error);
+        console.error("Token refresh failed:", error.response);
+        console.error("Token refresh failed:", error.request);
       }
 
       // Return null to force sign out
@@ -234,14 +332,10 @@ const authOptions: AuthOptions = {
 
       return session;
     },
-
-    async redirect({ url, baseUrl }) {
-      return `${baseUrl}/fa/auth/login`;
-    },
   },
   pages: {
-    signIn: "/auth/login",
-    error: "/auth/login",
+    signIn: "/auth",
+    error: "/auth",
   },
   session: {
     strategy: "jwt",

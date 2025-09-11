@@ -241,6 +241,8 @@
     "enroll": "Enroll",
     "presenters": "Presenters",
     "unknownPresenter": "Unknown Presenter",
+    "noPresenters": "No presenters",
+    "andMore": "and {count} more",
     "onlineWorkshops": "Online Workshops",
     "offlineWorkshops": "In-Person Workshops",
     "free": "Free",
