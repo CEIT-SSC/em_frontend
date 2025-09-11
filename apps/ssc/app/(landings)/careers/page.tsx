@@ -20,39 +20,47 @@ const page = () => {
       <div className="flex overflow-hidden min-h-129 flex-col bg-(--MainGray) sm:flex-row sm:gap-6 pt-8 sm:px-12">
         <div className="w-full flex items-center justify-center relative min-h-100 sm:min-h-auto">
           <Image
-            className="absolute z-1 sm:-mb-20"
+            className="absolute z-1 -mb-20"
             width={400}
             height={400}
             src={circle}
             alt="circle behind"
           />
           <Image
-            className="absolute z-2 scale-70 -left-15 -bottom-35 sm:scale-100 sm:-mb-55 sm:-mr-30"
+            className="absolute z-2 scale-125 -mb-60 -mr-20 sm:scale-100 sm:-mb-55 sm:-mr-30"
             width={506}
             height={576}
             src={ashkan}
             alt="ashkan"
           />
-          <div className={featureStyle + " top-0 right-4 sm:top-15 sm:right-5"}>
+          <div
+            className={
+              featureStyle + " top-15 left-2 sm:left-[unset] sm:right-5"
+            }
+          >
             تیم یابی برای انجام پروژه
             <HiLightBulb size={32} />
           </div>
           <div
-            className={featureStyle + " top-20 right-4 sm:top-40 sm:left-20"}
+            className={
+              featureStyle +
+              " top-58 right-3 sm:right-[unset] sm:top-40 sm:left-20"
+            }
           >
             استخدام در شرکت ها
             <HiClipboardList size={32} />
           </div>
           <div
             className={
-              featureStyle + " top-40 right-4 sm:bottom-20 sm:right-10"
+              featureStyle +
+              " -bottom-6 left-6 sm:left-[unset] sm:bottom-20 sm:right-10"
             }
           >
             یافتن فضای رشد
             <HiPresentationChartLine size={32} />
           </div>
         </div>
-        <div className="w-full relative flex items-center min-h-100 sm:min-h-auto">
+        <div className="w-full relative hidden sm:flex items-center min-h-100 sm:min-h-auto">
           <Image
             className="absolute top-0 left-0 sm:-mt-8 sm:-ml-12"
             width={0}
@@ -60,7 +68,7 @@ const page = () => {
             src={shape1}
             alt="corner shape"
           />
-          <div className="absolute z-10 flex flex-col gap-2.5 text-center justify-center">
+          <div className="absolute z-10 flex-col gap-2.5 text-center justify-center">
             <h2 className="text-5xl/[150%] font-bold">
               اینجا جاییه که رشد می کنی!
             </h2>
