@@ -1,8 +1,9 @@
 import React from "react";
 import { Button, ButtonVariant } from "@ssc/ui";
 import { HiCash, HiClock, HiLocationMarker } from "react-icons/hi";
+import Link from "next/link";
 
-interface Offer {
+export interface Offer {
   id: number;
   title: string;
   excerpt: string;
@@ -11,13 +12,11 @@ interface Offer {
   company_url: string;
   resume_url: string;
   created_at: string;
-  tags: [
-    {
-      id: number;
-      name: string;
-      color: string;
-    }
-  ];
+  tags: {
+    id: number;
+    name: string;
+    color: string;
+  }[];
 }
 
 const tagColors = {
@@ -28,36 +27,66 @@ const tagColors = {
 
 interface Props {
   type: "team" | "boot_camp" | "job";
+  offer: Offer;
 }
 
-const JobOffer = ({ type }: Props) => {
+const JobOffer = ({ offer, type }: Props) => {
+  let time, location, income;
+
+  for (const item of offer.tags) {
+    time = item.name === "time" ? item.color : time;
+    location = item.name === "location" ? item.color : location;
+    income = item.name === "income" ? item.color : income;
+  }
+
+  const realTags = offer.tags.filter(
+    (item) =>
+      item.name !== "time" && item.name !== "location" && item.name !== "income"
+  );
+
   return (
     <div className="flex flex-col gap-4 p-4 rounded-3xl border border-(--TextWhite)/50 shadow-[0_0_8px_0_white]">
-      <span
-        className={"w-fit font-bold py-2 px-4 rounded-full " + tagColors[type]}
-      >
-        {type}
-      </span>
+      <div className="flex flex-wrap gap-2.5">
+        {realTags.map((tag) => (
+          <span
+            key={tag.id}
+            className={
+              "w-fit font-bold py-2 px-4 rounded-full " + tagColors[tag.name]
+            }
+          >
+            {tag.name}
+          </span>
+        ))}
+        <span
+          className={
+            "w-fit font-bold py-2 px-4 rounded-full " + tagColors[type]
+          }
+        >
+          {type}
+        </span>
+      </div>
       <div className="flex flex-col gap-2">
-        <h4 className="text-2xl/[150%] font-bold">job title</h4>
-        <p className="text-2xl text-whiteText">description</p>
+        <h4 className="text-2xl/[150%] font-bold">{offer.title}</h4>
+        <p className="text-2xl text-whiteText">{offer.description}</p>
       </div>
       <div className="flex flex-col sm:flex-row justify-between sm:pl-6">
         <div className="flex flex-col sm:flex-row gap-2.5 p-2.5 text-2xl *:flex *:items-center *:gap-2 *:px-2.5">
           <div>
-            <HiClock />
-            full-time
+            <HiClock size={36} />
+            {time}
           </div>
           <div>
-            <HiLocationMarker />
-            remote
+            <HiLocationMarker size={36} />
+            {location}
           </div>
           <div>
-            <HiCash />
-            tavafoghi
+            <HiCash size={36} />
+            {income}
           </div>
         </div>
-        <Button variant={ButtonVariant.PRIMARY} label="send resume" />
+        <Link href={offer.resume_url}>
+          <Button variant={ButtonVariant.PRIMARY} label="send resume" />
+        </Link>
       </div>
     </div>
   );
