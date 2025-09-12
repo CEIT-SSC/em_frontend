@@ -1,6 +1,6 @@
 "use client";
 
-import { Empty, Flex, theme, Typography } from "antd";
+import { theme } from "antd";
 import { useTranslations } from "next-intl";
 import { useResponsive } from "../../../../lib/hooks/useResponsive";
 import { sponsors } from "../../../../config/sponsors";
@@ -12,77 +12,64 @@ export default function SponsorsPage() {
   const { token } = useToken();
   const screens = useResponsive();
   const t = useTranslations("app");
+  const tSponsors = useTranslations("app.sponsors");
   const sponsorsViewPadding = screens.lg ? "3rem 5rem" : "3rem 2rem";
+  const isMobile = !screens.lg;
+
+  // Custom Empty component to replace Ant Design Empty
+  const EmptyState = ({ description }: { description: string }) => (
+    <div className="flex flex-col items-center justify-center py-8">
+      <div className="text-6xl mb-4 opacity-25">📋</div>
+      <p style={{ color: token.colorTextSecondary }} className="text-center">
+        {description}
+      </p>
+    </div>
+  );
 
   return (
-    <Flex
-      vertical
-      align="center"
-      justify="center"
-      style={{
-        flex: 1,
-        width: "100%",
-        minHeight: "100%",
-      }}
-    >
-      <Flex
-        vertical
-        align="center"
-        justify="center"
-        style={{
-          width: "100%",
-          padding: sponsorsViewPadding,
-        }}
+    <div className="flex flex-col items-center justify-center flex-1 w-full min-h-full">
+      <div
+        className="flex flex-col items-center justify-center w-full"
+        style={{ padding: sponsorsViewPadding }}
       >
-        <Typography.Title
-          level={isMobile ? 2 : 1}
+        <h1
+          className="text-center mb-8"
           style={{
             color: "white",
             fontSize: isMobile
               ? token.fontSizeHeading2
               : token.fontSizeHeading1,
-            textAlign: "center",
             marginBottom: isMobile ? token.marginLG : token.marginXL,
           }}
         >
           {t("mainNavigation.sponsors")}
-        </Typography.Title>
-        <Flex
-          vertical
-          align="center"
-          justify="center"
+        </h1>
+
+        <div
+          className="flex flex-col items-center justify-center w-full min-h-[200px]"
           style={{
-            width: "100%",
-            minHeight: "200px",
             backgroundColor: token.colorBgBase,
             borderRadius: token.borderRadius,
-            padding: getContainerPadding(),
             margin: isMobile ? "0 0.5rem" : "0",
           }}
         >
           {sponsors.length > 0 ? (
-            <Flex
-              vertical
-              gap={isMobile ? 16 : 24}
+            <div
+              className="flex flex-col w-full"
               style={{
-                width: "100%",
+                gap: isMobile ? 16 : 24,
                 padding: isMobile ? "0.5rem 0" : "0",
               }}
             >
               {sponsors.map((sponsor, index) => (
                 <SponsorCard key={sponsor.id} sponsor={sponsor} index={index} />
               ))}
-            </Flex>
+            </div>
           ) : (
-            <Empty
-              description={tSponsors("noSponsors")}
-              style={{
-                color: token.colorTextSecondary,
-              }}
-            />
+            <EmptyState description={tSponsors("noSponsors")} />
           )}
-        </Flex>
-      </Flex>
-    </Flex>
+        </div>
+      </div>
+    </div>
   );
 }

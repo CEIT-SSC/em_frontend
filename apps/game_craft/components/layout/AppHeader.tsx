@@ -25,6 +25,8 @@ import { useMainNavigations } from "../../lib/config/navigation";
 import { useAuth } from "lib/hooks/useAuth";
 import { useRouter } from "@bprogress/next";
 import { signIn, signOut } from "next-auth/react";
+import { FaCircleUser } from "react-icons/fa6";
+import { MdGamepad } from "react-icons/md";
 
 const { useToken } = theme;
 const { Header } = Layout;
@@ -137,14 +139,6 @@ export function AppHeader() {
                   {item.name}
                 </Button>
               ))}
-              <Button
-                type="primary"
-                onClick={() => router.push("/dashboard")}
-                onMouseEnter={() => playSound("jump")}
-                style={{ fontWeight: "bolder" }}
-              >
-                {t("mainNavigation.dashboard")}
-              </Button>
             </Space>
           </Flex>
 
@@ -204,10 +198,18 @@ export function AppHeader() {
                     </Button>
                   </>
                 ) : (
-                  <div onClick={() => signOut()}>{user.name}</div>
+                  <div
+                    onClick={() => router.push("/dashboard/events")}
+                    className="flex items-center gap-2"
+                  >
+                    <FaCircleUser size={24} />
+                    {user.name}
+                  </div>
                 )
               ) : (
-                <p>loading</p>
+                <div className="flex items-center gap-2">
+                  <MdGamepad size={24} className="animate-spin" />
+                </div>
               )}
             </Space>
           </Flex>

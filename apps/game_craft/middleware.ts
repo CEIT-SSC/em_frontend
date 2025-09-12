@@ -29,6 +29,9 @@ export default withAuth(
         return !!token;
       },
     },
+    pages: {
+      signIn: "/fa/",
+    },
   }
 );
 

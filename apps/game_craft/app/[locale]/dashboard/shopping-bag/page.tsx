@@ -1,8 +1,9 @@
 "use client";
 
-import { Flex, theme, Row, Col } from "antd";
+import { theme } from "antd";
 import { WorkshopCard } from "../../../../components/features/workshops/WorkshopCard";
 import { PayBox } from "../../../../components/features/cart/PayBox";
+import ProductCart from "components/features/cart/ProductCart";
 
 const { useToken } = theme;
 
@@ -44,35 +45,114 @@ export default function ShoppingBagPage() {
       onAddToCart: () =>
         console.log("Removing Advanced Programming workshop from cart"),
     },
+    {
+      id: 3,
+      title: "برنامه‌نویسی پیشرفته بازی",
+      description:
+        "تکنیک‌های پیشرفته برنامه‌نویسی، بهینه‌سازی کد و الگوریتم‌های هوش مصنوعی",
+      instructor: "محمد رضایی",
+      date: "1404/2/10، 10:30",
+      price: "30,000",
+      is_online: false, // Changed from isInPerson: true
+      onAddToCart: () =>
+        console.log("Removing Advanced Programming workshop from cart"),
+    },
+    {
+      id: 3,
+      title: "برنامه‌نویسی پیشرفته بازی",
+      description:
+        "تکنیک‌های پیشرفته برنامه‌نویسی، بهینه‌سازی کد و الگوریتم‌های هوش مصنوعی",
+      instructor: "محمد رضایی",
+      date: "1404/2/10، 10:30",
+      price: "30,000",
+      is_online: false, // Changed from isInPerson: true
+      onAddToCart: () =>
+        console.log("Removing Advanced Programming workshop from cart"),
+    },
+    {
+      id: 3,
+      title: "برنامه‌نویسی پیشرفته بازی",
+      description:
+        "تکنیک‌های پیشرفته برنامه‌نویسی، بهینه‌سازی کد و الگوریتم‌های هوش مصنوعی",
+      instructor: "محمد رضایی",
+      date: "1404/2/10، 10:30",
+      price: "30,000",
+      is_online: false, // Changed from isInPerson: true
+      onAddToCart: () =>
+        console.log("Removing Advanced Programming workshop from cart"),
+    },
+    {
+      id: 3,
+      title: "برنامه‌نویسی پیشرفته بازی",
+      description:
+        "تکنیک‌های پیشرفته برنامه‌نویسی، بهینه‌سازی کد و الگوریتم‌های هوش مصنوعی",
+      instructor: "محمد رضایی",
+      date: "1404/2/10، 10:30",
+      price: "30,000",
+      is_online: false, // Changed from isInPerson: true
+      onAddToCart: () =>
+        console.log("Removing Advanced Programming workshop from cart"),
+    },
+    {
+      id: 3,
+      title: "برنامه‌نویسی پیشرفته بازی",
+      description:
+        "تکنیک‌های پیشرفته برنامه‌نویسی، بهینه‌سازی کد و الگوریتم‌های هوش مصنوعی",
+      instructor: "محمد رضایی",
+      date: "1404/2/10، 10:30",
+      price: "30,000",
+      is_online: false, // Changed from isInPerson: true
+      onAddToCart: () =>
+        console.log("Removing Advanced Programming workshop from cart"),
+    },
+    {
+      id: 3,
+      title: "برنامه‌نویسی پیشرفته بازی",
+      description:
+        "تکنیک‌های پیشرفته برنامه‌نویسی، بهینه‌سازی کد و الگوریتم‌های هوش مصنوعی",
+      instructor: "محمد رضایی",
+      date: "1404/2/10، 10:30",
+      price: "30,000",
+      is_online: false, // Changed from isInPerson: true
+      onAddToCart: () =>
+        console.log("Removing Advanced Programming workshop from cart"),
+    },
+    {
+      id: 3,
+      title: "برنامه‌نویسی پیشرفته بازی",
+      description:
+        "تکنیک‌های پیشرفته برنامه‌نویسی، بهینه‌سازی کد و الگوریتم‌های هوش مصنوعی",
+      instructor: "محمد رضایی",
+      date: "1404/2/10، 10:30",
+      price: "30,000",
+      is_online: false, // Changed from isInPerson: true
+      onAddToCart: () =>
+        console.log("Removing Advanced Programming workshop from cart"),
+    },
   ];
 
   return (
-    <Flex
-      vertical
-      flex={1}
-      style={{
-        width: "100%",
-        overflow: "hidden",
-      }}
-    >
-      <Flex
-        flex={1}
+    <div className="flex flex-col flex-1 w-full overflow-hidden">
+      <div
+        className="flex-1 w-full overflow-auto"
         style={{
-          width: "100%",
           padding: token.padding,
-          overflow: "auto",
         }}
       >
-        <Row gutter={[16, 16]} style={{ width: "100%" }}>
-          {/*{cartItems.map((item, index) => (*/}
-          {/*  <Col key={index} xs={24} sm={12} lg={8}>*/}
-          {/*    <WorkshopCard presentation={item} onAddToCart={item.onAddToCart} />*/}
-          {/*  </Col>*/}
-          {/*))}*/}
-        </Row>
-      </Flex>
+        <div className="flex flex-col gap-4 w-full max-h-80">
+          {cartItems.map((item, index) => (
+            <ProductCart
+              key={index}
+              imageUrl={"/images/superMario.png"}
+              title="تسست"
+              price={100000}
+              onRemove={item.onAddToCart}
+            />
+          ))}
+        </div>
+      </div>
 
       <PayBox />
-    </Flex>
+    </div>
   );
 }

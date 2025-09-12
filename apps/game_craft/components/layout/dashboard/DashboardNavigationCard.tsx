@@ -1,10 +1,12 @@
 "use client";
 
-import { Button, Flex, Grid, Image, theme, Typography } from "antd";
-import { useTranslations } from "next-intl";
-import { useRouter, usePathname } from "next/navigation";
+import { Button, Card, Flex, Grid, Image, theme, Typography } from "antd";
+import { useLocale, useTranslations } from "next-intl";
 import { useDashboardNavigations } from "../../../lib/config/dashboard-navigation";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { signOut, useSession } from "next-auth/react";
+import { usePathname, useRouter as nextIntlNavigation } from "lib/navigation";
+import { useRouter } from "@bprogress/next";
 // import fireworks from "../../../public/lottie/Fireworks.lottie";
 
 const { useToken } = theme;
@@ -19,15 +21,14 @@ export function DashboardNavigationCard({
 }: DashboardNavigationCardProps) {
   const t = useTranslations();
   const { token } = useToken();
-  const router = useRouter();
+  const router = useRouter({ customRouter: nextIntlNavigation });
   const pathname = usePathname();
   const dashboardNavigations = useDashboardNavigations();
   const screens = useBreakpoint();
+  const locale = useLocale();
 
   const handleLogout = () => {
-    // Clear user session or token here
-    // Redirect to login page
-    router.push("/");
+    signOut();
   };
 
   // Function to check if a route is active
@@ -131,6 +132,7 @@ export function DashboardNavigationCard({
                   toggleDrawerOpen();
                 }
               }}
+              icon={item.icon ? item.icon : null}
             >
               {item.name}
             </Button>

@@ -1,9 +1,13 @@
 "use client";
 
-import { Flex, theme, Typography } from "antd";
+import { Flex, theme, Typography, Spin, Alert } from "antd";
 import Wave from "../../common/Wave";
+import { WorkshopGrid } from "./WorkshopGrid";
 import { useTranslations } from "next-intl";
 import { useResponsive } from "../../../lib/hooks/useResponsive";
+import { useEffect, useMemo, useState } from "react";
+import { PresentationsList } from "@ssc/core";
+import { clientApi } from "lib/api/client/clientApi";
 
 const { useToken } = theme;
 
@@ -19,6 +23,62 @@ export function OnlineWorkshop({
   const { token } = useToken();
   const screens = useResponsive();
   const t = useTranslations();
+  const [presentations, setPresentations] = useState<{
+    loading: boolean;
+    error?: string;
+    data?: PresentationsList;
+  }>({ loading: true });
+
+  useEffect(() => {
+    clientApi.presentations
+      .getPresentationsList("game_craft_2024", true, false, "workshop")
+      .then((response) => {
+        if (response.status === 200) {
+          setPresentations({
+            loading: false,
+            data: response.data.data,
+          });
+        } else {
+          setPresentations({ loading: false, error: "failed to fetch" });
+        }
+      })
+      .catch((err) => {
+        setPresentations({ loading: false, error: "failed to fetch" });
+      });
+  }, []);
+
+  const content = useMemo(() => {
+    if (presentations.loading) {
+      return (
+        <Flex justify="center" align="center" style={{ minHeight: "200px" }}>
+          <Spin size="large" />
+        </Flex>
+      );
+    } else if (presentations.error) {
+      return (
+        <Alert
+          message={t("workshop.error")}
+          description={presentations.error}
+          type="error"
+          showIcon
+        />
+      );
+    } else {
+      return presentations.data.results.length === 0 ? (
+        <Alert
+          message={t("workshop.noWorkshops")}
+          description={t("workshop.noOnlineWorkshops")}
+          type="info"
+          showIcon
+        />
+      ) : (
+        <WorkshopGrid
+          presentations={presentations.data.results}
+          workshopImage="/images/SuperMario.jpg" // Pass SuperMario image for online workshops
+        />
+      );
+    }
+  }, [presentations, t]);
 
   return (
     <Flex
@@ -52,6 +112,8 @@ export function OnlineWorkshop({
         >
           {t("workshop.onlineWorkshops")}
         </Typography.Title>
+
+        {content}
       </Flex>
       <Wave
         width="100%"

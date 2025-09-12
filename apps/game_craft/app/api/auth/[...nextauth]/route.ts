@@ -257,7 +257,7 @@ const authOptions: AuthOptions = {
 
       // Return previous token if the access token has not expired yet
       console.log("!@! refreshing", token.expiresAt - Date.now());
-      if (Date.now() < token.expiresAt) {
+      if (Date.now() <= token.expiresAt) {
         return token;
       }
 

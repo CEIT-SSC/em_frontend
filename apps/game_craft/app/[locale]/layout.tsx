@@ -174,7 +174,7 @@ export default async function LocaleLayout({
         <ThemeProvider
           defaultTheme="light"
           enableSystem={true}
-          attribute="data-theme"
+          attribute={["data-theme", "class"]}
         >
           <SoundProvider>
             <AntdRegistry>

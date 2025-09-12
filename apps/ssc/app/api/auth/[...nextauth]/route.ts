@@ -174,7 +174,7 @@ export const authOptions: AuthOptions = {
       }
 
       // Return previous token if the access token has not expired yet
-      if (Date.now() < (token.expiresAt as number)) {
+      if (Date.now() <= (token.expiresAt as number)) {
         return token;
       }
 

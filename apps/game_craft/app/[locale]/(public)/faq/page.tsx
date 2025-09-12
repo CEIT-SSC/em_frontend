@@ -3,7 +3,7 @@
 import { Flex, theme, Typography, Collapse, Space, Card } from "antd";
 import { useTranslations } from "next-intl";
 import { QuestionCircleOutlined } from "@ant-design/icons";
-import { useResponsive } from "@/lib/hooks/useResponsive";
+import { useResponsive } from "lib/hooks/useResponsive";
 
 const { useToken } = theme;
 

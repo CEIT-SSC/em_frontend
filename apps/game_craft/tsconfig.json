@@ -5,12 +5,14 @@
     "outDir": "dist",
     "allowJs": true,
     "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "module": "esnext",
     "esModuleInterop": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noUnusedParameters": false,
-    "noUnusedLocals": false,
     "jsx": "preserve",
     "plugins": [
       {
@@ -18,10 +20,6 @@
       }
     ],
     "target": "ES2017",
-    "strict": false,
-    "noEmit": true,
-    "incremental": true,
-    "module": "esnext"
   },
   "include": [
     "next-env.d.ts",

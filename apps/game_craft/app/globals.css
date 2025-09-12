@@ -18,7 +18,7 @@
 }
 
 html {
-    cursor: url("/cursor/SuperMarioHand-pointer.cur"), pointer;
+    cursor: url("/cursor/SuperMarioHand-pointer.cur");
 }
 
 a,
@@ -50,9 +50,6 @@ body {
     --font-estedad: 'Estedad';
     --font-vazirmatn: 'Vazirmatn';
 }
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 /* RTL support */
 [dir="rtl"] {
