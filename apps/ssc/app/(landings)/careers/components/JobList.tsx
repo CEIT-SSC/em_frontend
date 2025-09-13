@@ -54,9 +54,10 @@ const JobList = () => {
         </div>
       </div>
       <div className="flex w-full flex-col gap-9 py-6 sm:px-8">
-        <JobOffer offer={sampleOffer} type="job" />
-        <JobOffer offer={sampleOffer} type="boot_camp" />
-        <JobOffer offer={sampleOffer} type="team" />
+        <h4 className="text-2xl font-bold text-center text-gray-100 opacity-60">
+          فعلا آگهی شغلی نداریم!
+        </h4>
+        {/* <JobOffer offer={sampleOffer} type="job" /> */}
       </div>
     </div>
   );

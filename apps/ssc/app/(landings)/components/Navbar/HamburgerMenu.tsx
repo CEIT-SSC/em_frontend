@@ -19,7 +19,7 @@ const HamburgerMenu = () => {
   const menuLayout = clsx(
     "fixed top-0 left-0 w-[100vw] h-[100vh] bg-(--MainGray)",
     "z-99 flex flex-col *:h-full",
-    "transition-opacity transition-5000",
+    "transition-opacity !transition-500",
     {
       "opacity-100 pointer-events-auto": isOpen,
       "opacity-0 pointer-events-none": !isOpen,
