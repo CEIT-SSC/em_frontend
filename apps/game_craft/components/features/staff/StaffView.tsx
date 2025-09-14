@@ -2,7 +2,7 @@
 
 import { Flex } from "antd";
 import { StaffContainer } from "./StaffContainer";
-import { useResponsive } from "@/lib/hooks/useResponsive";
+import {useResponsive} from "../../../lib/hooks/useResponsive";
 
 export function StaffView() {
   const screens = useResponsive();
