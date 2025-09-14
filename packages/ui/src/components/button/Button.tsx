@@ -57,16 +57,18 @@ export const Button = ({
   const isText = variant === ButtonVariant.TEXT;
   const isOutline = variant === ButtonVariant.OUTLINE;
 
+  const radiusClass =
+    className.match(/\brounded(?:-[^\s]+)?\b/) || "rounded-lg";
+
   return (
     <button
       className={clsx(
-        "relative h-full cursor-pointer",
-        "overflow-hidden p-px rounded-lg",
+        "relative cursor-pointer",
+        "overflow-hidden p-px",
         "text-bold",
         "flex justify-center items-center",
         {
           "default-gradient": !isSecondary && !isText,
-          "bg-transparent": isSecondary,
           "bg-black border-1 border-whiteText": isOutline,
           "px-3 py-2": !isText,
           "!bg-none bg-gray-500 text-gray-300": disable,
@@ -74,7 +76,8 @@ export const Button = ({
           [sizeClasses[size]]: !isText,
         },
         variantClasses[variant],
-        className
+        className,
+        radiusClass
       )}
       type={type}
       onClick={onClick}
