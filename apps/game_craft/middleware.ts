@@ -1,7 +1,6 @@
 import { withAuth } from "next-auth/middleware";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./lib/routing";
-import { NextRequest } from "next/server";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -37,6 +36,6 @@ export default withAuth(
 
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|images|sound|assets|public|svg|.*\\.svg|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.webp|.*\\.ico|.*\\.css|.*\\.js|.*\\.woff|.*\\.woff2|.*\\.ttf|.*\\.otf).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|images|sound|assets|public|svg|.*\\.cur|.*\\.lottie|.*\\.svg|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.webp|.*\\.ico|.*\\.css|.*\\.js|.*\\.woff|.*\\.woff2|.*\\.ttf|.*\\.otf|not-found|error).*)",
   ],
 };

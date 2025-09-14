@@ -1,5 +1,11 @@
 import { Presentation } from "../Presentation/presentation";
 
+export enum ItemType {
+  PRESENTATION = "presentation",
+  SOLO_COMPETITION = "solo_competition",
+  COMPETITION_TEAM = "competition_team",
+}
+
 export interface Cart {
   id: number;
   user: number;
@@ -9,7 +15,6 @@ export interface Cart {
   subtotal_amount: string;
   discount_amount: string;
   total_amount: string;
-  created_at: string; // ISO datetime
 }
 
 export interface CartItem {
@@ -26,7 +31,7 @@ export interface CartItem {
 }
 
 export interface ItemDetails {
-  item_type: string;
+  item_type: ItemType;
   presentation?: Presentation;
   solo_competition?: SoloCompetition;
   competition_team?: CompetitionTeam;
@@ -51,8 +56,6 @@ export interface SoloCompetition {
 }
 
 export interface CompetitionTeam {
-  id: number;
-  name: string;
   leader_details: TeamLeader;
   group_competition_title: string;
   status: string; // e.g. "pending_admin_verification"

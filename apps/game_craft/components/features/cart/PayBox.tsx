@@ -1,104 +1,76 @@
-'use client';
+"use client";
 
-import {Button, Divider, Flex, theme, Typography} from 'antd';
-
-const {useToken} = theme;
+import { cartPaymentDataSelector } from "lib/store/cart/cart.selectors";
+import { useAppSelector } from "lib/store/store";
 
 export function PayBox() {
-    const {token} = useToken();
+  const paymentData = useAppSelector(cartPaymentDataSelector);
 
-    // Sample cart totals
-    const subtotal = 75000;
-    const discount = 0;
-    const total = subtotal - discount;
+  return (
+    <div className="w-full flex flex-col items-center justify-center p-4 pt-0 z-[1000] gap-3">
+      {/* Dashed Divider */}
+      <div className="w-full border-t border-dashed border-antd-border-primary dark:border-antd-dark-border-primary"></div>
 
-    return (
-        <Flex
-            vertical
-            align="center"
-            justify="center"
-            style={{
-                width: '100%',
-                padding: token.padding,
-                paddingTop: 0,
-                zIndex: 1000,
-            }}
-            gap="small"
-        >
-            <Divider variant="dashed" type="horizontal" style={{borderColor: token.colorBorder}}/>
+      {/* Discount Code Section */}
+      <div className="w-full flex items-center justify-between gap-4">
+        {paymentData.discountCode ? (
+          <>
+            <span className="text-antd-text dark:text-antd-dark-text">
+              کد تخفیف دارید؟
+            </span>
+            <button className="px-3 py-2 border-3 border-antd-border-primary dark:border-antd-dark-border-primary rounded-full border-dashed text-antd-text dark:text-antd-dark-text bg-transparent transition-colors duration-200 text-sm hover:bg-antd-primary cursor-pointer">
+              وارد کردن
+            </button>
+          </>
+        ) : (
+          <span className="text-antd-text-secondary dark:text-antd-dark-text-secondary">
+            کد تخفیف شما: {paymentData.discountCode}
+          </span>
+        )}
+      </div>
 
-            <Flex
-                align="center"
-                justify="space-between"
-                style={{
-                    width: '100%',
-                }}
-                gap="middle"
-            >
-                <Typography.Text>
-                    کد تخفیف دارید؟
-                </Typography.Text>
-                <Button type="dashed">
-                    وارد کردن
-                </Button>
-            </Flex>
+      {/* Totals Section */}
+      <div className="w-full flex flex-col items-center justify-center gap-3">
+        {/* Subtotal */}
+        <div className="w-full flex items-center justify-between">
+          <span className="text-antd-text dark:text-antd-dark-text">
+            جمع کل:
+          </span>
+          <span className="font-semibold text-antd-text dark:text-antd-dark-text">
+            {paymentData.subTotal.toLocaleString()} تومان
+          </span>
+        </div>
 
-            <Flex
-                vertical
-                align="center"
-                justify="center"
-                style={{
-                    width: '100%',
-                }}
-                gap="small"
-            >
-                <Flex
-                    align="center"
-                    justify="space-between"
-                    style={{width: '100%'}}
-                >
-                    <Typography.Text>جمع کل:</Typography.Text>
-                    <Typography.Text strong>
-                        {subtotal.toLocaleString()} تومان
-                    </Typography.Text>
-                </Flex>
+        {/* Discount (only show if discount > 0) */}
+        {paymentData.discountAmount > 0 && (
+          <div className="w-full flex items-center justify-between">
+            <span className="text-antd-text-secondary dark:text-antd-dark-text-secondary">
+              تخفیف:
+            </span>
+            <span className="text-antd-success">
+              -{paymentData.discountAmount.toLocaleString()} تومان
+            </span>
+          </div>
+        )}
 
-                {discount > 0 && (
-                    <Flex
-                        align="center"
-                        justify="space-between"
-                        style={{width: '100%'}}
-                    >
-                        <Typography.Text type="secondary">تخفیف:</Typography.Text>
-                        <Typography.Text type="success">
-                            -{discount.toLocaleString()} تومان
-                        </Typography.Text>
-                    </Flex>
-                )}
+        {/* Solid Divider */}
+        <div className="w-full border-t border-solid border-antd-border-primary dark:border-antd-dark-border-primary my-2"></div>
 
-                <Divider variant={"solid"} style={{margin: '8px 0', borderColor: token.colorBorder}}/>
+        {/* Final Total */}
+        <div className="w-full flex items-center justify-between">
+          <h5 className="text-lg font-semibold text-antd-text dark:text-antd-dark-text m-0">
+            مبلغ نهایی:
+          </h5>
+          <h5 className="text-lg font-semibold text-antd-primary m-0">
+            {paymentData.total.toLocaleString()} تومان
+          </h5>
+        </div>
 
-                <Flex
-                    align="center"
-                    justify="space-between"
-                    style={{width: '100%'}}
-                >
-                    <Typography.Title level={5} style={{margin: 0}}>
-                        مبلغ نهایی:
-                    </Typography.Title>
-                    <Typography.Title level={5} style={{margin: 0, color: token.colorPrimary}}>
-                        {total.toLocaleString()} تومان
-                    </Typography.Title>
-                </Flex>
-
-                <Button type="primary" size="large" block style={{marginTop: token.margin}}>
-                    <Flex align="center" justify="center" gap="small">
-                        <Typography.Text style={{fontWeight: 900, color: 'white'}}>
-                            پرداخت
-                        </Typography.Text>
-                    </Flex>
-                </Button>
-            </Flex>
-        </Flex>
-    );
+        {/* Payment Button */}
+        <button className="w-full bg-antd-primary hover:bg-antd-primary-hover active:bg-antd-primary-active text-white font-bold py-3 px-6 rounded-lg mt-4 transition-colors duration-200 flex items-center justify-center">
+          <span className="font-black">پرداخت</span>
+        </button>
+      </div>
+    </div>
+  );
 }

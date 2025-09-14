@@ -7,6 +7,7 @@ import AuthData from "./AuthData";
 import ActiveLink from "./ActiveLink";
 import { navbarItems } from "./Navbar";
 import { usePathname } from "next/navigation";
+import Hamburger from "hamburger-react";
 
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);

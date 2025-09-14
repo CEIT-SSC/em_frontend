@@ -18,7 +18,7 @@
       "title": "Event Timeline",
       "step1": {
         "title": "Registration Begin",
-        "schedule": "September 6th"
+        "schedule": "September 16th"
       },
       "step2": {
         "title": "Presentations Begin",
@@ -179,15 +179,15 @@
       "title": "Prizes",
       "firstTeam": {
         "title": "First Place",
-        "prize": "9 Million Toman"
+        "prize": "18 Million Toman"
       },
       "secondTeam": {
         "title": "Second Place",
-        "prize": "6 Million Toman"
+        "prize": "15 Million Toman"
       },
       "thirdTeam": {
         "title": "Third Place",
-        "prize": "3 Million Toman"
+        "prize": "12 Million Toman"
       }
     },
     "sponsors": {
@@ -252,6 +252,9 @@
     "500": "Internal Server Error"
   },
   "workshop": {
+    "price": "Price",
+    "description": "Description",
+    "schedule": "Schedule",
     "inPerson": "In Person",
     "online": "Online",
     "addToCart": "Add to Cart",
@@ -276,5 +279,11 @@
   "common": {
     "currency": "Toman",
     "retry": "Retry"
+  },
+  "notFound": {
+    "title": "Oops! Page Not Found",
+    "description": "It looks like the page you're looking for doesn't exist. Mario couldn't find it in any of the castle levels!",
+    "goHome": "Go Home",
+    "goBack": "Go Back"
   }
 }

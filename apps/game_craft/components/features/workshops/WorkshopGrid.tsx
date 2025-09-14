@@ -6,13 +6,11 @@ import { PresentationOverview } from "@ssc/core";
 
 interface WorkshopGridProps {
   presentations?: PresentationOverview[];
-  onAddToCart?: (presentation: PresentationOverview) => void; // Made optional
   workshopImage?: string; // Add optional image prop
 }
 
 export function WorkshopGrid({
   presentations = [],
-  onAddToCart,
   workshopImage,
 }: WorkshopGridProps) {
   return (
@@ -45,8 +43,8 @@ export function WorkshopGrid({
           }}
         >
           <WorkshopCard
-            id={presentation.id}
-            workshopImage={workshopImage} // Pass the image prop to WorkshopCard
+            presentation={presentation}
+            workshopImage={workshopImage}
           />
         </Col>
       ))}

@@ -9,6 +9,7 @@ import { useTheme } from "next-themes";
 import { useMainNavigations } from "../../lib/config/navigation";
 import { useAuth } from "../../lib/hooks/useAuth";
 import { useRouter } from "@bprogress/next";
+import { signIn } from "next-auth/react";
 
 const { useToken } = theme;
 
@@ -161,7 +162,11 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
                   style={{ flex: 1 }}
                   size="large"
                   type="dashed"
-                  onClick={() => handleNavigation("/auth/login")}
+                  onClick={() =>
+                    signIn("ssc", {
+                      callbackUrl: "/dashboard",
+                    })
+                  }
                 >
                   {t("auth.login")}
                 </Button>
@@ -169,7 +174,11 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
                   style={{ flex: 1 }}
                   type="primary"
                   size="large"
-                  onClick={() => handleNavigation("/auth/signup")}
+                  onClick={() =>
+                    signIn("ssc", {
+                      callbackUrl: "/dashboard",
+                    })
+                  }
                 >
                   {t("auth.signUp")}
                 </Button>

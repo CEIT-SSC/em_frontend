@@ -5,8 +5,9 @@ import { WorkshopGrid } from "./WorkshopGrid";
 import { useTranslations } from "next-intl";
 import { useResponsive } from "../../../lib/hooks/useResponsive";
 import { useEffect, useMemo, useState } from "react";
-import { PresentationsList } from "@ssc/core";
+import { PresentationsList, PresentationType } from "@ssc/core";
 import { clientApi } from "lib/api/client/clientApi";
+import { eventId } from "lib/utils/constants";
 
 interface OfflineWorkshopProps {
   padding?: string;
@@ -27,7 +28,12 @@ export function OfflineWorkshop({
 
   useEffect(() => {
     clientApi.presentations
-      .getPresentationsList("game_craft_2024", false, false, "workshop")
+      .getPresentationsList(
+        eventId,
+        undefined,
+        undefined,
+        PresentationType.WORKSHOP
+      )
       .then((response) => {
         if (response.status === 200) {
           setPresentations({

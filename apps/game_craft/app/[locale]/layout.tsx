@@ -10,6 +10,9 @@ import AuthProvider from "components/providers/AuthProvider";
 import AntDesignProvider from "components/providers/AntDesignProvider";
 import Providers from "components/Providers";
 import { routing } from "lib/routing";
+import { Provider } from "react-redux";
+import { store } from "lib/store/store";
+import StoreProvider from "components/providers/StoreProvider";
 
 // Font definitions
 const estedad = localFont({
@@ -150,17 +153,8 @@ export default async function LocaleLayout({
   children,
   params,
 }: LocaleLayoutProps) {
-  // Await params in Next.js 15
   const { locale } = await params;
-
-  // Validate that the incoming `locale` parameter is valid
-  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
-    notFound();
-  }
-
-  // Providing all messages to the client side is the easiest way to get started
   const messages = await getMessages();
-
   const direction = locale === "fa" ? "rtl" : "ltr";
 
   return (
@@ -171,23 +165,25 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
-        <ThemeProvider
-          defaultTheme="light"
-          enableSystem={true}
-          attribute={["data-theme", "class"]}
-        >
-          <SoundProvider>
-            <AntdRegistry>
-              <NextIntlClientProvider messages={messages}>
-                <AuthProvider>
-                  <AntDesignProvider direction={direction}>
-                    <Providers>{children}</Providers>
-                  </AntDesignProvider>
-                </AuthProvider>
-              </NextIntlClientProvider>
-            </AntdRegistry>
-          </SoundProvider>
-        </ThemeProvider>
+        <StoreProvider>
+          <ThemeProvider
+            defaultTheme="light"
+            enableSystem={true}
+            attribute={["data-theme", "class"]}
+          >
+            <SoundProvider>
+              <AntdRegistry>
+                <NextIntlClientProvider messages={messages}>
+                  <AuthProvider>
+                    <AntDesignProvider direction={direction}>
+                      <Providers>{children}</Providers>
+                    </AntDesignProvider>
+                  </AuthProvider>
+                </NextIntlClientProvider>
+              </AntdRegistry>
+            </SoundProvider>
+          </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   );

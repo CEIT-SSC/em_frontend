@@ -9,6 +9,12 @@ export interface PresenterDetail {
   created_at: string; // ISO datetime
 }
 
+export enum PresentationType {
+  COURSE = "course",
+  TALK = "talk",
+  WORKSHOP = "workshop",
+}
+
 export interface Presentation {
   id: PresentationId;
   event: number;
@@ -16,7 +22,7 @@ export interface Presentation {
   title: string;
   description: string;
   presenters_details: PresenterDetail[];
-  type: string;
+  type: PresentationType;
   is_online: boolean;
   location: string;
   online_link: string;
@@ -27,18 +33,29 @@ export interface Presentation {
   capacity: number;
   created_at: string; // ISO datetime
   is_active: boolean;
+  poster: string;
 }
 
 export type PresentationOverview = Pick<
   Presentation,
-  "id" | "title" | "description" | "is_active"
-> & {
-  start_date: string;
-  end_date: string;
-  poster: string;
-  landing_url: string;
-  manager: string;
-};
+  | "id"
+  | "event"
+  | "event_title"
+  | "title"
+  | "description"
+  | "presenters_details"
+  | "type"
+  | "is_online"
+  | "location"
+  | "online_link"
+  | "start_time"
+  | "end_time"
+  | "is_paid"
+  | "price"
+  | "capacity"
+  | "is_active"
+  | "poster"
+>;
 
 export type PresentationsList = {
   count: number;
