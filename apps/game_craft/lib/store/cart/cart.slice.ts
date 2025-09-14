@@ -24,74 +24,57 @@ const cartSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchCartThunk.fulfilled, (state, action) => {
-      state.items = action.payload.items;
-      state.count = action.payload.items.length;
-      state.error = null;
-      console.log("!@!!!!!!! it's not pending now");
-      state.loading = false;
-    });
-    builder.addCase(fetchCartThunk.rejected, (state, action) => {
-      state.items = [];
-      state.count = 0;
-      state.error = action.payload as string;
-      console.log("!@!!!!!!! it's not pending now");
-      state.loading = false;
-    });
-    builder.addCase(addItemToCartThunk.pending, (state) => {
-      console.log("!@! it's pending now");
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(addItemToCartThunk.fulfilled, (state, action) => {
-      state.items = action.payload.items;
-      state.count = action.payload.items.length;
-      state.error = null;
-      console.log("!@!!!!!!! it's not pending now");
-      state.loading = false;
-    });
-    builder.addCase(addItemToCartThunk.rejected, (state, action) => {
-      state.error = action.payload as string;
-      console.log("!@!!!!!!! it's not pending now");
-      state.loading = false;
-    });
-    builder.addCase(removeItemFromCartThunk.fulfilled, (state, action) => {
-      state.items = action.payload.items;
-      state.count = action.payload.items.length;
-      state.error = null;
-      console.log("!@!!!!!!! it's not pending now");
-      state.loading = false;
-    });
-    builder.addCase(removeItemFromCartThunk.rejected, (state, action) => {
-      state.error = action.payload as string;
-      console.log("!@!!!!!!! it's not pending now");
-      state.loading = false;
-    });
+    builder.addAsyncThunk(fetchCartThunk, {
+      pending: (state) => {
+        state.loading = true;
+        state.error = null;
+      },
+      fulfilled: (state, action) => {
+        state.items = action.payload.items;
+        state.count = action.payload.items.length;
+        state.error = null;
+        state.loading = false;
+      },
 
-    builder.addCase(fetchCartThunk.pending, (state) => {
-      console.log("!@! it's pending now");
-      state.loading = true;
-      state.error = null;
+      rejected: (state, action) => {
+        state.items = [];
+        state.count = 0;
+        state.error = action.payload as string;
+        state.loading = false;
+      },
     });
-    builder.addCase(removeItemFromCartThunk.pending, (state) => {
-      console.log("!@! it's pending now");
-      state.loading = true;
-      state.error = null;
+    builder.addAsyncThunk(addItemToCartThunk, {
+      pending: (state) => {
+        state.loading = true;
+        state.error = null;
+      },
+      fulfilled: (state, action) => {
+        state.items = action.payload.items;
+        state.count = action.payload.items.length;
+        state.error = null;
+        state.loading = false;
+      },
+      rejected: (state, action) => {
+        state.error = action.payload as string;
+        state.loading = false;
+      },
     });
-
-    // builder.addMatcher(
-    //   (action) =>
-    //     [
-    //       fetchCartThunk.pending,
-    //       addItemToCartThunk.pending,
-    //       removeItemFromCartThunk,
-    //     ].includes(action.type),
-    //   (state) => {
-    //     console.log("!@! it's pending now");
-    //     state.loading = true;
-    //     state.error = null;
-    //   }
-    // );
+    builder.addAsyncThunk(removeItemFromCartThunk, {
+      pending: (state) => {
+        state.loading = true;
+        state.error = null;
+      },
+      fulfilled: (state, action) => {
+        state.items = action.payload.items;
+        state.count = action.payload.items.length;
+        state.error = null;
+        state.loading = false;
+      },
+      rejected: (state, action) => {
+        state.error = action.payload as string;
+        state.loading = false;
+      },
+    });
   },
 });
 

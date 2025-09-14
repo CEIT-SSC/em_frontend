@@ -47,7 +47,9 @@ export function WorkshopCard({
   const [showModal, setShowModal] = useState(false);
   const { formatNumberToMoney } = useFormatter();
   const dispatch = useAppDispatch();
-  const itemInCart = useAppSelector(itemInCartSelector(presentation.id));
+  const itemInCart = useAppSelector(
+    itemInCartSelector(presentation.id, ItemType.PRESENTATION)
+  );
   const buttonShouldBeDisabled = useAppSelector(cartLoadingSelector);
   const [buttonLoading, setButtonLoading] = useState(false);
   const { isAuthenticated } = useAuth();

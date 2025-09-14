@@ -1,4 +1,3 @@
-import { AxiosInstance } from "axios";
 import { ApiClient } from "../ApiClient";
 import { apiPath, ApiPath } from "../../types/ApiPaths";
 import { Cart, ItemType } from "../../types/api/Shop/Shop";
