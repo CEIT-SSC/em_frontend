@@ -24,8 +24,7 @@ export const cartLoadingSelector = createSelector(
   (cart) => cart.loading
 );
 
-export const isItemInCartSelector = (id: number) =>
-  createSelector(
-    [cartItemsSelector],
-    (items) => items.findIndex((item) => item.object_id === id) !== -1
+export const itemInCartSelector = (id: number) =>
+  createSelector([cartItemsSelector], (items) =>
+    items.find((item) => item.object_id === id)
   );

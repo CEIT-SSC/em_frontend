@@ -9,6 +9,12 @@ export interface PresenterDetail {
   created_at: string; // ISO datetime
 }
 
+export enum PresentationType {
+  COURSE = "course",
+  TALK = "talk",
+  WORKSHOP = "workshop",
+}
+
 export interface Presentation {
   id: PresentationId;
   event: number;
@@ -16,7 +22,7 @@ export interface Presentation {
   title: string;
   description: string;
   presenters_details: PresenterDetail[];
-  type: string;
+  type: PresentationType;
   is_online: boolean;
   location: string;
   online_link: string;

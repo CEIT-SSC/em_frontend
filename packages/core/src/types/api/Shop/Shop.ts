@@ -7,21 +7,14 @@ export enum ItemType {
 }
 
 export interface Cart {
-  success: true;
-  statusCode: 200;
-  message: "Request was successful.";
-  errors: object;
-  data: {
-    id: number;
-    user: number;
-    applied_discount_code: number;
-    discount_code: string;
-    items: CartItem[];
-    subtotal_amount: string;
-    discount_amount: string;
-    total_amount: string;
-    created_at: string; // ISO datetime
-  };
+  id: number;
+  user: number;
+  applied_discount_code: number;
+  discount_code: string;
+  items: CartItem[];
+  subtotal_amount: string;
+  discount_amount: string;
+  total_amount: string;
 }
 
 export interface CartItem {

@@ -4,7 +4,7 @@ import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
 import { ItemType, PresentationOverview } from "@ssc/core";
 import PresentersAvatar from "../presentersAvatar/PresentersAvatar";
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useMemo, useState } from "react";
 import {
   IoCloseOutline,
   IoTimeOutline,
@@ -19,7 +19,7 @@ import { useFormatter } from "lib/hooks/useFormatter";
 import { useAppDispatch, useAppSelector } from "lib/store/store";
 import {
   cartLoadingSelector,
-  isItemInCartSelector,
+  itemInCartSelector,
 } from "lib/store/cart/cart.selectors";
 import clsx from "clsx";
 import { MdDeleteOutline } from "react-icons/md";
@@ -27,6 +27,8 @@ import {
   addItemToCartThunk,
   removeItemFromCartThunk,
 } from "lib/store/cart/cart.thunk";
+import { toast } from "react-toastify";
+import { useAuth } from "lib/hooks/useAuth";
 
 interface WorkshopCardProps {
   workshopImage?: string;
@@ -45,9 +47,14 @@ export function WorkshopCard({
   const [showModal, setShowModal] = useState(false);
   const { formatNumberToMoney } = useFormatter();
   const dispatch = useAppDispatch();
-  const isSelected = useAppSelector(isItemInCartSelector(presentation.id));
+  const itemInCart = useAppSelector(itemInCartSelector(presentation.id));
   const buttonShouldBeDisabled = useAppSelector(cartLoadingSelector);
   const [buttonLoading, setButtonLoading] = useState(false);
+  const { isAuthenticated } = useAuth();
+
+  const isSelected = useMemo(() => {
+    return itemInCart !== undefined;
+  }, [itemInCart]);
 
   // Color palette
   const colorStripes = ["#4CAF50", "#2196F3", "#FFC107", "#F44336"];
@@ -65,7 +72,12 @@ export function WorkshopCard({
   };
 
   const handleAddToCart = () => {
-    if (buttonShouldBeDisabled) return;
+    if (buttonShouldBeDisabled) {
+      if (!isAuthenticated) {
+        toast.error("لطفا وارد حساب خود شوید");
+      }
+      return;
+    }
     setButtonLoading(true);
     dispatch(
       addItemToCartThunk({
@@ -81,7 +93,7 @@ export function WorkshopCard({
   const removeFromCart = () => {
     if (buttonShouldBeDisabled) return;
     setButtonLoading(true);
-    dispatch(removeItemFromCartThunk(presentation.id))
+    dispatch(removeItemFromCartThunk(itemInCart.id))
       .unwrap()
       .catch()
       .finally(() => setButtonLoading(false));
@@ -221,7 +233,7 @@ export function WorkshopCard({
                   presentation.is_active && !buttonShouldBeDisabled,
                 "bg-gray-300 dark:bg-gray-600 text-white":
                   !presentation.is_active && !buttonShouldBeDisabled,
-                "bg-red-500 text-white": isSelected,
+                "bg-red-500 text-white": isSelected && !buttonShouldBeDisabled,
               })}
             />
           </div>

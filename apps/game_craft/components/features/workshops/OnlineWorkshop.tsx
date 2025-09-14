@@ -6,8 +6,9 @@ import { WorkshopGrid } from "./WorkshopGrid";
 import { useTranslations } from "next-intl";
 import { useResponsive } from "../../../lib/hooks/useResponsive";
 import { useEffect, useMemo, useState } from "react";
-import { PresentationsList } from "@ssc/core";
+import { PresentationsList, PresentationType } from "@ssc/core";
 import { clientApi } from "lib/api/client/clientApi";
+import { eventId } from "lib/utils/constants";
 
 const { useToken } = theme;
 
@@ -31,7 +32,12 @@ export function OnlineWorkshop({
 
   useEffect(() => {
     clientApi.presentations
-      .getPresentationsList("game_craft_2024", true, false, "workshop")
+      .getPresentationsList(
+        eventId,
+        undefined,
+        undefined,
+        PresentationType.TALK
+      )
       .then((response) => {
         if (response.status === 200) {
           setPresentations({
@@ -110,7 +116,7 @@ export function OnlineWorkshop({
             textAlign: "center",
           }}
         >
-          {t("workshop.onlineWorkshops")}
+          {t("workshop.onlineTalks")}
         </Typography.Title>
 
         {content}

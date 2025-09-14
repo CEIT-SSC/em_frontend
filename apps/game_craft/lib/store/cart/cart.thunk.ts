@@ -9,7 +9,7 @@ export const fetchCartThunk = createAppAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await thunkAPI.extra.Api.shop.fetchCart(eventId);
-      const data = response.data.data.data;
+      const data = response.data.data;
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -25,7 +25,7 @@ export const addItemToCartThunk = createAppAsyncThunk(
         params.item_type,
         params.item_id
       );
-      const data = response.data.data as unknown as Cart["data"];
+      const data = response.data.data as unknown as Cart;
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -38,7 +38,7 @@ export const removeItemFromCartThunk = createAppAsyncThunk(
   async (item_id: number, thunkAPI) => {
     try {
       const response = await thunkAPI.extra.Api.shop.removeItem(item_id);
-      const data = response.data.data as unknown as Cart["data"];
+      const data = response.data.data as unknown as Cart;
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
