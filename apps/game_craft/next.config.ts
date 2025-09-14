@@ -7,6 +7,9 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 const nextConfig: NextConfig = {
+  env: {
+    GAME_CRAFT_SSC_EVENT_ID: process.env.GAME_CRAFT_SSC_EVENT_ID,
+  },
   transpilePackages: ["@ssc/ui", "@ssc/utils", "@ssc/core"],
   modularizeImports: {
     antd: {

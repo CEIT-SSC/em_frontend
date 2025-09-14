@@ -1,7 +1,7 @@
 "use client";
 
 import { theme } from "antd";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { WorkshopGrid } from "components/features/workshops/WorkshopGrid";
@@ -123,7 +123,9 @@ export default function EventsPage() {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/auth/login");
+      signIn("ssc", {
+        callbackUrl: "/dashboard",
+      });
     }
   }, [status, router]);
 

@@ -5,4 +5,4 @@ export * from "./api/axiosInstances/clientApiService";
 export * from "./types/api/Auth/Auth";
 export * from "./types/api/Presentation/presentation";
 export * from "./api/constants";
-export * from "./types/api/Cart/Cart";
+export * from "./types/api/Shop/Shop";

@@ -252,6 +252,9 @@
     "500": "Internal Server Error"
   },
   "workshop": {
+    "price": "Price",
+    "description": "Description",
+    "schedule": "Schedule",
     "inPerson": "In Person",
     "online": "Online",
     "addToCart": "Add to Cart",
@@ -276,5 +279,11 @@
   "common": {
     "currency": "Toman",
     "retry": "Retry"
+  },
+  "notFound": {
+    "title": "Oops! Page Not Found",
+    "description": "It looks like the page you're looking for doesn't exist. Mario couldn't find it in any of the castle levels!",
+    "goHome": "Go Home",
+    "goBack": "Go Back"
   }
 }
