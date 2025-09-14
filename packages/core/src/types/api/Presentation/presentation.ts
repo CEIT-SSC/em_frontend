@@ -27,18 +27,29 @@ export interface Presentation {
   capacity: number;
   created_at: string; // ISO datetime
   is_active: boolean;
+  poster: string;
 }
 
 export type PresentationOverview = Pick<
   Presentation,
-  "id" | "title" | "description" | "is_active"
-> & {
-  start_date: string;
-  end_date: string;
-  poster: string;
-  landing_url: string;
-  manager: string;
-};
+  | "id"
+  | "event"
+  | "event_title"
+  | "title"
+  | "description"
+  | "presenters_details"
+  | "type"
+  | "is_online"
+  | "location"
+  | "online_link"
+  | "start_time"
+  | "end_time"
+  | "is_paid"
+  | "price"
+  | "capacity"
+  | "is_active"
+  | "poster"
+>;
 
 export type PresentationsList = {
   count: number;

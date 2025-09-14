@@ -1,15 +1,6 @@
 "use client";
 
-import {
-  Button,
-  Divider,
-  Flex,
-  Layout,
-  Space,
-  Splitter,
-  Switch,
-  theme,
-} from "antd";
+import { Button, Divider, Flex, Layout, Space, Switch, theme } from "antd";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useRouter as useNextIntlRouter } from "../../lib/navigation";
@@ -24,9 +15,10 @@ import { useSound } from "../../components/providers/SoundProvider";
 import { useMainNavigations } from "../../lib/config/navigation";
 import { useAuth } from "lib/hooks/useAuth";
 import { useRouter } from "@bprogress/next";
-import { signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { FaCircleUser } from "react-icons/fa6";
 import { MdGamepad } from "react-icons/md";
+import CartIcon from "components/features/cart/CartIcon";
 
 const { useToken } = theme;
 const { Header } = Layout;
@@ -198,11 +190,13 @@ export function AppHeader() {
                     </Button>
                   </>
                 ) : (
-                  <div
-                    onClick={() => router.push("/dashboard/events")}
-                    className="flex items-center gap-2"
-                  >
-                    <FaCircleUser size={24} />
+                  <div className="flex items-center gap-2">
+                    <CartIcon />
+                    <FaCircleUser
+                      className="cursor-pointer"
+                      size={24}
+                      onClick={() => router.push("/dashboard/events")}
+                    />
                     {user.name}
                   </div>
                 )

@@ -9,7 +9,7 @@ import {
 
 export class PresentationsApi extends ApiClient {
   async getPresentationsList(
-    event: string,
+    event: number,
     isOnline: boolean,
     isPaid: boolean,
     type: string
