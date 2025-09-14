@@ -60,20 +60,20 @@ export function AppFooter() {
                   <Image
                     src="/assets/svg/dark-3d.svg"
                     alt="logo"
-                    width={60}
-                    height={60}
+                    width={70}
+                    height={70}
                   />
                 </a>
                 <a
-                  href={sscSocialLinks.telegram}
+                  href={sscSocialLinks.website}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <Image
                     src="/assets/images/ssc_white.png"
                     alt="aut-computer-engineering-logo"
-                    width={60}
-                    height={60}
+                    width={70}
+                    height={70}
                   />
                 </a>
                 <a
@@ -84,8 +84,8 @@ export function AppFooter() {
                   <Image
                     src="/assets/images/Asset4.png"
                     alt="tehran-art-logo"
-                    width={60}
-                    height={60}
+                    width={70}
+                    height={70}
                   />
                 </a>
               </Flex>
@@ -120,13 +120,13 @@ export function AppFooter() {
                   icon={<TelegramIcon color={"white"} />}
                   href={gameCraftSocialLinks.telegram}
                 />
-                <Button
-                  type="text"
-                  shape="circle"
-                  size="large"
-                  icon={<LinkedinFilled style={{ color: "white" }} />}
-                  href={gameCraftSocialLinks.linkedin}
-                />
+                {/*<Button*/}
+                {/*  type="text"*/}
+                {/*  shape="circle"*/}
+                {/*  size="large"*/}
+                {/*  icon={<LinkedinFilled style={{ color: "white" }} />}*/}
+                {/*  href={gameCraftSocialLinks.linkedin}*/}
+                {/*/>*/}
               </Flex>
             </Col>
           </Row>

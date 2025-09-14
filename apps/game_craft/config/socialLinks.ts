@@ -16,5 +16,6 @@ export const sscSocialLinks = {
     telegram: "https://t.me/ceit_ssc",
     twitter: "https://twitter.com/ceit_ssc",
     linkedin: "https://www.linkedin.com/school/students-scientific-chapter/",
+    website: "https://ceit-ssc.ir/",
     youtube: "",
 } as const;
