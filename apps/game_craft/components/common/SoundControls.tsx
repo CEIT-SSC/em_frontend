@@ -1,8 +1,9 @@
 "use client";
 
-import { useSound } from "@/components/providers/SoundProvider";
-import { Button } from "@/components/ui/button";
-import { Volume2, VolumeX } from "lucide-react";
+
+import {useSound} from "../providers/SoundProvider";
+import {Button} from "antd";
+import {SoundFilled, SoundOutlined} from "@ant-design/icons";
 
 export function SoundControls() {
   const { toggle, muted, volume, changeVolume } = useSound();
@@ -10,12 +11,10 @@ export function SoundControls() {
   return (
     <div className="flex items-center gap-2">
       <Button
-        variant="ghost"
-        size="icon"
         onClick={toggle}
         className="h-8 w-8"
       >
-        {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+        {muted ? <SoundOutlined /> : <SoundFilled />}
       </Button>
 
       <input
