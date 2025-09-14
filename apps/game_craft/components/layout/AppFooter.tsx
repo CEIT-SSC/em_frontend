@@ -120,13 +120,13 @@ export function AppFooter() {
                   icon={<TelegramIcon color={"white"} />}
                   href={gameCraftSocialLinks.telegram}
                 />
-                <Button
-                  type="text"
-                  shape="circle"
-                  size="large"
-                  icon={<LinkedinFilled style={{ color: "white" }} />}
-                  href={gameCraftSocialLinks.linkedin}
-                />
+                {/*<Button*/}
+                {/*  type="text"*/}
+                {/*  shape="circle"*/}
+                {/*  size="large"*/}
+                {/*  icon={<LinkedinFilled style={{ color: "white" }} />}*/}
+                {/*  href={gameCraftSocialLinks.linkedin}*/}
+                {/*/>*/}
               </Flex>
             </Col>
           </Row>
