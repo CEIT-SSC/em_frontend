@@ -67,7 +67,7 @@ export function DashboardHeader() {
           onClick={() => toggleDrawerOpen()}
         />
         <Image
-          src="svg/dark-3d.svg"
+          src="/svg/dark-3d.svg"
           alt="gamecraft-logo"
           width={60}
           height={40}
