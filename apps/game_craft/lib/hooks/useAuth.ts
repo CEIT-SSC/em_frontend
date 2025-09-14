@@ -23,7 +23,5 @@ export const useAuth = () => {
     [session]
   );
 
-  console.log("!@!", session);
-
   return { isLoading, isAuthenticated, user, logout };
 };

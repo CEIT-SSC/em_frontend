@@ -1,7 +1,6 @@
 "use client";
 
 import { theme } from "antd";
-import { WorkshopCard } from "../../../../components/features/workshops/WorkshopCard";
 import { PayBox } from "../../../../components/features/cart/PayBox";
 import ProductCart from "components/features/cart/ProductCart";
 

@@ -196,7 +196,9 @@ const authOptions: AuthOptions = {
           userWithTokens.accessToken = account.access_token;
           userWithTokens.refreshToken = account.refresh_token;
           userWithTokens.tokenType = account.token_type || "Bearer";
-          userWithTokens.expiresIn = (account.expires_in as number) || 3600;
+          userWithTokens.expiresIn =
+            new Date().getTime() +
+            ((account.expires_in as number) || 900) * 1000; // Convert to milliseconds
           return true;
         } catch (error) {
           console.error("Error handling SSC OAuth tokens:", error);
@@ -256,8 +258,8 @@ const authOptions: AuthOptions = {
       }
 
       // Return previous token if the access token has not expired yet
-      console.log("!@! refreshing", token.expiresAt - Date.now());
-      if (Date.now() <= token.expiresAt) {
+      console.log("!@! refreshing", token.expiresIn - Date.now());
+      if (Date.now() <= token.expiresIn) {
         return token;
       }
 
@@ -291,24 +293,6 @@ const authOptions: AuthOptions = {
 
               return token;
             }
-          }
-        } else {
-          // For other providers, use serverApi refresh
-          const response = await serverApi.auth.refresh();
-
-          if (response.status === 200 && response.data?.success) {
-            const newTokenData = response.data.data;
-
-            token.accessToken = newTokenData.access_token;
-            token.refreshToken = newTokenData.refresh_token;
-            token.tokenType = newTokenData.token_type;
-            token.expiresIn = newTokenData.expires_in;
-
-            // Update expiry time
-            const expiresAt = Date.now() + newTokenData.expires_in * 1000;
-            token.expiresAt = expiresAt;
-
-            return token;
           }
         }
       } catch (error) {

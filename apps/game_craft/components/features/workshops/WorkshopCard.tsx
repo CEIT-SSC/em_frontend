@@ -1,55 +1,63 @@
 "use client";
 
-import {
-  Card,
-  Typography,
-  Avatar,
-  Button,
-  Flex,
-  theme,
-  Badge,
-  Skeleton,
-} from "antd";
-import {
-  ClockCircleOutlined,
-  UserOutlined,
-  ShoppingCartOutlined,
-} from "@ant-design/icons";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
-import { PresentationId, PresentationOverview } from "@ssc/core";
-import useFetch from "lib/hooks/useFetch";
-import { clientApi } from "lib/api/client/clientApi";
-import { digitsToHindi, tomanFormat } from "@ssc/utils";
+import { ItemType, PresentationOverview } from "@ssc/core";
 import PresentersAvatar from "../presentersAvatar/PresentersAvatar";
-const { useToken } = theme;
+import { use, useEffect, useMemo, useState } from "react";
+import {
+  IoCloseOutline,
+  IoTimeOutline,
+  IoCartOutline,
+  IoLocationOutline,
+  IoLinkOutline,
+  IoEyeOutline,
+} from "react-icons/io5";
+import { Button, ButtonVariant, ButtonSize } from "@ssc/ui";
+import { createPortal } from "react-dom";
+import { useFormatter } from "lib/hooks/useFormatter";
+import { useAppDispatch, useAppSelector } from "lib/store/store";
+import {
+  cartLoadingSelector,
+  itemInCartSelector,
+} from "lib/store/cart/cart.selectors";
+import clsx from "clsx";
+import { MdDeleteOutline } from "react-icons/md";
+import {
+  addItemToCartThunk,
+  removeItemFromCartThunk,
+} from "lib/store/cart/cart.thunk";
+import { toast } from "react-toastify";
+import { useAuth } from "lib/hooks/useAuth";
 
 interface WorkshopCardProps {
-  onAddToCart?: () => void; // Made optional since we're not using it for now
-  workshopImage?: string; // Add optional image prop
-  id: PresentationId;
+  workshopImage?: string;
+  presentation: PresentationOverview;
 }
 
+// simple RTL detection (Persian/Arabic Unicode ranges)
+const isRTL = (text?: string) =>
+  !!text && /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/.test(text);
+
 export function WorkshopCard({
-  id,
+  presentation,
   workshopImage,
-  onAddToCart,
 }: WorkshopCardProps) {
-  const { token } = useToken();
   const t = useTranslations();
+  const [showModal, setShowModal] = useState(false);
+  const { formatNumberToMoney } = useFormatter();
+  const dispatch = useAppDispatch();
+  const itemInCart = useAppSelector(itemInCartSelector(presentation.id));
+  const buttonShouldBeDisabled = useAppSelector(cartLoadingSelector);
+  const [buttonLoading, setButtonLoading] = useState(false);
+  const { isAuthenticated } = useAuth();
 
-  const { loading, error, data } = useFetch(
-    (id: PresentationId) => clientApi.presentations.getPresentationDetails(id),
-    id,
-    { immediate: true }
-  );
+  const isSelected = useMemo(() => {
+    return itemInCart !== undefined;
+  }, [itemInCart]);
 
-  // Color palette based on theme
-  const cardBg = token.colorBgElevated;
+  // Color palette
   const colorStripes = ["#4CAF50", "#2196F3", "#FFC107", "#F44336"];
-  const textPrimary = token.colorText;
-  const textSecondary = token.colorTextSecondary;
-  const borderColor = token.colorBorder;
 
   // Format date and time
   const formatDateTime = (dateTimeString: string) => {
@@ -63,369 +71,340 @@ export function WorkshopCard({
     });
   };
 
-  // Loading state
-  if (loading) {
-    return (
-      <Card
-        style={{
-          width: "100%",
-          minWidth: "250px",
-          maxWidth: "100%",
-          borderRadius: token.borderRadiusLG,
-          overflow: "hidden",
-          border: "none",
-          backgroundColor: cardBg,
-          boxShadow: token.boxShadow,
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-        }}
-        styles={{
-          body: {
-            padding: 0,
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-          },
-        }}
-      >
-        {/* Header Image Skeleton */}
-        <div
-          style={{
-            position: "relative",
-            paddingTop: "56.25%", // 16:9 aspect ratio
-            backgroundColor: token.colorBgContainer,
-          }}
-        >
-          <Skeleton.Image
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              width: "100%",
-              height: "100%",
-            }}
-            active
+  const handleAddToCart = () => {
+    if (buttonShouldBeDisabled) {
+      if (!isAuthenticated) {
+        toast.error("لطفا وارد حساب خود شوید");
+      }
+      return;
+    }
+    setButtonLoading(true);
+    dispatch(
+      addItemToCartThunk({
+        item_type: ItemType.PRESENTATION,
+        item_id: presentation.id,
+      })
+    )
+      .unwrap()
+      .catch()
+      .finally(() => setButtonLoading(false));
+  };
+
+  const removeFromCart = () => {
+    if (buttonShouldBeDisabled) return;
+    setButtonLoading(true);
+    dispatch(removeItemFromCartThunk(itemInCart.id))
+      .unwrap()
+      .catch()
+      .finally(() => setButtonLoading(false));
+  };
+
+  useEffect(() => {
+    document.body.style.overflow = showModal ? "hidden" : "auto";
+  }, [showModal]);
+
+  const titleIsRTL = isRTL(presentation.title);
+  const descriptionIsRTL = isRTL(presentation.description);
+
+  return (
+    <>
+      {/* Workshop Card */}
+      <div className="w-full min-w-[250px] max-w-full bg-antd-bg-base dark:bg-antd-dark-bg-container rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
+        {/* Header Image with Stripes */}
+        <div className="relative pt-[56.25%]">
+          {/* Workshop Image */}
+          <Image
+            src={workshopImage || "/placeholder-workshop.jpg"}
+            alt="workshop"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-          {/* Colored Stripes Skeleton */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              display: "flex",
-              zIndex: 1,
-            }}
-          >
+
+          {/* Colored Stripes */}
+          <div className="absolute top-0 left-0 right-0 flex z-10">
             {colorStripes.map((color, index) => (
               <div
                 key={index}
-                style={{
-                  height: "4px",
-                  flex: 1,
-                  backgroundColor: color,
-                  opacity: 0.3,
-                }}
+                className="h-1 flex-1"
+                style={{ backgroundColor: color }}
               />
             ))}
           </div>
+
+          {/* View Details Button */}
+          <div className="absolute bottom-4 right-4">
+            <Button
+              onClick={() => setShowModal(true)}
+              label="جزئیات بیشتر"
+              variant={ButtonVariant.PRIMARY}
+              size={ButtonSize.SMALL}
+              prefixIcon={IoEyeOutline}
+              className="!rounded-full !min-w-fit !leading-3 !pb-2.5 !h-fit bg-black/70 hover:bg-black/90 text-white border-none"
+            />
+          </div>
         </div>
 
-        {/* Content Skeleton */}
-        <Flex
-          vertical
-          style={{
-            padding: "16px",
-            flex: 1,
-            gap: "12px",
-          }}
-        >
-          {/* Title Skeleton */}
-          <Skeleton title={{ width: "80%" }} paragraph={false} active />
-
-          {/* Description Skeleton */}
-          <Skeleton
-            title={false}
-            paragraph={{ rows: 3, width: ["100%", "90%", "70%"] }}
-            active
-          />
-
-          {/* Date and Time Skeleton */}
-          <Flex align="center" gap="small">
-            <Skeleton.Avatar size="small" active />
-            <Skeleton title={{ width: 150 }} paragraph={false} active />
-          </Flex>
-
-          {/* Location Skeleton */}
-          <Skeleton title={{ width: 120 }} paragraph={false} active />
-
-          {/* Presenters Label Skeleton */}
-          <Skeleton title={{ width: 80 }} paragraph={false} active />
-
-          {/* Presenters Avatar Skeleton */}
-          <Flex gap="small" align="center">
-            <Flex style={{ position: "relative" }}>
-              <Skeleton.Avatar size={32} active />
-              <Skeleton.Avatar size={32} active style={{ marginLeft: -8 }} />
-              <Skeleton.Avatar size={32} active style={{ marginLeft: -8 }} />
-            </Flex>
-            <Skeleton title={{ width: 100 }} paragraph={false} active />
-          </Flex>
-
-          {/* Price and Button Skeleton */}
-          <Flex
-            justify="space-between"
-            align="center"
+        {/* Content */}
+        <div className="p-4 flex-1 flex flex-col gap-3">
+          {/* Title */}
+          <h3
+            dir={titleIsRTL ? "rtl" : "ltr"}
             style={{
-              marginTop: "auto",
-              paddingTop: "12px",
-              borderTop: `1px solid ${borderColor}`,
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+            }}
+            className="text-lg font-semibold text-antd-text dark:text-antd-dark-text leading-6 overflow-hidden"
+          >
+            {presentation.title}
+          </h3>
+
+          {/* Description */}
+          <p
+            dir={descriptionIsRTL ? "rtl" : "ltr"}
+            className="text-antd-text-secondary dark:text-antd-dark-text-secondary text-sm leading-6 overflow-hidden"
+            style={{
+              display: "-webkit-box",
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: "vertical",
             }}
           >
-            <Skeleton title={{ width: 80 }} paragraph={false} active />
-            <Skeleton.Button
-              style={{
-                width: 120,
-                height: 36,
-                borderRadius: "8px",
-              }}
-              active
+            {presentation.description}
+          </p>
+
+          {/* Date and Time */}
+          <div className="mt-auto flex items-center gap-2 text-antd-text-secondary dark:text-antd-dark-text-secondary">
+            <IoTimeOutline size={16} className="text-antd-primary" />
+            <span className="text-sm">
+              {formatDateTime(presentation.start_time)}
+            </span>
+          </div>
+
+          {/* Location/Link */}
+          {presentation.location && !presentation.is_online && (
+            <div className="flex items-center gap-2 text-antd-text-secondary dark:text-antd-dark-text-secondary">
+              <IoLocationOutline size={16} className="text-antd-success" />
+              <span className="text-sm">{presentation.location}</span>
+            </div>
+          )}
+          {presentation.online_link && presentation.is_online && (
+            <div className="flex items-center gap-2 text-antd-text-secondary dark:text-antd-dark-text-secondary">
+              <IoLinkOutline size={16} className="text-antd-primary" />
+              <span className="text-sm">{t("workshop.onlineLink")}</span>
+            </div>
+          )}
+
+          {/* Presenters Label */}
+          <p className="text-antd-text-secondary dark:text-antd-dark-text-secondary text-sm opacity-70">
+            {t("workshop.presenters")}:
+          </p>
+
+          {/* Presenters */}
+          <PresentersAvatar presenters={presentation.presenters_details} />
+
+          {/* Price and Add to Cart */}
+          <div className="flex justify-between items-center mt-auto pt-3 border-t border-gray-200 dark:border-gray-700">
+            <div className="text-lg font-semibold text-antd-text dark:text-antd-dark-text">
+              {presentation.is_paid
+                ? `${formatNumberToMoney(presentation.price)} ${t(
+                    "common.currency"
+                  )}`
+                : t("workshop.free")}
+            </div>
+            <Button
+              onClick={isSelected ? removeFromCart : handleAddToCart}
+              disable={!presentation.is_active || buttonShouldBeDisabled}
+              variant={
+                presentation.is_active
+                  ? ButtonVariant.PRIMARY
+                  : ButtonVariant.SECONDARY
+              }
+              size={ButtonSize.SMALL}
+              prefixIcon={isSelected ? MdDeleteOutline : IoCartOutline}
+              label={
+                isSelected
+                  ? t("workshop.removeFromCart")
+                  : t("workshop.addToCart")
+              }
+              loading={buttonLoading}
+              className={clsx("border-none", {
+                "bg-antd-primary hover:bg-antd-primary-hover text-white":
+                  presentation.is_active && !buttonShouldBeDisabled,
+                "bg-gray-300 dark:bg-gray-600 text-white":
+                  !presentation.is_active && !buttonShouldBeDisabled,
+                "bg-red-500 text-white": isSelected && !buttonShouldBeDisabled,
+              })}
             />
-          </Flex>
-        </Flex>
-      </Card>
-    );
-  }
-
-  // Error state
-  if (error || !data) {
-    return (
-      <Card
-        style={{
-          width: "100%",
-          minWidth: "250px",
-          maxWidth: "100%",
-          borderRadius: token.borderRadiusLG,
-          overflow: "hidden",
-          border: "none",
-          backgroundColor: cardBg,
-          boxShadow: token.boxShadow,
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-        }}
-        styles={{
-          body: {
-            padding: "16px",
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          },
-        }}
-      >
-        <Flex
-          vertical
-          align="center"
-          justify="center"
-          gap="medium"
-          style={{ height: "100%" }}
-        >
-          <Typography.Text type="secondary" style={{ fontSize: "16px" }}>
-            {error ? t("workshop.error") : "Failed to load workshop"}
-          </Typography.Text>
-          <Button
-            type="default"
-            size="small"
-            onClick={() => window.location.reload()}
-          >
-            {t("common.retry")}
-          </Button>
-        </Flex>
-      </Card>
-    );
-  }
-
-  const presentation = data.data.data;
-
-  return (
-    <Card
-      style={{
-        width: "100%",
-        minWidth: "250px",
-        maxWidth: "100%",
-        borderRadius: token.borderRadiusLG,
-        overflow: "hidden",
-        border: "none",
-        backgroundColor: cardBg,
-        boxShadow: token.boxShadow,
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-      }}
-      styles={{
-        body: {
-          padding: 0,
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-        },
-      }}
-    >
-      {/* Header Image with Stripes */}
-      <div
-        style={{
-          position: "relative",
-          paddingTop: "56.25%", // 16:9 aspect ratio
-        }}
-      >
-        {/* Workshop Image */}
-        <Image
-          src={workshopImage}
-          alt={"workshop"}
-          fill
-          style={{
-            objectFit: "cover",
-          }}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-
-        {/* Colored Stripes */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            display: "flex",
-            zIndex: 1,
-          }}
-        >
-          {colorStripes.map((color, index) => (
-            <div
-              key={index}
-              style={{ height: "4px", flex: 1, backgroundColor: color }}
-            />
-          ))}
+          </div>
         </div>
       </div>
 
-      {/* Content */}
-      <Flex
-        vertical
-        style={{
-          padding: "16px",
-          flex: 1,
-          gap: "12px",
-        }}
-      >
-        {/* Title and Badge */}
-        <Flex vertical gap="small">
-          <Typography.Title
-            level={4}
-            style={{
-              margin: 0,
-              fontSize: "18px",
-              lineHeight: 1.4,
-            }}
-            ellipsis={{ rows: 2 }}
-          >
-            {presentation.title}
-          </Typography.Title>
-        </Flex>
+      {/* Modal */}
+      {showModal &&
+        createPortal(
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[999999] p-4">
+            <div className="bg-antd-bg-elevated dark:bg-antd-dark-bg-elevated rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+              {/* Modal Header */}
+              <div className="sticky top-0 bg-antd-bg-elevated dark:bg-antd-dark-bg-elevated border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex justify-between items-start">
+                <h2
+                  dir={titleIsRTL ? "rtl" : "ltr"}
+                  className="text-2xl font-bold text-antd-text dark:text-antd-dark-text pr-8"
+                >
+                  {presentation.title}
+                </h2>
+                <IoCloseOutline
+                  onClick={() => setShowModal(false)}
+                  size={36}
+                  className="cursor-pointer text-antd-text-secondary dark:text-antd-dark-text-secondary hover:text-antd-text dark:hover:text-antd-dark-text !p-1 !min-w-fit"
+                />
+              </div>
 
-        {/* Description */}
-        <Typography.Paragraph
-          style={{
-            color: textSecondary,
-            margin: 0,
-            fontSize: "14px",
-            lineHeight: 1.6,
-          }}
-          ellipsis={{ rows: 3 }}
-        >
-          {presentation.description}
-        </Typography.Paragraph>
+              {/* Modal Content */}
+              <div className="p-6">
+                {/* Workshop Image */}
+                {workshopImage && (
+                  <div className="relative w-full h-64 mb-6 rounded-lg overflow-hidden">
+                    <Image
+                      src={workshopImage}
+                      alt="workshop"
+                      fill
+                      className="object-cover"
+                    />
+                    {/* Colored Stripes */}
+                    <div className="absolute top-0 left-0 right-0 flex">
+                      {colorStripes.map((color, index) => (
+                        <div
+                          key={index}
+                          className="h-1 flex-1"
+                          style={{ backgroundColor: color }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
 
-        {/* Date and Time */}
-        <Flex align="center" gap="small">
-          <ClockCircleOutlined style={{ color: token.colorPrimary }} />
-          <Typography.Text style={{ color: textSecondary, fontSize: "14px" }}>
-            {formatDateTime(presentation.start_time)}
-          </Typography.Text>
-        </Flex>
+                {/* Workshop Details */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Left Column */}
+                  <div className="space-y-6">
+                    {/* Description */}
+                    <div>
+                      <h3 className="text-lg font-semibold text-antd-text dark:text-antd-dark-text mb-3">
+                        {t("workshop.description")}
+                      </h3>
+                      <p
+                        dir={descriptionIsRTL ? "rtl" : "ltr"}
+                        className="text-antd-text-secondary dark:text-antd-dark-text-secondary leading-7 whitespace-pre-line"
+                      >
+                        {presentation.description}
+                      </p>
+                    </div>
 
-        {/* Location/Link */}
-        {presentation.location && !presentation.is_online && (
-          <Typography.Text style={{ color: textSecondary, fontSize: "14px" }}>
-            📍 {presentation.location}
-          </Typography.Text>
+                    {/* Date and Time */}
+                    <div>
+                      <h3 className="text-lg font-semibold text-antd-text dark:text-antd-dark-text mb-3">
+                        {t("workshop.schedule")}
+                      </h3>
+                      <div className="flex items-center gap-3 text-antd-text-secondary dark:text-antd-dark-text-secondary">
+                        <IoTimeOutline
+                          size={20}
+                          className="text-antd-primary"
+                        />
+                        <span>{formatDateTime(presentation.start_time)}</span>
+                      </div>
+                    </div>
+
+                    {/* Location */}
+                    {presentation.location !== null && (
+                      <div>
+                        <h3 className="text-lg font-semibold text-antd-text dark:text-antd-dark-text mb-3">
+                          Location
+                        </h3>
+                        {presentation.location && !presentation.is_online && (
+                          <div className="flex items-center gap-3 text-antd-text-secondary dark:text-antd-dark-text-secondary">
+                            <IoLocationOutline
+                              size={20}
+                              className="text-antd-success"
+                            />
+                            <span>{presentation.location}</span>
+                          </div>
+                        )}
+                        {presentation.online_link && presentation.is_online && (
+                          <div className="flex items-center gap-3 text-antd-text-secondary dark:text-antd-dark-text-secondary">
+                            <IoLinkOutline
+                              size={20}
+                              className="text-antd-primary"
+                            />
+                            <span>{t("workshop.onlineLink")}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Right Column */}
+                  <div className="space-y-6">
+                    {/* Presenters */}
+                    <div>
+                      <h3 className="text-lg font-semibold text-antd-text dark:text-antd-dark-text mb-3">
+                        {t("workshop.presenters")}
+                      </h3>
+                      <PresentersAvatar
+                        presenters={presentation.presenters_details}
+                      />
+                    </div>
+
+                    {/* Price */}
+                    <div>
+                      <h3 className="text-lg font-semibold text-antd-text dark:text-antd-dark-text mb-3">
+                        {t("workshop.price")}
+                      </h3>
+                      <div className="text-2xl font-bold text-antd-text dark:text-antd-dark-text">
+                        {presentation.is_paid
+                          ? `${formatNumberToMoney(presentation.price)} ${t(
+                              "common.currency"
+                            )}`
+                          : t("workshop.free")}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="sticky bottom-0 bg-antd-bg-elevated dark:bg-antd-dark-bg-elevated border-t border-gray-200 dark:border-gray-700 px-6 py-4 flex justify-end gap-3">
+                <Button
+                  onClick={() => {
+                    handleAddToCart();
+                    setShowModal(false);
+                  }}
+                  disable={!presentation.is_active}
+                  variant={
+                    presentation.is_active
+                      ? ButtonVariant.PRIMARY
+                      : ButtonVariant.SECONDARY
+                  }
+                  size={ButtonSize.MEDIUM}
+                  prefixIcon={IoCartOutline}
+                  label={
+                    presentation.is_paid
+                      ? t("workshop.addToCart")
+                      : t("workshop.enroll")
+                  }
+                  className={`
+                  ${
+                    presentation.is_active
+                      ? "bg-antd-primary hover:bg-antd-primary-hover text-white"
+                      : "bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400"
+                  }
+                `}
+                />
+              </div>
+            </div>
+          </div>,
+          document.body
         )}
-        {presentation.online_link && presentation.is_online && (
-          <Typography.Text style={{ color: textSecondary, fontSize: "14px" }}>
-            🔗 {t("workshop.onlineLink")}
-          </Typography.Text>
-        )}
-
-        {/* Presenters Label */}
-        <Typography.Text
-          style={{
-            color: textSecondary,
-            fontSize: "14px",
-            opacity: 0.7,
-          }}
-        >
-          {t("workshop.presenters")}:
-        </Typography.Text>
-
-        {/* Instructor */}
-        <PresentersAvatar presenters={presentation.presenters_details} />
-
-        {/* Price and Add to Cart */}
-        <Flex
-          justify="space-between"
-          align="center"
-          style={{
-            marginTop: "auto",
-            paddingTop: "12px",
-            borderTop: `1px solid ${borderColor}`,
-          }}
-        >
-          <Typography.Title
-            level={5}
-            style={{
-              margin: 0,
-              fontSize: "16px",
-            }}
-          >
-            {presentation.is_paid
-              ? digitsToHindi(tomanFormat(presentation.price))
-              : t("workshop.free")}{" "}
-            {presentation.is_paid && t("common.currency")}
-          </Typography.Title>
-          <Button
-            type="primary"
-            icon={<ShoppingCartOutlined />}
-            onClick={() => {
-              // TODO: Implement registration/cart functionality
-              console.log(`Action for presentation: ${presentation.title}`);
-            }}
-            style={{
-              borderRadius: "8px",
-              height: "36px",
-            }}
-            disabled={!presentation.is_active}
-          >
-            {presentation.is_paid
-              ? t("workshop.addToCart")
-              : t("workshop.enroll")}
-          </Button>
-        </Flex>
-      </Flex>
-    </Card>
+    </>
   );
 }

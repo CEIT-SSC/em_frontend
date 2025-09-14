@@ -15,6 +15,11 @@ export enum ApiPath {
   // Presentations endpoints
   PRESENTATIONS_GET_LIST = "/presentations/",
   PRESENTATIONS_GET_DETAILS = "/presentations/{id}/",
+
+  // Shop
+  SHOP_CART = "/cart/",
+  SHOP_ADD_ITEM = "/cart/items/",
+  SHOP_REMOVE_ITEM = "/cart/items/{id}/remove/",
 }
 
 export const apiPath = (
@@ -29,6 +34,5 @@ export const apiPath = (
     });
   }
 
-  console.log("!@! ", url, options);
   return url; // was /api/path before
 };

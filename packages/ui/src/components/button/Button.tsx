@@ -63,6 +63,7 @@ export const Button = ({
         "relative h-full cursor-pointer",
         "overflow-hidden p-px rounded-lg",
         "text-bold",
+        "flex justify-center items-center",
         {
           "default-gradient": !isSecondary && !isText,
           "bg-transparent": isSecondary,
@@ -79,7 +80,7 @@ export const Button = ({
       onClick={onClick}
     >
       {loading && (
-        <AiOutlineLoading className=" absolute top-1/2 left-1/2 -translate-1/2 animate-spin" />
+        <AiOutlineLoading className="absolute top-1/2 left-1/2 -translate-1/2 animate-spin" />
       )}
       <div
         className={clsx("flex gap-2 justify-center items-center", {
