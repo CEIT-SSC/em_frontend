@@ -93,9 +93,14 @@ export function WorkshopCard({
   };
 
   const removeFromCart = () => {
-    if (buttonShouldBeDisabled) return;
+    if (buttonShouldBeDisabled || !itemInCart) return;
     setButtonLoading(true);
-    dispatch(removeItemFromCartThunk(itemInCart.id))
+    dispatch(
+      removeItemFromCartThunk({
+        item_id: itemInCart.id,
+        item_type: ItemType.PRESENTATION,
+      })
+    )
       .unwrap()
       .catch()
       .finally(() => setButtonLoading(false));

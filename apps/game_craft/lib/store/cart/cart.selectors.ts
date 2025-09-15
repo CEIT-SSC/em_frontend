@@ -4,12 +4,12 @@ import { ItemType } from "@ssc/core";
 
 export const cartSelector = (state: RootState) => state.cart;
 
-export const cartItemsSelector = createSelector(
+export const cartPresentationsSelector = createSelector(
   [cartSelector],
-  (cart) => cart.items
+  (cart) => cart.presentations
 );
 
-export const cartItemsCountSelector = createSelector(
+export const cartPresentationsCountSelector = createSelector(
   [cartSelector],
   (cart) => cart.count
 );
@@ -25,20 +25,24 @@ export const cartLoadingSelector = createSelector(
 );
 
 export const itemInCartSelector = (id: number, type: ItemType) =>
-  createSelector([cartItemsSelector], (items) =>
-    items.find((item) => {
-      switch (type) {
-        case ItemType.PRESENTATION:
-          return item.item_details.presentation?.id === id;
-        case ItemType.SOLO_COMPETITION:
-          return item.item_details.solo_competition?.id === id;
-        case ItemType.COMPETITION_TEAM:
-          return item.item_details.competition_team?.leader_details.id === id;
-        default:
-          return false;
-      }
-    })
-  );
+  createSelector([cartPresentationsSelector], (presentation) => {
+    switch (type) {
+      case ItemType.PRESENTATION:
+        console.log(
+          "!@!",
+          presentation.findIndex((item) => item.id === id),
+          id,
+          type
+        );
+        return presentation.find((item) => item.id === id);
+      case ItemType.SOLO_COMPETITION:
+        return false;
+      case ItemType.COMPETITION_TEAM:
+        return false;
+      default:
+        return false;
+    }
+  });
 
 export const cartPaymentDataSelector = createSelector(
   [cartSelector],

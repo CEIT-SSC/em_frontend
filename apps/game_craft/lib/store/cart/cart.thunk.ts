@@ -21,12 +21,9 @@ export const addItemToCartThunk = createAppAsyncThunk(
   "cart/addItem",
   async (params: { item_type: ItemType; item_id: number }, thunkAPI) => {
     try {
-      const response = await thunkAPI.extra.Api.shop.addItem(
-        params.item_type,
-        params.item_id
-      );
-      const data = response.data.data as unknown as Cart;
-      return thunkAPI.fulfillWithValue(data);
+      await thunkAPI.extra.Api.shop.addItem(params.item_type, params.item_id);
+      thunkAPI.dispatch(fetchCartThunk());
+      return;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -35,11 +32,11 @@ export const addItemToCartThunk = createAppAsyncThunk(
 
 export const removeItemFromCartThunk = createAppAsyncThunk(
   "cart/removeItem",
-  async (item_id: number, thunkAPI) => {
+  async (args: { item_id: number; item_type: ItemType }, thunkAPI) => {
     try {
-      const response = await thunkAPI.extra.Api.shop.removeItem(item_id);
-      const data = response.data.data as unknown as Cart;
-      return thunkAPI.fulfillWithValue(data);
+      thunkAPI.extra.Api.shop.removeItem(args.item_id, args.item_type);
+      thunkAPI.dispatch(fetchCartThunk());
+      return;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

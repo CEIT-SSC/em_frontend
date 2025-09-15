@@ -1,7 +1,7 @@
 "use client";
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Cart, CartItem } from "@ssc/core";
+import { Cart, Presentation } from "@ssc/core";
 import {
   addItemToCartThunk,
   applyBonusCodeThunk,
@@ -10,7 +10,7 @@ import {
 } from "./cart.thunk";
 
 const initialState = {
-  items: [] as CartItem[],
+  presentations: [] as Presentation[],
   count: 0,
   discountCode: null as string | null,
   discountAmount: 0,
@@ -31,14 +31,18 @@ const cartSlice = createSlice({
         state.error = null;
       },
       fulfilled: (state, action) => {
-        state.items = action.payload.items;
-        state.count = action.payload.items.length;
+        state.presentations = action.payload.presentations;
+        state.count = action.payload.presentations.length;
+        state.discountCode = action.payload.discount_code;
+        state.discountAmount = action.payload.discount_amount;
+        state.subTotal = action.payload.subtotal_amount;
+        state.total = action.payload.total_amount;
         state.error = null;
         state.loading = false;
       },
 
       rejected: (state, action) => {
-        state.items = [];
+        state.presentations = [];
         state.count = 0;
         state.error = action.payload as string;
         state.loading = false;
@@ -49,12 +53,6 @@ const cartSlice = createSlice({
         state.loading = true;
         state.error = null;
       },
-      fulfilled: (state, action) => {
-        state.items = action.payload.items;
-        state.count = action.payload.items.length;
-        state.error = null;
-        state.loading = false;
-      },
       rejected: (state, action) => {
         state.error = action.payload as string;
         state.loading = false;
@@ -64,12 +62,6 @@ const cartSlice = createSlice({
       pending: (state) => {
         state.loading = true;
         state.error = null;
-      },
-      fulfilled: (state, action) => {
-        state.items = action.payload.items;
-        state.count = action.payload.items.length;
-        state.error = null;
-        state.loading = false;
       },
       rejected: (state, action) => {
         state.error = action.payload as string;
@@ -82,12 +74,12 @@ const cartSlice = createSlice({
         state.error = null;
       },
       fulfilled: (state, action: PayloadAction<Cart>) => {
-        state.items = action.payload.items;
-        state.count = action.payload.items.length;
-        // state.discountCode = action.payload.discountCode;
-        // state.discountAmount = action.payload.discountAmount;
-        // state.subTotal = action.payload.subTotal;
-        // state.total = action.payload.total;
+        state.presentations = action.payload.presentations;
+        state.count = action.payload.presentations.length;
+        state.discountCode = action.payload.discount_code;
+        state.discountAmount = action.payload.discount_amount;
+        state.subTotal = action.payload.subtotal_amount;
+        state.total = action.payload.total_amount;
         state.error = null;
         state.loading = false;
       },

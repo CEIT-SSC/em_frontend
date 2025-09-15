@@ -15,7 +15,9 @@ export const useDashboardNavigations = (): DashboardNavigationItem[] => {
     {
       name: t("profile.label"),
       // route: `/${locale}/dashboard/events`,
-      route: "https://ceit-ssc.ir/dashabord",
+      route: `${
+        process.env.NEXT_PUBLIC_SSC_URL || "https://ceit-ssc.ir"
+      }/dashboard`,
       icon: <FaExternalLinkAlt />,
     },
     {

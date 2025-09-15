@@ -1,29 +1,29 @@
+// /home/duckwichtrust/Desktop/Projects/event-manager/em_frontend/packages/core/src/types/api/Order/Order.ts
+
 export type OrderStatus =
   | "pending_payment"
   | "paid"
+  | "failed"
   | "cancelled"
-  | "refunded"
-  | (string & {});
+  | string;
 
-export interface OrderItem {
-  id: number;
-  description: string;
-  price: string; // monetary value as string (e.g. "-43638.3")
-  content_type: number;
-  object_id: number;
-  event_id: number;
-  item_type: string;
-  item_title: string;
-}
-
-export interface Order {
-  id: number;
-  order_id: string;
-  total_amount: string; // monetary value as string (e.g. "50657208.0")
+export type Order = {
+  order_id: string; // uuid
+  user: number;
+  user_email: string;
+  event: number;
+  presentations: string;
+  solo_competitions: string;
+  competition_teams: string;
+  products: string;
+  subtotal_amount: string; // monetary values kept as strings (e.g. "-.")
+  discount_code_applied: number; // backend provided 0/1
+  discount_code_str: string;
+  discount_amount: string;
+  total_amount: string;
   status: OrderStatus;
-  created_at: string; // ISO 8601 timestamp
-  paid_at: string | null; // ISO 8601 timestamp or null
-  items: OrderItem[];
-}
-
-export type Orders = Order[];
+  payment_gateway_authority: string | null;
+  payment_gateway_txn_id: string | null;
+  created_at: string; // ISO timestamp
+  paid_at: string | null; // ISO timestamp or null if not paid
+};

@@ -29,9 +29,13 @@ export class ShopApi extends ApiClient {
     );
   }
 
-  async removeItem(item_id: number) {
-    return await this.Api.delete<Cart, RequestResponse<Cart>>(
-      apiPath(ApiPath.SHOP_REMOVE_ITEM, { id: item_id }),
+  async removeItem(item_id: number, item_type: ItemType) {
+    return await this.Api.post<Cart, RequestResponse<Cart>>(
+      apiPath(ApiPath.SHOP_REMOVE_ITEM),
+      {
+        item_type,
+        item_id,
+      },
       {
         requiresAuth: true,
       }

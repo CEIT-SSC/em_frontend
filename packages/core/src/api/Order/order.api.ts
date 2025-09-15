@@ -2,16 +2,18 @@ import { ApiClient } from "../ApiClient";
 import { apiPath, ApiPath } from "../../types/ApiPaths";
 import { RequestResponse } from "../../types/api/general";
 import { Order } from "../../types/api/Order/Order";
+import { query } from "express";
 
 export class OrderApi extends ApiClient {
-  async partialCheckout(itemIds: number[]) {
+  async checkout(event: number) {
     return await this.Api.post<Order, RequestResponse<Order>>(
       apiPath(ApiPath.ORDER_CREATE_PARTIAL_CHECKOUT),
-      {
-        cart_item_ids: itemIds,
-      },
+      undefined,
       {
         requiresAuth: true,
+        params: {
+          event,
+        },
       }
     );
   }

@@ -1,25 +1,32 @@
 "use client";
 
-import { Button, ButtonVariant } from "@ssc/ui";
 import {
-  cartItemsSelector,
+  cartPresentationsSelector,
   cartLoadingSelector,
   cartPaymentDataSelector,
 } from "lib/store/cart/cart.selectors";
-import { checkoutThunk, partialCheckout } from "lib/store/order/order.thunk";
+import { createAndCheckoutThunk } from "lib/store/order/order.thunk";
 import { useAppDispatch, useAppSelector } from "lib/store/store";
 import { useCallback } from "react";
-import { CgSpinnerTwoAlt } from "react-icons/cg";
-import {Flex, Divider, Typography, Button as AntButton, theme, Spin} from 'antd';
+import {
+  Flex,
+  Divider,
+  Typography,
+  Button as AntButton,
+  theme,
+  Spin,
+} from "antd";
+import { useFormatter } from "lib/hooks/useFormatter";
 
 const { useToken } = theme;
 
 export function PayBox() {
   const dispatch = useAppDispatch();
-  const cartItems = useAppSelector(cartItemsSelector);
+  const cartItems = useAppSelector(cartPresentationsSelector);
   const paymentData = useAppSelector(cartPaymentDataSelector);
   const loading = useAppSelector(cartLoadingSelector);
   const { token } = useToken();
+  const { formatNumberToMoney } = useFormatter();
 
   const applyDiscount = () => {
     // TODO: handling discount code
@@ -27,7 +34,7 @@ export function PayBox() {
   };
 
   const checkout = useCallback(() => {
-    dispatch(checkoutThunk(cartItems.map((item) => item.id)))
+    dispatch(createAndCheckoutThunk(cartItems.map((item) => item.id)))
       .unwrap()
       .then((res) => {
         window.open(res.payment_url, "_blank");
@@ -43,9 +50,9 @@ export function PayBox() {
         align="center"
         justify="center"
         style={{
-          width: '100%',
+          width: "100%",
           padding: token.padding,
-          height: '200px'
+          height: "200px",
         }}
       >
         <Spin size="large" />
@@ -59,28 +66,30 @@ export function PayBox() {
       align="center"
       justify="center"
       style={{
-        width: '100%',
+        width: "100%",
         padding: token.padding,
         paddingTop: 0,
         zIndex: 1000,
       }}
       gap="small"
     >
-      <Divider variant="dashed" type="horizontal" style={{ borderColor: token.colorBorder }} />
+      <Divider
+        variant="dashed"
+        type="horizontal"
+        style={{ borderColor: token.colorBorder }}
+      />
 
       <Flex
         align="center"
         justify="space-between"
         style={{
-          width: '100%',
+          width: "100%",
         }}
         gap="middle"
       >
         {!paymentData.discountCode ? (
           <>
-            <Typography.Text>
-              کد تخفیف دارید؟
-            </Typography.Text>
+            <Typography.Text>کد تخفیف دارید؟</Typography.Text>
             <AntButton type="dashed" onClick={applyDiscount}>
               وارد کردن
             </AntButton>
@@ -97,18 +106,14 @@ export function PayBox() {
         align="center"
         justify="center"
         style={{
-          width: '100%',
+          width: "100%",
         }}
         gap="small"
       >
-        <Flex
-          align="center"
-          justify="space-between"
-          style={{ width: '100%' }}
-        >
+        <Flex align="center" justify="space-between" style={{ width: "100%" }}>
           <Typography.Text>جمع کل:</Typography.Text>
           <Typography.Text strong>
-            {paymentData.subTotal.toLocaleString()} تومان
+            {formatNumberToMoney(paymentData.subTotal)} تومان
           </Typography.Text>
         </Flex>
 
@@ -116,27 +121,29 @@ export function PayBox() {
           <Flex
             align="center"
             justify="space-between"
-            style={{ width: '100%' }}
+            style={{ width: "100%" }}
           >
             <Typography.Text type="secondary">تخفیف:</Typography.Text>
             <Typography.Text type="success">
-              -{paymentData.discountAmount.toLocaleString()} تومان
+              -{formatNumberToMoney(paymentData.discountAmount)} تومان
             </Typography.Text>
           </Flex>
         )}
 
-        <Divider variant="solid" style={{ margin: '8px 0', borderColor: token.colorBorder }} />
+        <Divider
+          variant="solid"
+          style={{ margin: "8px 0", borderColor: token.colorBorder }}
+        />
 
-        <Flex
-          align="center"
-          justify="space-between"
-          style={{ width: '100%' }}
-        >
+        <Flex align="center" justify="space-between" style={{ width: "100%" }}>
           <Typography.Title level={5} style={{ margin: 0 }}>
             مبلغ نهایی:
           </Typography.Title>
-          <Typography.Title level={5} style={{ margin: 0, color: token.colorPrimary }}>
-            {paymentData.total.toLocaleString()} تومان
+          <Typography.Title
+            level={5}
+            style={{ margin: 0, color: token.colorPrimary }}
+          >
+            {formatNumberToMoney(paymentData.total)} تومان
           </Typography.Title>
         </Flex>
 
@@ -148,7 +155,7 @@ export function PayBox() {
           onClick={checkout}
         >
           <Flex align="center" justify="center" gap="small">
-            <Typography.Text style={{ fontWeight: 900, color: 'white' }}>
+            <Typography.Text style={{ fontWeight: 900, color: "white" }}>
               پرداخت
             </Typography.Text>
           </Flex>

@@ -4,7 +4,7 @@ import { apiPath, ApiPath } from "../../types/ApiPaths";
 import { ApiClient } from "../ApiClient";
 
 export class PaymentApi extends ApiClient {
-  async initiatePayment(orderId: number) {
+  async initiatePayment(orderId: string) {
     return await this.Api.post<
       paymentInitiationResponse,
       RequestResponse<paymentInitiationResponse>

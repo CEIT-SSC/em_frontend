@@ -36,7 +36,9 @@ function SSCProvider(options: SSCProviderOptions): Provider {
     name: "SSC SSO",
     type: "oauth",
     authorization: {
-      url: "http://localhost:3000/login",
+      url: `${
+        process.env.NEXT_PUBLIC_SSC_URL || "http://localhost:3000"
+      }/login`,
       params: {
         scope: "read write",
         response_type: "code",
@@ -55,7 +57,9 @@ function SSCProvider(options: SSCProviderOptions): Provider {
         formData.append("client_id", process.env.SSC_CLIENT_ID!);
         formData.append(
           "redirect_uri",
-          "http://localhost:3001/api/auth/callback/ssc"
+          `${
+            process.env.NEXTAUTH_URL || "http://localhost:3001"
+          }/api/auth/callback/ssc`
         );
 
         const codeVerifier = checks?.code_verifier || params.code_verifier;

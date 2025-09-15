@@ -18,12 +18,12 @@ export enum ApiPath {
 
   // Shop
   SHOP_CART = "/cart/",
-  SHOP_ADD_ITEM = "/cart/items/",
-  SHOP_REMOVE_ITEM = "/cart/items/{id}/remove/",
+  SHOP_ADD_ITEM = "/cart/items/add",
+  SHOP_REMOVE_ITEM = "/cart/items/remove/",
   SHOP_DISCOUNT_CODE = "/cart/items/apply-discount/",
 
   // Order
-  ORDER_CREATE_PARTIAL_CHECKOUT = "/orders/partial-checkout/",
+  ORDER_CREATE_PARTIAL_CHECKOUT = "/orders/checkout/",
   ORDER_PAY_SINGLE_ORDER = "/orders/{id}/initiate-payment/",
 }
 

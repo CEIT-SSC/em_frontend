@@ -2,7 +2,7 @@
 import { useFormatter } from "lib/hooks/useFormatter";
 import {
   cartErrorSelector,
-  cartItemsCountSelector,
+  cartPresentationsCountSelector,
   cartLoadingSelector,
 } from "lib/store/cart/cart.selectors";
 import { useAppDispatch, useAppSelector } from "lib/store/store";
@@ -17,7 +17,7 @@ const CartIcon = () => {
   const { formatNumberToMoney } = useFormatter();
   const router = useRouter({ customRouter: nextIntlRouter });
   const dispatch = useAppDispatch();
-  const counter = useAppSelector(cartItemsCountSelector);
+  const counter = useAppSelector(cartPresentationsCountSelector);
   const error = useAppSelector(cartErrorSelector);
   const loading = useAppSelector(cartLoadingSelector);
 
