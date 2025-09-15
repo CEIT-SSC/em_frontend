@@ -1,6 +1,6 @@
 import { RootState } from "../store";
 import { createSelector } from "@reduxjs/toolkit";
-import { ItemType} from "@ssc/core";
+import { ItemType } from "@ssc/core";
 
 export const cartSelector = (state: RootState) => state.cart;
 

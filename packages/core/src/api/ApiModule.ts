@@ -3,6 +3,8 @@ import { AuthApi } from "./Authentication/auth.api";
 import { ShopApi } from "./Shopping/shop.api";
 import { ProfileApi } from "./Profile/profile.api";
 import { PresentationsApi } from "./Presentations/presentations.api";
+import { OrderApi } from "./Order/order.api";
+import { PaymentApi } from "./Payment/payment.api";
 
 /**
  * Main API class that provides a centralized entry point for all API operations.
@@ -28,6 +30,8 @@ export class ApiModule {
   private _shop?: ShopApi;
   private _profile?: ProfileApi;
   private _presentations?: PresentationsApi;
+  private _orderApi?: OrderApi;
+  private _paymentApi?: PaymentApi;
   private apiInstance: AxiosInstance;
 
   constructor(apiInstance: AxiosInstance) {
@@ -60,6 +64,20 @@ export class ApiModule {
       this._presentations = new PresentationsApi(this.apiInstance);
     }
     return this._presentations;
+  }
+
+  get order(): OrderApi {
+    if (!this._orderApi) {
+      this._orderApi = new OrderApi(this.apiInstance);
+    }
+    return this._orderApi;
+  }
+
+  get payment(): PaymentApi {
+    if (!this._paymentApi) {
+      this._paymentApi = new PaymentApi(this.apiInstance);
+    }
+    return this._paymentApi;
   }
 
   public isLoaded(apiName: "auth" | "shop"): boolean {

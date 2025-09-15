@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Cart, CartItem } from "@ssc/core";
 import {
   addItemToCartThunk,
+  applyBonusCodeThunk,
   fetchCartThunk,
   removeItemFromCartThunk,
 } from "./cart.thunk";
@@ -67,6 +68,26 @@ const cartSlice = createSlice({
       fulfilled: (state, action) => {
         state.items = action.payload.items;
         state.count = action.payload.items.length;
+        state.error = null;
+        state.loading = false;
+      },
+      rejected: (state, action) => {
+        state.error = action.payload as string;
+        state.loading = false;
+      },
+    });
+    builder.addAsyncThunk(applyBonusCodeThunk, {
+      pending: (state) => {
+        state.loading = true;
+        state.error = null;
+      },
+      fulfilled: (state, action: PayloadAction<Cart>) => {
+        state.items = action.payload.items;
+        state.count = action.payload.items.length;
+        // state.discountCode = action.payload.discountCode;
+        // state.discountAmount = action.payload.discountAmount;
+        // state.subTotal = action.payload.subTotal;
+        // state.total = action.payload.total;
         state.error = null;
         state.loading = false;
       },

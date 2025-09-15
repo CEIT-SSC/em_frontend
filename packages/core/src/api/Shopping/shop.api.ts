@@ -37,4 +37,16 @@ export class ShopApi extends ApiClient {
       }
     );
   }
+
+  async applyDiscountCode(code: string) {
+    return await this.Api.post<Cart, RequestResponse<Cart>>(
+      apiPath(ApiPath.SHOP_DISCOUNT_CODE),
+      {
+        code,
+      },
+      {
+        requiresAuth: true,
+      }
+    );
+  }
 }

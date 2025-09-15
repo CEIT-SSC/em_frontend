@@ -20,6 +20,11 @@ export enum ApiPath {
   SHOP_CART = "/cart/",
   SHOP_ADD_ITEM = "/cart/items/",
   SHOP_REMOVE_ITEM = "/cart/items/{id}/remove/",
+  SHOP_DISCOUNT_CODE = "/cart/items/apply-discount/",
+
+  // Order
+  ORDER_CREATE_PARTIAL_CHECKOUT = "/orders/partial-checkout/",
+  ORDER_PAY_SINGLE_ORDER = "/orders/{id}/initiate-payment/",
 }
 
 export const apiPath = (
@@ -27,8 +32,10 @@ export const apiPath = (
   options?: { [key: string]: string | number }
 ): string => {
   let url = path as string;
+  console.log("!@! hi", path, options);
   if (options) {
     Object.keys(options).forEach((key) => {
+      console.log("!@! key", key, options[key]);
       if (options[key] === undefined) throw new Error("Missing option");
       url = url.replace(`{${key}}`, options[key].toString());
     });

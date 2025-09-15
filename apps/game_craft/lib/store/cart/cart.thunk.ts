@@ -45,3 +45,16 @@ export const removeItemFromCartThunk = createAppAsyncThunk(
     }
   }
 );
+
+export const applyBonusCodeThunk = createAppAsyncThunk(
+  "cart/applyBonusCode",
+  async (code: string, thunkAPI) => {
+    try {
+      const response = await thunkAPI.extra.Api.shop.applyDiscountCode(code);
+      const data = response.data.data;
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
