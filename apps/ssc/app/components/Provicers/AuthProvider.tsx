@@ -1,14 +1,12 @@
 "use client";
 
-import { ReactNode, useEffect } from "react";
-import { SessionProvider, useSession } from "next-auth/react";
-import { fetchUserData } from "~/core/store/Auth/user.thunk";
-import { useAppDispatch } from "~/core/store/store";
+import {ReactNode} from "react";
+import {SessionProvider} from "next-auth/react";
 
 interface AuthProviderProps {
-  children: ReactNode;
+    children: ReactNode;
 }
 
-export default function AuthProvider({ children }: AuthProviderProps) {
-  return <SessionProvider>{children}</SessionProvider>;
+export default function AuthProvider({children}: AuthProviderProps) {
+    return <SessionProvider>{children}</SessionProvider>;
 }
