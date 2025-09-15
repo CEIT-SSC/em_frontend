@@ -80,7 +80,7 @@ export function OnlineWorkshop({
       ) : (
         <WorkshopGrid
           presentations={presentations.data.results}
-          workshopImage="/images/SuperMario.jpg" // Pass SuperMario image for online workshops
+          workshopImage="/images/Luigi.jpg" // Pass SuperMario image for online workshops
         />
       );
     }
