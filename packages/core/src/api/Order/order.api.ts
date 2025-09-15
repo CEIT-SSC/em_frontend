@@ -1,7 +1,7 @@
 import { ApiClient } from "../ApiClient";
 import { apiPath, ApiPath } from "../../types/ApiPaths";
 import { RequestResponse } from "../../types/api/general";
-import { Order, paymentInitiationResponse } from "../../types/api/Order/Order";
+import { Order } from "../../types/api/Order/Order";
 
 export class OrderApi extends ApiClient {
   async partialCheckout(itemIds: number[]) {
