@@ -74,7 +74,7 @@ const ProductCart = (props: Props) => {
                         strong
                         style={{
                             fontSize: token.fontSizeXL,
-                            color: token.colorPrimary
+                            color: token.colorTextSecondary
                         }}
                     >
                         {digitsToHindi(moneyFormat(props.price))} تومان
