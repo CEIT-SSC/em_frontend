@@ -200,9 +200,8 @@ const authOptions: AuthOptions = {
           userWithTokens.accessToken = account.access_token;
           userWithTokens.refreshToken = account.refresh_token;
           userWithTokens.tokenType = account.token_type || "Bearer";
-          userWithTokens.expiresIn =
-            new Date().getTime() +
-            ((account.expires_in as number) || 900) * 1000; // Convert to milliseconds
+          // Store expires_in as duration in seconds (not absolute timestamp)
+          userWithTokens.expiresIn = (account.expires_in as number) || 900;
           return true;
         } catch (error) {
           console.error("Error handling SSC OAuth tokens:", error);
@@ -253,17 +252,27 @@ const authOptions: AuthOptions = {
         token.accessToken = userWithTokens.accessToken;
         token.refreshToken = userWithTokens.refreshToken;
         token.tokenType = userWithTokens.tokenType;
-        token.expiresIn = userWithTokens.expiresIn;
+        token.expiresIn = userWithTokens.expiresIn; // Duration in seconds
         token.scope = userWithTokens.scope;
         token.provider = account.provider; // Store provider info for refresh logic
 
+        // Calculate absolute expiry time in milliseconds
         const expiresAt = Date.now() + (userWithTokens.expiresIn || 0) * 1000;
         token.expiresAt = expiresAt;
       }
 
       // Return previous token if the access token has not expired yet
-      console.log("!@! refreshing", token.expiresIn - Date.now());
-      if (Date.now() <= token.expiresIn) {
+      console.log(
+        "!@! Token expires at:",
+        new Date(token.expiresAt || 0).toISOString()
+      );
+      console.log("!@! Current time:", new Date().toISOString());
+      console.log(
+        "!@! Time until expiry (ms):",
+        (token.expiresAt || 0) - Date.now()
+      );
+
+      if (Date.now() < (token.expiresAt || 0)) {
         return token;
       }
 
@@ -287,13 +296,17 @@ const authOptions: AuthOptions = {
               token.refreshToken =
                 newTokenData.refresh_token ?? token.refreshToken;
               token.tokenType = newTokenData.token_type;
-              token.expiresIn = newTokenData.expires_in;
+              token.expiresIn = newTokenData.expires_in; // Duration in seconds
 
-              // Update expiry time
-              const expiresAt = Date.now() + newTokenData.expires_in * 1000;
+              // Update expiry time - calculate absolute timestamp
+              const expiresAt =
+                Date.now() + (newTokenData.expires_in || 0) * 1000;
               token.expiresAt = expiresAt;
 
-              console.log("returning token: ", token);
+              console.log(
+                "Token refreshed successfully, new expiry:",
+                new Date(expiresAt).toISOString()
+              );
 
               return token;
             }
