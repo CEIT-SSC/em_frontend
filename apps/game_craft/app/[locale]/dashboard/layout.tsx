@@ -1,91 +1,118 @@
 "use client";
 
-import { theme, Grid } from "antd";
-import { useDashboardNavigations } from "../../../lib/config/dashboard-navigation";
-import { DashboardHeader } from "../../../components/layout/dashboard/DashboardHeader";
-import { DashboardNavigationCard } from "../../../components/layout/dashboard/DashboardNavigationCard";
+import {theme, Grid, Flex, Typography, Divider} from "antd";
+import {useDashboardNavigations} from "../../../lib/config/dashboard-navigation";
+import {DashboardHeader} from "../../../components/layout/dashboard";
+import {DashboardNavigationCard} from "../../../components/layout/dashboard";
 import LogoWithText from "../../../components/common/LogoWithText";
-import { usePathname } from "lib/navigation";
+import {usePathname} from "lib/navigation";
 
-const { useToken } = theme;
-const { useBreakpoint } = Grid;
+const {useToken} = theme;
+const {useBreakpoint} = Grid;
 
 interface DashboardLayoutProps {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+    children: React.ReactNode;
+    params: Promise<{ locale: string }>;
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  const screens = useBreakpoint();
-  const { token } = useToken();
-  const dashboardNavigations = useDashboardNavigations();
-  const pathname = usePathname();
+export default function DashboardLayout({children}: DashboardLayoutProps) {
+    const screens = useBreakpoint();
+    const {token} = useToken();
+    const dashboardNavigations = useDashboardNavigations();
+    const pathname = usePathname();
 
-  return (
-    <div className="flex flex-col w-full h-screen">
-      <DashboardHeader />
-      <div
-        className="flex flex-col flex-1 w-full items-center justify-start gap-6"
-        style={{
-          backgroundColor: token.colorPrimary,
-          backgroundImage: `url(/svg/pattern.svg)`,
-          padding: "1rem",
-        }}
-      >
-        {screens.lg ? (
-          <div className="flex items-center justify-center w-full">
-            <LogoWithText variant="light" />
-          </div>
-        ) : null}
-
-        <div className="flex items-start justify-center w-full gap-2">
-          {screens.lg ? (
-            <div className="flex flex-1 sticky top-2">
-              <DashboardNavigationCard />
-            </div>
-          ) : null}
-
-          <div
-            className="flex flex-col flex-3 items-center justify-start w-3/4 h-full"
+    return (
+        <Flex
+            vertical
             style={{
-              backgroundColor: token.colorBgBase,
-              borderRadius: token.borderRadius,
+                width: "100%",
+                height: "100vh",
             }}
-          >
-            <div className="flex flex-col items-center justify-start w-full h-full">
-              <div
-                className="flex flex-col items-center justify-center w-full pb-0"
+        >
+            <DashboardHeader/>
+            <Flex
+                vertical
+                align="center"
+                justify="start"
+                flex={1}
                 style={{
-                  padding: token.padding,
-                  paddingBottom: 0,
-                  backgroundColor: token.colorBgBase,
-                  borderRadius: token.borderRadius,
+                    width: "100%",
+                    backgroundColor: token.colorPrimary,
+                    backgroundImage: `url(/svg/pattern.svg)`,
+                    padding: "1rem",
                 }}
-              >
-                <h3
-                  className="text-xl font-black m-0"
-                  style={{
-                    fontWeight: 950,
-                    color: token.colorText,
-                  }}
+                gap="large"
+            >
+                {screens.lg ? (
+                    <Flex align="center" justify="center" style={{width: "100%"}}>
+                        <LogoWithText variant="light"/>
+                    </Flex>
+                ) : (
+                    <></>
+                )}
+                <Flex
+                    align="start"
+                    justify="center"
+                    style={{
+                        width: "100%",
+                    }}
+                    gap="small"
                 >
-                  {
-                    dashboardNavigations.find((item) => item.route === pathname)
-                      ?.name
-                  }
-                </h3>
-                <div
-                  className="w-full border-t border-dashed my-4"
-                  style={{
-                    borderColor: token.colorBorder,
-                  }}
-                />
-              </div>
-              <div className="flex flex-col flex-1 w-full">{children}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+                    {screens.lg ? (
+                        <Flex flex={1} style={{position: "sticky", top: ".5rem"}}>
+                            <DashboardNavigationCard/>
+                        </Flex>
+                    ) : (
+                        <></>
+                    )}
+                    <Flex
+                        flex={3}
+                        vertical
+                        align="center"
+                        justify="start"
+                        style={{
+                            backgroundColor: token.colorBgBase,
+                            height: "100%",
+                            borderRadius: token.borderRadius,
+                        }}
+                    >
+                        <Flex
+                            vertical
+                            align="center"
+                            justify="start"
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                            }}
+                        >
+                            <Flex
+                                vertical
+                                align="center"
+                                justify="center"
+                                style={{
+                                    width: "100%",
+                                    padding: token.padding,
+                                    paddingBottom: 0,
+                                }}
+                            >
+                                <Typography.Title level={3} style={{margin: 0, fontWeight: 950}}>
+                                    {dashboardNavigations.find((item) => item.route === pathname)?.name}
+                                </Typography.Title>
+                                <Divider type="horizontal" variant="dashed" style={{borderColor: token.colorBorder}}/>
+                            </Flex>
+                            <Flex
+                                vertical
+                                flex={1}
+                                style={{
+                                    width: "100%",
+                                }}
+                            >
+                                {children}
+                            </Flex>
+                        </Flex>
+                    </Flex>
+                </Flex>
+            </Flex>
+        </Flex>
+    );
 }

@@ -1,55 +1,123 @@
 "use client";
 
-import { theme } from "antd";
-import { PayBox } from "../../../../components/features/cart/PayBox";
+import {PayBox} from "../../../../components/features/cart/PayBox";
 import ProductCart from "components/features/cart/ProductCart";
-import { useAppDispatch, useAppSelector } from "lib/store/store";
+import {useAppDispatch, useAppSelector} from "lib/store/store";
 import {
-  cartItemsSelector,
-  cartLoadingSelector,
+    cartItemsSelector,
+    cartLoadingSelector,
+    cartErrorSelector,
 } from "lib/store/cart/cart.selectors";
-import { useEffect } from "react";
-import { fetchCartThunk } from "lib/store/cart/cart.thunk";
-import { CgSpinnerTwoAlt } from "react-icons/cg";
+import {useEffect} from "react";
+import {fetchCartThunk, removeItemFromCartThunk} from "lib/store/cart/cart.thunk";
+import {Flex, theme, Row, Col, Spin, Empty, Alert, message} from 'antd';
+
+const {useToken} = theme;
 
 // TODO: Hydrate redux with SSR, also make this component server component
 
 export default function ShoppingBagPage() {
-  const dispatch = useAppDispatch();
-  const cartItems = useAppSelector(cartItemsSelector);
-  const loading = useAppSelector(cartLoadingSelector);
+    const dispatch = useAppDispatch();
+    const cartItems = useAppSelector(cartItemsSelector);
+    const loading = useAppSelector(cartLoadingSelector);
+    const error = useAppSelector(cartErrorSelector);
+    const {token} = useToken();
 
-  useEffect(() => {
-    dispatch(fetchCartThunk());
-  }, []);
+    useEffect(() => {
+        dispatch(fetchCartThunk());
+    }, [dispatch]);
 
-  return (
-    <div className="flex flex-col flex-1 w-full overflow-hidden">
-      <div className="flex-1 w-full overflow-auto">
-        <div className="flex flex-col gap-4 w-full h-80 max-h-[80vh] px-8">
-          {loading ? (
-            <div className="w-full h-full flex items-center justify-center">
-              <CgSpinnerTwoAlt size={48} className="animate-spin " />
-            </div>
-          ) : (
-            <>
-              {cartItems.map((item, index) =>
-                item.item_details.presentation ? (
-                  <ProductCart
-                    key={index}
-                    imageUrl="/images/SuperMario.jpg"
-                    title={item.item_details.presentation.title}
-                    price={item.price}
-                    onRemove={() => console.log("remove item")}
-                  />
-                ) : null
-              )}
-            </>
-          )}
-        </div>
-      </div>
+    const handleRemoveItem = async (itemId: number) => {
+        try {
+            await dispatch(removeItemFromCartThunk(itemId)).unwrap();
+            message.success('محصول از سبد خرید حذف شد');
+        } catch (error) {
+            message.error('خطا در حذف محصول');
+        }
+    };
 
-      <PayBox />
-    </div>
-  );
+    const renderContent = () => {
+        if (loading) {
+            return (
+                <Flex
+                    justify="center"
+                    align="center"
+                    style={{
+                        height: '400px',
+                        width: '100%'
+                    }}
+                >
+                    <Spin size="large" />
+                </Flex>
+            );
+        }
+
+        if (error) {
+            return (
+                <Alert
+                    message="خطا در بارگذاری سبد خرید"
+                    description={error}
+                    type="error"
+                    showIcon
+                    style={{ margin: token.margin }}
+                />
+            );
+        }
+
+        if (!cartItems || cartItems.length === 0) {
+            return (
+                <Flex
+                    justify="center"
+                    align="center"
+                    style={{
+                        height: '400px',
+                        width: '100%'
+                    }}
+                >
+                    <Empty
+                        description="سبد خرید شما خالی است"
+                        image={Empty.PRESENTED_IMAGE_SIMPLE}
+                    />
+                </Flex>
+            );
+        }
+
+        return (
+            <Row gutter={[16, 16]} style={{width: '100%'}}>
+                {cartItems.map((item) => (
+                    <Col key={item.id} xs={24} sm={24} lg={24}>
+                        <ProductCart
+                            imageUrl="/images/SuperMario.jpg"
+                            title={item.item_details.presentation.title}
+                            price={item.price}
+                            onRemove={() => handleRemoveItem(item.id)}
+                        />
+                    </Col>
+                ))}
+            </Row>
+        );
+    };
+
+    return (
+        <Flex
+            vertical
+            flex={1}
+            style={{
+                width: '100%',
+                overflow: "hidden"
+            }}
+        >
+            <Flex
+                flex={1}
+                style={{
+                    width: '100%',
+                    padding: token.padding,
+                    overflow: "auto"
+                }}
+            >
+                {renderContent()}
+            </Flex>
+            <PayBox/>
+        </Flex>
+    );
 }
