@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "trustseal.enamad.ir",
       },
+      {
+        protocol: "http",
+        hostname: "api.ceit-ssc.ir",
+      },
     ],
   },
 
