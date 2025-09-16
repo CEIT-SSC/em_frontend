@@ -3,17 +3,23 @@ import Event, { EventProps } from "./Event";
 import clsx from "clsx";
 
 const EventList = async () => {
-  const events: EventProps[] = [
-    // {
-    //   id: 1,
-    //   title: "ACPC",
-    //   start_date: new Date().toISOString(),
-    //   end_date: new Date(new Date().getTime() + 1000000).toISOString(),
-    //   poster: "/event.png",
-    //   is_active: false,
-    //   landing_url: "acpc",
-    // },
-  ];
+  const request = await fetch("https://api.ceit-ssc.ir/api/events/");
+  const results = await request.json();
+  const events: EventProps[] = results.data.results;
+
+  // const events: EventProps[] = [
+  //   {
+  //     id: 1,
+  //     title: "ACPC",
+  //     start_date: new Date().toISOString(),
+  //     end_date: new Date(new Date().getTime() + 1000000).toISOString(),
+  //     poster: "/event.png",
+  //     is_active: false,
+  //     landing_url: "acpc",
+  //     description: "alaki",
+  //     manager: "ssc",
+  //   },
+  // ];
 
   return (
     <div
