@@ -8,7 +8,7 @@ import LogoWithText from "../../../components/common/LogoWithText";
 import { usePathname } from "lib/navigation";
 import { useAuth } from "lib/hooks/useAuth";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import {useRouter} from "next/navigation";
 
 const { useToken } = theme;
 const { useBreakpoint } = Grid;
