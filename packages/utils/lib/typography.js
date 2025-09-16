@@ -40,9 +40,13 @@ function digitsToLatin(input) {
  * @returns Formatted string with commas
  */
 function moneyFormat(input) {
+    // Handle undefined, null, or invalid input
+    if (input === undefined || input === null) {
+        return "0";
+    }
     const num = typeof input === "string" ? parseFloat(input) : input;
     if (isNaN(num)) {
-        return input.toString();
+        return "0";
     }
     return num.toLocaleString("en-US");
 }

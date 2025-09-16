@@ -34,9 +34,9 @@ const cartSlice = createSlice({
         state.presentations = action.payload.presentations;
         state.count = action.payload.presentations.length;
         state.discountCode = action.payload.discount_code;
-        state.discountAmount = action.payload.discount_amount;
-        state.subTotal = action.payload.subtotal_amount.parsedValue;
-        state.total = action.payload.total_amount.parsedValue;
+        state.discountAmount = action.payload.discount_amount || 0;
+        state.subTotal = action.payload.subtotal_amount?.parsedValue || 0;
+        state.total = action.payload.total_amount?.parsedValue || 0;
         state.error = null;
         state.loading = false;
       },
@@ -78,8 +78,8 @@ const cartSlice = createSlice({
         state.count = action.payload.presentations.length;
         state.discountCode = action.payload.discount_code;
         state.discountAmount = action.payload.discount_amount;
-        state.subTotal = action.payload.subtotal_amount.parsedValue;
-        state.total = action.payload.total_amount.parsedValue;
+        state.subTotal = action.payload.subtotal_amount?.parsedValue || 0;
+        state.total = action.payload.total_amount?.parsedValue || 0;
         state.error = null;
         state.loading = false;
       },
