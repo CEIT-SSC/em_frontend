@@ -26,6 +26,7 @@ export function DashboardNavigationCard({
   const dashboardNavigations = useDashboardNavigations();
   const screens = useBreakpoint();
   const locale = useLocale();
+  const session = useSession();
 
   const handleLogout = () => {
     signOut();
@@ -109,7 +110,7 @@ export function DashboardNavigationCard({
             />
           </div>
           <Typography.Title level={4} style={{ fontWeight: 800, margin: 0 }}>
-            Mahdi Haeri
+            {session.data.user.name}
           </Typography.Title>
         </Flex>
 
