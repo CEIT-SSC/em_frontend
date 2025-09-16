@@ -9,13 +9,6 @@ import EventList from "./components/Events/EventList";
 import portal from "~/assets/portal.png";
 import liara from "~/assets/sponsors/liara.svg";
 import Link from "next/link";
-import abbas from "~/assets/members/abbas.png";
-import ashkan from "~/assets/members/ashkan.png";
-import delaraam from "~/assets/members/delaraam.png";
-import javad from "~/assets/members/javad.png";
-import alireza from "~/assets/members/alireza.png";
-import behrad from "~/assets/members/behrad.jpg";
-import saba from "~/assets/members/saba.jpg";
 // import notfound from "~/assets/notfound.png";
 import ImagesCarousel from "./components/ImagesCarousel/ImagesCarousel";
 import { HiArrowLeft } from "react-icons/hi";
@@ -56,12 +49,13 @@ export default function Home() {
         </div>
         <div className="w-full flex flex-col items-center md:items-start gap-5">
           <h1 className="text-5xl/[125%] font-bold text-center md:text-right">
-            اینجا جای اثبات توانایی هاته!
+            جایی برای رشد، همکاری و یادگیری
           </h1>
           <p className="text-[20px]/[150%] font-bold opacity-60 pe-4 mb-6 text-center md:text-right">
-            به جامعه‌ای پرشور از علاقه‌مندان به فناوری بپیوندید و در رقابت‌ها و
-            رویدادهای هیجان‌انگیز شرکت کنید. مهارت‌های خود را ارتقا دهید و با
-            افراد هم‌فکر ارتباط برقرار کنید!
+            انجمن علمی مهندسی کامپیوتر دانشگاه صنعتی امیرکبیر فضایی پویا برای
+            یادگیری عملی، هم‌افزایی تیمی و پیوند با صنعت فراهم کرده است. با حضور
+            در برنامه‌ها و پروژه‌های ما می‌توانید مهارت‌های فنی و نرم‌افزاری خود
+            را تقویت کنید و شبکه‌ای از هم‌فکران بسازید.
           </p>
           <Link href="#events">
             <Button
@@ -98,79 +92,26 @@ export default function Home() {
           کارگاه‌های مهارتی تا پروژه‌های مشترک دانشجویی و صنعتی.
         </h3>
       </div>
-      <div className="flex flex-col justify-between items-center gap-8 py-8 px-12 lg:flex-row">
-        <FeatureCard
-          icon={MdEmojiEvents}
-          title="رویدادها و کارگاه‌ها"
-          description="هر ترم مجموعه‌ای از رویدادهای آموزشی و فنی برگزار می‌کنیم: از مقدماتی تا پیشرفته، با تمرکز بر مهارت‌های کاربردی مثل توسعه وب، علم داده، امنیت، سیستم‌ها و مصاحبه‌های فنی. خروجی هر رویداد، یادگیری عمیق و شبکه‌سازی واقعی است."
-        />
-        <FeatureCard
-          icon={GrWorkshop}
-          title="کارگروه‌ها و پروژه‌ها"
-          description="در کارگروه‌های تخصصی موضوع‌محور (AI، Backend، Frontend، سیستم‌های توزیع‌شده و …) روی پروژه‌های عملی کار می‌کنیم. منتورینگ، بازبینی کد و مستندسازی جزو اصول ماست تا اعضا نمونه‌کار حرفه‌ای بسازند."
-        />
-        <FeatureCard
-          icon={GiMeshNetwork}
-          title="فرصت‌های مشارکت و عضویت"
-          description="می‌خواهی برگزارکننده باشی یا مدرس؟ دنبال تیم برای مسابقه یا ایده‌ای برای اجرا هستی؟ با عضویت در انجمن به شبکه‌ای از دانشجوهای فعال و استادان و صنعت متصل می‌شوی و می‌توانی در برنامه‌ها نقش‌آفرینی کنی."
-        />
-      </div>
       <div className="px-12 py-6 flex flex-col gap-8" id="events">
         <h2 className="text-5xl font-bold text-center">رویداد ها</h2>
         <EventList />
       </div>
-      <div className="py-6">
-        <h2 className="text-5xl/[150%] font-bold text-center">تیم ما</h2>
-        <p className="text-[18px]/[150%] font-bold text-(--TextWhite) text-center">
-          منتخب انتخابات دور 19ام انجمن علمی مهندسی کامپیوتر امیرکبیر
-        </p>
-        <div className="flex flex-wrap justify-center gap-x-8 gap-y-16 py-8 px-4">
-          <TeamMemberCard
-            name="محمدجواد اکبری"
-            position="دبیر انجمن"
-            photoUrl={javad.src}
-            githubUrl="https://github.com/Javad-Ak"
-            linkedinUrl="https://www.linkedin.com/in/mo-ja-akbari/"
-          />
-          <TeamMemberCard
-            name="صبا سیدطبایی"
-            position="مسئول مالی"
-            photoUrl={saba.src}
-            linkedinUrl="https://www.linkedin.com/in/saba-seyed-tabaei"
-          />
-          <TeamMemberCard
-            name="امیرعباس انتظاری"
-            position="مسئول ارتباط با صنعت"
-            photoUrl={abbas.src}
-            githubUrl="https://github.com/AmirabbasEntezari"
-          />
-          <TeamMemberCard
-            name="دلارام روحانی"
-            position="مسئول آموزشی"
-            photoUrl={delaraam.src}
-            linkedinUrl="https://www.linkedin.com/in/delaraamroohani"
-          />
-          <TeamMemberCard
-            name="اشکان چاجی"
-            position="مسئول مسابقات"
-            photoUrl={ashkan.src}
-            githubUrl="https://github.com/ashkanchaji"
-            linkedinUrl="https://www.linkedin.com/in/ashkan-chaji-71493434b/"
-          />
-          <TeamMemberCard
-            name="علیرضا صفری"
-            position="مسئول انفورماتیک"
-            photoUrl={alireza.src}
-            githubUrl="https://github.com/Alireza12ss"
-            linkedinUrl="https://www.linkedin.com/in/alireza-safari-3ba3942b8/"
-          />
-          <TeamMemberCard
-            name="بهراد حضوری"
-            position="مسئول روابط عمومی"
-            photoUrl={behrad.src}
-            githubUrl="https://github.com/BehradHZ"
-          />
-        </div>
+      <div className="flex flex-col justify-between items-center gap-8 py-8 px-12 lg:flex-row">
+        <FeatureCard
+          icon={MdEmojiEvents}
+          title="رویدادهای پیش‌رو"
+          description="رویدادهای انجمن هم یادگیری عمیق و هم تجربه‌ی عملی را به همراه دارد — از نشست‌های تخصصی و چالش‌های برنامه‌نویسی تا کارگاه‌های کاربردی و همکاری‌های صنعتی. هر رویداد با هدف تبدیل نظریه به عمل و ایجاد خروجی ملموس برگزار می‌شود."
+        />
+        <FeatureCard
+          icon={GrWorkshop}
+          title="سخنرانی ها و کارگاه‌ها"
+          description="در هر نیم‌سال مجموعه‌ای از کارگاه‌ها و دوره‌ها ارائه می‌شود: از سطح مبتدی تا پیشرفته. محوریت موضوعات شامل توسعه وب، علم داده، امنیت، هوش مصنوعی، آماده‌سازی برای مصاحبه‌های فنی و مهارت‌های مهندسی نرم‌افزار است. پس از هر برنامه، انتظار می‌رود شرکت‌کنندگان دانش کاربردی کسب کنند و ارتباطات حرفه‌ای قابل‌اعتمادی شکل بگیرد."
+        />
+        <FeatureCard
+          icon={GiMeshNetwork}
+          title="فرصت‌های مشارکت و عضویت"
+          description="چه بخواهید برگزارکننده یا مدرس باشید، چه دنبال تیمی برای شرکت در مسابقه یا همراهی با یک ایده باشید، انجمن بستری برای ایفای نقش فعال شماست. این بستر دسترسی به شبکه‌ای از دانشجویان، اساتید و نیروهای صنعتی ایجاد می‌کند و شما را در مسیر اجرا و اثرگذاری همراهی می‌کند."
+        />
       </div>
       <div className="flex flex-col gap-8 px-12 py-6">
         <h2 className="text-5xl font-bold text-center">حامیان ما</h2>

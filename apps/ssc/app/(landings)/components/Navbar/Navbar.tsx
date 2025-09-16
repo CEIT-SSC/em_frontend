@@ -6,9 +6,9 @@ import HamburgerMenu from "./HamburgerMenu";
 export const navbarItems = [
   { label: "خانه", href: "/" },
   { label: "رویداد ها", href: "/#events" },
-  { label: "دریافت مدرک", href: "/certificates" },
-  { label: "فرصت های شغلی", href: "/careers" },
-  { label: "ترمچین", href: "/termchin" },
+  // { label: "دریافت مدرک", href: "/certificates" },
+  // { label: "فرصت های شغلی", href: "/careers" },
+  // { label: "ترمچین", href: "/termchin" },
   { label: "درباره ما", href: "/about" },
 ];
 

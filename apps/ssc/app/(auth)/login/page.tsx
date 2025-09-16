@@ -225,14 +225,14 @@ const LoginContent = () => {
               variant={ButtonVariant.OUTLINE}
               label="ورود با گیتهاب"
             /> */}
-              <Button
+              {/* <Button
                 className="w-full bg-secondary-background text-whiteText"
                 variant={ButtonVariant.OUTLINE}
                 label="ورود با گوگل"
                 onClick={handleGoogleSignIn}
                 loading={isGoogleLoading}
                 disable={isLoading || isGoogleLoading}
-              />
+              /> */}
             </div>
           </div>
         </div>
