@@ -2,12 +2,15 @@
 @import "@ssc/ui/styles.css";
 
 :root {
-  --background: hwb(0 100% 0%);
-  --foreground: #171717;
+  /* --background: hwb(0 100% 0%);
+  --foreground: #171717; */
   --secondary-background: #292f36;
   --TextWhite: #c7c7c7;
   --MainRed: #931621;
   --MainGray: #1b1b1b;
+
+  --background: #171717;
+  --foreground: #ededed;
 }
 
 .bprogress .bar {
@@ -25,12 +28,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #171717;
     --foreground: #ededed;
   }
-}
+} */
 
 @layer utilities {
   .default-gradient,
