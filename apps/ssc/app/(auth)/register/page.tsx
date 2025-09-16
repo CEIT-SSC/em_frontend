@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { RegisterStepOne } from "./steps/registerStepOne";
 import { RegisterStepTwo } from "./steps/registerStepTwo";
 import { RegisterStepThird } from "./steps/registerStepThird";
@@ -7,7 +7,7 @@ import { Button, ButtonSize, ButtonVariant } from "@ssc/ui";
 import { MdArrowBack } from "react-icons/md";
 import { useRouter } from "@bprogress/next";
 
-const Page = () => {
+const RegisterContent = () => {
   const [step, setStep] = useState(0);
   const [mail, setMail] = useState("none");
   const router = useRouter();
@@ -45,6 +45,20 @@ const Page = () => {
       {step === 1 && <RegisterStepTwo email={mail} nextStep={onNextStep} />}
       {step === 2 && <RegisterStepThird />}
     </>
+  );
+};
+
+const Page = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="w-full flex items-center justify-center h-64">
+          <div className="text-center text-whiteText">در حال بارگذاری...</div>
+        </div>
+      }
+    >
+      <RegisterContent />
+    </Suspense>
   );
 };
 

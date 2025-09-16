@@ -4,9 +4,9 @@ import { BASE_URL } from "@ssc/core";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 
-const Redirecting = () => {
+const RedirectingContent = () => {
   const session = useSession();
   const params = useSearchParams();
   const router = useRouter();
@@ -24,12 +24,28 @@ const Redirecting = () => {
     } else {
       router.push("/login");
     }
-  }, [session]);
+  }, [session, params, router]);
 
   return (
     <div className="w-full flex items-center justify-center gap-4 h-[50vh]">
       <div className="text-center text-4xl font-bold">در حال انتقال ...</div>
     </div>
+  );
+};
+
+const Redirecting = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="w-full flex items-center justify-center gap-4 h-[50vh]">
+          <div className="text-center text-4xl font-bold">
+            در حال بارگذاری ...
+          </div>
+        </div>
+      }
+    >
+      <RedirectingContent />
+    </Suspense>
   );
 };
 

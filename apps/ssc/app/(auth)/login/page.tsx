@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter } from "@bprogress/next";
 import { signIn, getSession, useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
@@ -22,7 +22,7 @@ const loginSchema = z.object({
   password: z.string().min(1, { message: "رمز عبور الزامی است" }),
 });
 
-const Page = () => {
+const LoginContent = () => {
   const router = useRouter();
   const params = useSearchParams();
   const session = useSession();
@@ -41,7 +41,7 @@ const Page = () => {
     if (params.get("error")) {
       toast.error("خطا در فرایند ورود");
     }
-  }, []);
+  }, [params]);
 
   const Authenticated = async () => {
     const session = await getSession();
@@ -238,6 +238,20 @@ const Page = () => {
         </div>
       </div>
     </>
+  );
+};
+
+const Page = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="w-full flex items-center justify-center h-64">
+          <div className="text-center text-whiteText">در حال بارگذاری...</div>
+        </div>
+      }
+    >
+      <LoginContent />
+    </Suspense>
   );
 };
 

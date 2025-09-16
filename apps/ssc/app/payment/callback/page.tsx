@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button, ButtonSize, ButtonVariant } from "@ssc/ui";
 import { HiArrowLeft, HiCheckCircle, HiXCircle } from "react-icons/hi";
@@ -11,7 +11,7 @@ interface PaymentState {
   orderId: string | null;
 }
 
-const PaymentCallbackPage = () => {
+const PaymentCallbackContent = () => {
   const searchParams = useSearchParams();
   const [paymentState, setPaymentState] = useState<PaymentState>({
     success: false,
@@ -93,6 +93,25 @@ const PaymentCallbackPage = () => {
         />
       </div>
     </div>
+  );
+};
+
+const PaymentCallbackPage = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-background flex items-center justify-center p-6">
+          <div className="max-w-md w-full bg-secondary-background rounded-3xl p-8 shadow-[0px_0px_20px_0px_rgba(199,199,199,0.1)] border border-whiteText/10">
+            <div className="flex justify-center mb-6">
+              <div className="w-16 h-16 border-4 border-whiteText/20 border-t-whiteText rounded-full animate-spin"></div>
+            </div>
+            <p className="text-center text-whiteText">در حال بارگذاری...</p>
+          </div>
+        </div>
+      }
+    >
+      <PaymentCallbackContent />
+    </Suspense>
   );
 };
 
