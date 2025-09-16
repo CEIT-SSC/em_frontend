@@ -13,7 +13,7 @@ const Footer = () => {
           <p>Arabic</p>
         </div>
       </div> */}
-      <div className="flex-col gap-4 flex">
+      <div className="w-full flex-col gap-4 flex">
         <h3 className="text-3xl font-bold">ارتباط با ما</h3>
         <div className="flex flex-col gap-2">
           <a href="https://t.me/ceit_ssc">تلگرام</a>
@@ -25,7 +25,7 @@ const Footer = () => {
           <a href="mailto:ssc.ce.aut@gmail.com">ssc.ce.aut@gmail.com</a>
         </div>
       </div>
-      <div className="flex-col gap-4 flex">
+      <div className="w-full flex-col gap-4 flex">
         <h3 className="text-3xl font-bold">رویداد ها</h3>
         <div className="flex flex-col gap-2">
           <p>مسابقات ACPC</p>
@@ -35,7 +35,7 @@ const Footer = () => {
           <p>لینوکس فست (Linux Fest)</p>
         </div>
       </div>
-      <div className="flex justify-center items-center gap-4">
+      <div className="w-full flex justify-center items-center gap-8">
         <Image
           width={100}
           height={120}
@@ -49,12 +49,12 @@ const Footer = () => {
           href="https://trustseal.enamad.ir/?id=646452&Code=uXSQCvKAnSeeLLUoP1E49sAEwGKLDzq4"
         >
           <Image
-            width={0}
-            height={0}
+            width={100}
+            height={100}
             referrerPolicy="origin"
             src="https://trustseal.enamad.ir/logo.aspx?id=646452&Code=uXSQCvKAnSeeLLUoP1E49sAEwGKLDzq4"
             alt=""
-            className="cursor-pointer"
+            className="cursor-pointer w-fit h-fit"
           />
         </Link>
       </div>
