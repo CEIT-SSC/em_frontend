@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -43,20 +42,18 @@ const Footer = () => {
           alt="ssc logo"
           className="w-25 h-30"
         />
-        <Link
+        <a
           referrerPolicy="origin"
           target="_blank"
           href="https://trustseal.enamad.ir/?id=646452&Code=uXSQCvKAnSeeLLUoP1E49sAEwGKLDzq4"
         >
-          <Image
-            width={100}
-            height={100}
+          <img
             referrerPolicy="origin"
             src="https://trustseal.enamad.ir/logo.aspx?id=646452&Code=uXSQCvKAnSeeLLUoP1E49sAEwGKLDzq4"
             alt=""
-            className="cursor-pointer w-fit h-fit"
+            className="cursor-pointer"
           />
-        </Link>
+        </a>
       </div>
     </footer>
   );
