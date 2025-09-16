@@ -2,7 +2,6 @@ import { ApiClient } from "../ApiClient";
 import { apiPath, ApiPath } from "../../types/ApiPaths";
 import { RequestResponse } from "../../types/api/general";
 import { Order } from "../../types/api/Order/Order";
-import { query } from "express";
 
 export class OrderApi extends ApiClient {
   async checkout(event: number) {
