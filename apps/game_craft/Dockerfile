@@ -19,7 +19,6 @@ RUN npm install -g pnpm@9 && pnpm install --frozen-lockfile
 COPY . .
 
 # Step 6: Build game_craft
-WORKDIR /app/apps/game_craft
 RUN pnpm run build
 
 # Step 7: Start production server
