@@ -5,10 +5,10 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
-      "types": "./lib/index.d.ts",
-      "require": "./lib/index.js",
-      "import": "./lib/index.js",
-      "source": "./src/index.ts"
+    "types": "./lib/index.d.ts",
+    "require": "./lib/index.js",
+    "import": "./lib/index.js",
+    "source": "./src/index.ts"
   },
   "scripts": {
     "build": "tsc",
@@ -22,5 +22,8 @@
   "license": "ISC",
   "dependencies": {
     "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.1"
   }
 }
