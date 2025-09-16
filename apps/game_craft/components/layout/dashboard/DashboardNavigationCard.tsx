@@ -86,7 +86,7 @@ export function DashboardNavigationCard({
               }}
             >
               <Image
-                src=""
+                src="/mario/giphy-1.gif"
                 width="100%"
                 height="auto"
                 alt="user-avatar"
@@ -110,7 +110,7 @@ export function DashboardNavigationCard({
             />
           </div>
           <Typography.Title level={4} style={{ fontWeight: 800, margin: 0 }}>
-            {session.data.user.name}
+            {session?.data?.user?.name}
           </Typography.Title>
         </Flex>
 
