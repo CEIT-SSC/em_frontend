@@ -266,6 +266,8 @@
     "noOnlineWorkshops": "No online workshops are currently available",
     "noOfflineWorkshops": "No in-person workshops are currently available",
     "viewDetails": "View Details",
+    "capacity": "Total Capacity",
+    "remainingCapacity": "Remaining",
     "type": {
       "course": "Course",
       "talk": "Talk",

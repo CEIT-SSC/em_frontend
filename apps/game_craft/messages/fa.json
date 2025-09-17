@@ -266,6 +266,8 @@
     "noOnlineWorkshops": "در حال حاضر هیچ کارگاه آنلاینی موجود نیست",
     "noOfflineWorkshops": "در حال حاضر هیچ کارگاه حضوری موجود نیست",
     "viewDetails": "جزئیات بیشتر",
+    "capacity": "ظرفیت کل",
+    "remainingCapacity": "باقی مانده",
     "type": {
       "course": "دوره",
       "talk": "سخنرانی",

@@ -339,6 +339,39 @@ export function WorkshopCard({
           {/* Presenters */}
           <PresentersAvatar presenters={presentation.presenters_details} />
 
+          {/* Capacity */}
+          <Flex
+            justify="space-between"
+            align="center"
+            style={{
+              marginTop: "auto",
+              paddingTop: "12px",
+              borderTop: `1px solid ${token.colorBorder}`,
+            }}
+          >
+            <Typography.Title
+              level={5}
+              style={{
+                margin: 0,
+                fontSize: "16px",
+              }}
+            >
+              {t("workshop.capacity") + ": " + presentation.capacity}
+            </Typography.Title>
+
+            <Typography.Title
+              level={5}
+              style={{
+                margin: 0,
+                fontSize: "16px",
+              }}
+            >
+              {t("workshop.remainingCapacity") +
+                ": " +
+                presentation.remaining_capacity}
+            </Typography.Title>
+          </Flex>
+
           {/* Price and Add to Cart */}
           <Flex
             justify="space-between"
