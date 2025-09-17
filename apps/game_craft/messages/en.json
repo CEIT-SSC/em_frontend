@@ -79,20 +79,11 @@
       "event": "Events",
       "events": {
         "title": "Events & Workshops",
-        "workshops": {
-          "title": "My Workshops",
-          "loading": "Loading workshops...",
-          "empty": "You haven't enrolled in any workshops",
-          "emptyDescription": "Browse available workshops and enroll to expand your skills",
-          "browseWorkshops": "Browse Workshops"
-        },
-        "presentations": {
-          "title": "My Presentations",
-          "loading": "Loading presentations...",
-          "empty": "You haven't enrolled in any presentations",
-          "emptyDescription": "Browse available presentations and enroll to gain new insights",
-          "browsePresentations": "Browse Presentations"
-        }
+        "workshops": "My Workshops",
+        "talks": "My Talks",
+        "loading": "Loading...",
+        "empty": "You haven't enrolled in any events",
+        "emptyDescription": "Browse available events and enroll to expand your skills"
       },
       "teamStatus": {
         "label": "Team Status",
