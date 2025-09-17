@@ -103,7 +103,7 @@ export function OfflineWorkshop({
           color: "white",
         }}
       >
-        {t("workshop.offlineWorkshops")}
+        {t("workshop.workshops")}
       </Typography.Title>
 
       {content}

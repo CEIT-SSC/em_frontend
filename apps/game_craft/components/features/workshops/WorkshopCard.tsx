@@ -457,7 +457,7 @@ export function WorkshopCard({
             : []),
         ]}
         width={800}
-        style={{ top: 100, zIndex: 200 }}
+        style={{ top: 50, zIndex: 200 }}
         styles={{
           body: { maxHeight: "70vh", overflowY: "auto" },
         }}
