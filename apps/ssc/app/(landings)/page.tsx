@@ -96,7 +96,7 @@ export default function Home() {
         <h2 className="text-5xl font-bold text-center">رویداد ها</h2>
         <EventList />
       </div>
-      <div className="flex flex-col justify-between items-center gap-8 py-8 px-12 lg:flex-row">
+      <div className="flex flex-col justify-between items-baseline gap-8 py-8 px-12 lg:flex-row">
         <FeatureCard
           icon={MdEmojiEvents}
           title="رویدادهای پیش‌رو"

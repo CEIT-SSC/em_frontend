@@ -3,7 +3,9 @@ import Event, { EventProps } from "./Event";
 import clsx from "clsx";
 
 const EventList = async () => {
-  const request = await fetch("https://api.ceit-ssc.ir/api/events/");
+  const request = await fetch("https://api.ceit-ssc.ir/api/events/", {
+    cache: "no-store",
+  });
   const results = await request.json();
   const events: EventProps[] = results.data.results;
 
