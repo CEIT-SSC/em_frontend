@@ -34,10 +34,10 @@ const purchasesSlice = createSlice({
         state.loading = false;
         state.error = null;
 
-        // Flatten all presentations from all purchase items
-        state.presentations = action.payload.results.flatMap(item => item.presentations);
-        state.soloCompetitions = action.payload.results.flatMap(item => item.solo_competitions);
-        state.products = action.payload.results.flatMap(item => item.products);
+        // Direct access to presentations from the API response
+        state.presentations = action.payload.presentations || [];
+        state.soloCompetitions = action.payload.solo_competitions || [];
+        state.products = action.payload.products || [];
       },
       rejected: (state, action) => {
         state.loading = false;

@@ -1,6 +1,6 @@
 "use client";
 
-import { Flex, theme, Typography, Spin, Empty, Alert, Row, Col, Card } from "antd";
+import { Flex, theme, Typography, Spin, Empty, Alert, Row, Col } from "antd";
 import { useAppDispatch, useAppSelector } from "lib/store/store";
 import { useEffect } from "react";
 import { fetchPurchasesThunk } from "lib/store/purchases/purchases.thunk";
@@ -11,72 +11,10 @@ import {
   purchasesErrorSelector,
 } from "lib/store/purchases/purchases.selectors";
 import { useTranslations } from "next-intl";
+import { WorkshopCard } from "components/features/workshops/WorkshopCard";
 import { PresentationOverview } from "@ssc/core";
 
 const { useToken } = theme;
-
-function EventCard({ presentation }: { presentation: PresentationOverview }) {
-  const { token } = useToken();
-  const t = useTranslations();
-
-  // Format date and time
-  const formatDateTime = (dateTimeString: string) => {
-    const date = new Date(dateTimeString);
-    return date.toLocaleString("fa-IR", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
-
-  return (
-    <Card
-      style={{
-        width: "100%",
-        borderRadius: token.borderRadiusLG,
-        marginBottom: token.margin,
-      }}
-      hoverable
-    >
-      <Flex vertical gap="small">
-        <Typography.Title level={5} style={{ margin: 0 }}>
-          {presentation.title}
-        </Typography.Title>
-
-        <Typography.Paragraph
-          style={{
-            color: token.colorTextSecondary,
-            margin: 0,
-            fontSize: "14px"
-          }}
-          ellipsis={{ rows: 2 }}
-        >
-          {presentation.description}
-        </Typography.Paragraph>
-
-        <Flex justify="space-between" align="center">
-          <Typography.Text style={{ fontSize: "12px", color: token.colorTextTertiary }}>
-            {formatDateTime(presentation.start_time)}
-          </Typography.Text>
-
-          <Flex gap="small">
-            {presentation.is_online ? (
-              <Typography.Text style={{ color: token.colorSuccess, fontSize: "12px" }}>
-                {t("workshop.online")}
-              </Typography.Text>
-            ) : (
-              <Typography.Text style={{ color: token.colorPrimary, fontSize: "12px" }}>
-                {t("workshop.inPerson")}
-              </Typography.Text>
-            )}
-          </Flex>
-        </Flex>
-      </Flex>
-    </Card>
-  );
-}
 
 export default function EventsPage() {
   const dispatch = useAppDispatch();
@@ -91,7 +29,7 @@ export default function EventsPage() {
     dispatch(fetchPurchasesThunk());
   }, [dispatch]);
 
-  const renderSection = (items: PresentationOverview[], title: string) => {
+  const renderSection = (items: PresentationOverview[], title: string, sectionKey: string) => {
     if (loading) {
       return (
         <Flex
@@ -141,7 +79,11 @@ export default function EventsPage() {
       <Row gutter={[16, 16]} style={{ width: "100%" }}>
         {items.map((item) => (
           <Col key={item.id} xs={24} sm={12} lg={8} xl={6}>
-            <EventCard presentation={item} />
+            <WorkshopCard
+              presentation={item}
+              isPurchased={true}
+              workshopImage={`/placeholder-${sectionKey}.jpg`}
+            />
           </Col>
         ))}
       </Row>
@@ -159,6 +101,11 @@ export default function EventsPage() {
       }}
       gap="large"
     >
+      {/* Page Title */}
+      <Typography.Title level={2} style={{ fontWeight: 800, marginBottom: token.marginLG }}>
+        {t("dashboard.events.title")}
+      </Typography.Title>
+
       {/* Workshops Section */}
       <Flex
         vertical
@@ -169,10 +116,10 @@ export default function EventsPage() {
         }}
         gap="medium"
       >
-        <Typography.Title level={4} style={{ fontWeight: 800, marginBottom: 0 }}>
-          کارگاه ها
+        <Typography.Title level={3} style={{ fontWeight: 800, marginBottom: 0 }}>
+          {t("dashboard.events.workshops")}
         </Typography.Title>
-        {renderSection(workshops, "کارگاه")}
+        {renderSection(workshops, "کارگاه", "workshop")}
       </Flex>
 
       {/* Talks Section */}
@@ -185,10 +132,10 @@ export default function EventsPage() {
         }}
         gap="medium"
       >
-        <Typography.Title level={4} style={{ fontWeight: 800, marginBottom: 0 }}>
-          ارائه ها
+        <Typography.Title level={3} style={{ fontWeight: 800, marginBottom: 0 }}>
+          {t("dashboard.events.talks")}
         </Typography.Title>
-        {renderSection(talks, "ارائه")}
+        {renderSection(talks, "ارائه", "talk")}
       </Flex>
     </Flex>
   );

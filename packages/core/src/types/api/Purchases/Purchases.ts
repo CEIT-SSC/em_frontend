@@ -40,8 +40,8 @@ export interface PurchaseItem {
 }
 
 export interface PurchasesResponse {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: PurchaseItem[];
+  presentations: PresentationOverview[];
+  solo_competitions: SoloCompetition[];
+  competition_teams: unknown[];
+  products: Product[];
 }

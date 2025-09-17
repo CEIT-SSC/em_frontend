@@ -43,6 +43,7 @@ const {useToken} = theme;
 interface WorkshopCardProps {
     workshopImage?: string;
     presentation: PresentationOverview;
+    isPurchased?: boolean; // Add this prop to control purchase button visibility
 }
 
 // simple RTL detection (Persian/Arabic Unicode ranges)
@@ -52,6 +53,7 @@ const isRTL = (text?: string) =>
 export function WorkshopCard({
                                  presentation,
                                  workshopImage,
+                                 isPurchased = false, // Default to false if not provided
                              }: WorkshopCardProps) {
     const t = useTranslations();
     const [showModal, setShowModal] = useState(false);
@@ -350,24 +352,26 @@ export function WorkshopCard({
                             {formatPrice()} {presentation.is_paid && t("common.currency")}
                         </Typography.Title>
 
-                        <AntButton
-                            type={isSelected ? "default" : "primary"}
-                            danger={isSelected}
-                            icon={isSelected ? <DeleteOutlined/> : <ShoppingCartOutlined/>}
-                            onClick={isSelected ? removeFromCart : handleAddToCart}
-                            disabled={!presentation.is_active || buttonShouldBeDisabled}
-                            loading={buttonLoading}
-                            style={{
-                                borderRadius: token.borderRadius,
-                                height: "36px",
-                            }}
-                        >
-                            {isSelected
-                                ? t("workshop.removeFromCart")
-                                : presentation.is_paid
-                                    ? t("workshop.addToCart")
-                                    : t("workshop.enroll")}
-                        </AntButton>
+                        {!isPurchased && (
+                            <AntButton
+                                type={isSelected ? "default" : "primary"}
+                                danger={isSelected}
+                                icon={isSelected ? <DeleteOutlined/> : <ShoppingCartOutlined/>}
+                                onClick={isSelected ? removeFromCart : handleAddToCart}
+                                disabled={!presentation.is_active || buttonShouldBeDisabled}
+                                loading={buttonLoading}
+                                style={{
+                                    borderRadius: token.borderRadius,
+                                    height: "36px",
+                                }}
+                            >
+                                {isSelected
+                                    ? t("workshop.removeFromCart")
+                                    : presentation.is_paid
+                                        ? t("workshop.addToCart")
+                                        : t("workshop.enroll")}
+                            </AntButton>
+                        )}
                     </Flex>
                 </Flex>
             </Card>
@@ -380,24 +384,31 @@ export function WorkshopCard({
                     <AntButton key="close" onClick={() => setShowModal(false)}>
                         {t("common.close")}
                     </AntButton>,
-                    <AntButton
-                        key="action"
-                        type={isSelected ? "default" : "primary"}
-                        danger={isSelected}
-                        icon={isSelected ? <DeleteOutlined/> : <ShoppingCartOutlined/>}
-                        onClick={() => {
-                            isSelected ? removeFromCart() : handleAddToCart();
-                            setShowModal(false);
-                        }}
-                        disabled={!presentation.is_active || buttonShouldBeDisabled}
-                        loading={buttonLoading}
-                    >
-                        {isSelected
-                            ? t("workshop.removeFromCart")
-                            : presentation.is_paid
-                                ? t("workshop.addToCart")
-                                : t("workshop.enroll")}
-                    </AntButton>,
+                    // Only show action button if not purchased
+                    ...(!isPurchased ? [
+                        <AntButton
+                            key="action"
+                            type={isSelected ? "default" : "primary"}
+                            danger={isSelected}
+                            icon={isSelected ? <DeleteOutlined/> : <ShoppingCartOutlined/>}
+                            onClick={() => {
+                                if (isSelected) {
+                                    removeFromCart();
+                                } else {
+                                    handleAddToCart();
+                                }
+                                setShowModal(false);
+                            }}
+                            disabled={!presentation.is_active || buttonShouldBeDisabled}
+                            loading={buttonLoading}
+                        >
+                            {isSelected
+                                ? t("workshop.removeFromCart")
+                                : presentation.is_paid
+                                    ? t("workshop.addToCart")
+                                    : t("workshop.enroll")}
+                        </AntButton>
+                    ] : []),
                 ]}
                 width={800}
                 style={{top: 20}}
