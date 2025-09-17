@@ -255,21 +255,26 @@
     "price": "Price",
     "description": "Description",
     "schedule": "Schedule",
+    "location": "Location",
     "inPerson": "In Person",
     "online": "Online",
     "addToCart": "Add to Cart",
+    "removeFromCart": "Remove from Cart",
     "enroll": "Enroll",
     "presenters": "Presenters",
     "unknownPresenter": "Unknown Presenter",
     "noPresenters": "No presenters",
     "andMore": "and {count} more",
     "onlineWorkshops": "Online Workshops",
+    "onlineTalks": "Online Talks",
+    "onlineLink": "Online Link",
     "offlineWorkshops": "In-Person Workshops",
     "free": "Free",
     "error": "Failed to load workshops",
     "noWorkshops": "No workshops available",
     "noOnlineWorkshops": "No online workshops are currently available",
     "noOfflineWorkshops": "No in-person workshops are currently available",
+    "viewDetails": "View Details",
     "type": {
       "course": "Course",
       "talk": "Talk",
@@ -278,7 +283,8 @@
   },
   "common": {
     "currency": "Toman",
-    "retry": "Retry"
+    "retry": "Retry",
+    "close": "Close"
   },
   "notFound": {
     "title": "Oops! Page Not Found",
