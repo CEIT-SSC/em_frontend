@@ -35,6 +35,18 @@ export function Sponsors({
       logo: "/assets/images/sponsors/asiatech.png",
       link: "https://asiatech.ir/",
     },
+    {
+      name: "SnappFood",
+      description: "description",
+      logo: "/assets/images/sponsors/snappfood.png",
+      link: "https://snappfood.ir/",
+    },
+    {
+      name: "PGJ",
+      description: "description",
+      logo: "/assets/images/sponsors/pgj.png",
+      link: "https://persiangj.ir/",
+    },
   ];
 
   return (
