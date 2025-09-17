@@ -59,6 +59,14 @@ export function useStaffs(): StaffTeam[] {
         telegramUrl: "",
       },
       {
+        imageUrl: "/images/2025/staffs/AlirezaNikooei.jpg",
+        name: "علیرضا نیکوئی",
+        role: "دوآپس",
+        githubUrl: "https://github.com/alirezanikooei",
+        linkedinUrl: "https://www.linkedin.com/in/alireza-nikooei-10655a1b5",
+        telegramUrl: "https://t.me/Nikoooei",
+      },
+      {
         imageUrl: "/images/2025/staffs/PouryaFahimi.jpg",
         name: "پوریا فهیمی",
         role: "توسعه دهنده فرانت اند",
@@ -130,12 +138,12 @@ export function useStaffs(): StaffTeam[] {
         linkedinUrl: "https://www.linkedin.com/in/adinepour",
       },
       {
-        imageUrl: "",
+        imageUrl: "/images/2025/staffs/AlirezaNikooei.jpg",
         name: "علیرضا نیکوئی",
         role: "عضو تیم علمی",
-        githubUrl: "",
-        linkedinUrl: "",
-        telegramUrl: "",
+        githubUrl: "https://github.com/alirezanikooei",
+        linkedinUrl: "https://www.linkedin.com/in/alireza-nikooei-10655a1b5",
+        telegramUrl: "https://t.me/Nikoooei",
       },
     ],
   };

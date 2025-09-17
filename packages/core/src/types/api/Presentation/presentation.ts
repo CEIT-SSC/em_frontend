@@ -34,6 +34,7 @@ export interface Presentation {
   created_at: string; // ISO datetime
   is_active: boolean;
   poster: string;
+  remaining_capacity: number;
 }
 
 export type PresentationOverview = Pick<
@@ -55,6 +56,7 @@ export type PresentationOverview = Pick<
   | "capacity"
   | "is_active"
   | "poster"
+  | "remaining_capacity"
 >;
 
 export type PresentationsList = {

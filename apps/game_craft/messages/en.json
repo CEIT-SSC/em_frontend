@@ -201,7 +201,7 @@
       "competitionConditions": "Competition Conditions",
       "howToParticipate": {
         "title": "How to participate?",
-        "content": "To participate in GameCraft, you need to register through our website during the registration period. Teams can consist of 2-4 members. After registration, you'll receive access to workshops and resources. Make sure to attend all required workshops and follow the competition guidelines."
+        "content": "To participate in GameCraft, you need to register through our website during the registration period. Teams can consist of 2-5 members. After registration, you'll receive access to workshops and resources. Make sure to attend all required workshops and follow the competition guidelines."
       },
       "competitionRules": {
         "title": "Competition Rules",
@@ -266,6 +266,8 @@
     "noOnlineWorkshops": "No online workshops are currently available",
     "noOfflineWorkshops": "No in-person workshops are currently available",
     "viewDetails": "View Details",
+    "capacity": "Total Capacity",
+    "remainingCapacity": "Remaining",
     "type": {
       "course": "Course",
       "talk": "Talk",
