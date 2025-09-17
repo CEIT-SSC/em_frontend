@@ -590,9 +590,22 @@ export function WorkshopCard({
                 <Typography.Title level={4} style={{ marginBottom: "12px" }}>
                   {t("workshop.presenters")}
                 </Typography.Title>
-                <PresentersAvatar
-                  presenters={presentation.presenters_details}
-                />
+                {presentation.presenters_details.map((presenter) => (
+                  <>
+                    <PresentersAvatar presenters={[presenter]} />
+                    <Typography.Paragraph
+                      style={{
+                        color: token.colorTextSecondary,
+                        lineHeight: 1.7,
+                        whiteSpace: "pre-line",
+                        direction: descriptionIsRTL ? "rtl" : "ltr",
+                        marginBottom: "12px",
+                      }}
+                    >
+                      {presenter.bio}
+                    </Typography.Paragraph>
+                  </>
+                ))}
               </div>
 
               {/* Price */}
