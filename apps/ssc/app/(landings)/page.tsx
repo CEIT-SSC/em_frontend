@@ -92,11 +92,11 @@ export default function Home() {
           کارگاه‌های مهارتی تا پروژه‌های مشترک دانشجویی و صنعتی.
         </h3>
       </div>
-      <div className="px-12 py-6 flex flex-col gap-8" id="events">
+      <div className="p-6  sm:px-12 flex flex-col gap-8" id="events">
         <h2 className="text-5xl font-bold text-center">رویداد ها</h2>
         <EventList />
       </div>
-      <div className="flex flex-col justify-between items-center gap-8 py-8 px-12 lg:flex-row">
+      <div className="flex flex-col justify-between items-baseline gap-8 py-8 px-12 lg:flex-row">
         <FeatureCard
           icon={MdEmojiEvents}
           title="رویدادهای پیش‌رو"

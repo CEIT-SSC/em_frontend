@@ -31,11 +31,11 @@ const Event = ({ event }: { event: EventProps }) => {
         height={160}
         src={event.poster}
         alt="event photo"
-        className="h-40 object-cover"
+        className="aspect-square object-cover"
       />
       <div className="h-full flex flex-col gap-4 justify-between p-4">
         <div className="flex flex-col gap-1">
-          <div className="flex gap-4">
+          <div className="flex gap-4 justify-center">
             <h4 className="text-2xl font-bold">{event.title}</h4>
             {isOver && (
               <span className="rounded-full bg-mainRed h-fit py-1 px-2 text-mainWhite text-md font-semibold">
@@ -43,9 +43,11 @@ const Event = ({ event }: { event: EventProps }) => {
               </span>
             )}
           </div>
-          <p className="text-sm">{event.manager}</p>
+          <p className="text-sm text-center">{event.manager}</p>
         </div>
-        <p className="text-whiteText line-clamp-3">{event.description}</p>
+        <p className="text-whiteText line-clamp-3 text-center">
+          {event.description}
+        </p>
         <div className="w-full flex justify-between items-center">
           <Link
             className={clsx("border rounded-full px-3 py-2", {
