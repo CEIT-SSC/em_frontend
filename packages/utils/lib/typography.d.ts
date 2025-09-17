@@ -15,7 +15,7 @@ export declare function digitsToLatin(input: string): string;
  * @param input - Number or string to format
  * @returns Formatted string with commas
  */
-export declare function moneyFormat(input: string | number | undefined | null): string;
+export declare function moneyFormat(input: string | number): string;
 /**
  * Format numbers as Rial currency
  * @param input - Number or string to format

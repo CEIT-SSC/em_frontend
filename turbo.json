@@ -1,17 +1,27 @@
 {
+  "globalDependencies": [
+    "**/.env"
+  ],
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "lib/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "dist/**",
+        "lib/**"
+      ]
     },
     "dev": {
-      "cache": false
+      "dependsOn": [
+        "^build"
+      ],
+      "cache": false,
+      "persistent": true
     },
-    "lint": {
-      "outputs": []
-    },
-    "type-check": {
-      "outputs": []
-    }
+    "lint": {},
+    "type-check": {}
   }
 }
