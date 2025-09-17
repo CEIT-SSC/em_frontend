@@ -12,14 +12,14 @@ export const useDashboardNavigations = (): DashboardNavigationItem[] => {
   const locale = useLocale();
 
   return [
-    {
-      name: t("profile.label"),
-      // route: `/${locale}/dashboard/events`,
-      route: `${
-        process.env.NEXT_PUBLIC_SSC_URL || "https://ceit-ssc.ir"
-      }/dashboard`,
-      icon: <FaExternalLinkAlt />,
-    },
+    // {
+    //   name: t("profile.label"),
+    //   // route: `/${locale}/dashboard/events`,
+    //   route: `${
+    //     process.env.NEXT_PUBLIC_SSC_URL || "https://ceit-ssc.ir"
+    //   }/dashboard`,
+    //   icon: <FaExternalLinkAlt />,
+    // },
     {
       name: t("event"),
       route: `/dashboard/events`,

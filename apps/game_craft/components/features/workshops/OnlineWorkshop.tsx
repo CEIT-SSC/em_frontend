@@ -116,7 +116,7 @@ export function OnlineWorkshop({
             textAlign: "center",
           }}
         >
-          {t("workshop.onlineTalks")}
+          {t("workshop.presentations")}
         </Typography.Title>
 
         {content}
