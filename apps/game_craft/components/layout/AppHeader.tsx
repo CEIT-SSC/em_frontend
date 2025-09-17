@@ -83,7 +83,7 @@ export function AppHeader() {
         position: "sticky",
         top: 0,
         right: 0,
-        zIndex: 10000,
+        zIndex: 100,
         width: "100%",
         height: "10vh",
         minHeight: "60px",

@@ -3,7 +3,7 @@ export const gameCraftSocialLinks = {
     instagram: "https://www.instagram.com/autgamecraft",
     telegram: "https://t.me/AUTGamecraft",
     twitter: "https://x.com/AutGamecraft",
-    website: "https://autgamecraft.com",
+    website: "https://gamecraft.ir",
     youtube: "",
     linkedin: "",
     facebook: "",

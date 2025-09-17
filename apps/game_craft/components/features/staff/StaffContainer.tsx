@@ -1,5 +1,4 @@
 "use client";
-"use client";
 
 import { Col, Flex, Row, theme, Typography } from "antd";
 import { StaffCard } from "./StaffCard";
