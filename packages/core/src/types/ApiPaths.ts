@@ -25,6 +25,9 @@ export enum ApiPath {
   // Order
   ORDER_CREATE_PARTIAL_CHECKOUT = "/api/orders/checkout/",
   ORDER_PAY_SINGLE_ORDER = "/api/orders/{id}/initiate-payment/",
+
+  // Purchases
+  PURCHASES_GET_LIST = "/api/purchases/",
 }
 
 export const apiPath = (

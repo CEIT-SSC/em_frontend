@@ -9,9 +9,14 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { cartReducer } from "./cart/cart.slice";
 import { clientApi } from "lib/api/client/clientApi";
 import { orderReducer } from "./order/order.slice";
+import { purchasesReducer } from "./purchases/purchases.slice";
 
 export const store = configureStore({
-  reducer: combineReducers({ cart: cartReducer, order: orderReducer }),
+  reducer: combineReducers({
+    cart: cartReducer,
+    order: orderReducer,
+    purchases: purchasesReducer,
+  }),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: {

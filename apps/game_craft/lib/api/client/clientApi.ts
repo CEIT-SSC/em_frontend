@@ -1,7 +1,6 @@
 "use client";
 
-import { ApiModule, BASE_URL } from "@ssc/core";
-
+import { ApiModule } from "@ssc/core";
 import axios, { AxiosRequestConfig } from "axios";
 import { getSession, signOut } from "next-auth/react";
 
@@ -10,6 +9,8 @@ declare module "axios" {
     requiresAuth?: boolean;
   }
 }
+
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -35,40 +36,13 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    return response;
+  },
   async (error) => {
-    const originalRequest = error.config;
-
-    if (
-      error.response?.status === 401 &&
-      originalRequest.requiresAuth &&
-      !originalRequest._retry
-    ) {
-      originalRequest._retry = true;
-
-      try {
-        const refreshedSession = await getSession();
-
-        if (refreshedSession && refreshedSession.accessToken) {
-          const newToken = refreshedSession.accessToken;
-          const oldToken = originalRequest.headers["Authorization"]?.replace(
-            "Bearer ",
-            ""
-          );
-
-          if (newToken !== oldToken) {
-            originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
-            return axiosInstance(originalRequest);
-          }
-        }
-
-        console.warn("Unable to refresh token, signing out user ?");
-      } catch (refreshError) {
-        console.error("Token refresh failed:", refreshError);
-        return Promise.reject(refreshError);
-      }
+    if (error.response?.status === 401) {
+      await signOut({ callbackUrl: "/login" });
     }
-
     return Promise.reject(error);
   }
 );
