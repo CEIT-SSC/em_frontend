@@ -14,7 +14,7 @@ import {
   removeItemFromCartThunk,
 } from "lib/store/cart/cart.thunk";
 import { Flex, theme, Row, Col, Spin, Empty, Alert, message } from "antd";
-import { ItemType } from "@ssc/core";
+import {ItemType, PresentationType} from "@ssc/core";
 
 const { useToken } = theme;
 
@@ -91,7 +91,7 @@ export default function ShoppingBagPage() {
         {cartItems.map((item) => (
           <Col key={item.id} xs={24} sm={24} lg={24}>
             <ProductCart
-              imageUrl= {item.type == "talk" ? "/images/SuperMarioSquare.jpg" : "/images/LuigiSquare.jpg"}
+              imageUrl= {item.type == PresentationType.WORKSHOP ? "/images/SuperMarioSquare.jpg" : "/images/LuigiSquare.jpg"}
               title={item.title}
               price={item.price}
               onRemove={() => handleRemoveItem(item.id, ItemType.PRESENTATION)}
