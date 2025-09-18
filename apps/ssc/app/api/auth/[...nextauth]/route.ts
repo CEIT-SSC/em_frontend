@@ -63,6 +63,7 @@ const authOptions: AuthOptions = {
         try {
 
           console.log(`[POINT B] Calling Django API for user: ${credentials.email}`);
+          console.log(`[ENV CHECK] API URI: ${process.env.NEXT_PUBLIC_API_URL}`);
 
           const response = await serverApi.auth.login(
             credentials.email,
