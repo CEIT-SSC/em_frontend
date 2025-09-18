@@ -1,75 +1,109 @@
 "use client";
 
-import { theme } from "antd";
+import { Empty, Flex, theme, Typography } from "antd";
 import { useTranslations } from "next-intl";
-import { useResponsive } from "../../../../lib/hooks/useResponsive";
-import { sponsors } from "../../../../config/sponsors";
+import {useResponsive} from "../../../../lib/hooks/useResponsive";
+import {sponsors} from "../../../../config/sponsors";
 import SponsorCard from "../../../../components/common/SponsorCard";
 
 const { useToken } = theme;
 
 export default function SponsorsPage() {
-  const { token } = useToken();
-  const screens = useResponsive();
-  const t = useTranslations("app");
-  const tSponsors = useTranslations("app.sponsors");
-  const sponsorsViewPadding = screens.lg ? "3rem 5rem" : "3rem 2rem";
-  const isMobile = !screens.lg;
+    const { token } = useToken();
+    const screens = useResponsive();
+    const t = useTranslations("app");
+    const tSponsors = useTranslations("app.sponsors");
 
-  // Custom Empty component to replace Ant Design Empty
-  const EmptyState = ({ description }: { description: string }) => (
-    <div className="flex flex-col items-center justify-center py-8">
-      <div className="text-6xl mb-4 opacity-25">📋</div>
-      <p style={{ color: token.colorTextSecondary }} className="text-center">
-        {description}
-      </p>
-    </div>
-  );
+    // Responsive padding configuration
+    const isMobile = !screens.md;
+    const isTablet = screens.md && !screens.lg;
 
-  return (
-    <div className="flex flex-col items-center justify-center flex-1 w-full min-h-full">
-      <div
-        className="flex flex-col items-center justify-center w-full"
-        style={{ padding: sponsorsViewPadding }}
-      >
-        <h1
-          className="text-center mb-8"
-          style={{
-            color: "white",
-            fontSize: isMobile
-              ? token.fontSizeHeading2
-              : token.fontSizeHeading1,
-            marginBottom: isMobile ? token.marginLG : token.marginXL,
-          }}
+    const getResponsivePadding = () => {
+        if (isMobile) return "2rem 1rem";
+        if (isTablet) return "2.5rem 2rem";
+        return "3rem 5rem";
+    };
+
+    const getContainerPadding = () => {
+        if (isMobile) return token.padding;
+        if (isTablet) return token.paddingLG;
+        return token.padding;
+    };
+
+    const getMaxWidth = () => {
+        if (isMobile) return "100%";
+        if (isTablet) return "800px";
+        return "1200px";
+    };
+
+    return (
+        <Flex
+            vertical
+            align="center"
+            justify="center"
+            style={{
+                flex: 1,
+                width: "100%",
+                minHeight: "100%",
+            }}
         >
-          {t("mainNavigation.sponsors")}
-        </h1>
-
-        <div
-          className="flex flex-col items-center justify-center w-full min-h-[200px]"
-          style={{
-            backgroundColor: token.colorBgBase,
-            borderRadius: token.borderRadius,
-            margin: isMobile ? "0 0.5rem" : "0",
-          }}
-        >
-          {sponsors.length > 0 ? (
-            <div
-              className="flex flex-col w-full"
-              style={{
-                gap: isMobile ? 16 : 24,
-                padding: isMobile ? "0.5rem 0" : "0",
-              }}
+            <Flex
+                vertical
+                align="center"
+                justify="center"
+                style={{
+                    width: "100%",
+                    padding: getResponsivePadding(),
+                }}
             >
-              {sponsors.map((sponsor, index) => (
-                <SponsorCard key={sponsor.id} sponsor={sponsor} index={index} />
-              ))}
-            </div>
-          ) : (
-            <EmptyState description={tSponsors("noSponsors")} />
-          )}
-        </div>
-      </div>
-    </div>
-  );
+                <Typography.Title
+                    level={isMobile ? 2 : 1}
+                    style={{
+                        color: "white",
+                        fontSize: isMobile ? token.fontSizeHeading2 : token.fontSizeHeading1,
+                        textAlign: "center",
+                        marginBottom: isMobile ? token.marginLG : token.marginXL,
+                    }}
+                >
+                    {t("mainNavigation.sponsors")}
+                </Typography.Title>
+                <Flex
+                    vertical
+                    align="center"
+                    justify="center"
+                    style={{
+                        width: "100%",
+                        maxWidth: getMaxWidth(),
+                        minHeight: isMobile ? "150px" : "200px",
+                        backgroundColor: token.colorBgBase,
+                        borderRadius: token.borderRadius,
+                        padding: getContainerPadding(),
+                        margin: isMobile ? "0 0.5rem" : "0",
+                    }}
+                >
+                    {sponsors.length > 0 ? (
+                        <Flex
+                            vertical
+                            gap={isMobile ? 16 : 24}
+                            style={{
+                                width: "100%",
+                                padding: isMobile ? "0.5rem 0" : "0",
+                            }}
+                        >
+                            {sponsors.map((sponsor, index) => (
+                                <SponsorCard key={sponsor.id} sponsor={sponsor} index={index} />
+                            ))}
+                        </Flex>
+                    ) : (
+                        <Empty
+                            description={tSponsors('noSponsors')}
+                            style={{
+                                color: token.colorTextSecondary,
+                            }}
+                        />
+                    )}
+                </Flex>
+            </Flex>
+        </Flex>
+    );
 }
