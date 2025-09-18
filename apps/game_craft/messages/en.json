@@ -294,6 +294,11 @@
       "course": "Course",
       "talk": "Talk",
       "workshop": "Workshop"
+    },
+    "level": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
     }
   },
   "common": {

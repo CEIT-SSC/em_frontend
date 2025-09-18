@@ -276,6 +276,16 @@ export function WorkshopCard({
                 }}
                 count={t(`workshop.type.${presentation.type}`)}
               />
+              <Badge
+                style={{
+                  backgroundColor: "transparent",
+                  color: token.colorInfo,
+                  border: `1px solid ${token.colorInfo}`,
+                  borderRadius: "4px",
+                  padding: "0 8px",
+                }}
+                count={t(`workshop.level.${presentation.level}`)}
+              />
             </Flex>
           </Flex>
 
