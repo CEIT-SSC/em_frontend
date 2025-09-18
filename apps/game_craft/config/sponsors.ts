@@ -17,7 +17,7 @@ export const sponsors: Sponsor[] = [
     tier: "platinum"
   },
   {
-    id: "AsiaTech",
+    id: "asiaTech",
     name: "Asia Tech",
     logo: "/assets/images/sponsors/asiatech.png",
     description: "Cafe Bazaar is Iran's largest Android app marketplace, providing a platform for mobile applications and games. They support the gaming community by sponsoring events and promoting innovative mobile gaming solutions.",
@@ -25,7 +25,7 @@ export const sponsors: Sponsor[] = [
     tier: "platinum"
   },
   {
-    id: "incytel-games",
+    id: "incytelGames",
     name: "Incytel Games",
     logo: "/assets/images/sponsors/incytelGames.png",
     description: "Incytel Games is a leading game development company specializing in mobile and web-based games. They are committed to advancing the gaming industry through cutting-edge technology and creative gameplay.",
@@ -33,7 +33,7 @@ export const sponsors: Sponsor[] = [
     tier: "gold"
   },
   {
-    id: "SnappFood",
+    id: "snappFood",
     name: "SnappFood",
     logo: "/assets/images/sponsors/snappfood.png",
     description: "Incytel Games is a leading game development company specializing in mobile and web-based games. They are committed to advancing the gaming industry through cutting-edge technology and creative gameplay.",
@@ -41,7 +41,7 @@ export const sponsors: Sponsor[] = [
     tier: "gold"
   },
   {
-    id: "PGJ",
+    id: "pgj",
     name: "PGJ",
     logo: "/assets/images/sponsors/pgj.png",
     description: "Incytel Games is a leading game development company specializing in mobile and web-based games. They are committed to advancing the gaming industry through cutting-edge technology and creative gameplay.",
@@ -65,7 +65,7 @@ export const sponsors: Sponsor[] = [
   //   tier: "silver"
   // },
   // {
-  //   id: "quiz-of-kings",
+  //   id: "quizOfKings",
   //   name: "Quiz of Kings",
   //   logo: "/assets/images/sponsors/quizOfKings.png",
   //   description: "Quiz of Kings is an interactive gaming platform that combines entertainment with education. They create engaging quiz-based games that challenge players while providing a fun and competitive environment.",
