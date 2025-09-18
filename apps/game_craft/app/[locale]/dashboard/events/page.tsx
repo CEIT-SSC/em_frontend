@@ -1,18 +1,18 @@
 "use client";
 
-import {Flex, theme, Typography, Spin, Empty, Alert, Row, Col} from "antd";
+import {Alert, Col, Empty, Flex, Row, Spin, theme, Typography} from "antd";
 import {useAppDispatch, useAppSelector} from "lib/store/store";
 import {useEffect} from "react";
 import {fetchPurchasesThunk} from "lib/store/purchases/purchases.thunk";
 import {
-    workshopsSelector,
-    talksSelector,
-    purchasesLoadingSelector,
     purchasesErrorSelector,
+    purchasesLoadingSelector,
+    talksSelector,
+    workshopsSelector,
 } from "lib/store/purchases/purchases.selectors";
 import {useTranslations} from "next-intl";
 import {WorkshopCard} from "components/features/workshops/WorkshopCard";
-import {PresentationOverview} from "@ssc/core";
+import {PresentationOverview, PresentationType} from "@ssc/core";
 
 const {useToken} = theme;
 
@@ -82,7 +82,7 @@ export default function EventsPage() {
                         <WorkshopCard
                             presentation={item}
                             isPurchased={true}
-                            workshopImage={'/images/Luigi.jpg'}
+                            workshopImage={item.type === PresentationType.WORKSHOP ? '/images/SuperMario.jpg'  : '/images/Luigi.jpg'}
                         />
                     </Col>
                 ))}
