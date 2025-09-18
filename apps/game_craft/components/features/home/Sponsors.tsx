@@ -3,6 +3,7 @@
 import { Button, Col, Flex, Row, Typography } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import {sponsors} from "../../../config/sponsors";
 
 interface SponsorsProps {
   padding?: string;
@@ -14,40 +15,6 @@ export function Sponsors({
   backgroundColor,
 }: SponsorsProps) {
   const t = useTranslations("app");
-
-  // Sponsor data matching the React project exactly
-  const sponsors = [
-    {
-      name: "IncytelGames",
-      description: "description",
-      logo: "/assets/images/sponsors/incytelGames.png",
-      link: "https://www.incytel.com/",
-    },
-    {
-      name: "Yektanet",
-      description: "description",
-      logo: "/assets/images/sponsors/yektanet.png",
-      link: "https://www.yektanet.com/",
-    },
-    {
-      name: "AsiaTech",
-      description: "description",
-      logo: "/assets/images/sponsors/asiatech.png",
-      link: "https://asiatech.ir/",
-    },
-    {
-      name: "SnappFood",
-      description: "description",
-      logo: "/assets/images/sponsors/snappfood.png",
-      link: "https://snappfood.ir/",
-    },
-    {
-      name: "PGJ",
-      description: "description",
-      logo: "/assets/images/sponsors/pgj.png",
-      link: "https://persiangj.ir/",
-    },
-  ];
 
   return (
     <Flex
