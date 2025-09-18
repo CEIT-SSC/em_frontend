@@ -23,33 +23,6 @@ export default function SponsorCard({sponsor, index}: SponsorCardProps) {
 
     const isMobile = !screens.md;
 
-    const getTierConfig = (tier: string) => {
-        switch (tier) {
-            case "platinum":
-                return {
-                    label: t("tiers.platinum"),
-                    color: "blue",
-                };
-            case "gold":
-                return {
-                    label: t("tiers.gold"),
-                    color: "gold",
-                };
-            case "silver":
-                return {
-                    label: t("tiers.silver"),
-                    color: "default",
-                };
-            default:
-                return {
-                    label: t("tiers.sponsor"),
-                    color: "default",
-                };
-        }
-    };
-
-    const tierConfig = getTierConfig(sponsor.tier);
-
     const handleVisitWebsite = () => {
         window.open(sponsor.link, "_blank", "noopener,noreferrer");
     };
@@ -65,16 +38,6 @@ export default function SponsorCard({sponsor, index}: SponsorCardProps) {
                     padding: token.paddingLG,
                 }}
             >
-                {/* Tier Badge */}
-                <Flex justify="end">
-                    <Tag
-                        color={tierConfig.color}
-                        style={{fontSize: token.fontSizeSM, fontWeight: 600}}
-                    >
-                        {tierConfig.label}
-                    </Tag>
-                </Flex>
-
                 <Flex
                     vertical={isMobile}
                     gap="large"
@@ -89,7 +52,6 @@ export default function SponsorCard({sponsor, index}: SponsorCardProps) {
                             height: isMobile ? 100 : 120,
                             borderRadius: "50%",
                             backgroundColor: customColors.colorAction,
-                            border: `1px solid ${token.colorBorderSecondary}`,
                             boxShadow: `0 2px 8px ${token.colorFillQuaternary}`,
                             flexShrink: 0,
                         }}
