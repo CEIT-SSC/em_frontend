@@ -28,7 +28,7 @@ const AuthData = () => {
 
   if (session.status === "unauthenticated") {
     return (
-      <>
+      <div className="flex items-center gap-2">
         <Link href="/login">
           <Button
             className="min-h-9 min-w-16"
@@ -45,7 +45,7 @@ const AuthData = () => {
             label="ثبت نام"
           />
         </Link>
-      </>
+      </div>
     );
   } else {
     if (!userData.loggedIn || session.status === "loading") {
