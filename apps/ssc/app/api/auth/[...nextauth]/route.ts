@@ -50,6 +50,9 @@ const authOptions: AuthOptions = {
         redirect_uri: { label: "Redirect URI", type: "text" },
       },
       async authorize(credentials) {
+
+        console.log("[POINT A] Received direct login request from client.");
+
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
@@ -58,13 +61,19 @@ const authOptions: AuthOptions = {
         const redirectUri = credentials.redirect_uri;
 
         try {
+
+          console.log(`[POINT B] Calling Django API for user: ${credentials.email}`);
+
           const response = await serverApi.auth.login(
             credentials.email,
             credentials.password,
             process.env.SSC_PUBLIC_CLIENT_ID
           );
 
+          console.log("Django /o/token/ Response Status:", response.status);
+          console.log("Django /o/token/ Response Data:", response.data);
           console.log("!@! i was successfull", response);
+
           if (response.status === 200 && response.data?.success) {
             const tokenData = response.data.data;
 
