@@ -190,6 +190,26 @@
         "gold": "GOLD",
         "silver": "SILVER",
         "sponsor": "SPONSOR"
+      },
+      "yektanet": {
+        "name": "Yektanet",
+        "description": "Yektanet is the largest native advertising network in Iran, providing advanced advertising solutions to help businesses grow and reach their target audience effectively."
+      },
+      "asiaTech": {
+        "name": "AsiaTech",
+        "description": "AsiaTech is a leading technology company specializing in software development, IT services, and digital transformation solutions for businesses across various industries."
+      },
+      "incytelGames": {
+        "name": "Incytel Games",
+        "description": "Incytel Games is a prominent game development studio known for creating engaging and innovative games that captivate players worldwide."
+      },
+      "snappFood": {
+        "name": "Snapp! Food",
+        "description": "Snapp! Food is a popular food delivery service in Iran, offering a wide range of restaurant options and fast delivery to customers across the country."
+      },
+      "pgj": {
+        "name": "PGJ",
+        "description": "PGJ is a leading provider of gaming accessories and peripherals, offering high-quality products designed to enhance the gaming experience for players of all levels."
       }
     },
     "footer": {

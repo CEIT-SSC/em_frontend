@@ -96,7 +96,7 @@ export default function SponsorCard({ sponsor, index }: SponsorCardProps) {
           >
             <Image
               src={sponsor.logo}
-              alt={`${sponsor.name} logo`}
+              alt={`${sponsor.id} logo`}
               width={isMobile ? 70 : 90}
               height={isMobile ? 70 : 90}
               style={{
@@ -121,7 +121,7 @@ export default function SponsorCard({ sponsor, index }: SponsorCardProps) {
                 fontWeight: 700,
               }}
             >
-              {sponsor.name}
+                {t(`${sponsor.id}.name`, { default: sponsor.id})}
             </Title>
 
             <Text
@@ -131,7 +131,7 @@ export default function SponsorCard({ sponsor, index }: SponsorCardProps) {
                 lineHeight: 1.6,
               }}
             >
-              {sponsor.description}
+              {t(`${sponsor.id}.description`)}
             </Text>
 
             <Button
