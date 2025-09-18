@@ -64,7 +64,7 @@ const authOptions: AuthOptions = {
             process.env.SSC_PUBLIC_CLIENT_ID
           );
 
-          console.log("!@! i was successfull");
+          console.log("!@! i was successfull", response);
           if (response.status === 200 && response.data?.success) {
             const tokenData = response.data.data;
 
