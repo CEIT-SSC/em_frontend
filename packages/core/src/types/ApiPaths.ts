@@ -1,33 +1,33 @@
 export enum ApiPath {
   // Authentication endpoints
-  AUTH_TOKEN = "/api/o/token/",
-  AUTH_LOGOUT = "/api/o/revoke-token/",
-  AUTH_REGISTER = "/api/register/",
-  AUTH_VERIFY_EMAIL = "/api/verify-email/",
-  AUTH_RESEND_OTP = "/api/resend-verify-email/",
-  AUTH_GOOGLE = "/api/auth/social/google/",
-  AUTH_AUTHORIZE = "/api/o/authorize",
-  AUTH_AUTHORIZE_TOKEN = "/api/o/authorize/refresh",
+  AUTH_TOKEN = "o/token/",
+  AUTH_LOGOUT = "/o/revoke-token/",
+  AUTH_REGISTER = "/register/",
+  AUTH_VERIFY_EMAIL = "/verify-email/",
+  AUTH_RESEND_OTP = "/resend-verify-email/",
+  AUTH_GOOGLE = "/auth/social/google/",
+  AUTH_AUTHORIZE = "/o/authorize",
+  AUTH_AUTHORIZE_TOKEN = "/o/authorize/refresh",
 
   // Profile endpoints
-  USER_PROFILE = "/api/profile/",
+  USER_PROFILE = "/profile/",
 
   // Presentations endpoints
-  PRESENTATIONS_GET_LIST = "/api/presentations/",
-  PRESENTATIONS_GET_DETAILS = "/api/presentations/{id}/",
+  PRESENTATIONS_GET_LIST = "/presentations/",
+  PRESENTATIONS_GET_DETAILS = "/presentations/{id}/",
 
   // Shop
-  SHOP_CART = "/api/cart/",
-  SHOP_ADD_ITEM = "/api/cart/items/",
-  SHOP_REMOVE_ITEM = "/api/cart/items/",
-  SHOP_DISCOUNT_CODE = "/api/cart/items/apply-discount/",
+  SHOP_CART = "/cart/",
+  SHOP_ADD_ITEM = "/cart/items/",
+  SHOP_REMOVE_ITEM = "/cart/items/",
+  SHOP_DISCOUNT_CODE = "/cart/items/apply-discount/",
 
   // Order
-  ORDER_CREATE_PARTIAL_CHECKOUT = "/api/orders/checkout/",
-  ORDER_PAY_SINGLE_ORDER = "/api/orders/{id}/initiate-payment/",
+  ORDER_CREATE_PARTIAL_CHECKOUT = "/orders/checkout/",
+  ORDER_PAY_SINGLE_ORDER = "/orders/{id}/initiate-payment/",
 
   // Purchases
-  PURCHASES_GET_LIST = "/api/purchases/",
+  PURCHASES_GET_LIST = "/purchases/",
 }
 
 export const apiPath = (
@@ -44,5 +44,5 @@ export const apiPath = (
     });
   }
 
-  return url; // was /api/path before
+  return url; // was /path before
 };

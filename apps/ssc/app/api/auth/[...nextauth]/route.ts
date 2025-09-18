@@ -70,8 +70,9 @@ const authOptions: AuthOptions = {
             process.env.SSC_PUBLIC_CLIENT_ID
           );
 
-          console.log("✅ Django /o/token/ Response Status:", response.status);
+          console.log("Django /o/token/ Response Status:", response.status);
           console.log("Django /o/token/ Response Data:", response.data);
+          console.log("!@! i was successfull", response);
 
           if (response.status === 200 && response.data?.success) {
             const tokenData = response.data.data;
@@ -81,6 +82,7 @@ const authOptions: AuthOptions = {
                 await serverApi.auth.authorizeWithToken(
                   tokenData.refresh_token
                 );
+              console.log("!@! authorize response", handshakeResponse);
 
               return {
                 id: "1",
@@ -106,7 +108,12 @@ const authOptions: AuthOptions = {
           }
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
-          console.error("Authentication error:", error.message, error.response);
+          console.error(
+            "Authentication error:",
+            error.message,
+            error.response,
+            error
+          );
         }
 
         return null;
