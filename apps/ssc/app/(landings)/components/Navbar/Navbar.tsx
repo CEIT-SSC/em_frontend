@@ -31,7 +31,7 @@ const Navbar = async () => {
           ))}
         </div>
       </div>
-      <div className="hidden md:flex items-center gap-2">
+      <div className="hidden md:block">
         <AuthData />
       </div>
       <HamburgerMenu />
