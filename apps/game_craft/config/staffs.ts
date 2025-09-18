@@ -59,6 +59,14 @@ export function useStaffs(): StaffTeam[] {
         telegramUrl: "",
       },
       {
+        imageUrl: "/images/2025/staffs/MoeinEnayati.png",
+        name: "معین عنایتی",
+        role: "توسعه دهنده بک اند و دوآپس",
+        telegramUrl: "https://t.me/moein_enayati",
+        linkedinUrl: "https://www.linkedin.com/in/moein-enayati",
+        githubUrl: "https://github.com/moeinEN",
+      },
+      {
         imageUrl: "/images/2025/staffs/AlirezaNikooei.jpg",
         name: "علیرضا نیکوئی",
         role: "دوآپس",
