@@ -294,6 +294,11 @@
       "course": "دوره",
       "talk": "سخنرانی",
       "workshop": "کارگاه"
+    },
+    "level": {
+      "beginner": "مبتدی",
+      "intermediate": "متوسط",
+      "advanced": "پیشرفته"
     }
   },
   "common": {

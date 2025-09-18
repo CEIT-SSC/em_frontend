@@ -15,6 +15,12 @@ export enum PresentationType {
   WORKSHOP = "workshop",
 }
 
+export enum PresentationLevel {
+  BEGINNER = "beginner",
+  INTERMEDIATE = "intermediate",
+  ADVANCED = "advanced",
+}
+
 export interface Presentation {
   id: PresentationId;
   event: number;
@@ -35,6 +41,7 @@ export interface Presentation {
   is_active: boolean;
   poster: string;
   remaining_capacity: number;
+  level: PresentationLevel;
 }
 
 export type PresentationOverview = Pick<
@@ -57,6 +64,7 @@ export type PresentationOverview = Pick<
   | "is_active"
   | "poster"
   | "remaining_capacity"
+  | "level"
 >;
 
 export type PresentationsList = {

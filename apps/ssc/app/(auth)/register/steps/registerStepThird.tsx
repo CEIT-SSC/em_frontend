@@ -13,7 +13,12 @@ export const RegisterStepThird = () => {
         ثبت نام شما با موفقیت انجام شد
       </p>
       <div className="w-full flex flex-col items-center gap-2.5 px-8 py-4">
-        <Link href={{ href: "/login", query: params.toString() }}>
+        <Link
+          href={{
+            pathname: "/login",
+            query: Object.fromEntries(params.entries()),
+          }}
+        >
           <Button
             className="w-full"
             variant={ButtonVariant.PRIMARY}
