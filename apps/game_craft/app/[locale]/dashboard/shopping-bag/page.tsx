@@ -91,7 +91,7 @@ export default function ShoppingBagPage() {
         {cartItems.map((item) => (
           <Col key={item.id} xs={24} sm={24} lg={24}>
             <ProductCart
-              imageUrl="/images/SuperMario.jpg"
+              imageUrl= {item.type == "talk" ? "/images/SuperMarioSquare.jpg" : "/images/LuigiSquare.jpg"}
               title={item.title}
               price={item.price}
               onRemove={() => handleRemoveItem(item.id, ItemType.PRESENTATION)}
