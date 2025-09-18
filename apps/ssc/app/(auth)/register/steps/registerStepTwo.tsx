@@ -79,7 +79,7 @@ export const RegisterStepTwo = ({ nextStep, email: mail }: Props) => {
         value={otp}
         onChange={setOtp}
         numInputs={OTP_LENGTH}
-        containerStyle="flex flex-row-reverse gap-4 justify-center px-24"
+        containerStyle="flex flex-row-reverse gap-4 justify-center px-4 sm:px-24"
         inputStyle="border-b-2 w-48 gradient-border !w-full outline-none text-4xl font-bold"
         shouldAutoFocus
         inputType="text"
