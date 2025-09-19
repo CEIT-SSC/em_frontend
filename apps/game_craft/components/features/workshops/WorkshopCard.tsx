@@ -432,7 +432,8 @@ export function WorkshopCard({
                 disabled={
                   !presentation.is_active ||
                   buttonShouldBeDisabled ||
-                  presentation.capacity <= 0
+                  presentation.capacity <= 0 ||
+                  !isAuthenticated
                 }
                 loading={buttonLoading}
                 style={{
@@ -479,7 +480,8 @@ export function WorkshopCard({
                   disabled={
                     !presentation.is_active ||
                     buttonShouldBeDisabled ||
-                    presentation.capacity <= 0
+                    presentation.capacity <= 0 ||
+                    !isAuthenticated
                   }
                   loading={buttonLoading}
                 >
