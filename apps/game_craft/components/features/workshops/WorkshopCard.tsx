@@ -426,7 +426,7 @@ export function WorkshopCard({
                         >
                             {t("workshop.remainingCapacity") +
                                 ": " +
-                                digitsToHindi(presentation.capacity)}
+                                digitsToHindi(presentation.remaining_capacity)}
                         </Typography.Title>
                     </Flex>
 
