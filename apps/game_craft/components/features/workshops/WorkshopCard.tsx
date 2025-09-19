@@ -101,6 +101,38 @@ export function WorkshopCard({
         });
     };
 
+    // Format time only (for end time when it's same day)
+    const formatTime = (dateTimeString: string) => {
+        const date = new Date(dateTimeString);
+        return date.toLocaleString("fa-IR", {
+            timeZone: "UTC",
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+    };
+
+    // Check if start and end dates are on the same day
+    const isSameDay = (startTime: string, endTime: string) => {
+        const start = new Date(startTime);
+        const end = new Date(endTime);
+        return start.toDateString() === end.toDateString();
+    };
+
+    // Format date time range
+    const formatDateTimeRange = () => {
+        if (!presentation.end_time) {
+            return formatDateTime(presentation.start_time);
+        }
+
+        if (isSameDay(presentation.start_time, presentation.end_time)) {
+            // Same day: show date + start time - end time
+            return `${formatDateTime(presentation.start_time)} - ${formatTime(presentation.end_time)}`;
+        } else {
+            // Different days: show full start date/time - full end date/time
+            return `${formatDateTime(presentation.start_time)} - ${formatDateTime(presentation.end_time)}`;
+        }
+    };
+
     const handleAddToCart = () => {
         if (buttonShouldBeDisabled) {
             if (!isAuthenticated) {
@@ -174,7 +206,7 @@ export function WorkshopCard({
                 <div
                     style={{
                         position: "relative",
-                        paddingTop: "56.25%", // 16:9 aspect ratio
+                        paddingTop: "56.25%" // 16:9 aspect ratio
                     }}
                 >
                     {/* Workshop Image */}
@@ -323,7 +355,7 @@ export function WorkshopCard({
                         <Typography.Text
                             style={{color: token.colorTextSecondary, fontSize: "14px"}}
                         >
-                            {formatDateTime(presentation.start_time)}
+                            {formatDateTimeRange()}
                         </Typography.Text>
                     </Flex>
 
@@ -581,7 +613,7 @@ export function WorkshopCard({
                                         style={{color: token.colorPrimary, fontSize: "20px"}}
                                     />
                                     <Typography.Text style={{color: token.colorTextSecondary}}>
-                                        {formatDateTime(presentation.start_time)}
+                                        {formatDateTimeRange()}
                                     </Typography.Text>
                                 </Flex>
                             </div>
