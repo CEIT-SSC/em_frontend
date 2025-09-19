@@ -1,10 +1,12 @@
 "use client";
 
 import { Button, Flex, Grid, Layout, theme } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
+import { MenuOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { DashboardDrawer } from "./DashboardDrawer";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const { Header } = Layout;
 const { useToken } = theme;
@@ -13,8 +15,10 @@ const { useBreakpoint } = Grid;
 export function DashboardHeader() {
   const { token } = useToken();
   const screens = useBreakpoint();
+  const router = useRouter();
   const [shadow, setShadow] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const t = useTranslations("common");
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -35,6 +39,10 @@ export function DashboardHeader() {
     setDrawerOpen(!drawerOpen);
   }
 
+  const handleBackToHome = () => {
+    router.push("/");
+  };
+
   return screens.lg ? (
     <></>
   ) : (
@@ -51,7 +59,7 @@ export function DashboardHeader() {
         background: token.colorPrimary,
         transition: "box-shadow 0.3s",
         boxShadow: shadow ? "0 10px 20px rgba(0, 0, 0, 0.5)" : "none",
-        padding: "0.5rem 2rem",
+        padding: "0.5rem 1rem",
       }}
     >
       <Flex
@@ -59,6 +67,7 @@ export function DashboardHeader() {
         justify="space-between"
         style={{ height: "100%", width: "100%" }}
       >
+        {/* Menu Button - moved to left */}
         <Button
           shape="circle"
           type="primary"
@@ -66,6 +75,8 @@ export function DashboardHeader() {
           icon={<MenuOutlined />}
           onClick={() => toggleDrawerOpen()}
         />
+
+        {/* Logo in center */}
         <Image
           src="/svg/dark-3d.svg"
           alt="gamecraft-logo"
@@ -73,6 +84,16 @@ export function DashboardHeader() {
           height={40}
           style={{ height: "60%", width: "auto", maxHeight: "60px" }}
         />
+
+        {/* Back Button - moved to right */}
+        <Button
+          shape="circle"
+          type="primary"
+          size="large"
+          icon={<ArrowLeftOutlined />}
+          onClick={handleBackToHome}
+        />
+
         <DashboardDrawer
           open={drawerOpen}
           toggleDrawerOpen={toggleDrawerOpen}
