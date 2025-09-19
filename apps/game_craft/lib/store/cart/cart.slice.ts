@@ -70,22 +70,22 @@ const cartSlice = createSlice({
     });
     builder.addAsyncThunk(applyBonusCodeThunk, {
       pending: (state) => {
-        state.loading = true;
-        state.error = null;
+        // state.loading = true;
+        // state.error = null;
       },
       fulfilled: (state, action: PayloadAction<Cart>) => {
-        state.presentations = action.payload.presentations;
-        state.count = action.payload.presentations.length;
+        // state.presentations = action.payload.presentations;
+        // state.count = action.payload.presentations.length;
         state.discountCode = action.payload.discount_code;
         state.discountAmount = action.payload.discount_amount;
         state.subTotal = action.payload.subtotal_amount?.parsedValue || 0;
         state.total = action.payload.total_amount?.parsedValue || 0;
-        state.error = null;
-        state.loading = false;
+        // state.error = null;
+        // state.loading = false;
       },
       rejected: (state, action) => {
-        state.error = action.payload as string;
-        state.loading = false;
+        // state.error = action.payload as string;
+        // state.loading = false;
       },
     });
   },

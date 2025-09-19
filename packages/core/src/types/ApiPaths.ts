@@ -24,7 +24,7 @@ export enum ApiPath {
   SHOP_CART = "/cart/",
   SHOP_ADD_ITEM = "/cart/items/",
   SHOP_REMOVE_ITEM = "/cart/items/",
-  SHOP_DISCOUNT_CODE = "/cart/items/apply-discount/",
+  SHOP_DISCOUNT_CODE = "/cart/apply-discount/",
 
   // Order
   ORDER_CREATE_PARTIAL_CHECKOUT = "/orders/checkout/",

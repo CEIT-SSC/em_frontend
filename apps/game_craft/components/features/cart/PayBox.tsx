@@ -6,8 +6,9 @@ import {
   cartPaymentDataSelector,
 } from "lib/store/cart/cart.selectors";
 import { createAndCheckoutThunk } from "lib/store/order/order.thunk";
+import { applyBonusCodeThunk } from "lib/store/cart/cart.thunk";
 import { useAppDispatch, useAppSelector } from "lib/store/store";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import {
   Flex,
   Divider,
@@ -15,8 +16,12 @@ import {
   Button as AntButton,
   theme,
   Spin,
+  Modal,
+  Input,
+  message,
 } from "antd";
 import { useFormatter } from "lib/hooks/useFormatter";
+import { toast, ToastContainer } from "react-toastify";
 
 const { useToken } = theme;
 
@@ -25,12 +30,40 @@ export function PayBox() {
   const cartItems = useAppSelector(cartPresentationsSelector);
   const paymentData = useAppSelector(cartPaymentDataSelector);
   const loading = useAppSelector(cartLoadingSelector);
-  const { token } = useToken();
+  const { token, theme } = useToken();
   const { formatNumberToMoney } = useFormatter();
 
+  // State for discount code modal and input
+  const [isDiscountModalOpen, setIsDiscountModalOpen] = useState(false);
+  const [discountCode, setDiscountCode] = useState("");
+  const [discountLoading, setDiscountLoading] = useState(false);
+
   const applyDiscount = () => {
-    // TODO: handling discount code
-    // dispatch(applyBonusCodeThunk("DISCOUNT2024"));
+    setIsDiscountModalOpen(true);
+  };
+
+  const handleDiscountSubmit = async () => {
+    if (!discountCode.trim()) {
+      toast.error("لطفاً کد تخفیف را وارد کنید");
+      return;
+    }
+
+    setDiscountLoading(true);
+    try {
+      await dispatch(applyBonusCodeThunk(discountCode.trim())).unwrap();
+      toast.success("کد تخفیف با موفقیت اعمال شد");
+      setIsDiscountModalOpen(false);
+      setDiscountCode("");
+    } catch (error) {
+      toast.error("کد تخفیف معتبر نمی باشد");
+    } finally {
+      setDiscountLoading(false);
+    }
+  };
+
+  const handleDiscountCancel = () => {
+    setIsDiscountModalOpen(false);
+    setDiscountCode("");
   };
 
   const checkout = useCallback(() => {
@@ -42,7 +75,7 @@ export function PayBox() {
       .catch((error) => {
         console.error(error);
       });
-  }, [cartItems]);
+  }, [cartItems, dispatch]);
 
   if (loading) {
     return (
@@ -73,6 +106,7 @@ export function PayBox() {
       }}
       gap="small"
     >
+      <ToastContainer theme={theme.id === 1 ? "dark" : "light"} />
       <Divider
         variant="dashed"
         type="horizontal"
@@ -161,6 +195,30 @@ export function PayBox() {
           </Flex>
         </AntButton>
       </Flex>
+
+      {/* Discount Code Modal */}
+      <Modal
+        title="وارد کردن کد تخفیف"
+        open={isDiscountModalOpen}
+        onOk={handleDiscountSubmit}
+        onCancel={handleDiscountCancel}
+        confirmLoading={discountLoading}
+        okText="اعمال"
+        cancelText="انصراف"
+        destroyOnClose
+      >
+        <Flex vertical gap="middle" style={{ padding: "16px 0" }}>
+          <Typography.Text>کد تخفیف خود را وارد کنید:</Typography.Text>
+          <Input
+            placeholder="کد تخفیف"
+            value={discountCode}
+            onChange={(e) => setDiscountCode(e.target.value)}
+            onPressEnter={handleDiscountSubmit}
+            size="large"
+            disabled={discountLoading}
+          />
+        </Flex>
+      </Modal>
     </Flex>
   );
 }
