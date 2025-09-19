@@ -131,6 +131,26 @@ export class AuthApi extends ApiClient {
       }
     );
   }
+
+  async changePassword(old_password: string, new_password: string) {
+    return await this.Api.patch<
+      void,
+      RequestResponse<void>,
+      { old_password: string; new_password: string }
+    >(apiPath(ApiPath.AUTH_CHANGE_PASSWORD), {
+      old_password,
+      new_password,
+    });
+  }
+
+  async forgotPassword(email: string) {
+    return await this.Api.post<void, RequestResponse<void>, { email: string }>(
+      apiPath(ApiPath.AUTH_FORGOT_PASSWORD),
+      {
+        email,
+      }
+    );
+  }
 }
 
 // async login(

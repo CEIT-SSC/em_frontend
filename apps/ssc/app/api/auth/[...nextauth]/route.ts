@@ -2,6 +2,10 @@ import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { serverApi } from "~/core/api/server/serverApi";
+import axios from "axios";
+import { BASE_URL } from "@ssc/core";
+import { UserProfileResponse } from "@ssc/core/lib/types/api/User/user";
+import { RequestResponse } from "@ssc/core/lib/types/api/general";
 
 declare module "next-auth" {
   interface Session {
@@ -10,6 +14,12 @@ declare module "next-auth" {
     expiresIn?: number;
     scope?: string;
     handshakeToken?: string;
+    user: {
+      firstName?: string | null;
+      lastName?: string | null;
+      email?: string | null | undefined;
+      image?: string | null | undefined;
+    };
   }
 
   interface User {
@@ -34,7 +44,7 @@ declare module "next-auth/jwt" {
   }
 }
 
-const authOptions: AuthOptions = {
+export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -50,40 +60,25 @@ const authOptions: AuthOptions = {
         redirect_uri: { label: "Redirect URI", type: "text" },
       },
       async authorize(credentials) {
-
-        console.log("[POINT A] Received direct login request from client.");
-
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
 
-        // Extract OAuth parameters from credentials (passed from frontend)
         const redirectUri = credentials.redirect_uri;
-
         try {
-
-          console.log(`[POINT B] Calling Django API for user: ${credentials.email}`);
-          console.log(`[ENV CHECK] API URI: ${process.env.NEXT_PUBLIC_API_URL}`);
-
           const response = await serverApi.auth.login(
             credentials.email,
             credentials.password,
             process.env.SSC_PUBLIC_CLIENT_ID
           );
 
-          console.log("Django /o/token/ Response Status:", response.status);
-          console.log("Django /o/token/ Response Data:", response.data);
-          console.log("!@! i was successfull", response);
-
           if (response.status === 200 && response.data?.success) {
             const tokenData = response.data.data;
-
             if (redirectUri !== "null") {
               const { data: handshakeResponse } =
                 await serverApi.auth.authorizeWithToken(
                   tokenData.refresh_token
                 );
-              console.log("!@! authorize response", handshakeResponse);
 
               return {
                 id: "1",
@@ -99,7 +94,6 @@ const authOptions: AuthOptions = {
 
             return {
               id: "1",
-              email: credentials.email,
               accessToken: tokenData.access_token,
               refreshToken: tokenData.refresh_token,
               tokenType: tokenData.token_type,
@@ -112,8 +106,8 @@ const authOptions: AuthOptions = {
           console.error(
             "Authentication error:",
             error.message,
-            error.response,
-            error
+            error.request,
+            error.response
           );
         }
 
@@ -196,6 +190,7 @@ const authOptions: AuthOptions = {
       }
 
       // Access token has expired, try to refresh it
+      console.log("!@! lets refresh", token);
       try {
         const response = await serverApi.auth.refresh(
           token.refreshToken,
@@ -216,8 +211,9 @@ const authOptions: AuthOptions = {
 
           return token;
         }
-      } catch (error) {
-        console.error("Token refresh failed:", error);
+      } catch (_error) {
+        return null;
+        // console.error("Token refresh failed:", error);
       }
 
       // Return null to force sign out
@@ -226,12 +222,30 @@ const authOptions: AuthOptions = {
 
     async session({ session, token }) {
       if (token.accessToken) {
+        // hardcoded to be able to send token via request
+        // it's not valuable to change axios instance (we should use next-auth getServerSession there)
+        // if later we need more stuff like this, we will refactor core to support it
+        const {
+          data: { data: user },
+        } = await axios.get<
+          UserProfileResponse,
+          RequestResponse<UserProfileResponse>
+        >(`${BASE_URL}/profile/`, {
+          headers: {
+            Authorization: `Bearer ${token.accessToken}`,
+          },
+        });
+
         const sessionWithTokens = session;
         sessionWithTokens.accessToken = token.accessToken;
         sessionWithTokens.tokenType = token.tokenType;
         sessionWithTokens.expiresIn = token.expiresIn;
         sessionWithTokens.scope = token.scope;
         sessionWithTokens.handshakeToken = token.handshakeToken;
+        sessionWithTokens.user.firstName = user.first_name;
+        sessionWithTokens.user.lastName = user.last_name;
+        sessionWithTokens.user.email = user.email;
+        sessionWithTokens.user.image = user.profile_picture;
       }
 
       return session;

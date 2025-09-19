@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-duplicate-enum-values */
+
 export enum ApiPath {
   // Authentication endpoints
   AUTH_TOKEN = "o/token/",
@@ -8,6 +10,8 @@ export enum ApiPath {
   AUTH_GOOGLE = "/auth/social/google/",
   AUTH_AUTHORIZE = "/o/authorize",
   AUTH_AUTHORIZE_TOKEN = "/o/authorize/refresh",
+  AUTH_CHANGE_PASSWORD = "/change-password/",
+  AUTH_FORGOT_PASSWORD = "/forgot-password/",
 
   // Profile endpoints
   USER_PROFILE = "/profile/",
