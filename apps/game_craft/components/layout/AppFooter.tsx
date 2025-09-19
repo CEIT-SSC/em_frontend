@@ -93,11 +93,25 @@ export function AppFooter() {
             <Col span={24} md={12}>
               <Flex align="center" justify="center" flex={1} gap="small">
                 <Button
+                    type="text"
+                    shape="circle"
+                    size="large"
+                    icon={<TelegramIcon color={"white"} />}
+                    href={gameCraftSocialLinks.telegram}
+                />
+                <Button
                   type="text"
                   shape="circle"
                   size="large"
                   icon={<InstagramOutlined style={{ color: "white" }} />}
                   href={gameCraftSocialLinks.instagram}
+                />
+                <Button
+                    type="text"
+                    shape="circle"
+                    size="large"
+                    icon={<XOutlined style={{ color: "white" }} />}
+                    href={gameCraftSocialLinks.twitter}
                 />
                 {/*<Button*/}
                 {/*    type="text"*/}
@@ -106,20 +120,6 @@ export function AppFooter() {
                 {/*    icon={<YoutubeFilled style={{color: 'white'}}/>}*/}
                 {/*    href={gameCraftSocialLinks.youtube}*/}
                 {/*/>*/}
-                <Button
-                  type="text"
-                  shape="circle"
-                  size="large"
-                  icon={<XOutlined style={{ color: "white" }} />}
-                  href={gameCraftSocialLinks.twitter}
-                />
-                <Button
-                  type="text"
-                  shape="circle"
-                  size="large"
-                  icon={<TelegramIcon color={"white"} />}
-                  href={gameCraftSocialLinks.telegram}
-                />
                 {/*<Button*/}
                 {/*  type="text"*/}
                 {/*  shape="circle"*/}
