@@ -11,6 +11,7 @@ import { useRouter } from "@bprogress/next";
 import { signIn, getSession, useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { MdArrowBack } from "react-icons/md";
+import CustomToast from "~/app/components/CustomToast";
 
 type Inputs = {
   email: string;
