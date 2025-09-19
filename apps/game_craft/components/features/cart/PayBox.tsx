@@ -205,7 +205,7 @@ export function PayBox() {
         confirmLoading={discountLoading}
         okText="اعمال"
         cancelText="انصراف"
-        destroyOnClose
+        destroyOnHidden={true}
       >
         <Flex vertical gap="middle" style={{ padding: "16px 0" }}>
           <Typography.Text>کد تخفیف خود را وارد کنید:</Typography.Text>
