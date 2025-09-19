@@ -37,7 +37,6 @@ export function useFetch<T = unknown, P = unknown>(
         setLoading(true);
         setError(null);
 
-        console.log("!@! repsonse", fetchParams || params);
         const response = await apiFunc(fetchParams || params);
         setData(response);
 

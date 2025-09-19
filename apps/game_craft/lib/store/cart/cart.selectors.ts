@@ -28,12 +28,6 @@ export const itemInCartSelector = (id: number, type: ItemType) =>
   createSelector([cartPresentationsSelector], (presentation) => {
     switch (type) {
       case ItemType.PRESENTATION:
-        console.log(
-          "!@!",
-          presentation.findIndex((item) => item.id === id),
-          id,
-          type
-        );
         return presentation.find((item) => item.id === id);
       case ItemType.SOLO_COMPETITION:
         return false;

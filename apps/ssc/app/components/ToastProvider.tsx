@@ -25,9 +25,10 @@ export function ToastProvider() {
         borderRadius: "999px",
         background: "#1B1B1B",
         width: "fit-content",
-        padding: "8px",
+        padding: "6px 10px",
         display: "flex",
-        gap: "42px",
+        gap: "32px",
+        color: "var(--TextWhite)",
       }}
       icon={({ type }) => {
         switch (type) {
@@ -35,14 +36,14 @@ export function ToastProvider() {
             return (
               <HiX
                 className="overflow-visible bg-gradient rounded-full text-[#1B1B1B]"
-                size={64}
+                size={50}
               />
             );
           case "success":
             return (
               <HiCheck
                 className="overflow-visible bg-gradient rounded-full text-[#1B1B1B]"
-                size={64}
+                size={50}
               />
             );
           default:

@@ -39,10 +39,8 @@ export const apiPath = (
   options?: { [key: string]: string | number }
 ): string => {
   let url = path as string;
-  console.log("!@! hi", path, options);
   if (options) {
     Object.keys(options).forEach((key) => {
-      console.log("!@! key", key, options[key]);
       if (options[key] === undefined) throw new Error("Missing option");
       url = url.replace(`{${key}}`, options[key].toString());
     });

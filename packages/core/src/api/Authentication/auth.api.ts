@@ -114,7 +114,6 @@ export class AuthApi extends ApiClient {
     refresh_token: string,
     client_id: string
   ): Promise<RequestResponse<TokenResponse>> {
-    console.log("!@!", apiPath(ApiPath.AUTH_TOKEN), ApiPath.AUTH_TOKEN);
     const params = new URLSearchParams({
       grant_type: GrantTypes.Refresh,
       refresh_token,
