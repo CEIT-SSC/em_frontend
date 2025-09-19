@@ -38,3 +38,10 @@ export const talksSelector = createSelector(
   [purchasedPresentationsSelector],
   (presentations) => presentations.filter(p => p.type === "talk")
 );
+
+// Check if a specific presentation is purchased
+export const isPresentationPurchasedSelector = (presentationId: number) =>
+  createSelector(
+    [purchasedPresentationsSelector],
+    (presentations) => presentations.some(p => p.id === presentationId)
+  );

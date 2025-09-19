@@ -1,6 +1,5 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { notFound } from "next/navigation";
 import { ThemeProvider } from "next-themes";
 import localFont from "next/font/local";
 import "../globals.css";
@@ -10,8 +9,6 @@ import AuthProvider from "components/providers/AuthProvider";
 import AntDesignProvider from "components/providers/AntDesignProvider";
 import Providers from "components/Providers";
 import { routing } from "lib/routing";
-import { Provider } from "react-redux";
-import { store } from "lib/store/store";
 import StoreProvider from "components/providers/StoreProvider";
 
 // Font definitions
