@@ -52,10 +52,10 @@ const LoginContent = () => {
     }
   };
 
-  const handleGoogleSignIn = async () => {
+  const handleGithubSignIn = async () => {
     try {
       setIsGoogleLoading(true);
-      const result = await signIn("google", {
+      const result = await signIn("github", {
         redirect: false,
         callbackUrl: "/",
       });
@@ -64,15 +64,15 @@ const LoginContent = () => {
         // Get the session to access the tokens
         const session = await getSession();
         if (session?.user) {
-          toast.success("ورود با گوگل موفقیت‌آمیز بود");
+          toast.success("ورود با گیتهاب موفقیت‌آمیز بود");
           router.push("/");
         }
       } else if (result?.error) {
-        toast.error("خطا در ورود با گوگل");
+        toast.error("خطا در ورود با گیتهاب");
       }
     } catch (error) {
-      console.error("Google sign-in error:", error);
-      toast.error("خطا در ورود با گوگل");
+      console.error("github sign-in error:", error);
+      toast.error("خطا در ورود با گیتهاب");
     } finally {
       setIsGoogleLoading(false);
     }
@@ -221,10 +221,11 @@ const LoginContent = () => {
             />
             <div className="w-full flex gap-3.5">
               {/* <Button
-              className="w-48 bg-secondary-background text-whiteText bg-secondary-background text-whiteText"
-              variant={ButtonVariant.OUTLINE}
-              label="ورود با گیتهاب"
-            /> */}
+                className="w-full bg-secondary-background text-whiteText bg-secondary-background text-whiteText"
+                variant={ButtonVariant.OUTLINE}
+                label="ورود با گیتهاب"
+                onClick={handleGithubSignIn}
+              /> */}
             </div>
           </div>
         </div>
