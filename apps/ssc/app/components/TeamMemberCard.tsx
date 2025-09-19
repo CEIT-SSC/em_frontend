@@ -18,7 +18,7 @@ const TeamMemberCard = ({
   linkedinUrl,
 }: TeamMemberCardProps) => {
   return (
-    <div className="w-96 border rounded-3xl overflow-hidden">
+    <div className="w-78 border rounded-3xl overflow-hidden">
       <div className="relative h-1/2 min-h-44">
         <div className="h-3/4 default-gradient flex justify-center items-end" />
         <Image

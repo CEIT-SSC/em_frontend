@@ -1,6 +1,5 @@
 import FeatureCard from "../components/FeatureCard";
 import { Button, ButtonVariant } from "@ssc/ui";
-import TeamMemberCard from "../components/TeamMemberCard";
 import Image from "next/image";
 import { GrWorkshop } from "react-icons/gr";
 import { MdEmojiEvents } from "react-icons/md";
@@ -12,6 +11,14 @@ import Link from "next/link";
 // import notfound from "~/assets/notfound.png";
 import ImagesCarousel from "./components/ImagesCarousel/ImagesCarousel";
 import { HiArrowLeft } from "react-icons/hi";
+import TeamMemberCard from "~/app/components/TeamMemberCard";
+import abbas from "~/assets/members/abbas.jpg";
+import ashkan from "~/assets/members/ashkan.jpg";
+import delaraam from "~/assets/members/delaraam.png";
+import javad from "~/assets/members/javad.jpg";
+import alireza from "~/assets/members/alireza.png";
+import behrad from "~/assets/members/behrad.jpg";
+import saba from "~/assets/members/saba.jpg";
 
 const imagesCarousel1: string[] = [
   "/events/acpc/2.JPG",
@@ -112,6 +119,60 @@ export default function Home() {
           title="فرصت‌های مشارکت و عضویت"
           description="چه بخواهید برگزارکننده یا مدرس باشید، چه دنبال تیمی برای شرکت در مسابقه یا همراهی با یک ایده باشید، انجمن بستری برای ایفای نقش فعال شماست. این بستر دسترسی به شبکه‌ای از دانشجویان، اساتید و نیروهای صنعتی ایجاد می‌کند و شما را در مسیر اجرا و اثرگذاری همراهی می‌کند."
         />
+      </div>
+
+      <div className="py-6">
+        <h2 className="text-5xl/[150%] font-bold text-center">تیم ما</h2>
+        <p className="text-[18px]/[150%] font-bold text-(--TextWhite) text-center">
+          منتخب انتخابات دور 19ام انجمن علمی مهندسی کامپیوتر امیرکبیر
+        </p>
+        <div className="flex flex-wrap justify-center gap-x-8 gap-y-16 py-8 px-4">
+          <TeamMemberCard
+            name="محمدجواد اکبری"
+            position="دبیر انجمن"
+            photoUrl={javad.src}
+            githubUrl="https://github.com/Javad-Ak"
+            linkedinUrl="https://www.linkedin.com/in/mo-ja-akbari/"
+          />
+          <TeamMemberCard
+            name="صبا سیدطبایی"
+            position="مسئول مالی"
+            photoUrl={saba.src}
+            linkedinUrl="https://www.linkedin.com/in/saba-seyed-tabaei"
+          />
+          <TeamMemberCard
+            name="امیرعباس انتظاری"
+            position="مسئول ارتباط با صنعت"
+            photoUrl={abbas.src}
+            githubUrl="https://github.com/AmirabbasEntezari"
+          />
+          <TeamMemberCard
+            name="دلارام روحانی"
+            position="مسئول آموزشی"
+            photoUrl={delaraam.src}
+            linkedinUrl="https://www.linkedin.com/in/delaraamroohani"
+          />
+          <TeamMemberCard
+            name="اشکان چاجی"
+            position="مسئول مسابقات"
+            photoUrl={ashkan.src}
+            githubUrl="https://github.com/ashkanchaji"
+            linkedinUrl="https://www.linkedin.com/in/ashkan-chaji-71493434b/"
+          />
+          <TeamMemberCard
+            name="علیرضا صفری"
+            position="مسئول انفورماتیک"
+            photoUrl={alireza.src}
+            githubUrl="https://github.com/Alireza12ss"
+            linkedinUrl="https://www.linkedin.com/in/alireza-safari-3ba3942b8/"
+          />
+          <TeamMemberCard
+            name="بهراد حضوری"
+            position="مسئول روابط عمومی"
+            photoUrl={behrad.src}
+            githubUrl="https://github.com/BehradHZ"
+          />
+        </div>
       </div>
       <div className="flex flex-col gap-8 px-12 py-6">
         <h2 className="text-5xl font-bold text-center">حامیان ما</h2>
