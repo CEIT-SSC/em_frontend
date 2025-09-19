@@ -260,8 +260,8 @@ export function WorkshopCard({
                                 <Badge
                                     style={{
                                         backgroundColor: "transparent",
-                                        color: token.colorPrimary,
-                                        border: `1px solid ${token.colorPrimary}`,
+                                        color: token.colorWarning,
+                                        border: `1px solid ${token.colorWarning}`,
                                         borderRadius: "4px",
                                         padding: "0 8px",
                                     }}

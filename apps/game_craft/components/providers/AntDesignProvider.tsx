@@ -20,7 +20,7 @@ const lightTheme = {
     fontFamily: "var(--font-estedad), var(--font-vazirmatn), sans-serif",
     borderRadius: 16,
     colorPrimary: customColors.colorPrimary,
-    colorInfo: customColors.colorPrimary,
+    // colorInfo: customColors.colorPrimary,
     colorSuccess: customColors.colorAction,
     colorWarning: "#faad14",
     colorError: "#ff4d4f",
