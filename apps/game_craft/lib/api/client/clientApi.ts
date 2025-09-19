@@ -1,6 +1,6 @@
 "use client";
 
-import { ApiModule } from "@ssc/core";
+import { ApiModule, BASE_URL } from "@ssc/core";
 import axios, { AxiosRequestConfig } from "axios";
 import { getSession, signOut } from "next-auth/react";
 
@@ -9,8 +9,6 @@ declare module "axios" {
     requiresAuth?: boolean;
   }
 }
-
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,
