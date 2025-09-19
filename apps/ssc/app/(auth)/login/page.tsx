@@ -204,12 +204,12 @@ const LoginContent = () => {
         <div className="flex flex-col items-center py-6 px-9 gap-2.5">
           <p className="text-whiteText">
             رمز عبور خود را فراموش کرده اید؟{" "}
-            <a
+            <Link
               className="default-gradient text-transparent bg-clip-text"
-              href=""
+              href="/forget-password"
             >
               بازیابی رمز عبور
-            </a>
+            </Link>
           </p>
           <div className="w-full md:w-3/4 flex flex-col items-center gap-4">
             <Button
@@ -225,14 +225,6 @@ const LoginContent = () => {
               variant={ButtonVariant.OUTLINE}
               label="ورود با گیتهاب"
             /> */}
-              {/* <Button
-                className="w-full bg-secondary-background text-whiteText"
-                variant={ButtonVariant.OUTLINE}
-                label="ورود با گوگل"
-                onClick={handleGoogleSignIn}
-                loading={isGoogleLoading}
-                disable={isLoading || isGoogleLoading}
-              /> */}
             </div>
           </div>
         </div>

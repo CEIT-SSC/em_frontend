@@ -1,5 +1,10 @@
 /* eslint-disable react/display-name */
-import React, { ChangeEventHandler, forwardRef } from "react";
+import clsx from "clsx";
+import React, {
+  ChangeEventHandler,
+  forwardRef,
+  ReactEventHandler,
+} from "react";
 import { HiOutlineExclamation } from "react-icons/hi";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 
@@ -20,6 +25,10 @@ export interface TextFieldProps {
   pattern?: string;
   required?: boolean;
   disabled?: boolean;
+  readonly?: boolean;
+  value?: string;
+  className?: string;
+  dir?: "rtl" | "ltr" | "auto";
 }
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
@@ -37,19 +46,20 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     ref
   ) => {
     return (
-      <div className="w-full flex flex-col gap-1">
+      <div className={clsx("w-full flex flex-col gap-1", props.className)}>
         <fieldset className="relative rounded-xl p-px border-[#4F5154] border-1 group focus-within:border-white">
           <legend className="mr-4 px-1 group-focus-within:px-2 transition-all transition-1s">
             {label}
           </legend>
           <input
+            {...props}
             className="w-full h-full pt-1 pb-3 px-4 rounded-xl caret-[#CB48B7] focus-visible:outline-none"
             id={id}
             name={name}
             type={type}
             placeholder={placeholder}
             ref={ref}
-            {...props}
+            readOnly={props.readonly}
           />
         </fieldset>
         {errorText && (

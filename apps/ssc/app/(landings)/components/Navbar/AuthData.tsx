@@ -8,7 +8,7 @@ import { userSelector } from "~/core/store/Auth/user.selector";
 import { fetchUserData } from "~/core/store/Auth/user.thunk";
 import { useAppDispatch, useAppSelector } from "~/core/store/store";
 import { AiOutlineLoading } from "react-icons/ai";
-import { HiUser } from "react-icons/hi";
+import { FaCircleUser } from "react-icons/fa6";
 
 const AuthData = () => {
   const dispatch = useAppDispatch();
@@ -52,23 +52,13 @@ const AuthData = () => {
       return <AiOutlineLoading className="animate-spin" />;
     }
     return (
-      <div
-        className="flex items-center gap-2 cursor-pointer"
-        onClick={() => setLogoutVisible(!logoutVisible)}
+      <Link
+        href={"/dashboard"}
+        className="flex flex-row-reverse items-center gap-2 cursor-pointer"
       >
-        {logoutVisible && (
-          <Button
-            className="min-h-9 min-w-16 bg-red-700"
-            size={ButtonSize.SMALL}
-            label="خروج"
-            onClick={handleLogout}
-          />
-        )}
         <p>{userData.first_name + " " + userData.last_name}</p>
-        <div className="w-10 content-center justify-items-center rounded-full aspect-square bg-gradient text-white">
-          <HiUser size={24} />
-        </div>
-      </div>
+        <FaCircleUser size={24} />
+      </Link>
     );
   }
 };
