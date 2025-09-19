@@ -34,10 +34,9 @@ const StickyBar = () => {
 
   return (
     <div
-      className="w-full h-10 flex items-center justify-center relative overflow-hidden"
+      className="w-full h-fit min-h-10 flex items-center justify-center relative overflow-hidden"
       style={{
         width: "100%",
-        height: "40px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
