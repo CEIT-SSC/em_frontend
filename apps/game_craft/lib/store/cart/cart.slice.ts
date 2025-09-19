@@ -35,8 +35,15 @@ const cartSlice = createSlice({
         state.count = action.payload.presentations.length;
         state.discountCode = action.payload.discount_code;
         state.discountAmount = action.payload.discount_amount || 0;
-        state.subTotal = action.payload.subtotal_amount?.parsedValue || 0;
-        state.total = action.payload.total_amount?.parsedValue || 0;
+        // Handle both PriceObject and plain number formats
+        state.subTotal =
+          typeof action.payload.subtotal_amount === "object"
+            ? action.payload.subtotal_amount?.parsedValue || 0
+            : action.payload.subtotal_amount || 0;
+        state.total =
+          typeof action.payload.total_amount === "object"
+            ? action.payload.total_amount?.parsedValue || 0
+            : action.payload.total_amount || 0;
         state.error = null;
         state.loading = false;
       },
@@ -78,8 +85,15 @@ const cartSlice = createSlice({
         // state.count = action.payload.presentations.length;
         state.discountCode = action.payload.discount_code;
         state.discountAmount = action.payload.discount_amount;
-        state.subTotal = action.payload.subtotal_amount?.parsedValue || 0;
-        state.total = action.payload.total_amount?.parsedValue || 0;
+        // Handle both PriceObject and plain number formats
+        state.subTotal =
+          typeof action.payload.subtotal_amount === "object"
+            ? action.payload.subtotal_amount?.parsedValue || 0
+            : action.payload.subtotal_amount || 0;
+        state.total =
+          typeof action.payload.total_amount === "object"
+            ? action.payload.total_amount?.parsedValue || 0
+            : action.payload.total_amount || 0;
         // state.error = null;
         // state.loading = false;
       },
