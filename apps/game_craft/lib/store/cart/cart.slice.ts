@@ -17,7 +17,7 @@ const initialState = {
   total: 0,
   subTotal: 0,
   error: null as string | null,
-  loading: true,
+  loading: false,
 };
 
 const cartSlice = createSlice({
