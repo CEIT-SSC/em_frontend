@@ -1,7 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { fetchUserData } from "./user.thunk";
-import { boolean } from "zod";
-import { UserProfileResponse } from "@ssc/core/lib/types/api/User/user";
 
 type UserState = {
   loading: boolean;
@@ -28,7 +26,6 @@ export const userSlice = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(fetchUserData.fulfilled, (state, action) => {
-      console.log("!@! satte:", state, action.payload);
       return { ...action.payload, loading: false, loggedIn: true };
     });
     builder.addCase(fetchUserData.rejected, () => {

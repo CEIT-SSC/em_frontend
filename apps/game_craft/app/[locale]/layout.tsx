@@ -10,6 +10,7 @@ import AntDesignProvider from "components/providers/AntDesignProvider";
 import Providers from "components/Providers";
 import { routing } from "lib/routing";
 import StoreProvider from "components/providers/StoreProvider";
+import GoftinoProvider from "components/providers/GoftinoProvider";
 
 // Font definitions
 const estedad = localFont({
@@ -173,6 +174,7 @@ export default async function LocaleLayout({
                 <NextIntlClientProvider messages={messages}>
                   <AuthProvider>
                     <AntDesignProvider direction={direction}>
+                      <GoftinoProvider />
                       <Providers>{children}</Providers>
                     </AntDesignProvider>
                   </AuthProvider>
