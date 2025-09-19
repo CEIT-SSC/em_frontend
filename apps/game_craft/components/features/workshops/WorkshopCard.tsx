@@ -4,7 +4,7 @@ import {useTranslations} from "next-intl";
 import Image from "next/image";
 import {ItemType, PresentationOverview} from "@ssc/core";
 import PresentersAvatar from "../presentersAvatar/PresentersAvatar";
-import {useMemo, useState, useEffect} from "react";
+import {useMemo, useState} from "react";
 import {
     Card,
     Typography,
@@ -31,8 +31,7 @@ import {
     cartLoadingSelector,
     itemInCartSelector,
 } from "lib/store/cart/cart.selectors";
-import { isPresentationPurchasedSelector } from "lib/store/purchases/purchases.selectors";
-import { fetchPurchasesThunk } from "lib/store/purchases/purchases.thunk";
+import { useIsPresentationPurchased } from "lib/hooks/usePurchases";
 import {
     addItemToCartThunk,
     removeItemFromCartThunk,
@@ -64,20 +63,11 @@ export function WorkshopCard({
     const itemInCart = useAppSelector(
         itemInCartSelector(presentation.id, ItemType.PRESENTATION)
     );
-    const isPresentationPurchased = useAppSelector(
-        isPresentationPurchasedSelector(presentation.id)
-    );
+    const isPresentationPurchased = useIsPresentationPurchased(presentation.id);
     const buttonShouldBeDisabled = useAppSelector(cartLoadingSelector);
     const [buttonLoading, setButtonLoading] = useState(false);
     const {isAuthenticated} = useAuth();
     const {token} = useToken();
-
-    // Fetch purchases data when user is authenticated (same pattern as CartButton)
-    useEffect(() => {
-        if (isAuthenticated) {
-            dispatch(fetchPurchasesThunk());
-        }
-    }, [dispatch, isAuthenticated]);
 
     const isSelected = useMemo(() => {
         return itemInCart !== undefined;

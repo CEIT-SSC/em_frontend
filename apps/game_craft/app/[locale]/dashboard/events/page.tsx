@@ -1,35 +1,23 @@
 "use client";
 
 import {Alert, Col, Empty, Flex, Row, Spin, theme, Typography} from "antd";
-import {useAppDispatch, useAppSelector} from "lib/store/store";
-import {useEffect} from "react";
-import {fetchPurchasesThunk} from "lib/store/purchases/purchases.thunk";
-import {
-    purchasesErrorSelector,
-    purchasesLoadingSelector,
-    talksSelector,
-    workshopsSelector,
-} from "lib/store/purchases/purchases.selectors";
 import {useTranslations} from "next-intl";
 import {WorkshopCard} from "components/features/workshops/WorkshopCard";
-import {PresentationOverview, PresentationType} from "@ssc/core";
+import {PresentationType} from "@ssc/core";
+import {usePurchases} from "lib/hooks/usePurchases";
 
 const {useToken} = theme;
 
 export default function EventsPage() {
-    const dispatch = useAppDispatch();
-    const workshops = useAppSelector(workshopsSelector);
-    const talks = useAppSelector(talksSelector);
-    const loading = useAppSelector(purchasesLoadingSelector);
-    const error = useAppSelector(purchasesErrorSelector);
     const {token} = useToken();
     const t = useTranslations("app");
+    const { presentations, loading, error, isAuthenticated } = usePurchases();
 
-    useEffect(() => {
-        dispatch(fetchPurchasesThunk());
-    }, [dispatch]);
+    // Filter presentations by type
+    const workshops = presentations.filter(p => p.type === "workshop" || p.type === "course");
+    const talks = presentations.filter(p => p.type === "talk");
 
-    const renderSection = (items: PresentationOverview[], title: string, sectionKey: string) => {
+    const renderSection = (items: typeof presentations, title: string) => {
         if (loading) {
             return (
                 <Flex
@@ -90,6 +78,27 @@ export default function EventsPage() {
         );
     };
 
+    // If not authenticated, show message to login
+    if (!isAuthenticated) {
+        return (
+            <Flex
+                justify="center"
+                align="center"
+                style={{
+                    height: "400px",
+                    width: "100%",
+                }}
+            >
+                <Alert
+                    message="دسترسی غیرمجاز"
+                    description="برای مشاهده رویدادهای خریداری شده، لطفا وارد حساب کاربری خود شوید."
+                    type="warning"
+                    showIcon
+                />
+            </Flex>
+        );
+    }
+
     return (
         <Flex
             vertical
@@ -114,7 +123,7 @@ export default function EventsPage() {
                 <Typography.Title level={3} style={{fontWeight: 800, marginBottom: 0}}>
                     {t("dashboard.events.workshops")}
                 </Typography.Title>
-                {renderSection(workshops, "کارگاه", "workshop")}
+                {renderSection(workshops, "کارگاه")}
             </Flex>
 
             {/* Talks Section */}
@@ -130,7 +139,7 @@ export default function EventsPage() {
                 <Typography.Title level={3} style={{fontWeight: 800, marginBottom: 0}}>
                     {t("dashboard.events.talks")}
                 </Typography.Title>
-                {renderSection(talks, "ارائه", "talk")}
+                {renderSection(talks, "ارائه")}
             </Flex>
         </Flex>
     );
