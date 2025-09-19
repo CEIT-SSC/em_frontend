@@ -42,7 +42,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
         />
       </Layout.Content>
       <AppFooter />
-      <FloatButton.BackTop style={{ insetInlineStart: 24 }} />
+      {/*<FloatButton.BackTop style={{ insetInlineStart: 24 }} />*/}
     </Layout>
   );
 }
