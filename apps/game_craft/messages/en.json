@@ -159,8 +159,8 @@
     },
     "intro": {
       "title": "GameCraft",
-      "subtitle": "The 5th Game Development Event at Amirkabir University of Technology",
-      "description": "GameCraft is a game development event aimed at inspiring and nurturing passion in game design enthusiasts. Hosted by Amirkabir University of Technology, this year's event focuses on creating a platform for knowledge transfer and networking among game development experts.\nThe event includes in-person workshops, presentations, and a game development competition. Winners will be recognized and awarded at the closing ceremony."
+      "subtitle": "From Ubisoft to Amirkabir — the 5th GameCraft event",
+      "description": "GameCraft is a game development event organized to inspire and nurture enthusiasm in those interested in game design and development. Hosted for the fifth time by Amirkabir University of Technology, this year's event aims to provide a platform for knowledge transfer and networking among game development experts and enthusiasts.\nThe event includes in-person workshops and presentations, and this year we are joined by speakers from some of the most prominent game development companies. After that, game creation and design will take place as a competition, and winners will be honored at the closing ceremony."
     },
     "aboutUs": {
       "title": "About Us",
@@ -263,6 +263,7 @@
     "500": "Internal Server Error"
   },
   "workshop": {
+    "loginToContinue": "Login to continue",
     "workshops": "Workshops",
     "presentations": "Presentations",
     "price": "Price",

@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { ItemType, PresentationOverview } from "@ssc/core";
 import PresentersAvatar from "../presentersAvatar/PresentersAvatar";
-import { useMemo, useState } from "react";
+import { use, useMemo, useState } from "react";
 import {
   Card,
   Typography,
@@ -76,6 +76,17 @@ export function WorkshopCard({
 
   // Color palette
   const colorStripes = ["#4CAF50", "#2196F3", "#FFC107", "#F44336"];
+
+  const buttonText = useMemo(() => {
+    if (!isAuthenticated) return t("workshop.loginToContinue");
+    if (isSelected) {
+      return t("workshop.removeFromCart");
+    } else {
+      return presentation.is_paid
+        ? t("workshop.addToCart")
+        : t("workshop.enroll");
+    }
+  }, [isSelected, presentation, t, isAuthenticated]);
 
   // Format date and time
   const formatDateTime = (dateTimeString: string) => {
@@ -441,11 +452,7 @@ export function WorkshopCard({
                   height: "36px",
                 }}
               >
-                {isSelected
-                  ? t("workshop.removeFromCart")
-                  : presentation.is_paid
-                  ? t("workshop.addToCart")
-                  : t("workshop.enroll")}
+                {buttonText}
               </AntButton>
             )}
           </Flex>
@@ -485,11 +492,7 @@ export function WorkshopCard({
                   }
                   loading={buttonLoading}
                 >
-                  {isSelected
-                    ? t("workshop.removeFromCart")
-                    : presentation.is_paid
-                    ? t("workshop.addToCart")
-                    : t("workshop.enroll")}
+                  {buttonText}
                 </AntButton>,
               ]
             : []),

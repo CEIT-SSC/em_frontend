@@ -28,6 +28,7 @@ import { signIn } from "next-auth/react";
 import { FaCircleUser } from "react-icons/fa6";
 import { MdGamepad } from "react-icons/md";
 import CartButton from "components/features/cart/CartButton";
+import StickyBar from "components/features/stickyBar/StickyBar";
 
 const { useToken } = theme;
 const { Header } = Layout;
@@ -87,175 +88,178 @@ export function AppHeader() {
   };
 
   return (
-    <Header
-      style={{
-        position: "sticky",
-        top: 0,
-        right: 0,
-        zIndex: 100,
-        width: "100%",
-        height: "10vh",
-        minHeight: "60px",
-        maxHeight: "100px",
-        background: token.colorPrimary,
-        transition: "box-shadow 0.3s",
-        boxShadow: shadow ? "0 10px 20px rgba(0, 0, 0, 0.5)" : "none",
-        padding: "0.5rem 2rem",
-      }}
-    >
-      {screens.lg ? (
-        <Flex
-          align="center"
-          justify="space-between"
-          style={{ width: "100%", height: "100%" }}
-        >
+    <div style={{ position: "sticky", top: 0, left: 0, zIndex: 1000 }}>
+      <StickyBar />
+      <Header
+        style={{
+          width: "100%",
+          height: "10vh",
+          minHeight: "60px",
+          maxHeight: "100px",
+          background: token.colorPrimary,
+          transition: "box-shadow 0.3s",
+          boxShadow: shadow ? "0 10px 20px rgba(0, 0, 0, 0.5)" : "none",
+          padding: "0.5rem 2rem",
+        }}
+      >
+        {screens.lg ? (
           <Flex
             align="center"
-            justify="center"
-            style={{ height: "100%" }}
-            gap="large"
+            justify="space-between"
+            style={{ width: "100%", height: "100%" }}
           >
+            <Flex
+              align="center"
+              justify="center"
+              style={{ height: "100%" }}
+              gap="large"
+            >
+              <Image
+                src="/images/dark-3d.svg"
+                alt="gamecraft-logo"
+                width={60}
+                height={60}
+                style={{ height: "80%", width: "auto", maxHeight: "60px" }}
+              />
+
+              <Space size="small">
+                {mainNavigations.map((item) => (
+                  <Button
+                    key={item.route}
+                    type="primary"
+                    onClick={() => router.push(item.route)}
+                    onMouseEnter={() => playSound("jump")}
+                    style={{
+                      fontWeight: "bolder",
+                      ...(isActive(item.route)
+                        ? { color: customColors.colorAction }
+                        : {}),
+                    }}
+                  >
+                    {item.name}
+                  </Button>
+                ))}
+              </Space>
+            </Flex>
+
+            <Flex
+              align="center"
+              justify="center"
+              style={{ height: "100%" }}
+              gap="small"
+            >
+              <Button
+                type="text"
+                shape="circle"
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                size="large"
+              >
+                {theme === "dark" ? (
+                  <MoonFilled style={{ color: "white" }} />
+                ) : (
+                  <SunFilled style={{ color: "white" }} />
+                )}
+              </Button>
+              <Switch
+                checkedChildren="En"
+                unCheckedChildren="Fa"
+                checked={locale !== "fa"}
+                onClick={handleLanguageSwitch}
+              />
+              <Divider
+                type="vertical"
+                style={{
+                  height: "50%",
+                  borderWidth: "4px",
+                  borderRadius: "8px",
+                  margin: 0,
+                }}
+              />
+              <Space size="small">
+                {!isLoading ? (
+                  !isAuthenticated ? (
+                    <>
+                      {/*                    /!* <Button*/}
+                      {/*  type="primary"*/}
+                      {/*  style={{ fontWeight: "bolder" }}*/}
+                      {/*  onClick={() => router.push("/auth/signup")}*/}
+                      {/*  onMouseEnter={() => playSound("coin")}*/}
+                      {/*>*/}
+                      {/*  {t("auth.signUp")}*/}
+                      {/*</Button> *!/*/}
+                      <Button
+                        type="primary"
+                        style={{ fontWeight: "bolder" }}
+                        onClick={handleLoginClicked}
+                        onMouseEnter={() => playSound("coin")}
+                      >
+                        {t("auth.login")}
+                      </Button>
+                    </>
+                  ) : (
+                    <Flex align="center" gap="small">
+                      <CartButton />
+                      <Button
+                        type="primary"
+                        shape={"round"}
+                        size={"large"}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: 8,
+                        }}
+                        onMouseEnter={() => playSound("coin")}
+                        onClick={() => router.push("/dashboard/events")}
+                      >
+                        <FaCircleUser
+                          style={{ cursor: "pointer" }}
+                          color={"white"}
+                          size={24}
+                          onClick={() => router.push("/dashboard/events")}
+                        />
+                        <Typography.Text style={{ color: "white" }}>
+                          {user.name}
+                        </Typography.Text>
+                      </Button>
+                    </Flex>
+                  )
+                ) : (
+                  <Flex align="center" gap="small">
+                    <MdGamepad
+                      size={24}
+                      style={{ animation: "spin 1s linear infinite" }}
+                      fill="white"
+                    />
+                  </Flex>
+                )}
+              </Space>
+            </Flex>
+          </Flex>
+        ) : (
+          <Flex
+            align="center"
+            justify="space-between"
+            style={{ height: "100%", width: "100%" }}
+          >
+            <Button
+              shape="circle"
+              type="primary"
+              size="large"
+              icon={<MenuOutlined />}
+              onClick={() => toggleDrawerOpen()}
+            />
             <Image
               src="/images/dark-3d.svg"
               alt="gamecraft-logo"
               width={60}
-              height={60}
-              style={{ height: "80%", width: "auto", maxHeight: "60px" }}
+              height={40}
+              style={{ height: "60%", width: "auto", maxHeight: "60px" }}
             />
-
-            <Space size="small">
-              {mainNavigations.map((item) => (
-                <Button
-                  key={item.route}
-                  type="primary"
-                  onClick={() => router.push(item.route)}
-                  onMouseEnter={() => playSound("jump")}
-                  style={{
-                    fontWeight: "bolder",
-                    ...(isActive(item.route)
-                      ? { color: customColors.colorAction }
-                      : {}),
-                  }}
-                >
-                  {item.name}
-                </Button>
-              ))}
-            </Space>
+            <AppDrawer open={drawerOpen} toggleDrawerOpen={toggleDrawerOpen} />
           </Flex>
-
-          <Flex
-            align="center"
-            justify="center"
-            style={{ height: "100%" }}
-            gap="small"
-          >
-            <Button
-              type="text"
-              shape="circle"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              size="large"
-            >
-              {theme === "dark" ? (
-                <MoonFilled style={{ color: "white" }} />
-              ) : (
-                <SunFilled style={{ color: "white" }} />
-              )}
-            </Button>
-            <Switch
-              checkedChildren="En"
-              unCheckedChildren="Fa"
-              checked={locale !== "fa"}
-              onClick={handleLanguageSwitch}
-            />
-            <Divider
-              type="vertical"
-              style={{
-                height: "50%",
-                borderWidth: "4px",
-                borderRadius: "8px",
-                margin: 0,
-              }}
-            />
-            <Space size="small">
-              {!isLoading ? (
-                !isAuthenticated ? (
-                  <>
-                    {/*                    /!* <Button*/}
-                    {/*  type="primary"*/}
-                    {/*  style={{ fontWeight: "bolder" }}*/}
-                    {/*  onClick={() => router.push("/auth/signup")}*/}
-                    {/*  onMouseEnter={() => playSound("coin")}*/}
-                    {/*>*/}
-                    {/*  {t("auth.signUp")}*/}
-                    {/*</Button> *!/*/}
-                    <Button
-                      type="primary"
-                      style={{ fontWeight: "bolder" }}
-                      onClick={handleLoginClicked}
-                      onMouseEnter={() => playSound("coin")}
-                    >
-                      {t("auth.login")}
-                    </Button>
-                  </>
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <CartButton />
-                    <Button
-                      type="primary"
-                      shape={"round"}
-                      size={"large"}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: 8,
-                      }}
-                      onMouseEnter={() => playSound("coin")}
-                      onClick={() => router.push("/dashboard/events")}
-                    >
-                      <FaCircleUser
-                        className="cursor-pointer"
-                        color={"white"}
-                        size={24}
-                        onClick={() => router.push("/dashboard/events")}
-                      />
-                      <Typography.Text style={{ color: "white" }}>
-                        {user.name}
-                      </Typography.Text>
-                    </Button>
-                  </div>
-                )
-              ) : (
-                <div className="flex items-center gap-2">
-                  <MdGamepad size={24} className="animate-spin" fill="white" />
-                </div>
-              )}
-            </Space>
-          </Flex>
-        </Flex>
-      ) : (
-        <Flex
-          align="center"
-          justify="space-between"
-          style={{ height: "100%", width: "100%" }}
-        >
-          <Button
-            shape="circle"
-            type="primary"
-            size="large"
-            icon={<MenuOutlined />}
-            onClick={() => toggleDrawerOpen()}
-          />
-          <Image
-            src="/images/dark-3d.svg"
-            alt="gamecraft-logo"
-            width={60}
-            height={40}
-            style={{ height: "60%", width: "auto", maxHeight: "60px" }}
-          />
-          <AppDrawer open={drawerOpen} toggleDrawerOpen={toggleDrawerOpen} />
-        </Flex>
-      )}
-    </Header>
+        )}
+      </Header>
+    </div>
   );
 }
