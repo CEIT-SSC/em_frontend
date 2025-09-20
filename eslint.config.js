@@ -21,6 +21,11 @@ const eslintConfig = [
       "@typescript-eslint/no-unused-vars": "off",
     },
   },
+  {
+    ignores: [
+      "packages/utils/lib/*.js"
+    ]
+  }
 ];
 
 export default eslintConfig;
