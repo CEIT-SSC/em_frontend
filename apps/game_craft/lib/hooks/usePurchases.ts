@@ -23,7 +23,7 @@ export function usePurchases() {
     if (isAuthenticated && presentations.length === 0 && !loading && !error) {
       dispatch(fetchPurchasesThunk());
     }
-  }, [dispatch, isAuthenticated, presentations.length, loading, error]);
+  }, [dispatch, isAuthenticated, presentations.length]);
 
   return {
     presentations,
