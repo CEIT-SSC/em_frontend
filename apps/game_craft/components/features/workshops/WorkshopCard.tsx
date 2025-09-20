@@ -608,6 +608,25 @@ export function WorkshopCard({
                 </Typography.Paragraph>
               </div>
 
+              {/* Requirements */}
+              {presentation.requirements && (
+                <div>
+                  <Typography.Title level={4} style={{ marginBottom: "12px" }}>
+                    {t("workshop.requirements")}
+                  </Typography.Title>
+                  <Typography.Paragraph
+                    style={{
+                      color: token.colorTextSecondary,
+                      lineHeight: 1.7,
+                      whiteSpace: "pre-line",
+                      direction: descriptionIsRTL ? "rtl" : "ltr",
+                    }}
+                  >
+                    {presentation.requirements}
+                  </Typography.Paragraph>
+                </div>
+              )}
+
               {/* Date and Time */}
               <div>
                 <Typography.Title level={4} style={{ marginBottom: "12px" }}>

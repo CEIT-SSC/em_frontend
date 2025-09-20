@@ -42,6 +42,7 @@ export interface Presentation {
   poster: string;
   remaining_capacity: number;
   level: PresentationLevel;
+  requirements: string;
 }
 
 export type PresentationOverview = Pick<
@@ -65,6 +66,7 @@ export type PresentationOverview = Pick<
   | "poster"
   | "remaining_capacity"
   | "level"
+  | "requirements"
 >;
 
 export type PresentationsList = {
