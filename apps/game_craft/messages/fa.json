@@ -291,6 +291,7 @@
     "viewDetails": "جزئیات بیشتر",
     "capacity": "ظرفیت کل",
     "remainingCapacity": "باقی مانده",
+    "requirements": "پیش نیاز ها",
     "type": {
       "course": "دوره",
       "talk": "سخنرانی",

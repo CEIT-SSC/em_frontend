@@ -291,6 +291,7 @@
     "viewDetails": "View Details",
     "capacity": "Total Capacity",
     "remainingCapacity": "Remaining",
+    "requirements": "Requirements",
     "type": {
       "course": "Course",
       "talk": "Talk",
