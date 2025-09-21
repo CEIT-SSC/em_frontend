@@ -130,7 +130,26 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
             </Button>
           ))}
 
-          {isAuthenticated && <CartButton />}
+          {isAuthenticated && (
+            <Flex
+              align="center"
+              justify="center"
+              gap="small"
+              style={{
+                width: "100%",
+              }}
+            >
+              <Button
+                style={{ flex: 1 }}
+                type="primary"
+                size="large"
+                onClick={() => handleNavigation("/dashboard/shopping-bag")}
+              >
+                <CartButton />
+                {t("dashboard.shoppingBag")}
+              </Button>
+            </Flex>
+          )}
 
           <Flex
             align="center"

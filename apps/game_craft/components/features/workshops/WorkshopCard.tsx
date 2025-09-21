@@ -398,7 +398,9 @@ export function WorkshopCard({
           </Typography.Text>
 
           {/* Presenters */}
-          <PresentersAvatar presenters={presentation.presenters_details} />
+          {presentation.presenters_details.map((presenter) => (
+            <PresentersAvatar presenters={[presenter]} />
+          ))}
 
           {/* Capacity */}
           <Flex
