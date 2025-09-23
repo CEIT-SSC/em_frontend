@@ -56,7 +56,7 @@ const WelcomePopup = () => {
 
   const handleCopyCode = async () => {
     try {
-      await navigator.clipboard.writeText("FIRST30");
+      await navigator.clipboard.writeText("LAST50");
       toast.success(
         locale === "fa"
           ? "کد تخفیف با موفقیت کپی شد!"
@@ -226,7 +226,7 @@ const WelcomePopup = () => {
           >
             {locale === "fa" ? (
               <>
-                🔥 پیشنهاد ویژهٔ ثبت‌نام! {digitsToHindi("30")}٪ تخفیف برای
+                🔥 پیشنهاد ویژهٔ ثبت‌نام! {digitsToHindi("50")}٪ تخفیف برای
                 کارگاه‌های ساخت بازی با کد{" "}
                 <span
                   onClick={handleCopyCode}
@@ -255,12 +255,12 @@ const WelcomePopup = () => {
                   }}
                   title="کلیک کنید تا کپی شود"
                 >
-                  FIRST30
+                  LAST50
                 </span>
               </>
             ) : (
               <>
-                🔥 Special Welcome Offer! Get 30% OFF on Game Development
+                🔥 Special Welcome Offer! Get 50% OFF on Game Development
                 Workshops with code{" "}
                 <span
                   onClick={handleCopyCode}
@@ -289,7 +289,7 @@ const WelcomePopup = () => {
                   }}
                   title="Click to copy"
                 >
-                  FIRST30
+                  LAST50
                 </span>
                 !
               </>
