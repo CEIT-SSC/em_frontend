@@ -6,4 +6,6 @@ export type UserProfileResponse = {
   phone_number: string;
   profile_picture: string;
   date_joined: string;
+  sky_username: string;
+  sky_password: string;
 };
