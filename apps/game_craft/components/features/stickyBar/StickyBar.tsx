@@ -20,7 +20,7 @@ const StickyBar = () => {
 
   const handleCopyCode = async () => {
     try {
-      await navigator.clipboard.writeText("FIRST30");
+      await navigator.clipboard.writeText("LAST50");
       toast.info("با موفقیت کپی شد");
       // You could add a toast notification here if desired
     } catch (err) {
@@ -112,7 +112,7 @@ const StickyBar = () => {
         >
           {locale === "fa" ? (
             <>
-              🔥 تخفیف ویژهٔ ثبت‌نام! {digitsToHindi("30")}٪ تخفیف برای
+              🔥 تخفیف ویژهٔ ثبت‌نام! {digitsToHindi("50")}٪ تخفیف برای
               کارگاه‌های ساخت بازی با کد{" "}
               <span
                 onClick={handleCopyCode}
@@ -129,12 +129,12 @@ const StickyBar = () => {
                 }}
                 title="کلیک کنید تا کپی شود"
               >
-                FIRST30
+                LAST50
               </span>
             </>
           ) : (
             <>
-              🔥 Special Game Craft Offer — 30% OFF on Game Development
+              🔥 Special Game Craft Offer — 50% OFF on Game Development
               Workshops with code{" "}
               <span
                 onClick={handleCopyCode}
@@ -159,7 +159,7 @@ const StickyBar = () => {
                 }}
                 title="Click to copy"
               >
-                FIRST30
+                LAST50
               </span>
               !
             </>

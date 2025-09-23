@@ -34,9 +34,9 @@ export const useMainNavigations = (): NavigationItem[] => {
       name: t("sponsors"),
       route: "/sponsor",
     },
-    {
-      name: t("dashboard"),
-      route: "/dashboard/shopping-bag",
-    },
+    // {
+    //   name: t("dashboard"),
+    //   route: "/dashboard/shopping-bag",
+    // },
   ];
 };
