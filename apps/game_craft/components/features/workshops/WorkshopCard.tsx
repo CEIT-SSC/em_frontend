@@ -211,12 +211,13 @@ export function WorkshopCard({
         <div
           style={{
             position: "relative",
-            paddingTop: "56.25%", // 16:9 aspect ratio
+            // paddingTop: "56.25%", // 16:9 aspect ratio
+            paddingTop: "100%", // square
           }}
         >
           {/* Workshop Image */}
           <Image
-            src={workshopImage || "/placeholder-workshop.jpg"}
+            src={presentation.poster || workshopImage}
             alt="workshop"
             fill
             style={{
@@ -534,7 +535,7 @@ export function WorkshopCard({
               ]
             : []),
         ]}
-        width={800}
+        width={700}
         style={{ top: 50, zIndex: 200 }}
         styles={{
           body: { maxHeight: "70vh", overflowY: "auto" },
@@ -551,19 +552,20 @@ export function WorkshopCard({
         </Typography.Title>
 
         {/* Workshop Image */}
-        {workshopImage && (
+        {presentation.poster && (
           <div
             style={{
               position: "relative",
               width: "100%",
-              height: "256px",
+              // height: "256px",
+              aspectRatio: 1,
               marginBottom: "24px",
               borderRadius: token.borderRadius,
               overflow: "hidden",
             }}
           >
             <Image
-              src={workshopImage}
+              src={presentation.poster}
               alt="workshop"
               fill
               style={{ objectFit: "cover" }}

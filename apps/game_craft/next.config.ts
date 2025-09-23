@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    domains: [],
+    domains: ["api.ceit-ssc.ir"],
   },
 };
 
