@@ -341,6 +341,39 @@ export function WorkshopCard({
             </Flex>
           </Flex>
 
+          {/* Presentation online link */}
+          {isPurchased && presentation.online_link && (
+            <Flex vertical gap="small">
+              <Typography.Title
+                level={4}
+                style={{
+                  margin: 0,
+                  fontSize: "18px",
+                  lineHeight: 1.4,
+                  direction: titleIsRTL ? "rtl" : "ltr",
+                }}
+              >
+                {t("workshop.onlineLink")}
+              </Typography.Title>
+              <a
+                className="contents"
+                href={presentation.online_link}
+                target="_blank"
+              >
+                <AntButton
+                  style={{
+                    textWrap: "wrap",
+                    height: "fit-content",
+                    overflow: "hidden",
+                  }}
+                  type="dashed"
+                >
+                  {presentation.online_link}
+                </AntButton>
+              </a>
+            </Flex>
+          )}
+
           {/* Description */}
           <Typography.Paragraph
             style={{
