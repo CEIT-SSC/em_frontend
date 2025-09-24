@@ -19,6 +19,8 @@ interface SSCProfile {
     profile_picture?: string;
     phone_number?: string;
     date_joined?: string;
+    sky_username?: string;
+    sky_password?: string;
   };
 
   // Direct fields for fallback
@@ -28,6 +30,8 @@ interface SSCProfile {
   first_name?: string;
   last_name?: string;
   profile_picture?: string;
+  sky_username?: string;
+  sky_password?: string;
 }
 
 function SSCProvider(options: SSCProviderOptions): Provider {
@@ -131,6 +135,8 @@ function SSCProvider(options: SSCProviderOptions): Provider {
         name: `${userData.first_name || ""} ${userData.last_name || ""}`.trim(),
         email: userData.email,
         image: userData.profile_picture,
+        skyUsername: userData.sky_username,
+        skyPassword: userData.sky_password,
       };
     },
   };
@@ -142,6 +148,9 @@ declare module "next-auth" {
     tokenType?: string;
     expiresIn?: number;
     scope?: string;
+
+    skyUsername?: string;
+    skyPassword?: string;
   }
 
   interface User {
@@ -150,6 +159,9 @@ declare module "next-auth" {
     tokenType?: string;
     expiresIn?: number;
     scope?: string;
+
+    skyUsername?: string;
+    skyPassword?: string;
   }
 }
 
@@ -162,6 +174,9 @@ declare module "next-auth/jwt" {
     scope?: string;
     expiresAt?: number;
     provider?: string;
+
+    skyUsername?: string;
+    skyPassword?: string;
   }
 }
 
@@ -256,6 +271,9 @@ const authOptions: AuthOptions = {
         token.scope = userWithTokens.scope;
         token.provider = account.provider; // Store provider info for refresh logic
 
+        token.skyUsername = user.skyUsername;
+        token.skyPassword = user.skyPassword;
+
         // Calculate absolute expiry time in milliseconds
         const expiresAt = Date.now() + (userWithTokens.expiresIn || 0) * 1000;
         token.expiresAt = expiresAt;
@@ -318,6 +336,9 @@ const authOptions: AuthOptions = {
         sessionWithTokens.tokenType = token.tokenType;
         sessionWithTokens.expiresIn = token.expiresIn;
         sessionWithTokens.scope = token.scope;
+
+        session.skyUsername = token.skyUsername;
+        session.skyPassword = token.skyPassword;
       }
 
       return session;

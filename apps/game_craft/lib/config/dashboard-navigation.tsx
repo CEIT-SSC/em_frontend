@@ -36,5 +36,9 @@ export const useDashboardNavigations = (): DashboardNavigationItem[] => {
       name: t("shoppingBag"),
       route: `/dashboard/shopping-bag`,
     },
+    {
+      name: t("onlineAccount.label"),
+      route: `/dashboard/online-account`,
+    },
   ];
 };

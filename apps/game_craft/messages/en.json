@@ -120,7 +120,14 @@
         "invalidImage": "Please upload a valid image file",
         "maxFileSize": "File size should not exceed 5MB"
       },
-      "shoppingBag": "Shopping Cart"
+      "shoppingBag": "Shopping Cart",
+      "onlineAccount": {
+        "label": "Online Account",
+        "skyroom": "Skyroom Account",
+        "description": "",
+        "username": "Username",
+        "password": "Password"
+      }
     },
     "pages": {
       "main": "GameCraft",
