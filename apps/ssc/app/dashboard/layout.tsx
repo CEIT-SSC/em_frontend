@@ -17,7 +17,7 @@ export default async function RootLayout({
   return (
     <div className="flex flex-col md:flex-row min-h-[100vh]">
       <HamburgerSidebar user={user} />
-      <div className="w-full px-4 pt-16 pb-100 md:pt-12 md:p-12 md:pb-12">
+      <div className="w-full px-4 pt-20 pb-100 md:pt-12 md:p-12 md:pb-12">
         {children}
       </div>
     </div>

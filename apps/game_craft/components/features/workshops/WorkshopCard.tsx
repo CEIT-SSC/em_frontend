@@ -211,12 +211,13 @@ export function WorkshopCard({
         <div
           style={{
             position: "relative",
-            paddingTop: "56.25%", // 16:9 aspect ratio
+            // paddingTop: "56.25%", // 16:9 aspect ratio
+            paddingTop: "100%", // square
           }}
         >
           {/* Workshop Image */}
           <Image
-            src={workshopImage || "/placeholder-workshop.jpg"}
+            src={presentation.poster || workshopImage}
             alt="workshop"
             fill
             style={{
@@ -340,6 +341,39 @@ export function WorkshopCard({
             </Flex>
           </Flex>
 
+          {/* Presentation online link */}
+          {isPurchased && presentation.online_link && (
+            <Flex vertical gap="small">
+              <Typography.Title
+                level={4}
+                style={{
+                  margin: 0,
+                  fontSize: "18px",
+                  lineHeight: 1.4,
+                  direction: titleIsRTL ? "rtl" : "ltr",
+                }}
+              >
+                {t("workshop.onlineLink")}
+              </Typography.Title>
+              <a
+                className="contents"
+                href={presentation.online_link}
+                target="_blank"
+              >
+                <AntButton
+                  style={{
+                    textWrap: "wrap",
+                    height: "fit-content",
+                    overflow: "hidden",
+                  }}
+                  type="dashed"
+                >
+                  {presentation.online_link}
+                </AntButton>
+              </a>
+            </Flex>
+          )}
+
           {/* Description */}
           <Typography.Paragraph
             style={{
@@ -399,7 +433,9 @@ export function WorkshopCard({
           </Typography.Text>
 
           {/* Presenters */}
-          <PresentersAvatar presenters={presentation.presenters_details} />
+          {presentation.presenters_details.map((presenter) => (
+            <PresentersAvatar presenters={[presenter]} />
+          ))}
 
           {/* Capacity */}
           <Flex
@@ -533,7 +569,7 @@ export function WorkshopCard({
               ]
             : []),
         ]}
-        width={800}
+        width={700}
         style={{ top: 50, zIndex: 200 }}
         styles={{
           body: { maxHeight: "70vh", overflowY: "auto" },
@@ -550,19 +586,20 @@ export function WorkshopCard({
         </Typography.Title>
 
         {/* Workshop Image */}
-        {workshopImage && (
+        {presentation.poster && (
           <div
             style={{
               position: "relative",
               width: "100%",
-              height: "256px",
+              // height: "256px",
+              aspectRatio: 1,
               marginBottom: "24px",
               borderRadius: token.borderRadius,
               overflow: "hidden",
             }}
           >
             <Image
-              src={workshopImage}
+              src={presentation.poster}
               alt="workshop"
               fill
               style={{ objectFit: "cover" }}

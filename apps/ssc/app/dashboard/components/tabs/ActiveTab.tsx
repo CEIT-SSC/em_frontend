@@ -7,6 +7,7 @@ import React, { ReactNode } from "react";
 import { IconType } from "react-icons";
 import { HiCash, HiIdentification, HiUser, HiUserGroup } from "react-icons/hi";
 import { LuPickaxe } from "react-icons/lu";
+import { MdCoPresent } from "react-icons/md";
 
 const tabIcons: { [key: string]: IconType } = {
   ["/dashboard"]: HiUser,
@@ -14,6 +15,7 @@ const tabIcons: { [key: string]: IconType } = {
   ["/dashboard/certificates"]: HiIdentification,
   ["/dashboard/payments"]: HiCash,
   ["/dashboard/soon"]: LuPickaxe,
+  ["/dashboard/classes"]: MdCoPresent,
 };
 
 interface Props {
