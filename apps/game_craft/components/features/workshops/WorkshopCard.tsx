@@ -375,14 +375,15 @@ export function WorkshopCard({
               </Typography.Text>
             </Flex>
           )}
-          {presentation.online_link && presentation.is_online && (
+          {isPurchased && presentation.online_link && presentation.is_online && (
             <Flex align="center" gap="small">
               <LinkOutlined style={{ color: token.colorPrimary }} />
-              <Typography.Text
+              <Typography.Link
                 style={{ color: token.colorTextSecondary, fontSize: "14px" }}
+                href={presentation.online_link}
               >
                 {t("workshop.onlineLink")}
-              </Typography.Text>
+              </Typography.Link>
             </Flex>
           )}
 
