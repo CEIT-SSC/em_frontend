@@ -409,17 +409,19 @@ export function WorkshopCard({
               </Typography.Text>
             </Flex>
           )}
-          {isPurchased && presentation.online_link && presentation.is_online && (
-            <Flex align="center" gap="small">
-              <LinkOutlined style={{ color: token.colorPrimary }} />
-              <Typography.Link
-                style={{ color: token.colorTextSecondary, fontSize: "14px" }}
-                href={presentation.online_link}
-              >
-                {t("workshop.onlineLink")}
-              </Typography.Link>
-            </Flex>
-          )}
+          {/* {isPurchased &&
+            presentation.online_link &&
+            presentation.is_online && (
+              <Flex align="center" gap="small">
+                <LinkOutlined style={{ color: token.colorPrimary }} />
+                <Typography.Link
+                  style={{ color: token.colorTextSecondary, fontSize: "14px" }}
+                  href={presentation.online_link}
+                >
+                  {t("workshop.onlineLink")}
+                </Typography.Link>
+              </Flex>
+            )} */}
 
           {/* Presenters Label */}
           <Typography.Text

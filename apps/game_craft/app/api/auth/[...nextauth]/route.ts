@@ -1,4 +1,7 @@
 import { BASE_URL } from "@ssc/core";
+import { RequestResponse } from "@ssc/core/lib/types/api/general";
+import { UserProfileResponse } from "@ssc/core/lib/types/api/User/user";
+import axios from "axios";
 import { serverApi } from "lib/api/server/serverApi";
 import NextAuth, { AuthOptions } from "next-auth";
 import { Provider } from "next-auth/providers";
@@ -330,6 +333,17 @@ const authOptions: AuthOptions = {
     },
 
     async session({ session, token }) {
+      const {
+        data: { data: user },
+      } = await axios.get<
+        UserProfileResponse,
+        RequestResponse<UserProfileResponse>
+      >(`${BASE_URL}/profile/`, {
+        headers: {
+          Authorization: `Bearer ${token.accessToken}`,
+        },
+      });
+
       if (token.accessToken) {
         const sessionWithTokens = session;
         sessionWithTokens.accessToken = token.accessToken;
@@ -337,8 +351,8 @@ const authOptions: AuthOptions = {
         sessionWithTokens.expiresIn = token.expiresIn;
         sessionWithTokens.scope = token.scope;
 
-        session.skyUsername = token.skyUsername;
-        session.skyPassword = token.skyPassword;
+        session.skyUsername = user.sky_username;
+        session.skyPassword = user.sky_password;
       }
 
       return session;
