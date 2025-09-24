@@ -19,6 +19,8 @@ declare module "next-auth" {
       lastName?: string | null;
       email?: string | null | undefined;
       image?: string | null | undefined;
+      skyUsername?: string | null | undefined;
+      skyPassword?: string | null | undefined;
     };
   }
 
@@ -246,6 +248,8 @@ export const authOptions: AuthOptions = {
         sessionWithTokens.user.lastName = user.last_name;
         sessionWithTokens.user.email = user.email;
         sessionWithTokens.user.image = user.profile_picture;
+        sessionWithTokens.user.skyUsername = user.sky_username;
+        sessionWithTokens.user.skyPassword = user.sky_password;
       }
 
       return session;
