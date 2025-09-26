@@ -44,10 +44,19 @@ export class ShopApi extends ApiClient {
 
   async applyDiscountCode(code: string) {
     return await this.Api.post<Cart, RequestResponse<Cart>>(
-      apiPath(ApiPath.SHOP_DISCOUNT_CODE),
+      apiPath(ApiPath.SHOP_APPLY_DISCOUNT_CODE),
       {
         code,
       },
+      {
+        requiresAuth: true,
+      }
+    );
+  }
+
+  async removeDiscountCode() {
+    return await this.Api.delete<Cart, RequestResponse<Cart>>(
+      apiPath(ApiPath.SHOP_REMOVE_DISCOUNT_CODE),
       {
         requiresAuth: true,
       }

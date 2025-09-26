@@ -6,6 +6,7 @@ import {
   addItemToCartThunk,
   applyBonusCodeThunk,
   fetchCartThunk,
+  removeBonusCodeThunk,
   removeItemFromCartThunk,
 } from "./cart.thunk";
 
@@ -75,11 +76,21 @@ const cartSlice = createSlice({
         state.loading = false;
       },
     });
-    builder.addAsyncThunk(applyBonusCodeThunk, {
-      pending: (state) => {
-        // state.loading = true;
-        // state.error = null;
+    builder.addAsyncThunk(removeBonusCodeThunk, {
+      fulfilled: (state, action: PayloadAction<Cart>) => {
+        state.discountCode = action.payload.discount_code;
+        state.discountAmount = action.payload.discount_amount;
+        state.subTotal =
+          typeof action.payload.subtotal_amount === "object"
+            ? action.payload.subtotal_amount?.parsedValue || 0
+            : action.payload.subtotal_amount || 0;
+        state.total =
+          typeof action.payload.total_amount === "object"
+            ? action.payload.total_amount?.parsedValue || 0
+            : action.payload.total_amount || 0;
       },
+    });
+    builder.addAsyncThunk(applyBonusCodeThunk, {
       fulfilled: (state, action: PayloadAction<Cart>) => {
         // state.presentations = action.payload.presentations;
         // state.count = action.payload.presentations.length;
@@ -94,12 +105,6 @@ const cartSlice = createSlice({
           typeof action.payload.total_amount === "object"
             ? action.payload.total_amount?.parsedValue || 0
             : action.payload.total_amount || 0;
-        // state.error = null;
-        // state.loading = false;
-      },
-      rejected: (state, action) => {
-        // state.error = action.payload as string;
-        // state.loading = false;
       },
     });
   },

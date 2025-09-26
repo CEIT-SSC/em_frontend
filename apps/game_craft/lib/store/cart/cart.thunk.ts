@@ -55,3 +55,16 @@ export const applyBonusCodeThunk = createAppAsyncThunk(
     }
   }
 );
+
+export const removeBonusCodeThunk = createAppAsyncThunk(
+  "cart/removeBonusCode",
+  async (parameters: void, thunkAPI) => {
+    try {
+      const response = await thunkAPI.extra.Api.shop.removeDiscountCode();
+      const data = response.data.data;
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
