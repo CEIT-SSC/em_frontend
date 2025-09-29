@@ -1,4 +1,6 @@
-export interface MyTeams {
+export type TeamsList = Team[];
+
+export interface Team {
   id: number
   name: string
   leader_details: LeaderDetails
