@@ -1,24 +1,27 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, ButtonSize, TextField } from "@ssc/ui";
 import { HiOutlineClipboardCopy, HiPlus } from "react-icons/hi";
 import Team from "../components/teams/Team";
 import { clientApi } from "~/core/api/client/clientApi";
+import { TeamDetails } from "@ssc/core/lib/types/api/Teams/teams";
 
-const page = async () => {
+const page = () => {
   const userId = "sampleId";
   const buttonText = "آیدی شما: " + userId;
 
+  const [teams, setTeams] = useState<TeamDetails[]>([]);
+
   useEffect(() => {
     const fetchTeams = async () => {
-      await clientApi.teams.getTeamsList();
+      await clientApi.teams
+        .getTeamsList()
+        .then((res) => setTeams(res.data.data.results));
     };
 
     fetchTeams();
   }, []);
-
-  console.log(clientApi.teams);
 
   return (
     <>
@@ -37,8 +40,13 @@ const page = async () => {
         />
       </div>
       <div className="flex flex-col gap-2.5 py-2.5 md:px-2.5">
-        <Team name="We are the best" memberCount={10} />
-        <Team name="They are the best" memberCount={4} />
+        {teams.map((team) => (
+          <Team
+            key={team.id}
+            name={team.name}
+            memberCount={team.memberships.length}
+          />
+        ))}
       </div>
     </>
   );
