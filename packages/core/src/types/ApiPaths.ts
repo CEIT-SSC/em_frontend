@@ -33,6 +33,14 @@ export enum ApiPath {
 
   // Purchases
   PURCHASES_GET_LIST = "/purchases/",
+
+  // Teams
+  TEAMS_GET_LIST = "/my-teams/",
+  TEAMS_CREATE = "/my-teams/",
+  TEAMS_GET_DETAILS = "/my-teams/{id}/",
+  TEAMS_REMOVE = "/my-teams/{id}/",
+  TEAMS_PAY_REGISTER = "/api/my-teams/{id}/register-competition/{competition_pk}/",
+  TEAMS_UPDATE = "/api/my-teams/{id}/submit-content/",
 }
 
 export const apiPath = (

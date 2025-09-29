@@ -2,10 +2,13 @@ import React from "react";
 import { Button, ButtonSize, TextField } from "@ssc/ui";
 import { HiOutlineClipboardCopy, HiPlus } from "react-icons/hi";
 import Team from "../components/teams/Team";
+import { clientApi } from "~/core/api/client/clientApi";
 
-const page = () => {
+const page = async () => {
   const userId = "sampleId";
   const buttonText = "آیدی شما: " + userId;
+
+  await clientApi.teams.getMyTeamsList();
 
   return (
     <>
