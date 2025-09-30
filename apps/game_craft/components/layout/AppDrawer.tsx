@@ -165,7 +165,7 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
                   style={{ flex: 1 }}
                   size="large"
                   type="dashed"
-                  onClick={() => handleNavigation("/dashboard")}
+                  onClick={() => handleNavigation("/dashboard/info")}
                 >
                   {t("mainNavigation.dashboard")}
                 </Button>
@@ -186,7 +186,7 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
                   type="dashed"
                   onClick={() =>
                     signIn("ssc", {
-                      callbackUrl: "/dashboard",
+                      callbackUrl: "/dashboard/info",
                     })
                   }
                 >
@@ -198,7 +198,7 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
                   size="large"
                   onClick={() =>
                     signIn("ssc", {
-                      callbackUrl: "/dashboard",
+                      callbackUrl: "/dashboard/info",
                     })
                   }
                 >

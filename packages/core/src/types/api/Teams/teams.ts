@@ -84,3 +84,84 @@ export interface Image {
   caption: string;
   uploaded_at: string;
 }
+
+export interface CreateTeamRequest {
+  team_name: string;
+  member_emails: string[];
+}
+
+export interface CreateTeamResponse {
+  team_name: string;
+  member_emails: string[];
+}
+
+export interface RegisterCompetitionRequest {
+  description?: string;
+  file_link?: string;
+  uploaded_images?: string[];
+}
+
+export interface RegisterCompetitionResponse {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  errors: Record<string, unknown>;
+  data: TeamDetails;
+}
+
+export interface SubmitContentRequest {
+  description?: string;
+  file_link?: string;
+  uploaded_images?: string[];
+}
+
+export interface SubmitContentResponse {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  errors: Record<string, unknown>;
+  data: ContentSubmission;
+}
+
+export interface AddMemberRequest {
+  email: string;
+}
+
+export interface AddMemberResponse {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  errors: Record<string, unknown>;
+  data: Membership;
+}
+
+export interface MembershipRequest {
+  id: number;
+  team: number;
+  team_name: string;
+  user_details: UserDetails;
+  status: string;
+  requested_at: string;
+}
+
+export interface MembershipRequestsList {
+  count: number;
+  next: string;
+  previous: string;
+  results: MembershipRequest[];
+}
+
+export interface AcceptMembershipResponse {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  errors: Record<string, unknown>;
+  data: Membership;
+}
+
+export interface RejectMembershipResponse {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  errors: Record<string, unknown>;
+}

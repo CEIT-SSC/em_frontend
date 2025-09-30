@@ -39,8 +39,12 @@ export enum ApiPath {
   TEAMS_CREATE = "/my-teams/",
   TEAMS_GET_DETAILS = "/my-teams/{id}/",
   TEAMS_REMOVE = "/my-teams/{id}/",
-  TEAMS_PAY_REGISTER = "/api/my-teams/{id}/register-competition/{competition_pk}/",
-  TEAMS_UPDATE = "/api/my-teams/{id}/submit-content/",
+  TEAMS_ADD_MEMBER = "/my-teams/{id}/add-member/",
+  TEAMS_GET_MEMBERSHIP_REQUESTS = "/my-teams/membership-requests/",
+  TEAMS_ACCEPT_MEMBERSHIP = "/my-teams/membership-requests/{request_id}/accept/",
+  TEAMS_REJECT_MEMBERSHIP = "/my-teams/membership-requests/{request_id}/reject/",
+  TEAMS_REGISTER_COMPETITION = "/my-teams/{id}/register-competition/{competition_pk}/",
+  TEAMS_SUBMIT_CONTENT = "/my-teams/{id}/register-competition/{competition_pk}/",
 }
 
 export const apiPath = (

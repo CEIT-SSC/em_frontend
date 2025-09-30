@@ -2,6 +2,7 @@ import React from "react";
 import { IconType } from "react-icons";
 import { AiOutlineLoading } from "react-icons/ai";
 import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export interface ButtonProps {
   label?: string;
@@ -38,7 +39,7 @@ export enum ButtonVariant {
 const variantClasses = {
   [ButtonVariant.PRIMARY]: "default-gradient",
   [ButtonVariant.SECONDARY]: "",
-  [ButtonVariant.OUTLINE]: "text-transparent bg-clip-text default-gradient",
+  [ButtonVariant.OUTLINE]: "text-transparent bg-clip-text",
 };
 
 export const Button = ({
@@ -62,22 +63,23 @@ export const Button = ({
 
   return (
     <button
-      className={clsx(
-        "relative cursor-pointer",
-        "overflow-hidden p-px",
-        "text-bold",
-        "flex justify-center items-center",
-        {
-          "default-gradient": !isSecondary && !isText,
-          "bg-black border-1 border-whiteText": isOutline,
-          "px-3 py-2": !isText,
-          "!bg-none bg-gray-500 text-gray-300": disable,
-          "!cursor-not-allowed": disable,
-          [sizeClasses[size]]: !isText,
-        },
-        variantClasses[variant],
-        className,
-        radiusClass
+      className={twMerge(
+        clsx(
+          "relative cursor-pointer",
+          "overflow-hidden p-px",
+          "text-bold",
+          "flex justify-center items-center",
+          {
+            "bg-black border-1 border-whiteText": isOutline,
+            "px-3 py-2": !isText,
+            "!bg-none bg-gray-500 text-gray-300": disable,
+            "!cursor-not-allowed": disable,
+            [sizeClasses[size]]: !isText,
+          },
+          variantClasses[variant],
+          radiusClass,
+          className
+        )
       )}
       type={type}
       onClick={onClick}

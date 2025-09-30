@@ -66,3 +66,5 @@ export const PhoneNumberField = forwardRef<
     );
   }
 );
+
+PhoneNumberField.displayName = "PhoneNumberField";
