@@ -12,7 +12,7 @@ const Modal = ({ className, children }: Props) => {
       <div className="absolute top-0 left-0 bottom-0 right-0 backdrop-blur-sm"></div>
       <div
         className={clsx(
-          "bg-mainGray rounded-xl p-6 w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto z-99",
+          "bg-mainGray rounded-xl p-6 w-full max-w-md mx-4 overflow-y-auto z-99 max-h-[90vh]",
           className
         )}
       >

@@ -97,8 +97,8 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <Modal className="!max-w-3/4">
-      <div className="w-full max-h-[90vh] overflow-y-auto">
+    <Modal className="sm:!max-w-3/4">
+      <div className="w-full">
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-xl font-bold text-whiteText">جزئیات تیم</h3>
           <Button
@@ -118,15 +118,15 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
           <div className="space-y-6">
             {/* Team Header */}
             <div className="bg-[#43434340] p-6 rounded-2xl">
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex flex-col sm:flex-row items-center gap-4 mb-4">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#ff715b] to-[#cb48b7] flex items-center justify-center shadow-lg">
                   <HiUser className="w-8 h-8 text-white" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="text-2xl font-bold text-white">
+                  <h4 className="text-2xl text-center sm:text-start font-bold text-white">
                     {teamDetails.name}
                   </h4>
-                  <div className="flex items-center gap-4 mt-2">
+                  <div className="flex flex-col sm:flex-row items-center gap-4 mt-2">
                     <span
                       className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(
                         teamDetails.status
@@ -260,9 +260,9 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
                 {teamDetails.memberships.map((membership) => (
                   <div
                     key={membership.id}
-                    className="flex items-center justify-between p-3 bg-[#2a2a2a] rounded-lg"
+                    className="flex flex-col sm:flex-row items-center justify-between gap-4 p-3 bg-[#2a2a2a] rounded-lg"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center self-baseline gap-3">
                       {membership.user_details.profile_picture && (
                         <img
                           src={membership.user_details.profile_picture}

@@ -41,7 +41,7 @@ const Request = ({ request, onRequestHandled }: Props) => {
 
   return (
     <div className="flex justify-between items-center p-4 md:p-6 rounded-2xl bg-[#43434340]">
-      <div className="flex flex-col gap-2.5 px-2.5">
+      <div className="flex flex-col gap-2.5 sm:px-2.5">
         <h4 className="text-2xl/[150%] font-bold">{request.name}</h4>
         <div className="flex flex-col gap-1">
           <p className="text-whiteText font-bold">

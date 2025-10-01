@@ -86,7 +86,7 @@ function SidebarContent({ user, onLinkClick }: SidebarContentProps) {
           alt="ssc logo"
           className="w-14 md:w-16 h-auto justify-items-center content-center"
         />
-        <div className="md:text-lg text-md text-center">
+        <div className="text-sm text-center">
           <p>انجمن علمی</p>
           <p>مهندسی کامپیوتر</p>
           <p>دانشگاه پلی تکنیک تهران</p>
