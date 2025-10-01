@@ -3,7 +3,6 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { ItemType } from "@ssc/core";
-import PresentersAvatar from "../presentersAvatar/PresentersAvatar";
 import { use, useMemo, useState } from "react";
 import {
   Card,
@@ -40,6 +39,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "lib/hooks/useAuth";
 import { digitsToHindi } from "@ssc/utils";
 import { GroupCompetitionDetails } from "@ssc/core/lib/types/api/competitions/competitions";
+import GroupModal from "./GroupModal";
 
 const { useToken } = theme;
 
@@ -60,6 +60,7 @@ export function CompetitionCard({
 }: Props) {
   const t = useTranslations();
   const [showModal, setShowModal] = useState(false);
+  const [showGroupModal, setGroupModal] = useState(false);
   const { formatNumberToMoney } = useFormatter();
   const dispatch = useAppDispatch();
   const itemInCart = useAppSelector(
@@ -406,6 +407,8 @@ export function CompetitionCard({
                 {buttonText}
               </AntButton>
             )} */}
+
+              <GroupModal isRTL={titleIsRTL} />
             </Flex>
           </Flex>
         </Flex>
