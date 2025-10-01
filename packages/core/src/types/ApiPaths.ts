@@ -44,8 +44,12 @@ export enum ApiPath {
   TEAMS_SUBMIT_CONTENT = "/my-teams/{id}/register-competition/{competition_pk}/",
 
   // Invitations
-  TEAMS_GET_INVITATIONS = "/api/my-invitations/",
-  TEAMS_INVITATION_RESPOND = "/api/my-invitations/{id}/respond/",
+  TEAMS_GET_INVITATIONS = "/my-invitations/",
+  TEAMS_INVITATION_RESPOND = "/my-invitations/{id}/respond/",
+
+  // Competitions
+  GROUP_COMPETITIONS_GET_LIST = "/group-competitions/",
+  GROUP_COMPETITIONS_GET_DETAILS = "/group-competitions/{id}/",
 }
 
 export const apiPath = (
