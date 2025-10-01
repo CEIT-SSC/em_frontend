@@ -102,7 +102,7 @@ export class TeamsApi extends ApiClient {
   }
 
   async registerCompetition(
-    teamId: number,
+    id: number,
     competitionId: number,
     registerData?: RegisterCompetitionRequest
   ): Promise<RequestResponse<RegisterCompetitionResponse>> {
@@ -111,7 +111,7 @@ export class TeamsApi extends ApiClient {
       RequestResponse<RegisterCompetitionResponse>
     >(
       apiPath(ApiPath.TEAMS_REGISTER_COMPETITION, {
-        id: teamId,
+        id,
         competition_pk: competitionId,
       }),
       registerData || {},

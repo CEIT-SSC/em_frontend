@@ -9,9 +9,10 @@ import { useAuth } from "lib/hooks/useAuth";
 
 interface Props {
   isRTL: boolean;
+  competitionId: number;
 }
 
-const GroupModal = ({ isRTL }: Props) => {
+const GroupModal = ({ isRTL, competitionId }: Props) => {
   const [showGroupModal, setShowGroupModal] = useState(false);
   const t = useTranslations();
   const { user } = useAuth();
@@ -41,6 +42,15 @@ const GroupModal = ({ isRTL }: Props) => {
       });
   }, [user]);
 
+  const handleRegisterCompetition = (teamId: number) => {
+    clientApi.teams
+      .registerCompetition(teamId, competitionId)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => console.log("Failed to register:", error));
+  };
+
   const content = useMemo(() => {
     if (teams.loading) {
       return (
@@ -68,6 +78,8 @@ const GroupModal = ({ isRTL }: Props) => {
       ) : (
         teams.data.map((team) => (
           <Button
+            key={team.id}
+            onClick={() => handleRegisterCompetition(team.id)}
             type="dashed"
             style={{
               display: "flex",

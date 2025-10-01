@@ -408,7 +408,7 @@ export function CompetitionCard({
               </AntButton>
             )} */}
 
-              <GroupModal isRTL={titleIsRTL} />
+              <GroupModal isRTL={titleIsRTL} competitionId={competition.id} />
             </Flex>
           </Flex>
         </Flex>
