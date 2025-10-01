@@ -148,7 +148,7 @@ export interface MembershipRequestsList {
   count: number;
   next: string;
   previous: string;
-  results: MembershipRequest[];
+  results: TeamDetails[];
 }
 
 export interface AcceptMembershipResponse {

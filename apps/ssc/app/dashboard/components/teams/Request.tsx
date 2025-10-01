@@ -9,10 +9,10 @@ import {
   acceptMembershipThunk,
   rejectMembershipThunk,
 } from "~/core/store/teams/teams.thunk";
-import { MembershipRequest } from "@ssc/core/lib/types/api/Teams/teams";
+import { TeamDetails } from "@ssc/core/lib/types/api/Teams/teams";
 
 interface Props {
-  request: MembershipRequest;
+  request: TeamDetails;
   onRequestHandled?: () => void;
 }
 
@@ -42,18 +42,18 @@ const Request = ({ request, onRequestHandled }: Props) => {
   return (
     <div className="flex justify-between items-center p-4 md:p-6 rounded-2xl bg-[#43434340]">
       <div className="flex flex-col gap-2.5 px-2.5">
-        <h4 className="text-2xl/[150%] font-bold">{request.team_name}</h4>
+        <h4 className="text-2xl/[150%] font-bold">{request.name}</h4>
         <div className="flex flex-col gap-1">
           <p className="text-whiteText font-bold">
-            درخواست دهنده: {request.user_details.first_name}{" "}
-            {request.user_details.last_name}
+            درخواست دهنده: {request.leader_details.first_name}{" "}
+            {request.leader_details.last_name}
           </p>
           <p className="text-gray-400 text-sm">
-            ایمیل: {request.user_details.email}
+            ایمیل: {request.leader_details.email}
           </p>
           <p className="text-gray-400 text-sm">
             تاریخ درخواست:{" "}
-            {new Date(request.requested_at).toLocaleDateString("fa-IR")}
+            {new Date(request.created_at).toLocaleDateString("fa-IR")}
           </p>
         </div>
       </div>

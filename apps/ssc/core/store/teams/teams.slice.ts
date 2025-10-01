@@ -21,7 +21,7 @@ const teamsSlice = createSlice({
   name: "teams",
   initialState: {
     teams: [] as TeamDetails[],
-    membershipRequests: [] as MembershipRequest[],
+    membershipRequests: [] as TeamDetails[],
     loading: true,
     teamDetailsLoading: true,
     membershipRequestsLoading: true,
@@ -142,7 +142,7 @@ const teamsSlice = createSlice({
         const request = state.membershipRequests.find(
           (req) => req.id === action.payload.requestId
         );
-        const teamId = request?.team;
+        const teamId = request?.id;
 
         // Remove the accepted request from the list
         state.membershipRequests = state.membershipRequests.filter(

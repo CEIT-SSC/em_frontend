@@ -68,7 +68,7 @@ export class TeamsApi extends ApiClient {
     return await this.Api.get<
       MembershipRequestsList,
       RequestResponse<MembershipRequestsList>
-    >(apiPath(ApiPath.TEAMS_GET_MEMBERSHIP_REQUESTS), { requiresAuth: true });
+    >(apiPath(ApiPath.TEAMS_GET_INVITATIONS), { requiresAuth: true });
   }
 
   async acceptMembership(
@@ -78,8 +78,8 @@ export class TeamsApi extends ApiClient {
       AcceptMembershipResponse,
       RequestResponse<AcceptMembershipResponse>
     >(
-      apiPath(ApiPath.TEAMS_ACCEPT_MEMBERSHIP, { request_id: requestId }),
-      {},
+      apiPath(ApiPath.TEAMS_INVITATION_RESPOND, { id: requestId }),
+      {action: "accept"},
       {
         requiresAuth: true,
       }
@@ -93,8 +93,8 @@ export class TeamsApi extends ApiClient {
       RejectMembershipResponse,
       RequestResponse<RejectMembershipResponse>
     >(
-      apiPath(ApiPath.TEAMS_REJECT_MEMBERSHIP, { request_id: requestId }),
-      {},
+      apiPath(ApiPath.TEAMS_INVITATION_RESPOND, { id: requestId }),
+      {action: "reject"},
       {
         requiresAuth: true,
       }

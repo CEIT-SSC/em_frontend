@@ -40,11 +40,12 @@ export enum ApiPath {
   TEAMS_GET_DETAILS = "/my-teams/{id}/",
   TEAMS_REMOVE = "/my-teams/{id}/",
   TEAMS_ADD_MEMBER = "/my-teams/{id}/add-member/",
-  TEAMS_GET_MEMBERSHIP_REQUESTS = "/my-teams/membership-requests/",
-  TEAMS_ACCEPT_MEMBERSHIP = "/my-teams/membership-requests/{request_id}/accept/",
-  TEAMS_REJECT_MEMBERSHIP = "/my-teams/membership-requests/{request_id}/reject/",
   TEAMS_REGISTER_COMPETITION = "/my-teams/{id}/register-competition/{competition_pk}/",
   TEAMS_SUBMIT_CONTENT = "/my-teams/{id}/register-competition/{competition_pk}/",
+
+  // Invitations
+  TEAMS_GET_INVITATIONS = "/api/my-invitations/",
+  TEAMS_INVITATION_RESPOND = "/api/my-invitations/{id}/respond/",
 }
 
 export const apiPath = (

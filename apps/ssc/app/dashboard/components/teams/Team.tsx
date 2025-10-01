@@ -33,7 +33,7 @@ const Team = ({ name, memberCount, teamId, onTeamUpdated }: Props) => {
         {/* Background gradient effect */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#ff715b]/5 to-[#cb48b7]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         {/* Main card */}
-        <div className="relative flex flex-col md:flex-row md:justify-between md:items-center gap-y-3 p-4 md:p-6 rounded-2xl bg-[#43434340] border border-transparent hover:border-[#ff715b]/20 transition-all duration-300 hover:shadow-lg hover:shadow-[#ff715b]/10">
+        <div className="relative flex justify-between items-center gap-y-3 p-4 md:p-6 rounded-2xl bg-[#43434340] border border-transparent hover:border-[#ff715b]/20 transition-all duration-300 hover:shadow-lg hover:shadow-[#ff715b]/10">
           {/* Team info */}
           <div className="flex items-center gap-4 flex-1">
             {/* Team avatar/icon */}
