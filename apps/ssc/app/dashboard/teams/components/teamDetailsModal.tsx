@@ -245,7 +245,7 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
                   <HiUser className="w-5 h-5" />
                   اعضا ({teamDetails.memberships.length})
                 </h5>
-                {currentUser.email === teamDetails.leader_details.email && (
+                {/* {currentUser.email === teamDetails.leader_details.email && (
                   <Button
                     variant={ButtonVariant.PRIMARY}
                     size={ButtonSize.SMALL}
@@ -254,7 +254,7 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
                     onClick={() => setIsAddMemberModalOpen(true)}
                     className="text-sm"
                   />
-                )}
+                )} */}
               </div>
               <div className="space-y-3">
                 {teamDetails.memberships.map((membership) => (

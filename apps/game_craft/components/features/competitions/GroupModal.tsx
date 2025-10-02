@@ -35,10 +35,19 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
       team.status === "active"
   );
 
+  const inPaymentProgress = !!teams.find(
+    (team) =>
+      team.group_competition_details?.id == competitionId &&
+      (team.status === "approved_awaiting_payment" ||
+        team.status === "awaiting_payment_confirmation")
+  );
+
   if (registered) registered(isRegistered);
 
   const buttonText = isAuthenticated
-    ? isRegistered
+    ? inPaymentProgress
+      ? "در انتظار پرداخت"
+      : isRegistered
       ? "ثبت نام شده"
       : "ثبت نام"
     : "ابتدا وارد شوید";
@@ -271,8 +280,8 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
     }
   }, [teams, t]);
 
-  return (
-    <>
+  const cardButton = useMemo(() => {
+    return (
       <Button
         onClick={() => setShowGroupModal(true)}
         type="primary"
@@ -286,6 +295,12 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
       >
         {buttonText}
       </Button>
+    );
+  }, [showGroupModal]);
+
+  return (
+    <>
+      {cardButton}
       <Modal
         open={showGroupModal}
         onCancel={() => setShowGroupModal(false)}
