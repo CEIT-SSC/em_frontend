@@ -405,7 +405,11 @@ export function CompetitionCard({
           //         </AntButton>,
           //       ]
           //     : []),
-          <GroupModal isRTL={titleIsRTL} competitionId={competition.id} />,
+          <GroupModal
+            key="group-modal"
+            isRTL={titleIsRTL}
+            competitionId={competition.id}
+          />,
         ]}
         width={700}
         style={{ top: 50, zIndex: 200 }}
