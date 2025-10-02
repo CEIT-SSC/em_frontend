@@ -11,7 +11,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (session.status === "authenticated") {
-      router.push("/dashboard/info");
+      router.push("/dashboard");
       // TODO: show toast
     } else {
       router.push("/");
