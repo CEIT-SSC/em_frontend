@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import HamburgerSidebar from "./components/HamburgerSidebar";
+import { authOptions } from "~/lib/auth-options";
 
 export default async function RootLayout({
   children,

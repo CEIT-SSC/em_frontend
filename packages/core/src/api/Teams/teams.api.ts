@@ -16,6 +16,7 @@ import {
   AcceptMembershipResponse,
   RejectMembershipResponse,
   TeamPaymentResponse,
+  PaymentData,
 } from "../../types/api/Teams/teams";
 
 export class TeamsApi extends ApiClient {
@@ -140,11 +141,8 @@ export class TeamsApi extends ApiClient {
     );
   }
 
-  async teamPayment(id: number): Promise<RequestResponse<TeamPaymentResponse>> {
-    return await this.Api.post<
-      TeamPaymentResponse,
-      RequestResponse<TeamPaymentResponse>
-    >(
+  async teamPayment(id: number): Promise<RequestResponse<PaymentData>> {
+    return await this.Api.post<PaymentData, RequestResponse<PaymentData>>(
       apiPath(ApiPath.TEAMS_PAYMENT, { id }),
       {},
       {

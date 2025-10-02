@@ -436,7 +436,7 @@ export function WorkshopCard({
 
           {/* Presenters */}
           {presentation.presenters_details.map((presenter) => (
-            <PresentersAvatar presenters={[presenter]} />
+            <PresentersAvatar key={presenter.id} presenters={[presenter]} />
           ))}
 
           {/* Capacity */}

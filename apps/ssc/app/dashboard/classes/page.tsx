@@ -1,7 +1,7 @@
 import { TextField } from "@ssc/ui";
 import { getServerSession } from "next-auth";
 import React from "react";
-import { authOptions } from "~/app/api/auth/[...nextauth]/route";
+import { authOptions } from "~/lib/auth-options";
 
 const page = async () => {
   const session = await getServerSession(authOptions);
