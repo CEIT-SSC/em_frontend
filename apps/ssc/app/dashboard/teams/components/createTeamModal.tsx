@@ -76,6 +76,10 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
   };
 
   const handleSubmit = async () => {
+    if (invitedEmails.length === 0) {
+      toast.error("لطفا حداقل یک عضو برای تیم دعوت کنید");
+      return;
+    }
     if (teamName.trim()) {
       try {
         await dispatch(
@@ -83,13 +87,17 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
             team_name: teamName,
             member_emails: invitedEmails,
           })
-        );
+        ).unwrap();
 
         toast.success("گروه با موفقیت ساخته شده");
         onTeamCreated();
         handleClose();
       } catch (error) {
-        toast.error(error.message);
+        if (error.status === 400) {
+          toast.error("تیم با این نام قبلا ایجاد شده است");
+          return;
+        }
+        toast.error(error.response.data?.message || "خطا در ایجاد تیم");
       }
     }
   };
@@ -163,6 +171,9 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
               <p className="text-whiteText text-sm">
                 نام تیم: <span className="font-semibold">{teamName}</span>
               </p>
+            </div>
+            <div className="bg-yellow-100 text-yellow-800 rounded p-2 mb-2 text-sm">
+              توجه: پس از ایجاد تیم، امکان افزودن عضو جدید وجود ندارد.
             </div>
 
             <div className="space-y-2">
@@ -256,6 +267,7 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
                 variant={ButtonVariant.PRIMARY}
                 size={ButtonSize.SMALL}
                 label="ایجاد تیم"
+                disable={invitedEmails.length === 0}
                 onClick={handleSubmit}
                 className="flex-1"
               />

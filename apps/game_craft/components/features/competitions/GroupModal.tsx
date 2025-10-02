@@ -10,13 +10,24 @@ import { HiCash, HiCheck, HiPlus } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { MdOutlineWatch } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "lib/store/store";
-import { fetchTeams, payTeam, registerTeam } from "lib/store/teams/teams.slice";
+import {
+  fetchTeamsThunk,
+  payTeamThunk,
+  registerTeamThunk,
+} from "lib/store/teams/teams.thunk";
 
 interface Props {
   isRTL: boolean;
   competitionId: number;
   registered?: (isRegistered: boolean) => void;
 }
+
+const isTeamSizeValid = (members: any[]) => {
+  const teamSize = members.length;
+  if (teamSize < 2) return -1;
+  if (teamSize > 3) return 1;
+  return 0;
+};
 
 const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
   const [showGroupModal, setShowGroupModal] = useState(false);
@@ -99,15 +110,9 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
     }
   };
 
-  // const [teams, setTeams] = useState<{
-  //   loading: boolean;
-  //   error?: string;
-  //   data?: TeamDetails[];
-  // }>({ loading: true });
-
   useEffect(() => {
     if (isAuthenticated)
-      dispatch(fetchTeams())
+      dispatch(fetchTeamsThunk())
         .unwrap()
         .catch((err) => {
           toast.error(err.message);
@@ -120,26 +125,10 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
           team.group_competition_details.id == competitionId
       )
     );
-
-    // clientApi.teams
-    //   .getTeamsList()
-    //   .then((response) => {
-    //     if (response.status === 200) {
-    //       setTeams({
-    //         loading: false,
-    //         data: response.data.data.results,
-    //       });
-    //     } else {
-    //       setTeams({ loading: false, error: "failed to fetch" });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     setTeams({ loading: false, error: "failed to fetch" });
-    //   });
   }, [isAuthenticated, showGroupModal]);
 
   const handlePayment = (teamId: number) => {
-    dispatch(payTeam(teamId))
+    dispatch(payTeamThunk(teamId))
       .unwrap()
       .then((res) => {
         if (res.paymentUrl) {
@@ -152,17 +141,18 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
       .catch((err) => {
         toast.error(err.message);
       });
-
-    // clientApi.teams
-    //   .teamPayment(teamId)
-    //   .then((response) =>
-    //     window.open(response.data.data.data.payment_url, "_blank")
-    //   )
-    //   .catch((error) => console.log("Failed to pay:", error));
   };
 
-  const handleRegisterCompetition = (teamId: number) => {
-    dispatch(registerTeam({ teamId, competitionId }))
+  const handleRegisterCompetition = (team: TeamDetails) => {
+    const pending = team.memberships.some(
+      (member) => member.status === "pending"
+    );
+    if (pending) {
+      toast.error("تمامی اعضای تیم باید درخواست عضویت خود را تایید کنند");
+      return;
+    }
+
+    dispatch(registerTeamThunk({ teamId: team.id, competitionId }))
       .unwrap()
       .then((res) => {
         toast.success(res.message);
@@ -170,19 +160,6 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
       .catch((err) => {
         toast.error(err.message);
       });
-
-    // clientApi.teams
-    //   .registerCompetition(teamId, competitionId)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log("Failed to register:", error);
-    //     if (error.status === 403)
-    //       toast.error("تنها سرگروه مجاز به ثبت تیم می باشد");
-    //     if (error.status === 400)
-    //       toast.error("شما قبلا در این مسابقه ثبت نام کرده اید");
-    //   });
   };
 
   const content = useMemo(() => {
@@ -212,74 +189,86 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
           showIcon
         />
       ) : (
-        filteredTeams.map((team) => (
-          <Button
-            key={team.id}
-            type="dashed"
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "100%",
-              padding: "1rem",
-              height: "fit-content",
-            }}
-          >
-            <Flex
+        filteredTeams.map((team) => {
+          return (
+            <Button
+              key={team.id}
+              type="dashed"
               style={{
                 display: "flex",
-                flexDirection: "column",
-                gap: "0.5rem",
-                alignItems: "start",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+                padding: "1rem",
+                height: "fit-content",
               }}
             >
-              <Typography.Title
-                level={3}
+              <Flex
                 style={{
-                  direction: isRTL ? "rtl" : "ltr",
-                  margin: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.5rem",
+                  alignItems: "start",
                 }}
               >
-                {team.name}
-              </Typography.Title>
-              <Typography.Paragraph
-                style={{
-                  direction: isRTL ? "rtl" : "ltr",
-                  margin: 0,
-                }}
-              >
-                سرگروه:{" "}
-                {team.leader_details.first_name +
-                  " " +
-                  team.leader_details.last_name}
-              </Typography.Paragraph>
-              <Typography.Paragraph
-                style={{
-                  direction: isRTL ? "rtl" : "ltr",
-                  margin: 0,
-                }}
-              >
-                تعداد اعضا: {digitsToHindi(team.memberships.length)}
-              </Typography.Paragraph>
-            </Flex>
+                <Typography.Title
+                  level={3}
+                  style={{
+                    direction: isRTL ? "rtl" : "ltr",
+                    margin: 0,
+                  }}
+                >
+                  {team.name}
+                </Typography.Title>
+                <Typography.Paragraph
+                  style={{
+                    direction: isRTL ? "rtl" : "ltr",
+                    margin: 0,
+                  }}
+                >
+                  سرگروه:{" "}
+                  {team.leader_details.first_name +
+                    " " +
+                    team.leader_details.last_name}
+                </Typography.Paragraph>
+                <Typography.Paragraph
+                  style={{
+                    direction: isRTL ? "rtl" : "ltr",
+                    margin: 0,
+                  }}
+                >
+                  تعداد اعضا: {digitsToHindi(team.memberships.length)}
+                </Typography.Paragraph>
+              </Flex>
 
-            {team.group_competition_details ? (
-              statusButton(team.status, team.id)
-            ) : (
-              <Button
-                type="primary"
-                onClick={() => handleRegisterCompetition(team.id)}
-                disabled={!!team.group_competition_details}
-                icon={<HiPlus />}
-              >
-                ثبت تیم
-              </Button>
-            )}
-          </Button>
-        ))
+              {team.group_competition_details ? (
+                statusButton(team.status, team.id)
+              ) : (
+                <Button
+                  type="primary"
+                  onClick={() =>
+                    isTeamSizeValid(team.memberships) === 0 &&
+                    handleRegisterCompetition(team)
+                  }
+                  disabled={
+                    !!team.group_competition_details ||
+                    isTeamSizeValid(team.memberships) !== 0
+                  }
+                  icon={<HiPlus />}
+                >
+                  {isTeamSizeValid(team.memberships) < 0
+                    ? "تعداد اعضا کم است"
+                    : isTeamSizeValid(team.memberships) > 0
+                    ? "تعداد اعضای تیم بیش از حد مجاز است"
+                    : "ثبت تیم"}
+                </Button>
+              )}
+            </Button>
+          );
+        })
       );
     }
-  }, [teams, t]);
+  }, [teams, filteredTeams, t, loading]);
 
   const cardButton = () => (
     <Button
