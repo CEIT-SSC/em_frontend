@@ -24,6 +24,7 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
   const { isAuthenticated } = useAuth();
   const { useToken } = theme;
   const { token } = useToken();
+  const [filteredTeams, setFilteredTeams] = useState<TeamDetails[]>([]);
 
   const dispatch = useAppDispatch();
   const { data: teams, loading, error } = useAppSelector((s) => s.teams);
@@ -101,6 +102,14 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
         .catch((err) => {
           toast.error(err.message);
         });
+
+    setFilteredTeams(
+      teams.filter(
+        (team) =>
+          !team.group_competition_details ||
+          team.group_competition_details.id == competitionId
+      )
+    );
 
     // clientApi.teams
     //   .getTeamsList()
@@ -183,7 +192,7 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
         />
       );
     } else {
-      return teams.length === 0 ? (
+      return filteredTeams.length === 0 ? (
         <Alert
           message={"هنوز تیمی ندارید!"}
           description={
@@ -193,7 +202,7 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
           showIcon
         />
       ) : (
-        teams.map((team) => (
+        filteredTeams.map((team) => (
           <Button
             key={team.id}
             type="dashed"

@@ -70,7 +70,7 @@ export default function HomePage() {
           fill={customColors.colorOfflineWorkshop}
           style={{
             transform: "scaleY(-1) translateY(-2px)",
-            marginTop: "-54px",
+            marginTop: "-72px",
           }}
         />
         <OfflineWorkshop

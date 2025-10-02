@@ -66,10 +66,13 @@ export function CompetitionCard({
   const { isAuthenticated } = useAuth();
   const { token } = useToken();
 
-  let isRegistered;
-  const handleRegistered = (registered: boolean) => (isRegistered = registered);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const handleIsRegistered = (registered: boolean) =>
+    setIsRegistered(registered);
 
-  if (dashboardMode && !isRegistered) return;
+  // console.log(competition.event_title, dashboardMode, isRegistered);
+
+  // if (dashboardMode && !isRegistered) return;
 
   // const isSelected = useMemo(() => {
   //   return itemInCart !== undefined;
@@ -355,7 +358,7 @@ export function CompetitionCard({
               <GroupModal
                 isRTL={titleIsRTL}
                 competitionId={competition.id}
-                registered={handleRegistered}
+                registered={handleIsRegistered}
               />
             </Flex>
           </Flex>
@@ -400,7 +403,7 @@ export function CompetitionCard({
           <GroupModal
             isRTL={titleIsRTL}
             competitionId={competition.id}
-            registered={handleRegistered}
+            registered={handleIsRegistered}
           />,
         ]}
         width={700}

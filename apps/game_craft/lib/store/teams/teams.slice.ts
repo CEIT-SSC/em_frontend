@@ -9,7 +9,7 @@ interface TeamsState {
 }
 
 const initialState: TeamsState = {
-  loading: false,
+  loading: true,
   error: null,
   data: [],
 };
@@ -29,7 +29,7 @@ export const payTeam = createAppAsyncThunk(
       const res = await Api.teams.teamPayment(teamId);
 
       if (res.status === 200) {
-        return { teamId, paymentUrl: res.data.data.data.payment_url };
+        return { teamId, paymentUrl: res.data.data.payment_url };
       }
 
       if (res.status === 204) {
@@ -38,6 +38,7 @@ export const payTeam = createAppAsyncThunk(
 
       return { teamId };
     } catch (err: any) {
+      console.log(err);
       return rejectWithValue({
         code: err.response?.status ?? 500,
         message: "پرداخت ناموفق بود",

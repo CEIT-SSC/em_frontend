@@ -9,7 +9,6 @@ export const fetchPurchasesThunk = createAppAsyncThunk(
     try {
       const response = await thunkAPI.extra.Api.purchases.fetchPurchases();
       const data = response.data.data;
-      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(
