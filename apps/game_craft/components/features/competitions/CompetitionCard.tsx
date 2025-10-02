@@ -32,6 +32,7 @@ import { useAuth } from "lib/hooks/useAuth";
 import { digitsToHindi } from "@ssc/utils";
 import { GroupCompetitionDetails } from "@ssc/core/lib/types/api/competitions/competitions";
 import GroupModal from "./GroupModal";
+import React from "react";
 
 const { useToken } = theme;
 
@@ -66,9 +67,17 @@ export function CompetitionCard({
   const { isAuthenticated } = useAuth();
   const { token } = useToken();
 
-  const [isRegistered, setIsRegistered] = useState(false);
-  const handleIsRegistered = (registered: boolean) =>
-    setIsRegistered(registered);
+  const { data: teams, loading, error } = useAppSelector((s) => s.teams);
+
+  if (
+    dashboardMode &&
+    !teams.find((team) => team.group_competition_details?.id == competition.id)
+  )
+    return;
+
+  // const [isRegistered, setIsRegistered] = useState(false);
+  // const handleIsRegistered = (registered: boolean) =>
+  //   setIsRegistered(registered);
 
   // console.log(competition.event_title, dashboardMode, isRegistered);
 
@@ -355,11 +364,7 @@ export function CompetitionCard({
               </AntButton>
             )} */}
 
-              <GroupModal
-                isRTL={titleIsRTL}
-                competitionId={competition.id}
-                registered={handleIsRegistered}
-              />
+              <GroupModal isRTL={titleIsRTL} competitionId={competition.id} />
             </Flex>
           </Flex>
         </Flex>
@@ -400,11 +405,7 @@ export function CompetitionCard({
           //         </AntButton>,
           //       ]
           //     : []),
-          <GroupModal
-            isRTL={titleIsRTL}
-            competitionId={competition.id}
-            registered={handleIsRegistered}
-          />,
+          <GroupModal isRTL={titleIsRTL} competitionId={competition.id} />,
         ]}
         width={700}
         style={{ top: 50, zIndex: 200 }}
