@@ -44,13 +44,14 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
 
   if (registered) registered(isRegistered);
 
-  const buttonText = isAuthenticated
-    ? inPaymentProgress
-      ? "در انتظار پرداخت"
-      : isRegistered
-      ? "ثبت نام شده"
-      : "ثبت نام"
-    : "ابتدا وارد شوید";
+  const buttonText = () =>
+    isAuthenticated
+      ? inPaymentProgress
+        ? "در انتظار پرداخت"
+        : isRegistered
+        ? "ثبت نام شده"
+        : "ثبت نام"
+      : "ابتدا وارد شوید";
 
   // const buttonText = useMemo(() => {
   //   if (!isAuthenticated) return t("workshop.loginToContinue");
@@ -205,7 +206,7 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
         <Alert
           message={"هنوز تیمی ندارید!"}
           description={
-            "میتوانید با مراجعه به داشبورد سایت انجمن تیم خود را بسازید"
+            "میتوانید با مراجعه به داشبورد سایت انجمن (ceit-ssc.ir) تیم خود را بسازید"
           }
           type="info"
           showIcon
@@ -280,27 +281,25 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
     }
   }, [teams, t]);
 
-  const cardButton = useMemo(() => {
-    return (
-      <Button
-        onClick={() => setShowGroupModal(true)}
-        type="primary"
-        size="middle"
-        style={{
-          borderRadius: token.borderRadius,
-          height: "36px",
-        }}
-        disabled={!isAuthenticated || isRegistered}
-        icon={isRegistered ? <HiCheck /> : <HiPlus />}
-      >
-        {buttonText}
-      </Button>
-    );
-  }, [showGroupModal]);
+  const cardButton = () => (
+    <Button
+      onClick={() => setShowGroupModal(true)}
+      type="primary"
+      size="middle"
+      style={{
+        borderRadius: token.borderRadius,
+        height: "36px",
+      }}
+      disabled={!isAuthenticated || isRegistered}
+      icon={isRegistered ? <HiCheck /> : <HiPlus />}
+    >
+      {buttonText()}
+    </Button>
+  );
 
   return (
     <>
-      {cardButton}
+      {cardButton()}
       <Modal
         open={showGroupModal}
         onCancel={() => setShowGroupModal(false)}
