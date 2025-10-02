@@ -8,7 +8,7 @@ const tabItems = [
   // { label: "پرداخت ها", href: "/dashboard/payments" },
   // { label: "تیم های من", href: "/dashboard/soon" },
   // { label: "گواهی های من", href: "/dashboard/soon" },
-  { label: "پرداخت ها", href: "/dashboard/soon" },
+  // { label: "پرداخت ها", href: "/dashboard/soon" },
   { label: "کلاس آنلاین من", href: "/dashboard/classes" },
 ];
 
