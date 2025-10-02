@@ -2,8 +2,8 @@ import Image from "next/image";
 import React from "react";
 import { Button, ButtonSize, TextField } from "@ssc/ui";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
 import Link from "next/link";
+import { authOptions } from "~/lib/auth-options";
 
 const page = async () => {
   const session = await getServerSession(authOptions);

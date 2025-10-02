@@ -37,7 +37,7 @@ export const payTeam = createAppAsyncThunk(
       }
 
       return { teamId };
-    } catch (err: any) {
+    } catch (err) {
       console.log(err);
       return rejectWithValue({
         code: err.response?.status ?? 500,
@@ -61,7 +61,7 @@ export const registerTeam = createAppAsyncThunk(
         details: res.data,
         message: "تیم در مسابقه ثبت شد و آماده پرداخت است",
       };
-    } catch (err: any) {
+    } catch (err) {
       if (err.response?.status === 403) {
         return rejectWithValue({
           code: 403,
