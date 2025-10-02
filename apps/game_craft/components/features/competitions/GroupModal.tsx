@@ -1,4 +1,4 @@
-import { Alert, Button, Flex, Modal, Spin, Typography } from "antd";
+import { Alert, Button, Flex, Modal, Spin, theme, Typography } from "antd";
 import { clientApi } from "lib/api/client/clientApi";
 import { eventId } from "lib/utils/constants";
 import React, { useEffect, useMemo, useState } from "react";
@@ -21,9 +21,23 @@ const GroupModal = ({ isRTL, competitionId }: Props) => {
   const [showGroupModal, setShowGroupModal] = useState(false);
   const t = useTranslations();
   const { isAuthenticated } = useAuth();
+  const { useToken } = theme;
+  const { token } = useToken();
 
   const dispatch = useAppDispatch();
   const { data: teams, loading, error } = useAppSelector((s) => s.teams);
+
+  const isRegistered = !!teams.find(
+    (team) =>
+      team.group_competition_details?.id == competitionId &&
+      team.status === "active"
+  );
+
+  const buttonText = isAuthenticated
+    ? isRegistered
+      ? "ثبت نام شده"
+      : "ثبت نام"
+    : "ابتدا وارد شوید";
 
   // const buttonText = useMemo(() => {
   //   if (!isAuthenticated) return t("workshop.loginToContinue");
@@ -128,6 +142,9 @@ const GroupModal = ({ isRTL, competitionId }: Props) => {
   const handleRegisterCompetition = (teamId: number) => {
     dispatch(registerTeam({ teamId, competitionId }))
       .unwrap()
+      .then((res) => {
+        toast.success(res.message);
+      })
       .catch((err) => {
         toast.error(err.message);
       });
@@ -247,11 +264,13 @@ const GroupModal = ({ isRTL, competitionId }: Props) => {
         type="primary"
         size="middle"
         style={{
-          borderRadius: "12px",
+          borderRadius: token.borderRadius,
           height: "36px",
         }}
+        disabled={!isAuthenticated || isRegistered}
+        icon={isRegistered ? <HiCheck /> : <HiPlus />}
       >
-        ثبت نام
+        {buttonText}
       </Button>
       <Modal
         open={showGroupModal}
@@ -308,19 +327,7 @@ const GroupModal = ({ isRTL, competitionId }: Props) => {
         <Flex
           style={{ flexDirection: "column", alignItems: "center", gap: "1rem" }}
         >
-          {isAuthenticated ? (
-            content
-          ) : (
-            <Typography.Title
-              level={4}
-              style={{
-                direction: isRTL ? "rtl" : "ltr",
-                marginBottom: "24px",
-              }}
-            >
-              ابتدا وارد شوید!
-            </Typography.Title>
-          )}
+          {isAuthenticated && content}
         </Flex>
       </Modal>
     </>

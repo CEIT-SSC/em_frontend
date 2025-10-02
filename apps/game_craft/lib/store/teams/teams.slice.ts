@@ -58,7 +58,7 @@ export const registerTeam = createAppAsyncThunk(
       return {
         teamId,
         details: res.data,
-        message: "تیم با موفقیت در مسابقه ثبت شد",
+        message: "تیم در مسابقه ثبت شد و آماده پرداخت است",
       };
     } catch (err: any) {
       if (err.response?.status === 403) {

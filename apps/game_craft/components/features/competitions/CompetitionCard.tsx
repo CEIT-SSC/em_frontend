@@ -16,14 +16,7 @@ import {
   Row,
   Col,
 } from "antd";
-import {
-  ClockCircleOutlined,
-  EnvironmentOutlined,
-  LinkOutlined,
-  ShoppingCartOutlined,
-  DeleteOutlined,
-  EyeOutlined,
-} from "@ant-design/icons";
+import { ClockCircleOutlined, EyeOutlined } from "@ant-design/icons";
 import { useFormatter } from "lib/hooks/useFormatter";
 import { useAppDispatch, useAppSelector } from "lib/store/store";
 import {
@@ -35,7 +28,6 @@ import {
   addItemToCartThunk,
   removeItemFromCartThunk,
 } from "lib/store/cart/cart.thunk";
-import { toast } from "react-toastify";
 import { useAuth } from "lib/hooks/useAuth";
 import { digitsToHindi } from "@ssc/utils";
 import { GroupCompetitionDetails } from "@ssc/core/lib/types/api/competitions/competitions";
@@ -72,23 +64,23 @@ export function CompetitionCard({
   const { isAuthenticated } = useAuth();
   const { token } = useToken();
 
-  const isSelected = useMemo(() => {
-    return itemInCart !== undefined;
-  }, [itemInCart]);
+  // const isSelected = useMemo(() => {
+  //   return itemInCart !== undefined;
+  // }, [itemInCart]);
 
   // Color palette
   const colorStripes = ["#4CAF50", "#2196F3", "#FFC107", "#F44336"];
 
-  const buttonText = useMemo(() => {
-    if (!isAuthenticated) return t("workshop.loginToContinue");
-    if (isSelected) {
-      return t("workshop.removeFromCart");
-    } else {
-      return competition.is_paid
-        ? t("workshop.addToCart")
-        : t("workshop.enroll");
-    }
-  }, [isSelected, competition, t, isAuthenticated]);
+  // const buttonText = useMemo(() => {
+  //   if (!isAuthenticated) return t("workshop.loginToContinue");
+  //   if (isSelected) {
+  //     return t("workshop.removeFromCart");
+  //   } else {
+  //     return competition.is_paid
+  //       ? t("workshop.addToCart")
+  //       : t("workshop.enroll");
+  //   }
+  // }, [isSelected, competition, t, isAuthenticated]);
 
   // Format date and time
   const formatDateTime = (dateTimeString: string) => {
@@ -98,26 +90,7 @@ export function CompetitionCard({
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
     });
-  };
-
-  // Format time only (for end time when it's same day)
-  const formatTime = (dateTimeString: string) => {
-    const date = new Date(dateTimeString);
-    return date.toLocaleString("fa-IR", {
-      timeZone: "UTC",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
-
-  // Check if start and end dates are on the same day
-  const isSameDay = (startTime: string, endTime: string) => {
-    const start = new Date(startTime);
-    const end = new Date(endTime);
-    return start.toDateString() === end.toDateString();
   };
 
   // Format date time range
@@ -126,47 +99,9 @@ export function CompetitionCard({
       return formatDateTime(competition.start_datetime);
     }
 
-    if (isSameDay(competition.start_datetime, competition.end_datetime)) {
-      // Same day: show date + start time - end time
-    } else {
-      // Different days: show full start date/time - full end date/time
-      return `${formatDateTime(competition.start_datetime)} - ${formatDateTime(
-        competition.end_datetime
-      )}`;
-    }
-  };
-
-  const handleAddToCart = () => {
-    if (buttonShouldBeDisabled) {
-      if (!isAuthenticated) {
-        toast.error("لطفا وارد حساب خود شوید");
-      }
-      return;
-    }
-    setButtonLoading(true);
-    dispatch(
-      addItemToCartThunk({
-        item_type: ItemType.PRESENTATION,
-        item_id: competition.id,
-      })
-    )
-      .unwrap()
-      .catch()
-      .finally(() => setButtonLoading(false));
-  };
-
-  const removeFromCart = () => {
-    if (buttonShouldBeDisabled || !itemInCart) return;
-    setButtonLoading(true);
-    dispatch(
-      removeItemFromCartThunk({
-        item_id: itemInCart.id,
-        item_type: ItemType.PRESENTATION,
-      })
-    )
-      .unwrap()
-      .catch()
-      .finally(() => setButtonLoading(false));
+    return `${formatDateTime(competition.start_datetime)} - ${formatDateTime(
+      competition.end_datetime
+    )}`;
   };
 
   const titleIsRTL = isRTL(competition.title);
@@ -174,7 +109,9 @@ export function CompetitionCard({
 
   const formatPrice = () => {
     return competition.is_paid
-      ? formatNumberToMoney(competition.price_per_member)
+      ? t("workshop.per_member") +
+          " " +
+          formatNumberToMoney(competition.price_per_member)
       : t("workshop.free");
   };
 
@@ -418,40 +355,39 @@ export function CompetitionCard({
       <Modal
         open={showModal}
         onCancel={() => setShowModal(false)}
-        footer={
-          [
-            // Only show action button if not purchased
-            //   ...(!isPurchased
-            //     ? [
-            //         <AntButton
-            //           key="action"
-            //           type={isSelected ? "default" : "primary"}
-            //           danger={isSelected}
-            //           icon={
-            //             isSelected ? <DeleteOutlined /> : <ShoppingCartOutlined />
-            //           }
-            //           onClick={() => {
-            //             if (isSelected) {
-            //               removeFromCart();
-            //             } else {
-            //               handleAddToCart();
-            //             }
-            //             setShowModal(false);
-            //           }}
-            //           disabled={
-            //             !competition.is_active ||
-            //             buttonShouldBeDisabled ||
-            //             competition.capacity <= 0 ||
-            //             !isAuthenticated
-            //           }
-            //           loading={buttonLoading}
-            //         >
-            //           {buttonText}
-            //         </AntButton>,
-            //       ]
-            //     : []),
-          ]
-        }
+        footer={[
+          // Only show action button if not purchased
+          //   ...(!isPurchased
+          //     ? [
+          //         <AntButton
+          //           key="action"
+          //           type={isSelected ? "default" : "primary"}
+          //           danger={isSelected}
+          //           icon={
+          //             isSelected ? <DeleteOutlined /> : <ShoppingCartOutlined />
+          //           }
+          //           onClick={() => {
+          //             if (isSelected) {
+          //               removeFromCart();
+          //             } else {
+          //               handleAddToCart();
+          //             }
+          //             setShowModal(false);
+          //           }}
+          //           disabled={
+          //             !competition.is_active ||
+          //             buttonShouldBeDisabled ||
+          //             competition.capacity <= 0 ||
+          //             !isAuthenticated
+          //           }
+          //           loading={buttonLoading}
+          //         >
+          //           {buttonText}
+          //         </AntButton>,
+          //       ]
+          //     : []),
+          <GroupModal isRTL={titleIsRTL} competitionId={competition.id} />,
+        ]}
         width={700}
         style={{ top: 50, zIndex: 200 }}
         styles={{
@@ -561,11 +497,7 @@ export function CompetitionCard({
                     color: token.colorText,
                   }}
                 >
-                  {competition.is_paid
-                    ? `${formatNumberToMoney(competition.price_per_member)} ${t(
-                        "common.currency"
-                      )}`
-                    : t("workshop.free")}
+                  {formatPrice()} {competition.is_paid && t("common.currency")}
                 </Typography.Title>
               </div>
             </Space>

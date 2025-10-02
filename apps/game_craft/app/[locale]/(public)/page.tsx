@@ -48,15 +48,30 @@ export default function HomePage() {
 
         {/* Workshop Sections - Matching React order exactly */}
         <div id="workshops" />
-        <Wave
+        {/* <Wave
           width="100%"
           height="auto"
           fill={customColors.colorOfflineWorkshop}
           style={{ transform: "scaleY(-1) translateY(-2px)" }}
+        /> */}
+        <Wave
+          width="100%"
+          height="auto"
+          fill={token.colorPrimary}
+          style={{ transform: "scaleY(-1) translateY(-2px)" }}
         />
         <CompetitionsList
           padding={homeViewPadding}
-          backgroundColor={customColors.colorOfflineWorkshop}
+          backgroundColor={token.colorPrimary}
+        />
+        <Wave
+          width="100%"
+          height="auto"
+          fill={customColors.colorOfflineWorkshop}
+          style={{
+            transform: "scaleY(-1) translateY(-2px)",
+            marginTop: "-54px",
+          }}
         />
         <OfflineWorkshop
           padding={homeViewPadding}

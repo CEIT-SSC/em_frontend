@@ -91,7 +91,7 @@ export function CompetitionsList({
         backgroundColor: backgroundColor,
       }}
     >
-      <Wave width="100%" height="auto" fill="#4F7B79" />
+      {/* <Wave width="100%" height="auto" fill="#4F7B79" /> */}
       <Flex
         vertical
         align="center"
@@ -116,12 +116,6 @@ export function CompetitionsList({
 
         {content}
       </Flex>
-      <Wave
-        width="100%"
-        height="auto"
-        fill={token.colorPrimary}
-        style={{ transform: "scaleY(-1) translateY(-2px)" }}
-      />
     </Flex>
   );
 }
