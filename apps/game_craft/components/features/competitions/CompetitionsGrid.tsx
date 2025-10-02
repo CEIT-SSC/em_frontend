@@ -7,12 +7,30 @@ import { GroupCompetitionDetails } from "@ssc/core/lib/types/api/competitions/co
 interface Props {
   competitions?: GroupCompetitionDetails[];
   competitionImage?: string;
+  dashboardMode?: boolean;
 }
 
 export function CompetitionsGrid({
   competitions = [],
   competitionImage: workshopImage,
+  dashboardMode = false,
 }: Props) {
+  if (dashboardMode)
+    return (
+      <Row gutter={[16, 16]} style={{ width: "100%" }}>
+        {competitions.map((item) => (
+          <Col key={item.id} xs={24} sm={12} lg={8} xl={8}>
+            <CompetitionCard
+              competition={item}
+              isPurchased={true}
+              competitionImage={"/images/Luigi.jpg"}
+              dashboardMode={true}
+            />
+          </Col>
+        ))}
+      </Row>
+    );
+
   return (
     <Row
       gutter={[

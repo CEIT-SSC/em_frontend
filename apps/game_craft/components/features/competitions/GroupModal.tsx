@@ -15,9 +15,10 @@ import { fetchTeams, payTeam, registerTeam } from "lib/store/teams/teams.slice";
 interface Props {
   isRTL: boolean;
   competitionId: number;
+  registered?: (isRegistered: boolean) => void;
 }
 
-const GroupModal = ({ isRTL, competitionId }: Props) => {
+const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
   const [showGroupModal, setShowGroupModal] = useState(false);
   const t = useTranslations();
   const { isAuthenticated } = useAuth();
@@ -32,6 +33,8 @@ const GroupModal = ({ isRTL, competitionId }: Props) => {
       team.group_competition_details?.id == competitionId &&
       team.status === "active"
   );
+
+  registered(isRegistered);
 
   const buttonText = isAuthenticated
     ? isRegistered
@@ -182,8 +185,10 @@ const GroupModal = ({ isRTL, competitionId }: Props) => {
     } else {
       return teams.length === 0 ? (
         <Alert
-          message={t("workshop.noWorkshops")}
-          description={t("workshop.noOnlineWorkshops")}
+          message={"هنوز تیمی ندارید!"}
+          description={
+            "میتوانید با مراجعه به داشبورد سایت انجمن تیم خود را بسازید"
+          }
           type="info"
           showIcon
         />

@@ -38,7 +38,8 @@ const { useToken } = theme;
 interface Props {
   competitionImage?: string;
   competition: GroupCompetitionDetails;
-  isPurchased?: boolean; // Add this prop to control purchase button visibility
+  isPurchased?: boolean;
+  dashboardMode?: boolean;
 }
 
 // simple RTL detection (Persian/Arabic Unicode ranges)
@@ -48,7 +49,8 @@ const isRTL = (text?: string) =>
 export function CompetitionCard({
   competition,
   competitionImage: workshopImage,
-  isPurchased = false, // Default to false if not provided
+  isPurchased = false,
+  dashboardMode = false,
 }: Props) {
   const t = useTranslations();
   const [showModal, setShowModal] = useState(false);
@@ -63,6 +65,11 @@ export function CompetitionCard({
   const [buttonLoading, setButtonLoading] = useState(false);
   const { isAuthenticated } = useAuth();
   const { token } = useToken();
+
+  let isRegistered;
+  const handleRegistered = (registered: boolean) => (isRegistered = registered);
+
+  if (dashboardMode && !isRegistered) return;
 
   // const isSelected = useMemo(() => {
   //   return itemInCart !== undefined;
@@ -117,7 +124,7 @@ export function CompetitionCard({
 
   return (
     <>
-      {/* Workshop Card */}
+      {/* Competition Card */}
       <Card
         style={{
           width: "100%",
@@ -345,7 +352,11 @@ export function CompetitionCard({
               </AntButton>
             )} */}
 
-              <GroupModal isRTL={titleIsRTL} competitionId={competition.id} />
+              <GroupModal
+                isRTL={titleIsRTL}
+                competitionId={competition.id}
+                registered={handleRegistered}
+              />
             </Flex>
           </Flex>
         </Flex>
@@ -386,7 +397,11 @@ export function CompetitionCard({
           //         </AntButton>,
           //       ]
           //     : []),
-          <GroupModal isRTL={titleIsRTL} competitionId={competition.id} />,
+          <GroupModal
+            isRTL={titleIsRTL}
+            competitionId={competition.id}
+            registered={handleRegistered}
+          />,
         ]}
         width={700}
         style={{ top: 50, zIndex: 200 }}

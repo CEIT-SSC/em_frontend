@@ -15,11 +15,13 @@ const { useToken } = theme;
 interface Props {
   padding?: string;
   backgroundColor?: string;
+  dashboardMode?: boolean;
 }
 
 export function CompetitionsList({
   padding = "3rem 2rem",
   backgroundColor,
+  dashboardMode = false,
 }: Props) {
   const { token } = useToken();
   const screens = useResponsive();
@@ -75,11 +77,14 @@ export function CompetitionsList({
       ) : (
         <CompetitionsGrid
           competitions={competitions.data.results}
-          competitionImage="/images/Luigi.jpg" // Pass SuperMario image for online workshops
+          competitionImage="/images/Luigi.jpg"
+          dashboardMode={dashboardMode}
         />
       );
     }
   }, [competitions, t]);
+
+  if (dashboardMode) return content;
 
   return (
     <Flex
