@@ -12,6 +12,7 @@ import Wave from "../../../components/common/Wave";
 import { useResponsive } from "../../../lib/hooks/useResponsive";
 import { customColors } from "../../../config/colors";
 import WelcomePopup from "../../../components/features/popup/WelcomePopup";
+import { CompetitionsList } from "components/features/competitions/CompetitonsList";
 
 const { useToken } = theme;
 
@@ -47,11 +48,30 @@ export default function HomePage() {
 
         {/* Workshop Sections - Matching React order exactly */}
         <div id="workshops" />
-        <Wave
+        {/* <Wave
           width="100%"
           height="auto"
           fill={customColors.colorOfflineWorkshop}
           style={{ transform: "scaleY(-1) translateY(-2px)" }}
+        /> */}
+        <Wave
+          width="100%"
+          height="auto"
+          fill={token.colorPrimary}
+          style={{ transform: "scaleY(-1) translateY(-2px)" }}
+        />
+        <CompetitionsList
+          padding={homeViewPadding}
+          backgroundColor={token.colorPrimary}
+        />
+        <Wave
+          width="100%"
+          height="auto"
+          fill={customColors.colorOfflineWorkshop}
+          style={{
+            transform: "scaleY(-1) translateY(-2px)",
+            marginTop: "-72px",
+          }}
         />
         <OfflineWorkshop
           padding={homeViewPadding}

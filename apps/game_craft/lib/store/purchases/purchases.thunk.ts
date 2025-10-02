@@ -11,7 +11,9 @@ export const fetchPurchasesThunk = createAppAsyncThunk(
       const data = response.data.data;
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error?.message || "Failed to fetch purchases");
+      return thunkAPI.rejectWithValue(
+        error?.message || "Failed to fetch purchases"
+      );
     }
   }
 );

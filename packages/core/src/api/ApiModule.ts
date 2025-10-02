@@ -6,6 +6,8 @@ import { PresentationsApi } from "./Presentations/presentations.api";
 import { OrderApi } from "./Order/order.api";
 import { PaymentApi } from "./Payment/payment.api";
 import { PurchasesApi } from "./Purchases/purchases.api";
+import { TeamsApi } from "./Teams/teams.api";
+import { CompetitionsApi } from "./Competitions/competitions.api";
 
 /**
  * Main API class that provides a centralized entry point for all API operations.
@@ -34,6 +36,8 @@ export class ApiModule {
   private _orderApi?: OrderApi;
   private _paymentApi?: PaymentApi;
   private _purchasesApi?: PurchasesApi;
+  private _teamsApi?: TeamsApi;
+  private _competitionsApi?: CompetitionsApi;
   private apiInstance: AxiosInstance;
 
   constructor(apiInstance: AxiosInstance) {
@@ -87,6 +91,20 @@ export class ApiModule {
       this._purchasesApi = new PurchasesApi(this.apiInstance);
     }
     return this._purchasesApi;
+  }
+
+  get teams(): TeamsApi {
+    if (!this._teamsApi) {
+      this._teamsApi = new TeamsApi(this.apiInstance);
+    }
+    return this._teamsApi;
+  }
+
+  get competitions(): CompetitionsApi {
+    if (!this._competitionsApi) {
+      this._competitionsApi = new CompetitionsApi(this.apiInstance)
+    }
+    return this._competitionsApi;
   }
 
   public isLoaded(apiName: "auth" | "shop"): boolean {

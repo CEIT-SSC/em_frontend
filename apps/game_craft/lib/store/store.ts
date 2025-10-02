@@ -10,12 +10,14 @@ import { cartReducer } from "./cart/cart.slice";
 import { clientApi } from "lib/api/client/clientApi";
 import { orderReducer } from "./order/order.slice";
 import { purchasesReducer } from "./purchases/purchases.slice";
+import { teamsReducer } from "./teams/teams.slice";
 
 export const store = configureStore({
   reducer: combineReducers({
     cart: cartReducer,
     order: orderReducer,
     purchases: purchasesReducer,
+    teams: teamsReducer,
   }),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

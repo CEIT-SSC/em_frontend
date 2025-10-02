@@ -2,8 +2,8 @@ import React from "react";
 import ActiveTab from "./ActiveTab";
 
 const tabItems = [
-  { label: "اطلاعات من", href: "/dashboard" },
-  // { label: "تیم های من", href: "/dashboard/teams" },
+  { label: "اطلاعات من", href: "/dashboard/info" },
+  { label: "تیم های من", href: "/dashboard/teams" },
   // { label: "گواهی های من", href: "/dashboard/certificates" },
   // { label: "پرداخت ها", href: "/dashboard/payments" },
   // { label: "تیم های من", href: "/dashboard/soon" },

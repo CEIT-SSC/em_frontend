@@ -53,7 +53,7 @@ const AuthData = () => {
     }
     return (
       <Link
-        href={"/dashboard"}
+        href={"/dashboard/info"}
         className="flex flex-row-reverse items-center gap-2 cursor-pointer"
       >
         <p>{userData.first_name + " " + userData.last_name}</p>

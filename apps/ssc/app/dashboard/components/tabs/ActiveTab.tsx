@@ -3,14 +3,14 @@
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useMemo } from "react";
 import { IconType } from "react-icons";
 import { HiCash, HiIdentification, HiUser, HiUserGroup } from "react-icons/hi";
 import { LuPickaxe } from "react-icons/lu";
 import { MdCoPresent } from "react-icons/md";
 
 const tabIcons: { [key: string]: IconType } = {
-  ["/dashboard"]: HiUser,
+  ["/dashboard/info"]: HiUser,
   ["/dashboard/teams"]: HiUserGroup,
   ["/dashboard/certificates"]: HiIdentification,
   ["/dashboard/payments"]: HiCash,
@@ -27,11 +27,12 @@ interface Props {
 const ActiveTab = ({ href, children, onClick }: Props) => {
   const path = usePathname();
   const TabIcon = tabIcons[href];
+  const isActive = useMemo(() => path.includes(href), [path, href]);
 
   return (
     <div
       className={clsx("p-px w-full rounded-3xl overflow-hidden", {
-        "bg-gradient": path === href,
+        "bg-gradient": isActive,
       })}
     >
       <div className="bg-(--background) rounded-3xl">
@@ -39,14 +40,14 @@ const ActiveTab = ({ href, children, onClick }: Props) => {
           href={href}
           onClick={onClick}
           className={clsx("flex items-center h-full p-2.5 gap-2.5 text-2xl", {
-            ["text-gradient"]: path === href,
+            ["text-gradient"]: isActive,
           })}
         >
           <GradientSvg />
           <TabIcon
             style={{
-              fill: path === href ? `url(#blue-gradient)` : "",
-              stroke: path === href ? `url(#blue-gradient)` : "",
+              fill: isActive ? `url(#blue-gradient)` : "",
+              stroke: isActive ? `url(#blue-gradient)` : "",
             }}
           />
           <p>{children}</p>

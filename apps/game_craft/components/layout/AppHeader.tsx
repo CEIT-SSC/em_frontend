@@ -83,7 +83,7 @@ export function AppHeader() {
   const handleLoginClicked = () => {
     // router.push("/auth/login");
     signIn("ssc", {
-      callbackUrl: "/dashboard",
+      callbackUrl: "/dashboard/info",
     });
   };
 

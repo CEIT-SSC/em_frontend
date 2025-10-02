@@ -79,6 +79,7 @@
       "event": "رویدادها",
       "events": {
         "title": "رویدادها و کارگاه‌ها",
+        "competitions": "مسابقات من",
         "workshops": "کارگاه‌های من",
         "talks": "ارائه‌های من",
         "loading": "در حال بارگذاری...",
@@ -271,9 +272,11 @@
   },
   "workshop": {
     "loginToContinue": "ابتدا وارد شوید",
+    "competitions": "مسابقه ها",
     "workshops": "کارگاه ها",
     "presentations": "ارائه ها",
     "price": "قیمت",
+    "per_member": "هر عضو",
     "description": "توضیحات",
     "schedule": "زمان برگزاری",
     "location": "مکان",

@@ -24,6 +24,7 @@
   --color-whiteText: var(--TextWhite);
   --color-mainRed: var(--MainRed);
   --color-mainWhite: #f3f7f0;
+  --color-mainGray: var(--MainGray);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
