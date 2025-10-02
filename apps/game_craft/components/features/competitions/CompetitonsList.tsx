@@ -111,7 +111,7 @@ export function CompetitionsList({
             textAlign: "center",
           }}
         >
-          {t("workshop.presentations")}
+          {t("workshop.competitions")}
         </Typography.Title>
 
         {content}

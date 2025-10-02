@@ -6,6 +6,11 @@ import { TeamDetails } from "@ssc/core/lib/types/api/Teams/teams";
 import { useTranslations } from "next-intl";
 import { digitsToHindi } from "@ssc/utils";
 import { useAuth } from "lib/hooks/useAuth";
+import { HiCash, HiCheck, HiPlus } from "react-icons/hi";
+import { toast } from "react-toastify";
+import { MdOutlineWatch } from "react-icons/md";
+import { useAppDispatch, useAppSelector } from "lib/store/store";
+import { fetchTeams, payTeam, registerTeam } from "lib/store/teams/teams.slice";
 
 interface Props {
   isRTL: boolean;
@@ -15,60 +20,150 @@ interface Props {
 const GroupModal = ({ isRTL, competitionId }: Props) => {
   const [showGroupModal, setShowGroupModal] = useState(false);
   const t = useTranslations();
-  const { user } = useAuth();
+  const { isAuthenticated } = useAuth();
 
-  const [teams, setTeams] = useState<{
-    loading: boolean;
-    error?: string;
-    data?: TeamDetails[];
-  }>({ loading: true });
+  const dispatch = useAppDispatch();
+  const { data: teams, loading, error } = useAppSelector((s) => s.teams);
+
+  // const buttonText = useMemo(() => {
+  //   if (!isAuthenticated) return t("workshop.loginToContinue");
+  //   if (isSelected) {
+  //     return t("workshop.removeFromCart");
+  //   } else {
+  //     return presentation.is_paid
+  //       ? t("workshop.addToCart")
+  //       : t("workshop.enroll");
+  //   }
+  // }, [isSelected, presentation, t, isAuthenticated]);
+
+  const statusButton = (status: string, teamId: number) => {
+    switch (status) {
+      case "pending_admin_verification":
+        return (
+          <Button type="primary" disabled icon={<MdOutlineWatch />}>
+            در انتظار تایید
+          </Button>
+        );
+      case "approved_awaiting_payment":
+        return (
+          <Button
+            type="primary"
+            icon={<HiCash />}
+            onClick={() => handlePayment(teamId)}
+          >
+            پرداخت
+          </Button>
+        );
+      case "awaiting_payment_confirmation":
+        return (
+          <Button type="primary" disabled icon={<HiCash />}>
+            در حال پرداخت
+          </Button>
+        );
+      case "active":
+        return (
+          <Button type="primary" disabled icon={<HiCheck />}>
+            ثبت نام شده
+          </Button>
+        );
+      default:
+        break;
+    }
+  };
+
+  // const [teams, setTeams] = useState<{
+  //   loading: boolean;
+  //   error?: string;
+  //   data?: TeamDetails[];
+  // }>({ loading: true });
 
   useEffect(() => {
-    if (!user) return;
-    clientApi.teams
-      .getTeamsList()
-      .then((response) => {
-        if (response.status === 200) {
-          setTeams({
-            loading: false,
-            data: response.data.data.results,
-          });
+    if (isAuthenticated)
+      dispatch(fetchTeams())
+        .unwrap()
+        .catch((err) => {
+          toast.error(err.message);
+        });
+
+    // clientApi.teams
+    //   .getTeamsList()
+    //   .then((response) => {
+    //     if (response.status === 200) {
+    //       setTeams({
+    //         loading: false,
+    //         data: response.data.data.results,
+    //       });
+    //     } else {
+    //       setTeams({ loading: false, error: "failed to fetch" });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     setTeams({ loading: false, error: "failed to fetch" });
+    //   });
+  }, [isAuthenticated, showGroupModal]);
+
+  const handlePayment = (teamId: number) => {
+    dispatch(payTeam(teamId))
+      .unwrap()
+      .then((res) => {
+        if (res.paymentUrl) {
+          window.open(res.paymentUrl, "_blank");
         } else {
-          setTeams({ loading: false, error: "failed to fetch" });
+          // free
+          toast.success("پرداخت با موفقیت انجام شد");
         }
       })
       .catch((err) => {
-        setTeams({ loading: false, error: "failed to fetch" });
+        toast.error(err.message);
       });
-  }, [user]);
+
+    // clientApi.teams
+    //   .teamPayment(teamId)
+    //   .then((response) =>
+    //     window.open(response.data.data.data.payment_url, "_blank")
+    //   )
+    //   .catch((error) => console.log("Failed to pay:", error));
+  };
 
   const handleRegisterCompetition = (teamId: number) => {
-    clientApi.teams
-      .registerCompetition(teamId, competitionId)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => console.log("Failed to register:", error));
+    dispatch(registerTeam({ teamId, competitionId }))
+      .unwrap()
+      .catch((err) => {
+        toast.error(err.message);
+      });
+
+    // clientApi.teams
+    //   .registerCompetition(teamId, competitionId)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log("Failed to register:", error);
+    //     if (error.status === 403)
+    //       toast.error("تنها سرگروه مجاز به ثبت تیم می باشد");
+    //     if (error.status === 400)
+    //       toast.error("شما قبلا در این مسابقه ثبت نام کرده اید");
+    //   });
   };
 
   const content = useMemo(() => {
-    if (teams.loading) {
+    if (loading) {
       return (
         <Flex justify="center" align="center" style={{ minHeight: "200px" }}>
           <Spin size="large" />
         </Flex>
       );
-    } else if (teams.error) {
+    } else if (error) {
       return (
         <Alert
           message={t("workshop.error")}
-          description={teams.error}
+          description={error}
           type="error"
           showIcon
         />
       );
     } else {
-      return teams.data.length === 0 ? (
+      return teams.length === 0 ? (
         <Alert
           message={t("workshop.noWorkshops")}
           description={t("workshop.noOnlineWorkshops")}
@@ -76,10 +171,9 @@ const GroupModal = ({ isRTL, competitionId }: Props) => {
           showIcon
         />
       ) : (
-        teams.data.map((team) => (
+        teams.map((team) => (
           <Button
             key={team.id}
-            onClick={() => handleRegisterCompetition(team.id)}
             type="dashed"
             style={{
               display: "flex",
@@ -87,7 +181,7 @@ const GroupModal = ({ isRTL, competitionId }: Props) => {
               alignItems: "center",
               width: "100%",
               padding: "1rem",
-              minHeight: "fit-content",
+              height: "fit-content",
             }}
           >
             <Flex
@@ -118,16 +212,28 @@ const GroupModal = ({ isRTL, competitionId }: Props) => {
                   " " +
                   team.leader_details.last_name}
               </Typography.Paragraph>
+              <Typography.Paragraph
+                style={{
+                  direction: isRTL ? "rtl" : "ltr",
+                  margin: 0,
+                }}
+              >
+                تعداد اعضا: {digitsToHindi(team.memberships.length)}
+              </Typography.Paragraph>
             </Flex>
 
-            <Typography.Paragraph
-              style={{
-                direction: isRTL ? "rtl" : "ltr",
-                margin: 0,
-              }}
-            >
-              تعداد اعضا: {digitsToHindi(team.memberships.length)}
-            </Typography.Paragraph>
+            {team.group_competition_details ? (
+              statusButton(team.status, team.id)
+            ) : (
+              <Button
+                type="primary"
+                onClick={() => handleRegisterCompetition(team.id)}
+                disabled={!!team.group_competition_details}
+                icon={<HiPlus />}
+              >
+                ثبت تیم
+              </Button>
+            )}
           </Button>
         ))
       );
@@ -202,7 +308,7 @@ const GroupModal = ({ isRTL, competitionId }: Props) => {
         <Flex
           style={{ flexDirection: "column", alignItems: "center", gap: "1rem" }}
         >
-          {user ? (
+          {isAuthenticated ? (
             content
           ) : (
             <Typography.Title

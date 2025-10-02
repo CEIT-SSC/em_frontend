@@ -79,6 +79,7 @@
       "event": "Events",
       "events": {
         "title": "Events & Workshops",
+        "competitions": "My Competitions",
         "workshops": "My Workshops",
         "talks": "My Talks",
         "loading": "Loading...",
@@ -273,6 +274,7 @@
     "loginToContinue": "Login to continue",
     "workshops": "Workshops",
     "presentations": "Presentations",
+    "competitions": "Competitions",
     "price": "Price",
     "description": "Description",
     "schedule": "Schedule",

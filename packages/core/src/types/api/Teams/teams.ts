@@ -143,3 +143,15 @@ export interface RejectMembershipResponse {
   message: string;
   errors: Record<string, unknown>;
 }
+
+export interface TeamPaymentResponse {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  errors: object;
+  data: PaymentData;
+}
+export interface PaymentData {
+  payment_url: string;
+  authority: string;
+}

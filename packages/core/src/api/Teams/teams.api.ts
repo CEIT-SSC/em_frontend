@@ -15,6 +15,7 @@ import {
   MembershipRequestsList,
   AcceptMembershipResponse,
   RejectMembershipResponse,
+  TeamPaymentResponse,
 } from "../../types/api/Teams/teams";
 
 export class TeamsApi extends ApiClient {
@@ -79,7 +80,7 @@ export class TeamsApi extends ApiClient {
       RequestResponse<AcceptMembershipResponse>
     >(
       apiPath(ApiPath.TEAMS_INVITATION_RESPOND, { id: requestId }),
-      {action: "accept"},
+      { action: "accept" },
       {
         requiresAuth: true,
       }
@@ -94,7 +95,7 @@ export class TeamsApi extends ApiClient {
       RequestResponse<RejectMembershipResponse>
     >(
       apiPath(ApiPath.TEAMS_INVITATION_RESPOND, { id: requestId }),
-      {action: "reject"},
+      { action: "reject" },
       {
         requiresAuth: true,
       }
@@ -136,6 +137,19 @@ export class TeamsApi extends ApiClient {
       }),
       contentData,
       { requiresAuth: true }
+    );
+  }
+
+  async teamPayment(id: number): Promise<RequestResponse<TeamPaymentResponse>> {
+    return await this.Api.post<
+      TeamPaymentResponse,
+      RequestResponse<TeamPaymentResponse>
+    >(
+      apiPath(ApiPath.TEAMS_PAYMENT, { id }),
+      {},
+      {
+        requiresAuth: true,
+      }
     );
   }
 }

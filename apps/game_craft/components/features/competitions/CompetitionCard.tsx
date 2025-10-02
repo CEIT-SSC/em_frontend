@@ -334,7 +334,7 @@ export function CompetitionCard({
               >
                 {t("workshop.capacity") +
                   ": " +
-                  digitsToHindi(competition.remaining_capacity)}
+                  digitsToHindi(competition.max_teams)}
               </Typography.Title>
 
               <Typography.Title
