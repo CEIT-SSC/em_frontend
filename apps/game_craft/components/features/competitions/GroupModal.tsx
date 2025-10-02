@@ -35,7 +35,7 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
       team.status === "active"
   );
 
-  registered(isRegistered);
+  if (registered) registered(isRegistered);
 
   const buttonText = isAuthenticated
     ? isRegistered
