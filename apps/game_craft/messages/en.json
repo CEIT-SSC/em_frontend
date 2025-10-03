@@ -87,10 +87,12 @@
         "emptyDescription": "Browse available events and enroll to expand your skills"
       },
       "teamStatus": {
-        "label": "Team Status",
+        "label": "Teams Status",
         "teamName": "Team Name",
         "teamMembers": "Team Members",
-        "addTeammate": "Add Teammate"
+        "addTeammate": "Add Teammate",
+        "noTeams": "You haven't enrolled in any competitions",
+        "noTeamsDescription": "There is no such a team that enrolled in a competition for you"
       },
       "games": {
         "label": "Games",
@@ -258,7 +260,7 @@
     "signup": "Sign Up",
     "cancel": "Cancel",
     "events": "Events",
-    "teamStatus": "Team Status",
+    "teamStatus": "Teams Status",
     "games": "Games",
     "shoppingBag": "Shopping Cart",
     "staffs": "Our Team",
