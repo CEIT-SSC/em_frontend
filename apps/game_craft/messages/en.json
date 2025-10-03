@@ -229,6 +229,14 @@
     "faq": {
       "title": "Frequently Asked Questions",
       "competitionConditions": "Competition Conditions",
+      "competitionParticipate": {
+        "title": "Steps to Register for the Competition",
+        "content": "To register for the competitions, you must first go to the scientific association website (ceit-ssc.ir), and in the dashboard under the 'My Teams' section, form your team with your friends. Then return to GameCraft, select your desired team to register for the competitions, and pay the specified amount."
+      },
+      "teamsConditions": {
+        "title": "Which teams can I choose?",
+        "content": "The required number of members for each competition is specified in its details. For registration, only teams that meet the eligibility criteria and have not yet participated in any competition will be displayed. Each team can only participate in one competition."
+      },
       "howToParticipate": {
         "title": "How to participate?",
         "content": "To participate in GameCraft, you need to register through our website during the registration period. Teams can consist of 2-5 members. After registration, you'll receive access to workshops and resources. Make sure to attend all required workshops and follow the competition guidelines."

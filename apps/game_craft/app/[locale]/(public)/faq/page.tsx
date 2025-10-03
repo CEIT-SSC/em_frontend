@@ -20,6 +20,38 @@ export default function FAQPage() {
         <Space>
           <QuestionCircleOutlined style={{ color: token.colorPrimary }} />
           <Typography.Text strong style={{ fontSize: "16px" }}>
+            {t("faq.competitionParticipate.title")}
+          </Typography.Text>
+        </Space>
+      ),
+      children: (
+        <Typography.Paragraph style={{ fontSize: "16px", lineHeight: 1.6 }}>
+          {t("faq.competitionParticipate.content")}
+        </Typography.Paragraph>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Space>
+          <QuestionCircleOutlined style={{ color: token.colorPrimary }} />
+          <Typography.Text strong style={{ fontSize: "16px" }}>
+            {t("faq.teamsConditions.title")}
+          </Typography.Text>
+        </Space>
+      ),
+      children: (
+        <Typography.Paragraph style={{ fontSize: "16px", lineHeight: 1.6 }}>
+          {t("faq.teamsConditions.content")}
+        </Typography.Paragraph>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <Space>
+          <QuestionCircleOutlined style={{ color: token.colorPrimary }} />
+          <Typography.Text strong style={{ fontSize: "16px" }}>
             {t("faq.howToParticipate.title")}
           </Typography.Text>
         </Space>
@@ -31,7 +63,7 @@ export default function FAQPage() {
       ),
     },
     {
-      key: "2",
+      key: "4",
       label: (
         <Space>
           <QuestionCircleOutlined style={{ color: token.colorPrimary }} />
@@ -47,7 +79,7 @@ export default function FAQPage() {
       ),
     },
     {
-      key: "3",
+      key: "5",
       label: (
         <Space>
           <QuestionCircleOutlined style={{ color: token.colorPrimary }} />
@@ -63,7 +95,7 @@ export default function FAQPage() {
       ),
     },
     {
-      key: "4",
+      key: "6",
       label: (
         <Space>
           <QuestionCircleOutlined style={{ color: token.colorPrimary }} />

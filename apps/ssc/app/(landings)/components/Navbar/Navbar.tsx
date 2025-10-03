@@ -10,6 +10,7 @@ export const navbarItems = [
   // { label: "فرصت های شغلی", href: "/careers" },
   // { label: "ترمچین", href: "/termchin" },
   { label: "درباره ما", href: "/about" },
+  { label: "داشبورد", href: "/dashboard" },
 ];
 
 const Navbar = async () => {

@@ -195,8 +195,12 @@ const GroupModal = ({
           }
           description={
             <span>
-              میتوانید با مراجعه به داشبورد{" "}
-              <a href="">سایت انجمن (ceit-ssc.ir)</a> تیم خود را بسازید
+              با هر تیمی تنها در یک مسابقه میتوان شرکت نمود، با مراجعه به
+              داشبورد{" "}
+              <a href="https://ceit-ssc.ir/dashboard/teams" target="_blank">
+                سایت انجمن (ceit-ssc.ir)
+              </a>{" "}
+              میتوانید تیم جدیدی بسازید
             </span>
           }
           type="info"
