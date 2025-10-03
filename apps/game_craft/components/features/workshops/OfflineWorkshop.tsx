@@ -36,9 +36,14 @@ export function OfflineWorkshop({
       )
       .then((response) => {
         if (response.status === 200) {
+          const filteredData = response.data.data;
+          filteredData.results = filteredData.results.filter(
+            (presentation) => presentation.is_active
+          );
+
           setPresentations({
             loading: false,
-            data: response.data.data,
+            data: filteredData,
           });
         } else {
           setPresentations({ loading: false, error: "failed to fetch" });
