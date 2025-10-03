@@ -16,7 +16,11 @@ import {
   Row,
   Col,
 } from "antd";
-import { ClockCircleOutlined, EyeOutlined } from "@ant-design/icons";
+import {
+  ClockCircleOutlined,
+  EyeOutlined,
+  TeamOutlined,
+} from "@ant-design/icons";
 import { useFormatter } from "lib/hooks/useFormatter";
 import { useAppDispatch, useAppSelector } from "lib/store/store";
 import {
@@ -282,6 +286,17 @@ export function CompetitionCard({
               {competition.description}
             </Typography.Paragraph>
 
+            {/* Teams */}
+            <Flex align="center" gap="small">
+              <TeamOutlined style={{ color: token.colorPrimary }} />
+              <Typography.Text
+                style={{ color: token.colorTextSecondary, fontSize: "14px" }}
+              >
+                {t("workshop.teamSizes")}: {competition.min_group_size} -{" "}
+                {competition.max_group_size}
+              </Typography.Text>
+            </Flex>
+
             {/* Date and Time */}
             <Flex align="center" gap="small">
               <ClockCircleOutlined style={{ color: token.colorPrimary }} />
@@ -538,6 +553,26 @@ export function CompetitionCard({
           {/* Right Column */}
           <Col xs={24} lg={12}>
             <Space direction="vertical" size="large" style={{ width: "100%" }}>
+              {/* Teams */}
+              <div>
+                <Typography.Title level={4} style={{ marginBottom: "12px" }}>
+                  {t("workshop.teamSizes")}
+                </Typography.Title>
+                <Flex align="center" gap="small">
+                  <TeamOutlined
+                    style={{ color: token.colorPrimary, fontSize: "20px" }}
+                  />
+                  <Typography.Text
+                    style={{
+                      color: token.colorTextSecondary,
+                      fontSize: "14px",
+                    }}
+                  >
+                    {competition.min_group_size} - {competition.max_group_size}
+                  </Typography.Text>
+                </Flex>
+              </div>
+
               {/* Price */}
               <div>
                 <Typography.Title level={4} style={{ marginBottom: "12px" }}>

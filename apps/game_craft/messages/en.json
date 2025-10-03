@@ -302,6 +302,7 @@
     "capacity": "Total Capacity",
     "teamsCapacity": "Teams Total Capacity",
     "remainingCapacity": "Remaining",
+    "teamSizes": "Team Sizes",
     "requirements": "Requirements",
     "type": {
       "course": "Course",

@@ -302,6 +302,7 @@
     "capacity": "ظرفیت کل",
     "teamsCapacity": "ظرفیت کل تیم ها",
     "remainingCapacity": "باقی مانده",
+    "teamSizes": "اندازه تیم ها",
     "requirements": "پیش نیاز ها",
     "type": {
       "course": "دوره",
