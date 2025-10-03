@@ -26,6 +26,11 @@ export const payTeamThunk = createAppAsyncThunk(
       return { teamId };
     } catch (err) {
       console.log(err);
+      if (err.status == 403)
+        return rejectWithValue({
+          code: err.status,
+          message: "تنها سرگروه مجاز به پرداخت میباشد",
+        });
       return rejectWithValue({
         code: err.response?.status ?? 500,
         message: "پرداخت ناموفق بود",
