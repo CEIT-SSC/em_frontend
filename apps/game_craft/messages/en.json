@@ -300,6 +300,7 @@
     "noOfflineWorkshops": "No in-person workshops are currently available",
     "viewDetails": "View Details",
     "capacity": "Total Capacity",
+    "teamsCapacity": "Teams Total Capacity",
     "remainingCapacity": "Remaining",
     "requirements": "Requirements",
     "type": {
