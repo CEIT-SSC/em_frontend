@@ -62,7 +62,7 @@ export function CompetitionCard({
   const { isAuthenticated } = useAuth();
   const { token } = useToken();
 
-  const { data: teams, loading, error } = useAppSelector((s) => s.teams);
+  const { data: teams } = useAppSelector((s) => s.teams);
 
   if (
     dashboardMode &&
@@ -181,7 +181,6 @@ export function CompetitionCard({
             flexDirection: "column",
           },
         }}
-        hoverable
       >
         {/* Header Image with Stripes */}
         <div

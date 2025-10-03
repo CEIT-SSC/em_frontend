@@ -15,7 +15,7 @@ interface TeamMemberCardProps {
 
 export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
   isHead = false,
-  name = "Mahdi Haeri",
+  name = "",
   avatar = "svg/avatar-1.svg",
 }) => {
   const { token } = useToken();
