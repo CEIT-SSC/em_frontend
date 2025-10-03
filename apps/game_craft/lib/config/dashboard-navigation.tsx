@@ -24,10 +24,10 @@ export const useDashboardNavigations = (): DashboardNavigationItem[] => {
       name: t("event"),
       route: `/dashboard/events`,
     },
-    // {
-    //   name: t("teamStatus.label"),
-    //   route: `/${locale}/dashboard/team-status`,
-    // },
+    {
+      name: t("teamStatus.label"),
+      route: `/dashboard/team-status`,
+    },
     // {
     //   name: t("games.label"),
     //   route: `/${locale}/dashboard/games`,

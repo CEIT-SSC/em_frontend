@@ -1,7 +1,6 @@
 "use client";
 
 import { Flex, theme, Typography, Spin, Alert } from "antd";
-import Wave from "../../common/Wave";
 import { CompetitionsGrid } from "./CompetitionsGrid";
 import { useTranslations } from "next-intl";
 import { useResponsive } from "../../../lib/hooks/useResponsive";

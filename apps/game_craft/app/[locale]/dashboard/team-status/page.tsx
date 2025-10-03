@@ -20,12 +20,12 @@ export default function TeamStatusPage() {
         padding: token.padding,
       }}
     >
-      <Typography.Title
+      {/* <Typography.Title
         level={3}
         style={{ margin: 0, fontWeight: 900, color: token.colorPrimary }}
       >
         {t("teamName")}
-      </Typography.Title>
+      </Typography.Title> */}
       <TeamMemberContainer />
     </Flex>
   );

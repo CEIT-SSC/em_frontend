@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { ItemType } from "@ssc/core";
-import { use, useMemo, useState } from "react";
+import { useState } from "react";
 import {
   Card,
   Typography,
@@ -24,10 +24,6 @@ import {
   itemInCartSelector,
 } from "lib/store/cart/cart.selectors";
 // import { useIscompetitionPurchased } from "lib/hooks/usePurchases";
-import {
-  addItemToCartThunk,
-  removeItemFromCartThunk,
-} from "lib/store/cart/cart.thunk";
 import { useAuth } from "lib/hooks/useAuth";
 import { digitsToHindi } from "@ssc/utils";
 import { GroupCompetitionDetails } from "@ssc/core/lib/types/api/competitions/competitions";
@@ -55,7 +51,6 @@ export function CompetitionCard({
 }: Props) {
   const t = useTranslations();
   const [showModal, setShowModal] = useState(false);
-  const [showGroupModal, setGroupModal] = useState(false);
   const { formatNumberToMoney } = useFormatter();
   const dispatch = useAppDispatch();
   const itemInCart = useAppSelector(
@@ -67,7 +62,7 @@ export function CompetitionCard({
   const { isAuthenticated } = useAuth();
   const { token } = useToken();
 
-  const { data: teams, loading, error } = useAppSelector((s) => s.teams);
+  const { data: teams } = useAppSelector((s) => s.teams);
 
   if (
     dashboardMode &&
@@ -109,7 +104,26 @@ export function CompetitionCard({
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
     });
+  };
+
+  // Format time only (for end time when it's same day)
+  const formatTime = (dateTimeString: string) => {
+    const date = new Date(dateTimeString);
+    return date.toLocaleString("fa-IR", {
+      timeZone: "UTC",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  // Check if start and end dates are on the same day
+  const isSameDay = (startTime: string, endTime: string) => {
+    const start = new Date(startTime);
+    const end = new Date(endTime);
+    return start.toDateString() === end.toDateString();
   };
 
   // Format date time range
@@ -118,9 +132,17 @@ export function CompetitionCard({
       return formatDateTime(competition.start_datetime);
     }
 
-    return `${formatDateTime(competition.start_datetime)} - ${formatDateTime(
-      competition.end_datetime
-    )}`;
+    if (isSameDay(competition.start_datetime, competition.end_datetime)) {
+      // Same day: show date + start time - end time
+      return `${formatDateTime(competition.start_datetime)} - ${formatTime(
+        competition.end_datetime
+      )}`;
+    } else {
+      // Different days: show full start date/time - full end date/time
+      return `${formatDateTime(competition.start_datetime)} - ${formatDateTime(
+        competition.end_datetime
+      )}`;
+    }
   };
 
   const titleIsRTL = isRTL(competition.title);
@@ -159,7 +181,6 @@ export function CompetitionCard({
             flexDirection: "column",
           },
         }}
-        hoverable
       >
         {/* Header Image with Stripes */}
         <div
@@ -288,7 +309,7 @@ export function CompetitionCard({
                   fontSize: "16px",
                 }}
               >
-                {t("workshop.capacity") +
+                {t("workshop.teamsCapacity") +
                   ": " +
                   digitsToHindi(competition.max_teams)}
               </Typography.Title>
@@ -364,7 +385,13 @@ export function CompetitionCard({
               </AntButton>
             )} */}
 
-              <GroupModal isRTL={titleIsRTL} competitionId={competition.id} />
+              <GroupModal
+                isRTL={titleIsRTL}
+                competitionId={competition.id}
+                minTeamSize={competition.min_group_size}
+                maxTeamSize={competition.max_group_size}
+                disable={!competition.is_active}
+              />
             </Flex>
           </Flex>
         </Flex>
@@ -409,6 +436,9 @@ export function CompetitionCard({
             key="group-modal"
             isRTL={titleIsRTL}
             competitionId={competition.id}
+            minTeamSize={competition.min_group_size}
+            maxTeamSize={competition.max_group_size}
+            disable={!competition.is_active}
           />,
         ]}
         width={700}

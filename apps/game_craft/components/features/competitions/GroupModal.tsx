@@ -19,17 +19,20 @@ import {
 interface Props {
   isRTL: boolean;
   competitionId: number;
+  minTeamSize: number;
+  maxTeamSize: number;
+  disable: boolean;
   registered?: (isRegistered: boolean) => void;
 }
 
-const isTeamSizeValid = (members: any[]) => {
-  const teamSize = members.length;
-  if (teamSize < 2) return -1;
-  if (teamSize > 3) return 1;
-  return 0;
-};
-
-const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
+const GroupModal = ({
+  isRTL,
+  competitionId,
+  registered,
+  minTeamSize,
+  maxTeamSize,
+  disable,
+}: Props) => {
   const [showGroupModal, setShowGroupModal] = useState(false);
   const t = useTranslations();
   const { isAuthenticated } = useAuth();
@@ -39,6 +42,11 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
 
   const dispatch = useAppDispatch();
   const { data: teams, loading, error } = useAppSelector((s) => s.teams);
+
+  const isTeamSizeValid = (teamSize: number) => {
+    if (teamSize < minTeamSize || teamSize > maxTeamSize) return false;
+    return true;
+  };
 
   const isRegistered = !!teams.find(
     (team) =>
@@ -121,8 +129,9 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
     setFilteredTeams(
       teams.filter(
         (team) =>
-          !team.group_competition_details ||
-          team.group_competition_details.id == competitionId
+          isTeamSizeValid(team.memberships.length) &&
+          (!team.group_competition_details ||
+            team.group_competition_details.id == competitionId)
       )
     );
   }, [isAuthenticated, showGroupModal]);
@@ -181,7 +190,9 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
     } else {
       return filteredTeams.length === 0 ? (
         <Alert
-          message={"هنوز تیمی ندارید!"}
+          message={
+            "هنوز تیم واجد شرایطی که در مسابقه ای شرکت نکرده باشد ندارید!"
+          }
           description={
             "میتوانید با مراجعه به داشبورد سایت انجمن (ceit-ssc.ir) تیم خود را بسازید"
           }
@@ -246,21 +257,10 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
               ) : (
                 <Button
                   type="primary"
-                  onClick={() =>
-                    isTeamSizeValid(team.memberships) === 0 &&
-                    handleRegisterCompetition(team)
-                  }
-                  disabled={
-                    !!team.group_competition_details ||
-                    isTeamSizeValid(team.memberships) !== 0
-                  }
+                  onClick={() => handleRegisterCompetition(team)}
                   icon={<HiPlus />}
                 >
-                  {isTeamSizeValid(team.memberships) < 0
-                    ? "تعداد اعضا کم است"
-                    : isTeamSizeValid(team.memberships) > 0
-                    ? "تعداد اعضای تیم بیش از حد مجاز است"
-                    : "ثبت تیم"}
+                  ثبت تیم
                 </Button>
               )}
             </Button>
@@ -279,7 +279,7 @@ const GroupModal = ({ isRTL, competitionId, registered }: Props) => {
         borderRadius: token.borderRadius,
         height: "36px",
       }}
-      disabled={!isAuthenticated || isRegistered}
+      disabled={!isAuthenticated || isRegistered || disable}
       icon={isRegistered ? <HiCheck /> : <HiPlus />}
     >
       {buttonText()}

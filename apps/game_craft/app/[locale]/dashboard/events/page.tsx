@@ -6,6 +6,7 @@ import { WorkshopCard } from "components/features/workshops/WorkshopCard";
 import { PresentationType } from "@ssc/core";
 import { usePurchases } from "lib/hooks/usePurchases";
 import { CompetitionsList } from "components/features/competitions/CompetitonsList";
+import { useResponsive } from "lib/hooks/useResponsive";
 
 const { useToken } = theme;
 
@@ -13,6 +14,7 @@ export default function EventsPage() {
   const { token } = useToken();
   const t = useTranslations("app");
   const { presentations, loading, error, isAuthenticated } = usePurchases();
+  const screen = useResponsive();
 
   // Filter presentations by type
   const workshops = presentations.filter(
@@ -109,18 +111,18 @@ export default function EventsPage() {
   return (
     <Flex
       vertical
-      align="center"
+      align="start"
       justify="center"
       style={{
         width: "100%",
-        padding: token.padding,
+        padding: screen.xs ? "2px" : token.padding,
       }}
       gap="large"
     >
       {/* Competition Section */}
       <Flex
         vertical
-        align="start"
+        align={screen.xs ? "center" : "start"}
         justify="center"
         style={{
           width: "100%",
@@ -139,7 +141,7 @@ export default function EventsPage() {
       {/* Workshops Section */}
       <Flex
         vertical
-        align="start"
+        align={screen.xs ? "center" : "start"}
         justify="center"
         style={{
           width: "100%",
@@ -158,7 +160,7 @@ export default function EventsPage() {
       {/* Talks Section */}
       <Flex
         vertical
-        align="start"
+        align={screen.xs ? "center" : "start"}
         justify="center"
         style={{
           width: "100%",
