@@ -110,10 +110,10 @@ export const TeamMemberContainer: React.FC = () => {
         />
       );
     } else {
-      return competitions.data.results.length === 0 ? (
+      return filteredTeams.length === 0 ? (
         <Alert
-          message={t("workshop.noWorkshops")}
-          description={t("workshop.noOnlineWorkshops")}
+          message={t("noTeams")}
+          description={t("noTeamsDescription")}
           type="info"
           showIcon
         />

@@ -377,7 +377,8 @@ const Page = () => {
             variant={ButtonVariant.PRIMARY}
             label={isSubmitting ? "در حال آپدیت..." : "ویرایش اطلاعات"}
             type="submit"
-            disable={isSubmitting}
+            disable={true}
+            // disable={isSubmitting}
             loading={isSubmitting}
           />
         </div>

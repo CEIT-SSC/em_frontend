@@ -194,7 +194,14 @@ const GroupModal = ({
             "هنوز تیم واجد شرایطی که در مسابقه ای شرکت نکرده باشد ندارید!"
           }
           description={
-            "میتوانید با مراجعه به داشبورد سایت انجمن (ceit-ssc.ir) تیم خود را بسازید"
+            <span>
+              با هر تیمی تنها در یک مسابقه میتوان شرکت نمود، با مراجعه به
+              داشبورد{" "}
+              <a href="https://ceit-ssc.ir/dashboard/teams" target="_blank">
+                سایت انجمن (ceit-ssc.ir)
+              </a>{" "}
+              میتوانید تیم جدیدی بسازید
+            </span>
           }
           type="info"
           showIcon
