@@ -370,18 +370,17 @@ const Page = () => {
           />
         </div>
 
-        <div className="flex justify-center py-6 md:px-32">
+        {/* <div className="flex justify-center py-6 md:px-32">
           <Button
             className=" w-full"
             size={ButtonSize.SMALL}
             variant={ButtonVariant.PRIMARY}
             label={isSubmitting ? "در حال آپدیت..." : "ویرایش اطلاعات"}
             type="submit"
-            disable={true}
-            // disable={isSubmitting}
+            disable={isSubmitting}
             loading={isSubmitting}
           />
-        </div>
+        </div> */}
       </form>
 
       <ImageCropModal

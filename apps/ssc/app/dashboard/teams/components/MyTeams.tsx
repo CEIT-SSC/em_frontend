@@ -44,6 +44,7 @@ const MyTeams = () => {
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
         onTeamCreated={fetchTeams}
+        teamNames={teams.map((team) => team.name)}
       />
     </>
   );

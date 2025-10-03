@@ -86,6 +86,7 @@ const Page = () => {
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
         onTeamCreated={fetchTeams}
+        teamNames={teamsList.map((team) => team.name)}
       />
     </>
   );

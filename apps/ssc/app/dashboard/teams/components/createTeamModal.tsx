@@ -19,6 +19,7 @@ interface CreateTeamModalProps {
   isOpen: boolean;
   onClose: () => void;
   onTeamCreated?: () => void;
+  teamNames: string[];
 }
 
 const emailSchema = z.object({
@@ -31,6 +32,7 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
   isOpen,
   onClose,
   onTeamCreated,
+  teamNames,
 }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [teamName, setTeamName] = useState("");
@@ -94,7 +96,13 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
         handleClose();
       } catch (error) {
         if (error.status === 400) {
-          toast.error("تیم با این نام قبلا ایجاد شده است");
+          console.log(error);
+          if (teamNames?.includes(teamName))
+            toast.error("تیم با این نام قبلا ایجاد شده است");
+          else
+            toast.error(
+              "همه ی اعضا با ایمیل وارد شده باید در سایت انجمن اکانت داشته باشند"
+            );
           return;
         }
         toast.error(error.response.data?.message || "خطا در ایجاد تیم");
