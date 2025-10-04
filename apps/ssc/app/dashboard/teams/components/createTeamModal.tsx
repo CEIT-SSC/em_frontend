@@ -95,16 +95,6 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
         onTeamCreated();
         handleClose();
       } catch (error) {
-        if (error.status === 400) {
-          console.log(error);
-          if (teamNames?.includes(teamName))
-            toast.error("تیم با این نام قبلا ایجاد شده است");
-          else
-            toast.error(
-              "همه ی اعضا با ایمیل وارد شده باید در سایت انجمن اکانت داشته باشند"
-            );
-          return;
-        }
         toast.error(error.response.data?.message || "خطا در ایجاد تیم");
       }
     }

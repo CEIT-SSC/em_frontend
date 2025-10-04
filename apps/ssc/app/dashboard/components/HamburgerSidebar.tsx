@@ -103,7 +103,7 @@ function SidebarContent({ user, onLinkClick }: SidebarContentProps) {
             className="w-32 h-32 rounded-full object-cover"
           />
           <h4 className="text-2xl/[150%] font-bold">{`${user.firstName} ${user.lastName}`}</h4>
-          <EditAccountButton />
+          {/* <EditAccountButton /> */}
         </div>
         <Tabs onTabClick={onLinkClick} />
       </div>
