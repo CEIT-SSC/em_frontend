@@ -103,8 +103,12 @@ const GroupModal = ({
         );
       case "awaiting_payment_confirmation":
         return (
-          <Button type="primary" disabled icon={<HiCash />}>
-            در حال پرداخت
+          <Button
+            type="primary"
+            icon={<HiCash />}
+            onClick={() => handlePayment(teamId)}
+          >
+            پرداخت
           </Button>
         );
       case "active":
