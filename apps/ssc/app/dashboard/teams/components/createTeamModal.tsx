@@ -101,7 +101,7 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
             toast.error("تیم با این نام قبلا ایجاد شده است");
           else
             toast.error(
-              "همه ی اعضا با ایمیل وارد شده باید در سایت انجمن اکانت داشته باشند"
+              "اعضا باید در سایت اکانت داشته باشند و نام تیم تکراری نباشد"
             );
           return;
         }
