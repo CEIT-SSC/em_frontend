@@ -50,7 +50,7 @@ const page = async () => {
           />
         </div> */}
       </div>
-      <Link
+      {/* <Link
         href={"/dashboard/edit-account"}
         className="flex justify-center py-6 md:px-32"
       >
@@ -59,7 +59,7 @@ const page = async () => {
           size={ButtonSize.SMALL}
           label="ویرایش اطلاعات"
         />
-      </Link>
+      </Link> */}
     </div>
   );
 };
