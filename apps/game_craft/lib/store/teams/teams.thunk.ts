@@ -63,7 +63,7 @@ export const registerTeamThunk = createAppAsyncThunk(
       if (err.response?.status === 400) {
         return rejectWithValue({
           code: 400,
-          message: "شما قبلا در این مسابقه ثبت نام کرده اید",
+          message: err.response?.data?.message || "خطای نامشخص",
         });
       }
       return rejectWithValue({ code: 500, message: "خطای ناشناخته" });
