@@ -26,9 +26,9 @@ export const sponsors: Sponsor[] = [
         tier: "gold"
     },
     {
-        id: "snappFood",
-        logo: "/assets/images/sponsors/snappfood.png",
-        link: "https://snappfood.ir",
+        id: "blackcubegames",
+        logo: "/assets/images/sponsors/black-cube.png",
+        link: "https://blackcubegames.com/",
         tier: "gold"
     },
     {
