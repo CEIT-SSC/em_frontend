@@ -1,0 +1,263 @@
+{
+  "app": {
+    "name": "LevelUp",
+    "logo": {
+      "game": "Level",
+      "craft": "Up"
+    },
+    "mainNavigation": {
+      "home": "Home",
+      "news": "News",
+      "faq": "FAQ",
+      "staffs": "Our Team",
+      "gallery": "Gallery",
+      "sponsors": "Sponsors",
+      "dashboard": "Dashboard"
+    },
+    "sponsors": {
+      "title": "Sponsors",
+      "noSponsors": "No sponsors yet.",
+      "visitWebsite": "Show website!",
+      "Liara": {
+        "name": "Liara",
+        "description": "Liara makes it easy to deploy any software!"
+      }
+    },
+    "staffs": {
+      "title": "Our Team",
+      "organizingTeam": {
+        "title": "Organizing Team"
+      },
+      "technicalTeam": {
+        "title": "Technical Team"
+      },
+      "scientificTeam": {
+        "title": "Scientific Team"
+      },
+      "marketingTeam": {
+        "title": "Marketing Team"
+      },
+      "contentCreationTeam": {
+        "title": "Content Creation Team"
+      },
+      "graphicTeam": {
+        "title": "Graphic Design Team"
+      },
+      "financeTeam": {
+        "title": "Finance Team"
+      },
+      "operationsTeam": {
+        "title": "Operations Team"
+      },
+      "decorationTeam": {
+        "title": "Decoration Team"
+      }
+    },
+    "dashboard": {
+      "event": "Events",
+      "events": {
+        "title": "Events & Workshops",
+        "competitions": "My Competitions",
+        "workshops": "My Workshops",
+        "talks": "My Talks",
+        "loading": "Loading...",
+        "empty": "You haven't enrolled in any events",
+        "emptyDescription": "Browse available events and enroll to expand your skills"
+      },
+      "teamStatus": {
+        "label": "Teams Status",
+        "teamName": "Team Name",
+        "teamMembers": "Team Members",
+        "addTeammate": "Add Teammate",
+        "noTeams": "You haven't enrolled in any competitions",
+        "noTeamsDescription": "There is no such a team that enrolled in a competition for you"
+      },
+      "games": {
+        "label": "Games",
+        "upload": "Upload",
+        "gameName": "Game Name",
+        "gameLink": "Game Link",
+        "gameDescription": "Game Description",
+        "submitGame": "Submit Game",
+        "preview": "Preview",
+        "download": "Download"
+      },
+      "profile": {
+        "label": "Profile",
+        "profileImage": "Profile Image",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phoneNumber": "Phone Number",
+        "updateProfile": "Update Profile",
+        "uploadImage": "Upload Image",
+        "changeImage": "Change Image",
+        "emailLocked": "Email cannot be changed",
+        "personalInformation": "Personal Information",
+        "profilePicture": "Profile Picture",
+        "saveChanges": "Save Changes",
+        "cancel": "Cancel",
+        "profileUpdated": "Profile updated successfully",
+        "invalidImage": "Please upload a valid image file",
+        "maxFileSize": "File size should not exceed 5MB"
+      },
+      "shoppingBag": "Shopping Cart",
+      "onlineAccount": {
+        "label": "Online Account",
+        "skyroom": "Skyroom Account",
+        "description": "",
+        "username": "Username",
+        "password": "Password"
+      }
+    },
+    "pages": {
+      "main": "LevelUp",
+      "home": "Home",
+      "dashboard": "Dashboard",
+      "notFound": "Page Not Found",
+      "login": "Login",
+      "signUp": "Sign Up",
+      "forgotPassword": "Forgot Password"
+    },
+    "auth": {
+      "login": "Login",
+      "signUp": "Sign Up",
+      "logout": "Logout",
+      "register": "Register",
+      "email": "Email",
+      "password": "Password",
+      "displayName": "Display Name",
+      "phoneNumber": "Phone Number",
+      "forgotPassword": "Forgot Password?",
+      "doNotHaveAccount": "Don't have an account?",
+      "alreadyHaveAccount": "Already have an account?",
+      "resetPassword": "Reset Password",
+      "resetPasswordInstructions": "Enter your email address and we'll send you instructions to reset your password.",
+      "sendResetLink": "Send Reset Link",
+      "backToLogin": "Back to Login",
+      "resetLinkSent": "Reset link has been sent to your email",
+      "resetLinkError": "Failed to send reset link. Please try again.",
+      "loginWithSSC": "Login with SSC",
+      "loginWithEmail": "Login with Email",
+      "or": "OR",
+      "invalidCredentials": "Invalid email or password",
+      "loginSuccessful": "Login successful! Redirecting...",
+      "loginFailed": "Login failed. Please try again.",
+      "ssoLoginFailed": "SSO login failed. Please try again."
+    },
+    "intro": {
+      "title": "LevelUp",
+      "subtitle": "The Level Up Educational Event",
+      "description": "LevelUp is an educational event designed to empower students and enthusiasts through hands-on learning and collaboration. Organized by Amirkabir University of Technology, this year's event offers a dynamic blend of courses, workshops, and competitions focused on creativity, technology, and innovation. Participants will have the opportunity to learn from experienced mentors, develop practical skills, and showcase their talents in engaging challenges — all within a supportive and inspiring community environment."
+    },
+    "aboutUs": {
+      "title": "About Us",
+      "description": "The Computer Science Student Association at Amirkabir University is an independent organization dedicated to scientific and educational activities. Each year, the association hosts numerous academic and educational events at university, national, and international levels, attracting a large audience. Notable events include ACM competitions, Linux festivals, DMC data mining competitions, and AAISS artificial intelligence seminars.\nOne of the association's key approaches is strengthening team spirit and large-scale collaboration, helping students gain valuable experience for their professional lives. This event is no exception, with many students actively participating in the association's initiatives."
+    },
+    "footer": {
+      "autGameCraft": "Amirkabir Level Up",
+      "copyRight": "© 2025 LevelUp. All rights reserved."
+    },
+    "faq": {
+    "title": "Frequently Asked Questions",
+    "competitionConditions": "Course and Workshop Participation",
+    "competitionParticipate": {
+      "title": "How can I register for courses and workshops?",
+      "content": "To participate in LevelUp courses or workshops, visit levelup.ceit-ssc.ir, browse the available sessions, and complete the payment for your chosen course. After payment, the purchased course will appear in your dashboard under 'Purchased Courses'."
+    },
+    "teamsConditions": {
+      "title": "How can I access my purchased courses?",
+      "content": "Once you've registered for a course or presentation, go to your dashboard on the LevelUp website and open the 'My Courses' section. There you can view all the courses and workshops you’ve enrolled in, along with access details for each."
+    },
+    "howToParticipate": {
+      "title": "How do I join online classes?",
+      "content": "For online classes, your Skyroom username and password are displayed in the 'Online Account' section of your dashboard. You can use these credentials to join your class sessions directly through the Skyroom platform."
+    },
+    "competitionRules": {
+      "title": "Workshop and Course Rules",
+      "content": "Please check each course’s schedule before attending. Participants are expected to join sessions on time, whether in-person or online. Sharing login credentials or class links with others is not allowed. If you face any issues accessing a session, please contact event support."
+    }
+  },
+    "buttons": {
+      "staffs": "Our Team",
+      "learnMore": "Learn More",
+      "watchNow": "Watch Now",
+      "registerNow": "Register Now"
+    }
+  },
+  "button": {
+    "submit": "Submit",
+    "logout": "Logout",
+    "login": "Login",
+    "signup": "Sign Up",
+    "cancel": "Cancel",
+    "events": "Events",
+    "teamStatus": "Teams Status",
+    "games": "Games",
+    "shoppingBag": "Shopping Cart",
+    "staffs": "Our Team",
+    "backToHome": "Back to Home",
+    "sendResetLink": "Send Reset Link",
+    "backToLogin": "Back to Login"
+  },
+  "error": {
+    "404": "Page Not Found",
+    "500": "Internal Server Error"
+  },
+  "workshop": {
+    "loginToContinue": "Login to continue",
+    "workshops": "Workshops",
+    "presentations": "Presentations",
+    "competitions": "Competitions",
+    "price": "Price",
+    "per_member": "Per Each Member",
+    "description": "Description",
+    "schedule": "Schedule",
+    "location": "Location",
+    "inPerson": "In Person",
+    "online": "Online",
+    "addToCart": "Add to Cart",
+    "removeFromCart": "Remove from Cart",
+    "enroll": "Enroll",
+    "presenters": "Presenters",
+    "unknownPresenter": "Unknown Presenter",
+    "noPresenters": "No presenters",
+    "andMore": "and {count} more",
+    "onlineWorkshops": "Online Workshops",
+    "onlineTalks": "Online Talks",
+    "onlineLink": "Presentation Link",
+    "offlineWorkshops": "In-Person Workshops",
+    "free": "Free",
+    "error": "Failed to load workshops",
+    "noWorkshops": "No workshops available",
+    "noOnlineWorkshops": "No online workshops are currently available",
+    "noOfflineWorkshops": "No in-person workshops are currently available",
+    "viewDetails": "View Details",
+    "capacity": "Total Capacity",
+    "teamsCapacity": "Teams Total Capacity",
+    "remainingCapacity": "Remaining",
+    "teamSizes": "Team Sizes",
+    "requirements": "Requirements",
+    "type": {
+      "course": "Course",
+      "talk": "Talk",
+      "workshop": "Workshop"
+    },
+    "level": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    }
+  },
+  "common": {
+    "currency": "Toman",
+    "retry": "Retry",
+    "close": "Close"
+  },
+  "notFound": {
+    "title": "Oops! Page Not Found",
+    "description": "It looks like the page you're looking for doesn't exist. Mario couldn't find it in any of the castle levels!",
+    "goHome": "Go Home",
+    "goBack": "Go Back"
+  }
+}
