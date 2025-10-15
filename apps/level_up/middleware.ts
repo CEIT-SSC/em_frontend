@@ -1,0 +1,41 @@
+import { withAuth } from "next-auth/middleware";
+import createMiddleware from "next-intl/middleware";
+import { routing } from "./lib/routing";
+
+const intlMiddleware = createMiddleware(routing);
+
+// Protected routes that require authentication
+const protectedRoutes = ["/dashboard", "/profile", "/admin"];
+
+function isProtectedRoute(pathname: string) {
+  const pathWithoutLocale = pathname.replace(/^\/(fa|en)/, "") || "/";
+  return protectedRoutes.some((route) => pathWithoutLocale.startsWith(route));
+}
+
+export default withAuth(
+  function middleware(req) {
+    return intlMiddleware(req);
+  },
+  {
+    callbacks: {
+      authorized: ({ token, req }) => {
+        const { pathname } = req.nextUrl;
+
+        if (!isProtectedRoute(pathname)) {
+          return true;
+        }
+
+        return !!token;
+      },
+    },
+    pages: {
+      signIn: "/fa/",
+    },
+  }
+);
+
+export const config = {
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|images|sound|assets|public|svg|.*\\.cur|.*\\.lottie|.*\\.svg|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.webp|.*\\.ico|.*\\.css|.*\\.js|.*\\.woff|.*\\.woff2|.*\\.ttf|.*\\.otf|not-found|error).*)",
+  ],
+};
