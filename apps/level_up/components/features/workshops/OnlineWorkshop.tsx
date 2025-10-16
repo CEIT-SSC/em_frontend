@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState } from "react";
 import { PresentationsList, PresentationType } from "@ssc/core";
 import { clientApi } from "lib/api/client/clientApi";
 import { eventId } from "lib/utils/constants";
+import {customColors} from "../../../config/colors";
 
 const { useToken } = theme;
 
@@ -18,7 +19,7 @@ interface OnlineWorkshopProps {
 }
 
 export function OnlineWorkshop({
-  padding = "3rem 2rem",
+  padding = "2rem 2rem",
   backgroundColor,
 }: OnlineWorkshopProps) {
   const { token } = useToken();
@@ -101,7 +102,7 @@ export function OnlineWorkshop({
         backgroundColor: backgroundColor,
       }}
     >
-      <Wave width="100%" height="auto" fill="#4F7B79" />
+      <Wave width="100%" height="auto" fill={customColors.colorOfflineWorkshop} />
       <Flex
         vertical
         align="center"
@@ -115,7 +116,7 @@ export function OnlineWorkshop({
         <Typography.Title
           level={screens.md ? 1 : 2}
           style={{
-            margin: 0,
+            marginTop: "2rem",
             fontWeight: 900,
             color: "white",
             textAlign: "center",
@@ -124,7 +125,14 @@ export function OnlineWorkshop({
           {t("workshop.presentations")}
         </Typography.Title>
 
-        {content}
+        <Flex
+            style={{
+            marginBottom: "2rem",
+          }}
+        >
+          {content}
+        </Flex>
+
       </Flex>
       <Wave
         width="100%"

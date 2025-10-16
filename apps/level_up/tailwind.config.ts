@@ -17,36 +17,32 @@ const config: Config = {
         "sf-pro": ["SF Pro Rounded", "sans-serif"],
       },
       colors: {
-        // Your custom brand colors
-        primary: "#0056D2", // Bright blue
-        action: "#00C897", // Fresh green accent
-        "offline-workshop": "#4E6E81", // Muted teal
+        primary: "#4B164C",
+        action: "#E83E8C",
+        "offline-workshop": "#5C4D7D",
 
-        // Ant Design theme colors extracted from provider
-        "antd-primary": "#0056D2",
-        "antd-primary-hover": "#1E6DEB",
-        "antd-primary-active": "#0041A8",
-        "antd-success": "#00C897",
-        "antd-warning": "#FFC93C",
-        "antd-error": "#FF5A5F",
+        "antd-primary": "#4B164C",
+        "antd-primary-hover": "#662566",
+        "antd-primary-active": "#351034",
+        "antd-success": "#22C55E",
+        "antd-warning": "#FACC15",
+        "antd-error": "#F43F5E",
 
-        // Light theme colors
-        "antd-bg-base": "#ffffff",
-        "antd-bg-container": "#f9fafb",
-        "antd-bg-elevated": "#ffffff",
-        "antd-text": "#1a1a1a",
-        "antd-text-secondary": "#4b5563",
-        "antd-layout-header": "#0056D2",
-        "antd-layout-body": "#f4f6f8",
+        "antd-bg-base": "#FFFFFF",
+        "antd-bg-container": "#F9F7FB",
+        "antd-bg-elevated": "#FFFFFF",
+        "antd-text": "#1E1B1B",
+        "antd-text-secondary": "#575369",
+        "antd-layout-header": "#4B164C",
+        "antd-layout-body": "#F6F4F9",
 
-        // Dark theme colors
-        "antd-dark-bg-base": "#0F172A",
-        "antd-dark-bg-container": "#1E293B",
-        "antd-dark-bg-elevated": "#27364A",
+        "antd-dark-bg-base": "#130E15",
+        "antd-dark-bg-container": "#1F1825",
+        "antd-dark-bg-elevated": "#2B1F36",
         "antd-dark-text": "#F8FAFC",
-        "antd-dark-text-secondary": "#CBD5E1",
-        "antd-dark-layout-header": "#0056D2",
-        "antd-dark-layout-body": "#0F172A",
+        "antd-dark-text-secondary": "#A1A1AA",
+        "antd-dark-layout-header": "#4B164C",
+        "antd-dark-layout-body": "#130E15",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -8,6 +8,8 @@ import { useEffect, useMemo, useState } from "react";
 import { PresentationsList, PresentationType } from "@ssc/core";
 import { clientApi } from "lib/api/client/clientApi";
 import { eventId } from "lib/utils/constants";
+import Wave from "../../common/Wave";
+import {customColors} from "../../../config/colors";
 
 interface OfflineWorkshopProps {
   padding?: string;
@@ -15,7 +17,7 @@ interface OfflineWorkshopProps {
 }
 
 export function OfflineWorkshop({
-  padding = "3rem 2rem",
+  padding = "2rem 2rem",
   backgroundColor,
 }: OfflineWorkshopProps) {
   const screens = useResponsive();
