@@ -1,8 +1,9 @@
 // Custom brand colors for the application
 export const customColors = {
-  colorAction: "#01B582", // Brand action color
-  colorPrimary: "#3c3a7d", // Primary brand color
-  colorOfflineWorkshop: "#4F7B79", // Offline workshop background color
+  colorAction: "#FF6B35",  // Bright orange-red action
+  colorPrimary: "#1E1E5A", // Deep royal navy
+  colorOfflineWorkshop: "#3C4F76", // Cool blue-gray
 } as const;
+
 
 export type CustomColors = typeof customColors;

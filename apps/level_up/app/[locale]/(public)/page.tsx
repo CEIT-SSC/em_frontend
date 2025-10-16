@@ -1,9 +1,7 @@
 "use client";
 
 import { Flex, theme } from "antd";
-import { GameCraftTimeline } from "../../../components/features/Timeline";
 import { GameCraftIntro } from "../../../components/features/home/GameCraftIntro";
-import { Prizes } from "../../../components/features/home/Prizes";
 import { AboutUs } from "../../../components/features/home/AboutUs";
 import { OfflineWorkshop } from "../../../components/features/workshops/OfflineWorkshop";
 import { OnlineWorkshop } from "../../../components/features/workshops/OnlineWorkshop";
@@ -47,7 +45,6 @@ export default function HomePage() {
         {/*<Prizes padding={homeViewPadding} backgroundColor={token.colorBgBase} />*/}
 
         {/* Workshop Sections - Matching React order exactly */}
-        <div/>
         <Wave
           width="100%"
           height="auto"
@@ -70,10 +67,10 @@ export default function HomePage() {
           backgroundColor={token.colorPrimary}
         />
 
-        {/* Sponsors Section */}
+         {/*Sponsors Section*/}
         {/*<Sponsors*/}
         {/*  padding={homeViewPadding}*/}
-        {/*  backgroundColor={token.colorPrimary}*/}
+        {/*  backgroundColor={customColors.colorOfflineWorkshop}*/}
         {/*/>*/}
         <Wave width="100%" height="auto" fill={token.colorPrimary} />
 

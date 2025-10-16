@@ -31,10 +31,10 @@ const PaymentCallbackContent = () => {
     });
   }, [searchParams]);
 
-  const handleRedirectToGameCraft = () => {
-    const gamecraftUrl =
-      process.env.NEXT_PUBLIC_GAMECRAFT_URL || "https://gamecraft.ir";
-    window.location.href = gamecraftUrl;
+  const handleRedirect = () => {
+    const redirectUrl =
+      process.env.NEXT_PUBLIC_API_URL || "https://ceit-ssc.ir";
+    window.location.href = redirectUrl;
   };
 
   const { success, message, orderId } = paymentState;
@@ -86,9 +86,9 @@ const PaymentCallbackContent = () => {
         <Button
           variant={ButtonVariant.PRIMARY}
           size={ButtonSize.LARGE}
-          label="بازگشت به گیم کرفت"
+          label="بازگشت به خانه"
           suffixIcon={HiArrowLeft}
-          onClick={handleRedirectToGameCraft}
+          onClick={handleRedirect}
           className="w-full justify-center"
         />
       </div>

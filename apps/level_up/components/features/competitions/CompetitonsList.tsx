@@ -18,7 +18,7 @@ interface Props {
 }
 
 export function CompetitionsList({
-  padding = "3rem 2rem",
+  padding = "2rem 2rem",
   backgroundColor,
   dashboardMode = false,
 }: Props) {
