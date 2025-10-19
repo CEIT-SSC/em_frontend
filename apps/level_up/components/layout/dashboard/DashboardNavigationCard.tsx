@@ -86,11 +86,11 @@ export function DashboardNavigationCard({
               }}
             >
               <Image
-                src="/mario/giphy-1.gif"
+                src="/images/user.png"
                 width="100%"
                 height="auto"
                 alt="user-avatar"
-                fallback="/mario/giphy-1.gif"
+                fallback="/images/user.png"
               />
             </Flex>
             <DotLottieReact
