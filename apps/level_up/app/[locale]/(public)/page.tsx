@@ -37,7 +37,7 @@ export default function HomePage() {
         />
         {/*<Wave width="100%" height="auto" fill={token.colorPrimary} />*/}
 
-         {/*Timeline and Prizes Section*/}
+        {/*Timeline and Prizes Section*/}
         {/*<GameCraftTimeline*/}
         {/*  padding={homeViewPadding}*/}
         {/*  backgroundColor={token.colorBgBase}*/}
@@ -51,7 +51,8 @@ export default function HomePage() {
           fill={customColors.colorOfflineWorkshop}
           style={{
             transform: "scaleY(-1) translateY(-2px)",
-            marginTop: "-60px",
+            marginTop: "-4px",
+            backgroundColor: token.colorPrimary,
           }}
         />
         <OfflineWorkshop
@@ -67,7 +68,7 @@ export default function HomePage() {
           backgroundColor={token.colorPrimary}
         />
 
-         {/*Sponsors Section*/}
+        {/*Sponsors Section*/}
         {/*<Sponsors*/}
         {/*  padding={homeViewPadding}*/}
         {/*  backgroundColor={customColors.colorOfflineWorkshop}*/}
