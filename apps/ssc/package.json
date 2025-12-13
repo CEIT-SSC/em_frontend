@@ -19,7 +19,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",
     "hamburger-react": "^2.5.2",
-    "next": "15.3.6",
+    "next": "15.3.8",
     "next-auth": "^4.24.11",
     "next-nprogress-bar": "^2.4.7",
     "react": "^19.0.0",
