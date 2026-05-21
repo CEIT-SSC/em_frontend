@@ -1,28 +1,49 @@
 # ---- build stage ----
 FROM node:20-alpine AS builder
 WORKDIR /repo
-RUN corepack enable
 
-# 1) install workspace deps
+# Disable Corepack entirely to avoid Corepack fetching failures
+ENV COREPACK_ENABLE=0
+
+# Configure npm to use Runflare mirror
+RUN npm config set registry https://mirror-npm.runflare.com && \
+    npm config set strict-ssl false
+
+# Install pnpm globally using npm (this bypasses Corepack entirely)
+RUN npm install -g pnpm@9.0.0
+
+# Copy workspace configuration files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json tsconfig.json ./
+
+# Copy source directories
 COPY apps ./apps
 COPY packages ./packages
+
+# Configure pnpm explicitly
+RUN pnpm config set registry https://mirror-npm.runflare.com && \
+    pnpm config set strict-ssl false
+
+# Install dependencies
 RUN pnpm install --frozen-lockfile
 
-# 2) build the Next.js site
+# Build the Next.js applications
 RUN pnpm build
 
 # ---- run stage ----
-FROM node:20-alpine
+FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
+ENV COREPACK_ENABLE=0
 
-# 1) Enable Corepack and turn the stub into a real pnpm install
-RUN corepack enable && corepack prepare pnpm@8 --activate
+# Configure npm & install pnpm globally in runner stage too
+RUN npm config set registry https://mirror-npm.runflare.com && \
+    npm config set strict-ssl false && \
+    npm install -g pnpm@9.0.0
 
-# 2) Copy the build output (+ node_modules tree) produced in the builder stage
+# Copy everything from builder
 COPY --from=builder /repo .
 
-# 3) Start only the Next.js app (CMD is overridden in docker compose)
 EXPOSE 3000
-CMD ["pnpm", "-F", "web", "start"]
+
+# Default command (overridden by docker-compose)
+CMD ["pnpm", "start"]
