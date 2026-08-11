@@ -9,7 +9,7 @@ RUN npm config set registry https://mirror-npm.runflare.com && \
     npm install --global pnpm@9.0.0
 
 FROM base AS dependencies
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/game_craft/package.json ./apps/game_craft/package.json
 COPY apps/level_up/package.json ./apps/level_up/package.json
 COPY apps/ssc/package.json ./apps/ssc/package.json

@@ -19,7 +19,7 @@ FROM base AS dependencies
 
 # Install only after copying workspace manifests. The layer is rebuilt only
 # when a dependency or workspace definition changes.
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/game_craft/package.json ./apps/game_craft/package.json
 COPY apps/level_up/package.json ./apps/level_up/package.json
 COPY apps/ssc/package.json ./apps/ssc/package.json
