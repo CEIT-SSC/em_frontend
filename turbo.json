@@ -7,6 +7,9 @@
       "dependsOn": [
         "^build"
       ],
+      "env": [
+        "GAME_CRAFT_SSC_EVENT_ID"
+      ],
       "outputs": [
         ".next/**",
         "!.next/cache/**",
