@@ -1,28 +1,68 @@
-# ---- build stage ----
-FROM node:20-alpine AS builder
+# syntax=docker/dockerfile:1.7
+
+FROM node:20-alpine AS base
+
 WORKDIR /repo
-RUN corepack enable
 
-# 1) install workspace deps
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json tsconfig.json ./
-COPY apps ./apps
+ENV COREPACK_ENABLE=0 \
+    PNPM_HOME=/pnpm \
+    PATH=/pnpm:$PATH
+
+# Keep the package manager in a shared base layer. Source-code changes never
+# invalidate this layer.
+RUN npm config set registry https://mirror-npm.runflare.com && \
+    npm config set strict-ssl false && \
+    npm install --global pnpm@9.0.0
+
+
+FROM base AS dependencies
+
+# Install only after copying workspace manifests. The layer is rebuilt only
+# when a dependency or workspace definition changes.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+COPY apps/game_craft/package.json ./apps/game_craft/package.json
+COPY apps/level_up/package.json ./apps/level_up/package.json
+COPY apps/ssc/package.json ./apps/ssc/package.json
+COPY packages/core/package.json ./packages/core/package.json
+COPY packages/tailwind-config/package.json ./packages/tailwind-config/package.json
+COPY packages/ui/package.json ./packages/ui/package.json
+COPY packages/utils/package.json ./packages/utils/package.json
+
+RUN --mount=type=cache,id=frontend-pnpm-store,target=/pnpm/store,sharing=locked \
+    pnpm config set store-dir /pnpm/store && \
+    pnpm config set package-import-method copy && \
+    pnpm install --frozen-lockfile
+
+
+FROM dependencies AS builder
+
+# Defaults keep a direct `docker build em_frontend` useful. Compose overrides
+# these values for the other applications.
+ARG APP_PATH=apps/ssc
+ARG APP_FILTER=@ssc/web
+
+COPY turbo.json tsconfig.json ./
 COPY packages ./packages
-RUN pnpm install --frozen-lockfile
+COPY ${APP_PATH} ./${APP_PATH}
 
-# 2) build the Next.js site
-RUN pnpm build
+# The trailing ellipsis tells Turbo to build the selected app and only its
+# workspace dependencies, instead of rebuilding all frontend applications.
+RUN --mount=type=cache,id=frontend-turbo,target=/repo/.turbo \
+    --mount=type=cache,id=frontend-next-ssc,target=/repo/apps/ssc/.next/cache,sharing=locked \
+    --mount=type=cache,id=frontend-next-level-up,target=/repo/apps/level_up/.next/cache,sharing=locked \
+    --mount=type=cache,id=frontend-next-game-craft,target=/repo/apps/game_craft/.next/cache,sharing=locked \
+    pnpm turbo run build --filter="${APP_FILTER}..."
 
-# ---- run stage ----
-FROM node:20-alpine
-WORKDIR /app
-ENV NODE_ENV=production
 
-# 1) Enable Corepack and turn the stub into a real pnpm install
-RUN corepack enable && corepack prepare pnpm@8 --activate
+FROM base AS runner
 
-# 2) Copy the build output (+ node_modules tree) produced in the builder stage
-COPY --from=builder /repo .
+ARG APP_FILTER=@ssc/web
 
-# 3) Start only the Next.js app (CMD is overridden in docker compose)
+ENV NODE_ENV=production \
+    APP_FILTER=${APP_FILTER}
+
+COPY --from=builder /repo ./
+
 EXPOSE 3000
-CMD ["pnpm", "-F", "web", "start"]
+
+CMD ["sh", "-c", "exec pnpm --filter \"$APP_FILTER\" start"]
