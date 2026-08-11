@@ -28,8 +28,13 @@ RUN --mount=type=cache,id=frontend-turbo,target=/repo/.turbo \
     --mount=type=cache,id=frontend-next-game-craft,target=/repo/apps/game_craft/.next/cache,sharing=locked \
     pnpm turbo run build --filter="@ssc/game_craft..."
 
-FROM base AS runner
-ENV NODE_ENV=production
-COPY --from=builder /repo ./
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 HOSTNAME=0.0.0.0 PORT=3000
+COPY --from=builder --chown=node:node /repo/apps/game_craft/.next/standalone ./
+COPY --from=builder --chown=node:node /repo/apps/game_craft/.next/static ./apps/game_craft/.next/static
+COPY --from=builder --chown=node:node /repo/apps/game_craft/public ./apps/game_craft/public
+USER node
+WORKDIR /app/apps/game_craft
 EXPOSE 3000
-CMD ["pnpm", "--filter", "@ssc/game_craft", "start"]
+CMD ["node", "server.js"]

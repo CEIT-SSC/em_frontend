@@ -52,15 +52,26 @@ RUN --mount=type=cache,id=frontend-turbo,target=/repo/.turbo \
     pnpm turbo run build --filter="${APP_FILTER}..."
 
 
-FROM base AS runner
+FROM node:20-alpine AS runner
 
-ARG APP_FILTER=@ssc/web
+ARG APP_PATH=apps/ssc
 
 ENV NODE_ENV=production \
-    APP_FILTER=${APP_FILTER}
+    NEXT_TELEMETRY_DISABLED=1 \
+    HOSTNAME=0.0.0.0 \
+    PORT=3000
 
-COPY --from=builder /repo ./
+WORKDIR /app
+
+# The standalone directory contains only the traced production server and its
+# runtime dependencies. Static and public assets are intentionally separate.
+COPY --from=builder --chown=node:node /repo/${APP_PATH}/.next/standalone ./
+COPY --from=builder --chown=node:node /repo/${APP_PATH}/.next/static ./${APP_PATH}/.next/static
+COPY --from=builder --chown=node:node /repo/${APP_PATH}/public ./${APP_PATH}/public
+
+USER node
+WORKDIR /app/${APP_PATH}
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "exec pnpm --filter \"$APP_FILTER\" start"]
+CMD ["node", "server.js"]

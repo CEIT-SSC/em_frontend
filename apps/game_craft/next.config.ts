@@ -1,5 +1,6 @@
 import createNextIntlPlugin from "next-intl/plugin";
 import type { NextConfig } from "next";
+import path from "node:path";
 
 const withNextIntl = createNextIntlPlugin("./lib/i18n.ts");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
@@ -7,6 +8,8 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 const nextConfig: NextConfig = {
+  output: "standalone",
+  outputFileTracingRoot: path.join(__dirname, "../.."),
   env: {
     GAME_CRAFT_SSC_EVENT_ID: process.env.GAME_CRAFT_SSC_EVENT_ID,
   },

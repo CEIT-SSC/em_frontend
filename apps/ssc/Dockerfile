@@ -28,8 +28,13 @@ RUN --mount=type=cache,id=frontend-turbo,target=/repo/.turbo \
     --mount=type=cache,id=frontend-next-ssc,target=/repo/apps/ssc/.next/cache,sharing=locked \
     pnpm turbo run build --filter="@ssc/web..."
 
-FROM base AS runner
-ENV NODE_ENV=production
-COPY --from=builder /repo ./
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 HOSTNAME=0.0.0.0 PORT=3000
+COPY --from=builder --chown=node:node /repo/apps/ssc/.next/standalone ./
+COPY --from=builder --chown=node:node /repo/apps/ssc/.next/static ./apps/ssc/.next/static
+COPY --from=builder --chown=node:node /repo/apps/ssc/public ./apps/ssc/public
+USER node
+WORKDIR /app/apps/ssc
 EXPOSE 3000
-CMD ["pnpm", "--filter", "@ssc/web", "start"]
+CMD ["node", "server.js"]
