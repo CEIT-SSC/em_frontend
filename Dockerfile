@@ -10,9 +10,7 @@ ENV COREPACK_ENABLE=0 \
 
 # Keep the package manager in a shared base layer. Source-code changes never
 # invalidate this layer.
-RUN npm config set registry https://mirror-npm.runflare.com && \
-    npm config set strict-ssl false && \
-    npm install --global pnpm@9.0.0
+RUN npm install --global pnpm@9.0.0
 
 
 FROM base AS dependencies

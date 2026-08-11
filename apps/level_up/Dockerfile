@@ -4,9 +4,7 @@
 FROM node:20-alpine AS base
 WORKDIR /repo
 ENV COREPACK_ENABLE=0 PNPM_HOME=/pnpm PATH=/pnpm:$PATH
-RUN npm config set registry https://mirror-npm.runflare.com && \
-    npm config set strict-ssl false && \
-    npm install --global pnpm@9.0.0
+RUN npm install --global pnpm@9.0.0
 
 FROM base AS dependencies
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
