@@ -20,7 +20,7 @@ export default function EventsPage() {
       await navigator.clipboard.writeText(text);
       toast.info("با موفقیت کپی شد");
     } catch (err) {
-      console.error("Failed to copy code:", err);
+      console.error("Failed to copy account code");
     }
   };
 

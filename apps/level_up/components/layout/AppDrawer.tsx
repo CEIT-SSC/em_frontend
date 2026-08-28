@@ -54,7 +54,7 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
       await logout();
       toggleDrawerOpen();
     } catch (error) {
-      console.error("Logout error:", error);
+      console.error("Logout failed");
     }
   };
 

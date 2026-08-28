@@ -96,7 +96,6 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
         handleClose();
       } catch (error) {
         if (error.status === 400) {
-          console.log(error);
           if (teamNames?.includes(teamName))
             toast.error("تیم با این نام قبلا ایجاد شده است");
           else

@@ -103,14 +103,8 @@ export const authOptions: AuthOptions = {
               scope: tokenData.scope,
             };
           }
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (error: any) {
-          console.error(
-            "Authentication error:",
-            error.message,
-            error.request,
-            error.response
-          );
+        } catch (_error) {
+          console.error("Credentials authentication failed");
         }
 
         return null;
@@ -144,22 +138,21 @@ export const authOptions: AuthOptions = {
                     tokenData.refresh_token
                   );
                 user.handshakeToken = handshakeResponse.data.handshake_token;
-              } catch (handshakeError) {
-                console.error("Error getting handshake token:", handshakeError);
+              } catch (_handshakeError) {
+                console.error("Failed to get an authentication handshake token");
                 // Continue without handshake token - it might not be required for all flows
               }
             }
 
             return true;
           } else {
-            console.error(
-              "Backend Google authentication failed:",
-              response.data
-            );
+            console.error("Backend Google authentication failed", {
+              status: response.status,
+            });
             return false;
           }
-        } catch (error) {
-          console.error("Error authenticating with backend:", error);
+        } catch (_error) {
+          console.error("Backend authentication request failed");
           return false;
         }
       }
@@ -192,7 +185,6 @@ export const authOptions: AuthOptions = {
       }
 
       // Access token has expired, try to refresh it
-      console.log("!@! lets refresh", token);
       try {
         const response = await serverApi.auth.refresh(
           token.refreshToken,
@@ -215,7 +207,6 @@ export const authOptions: AuthOptions = {
         }
       } catch (_error) {
         return null;
-        // console.error("Token refresh failed:", error);
       }
 
       // Return null to force sign out

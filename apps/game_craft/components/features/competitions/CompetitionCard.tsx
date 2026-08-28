@@ -78,7 +78,6 @@ export function CompetitionCard({
   // const handleIsRegistered = (registered: boolean) =>
   //   setIsRegistered(registered);
 
-  // console.log(competition.event_title, dashboardMode, isRegistered);
 
   // if (dashboardMode && !isRegistered) return;
 

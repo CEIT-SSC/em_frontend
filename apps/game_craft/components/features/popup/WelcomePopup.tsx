@@ -63,7 +63,7 @@ const WelcomePopup = () => {
           : "Discount code copied successfully!"
       );
     } catch (err) {
-      console.error("Failed to copy code:", err);
+      console.error("Failed to copy account code");
       toast.error(
         locale === "fa" ? "خطا در کپی کردن کد" : "Failed to copy code"
       );

@@ -66,11 +66,6 @@ export function useGoftino() {
     function handleGoftinoReady() {
       if (session.status === "authenticated") {
         const { user } = session.data;
-        // console.log("!@! user data to goftino", {
-        //   email: user.email,
-        //   name: user.name,
-        //   forceUpdate: true,
-        // });
         window.Goftino?.setUser({
           email: user.email,
           name: user.name,
