@@ -30,7 +30,7 @@ import {
 // import { useIscompetitionPurchased } from "lib/hooks/usePurchases";
 import { useAuth } from "lib/hooks/useAuth";
 import { digitsToHindi } from "@ssc/utils";
-import { GroupCompetitionDetails } from "@ssc/core/lib/types/api/competitions/competitions";
+import { GroupCompetitionDetails } from "@ssc/core";
 import GroupModal from "./GroupModal";
 import React from "react";
 

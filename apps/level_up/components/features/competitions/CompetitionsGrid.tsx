@@ -2,7 +2,7 @@
 
 import { Row, Col } from "antd";
 import { CompetitionCard } from "./CompetitionCard";
-import { GroupCompetitionDetails } from "@ssc/core/lib/types/api/competitions/competitions";
+import { GroupCompetitionDetails } from "@ssc/core";
 
 interface Props {
   competitions?: GroupCompetitionDetails[];

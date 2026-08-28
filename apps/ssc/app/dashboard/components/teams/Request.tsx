@@ -9,7 +9,7 @@ import {
   acceptMembershipThunk,
   rejectMembershipThunk,
 } from "~/core/store/teams/teams.thunk";
-import { TeamDetails } from "@ssc/core/lib/types/api/Teams/teams";
+import { TeamDetails } from "@ssc/core";
 
 interface Props {
   request: TeamDetails;

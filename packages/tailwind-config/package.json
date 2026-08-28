@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Shared Tailwind CSS configuration",
-  "main": "tailwind.config.js",
+  "main": "dist/index.js",
   "exports": {
-    ".": "./tailwind.config.js",
+    ".": "./dist/index.js",
     "./postcss": "./postcss.config.js"
   },
   "scripts": {
+    "build": "rspack build",
+    "dev": "rspack build --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,5 +20,9 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.0",
     "tailwindcss": "3"
+  },
+  "devDependencies": {
+    "@rspack/cli": "^2.2.1",
+    "@rspack/core": "^2.2.1"
   }
 }

@@ -11,7 +11,7 @@
         ".next/**",
         "!.next/cache/**",
         "dist/**",
-        "lib/**"
+        "!.rsbuild/**"
       ]
     },
     "dev": {

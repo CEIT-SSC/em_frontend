@@ -1,6 +1,5 @@
 import { BASE_URL } from "@ssc/core";
-import { RequestResponse } from "@ssc/core/lib/types/api/general";
-import { UserProfileResponse } from "@ssc/core/lib/types/api/User/user";
+import { RequestResponse, UserProfileResponse } from "@ssc/core";
 import axios from "axios";
 import { serverApi } from "lib/api/server/serverApi";
 import NextAuth, { AuthOptions } from "next-auth";

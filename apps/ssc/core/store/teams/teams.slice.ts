@@ -14,8 +14,8 @@ import {
 import {
   TeamDetails,
   MembershipRequest,
-  Membership,
-} from "@ssc/core/lib/types/api/Teams/teams";
+  TeamMembership,
+} from "@ssc/core";
 
 const teamsSlice = createSlice({
   name: "teams",
@@ -154,7 +154,7 @@ const teamsSlice = createSlice({
           const teamIndex = state.teams.findIndex((team) => team.id === teamId);
           if (teamIndex !== -1) {
             state.teams[teamIndex].memberships.push(
-              action.payload.membership as unknown as Membership
+              action.payload.membership as unknown as TeamMembership
             );
           }
         }

@@ -1,20 +1,20 @@
 {
   "name": "@ssc/ui",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./lib/index.d.ts",
-      "require": "./lib/index.js",
-      "import": "./lib/index.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     },
-    "./styles.css": "./lib/styles.css"
+    "./styles.css": "./dist/styles.css"
   },
   "scripts": {
-    "dev": "tsc --watch & tailwindcss -i ./src/styles.css -o ./lib/styles.css --watch",
-    "build": "tsc && tailwindcss -i ./src/styles.css -o ./lib/styles.css --minify",
+    "dev": "rspack build --watch",
+    "build": "rspack build && tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify && tsc --emitDeclarationOnly",
     "test": "echo \"Error: no test specified\" && exit 1",
     "type-check": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
@@ -31,6 +31,8 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
+    "@rspack/cli": "^2.2.1",
+    "@rspack/core": "^2.2.1",
     "@chromatic-com/storybook": "^4.0.1",
     "@ssc/tailwind-config": "workspace:*",
     "@storybook/addon-a11y": "^9.0.17",

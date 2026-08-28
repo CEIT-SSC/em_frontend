@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { UserProfileResponse } from "@ssc/core/lib/types/api/User/user";
-import { ApiModule } from "@ssc/core/lib/api/ApiModule";
+import { ApiModule, UserProfileResponse } from "@ssc/core";
 
 export const fetchUserData = createAsyncThunk<
   UserProfileResponse,
