@@ -33,8 +33,8 @@ export const ForgetStepOne = ({ nextStep }: Props) => {
       setIsLoading(true);
       await clientApi.auth.forgotPassword(data.email);
       nextStep();
-    } catch (error) {
-      console.error("Error submitting form:", error);
+    } catch (_error) {
+      console.error("Password reset request failed");
     } finally {
       setIsLoading(false);
     }

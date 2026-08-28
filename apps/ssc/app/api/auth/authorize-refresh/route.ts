@@ -39,8 +39,8 @@ export async function POST(req: NextRequest) {
         { status: 500 }
       );
     }
-  } catch (error) {
-    console.error("Error in authorize-refresh:", error);
+  } catch (_error) {
+    console.error("Refresh authorization failed");
     return NextResponse.json(
       { success: false, error: "Internal server error" },
       { status: 500 }

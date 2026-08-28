@@ -105,8 +105,8 @@ export const ImageCropModal: React.FC<ImageCropModalProps> = ({
         onCropComplete(croppedImage);
         onClose();
       }
-    } catch (e) {
-      console.error(e);
+    } catch (_error) {
+      console.error("Image cropping failed");
     }
   }, [croppedAreaPixels, imageSrc, onCropComplete, onClose]);
 

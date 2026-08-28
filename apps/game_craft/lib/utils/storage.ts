@@ -8,7 +8,7 @@ export const storage = {
       try {
         localStorage.setItem(key, JSON.stringify(value))
       } catch (error) {
-        console.error(`Error setting localStorage key "${key}":`, error)
+        console.error("Failed to set a localStorage value")
       }
     }
   },
@@ -19,7 +19,7 @@ export const storage = {
         const item = localStorage.getItem(key)
         return item ? JSON.parse(item) : null
       } catch (error) {
-        console.error(`Error getting localStorage key "${key}":`, error)
+        console.error("Failed to get a localStorage value")
         return null
       }
     }
@@ -31,7 +31,7 @@ export const storage = {
       try {
         localStorage.removeItem(key)
       } catch (error) {
-        console.error(`Error removing localStorage key "${key}":`, error)
+        console.error("Failed to remove a localStorage value")
       }
     }
   },
@@ -41,7 +41,7 @@ export const storage = {
       try {
         localStorage.clear()
       } catch (error) {
-        console.error('Error clearing localStorage:', error)
+        console.error("Failed to clear localStorage")
       }
     }
   },

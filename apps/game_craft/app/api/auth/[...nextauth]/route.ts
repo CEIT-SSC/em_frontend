@@ -55,8 +55,6 @@ function SSCProvider(options: SSCProviderOptions): Provider {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       async request(context: any) {
         const { params, checks } = context;
-        console.log("Full token request context:", context);
-
         const formData = new URLSearchParams();
         formData.append("grant_type", "authorization_code");
         formData.append("code", params.code);
@@ -75,8 +73,6 @@ function SSCProvider(options: SSCProviderOptions): Provider {
           console.warn("PKCE code_verifier not found in context!");
         }
 
-        console.log("Sending form data:", Object.fromEntries(formData));
-
         const response = await fetch(`${BASE_URL}/o/token/`, {
           method: "POST",
           headers: {
@@ -86,23 +82,17 @@ function SSCProvider(options: SSCProviderOptions): Provider {
           body: formData,
         });
 
-        console.log("!@!", response);
         const result = await response.json();
-        console.log("Token response from Django:", result);
 
         if (!response.ok) {
-          const errorDetail =
-            result.errors?.detail ||
-            result.error_description ||
-            result.error ||
-            "Token exchange failed";
-          throw new Error(`Token exchange failed: ${errorDetail}`);
+          console.error("SSC token exchange failed", { status: response.status });
+          throw new Error("Token exchange failed");
         }
 
         const tokens = result.data || result;
 
         if (!tokens.access_token) {
-          console.error("No access_token in response:", tokens);
+          console.error("SSC token response did not include an access token");
           throw new Error("access_token not found in response");
         }
 
@@ -128,8 +118,6 @@ function SSCProvider(options: SSCProviderOptions): Provider {
     },
     checks: ["pkce", "state"],
     profile(profile: SSCProfile) {
-      console.log("Processing profile:", profile);
-
       const userData = profile.data || profile;
 
       return {
@@ -188,30 +176,10 @@ const authOptions: AuthOptions = {
       clientId: process.env.SSC_CLIENT_ID,
     }),
   ],
-  // debug: true, // Enable debug mode
-  // logger: {
-  //   error(code, metadata) {
-  //     console.error("NextAuth Error:", code, metadata);
-  //   },
-  //   warn(code) {
-  //     console.warn("NextAuth Warning:", code);
-  //   },
-  //   debug(code, metadata) {
-  //     console.log("NextAuth Debug:", code, metadata);
-  //   },
-  // },
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log("SignIn callback triggered:", {
-        provider: account?.provider,
-        user: user?.email,
-        accountKeys: account ? Object.keys(account) : null,
-        profile: profile,
-      });
-
+    async signIn({ user, account }) {
       if (account?.provider === "ssc") {
         try {
-          console.log("SSC account data:", account);
           // Store OAuth tokens in user object
           const userWithTokens = user;
           userWithTokens.accessToken = account.access_token;
@@ -221,7 +189,7 @@ const authOptions: AuthOptions = {
           userWithTokens.expiresIn = (account.expires_in as number) || 900;
           return true;
         } catch (error) {
-          console.error("Error handling SSC OAuth tokens:", error);
+          console.error("Failed to handle SSC OAuth tokens");
           return false;
         }
       }
@@ -243,14 +211,13 @@ const authOptions: AuthOptions = {
             userWithTokens.expiresIn = tokenData.expires_in;
             return true;
           } else {
-            console.error(
-              "Backend Google authentication failed:",
-              response.data
-            );
+            console.error("Backend Google authentication failed", {
+              status: response.status,
+            });
             return false;
           }
         } catch (error) {
-          console.error("Error authenticating with backend:", error);
+          console.error("Backend authentication request failed");
           return false;
         }
       }
@@ -294,11 +261,7 @@ const authOptions: AuthOptions = {
             process.env.SSC_CLIENT_ID!
           );
 
-          console.log("Refresh response:", response.status);
-
           if (response.status === 200) {
-            console.log("Refreshed tokens:", response.data);
-
             if (response.data.success && response.data.data) {
               const newTokenData = response.data.data;
               token.accessToken = newTokenData.access_token;
@@ -312,19 +275,12 @@ const authOptions: AuthOptions = {
                 Date.now() + (newTokenData.expires_in || 0) * 1000;
               token.expiresAt = expiresAt;
 
-              console.log(
-                "Token refreshed successfully, new expiry:",
-                new Date(expiresAt).toISOString()
-              );
-
               return token;
             }
           }
         }
-      } catch (error) {
-        console.error("Token refresh failed:", error);
-        console.error("Token refresh failed:", error.response);
-        console.error("Token refresh failed:", error.request);
+      } catch (_error) {
+        console.error("Token refresh failed");
       }
 
       // Return null to force sign out

@@ -25,7 +25,6 @@ export const payTeamThunk = createAppAsyncThunk(
 
       return { teamId };
     } catch (err) {
-      console.log(err);
       if (err.status == 403)
         return rejectWithValue({
           code: err.status,

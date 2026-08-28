@@ -78,7 +78,7 @@ export function PayBox() {
         window.open(res.payment_url, "_blank");
       })
       .catch((error) => {
-        console.error(error);
+        console.error("Payment request failed");
       });
   }, [cartItems, dispatch]);
 

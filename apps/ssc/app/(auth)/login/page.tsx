@@ -71,8 +71,8 @@ const LoginContent = () => {
       } else if (result?.error) {
         toast.error("خطا در ورود با گیتهاب");
       }
-    } catch (error) {
-      console.error("github sign-in error:", error);
+    } catch (_error) {
+      console.error("GitHub sign-in failed");
       toast.error("خطا در ورود با گیتهاب");
     } finally {
       setIsGoogleLoading(false);
@@ -103,8 +103,8 @@ const LoginContent = () => {
       } else {
         toast.error("خطا در هنگام ورود");
       }
-    } catch (error) {
-      console.log("Login error:", error);
+    } catch (_error) {
+      console.error("Credentials sign-in failed");
       toast.error("خطا در ورود");
     } finally {
       setIsLoading(false);
@@ -138,8 +138,8 @@ const LoginContent = () => {
             } else {
               toast.error("خطا در فرآیند تأیید هویت");
             }
-          } catch (error) {
-            console.error("Error handling OAuth redirect:", error);
+          } catch (_error) {
+            console.error("OAuth redirect failed");
             toast.error("خطا در فرآیند تأیید هویت");
           }
         }

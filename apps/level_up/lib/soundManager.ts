@@ -11,10 +11,10 @@ const sounds: Record<SoundKey, Howl> = {
     preload: true,
     html5: true,
     onloaderror: (id, error) => {
-      console.error(`Failed to load hover sound:`, error);
+      console.error("Failed to load hover sound");
     },
     onplayerror: (id, error) => {
-      console.error(`Failed to play hover sound:`, error);
+      console.error("Failed to play hover sound");
     },
   }),
   jump: new Howl({
@@ -23,10 +23,10 @@ const sounds: Record<SoundKey, Howl> = {
     preload: true,
     html5: true,
     onloaderror: (id, error) => {
-      console.error(`Failed to load hover sound:`, error);
+      console.error("Failed to load hover sound");
     },
     onplayerror: (id, error) => {
-      console.error(`Failed to play hover sound:`, error);
+      console.error("Failed to play hover sound");
     },
   }),
 };
@@ -44,7 +44,7 @@ export const playSound = (key: SoundKey): void => {
       }
     }
   } catch (error) {
-    console.error(`Error playing sound "${key}":`, error);
+    console.error("Failed to play sound");
   }
 };
 

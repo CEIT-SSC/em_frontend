@@ -244,7 +244,7 @@ const Page = () => {
       setValue("oldPassword", "");
       setValue("newPassword", "");
     } catch (error) {
-      console.error("Update error:", error);
+      console.error("Account update failed");
       toast.error(
         <CustomToast
           title="خطا"

@@ -24,7 +24,7 @@ const StickyBar = () => {
       toast.info("با موفقیت کپی شد");
       // You could add a toast notification here if desired
     } catch (err) {
-      console.error("Failed to copy code:", err);
+      console.error("Failed to copy account code");
     }
   };
 
