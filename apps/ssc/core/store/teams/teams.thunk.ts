@@ -3,7 +3,7 @@ import {
   RegisterCompetitionRequest,
   SubmitContentRequest,
   AddMemberRequest,
-} from "@ssc/core/lib/types/api/Teams/teams";
+} from "@ssc/core";
 import { createAppAsyncThunk } from "../createAppAsyncThunk";
 
 export const createTeamThunk = createAppAsyncThunk(

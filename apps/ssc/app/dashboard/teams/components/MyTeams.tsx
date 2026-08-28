@@ -4,7 +4,7 @@ import { HiPlus } from "react-icons/hi";
 import Team from "../../components/teams/Team";
 import CreateTeamModal from "./createTeamModal";
 import { clientApi } from "~/core/api/client/clientApi";
-import { TeamDetails } from "@ssc/core/lib/types/api/Teams/teams";
+import { TeamDetails } from "@ssc/core";
 
 const MyTeams = () => {
   const [teams, setTeams] = useState<TeamDetails[]>([]);

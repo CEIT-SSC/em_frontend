@@ -5,10 +5,10 @@ import { Alert, Col, Flex, Row, Spin, theme, Typography } from "antd";
 import { useTranslations } from "next-intl";
 import { TeamMemberCard } from "./TeamMemberCard";
 import { useAppSelector } from "lib/store/store";
-import { TeamDetails } from "@ssc/core/lib/types/api/Teams/teams";
+import { TeamDetails } from "@ssc/core";
 import { clientApi } from "lib/api/client/clientApi";
 import { eventId } from "lib/utils/constants";
-import { GroupCompetitionsList } from "@ssc/core/lib/types/api/competitions/competitions";
+import { GroupCompetitionsList } from "@ssc/core";
 
 const { useToken } = theme;
 

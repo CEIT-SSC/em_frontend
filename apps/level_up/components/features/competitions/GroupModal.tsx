@@ -2,7 +2,7 @@ import { Alert, Button, Flex, Modal, Spin, theme, Typography } from "antd";
 import { clientApi } from "lib/api/client/clientApi";
 import { eventId } from "lib/utils/constants";
 import React, { useEffect, useMemo, useState } from "react";
-import { TeamDetails } from "@ssc/core/lib/types/api/Teams/teams";
+import { TeamDetails } from "@ssc/core";
 import { useTranslations } from "next-intl";
 import { digitsToHindi } from "@ssc/utils";
 import { useAuth } from "lib/hooks/useAuth";

@@ -1,12 +1,12 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "lib",
+    "outDir": "dist",
     "declaration": true,
-    "emitDeclarationOnly": false,
-    "module": "commonjs",
+    "emitDeclarationOnly": true,
+    "module": "esnext",
     "target": "es2020"
   },
-  "include": ["src/**/*", "./src/styles.css"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "lib", "dist", "build", "**/*.stories.ts"]
 }

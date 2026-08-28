@@ -7,7 +7,7 @@ import { useResponsive } from "../../../lib/hooks/useResponsive";
 import { useEffect, useMemo, useState } from "react";
 import { clientApi } from "lib/api/client/clientApi";
 import { eventId } from "lib/utils/constants";
-import { GroupCompetitionsList } from "@ssc/core/lib/types/api/competitions/competitions";
+import { GroupCompetitionsList } from "@ssc/core";
 
 const { useToken } = theme;
 
