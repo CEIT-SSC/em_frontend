@@ -1,6 +1,5 @@
 "use client";
 
-import { BASE_URL } from "@ssc/core";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -12,16 +11,11 @@ const RedirectingContent = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const handshake_token =
-      params.get("handshake_token") ?? session.data.handshakeToken;
-    if (session.status === "authenticated" && handshake_token) {
-      const url = new URL(`${BASE_URL}/api/o/authorize`);
-      params?.forEach((value, key) => {
-        url.searchParams.set(key, value);
-      });
-      url.searchParams.set("handshake_token", handshake_token);
-      window.location.href = url.toString();
-    } else {
+    if (session.status === "authenticated") {
+      window.location.replace(
+        `/api/auth/authorize-refresh?${params.toString()}`
+      );
+    } else if (session.status === "unauthenticated") {
       router.push("/login");
     }
   }, [session, params, router]);

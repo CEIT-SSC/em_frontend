@@ -9,7 +9,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions);
-  if (!session) {
+  if (!session || session.error === "RefreshAccessTokenError") {
     redirect("/");
   }
   const { user } = session;

@@ -1,7 +1,7 @@
 "use client";
 
-import { ApiModule, BASE_URL } from "@ssc/core";
-import axios, { AxiosRequestConfig } from "axios";
+import { ApiModule } from "@ssc/core";
+import axios from "axios";
 import { getSession, signOut } from "next-auth/react";
 
 declare module "axios" {
@@ -11,7 +11,7 @@ declare module "axios" {
 }
 
 export const axiosInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: "/api/backend/",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
@@ -21,11 +21,9 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async (request) => {
     if (request.requiresAuth) {
-      const session = await getSession();
-      if (session && session.accessToken) {
-        request.headers["Authorization"] = `Bearer ${session.accessToken}`;
-      }
+      await getSession();
     }
+    if (request.url?.startsWith("/")) request.url = request.url.slice(1);
     return request;
   },
   (error) => {

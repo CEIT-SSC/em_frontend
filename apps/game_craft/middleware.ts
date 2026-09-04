@@ -25,7 +25,7 @@ export default withAuth(
           return true;
         }
 
-        return !!token;
+        return !!token && token.error !== "RefreshAccessTokenError";
       },
     },
     pages: {

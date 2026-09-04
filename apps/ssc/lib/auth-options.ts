@@ -9,18 +9,15 @@ import { RequestResponse } from "@ssc/core/lib/types/api/general";
 
 declare module "next-auth" {
   interface Session {
-    accessToken?: string;
-    tokenType?: string;
-    expiresIn?: number;
-    scope?: string;
-    handshakeToken?: string;
+    error?: "RefreshAccessTokenError";
     user: {
       firstName?: string | null;
       lastName?: string | null;
       email?: string | null | undefined;
       image?: string | null | undefined;
-      skyUsername?: string | null | undefined;
-      skyPassword?: string | null | undefined;
+      id?: string;
+      skyUsername?: string;
+      skyPassword?: string;
     };
   }
 
@@ -30,7 +27,6 @@ declare module "next-auth" {
     tokenType?: string;
     expiresIn?: number;
     scope?: string;
-    handshakeToken?: string;
   }
 }
 
@@ -42,7 +38,7 @@ declare module "next-auth/jwt" {
     expiresIn?: number;
     scope?: string;
     expiresAt?: number;
-    handshakeToken?: string;
+    error?: "RefreshAccessTokenError";
   }
 }
 
@@ -66,36 +62,18 @@ export const authOptions: AuthOptions = {
           return null;
         }
 
-        const redirectUri = credentials.redirect_uri;
         try {
           const response = await serverApi.auth.login(
             credentials.email,
             credentials.password,
-            process.env.SSC_PUBLIC_CLIENT_ID
+            process.env.SSC_PUBLIC_CLIENT_ID!
           );
 
           if (response.status === 200 && response.data?.success) {
             const tokenData = response.data.data;
-            if (redirectUri !== "null") {
-              const { data: handshakeResponse } =
-                await serverApi.auth.authorizeWithToken(
-                  tokenData.refresh_token
-                );
-
-              return {
-                id: "1",
-                email: credentials.email,
-                accessToken: tokenData.access_token,
-                refreshToken: tokenData.refresh_token,
-                tokenType: tokenData.token_type,
-                expiresIn: tokenData.expires_in,
-                scope: tokenData.scope,
-                handshakeToken: handshakeResponse.data.handshake_token,
-              };
-            }
-
             return {
               id: "1",
+              email: credentials.email,
               accessToken: tokenData.access_token,
               refreshToken: tokenData.refresh_token,
               tokenType: tokenData.token_type,
@@ -103,14 +81,8 @@ export const authOptions: AuthOptions = {
               scope: tokenData.scope,
             };
           }
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (error: any) {
-          console.error(
-            "Authentication error:",
-            error.message,
-            error.request,
-            error.response
-          );
+        } catch {
+          console.error("SSC authentication failed");
         }
 
         return null;
@@ -129,37 +101,21 @@ export const authOptions: AuthOptions = {
           if (response.status === 200 && response.data?.success) {
             const tokenData = response.data.data;
 
-            // Store tokens in user object for later use in jwt callback
             if (user) {
               user.accessToken = tokenData.access_token;
               user.refreshToken = tokenData.refresh_token;
               user.tokenType = tokenData.token_type;
               user.expiresIn = tokenData.expires_in;
               user.scope = tokenData.scope;
-
-              // Get handshake token for OAuth redirect flow
-              try {
-                const { data: handshakeResponse } =
-                  await serverApi.auth.authorizeWithToken(
-                    tokenData.refresh_token
-                  );
-                user.handshakeToken = handshakeResponse.data.handshake_token;
-              } catch (handshakeError) {
-                console.error("Error getting handshake token:", handshakeError);
-                // Continue without handshake token - it might not be required for all flows
-              }
             }
 
             return true;
           } else {
-            console.error(
-              "Backend Google authentication failed:",
-              response.data
-            );
+            console.error("Backend social authentication failed");
             return false;
           }
-        } catch (error) {
-          console.error("Error authenticating with backend:", error);
+        } catch {
+          console.error("Backend social authentication failed");
           return false;
         }
       }
@@ -174,59 +130,63 @@ export const authOptions: AuthOptions = {
 
     async jwt({ token, user, account }) {
       if (user && account) {
-        const userWithTokens = user;
-        token.accessToken = userWithTokens.accessToken;
-        token.refreshToken = userWithTokens.refreshToken;
-        token.tokenType = userWithTokens.tokenType;
-        token.expiresIn = userWithTokens.expiresIn;
-        token.scope = userWithTokens.scope;
-        token.handshakeToken = userWithTokens.handshakeToken;
-
-        const expiresAt = Date.now() + (userWithTokens.expiresIn || 0) * 1000;
-        token.expiresAt = expiresAt;
+        const expiresIn = user.expiresIn ?? 900;
+        token.accessToken = user.accessToken;
+        token.refreshToken = user.refreshToken;
+        token.tokenType = user.tokenType ?? "Bearer";
+        token.expiresIn = expiresIn;
+        token.scope = user.scope;
+        token.expiresAt = Date.now() + expiresIn * 1000;
+        delete token.error;
       }
 
-      // Return previous token if the access token has not expired yet
-      if (Date.now() <= (token.expiresAt as number)) {
+      if (token.accessToken && Date.now() < (token.expiresAt ?? 0)) {
         return token;
       }
 
-      // Access token has expired, try to refresh it
-      console.log("!@! lets refresh", token);
+      if (!token.refreshToken) {
+        return {
+          ...token,
+          accessToken: undefined,
+          error: "RefreshAccessTokenError",
+        };
+      }
+
       try {
         const response = await serverApi.auth.refresh(
           token.refreshToken,
-          process.env.SSC_PUBLIC_CLIENT_ID
+          process.env.SSC_PUBLIC_CLIENT_ID!
         );
 
         if (response.status === 200 && response.data?.success) {
-          const newTokenData = response.data.data;
-
-          token.accessToken = newTokenData.access_token;
-          token.refreshToken = newTokenData.refresh_token;
-          token.tokenType = newTokenData.token_type;
-          token.expiresIn = newTokenData.expires_in;
-
-          // Update expiry time
-          const expiresAt = Date.now() + newTokenData.expires_in * 1000;
-          token.expiresAt = expiresAt;
-
-          return token;
+          const refreshed = response.data.data;
+          const expiresIn = refreshed.expires_in ?? token.expiresIn ?? 900;
+          return {
+            ...token,
+            accessToken: refreshed.access_token,
+            refreshToken: refreshed.refresh_token ?? token.refreshToken,
+            tokenType: refreshed.token_type ?? token.tokenType,
+            expiresIn,
+            scope: refreshed.scope ?? token.scope,
+            expiresAt: Date.now() + expiresIn * 1000,
+            error: undefined,
+          };
         }
-      } catch (_error) {
-        return null;
-        // console.error("Token refresh failed:", error);
+      } catch {
+        console.error("SSC token refresh failed");
       }
 
-      // Return null to force sign out
-      return null;
+      return {
+        ...token,
+        accessToken: undefined,
+        error: "RefreshAccessTokenError",
+      };
     },
 
     async session({ session, token }) {
+      session.error = token.error;
+
       if (token.accessToken) {
-        // hardcoded to be able to send token via request
-        // it's not valuable to change axios instance (we should use next-auth getServerSession there)
-        // if later we need more stuff like this, we will refactor core to support it
         const {
           data: { data: user },
         } = await axios.get<
@@ -238,18 +198,13 @@ export const authOptions: AuthOptions = {
           },
         });
 
-        const sessionWithTokens = session;
-        sessionWithTokens.accessToken = token.accessToken;
-        sessionWithTokens.tokenType = token.tokenType;
-        sessionWithTokens.expiresIn = token.expiresIn;
-        sessionWithTokens.scope = token.scope;
-        sessionWithTokens.handshakeToken = token.handshakeToken;
-        sessionWithTokens.user.firstName = user.first_name;
-        sessionWithTokens.user.lastName = user.last_name;
-        sessionWithTokens.user.email = user.email;
-        sessionWithTokens.user.image = user.profile_picture;
-        sessionWithTokens.user.skyUsername = user.sky_username;
-        sessionWithTokens.user.skyPassword = user.sky_password;
+        session.user.id = token.sub;
+        session.user.firstName = user.first_name;
+        session.user.lastName = user.last_name;
+        session.user.email = user.email;
+        session.user.image = user.profile_picture;
+        session.user.skyUsername = user.sky_username;
+        session.user.skyPassword = user.sky_password;
       }
 
       return session;

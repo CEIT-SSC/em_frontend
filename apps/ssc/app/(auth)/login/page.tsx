@@ -6,12 +6,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { toast } from "react-toastify";
-import { useEffect, useState, Suspense } from "react";
+import { useCallback, useEffect, useState, Suspense } from "react";
 import { useRouter } from "@bprogress/next";
-import { signIn, getSession, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { MdArrowBack } from "react-icons/md";
-import CustomToast from "~/app/components/CustomToast";
 
 type Inputs = {
   email: string;
@@ -28,7 +27,6 @@ const LoginContent = () => {
   const params = useSearchParams();
   const session = useSession();
   const [isLoading, setIsLoading] = useState(false);
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -44,40 +42,15 @@ const LoginContent = () => {
     }
   }, [params]);
 
-  const Authenticated = async () => {
-    const session = await getSession();
-    if (session.handshakeToken !== undefined) {
-      router.push(`/redirecting?${params ? params.toString() : ""}`);
-    } else {
-      router.push("/");
+  const continueAfterLogin = useCallback(() => {
+    const redirectUri = params.get("redirect_uri");
+    if (redirectUri && redirectUri !== "null") {
+      window.location.assign(`/api/auth/authorize-refresh?${params.toString()}`);
+      return;
     }
-  };
 
-  const handleGithubSignIn = async () => {
-    try {
-      setIsGoogleLoading(true);
-      const result = await signIn("github", {
-        redirect: false,
-        callbackUrl: "/",
-      });
-
-      if (result?.ok) {
-        // Get the session to access the tokens
-        const session = await getSession();
-        if (session?.user) {
-          toast.success("ورود با گیتهاب موفقیت‌آمیز بود");
-          router.push("/");
-        }
-      } else if (result?.error) {
-        toast.error("خطا در ورود با گیتهاب");
-      }
-    } catch (error) {
-      console.error("github sign-in error:", error);
-      toast.error("خطا در ورود با گیتهاب");
-    } finally {
-      setIsGoogleLoading(false);
-    }
-  };
+    router.push("/");
+  }, [params, router]);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
@@ -97,7 +70,7 @@ const LoginContent = () => {
       });
       if (res.status === 200) {
         toast.success("ورود موفقیت‌آمیز بود");
-        Authenticated();
+        continueAfterLogin();
       } else if (res.status === 401) {
         toast.error("ایمیل یا رمز عبور اشتباه است");
       } else {
@@ -114,40 +87,16 @@ const LoginContent = () => {
   useEffect(() => {
     const handleOAuthRedirect = async () => {
       if (session.status === "authenticated") {
-        const redirectUri = params.get("redirect_uri");
-        if (redirectUri && redirectUri !== "null") {
-          try {
-            const response = await fetch("/api/auth/authorize-refresh", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            });
-
-            if (response.ok) {
-              const data = await response.json();
-              if (data.success) {
-                router.push(
-                  `/redirecting?${
-                    params ? params.toString() : ""
-                  }&handshake_token=${data.handshakeToken}`
-                );
-              } else {
-                toast.error("خطا در دریافت توکن تأیید هویت");
-              }
-            } else {
-              toast.error("خطا در فرآیند تأیید هویت");
-            }
-          } catch (error) {
-            console.error("Error handling OAuth redirect:", error);
-            toast.error("خطا در فرآیند تأیید هویت");
-          }
+        if (session.data.error === "RefreshAccessTokenError") {
+          await signOut({ redirect: false });
+          return;
         }
+        continueAfterLogin();
       }
     };
 
     handleOAuthRedirect();
-  }, [session, params, router]);
+  }, [session.status, session.data?.error, continueAfterLogin]);
 
   return (
     <>
