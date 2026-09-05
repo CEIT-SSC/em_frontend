@@ -12,7 +12,6 @@ import {
 } from "antd";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { useRouter as useNextIntlRouter } from "../../lib/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { MenuOutlined, MoonFilled, SunFilled } from "@ant-design/icons";
 import Image from "next/image";
@@ -23,7 +22,7 @@ import { customColors } from "../../config/colors";
 import { useSound } from "../providers/SoundProvider";
 import { useMainNavigations } from "../../lib/config/navigation";
 import { useAuth } from "lib/hooks/useAuth";
-import { useRouter } from "@bprogress/next";
+import { useAppRouter } from "lib/hooks/useAppRouter";
 import { signIn } from "next-auth/react";
 import { FaCircleUser } from "react-icons/fa6";
 import { MdGamepad } from "react-icons/md";
@@ -36,9 +35,7 @@ const { Header } = Layout;
 export function AppHeader() {
   const [shadow, setShadow] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const router = useRouter({
-    customRouter: useNextIntlRouter,
-  });
+  const router = useAppRouter();
   const pathname = usePathname();
   const locale = useLocale();
   const { token } = useToken();
@@ -56,7 +53,7 @@ export function AppHeader() {
   const handleLanguageSwitch = () => {
     const newLocale = locale === "fa" ? "en" : "fa";
     const currentPath = pathname.replace(`/${locale}`, "") || "/";
-    router.replace(currentPath, { locale: newLocale });
+    router.replaceLocale(currentPath, newLocale);
   };
 
   const handleScroll = () => {
