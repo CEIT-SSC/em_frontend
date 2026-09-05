@@ -13,7 +13,7 @@ function isProtectedRoute(pathname: string) {
 }
 
 export default withAuth(
-  function middleware(req) {
+  function proxy(req) {
     return intlMiddleware(req);
   },
   {

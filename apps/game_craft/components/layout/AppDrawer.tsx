@@ -4,11 +4,10 @@ import { Button, Drawer, Flex, Switch, theme } from "antd";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
 import { MoonFilled, SunFilled } from "@ant-design/icons";
-import { useRouter as useNextIntlRouter } from "../../lib/navigation";
 import { useTheme } from "next-themes";
 import { useMainNavigations } from "../../lib/config/navigation";
 import { useAuth } from "../../lib/hooks/useAuth";
-import { useRouter } from "@bprogress/next";
+import { useAppRouter } from "lib/hooks/useAppRouter";
 import { signIn } from "next-auth/react";
 import CartButton from "components/features/cart/CartButton";
 
@@ -27,9 +26,7 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
   const { token } = useToken();
   const { theme, setTheme } = useTheme();
   const { isAuthenticated, user, logout } = useAuth();
-  const router = useRouter({
-    customRouter: useNextIntlRouter,
-  });
+  const router = useAppRouter();
 
   const isActive = (path: string) => {
     // Remove locale prefix from pathname for comparison
@@ -41,7 +38,7 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
     const newLocale = locale === "fa" ? "en" : "fa";
     // Remove the current locale from the pathname and get the clean path
     const currentPath = pathname.replace(`/${locale}`, "") || "/";
-    router.replace(currentPath, { locale: newLocale });
+    router.replaceLocale(currentPath, newLocale);
   };
 
   const handleNavigation = (route: string) => {
