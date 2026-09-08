@@ -233,8 +233,8 @@ const authOptions: AuthOptions = {
             id_token: account.id_token,
           });
 
-          if (response.status === 200 && response.data?.success) {
-            const tokenData = response.data.data;
+          if (response.status === 200) {
+            const tokenData = response.data;
             // Store backend tokens in user object
             const userWithTokens = user;
             userWithTokens.accessToken = tokenData.access_token;
@@ -299,8 +299,8 @@ const authOptions: AuthOptions = {
           if (response.status === 200) {
             console.log("Refreshed tokens:", response.data);
 
-            if (response.data.success && response.data.data) {
-              const newTokenData = response.data.data;
+            if (response.data) {
+              const newTokenData = response.data;
               token.accessToken = newTokenData.access_token;
               token.refreshToken =
                 newTokenData.refresh_token ?? token.refreshToken;
