@@ -71,15 +71,17 @@ export const authOptions: AuthOptions = {
           const response = await serverApi.auth.login(
             credentials.email,
             credentials.password,
-            process.env.SSC_PUBLIC_CLIENT_ID
+            process.env.SSC_PUBLIC_CLIENT_ID,
           );
 
-          if (response.status === 200 && response.data?.success) {
-            const tokenData = response.data.data;
+          console.log("!@!", response.data);
+
+          if (response.status === 200) {
+            const tokenData = response.data;
             if (redirectUri !== "null") {
               const { data: handshakeResponse } =
                 await serverApi.auth.authorizeWithToken(
-                  tokenData.refresh_token
+                  tokenData.refresh_token,
                 );
 
               return {
@@ -109,7 +111,7 @@ export const authOptions: AuthOptions = {
             "Authentication error:",
             error.message,
             error.request,
-            error.response
+            error.response,
           );
         }
 
@@ -126,8 +128,9 @@ export const authOptions: AuthOptions = {
             id_token: account.id_token,
           });
 
-          if (response.status === 200 && response.data?.success) {
-            const tokenData = response.data.data;
+          console.log("!@!", response.data);
+          if (response.status === 200) {
+            const tokenData = response.data;
 
             // Store tokens in user object for later use in jwt callback
             if (user) {
@@ -141,7 +144,7 @@ export const authOptions: AuthOptions = {
               try {
                 const { data: handshakeResponse } =
                   await serverApi.auth.authorizeWithToken(
-                    tokenData.refresh_token
+                    tokenData.refresh_token,
                   );
                 user.handshakeToken = handshakeResponse.data.handshake_token;
               } catch (handshakeError) {
@@ -154,7 +157,7 @@ export const authOptions: AuthOptions = {
           } else {
             console.error(
               "Backend Google authentication failed:",
-              response.data
+              response.data,
             );
             return false;
           }
@@ -196,11 +199,11 @@ export const authOptions: AuthOptions = {
       try {
         const response = await serverApi.auth.refresh(
           token.refreshToken,
-          process.env.SSC_PUBLIC_CLIENT_ID
+          process.env.SSC_PUBLIC_CLIENT_ID,
         );
 
-        if (response.status === 200 && response.data?.success) {
-          const newTokenData = response.data.data;
+        if (response.status === 200) {
+          const newTokenData = response.data;
 
           token.accessToken = newTokenData.access_token;
           token.refreshToken = newTokenData.refresh_token;
