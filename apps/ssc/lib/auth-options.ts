@@ -74,8 +74,6 @@ export const authOptions: AuthOptions = {
             process.env.SSC_PUBLIC_CLIENT_ID,
           );
 
-          console.log("!@!", response.data);
-
           if (response.status === 200) {
             const tokenData = response.data;
             if (redirectUri !== "null") {
@@ -128,7 +126,6 @@ export const authOptions: AuthOptions = {
             id_token: account.id_token,
           });
 
-          console.log("!@!", response.data);
           if (response.status === 200) {
             const tokenData = response.data;
 
@@ -195,7 +192,6 @@ export const authOptions: AuthOptions = {
       }
 
       // Access token has expired, try to refresh it
-      console.log("!@! lets refresh", token);
       try {
         const response = await serverApi.auth.refresh(
           token.refreshToken,

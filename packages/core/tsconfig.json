@@ -4,6 +4,8 @@
     "outDir": "dist",
     "types": ["node"],
     "declaration": true,
+    "declarationMap": true,
+    "sourceMap": false,
     "emitDeclarationOnly": true,
     "module": "esnext",
     "target": "es2020"

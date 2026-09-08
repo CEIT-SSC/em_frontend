@@ -6,6 +6,8 @@ export default defineConfig({
   target: "web",
   externals: {
     react: "react",
+    "react/jsx-runtime": "react/jsx-runtime",
+    "react/jsx-dev-runtime": "react/jsx-dev-runtime",
   },
   output: {
     clean: true,

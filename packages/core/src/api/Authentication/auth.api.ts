@@ -9,6 +9,7 @@ import {
 import { ApiClient } from "../ApiClient";
 import { apiPath, ApiPath } from "../../types/ApiPaths";
 import { RequestResponse } from "../../types/api/general";
+import type { AxiosResponse } from "axios";
 export class AuthApi extends ApiClient {
   async register(parameters: {
     email: string;
@@ -57,7 +58,7 @@ export class AuthApi extends ApiClient {
     email: string,
     password: string,
     client_id: string
-  ): Promise<RequestResponse<TokenResponse>> {
+  ): Promise<AxiosResponse<TokenResponse>> {
     const params = new URLSearchParams({
       grant_type: GrantTypes.Password,
       username: email,
@@ -65,7 +66,7 @@ export class AuthApi extends ApiClient {
       client_id,
     });
 
-    return await this.Api.post<TokenResponse, RequestResponse<TokenResponse>>(
+    return await this.Api.post<TokenResponse, AxiosResponse<TokenResponse>>(
       apiPath(ApiPath.AUTH_TOKEN),
       params,
       {
@@ -102,10 +103,10 @@ export class AuthApi extends ApiClient {
     access_token?: string;
     id_token?: string;
     code?: string;
-  }): Promise<RequestResponse<TokenResponse>> {
+  }): Promise<AxiosResponse<TokenResponse>> {
     return await this.Api.post<
       TokenResponse,
-      RequestResponse<TokenResponse>,
+      AxiosResponse<TokenResponse>,
       typeof googleData
     >(apiPath(ApiPath.AUTH_GOOGLE), googleData);
   }
@@ -113,14 +114,14 @@ export class AuthApi extends ApiClient {
   async refresh(
     refresh_token: string,
     client_id: string
-  ): Promise<RequestResponse<TokenResponse>> {
+  ): Promise<AxiosResponse<TokenResponse>> {
     const params = new URLSearchParams({
       grant_type: GrantTypes.Refresh,
       refresh_token,
       client_id,
     });
 
-    return await this.Api.post<TokenResponse, RequestResponse<TokenResponse>>(
+    return await this.Api.post<TokenResponse, AxiosResponse<TokenResponse>>(
       apiPath(ApiPath.AUTH_TOKEN),
       params,
       {
