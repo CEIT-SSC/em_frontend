@@ -1,5 +1,4 @@
 import FeatureCard from "../components/FeatureCard";
-import { Button, ButtonVariant } from "@ssc/ui";
 import Image from "next/image";
 import { GrWorkshop } from "react-icons/gr";
 import { MdEmojiEvents } from "react-icons/md";
@@ -64,14 +63,13 @@ export default function Home() {
             در برنامه‌ها و پروژه‌های ما می‌توانید مهارت‌های فنی و نرم‌افزاری خود
             را تقویت کنید و شبکه‌ای از هم‌فکران بسازید.
           </p>
-          <Link href="#events">
-            <Button
-              className="h-8 min-w-20 w-fit rounded-lg overflow-hidden p-px px-3 py-2 cursor-pointer flex gap-2 justify-center items-center"
-              variant={ButtonVariant.PRIMARY}
-              label="رویداد های پیش رو"
-              suffixIcon={HiArrowLeft}
-            />
-          </Link>
+          <a
+            href="#events"
+            className="default-gradient h-8 min-w-20 w-fit rounded-lg overflow-hidden px-3 py-2 cursor-pointer flex gap-2 justify-center items-center"
+          >
+            رویداد های پیش رو
+            <HiArrowLeft />
+          </a>
         </div>
       </div>
       <div className="flex-col justify-center gap-4 hidden md:flex">
