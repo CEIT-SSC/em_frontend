@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-09T00:00:00+03:30",
+  "title": "Design System: GameCraft",
+  "extensions": {
+    "colorMeta": {
+      "void": { "role": "neutral", "displayName": "Void", "canonical": "#070a12", "tonalRamp": ["#02030a", "#070a12", "#101728", "#24314a", "#46516a", "#758098", "#aab1c2", "#edf0f5"] },
+      "wayfinding-blue": { "role": "primary", "displayName": "Wayfinding Blue", "canonical": "#9ddbf5", "tonalRamp": ["#082432", "#104256", "#1b657e", "#368da8", "#5b9fc1", "#9ddbf5", "#c8edfb", "#effbff"] },
+      "cavern-violet": { "role": "secondary", "displayName": "Cavern Violet", "canonical": "#8b7bae", "tonalRamp": ["#180f24", "#2b1c3d", "#46305d", "#63477e", "#8b7bae", "#b4a9cd", "#d9d3e7", "#f6f3fa"] },
+      "ivory": { "role": "neutral", "displayName": "Ivory Light", "canonical": "#f1ecdf", "tonalRamp": ["#28251e", "#474237", "#70695b", "#9e9684", "#c5beae", "#f1ecdf", "#faf7ef", "#fffdf7"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Carved Display", "purpose": "Major route and page titles." },
+      "body": { "displayName": "Bilingual Body", "purpose": "Programme and task copy in Persian or English." },
+      "label": { "displayName": "Route Label", "purpose": "Buttons and compact interactive controls." }
+    },
+    "shadows": [
+      { "name": "public-card-lift", "value": "0 19px 42px rgba(0, 0, 0, .2)", "purpose": "Separate public content from the atmospheric field." },
+      { "name": "dashboard-frame", "value": "0 24px 55px rgba(0, 0, 0, .24)", "purpose": "Lift a main dashboard vessel." },
+      { "name": "signal-glow", "value": "0 0 24px rgba(91, 159, 193, .2)", "purpose": "Illuminate sparse waymarks and sigils." }
+    ],
+    "motion": [
+      { "name": "gallery-response", "value": "border-color .22s ease, transform .22s ease", "purpose": "Brief image hover response." },
+      { "name": "arch-breathe", "value": "9s ease-in-out infinite", "purpose": "Optional ambient public-home movement." },
+      { "name": "route-drift", "value": "8s linear infinite", "purpose": "Optional route-line motion." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "600px" },
+      { "name": "tablet", "value": "768px" },
+      { "name": "dashboard-collapse", "value": "991px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Wayfinding Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The luminous primary action for public and dashboard routes.",
+      "html": "<button class=\"ds-btn-primary\">CONTINUE</button>",
+      "css": ".ds-btn-primary { min-height: 40px; padding: 0 18px; border: 1px solid #9ddbf5; border-radius: 999px; background: #9ddbf5; color: #10182b; font-family: Estedad, Vazirmatn, sans-serif; font-weight: 750; cursor: pointer; transition: transform .2s ease, background .2s ease; } .ds-btn-primary:hover { background: #c8edfb; transform: translateY(-1px); } .ds-btn-primary:active { transform: translateY(0); } .ds-btn-primary:focus-visible { outline: 3px solid #f1ecdf; outline-offset: 3px; }"
+    },
+    {
+      "name": "Wayfinding Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A bordered alternate route that stays visible in dark public space.",
+      "html": "<button class=\"ds-btn-secondary\">EXPLORE</button>",
+      "css": ".ds-btn-secondary { min-height: 40px; padding: 0 18px; border: 1px solid rgba(157, 219, 245, .45); border-radius: 999px; background: rgba(14, 22, 40, .3); color: #f1ecdf; font-family: Estedad, Vazirmatn, sans-serif; font-weight: 750; cursor: pointer; transition: border-color .2s ease, background .2s ease; } .ds-btn-secondary:hover { border-color: #9ddbf5; background: rgba(22, 36, 61, .94); } .ds-btn-secondary:focus-visible { outline: 3px solid #9ddbf5; outline-offset: 3px; }"
+    },
+    {
+      "name": "Dashboard Input",
+      "kind": "input",
+      "description": "A quiet field for account and submission tasks.",
+      "html": "<label class=\"ds-field\">GAME TITLE<input placeholder=\"Enter a title\" /></label>",
+      "css": ".ds-field { display: grid; gap: 8px; color: #b8c7d5; font: 750 12px Estedad, Vazirmatn, sans-serif; } .ds-field input { min-height: 42px; padding: 0 12px; border: 1px solid rgba(157, 219, 245, .28); border-radius: 12px; background: #0b1324; color: #f1ecdf; font: 400 16px Estedad, Vazirmatn, sans-serif; } .ds-field input::placeholder { color: #93a6b7; } .ds-field input:focus-visible { outline: 3px solid #9ddbf5; outline-offset: 3px; }"
+    },
+    {
+      "name": "Dashboard Route Item",
+      "kind": "nav",
+      "description": "The active state in the authenticated route ledger.",
+      "html": "<nav class=\"ds-nav\"><button class=\"ds-nav-item ds-nav-item--active\"><span></span>MY EVENTS</button><button class=\"ds-nav-item\">ACCOUNT</button></nav>",
+      "css": ".ds-nav { display: grid; gap: 8px; padding: 16px; border: 1px solid rgba(157, 219, 245, .18); border-radius: 16px; background: rgba(13, 21, 39, .96); } .ds-nav-item { min-height: 40px; border: 1px solid rgba(157, 219, 245, .2); border-radius: 999px; background: transparent; color: #b8c7d5; font: 750 14px Estedad, Vazirmatn, sans-serif; text-align: start; cursor: pointer; } .ds-nav-item:hover { border-color: rgba(157, 219, 245, .66); background: rgba(91, 159, 193, .11); color: #f1ecdf; } .ds-nav-item--active { border-color: rgba(157, 219, 245, .62); background: rgba(91, 159, 193, .16); color: #f1ecdf; } .ds-nav-item--active span { display: inline-block; width: 7px; height: 7px; margin: 0 7px; border-radius: 50%; background: #9ddbf5; box-shadow: 0 0 12px rgba(157, 219, 245, .7); } .ds-nav-item:focus-visible { outline: 3px solid #9ddbf5; outline-offset: 3px; }"
+    },
+    {
+      "name": "Raised Task Card",
+      "kind": "card",
+      "refersTo": "card-public",
+      "description": "A stable dashboard task container with a precise blue frame.",
+      "html": "<article class=\"ds-task-card\"><strong>TEAM STATUS</strong><p>Continue building your game together.</p></article>",
+      "css": ".ds-task-card { padding: 20px; border: 1px solid rgba(157, 219, 245, .2); border-radius: 14px; background: #16243d; color: #f1ecdf; font-family: Estedad, Vazirmatn, sans-serif; } .ds-task-card strong { font-weight: 900; } .ds-task-card p { margin: 8px 0 0; color: #b8c7d5; }"
+    },
+    {
+      "name": "Vault Waymark",
+      "kind": "custom",
+      "description": "Original geometric wayfinding ornament used in place of derivative environmental art.",
+      "html": "<div class=\"ds-waymark\" aria-label=\"Waymark\"><i></i></div>",
+      "css": ".ds-waymark { display: grid; place-items: center; width: 68px; aspect-ratio: 1; border: 2px solid #9ddbf5; border-radius: 50% 50% 44% 44%; background: radial-gradient(circle at 50% 42%, #f1ecdf 0 12%, transparent 14%), rgba(91, 159, 193, .16); box-shadow: 0 0 0 7px rgba(91, 159, 193, .08), 0 0 24px rgba(91, 159, 193, .2); } .ds-waymark i { width: 8px; height: 8px; border-radius: 50%; background: #9ddbf5; box-shadow: 0 0 12px rgba(157, 219, 245, .7); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Subterranean Wayfinder Atelier",
+    "overview": "GameCraft is an original, Hollow Knight-inspired world for a bilingual university game-development event. It evokes a quiet illuminated underworld through vaulted arches, route lines, signal nodes, deep layered blue-black space, and rare pools of pale light. The public experience is cinematic; the dashboard turns the same language into stable task surfaces.",
+    "keyCharacteristics": ["Deep, cool architectural darkness balanced by warm ivory reading surfaces.", "Bioluminescent blue is the interaction signal and navigational thread.", "Arched linework, not borrowed imagery, carries the Hollow Knight-inspired mood.", "Rounded, high-contrast controls make the fantasy operational rather than ornamental."],
+    "rules": [
+      { "name": "The Signal-Not-Fill Rule", "body": "Wayfinding Blue guides actions and geometry; it must stay sparse enough that a new blue element is immediately meaningful.", "section": "colors" },
+      { "name": "The Carved Title Rule", "body": "Large headings are short, dense, and high contrast; never substitute decorative display fonts or excessive letter spacing that harms Persian legibility.", "section": "typography" },
+      { "name": "The Quiet Work Surface Rule", "body": "Dashboard task cards do not acquire dramatic shadows on hover; their borders and hierarchy stay stable so users can operate confidently.", "section": "elevation" }
+    ],
+    "dos": ["Do use Void, Deep, and Raised Surface in that order to create navigable depth.", "Do let Wayfinding Blue identify the primary next action, active route, focus treatment, or meaningful geometry.", "Do preserve Estedad/Vazirmatn and test both RTL Persian and LTR English layouts.", "Do use original arched geometry, route lines, and light nodes to sustain the subterranean mood."],
+    "donts": ["Don't use Hollow Knight characters, logos, maps, screenshots, or copied game assets.", "Don't turn every card, divider, and icon blue; blue is a scarce navigation signal.", "Don't replace solid dashboard task surfaces with cinematic transparency that weakens text and form contrast.", "Don't use hard square controls or arbitrary corner radii outside the established pill, 14px, and 16px vocabulary."]
+  }
+}
