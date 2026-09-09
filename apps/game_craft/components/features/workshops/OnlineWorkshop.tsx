@@ -1,7 +1,6 @@
 "use client";
 
-import { Flex, theme, Typography, Spin, Alert } from "antd";
-import Wave from "../../common/Wave";
+import { Flex, Typography, Spin, Alert } from "antd";
 import { WorkshopGrid } from "./WorkshopGrid";
 import { useTranslations } from "next-intl";
 import { useResponsive } from "../../../lib/hooks/useResponsive";
@@ -9,8 +8,6 @@ import { useEffect, useMemo, useState } from "react";
 import { PresentationsList, PresentationType } from "@ssc/core";
 import { clientApi } from "lib/api/client/clientApi";
 import { eventId } from "lib/utils/constants";
-
-const { useToken } = theme;
 
 interface OnlineWorkshopProps {
   padding?: string;
@@ -21,7 +18,6 @@ export function OnlineWorkshop({
   padding = "3rem 2rem",
   backgroundColor,
 }: OnlineWorkshopProps) {
-  const { token } = useToken();
   const screens = useResponsive();
   const t = useTranslations();
   const [presentations, setPresentations] = useState<{
@@ -85,7 +81,7 @@ export function OnlineWorkshop({
       ) : (
         <WorkshopGrid
           presentations={presentations.data.results}
-          workshopImage="/images/Luigi.jpg" // Pass SuperMario image for online workshops
+          workshopImage="/images/2025/staffs/hero.gif"
         />
       );
     }
@@ -96,12 +92,12 @@ export function OnlineWorkshop({
       vertical
       align="center"
       justify="center"
+      className="gc-home-presentations"
       style={{
         width: "100%",
         backgroundColor: backgroundColor,
       }}
     >
-      <Wave width="100%" height="auto" fill="#4F7B79" />
       <Flex
         vertical
         align="center"
@@ -126,12 +122,6 @@ export function OnlineWorkshop({
 
         {content}
       </Flex>
-      <Wave
-        width="100%"
-        height="auto"
-        fill={token.colorPrimary}
-        style={{ transform: "scaleY(-1) translateY(-2px)" }}
-      />
     </Flex>
   );
 }

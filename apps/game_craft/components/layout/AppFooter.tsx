@@ -33,8 +33,9 @@ export function AppFooter() {
   return (
     <ConfigProvider theme={darkTheme}>
       <Layout.Footer
+        className="gc-footer"
         style={{
-          backgroundColor: token.colorPrimary,
+          backgroundColor: "transparent",
           textAlign: "center",
           width: "100%",
           padding: token.padding,

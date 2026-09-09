@@ -72,7 +72,7 @@ export const TeamMemberContainer: React.FC = () => {
   const mapTeams = () =>
     filteredTeams.map((team) => (
       <>
-        <Col span={24}>
+        <Col className="gc-dashboard-team-name" span={24}>
           <Typography.Title level={4} style={{ marginBottom: "1.5rem" }}>
             {team.group_competition_details.title}:
           </Typography.Title>
@@ -125,6 +125,7 @@ export const TeamMemberContainer: React.FC = () => {
 
   return (
     <Flex
+      className="gc-dashboard-team-members"
       vertical
       align="center"
       justify="center"

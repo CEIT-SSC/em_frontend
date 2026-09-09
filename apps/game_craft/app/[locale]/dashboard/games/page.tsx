@@ -15,16 +15,16 @@ export default function GamesPage() {
 
   return (
     <Flex
+      className="gc-dashboard-games"
       vertical={!screens.lg}
       flex={1}
       style={{
         width: "100%",
-        padding: token.padding,
-        paddingTop: 0,
+        padding: `0 ${token.padding}px ${token.padding}px`,
       }}
       gap="small"
     >
-      <Flex align="start" justify="center" flex={2}>
+      <Flex className="gc-dashboard-game-form" align="start" justify="center" flex={2}>
         <UploadGameForm />
       </Flex>
 
@@ -45,6 +45,7 @@ export default function GamesPage() {
       )}
 
       <Flex
+        className="gc-dashboard-game-preview"
         flex={1}
         align="start"
         justify="center"

@@ -81,32 +81,8 @@ export function Prizes({ padding = '3rem 2rem', backgroundColor }: PrizesProps) 
         padding: padding,
         backgroundColor: backgroundColor,
       }}
+      className="gc-home-prizes"
     >
-      {/* Background bubble effect - matching React project exactly */}
-      <Flex
-        align="center"
-        justify="start"
-        style={{
-          width: '100%',
-          height: '100%',
-          position: 'absolute',
-          padding: padding,
-        }}
-      >
-        <Image
-          src="/assets/svg/bubble-light-purple.svg"
-          alt="bubble-image"
-          width={800}
-          height={600}
-          style={{
-            height: '100%',
-            width: '100%',
-            transform: 'scaleX(-1)',
-            opacity: 0.5,
-          }}
-        />
-      </Flex>
-
       <Typography.Title
         level={1}
         style={{

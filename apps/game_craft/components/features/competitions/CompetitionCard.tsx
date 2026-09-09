@@ -87,7 +87,7 @@ export function CompetitionCard({
   // }, [itemInCart]);
 
   // Color palette
-  const colorStripes = ["#4CAF50", "#2196F3", "#FFC107", "#F44336"];
+  const colorStripes = ["#9ddbf5", "#5b9fc1", "#8b7bae", "#f1ecdf"];
 
   // const buttonText = useMemo(() => {
   //   if (!isAuthenticated) return t("workshop.loginToContinue");
@@ -239,8 +239,8 @@ export function CompetitionCard({
               size="small"
               style={{
                 borderRadius: token.borderRadiusLG,
-                backgroundColor: "rgba(0, 0, 0, 0.7)",
-                borderColor: "transparent",
+                backgroundColor: "rgba(14, 22, 40, 0.88)",
+                borderColor: "rgba(157, 219, 245, 0.45)",
               }}
             >
               جزئیات بیشتر

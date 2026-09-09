@@ -48,18 +48,13 @@ export function StaffCard({ staff }: StaffCardProps) {
               }}
             >
               <Image
-                src={"/mario/giphy-14.gif"}
-                alt={"mario question block"}
+                src="/images/logo/default_prof.jpg"
+                alt="Default staff profile"
                 width={240}
                 height={240}
               />
             </Flex>
           )
-          // <Avatar
-          //     size={140}
-          //     icon={<UserOutlined/>}
-          //     src={"/mario/giphy-16.gif"}
-          // />
         }
 
         <Flex

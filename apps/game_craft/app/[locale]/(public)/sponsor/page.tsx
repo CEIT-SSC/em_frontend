@@ -47,19 +47,19 @@ export default function SponsorsPage() {
                 minHeight: "100%",
             }}
         >
-            <Flex
+            <Flex className="gc-page gc-public-page gc-public-sponsors"
                 vertical
                 align="center"
                 justify="center"
                 style={{
                     width: "100%",
-                    padding: getResponsivePadding(),
+                    padding: 0,
                 }}
             >
                 <Typography.Title
                     level={isMobile ? 2 : 1}
                     style={{
-                        color: "white",
+                        color: "var(--gc-ivory)",
                         fontSize: isMobile ? token.fontSizeHeading2 : token.fontSizeHeading1,
                         textAlign: "center",
                         marginBottom: isMobile ? token.marginLG : token.marginXL,
@@ -71,6 +71,7 @@ export default function SponsorsPage() {
                     vertical
                     align="center"
                     justify="center"
+                    className="gc-sponsor-archive"
                     style={{
                         width: "100%",
                         maxWidth: getMaxWidth(),

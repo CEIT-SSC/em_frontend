@@ -4,6 +4,7 @@ import { Empty, Flex, theme, Typography, Image, Row, Col } from "antd";
 import { useTranslations } from "next-intl";
 import { useResponsive } from "../../../../lib/hooks/useResponsive";
 import { galleryImages } from "../../../../config/galleryImages";
+import { HomeArtworkSlot } from "../../../../components/features/home/HomeArtworkSlot";
 
 const { useToken } = theme;
 
@@ -24,19 +25,21 @@ export default function GalleryPage() {
         minHeight: "100%",
       }}
     >
-      <Flex
+      <Flex className="gc-page gc-public-page gc-public-gallery"
         vertical
         align="center"
         justify="center"
         style={{
           width: "100%",
-          padding: galleryViewPadding,
+          padding: 0,
         }}
       >
-        <Typography.Title style={{ color: "white" }}>
+        <Typography.Title className="gc-public-title">
           {t("mainNavigation.gallery")}
         </Typography.Title>
+        <HomeArtworkSlot assetId="GC-ART-07" variant="gallery" />
         <Flex
+          className="gc-gallery-panel"
           vertical
           align="center"
           justify="center"
@@ -62,6 +65,7 @@ export default function GalleryPage() {
                       key={image.id}
                       align="center"
                       justify="center"
+                      className="gc-gallery-image"
                       style={{
                         width: "100%",
                         borderRadius: token.borderRadius,

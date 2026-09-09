@@ -39,6 +39,7 @@ export function DashboardDrawer({
 
   return (
     <Drawer
+      className="gc-dashboard-drawer"
       placement={direction === "rtl" ? "right" : "left"}
       open={open}
       width={300}
@@ -48,9 +49,14 @@ export function DashboardDrawer({
       maskClosable={true}
       onClose={() => toggleDrawerOpen()}
       zIndex={100000000}
-      style={{
-        backgroundColor: `${token.colorBgBase}`,
-        backdropFilter: "blur(10px)",
+      styles={{
+        content: { backgroundColor: "#0d1527" },
+        header: {
+          color: "#f1ecdf",
+          backgroundColor: "#0d1527",
+          borderBottomColor: "rgba(157, 219, 245, 0.18)",
+        },
+        body: { backgroundColor: "#0d1527" },
       }}
     >
       <Flex

@@ -77,8 +77,8 @@ export default function EventsPage() {
               isPurchased={true}
               workshopImage={
                 item.type === PresentationType.WORKSHOP
-                  ? "/images/SuperMario.jpg"
-                  : "/images/Luigi.jpg"
+                  ? "/images/2025/staffs/hero.gif"
+                  : "/images/2025/staffs/hero.gif"
               }
             />
           </Col>
@@ -110,6 +110,7 @@ export default function EventsPage() {
 
   return (
     <Flex
+      className="gc-dashboard-events"
       vertical
       align="start"
       justify="center"
@@ -120,7 +121,7 @@ export default function EventsPage() {
       gap="large"
     >
       {/* Competition Section */}
-      <Flex
+      <Flex className="gc-dashboard-event-section"
         vertical
         align={screen.xs ? "center" : "start"}
         justify="center"
@@ -139,7 +140,7 @@ export default function EventsPage() {
       </Flex>
 
       {/* Workshops Section */}
-      <Flex
+      <Flex className="gc-dashboard-event-section"
         vertical
         align={screen.xs ? "center" : "start"}
         justify="center"
@@ -158,7 +159,7 @@ export default function EventsPage() {
       </Flex>
 
       {/* Talks Section */}
-      <Flex
+      <Flex className="gc-dashboard-event-section"
         vertical
         align={screen.xs ? "center" : "start"}
         justify="center"

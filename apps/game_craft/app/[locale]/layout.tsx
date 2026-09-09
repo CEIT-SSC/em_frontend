@@ -3,7 +3,6 @@ import { getMessages } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
 import localFont from "next/font/local";
 import "../globals.css";
-import { SoundProvider } from "components/providers/SoundProvider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import AuthProvider from "components/providers/AuthProvider";
 import AntDesignProvider from "components/providers/AntDesignProvider";
@@ -134,7 +133,7 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const title = locale === "fa" ? "گیم‌کرفت" : "GameCraft";
-  const description = locale === "fa" ? "گیم‌کرفت - ۱۴۰۴" : "GameCraft - 2025";
+  const description = locale === "fa" ? "رویداد بازی‌سازی گیم‌کرفت" : "GameCraft game development event";
 
   return {
     title,
@@ -159,6 +158,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={direction}
+      data-scroll-behavior="smooth"
       className={`${estedad.variable} ${vazirmatn.variable}`}
       suppressHydrationWarning
     >
@@ -169,18 +169,16 @@ export default async function LocaleLayout({
             enableSystem={true}
             attribute={["data-theme", "class"]}
           >
-            <SoundProvider>
-              <AntdRegistry>
-                <NextIntlClientProvider messages={messages}>
-                  <AuthProvider>
-                    <AntDesignProvider direction={direction}>
-                      <GoftinoProvider />
-                      <Providers>{children}</Providers>
-                    </AntDesignProvider>
-                  </AuthProvider>
-                </NextIntlClientProvider>
-              </AntdRegistry>
-            </SoundProvider>
+            <AntdRegistry>
+              <NextIntlClientProvider messages={messages}>
+                <AuthProvider>
+                  <AntDesignProvider direction={direction}>
+                    <GoftinoProvider />
+                    <Providers>{children}</Providers>
+                  </AntDesignProvider>
+                </AuthProvider>
+              </NextIntlClientProvider>
+            </AntdRegistry>
           </ThemeProvider>
         </StoreProvider>
       </body>

@@ -100,13 +100,13 @@ export function PayBox() {
 
   return (
     <Flex
+      className="gc-dashboard-payment"
       vertical
       align="center"
       justify="center"
       style={{
         width: "100%",
-        padding: token.padding,
-        paddingTop: 0,
+        padding: `0 ${token.padding}px ${token.padding}px`,
         zIndex: 1000,
       }}
       gap="small"

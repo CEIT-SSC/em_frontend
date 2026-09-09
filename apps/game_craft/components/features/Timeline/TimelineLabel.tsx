@@ -1,5 +1,4 @@
 import { Flex } from "antd";
-import Image from "next/image";
 
 interface TimelineLabelProps {
   logo: string;
@@ -8,9 +7,9 @@ interface TimelineLabelProps {
 }
 
 export default function TimelineLabel({
-  logo,
+  logo: _logo,
   alt = "Timeline step",
-  width = "30%",
+  width: _width = "30%",
 }: TimelineLabelProps) {
   return (
     <Flex
@@ -19,14 +18,9 @@ export default function TimelineLabel({
       justify="start"
       style={{ width: "100%", height: "auto" }}
     >
-      <Image
-        src={logo}
-        alt={alt}
-        width={100}
-        height={100}
-        className="w-[65%] md:w-[30%]"
-        style={{ height: "auto" }}
-      />
+      <div className="gc-timeline-waymark" role="img" aria-label={alt}>
+        <span className="gc-timeline-waymark__core" />
+      </div>
     </Flex>
   );
 }

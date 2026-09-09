@@ -1,6 +1,6 @@
 "use client";
 
-import { Flex, theme } from "antd";
+import { Flex } from "antd";
 import { GameCraftTimeline } from "../../../components/features/Timeline";
 import { GameCraftIntro } from "../../../components/features/home/GameCraftIntro";
 import { Prizes } from "../../../components/features/home/Prizes";
@@ -8,23 +8,20 @@ import { AboutUs } from "../../../components/features/home/AboutUs";
 import { OfflineWorkshop } from "../../../components/features/workshops/OfflineWorkshop";
 import { OnlineWorkshop } from "../../../components/features/workshops/OnlineWorkshop";
 import { Sponsors } from "../../../components/features/home/Sponsors";
-import Wave from "../../../components/common/Wave";
 import { useResponsive } from "../../../lib/hooks/useResponsive";
-import { customColors } from "../../../config/colors";
-import WelcomePopup from "../../../components/features/popup/WelcomePopup";
 import { CompetitionsList } from "components/features/competitions/CompetitonsList";
-
-const { useToken } = theme;
+import {
+  HomeArtworkSlot,
+  HomeVaultSeparator,
+} from "components/features/home/HomeArtworkSlot";
 
 export default function HomePage() {
-  const { token } = useToken();
   const screens = useResponsive();
   const homeViewPadding = screens.lg ? "3rem 5rem" : "3rem 2rem";
 
   return (
     <>
-      <WelcomePopup />
-      <Flex
+      <Flex className="gc-home"
         align="center"
         justify="center"
         vertical
@@ -33,64 +30,44 @@ export default function HomePage() {
         }}
       >
         {/* GameCraft Introduction Section */}
-        <GameCraftIntro
-          padding={homeViewPadding}
-          backgroundColor={token.colorPrimary}
-        />
-        <Wave width="100%" height="auto" fill={token.colorPrimary} />
+        <GameCraftIntro padding={homeViewPadding} backgroundColor="#070a12" />
+        <HomeVaultSeparator />
 
         {/* Timeline and Prizes Section */}
+        <HomeArtworkSlot assetId="GC-ART-02" variant="map" />
         <GameCraftTimeline
           padding={homeViewPadding}
-          backgroundColor={token.colorBgBase}
+          backgroundColor="#0e1628"
         />
-        <Prizes padding={homeViewPadding} backgroundColor={token.colorBgBase} />
+        <Prizes padding={homeViewPadding} backgroundColor="#111c31" />
 
-        {/* Workshop Sections - Matching React order exactly */}
-        <div id="workshops" />
-        {/* <Wave
-          width="100%"
-          height="auto"
-          fill={customColors.colorOfflineWorkshop}
-          style={{ transform: "scaleY(-1) translateY(-2px)" }}
-        /> */}
-        <Wave
-          width="100%"
-          height="auto"
-          fill={token.colorPrimary}
-          style={{ transform: "scaleY(-1) translateY(-2px)" }}
-        />
+        <HomeArtworkSlot assetId="GC-ART-03" variant="gateway" />
+        <div id="game-jam" style={{ width: "100%" }}>
         <CompetitionsList
           padding={homeViewPadding}
-          backgroundColor={token.colorPrimary}
+          backgroundColor="#101a30"
         />
-        <Wave
-          width="100%"
-          height="auto"
-          fill={customColors.colorOfflineWorkshop}
-          style={{
-            transform: "scaleY(-1) translateY(-2px)",
-            marginTop: "-72px",
-          }}
-        />
+        </div>
+        <HomeArtworkSlot assetId="GC-ART-04" variant="study" />
+        <div id="workshops" />
         <OfflineWorkshop
           padding={homeViewPadding}
-          backgroundColor={customColors.colorOfflineWorkshop}
+          backgroundColor="#172640"
         />
         <OnlineWorkshop
           padding={homeViewPadding}
-          backgroundColor={customColors.colorAction}
+          backgroundColor="#0d1527"
         />
 
         {/* Sponsors Section */}
         <Sponsors
           padding={homeViewPadding}
-          backgroundColor={token.colorPrimary}
+          backgroundColor="#101a30"
         />
-        <Wave width="100%" height="auto" fill={token.colorPrimary} />
+        <HomeVaultSeparator flip />
 
         {/* About Us Section */}
-        <AboutUs padding={homeViewPadding} backgroundColor={"transparent"} />
+        <AboutUs padding={homeViewPadding} backgroundColor="#070a12" />
       </Flex>
     </>
   );

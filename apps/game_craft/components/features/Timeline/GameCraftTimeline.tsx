@@ -1,9 +1,9 @@
 import { ConfigProvider, Flex, Timeline, Typography } from "antd";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import TimelineDot from "./TimelineDot";
 import TimelineLabel from "./TimelineLabel";
 import TimelineChildren from "./TimelineChildren";
+import { useResponsive } from "../../../lib/hooks/useResponsive";
 
 interface GameCraftTimelineProps {
   padding?: string | number;
@@ -17,6 +17,7 @@ export default function GameCraftTimeline({
   className = "",
 }: GameCraftTimelineProps) {
   const t = useTranslations("app.timeline");
+  const screens = useResponsive();
 
   const items = [
     {
@@ -92,26 +93,6 @@ export default function GameCraftTimeline({
       gap="large"
       className={className}
     >
-      <Flex
-        align="center"
-        justify="center"
-        style={{
-          width: "100%",
-          height: "100%",
-          position: "absolute",
-          padding: padding,
-        }}
-      >
-        <Image
-          src="/svg/bubble-light-purple.svg"
-          alt="Background bubble"
-          fill
-          style={{
-            opacity: 0.5,
-            objectFit: "contain",
-          }}
-        />
-      </Flex>
       <Typography.Title
         style={{
           marginBottom: "2rem",
@@ -130,8 +111,8 @@ export default function GameCraftTimeline({
         }}
       >
         <Timeline
-          items={items}
-          mode="alternate"
+          items={screens.md ? items : items.map(({ label, ...item }) => item)}
+          mode={screens.md ? "alternate" : "left"}
           style={{
             width: "100%",
           }}
