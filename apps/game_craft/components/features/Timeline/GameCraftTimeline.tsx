@@ -25,7 +25,12 @@ export default function GameCraftTimeline({
       children: (
         <TimelineChildren title={t("step1.title")} time={t("step1.schedule")} />
       ),
-      label: <TimelineLabel logo="/svg/timline-1.svg" alt="Registration" />,
+      label: (
+        <TimelineLabel
+          logo="/assets/images/hollwo-knight/timeline/01.png"
+          alt="Registration"
+        />
+      ),
     },
     {
       dot: <TimelineDot />,
@@ -33,7 +38,10 @@ export default function GameCraftTimeline({
         <TimelineChildren title={t("step2.title")} time={t("step2.schedule")} />
       ),
       label: (
-        <TimelineLabel logo="/svg/timline-2.svg" alt="Registration Deadline" />
+        <TimelineLabel
+          logo="/assets/images/hollwo-knight/timeline/02.png"
+          alt="Registration Deadline"
+        />
       ),
     },
     {
@@ -41,28 +49,48 @@ export default function GameCraftTimeline({
       children: (
         <TimelineChildren title={t("step3.title")} time={t("step3.schedule")} />
       ),
-      label: <TimelineLabel logo="/svg/timline-3.svg" alt="Workshops Begin" />,
+      label: (
+        <TimelineLabel
+          logo="/assets/images/hollwo-knight/timeline/03.png"
+          alt="Workshops Begin"
+        />
+      ),
     },
     {
       dot: <TimelineDot />,
       children: (
         <TimelineChildren title={t("step4.title")} time={t("step4.schedule")} />
       ),
-      label: <TimelineLabel logo="/svg/timline-4.svg" alt="Workshops End" />,
+      label: (
+        <TimelineLabel
+          logo="/assets/images/hollwo-knight/timeline/04.PNG"
+          alt="Workshops End"
+        />
+      ),
     },
     {
       dot: <TimelineDot />,
       children: (
         <TimelineChildren title={t("step5.title")} time={t("step5.schedule")} />
       ),
-      label: <TimelineLabel logo="/svg/timline-5.svg" alt="Game Development" />,
+      label: (
+        <TimelineLabel
+          logo="/assets/images/hollwo-knight/timeline/05.PNG"
+          alt="Game Development"
+        />
+      ),
     },
     {
       dot: <TimelineDot />,
       children: (
         <TimelineChildren title={t("step6.title")} time={t("step6.schedule")} />
       ),
-      label: <TimelineLabel logo="/svg/timline-6.svg" alt="Judging" />,
+      label: (
+        <TimelineLabel
+          logo="/assets/images/hollwo-knight/timeline/06.PNG"
+          alt="Judging"
+        />
+      ),
     },
     {
       dot: <TimelineDot />,
@@ -71,7 +99,7 @@ export default function GameCraftTimeline({
       ),
       label: (
         <TimelineLabel
-          logo="/svg/timline-6.svg"
+          logo="/assets/images/hollwo-knight/timeline/06.PNG"
           alt="Results & Closing Ceremony"
         />
       ),

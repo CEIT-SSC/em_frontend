@@ -196,22 +196,7 @@ body { min-height:100vh; margin:0; color:var(--ink); background:var(--paper); fo
 .gc-home .ant-timeline-item-content { color: var(--gc-ivory) !important; }
 .gc-home .ant-timeline-item-content .ant-typography { color: var(--gc-ivory) !important; }
 .gc-home .ant-timeline-item-content .ant-typography-secondary { color: var(--gc-blue) !important; }
-.gc-timeline-waymark {
-  position: relative;
-  display: grid;
-  width: min(30%, 152px);
-  aspect-ratio: 1;
-  place-items: center;
-  border: 1px solid rgba(157, 219, 245, .48);
-  border-bottom: 0;
-  border-radius: 50% 50% 0 0 / 48% 48% 0 0;
-  background: radial-gradient(circle at 50% 62%, rgba(91, 159, 193, .22), transparent 36%);
-}
-.gc-timeline-waymark::before,
-.gc-timeline-waymark::after { content: ""; position: absolute; border: 1px solid rgba(139, 123, 174, .55); }
-.gc-timeline-waymark::before { width: 36%; height: 55%; border-bottom: 0; border-radius: 50% 50% 0 0 / 44% 44% 0 0; }
-.gc-timeline-waymark::after { width: 8%; aspect-ratio: 1; border-radius: 50%; background: var(--gc-blue); box-shadow: 0 0 14px rgba(157, 219, 245, .62); }
-.gc-timeline-waymark__core { width: 14%; aspect-ratio: 1; border-radius: 50%; background: var(--gc-ivory); box-shadow: 0 0 0 4px rgba(157, 219, 245, .18); }
+.gc-timeline-label-image { display: block; max-width: 100%; object-fit: contain; }
 .gc-timeline-node { display: block; width: clamp(2.8rem, 5vw, 4.35rem); aspect-ratio: 1; border: 2px solid var(--gc-blue); border-radius: 50% 50% 44% 44%; background: radial-gradient(circle at 50% 42%, var(--gc-ivory) 0 12%, transparent 14%), rgba(91, 159, 193, .16); box-shadow: 0 0 0 7px rgba(91, 159, 193, .08), 0 0 24px rgba(91, 159, 193, .2); }
 .gc-home-prizes { color: var(--gc-ivory); }
 .gc-home-prizes .ant-typography { color: var(--gc-ivory) !important; }
