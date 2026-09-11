@@ -1,6 +1,7 @@
 "use client";
 
 import { Flex } from "antd";
+import Image from "next/image";
 import { GameCraftTimeline } from "../../../components/features/Timeline";
 import { GameCraftIntro } from "../../../components/features/home/GameCraftIntro";
 import { Prizes } from "../../../components/features/home/Prizes";
@@ -21,7 +22,8 @@ export default function HomePage() {
 
   return (
     <>
-      <Flex className="gc-home"
+      <Flex
+        className="gc-home"
         align="center"
         justify="center"
         vertical
@@ -34,36 +36,40 @@ export default function HomePage() {
         <HomeVaultSeparator />
 
         {/* Timeline and Prizes Section */}
-        <HomeArtworkSlot assetId="GC-ART-02" variant="map" />
+        <figure className="w-full relative m-0 overflow-hidden flex justify-center">
+          <div
+            className="w-full h-full top-0 pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(to_bottom,rgb(14,22,40)_0%,transparent_10%,transparent_90%,rgb(14,22,40)_100%)]"
+            aria-hidden="true"
+          />
+          <Image
+            src="/assets/images/hollwo-knight/knight-and-hornet-playing-game.png"
+            alt="Knight and Hornet playing a game together"
+            width={512}
+            height={225}
+            sizes="(max-width: 768px) calc(100vw - 2rem), min(1200px, 100vw)"
+            className="h-auto w-auto object-contain"
+            priority
+          />
+        </figure>
         <GameCraftTimeline
           padding={homeViewPadding}
           backgroundColor="#0e1628"
         />
         <Prizes padding={homeViewPadding} backgroundColor="#111c31" />
 
-        <HomeArtworkSlot assetId="GC-ART-03" variant="gateway" />
+        {/* <HomeArtworkSlot assetId="GC-ART-03" variant="gateway" /> */}
         <div id="game-jam" style={{ width: "100%" }}>
-        <CompetitionsList
-          padding={homeViewPadding}
-          backgroundColor="#101a30"
-        />
+          <CompetitionsList
+            padding={homeViewPadding}
+            backgroundColor="#101a30"
+          />
         </div>
-        <HomeArtworkSlot assetId="GC-ART-04" variant="study" />
         <div id="workshops" />
-        <OfflineWorkshop
-          padding={homeViewPadding}
-          backgroundColor="#172640"
-        />
-        <OnlineWorkshop
-          padding={homeViewPadding}
-          backgroundColor="#0d1527"
-        />
+        <OfflineWorkshop padding={homeViewPadding} backgroundColor="#172640" />
+        <OnlineWorkshop padding={homeViewPadding} backgroundColor="#0d1527" />
 
         {/* Sponsors Section */}
-        <Sponsors
-          padding={homeViewPadding}
-          backgroundColor="#101a30"
-        />
+        <Sponsors padding={homeViewPadding} backgroundColor="#101a30" />
         <HomeVaultSeparator flip />
 
         {/* About Us Section */}

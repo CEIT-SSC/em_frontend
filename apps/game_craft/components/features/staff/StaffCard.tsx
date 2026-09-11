@@ -23,7 +23,7 @@ export function StaffCard({ staff }: StaffCardProps) {
       style={{
         width: "100%",
         height: "300px",
-        backgroundColor: token.colorBgElevated,
+         backgroundColor: "var(--gc-navy)",
         boxShadow: "0 0 10px rgba(0,0,0,0.1)",
         borderRadius: "2rem",
         padding: token.padding,
@@ -63,10 +63,15 @@ export function StaffCard({ staff }: StaffCardProps) {
           justify="center"
           style={{ width: "100%" }}
         >
-          <Typography.Title level={4} style={{ margin: 0, fontWeight: 700 }}>
+          <Typography.Title
+            level={4}
+            style={{ margin: 0, fontWeight: 700, color: "var(--gc-ivory)" }}
+          >
             {staff.name}
           </Typography.Title>
-          <Typography.Text type="secondary">{staff.role}</Typography.Text>
+          <Typography.Text style={{ color: "rgba(241, 236, 223, 0.72)" }}>
+            {staff.role}
+          </Typography.Text>
         </Flex>
       </Flex>
       <Flex

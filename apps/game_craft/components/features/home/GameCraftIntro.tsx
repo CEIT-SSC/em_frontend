@@ -7,7 +7,7 @@ import {useResponsive} from "../../../lib/hooks/useResponsive";
 import {darkTheme} from "../../../components/providers/AntDesignProvider";
 import {gameCraftSocialLinks} from "../../../config/socialLinks";
 import {TelegramIcon} from "../../../components/common/TelegramIcon";
-import { HomeArtworkSlot } from "./HomeArtworkSlot";
+import { HomeParallaxArtwork } from "./HomeParallaxArtwork";
 
 interface GameCraftIntroProps {
     padding?: string;
@@ -130,7 +130,7 @@ export function GameCraftIntro({
 
                     <Col span={24} lg={12}>
                         <Flex align="center" justify="center" style={{width: "100%"}}>
-                            <HomeArtworkSlot assetId="GC-ART-01" variant="hero" />
+                            <HomeParallaxArtwork />
                         </Flex>
                     </Col>
                 </Row>

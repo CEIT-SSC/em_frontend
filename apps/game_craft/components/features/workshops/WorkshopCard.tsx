@@ -141,7 +141,7 @@ export function WorkshopCard({
   const handleAddToCart = () => {
     if (buttonShouldBeDisabled) {
       if (!isAuthenticated) {
-        toast.error("لطفا وارد حساب خود شوید");
+        toast.error(t("workshop.loginToContinue"));
       }
       return;
     }
@@ -264,7 +264,7 @@ export function WorkshopCard({
                 borderColor: "transparent",
               }}
             >
-              جزئیات بیشتر
+              {t("workshop.viewDetails")}
             </AntButton>
           </div>
         </div>
@@ -506,7 +506,7 @@ export function WorkshopCard({
                   color: "white",
                 }}
               >
-                خریداری شده
+                {t("workshop.purchased")}
               </AntButton>
             ) : (
               <AntButton
@@ -537,6 +537,7 @@ export function WorkshopCard({
 
       {/* Modal */}
       <Modal
+        className="gc-workshop-modal"
         open={showModal}
         onCancel={() => setShowModal(false)}
         footer={[

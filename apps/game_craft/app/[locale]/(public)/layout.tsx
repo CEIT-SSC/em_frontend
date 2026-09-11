@@ -10,7 +10,7 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children }: MainLayoutProps) {
   return (
-    <Layout className="gc-public gc-public-world"
+    <Layout className="gc-public gc-public-world min-h-screen text-[var(--gc-ivory)]"
       style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
     >
       <AppHeader />
