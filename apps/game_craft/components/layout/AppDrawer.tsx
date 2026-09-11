@@ -57,6 +57,7 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
 
   return (
     <Drawer
+      className="gc-public-drawer"
       placement={locale === "fa" ? "right" : "left"}
       open={open}
       width={300}
