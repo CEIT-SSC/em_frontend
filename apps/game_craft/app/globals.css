@@ -850,35 +850,6 @@ body {
 .gc-workshop-modal .ant-modal-footer {
   border-top-color: rgba(157, 219, 245, 0.21) !important;
 }
-.gc-public-drawer .ant-drawer-content,
-.gc-public-drawer .ant-drawer-header,
-.gc-public-drawer .ant-drawer-body {
-  color: rgb(241, 236, 223) !important;
-  background: rgb(14, 22, 40) !important;
-}
-.gc-public-drawer .ant-drawer-header {
-  border-bottom-color: rgba(157, 219, 245, 0.21) !important;
-}
-.gc-public-drawer .ant-drawer-title,
-.gc-public-drawer .ant-drawer-close,
-.gc-public-drawer .ant-btn:not(.ant-btn-primary) {
-  color: rgb(241, 236, 223) !important;
-}
-.gc-public-drawer .ant-btn:not(.ant-btn-primary) {
-  border-color: rgba(157, 219, 245, 0.45) !important;
-  background: rgba(14, 22, 40, 0.3) !important;
-}
-.gc-public-drawer .ant-btn-primary {
-  color: rgb(16, 24, 43) !important;
-  background: rgb(157, 219, 245) !important;
-  border-color: rgb(157, 219, 245) !important;
-}
-.gc-public-drawer .ant-switch {
-  background: rgba(91, 159, 193, 0.42);
-}
-.gc-public-drawer .ant-switch.ant-switch-checked {
-  background: rgb(157, 219, 245) !important;
-}
 .gc-public-page {
   color: var(--gc-ivory);
   padding-block: clamp(2.5rem, 6vw, 6rem) !important;

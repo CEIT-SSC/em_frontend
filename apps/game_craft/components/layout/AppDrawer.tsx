@@ -101,6 +101,7 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
             <Button
               type="text"
               shape="circle"
+              aria-label="Toggle color theme"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               size="large"
               icon={theme === "dark" ? <MoonFilled /> : <SunFilled />}
@@ -117,6 +118,7 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
             <Button
               key={item.route}
               type={isActive(item.route) ? "primary" : "dashed"}
+              className={isActive(item.route) ? "gc-nav-item gc-nav-item--active" : "gc-nav-item"}
               size="large"
               onClick={() => handleNavigation(item.route)}
               style={{

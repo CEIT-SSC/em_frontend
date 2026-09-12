@@ -16,7 +16,6 @@ import { useTranslations, useLocale } from "next-intl";
 import { MenuOutlined, MoonFilled, SunFilled } from "@ant-design/icons";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { useResponsive } from "../../lib/hooks/useResponsive";
 import AppDrawer from "../../components/layout/AppDrawer";
 import { useMainNavigations } from "../../lib/config/navigation";
 import { useAuth } from "lib/hooks/useAuth";
@@ -37,7 +36,6 @@ export function AppHeader() {
   const locale = useLocale();
   const { token } = useToken();
   const t = useTranslations("app");
-  const screens = useResponsive();
   const { theme, setTheme } = useTheme();
   const mainNavigations = useMainNavigations();
   const { isLoading, isAuthenticated, user } = useAuth();
@@ -95,7 +93,7 @@ export function AppHeader() {
           padding: "0.5rem clamp(1rem, 4vw, 4rem)",
         }}
       >
-        {screens.lg ? (
+        <div className="gc-header-desktop">
           <Flex
             align="center"
             justify="space-between"
@@ -119,12 +117,9 @@ export function AppHeader() {
                 {mainNavigations.map((item) => (
                   <Button
                     key={item.route}
-                    type="primary"
+                    type={isActive(item.route) ? "primary" : "text"}
+                    className={isActive(item.route) ? "gc-nav-item gc-nav-item--active" : "gc-nav-item"}
                     onClick={() => router.push(item.route)}
-                    style={{
-                      fontWeight: "bolder",
-                      ...(isActive(item.route) ? { color: "currentColor" } : {}),
-                    }}
                   >
                     {item.name}
                   </Button>
@@ -216,7 +211,8 @@ export function AppHeader() {
               </Space>
             </Flex>
           </Flex>
-        ) : (
+        </div>
+        <div className="gc-header-mobile">
           <Flex
             align="center"
             justify="space-between"
@@ -227,6 +223,7 @@ export function AppHeader() {
               type="primary"
               size="large"
               icon={<MenuOutlined />}
+              aria-label="Open navigation menu"
               onClick={() => toggleDrawerOpen()}
             />
             <Image
@@ -238,7 +235,7 @@ export function AppHeader() {
             />
             <AppDrawer open={drawerOpen} toggleDrawerOpen={toggleDrawerOpen} />
           </Flex>
-        )}
+        </div>
       </Header>
     </div>
   );

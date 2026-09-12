@@ -233,17 +233,14 @@ export function CompetitionCard({
             }}
           >
             <AntButton
+              className="gc-card-details"
               onClick={() => setShowModal(true)}
               type="primary"
               icon={<EyeOutlined />}
               size="small"
-              style={{
-                borderRadius: token.borderRadiusLG,
-                backgroundColor: "rgba(14, 22, 40, 0.88)",
-                borderColor: "rgba(157, 219, 245, 0.45)",
-              }}
+              style={{ borderRadius: token.borderRadiusLG }}
             >
-              جزئیات بیشتر
+              {t("workshop.viewDetails")}
             </AntButton>
           </div>
         </div>
@@ -414,6 +411,7 @@ export function CompetitionCard({
 
       {/* Modal */}
       <Modal
+        className="gc-workshop-modal"
         open={showModal}
         onCancel={() => setShowModal(false)}
         footer={[

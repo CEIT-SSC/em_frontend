@@ -62,7 +62,7 @@ export function WorkshopCard({
   const { formatNumberToMoney } = useFormatter();
   const dispatch = useAppDispatch();
   const itemInCart = useAppSelector(
-    itemInCartSelector(presentation.id, ItemType.PRESENTATION)
+    itemInCartSelector(presentation.id, ItemType.PRESENTATION),
   );
   const isPresentationPurchased = useIsPresentationPurchased(presentation.id);
   const buttonShouldBeDisabled = useAppSelector(cartLoadingSelector);
@@ -134,7 +134,7 @@ export function WorkshopCard({
 
     // since all the presentations are on one day
     return `${formatDateTime(presentation.start_time)} - ${formatTime(
-      presentation.end_time
+      presentation.end_time,
     )}`;
   };
 
@@ -150,7 +150,7 @@ export function WorkshopCard({
       addItemToCartThunk({
         item_type: ItemType.PRESENTATION,
         item_id: presentation.id,
-      })
+      }),
     )
       .unwrap()
       .catch()
@@ -164,7 +164,7 @@ export function WorkshopCard({
       removeItemFromCartThunk({
         item_id: itemInCart.id,
         item_type: ItemType.PRESENTATION,
-      })
+      }),
     )
       .unwrap()
       .catch()
@@ -254,15 +254,12 @@ export function WorkshopCard({
             }}
           >
             <AntButton
+              className="gc-card-details"
               onClick={() => setShowModal(true)}
               type="primary"
               icon={<EyeOutlined />}
               size="small"
-              style={{
-                borderRadius: token.borderRadiusLG,
-                backgroundColor: "rgba(0, 0, 0, 0.7)",
-                borderColor: "transparent",
-              }}
+              style={{ borderRadius: token.borderRadiusLG }}
             >
               {t("workshop.viewDetails")}
             </AntButton>
@@ -758,7 +755,7 @@ export function WorkshopCard({
                 >
                   {presentation.is_paid
                     ? `${formatNumberToMoney(presentation.price)} ${t(
-                        "common.currency"
+                        "common.currency",
                       )}`
                     : t("workshop.free")}
                 </Typography.Title>
