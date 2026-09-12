@@ -21,7 +21,7 @@ function PrizeCard({ teamImage, teamTitle, teamPrize }: PrizeCardProps) {
         style={{ width: '40%', height: 'auto' }}
       />
       <Typography.Title
-        level={2}
+        level={3}
         style={{
           margin: 0,
           fontWeight: 800
@@ -30,7 +30,7 @@ function PrizeCard({ teamImage, teamTitle, teamPrize }: PrizeCardProps) {
         {teamTitle}
       </Typography.Title>
       <Typography.Title
-        level={3}
+        level={4}
         type="secondary"
         style={{
           margin: 0,
@@ -84,7 +84,7 @@ export function Prizes({ padding = '3rem 2rem', backgroundColor }: PrizesProps) 
       className="gc-home-prizes"
     >
       <Typography.Title
-        level={1}
+        level={2}
         style={{
           fontWeight: 900,
           position: 'relative',

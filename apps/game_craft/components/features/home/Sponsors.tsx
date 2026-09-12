@@ -26,7 +26,7 @@ export function Sponsors({padding = "3rem 2rem", backgroundColor}: SponsorsProps
             className="gc-home-sponsors"
         >
             <Typography.Title
-                level={1}
+                level={2}
                 style={{
                     fontWeight: 900,
                     color: "white",

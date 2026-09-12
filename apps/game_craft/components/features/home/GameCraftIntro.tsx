@@ -65,7 +65,7 @@ export function GameCraftIntro({
                             </Typography.Title>
 
                             <Typography.Title
-                                level={3}
+                                level={2}
                                 style={{
                                     fontWeight: 900,
                                     margin: 0,
@@ -105,6 +105,7 @@ export function GameCraftIntro({
                                     href={gameCraftSocialLinks.telegram}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label="GameCraft on Telegram"
                                 />
                                 <Button
                                     type="text"
@@ -114,6 +115,7 @@ export function GameCraftIntro({
                                     href={gameCraftSocialLinks.instagram}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label="GameCraft on Instagram"
                                 />
                                 <Button
                                     type="text"
@@ -123,6 +125,7 @@ export function GameCraftIntro({
                                     href={gameCraftSocialLinks.twitter}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label="GameCraft on X"
                                 />
                             </Flex>
                         </Flex>

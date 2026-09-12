@@ -47,7 +47,7 @@ export function AboutUs({
               style={{ width: "100%" }}
             >
               <Typography.Title
-                level={1}
+                level={2}
                 style={{
                   fontWeight: 900,
                 }}

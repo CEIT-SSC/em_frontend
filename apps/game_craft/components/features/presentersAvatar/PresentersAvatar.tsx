@@ -52,6 +52,7 @@ const PresentersAvatar: React.FC<PresentersAvatarProps> = ({
       <Flex gap="small" align="center">
         <Avatar
           src={presenter.presenter_picture}
+          alt={presenter.name}
           icon={!presenter.presenter_picture && <UserOutlined />}
           size={32}
         />
@@ -78,6 +79,7 @@ const PresentersAvatar: React.FC<PresentersAvatarProps> = ({
           <Avatar
             key={presenter.id}
             src={presenter.presenter_picture}
+            alt={presenter.name}
             icon={!presenter.presenter_picture && <UserOutlined />}
             size={32}
             style={{
@@ -90,6 +92,7 @@ const PresentersAvatar: React.FC<PresentersAvatarProps> = ({
         {remainingCount > 0 && (
           <Avatar
             size={32}
+            aria-label={t("andMore", { count: remainingCount })}
             style={{
               marginLeft: -8,
               backgroundColor: token.colorPrimary,

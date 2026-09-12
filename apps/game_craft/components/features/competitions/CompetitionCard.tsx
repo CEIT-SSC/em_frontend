@@ -260,7 +260,7 @@ export function CompetitionCard({
           {/* Title and Badges */}
           <Flex vertical gap="small">
             <Typography.Title
-              level={4}
+              level={3}
               style={{
                 margin: 0,
                 fontSize: "18px",
