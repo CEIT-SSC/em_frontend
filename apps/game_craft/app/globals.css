@@ -138,6 +138,48 @@ body {
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(244, 240, 228, 0.12);
 }
+.gc-header-desktop {
+  display: block;
+  height: 100%;
+}
+.gc-header-mobile {
+  display: none;
+}
+.gc-header .ant-btn:not(.ant-btn-primary):is(:hover, :focus-visible) {
+  color: var(--paper-strong) !important;
+  background: #070a12 !important;
+  border-color: rgba(157, 219, 245, 0.45) !important;
+  transform: translateY(-2px);
+}
+.gc-public-drawer {
+  --gc-drawer-deep: #0e1628;
+  --gc-drawer-ivory: #f1ecdf;
+  --gc-drawer-blue: #9ddbf5;
+}
+.gc-public-drawer .ant-drawer-content,
+.gc-public-drawer .ant-drawer-header {
+  color: var(--gc-drawer-ivory) !important;
+  background: var(--gc-drawer-deep) !important;
+  border-color: rgba(157, 219, 245, 0.2) !important;
+}
+.gc-public-drawer .ant-drawer-body {
+  color: var(--gc-drawer-ivory);
+  background: var(--gc-drawer-deep);
+}
+.gc-public-drawer .ant-drawer-title,
+.gc-public-drawer .ant-drawer-close {
+  color: var(--gc-drawer-ivory) !important;
+}
+.gc-public-drawer .ant-btn:not(.ant-btn-primary) {
+  color: var(--gc-drawer-ivory) !important;
+  background: rgba(14, 22, 40, 0.3) !important;
+  border-color: rgba(157, 219, 245, 0.45) !important;
+}
+.gc-public-drawer .ant-btn-primary {
+  color: #10182b !important;
+  background: var(--gc-drawer-blue) !important;
+  border-color: var(--gc-drawer-blue) !important;
+}
 .gc-footer {
   background: var(--deep) !important;
   border-top: 1px solid rgba(216, 180, 108, 0.35);
@@ -164,6 +206,13 @@ body {
   pointer-events: none;
 }
 @media (max-width: 768px) {
+  .gc-header-desktop {
+    display: none;
+  }
+  .gc-header-mobile {
+    display: block;
+    height: 100%;
+  }
   .gc-page {
     width: min(100% - 2rem, 1180px);
     padding: 2.5rem 0;

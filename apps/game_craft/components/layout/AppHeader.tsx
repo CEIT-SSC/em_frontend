@@ -118,7 +118,11 @@ export function AppHeader() {
                   <Button
                     key={item.route}
                     type={isActive(item.route) ? "primary" : "text"}
-                    className={isActive(item.route) ? "gc-nav-item gc-nav-item--active" : "gc-nav-item"}
+                    className={
+                      isActive(item.route)
+                        ? "gc-nav-item gc-nav-item--active"
+                        : "gc-nav-item"
+                    }
                     onClick={() => router.push(item.route)}
                   >
                     {item.name}
@@ -133,7 +137,8 @@ export function AppHeader() {
               style={{ height: "100%" }}
               gap="small"
             >
-              <Button
+              // disabled temporarily due to theme
+              {/* <Button
                 type="text"
                 shape="circle"
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -144,7 +149,7 @@ export function AppHeader() {
                 ) : (
                   <SunFilled style={{ color: "white" }} />
                 )}
-              </Button>
+              </Button> */}
               <Switch
                 checkedChildren="En"
                 unCheckedChildren="Fa"
