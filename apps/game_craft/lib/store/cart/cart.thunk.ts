@@ -34,7 +34,7 @@ export const removeItemFromCartThunk = createAppAsyncThunk(
   "cart/removeItem",
   async (args: { item_id: number; item_type: ItemType }, thunkAPI) => {
     try {
-      thunkAPI.extra.Api.shop.removeItem(args.item_id, args.item_type);
+      await thunkAPI.extra.Api.shop.removeItem(args.item_id, args.item_type);
       thunkAPI.dispatch(fetchCartThunk());
       return;
     } catch (error) {
