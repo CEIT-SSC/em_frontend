@@ -21,7 +21,7 @@ function PrizeCard({ teamImage, teamTitle, teamPrize }: PrizeCardProps) {
         style={{ width: '40%', height: 'auto' }}
       />
       <Typography.Title
-        level={2}
+        level={3}
         style={{
           margin: 0,
           fontWeight: 800
@@ -30,7 +30,7 @@ function PrizeCard({ teamImage, teamTitle, teamPrize }: PrizeCardProps) {
         {teamTitle}
       </Typography.Title>
       <Typography.Title
-        level={3}
+        level={4}
         type="secondary"
         style={{
           margin: 0,
@@ -81,34 +81,10 @@ export function Prizes({ padding = '3rem 2rem', backgroundColor }: PrizesProps) 
         padding: padding,
         backgroundColor: backgroundColor,
       }}
+      className="gc-home-prizes"
     >
-      {/* Background bubble effect - matching React project exactly */}
-      <Flex
-        align="center"
-        justify="start"
-        style={{
-          width: '100%',
-          height: '100%',
-          position: 'absolute',
-          padding: padding,
-        }}
-      >
-        <Image
-          src="/assets/svg/bubble-light-purple.svg"
-          alt="bubble-image"
-          width={800}
-          height={600}
-          style={{
-            height: '100%',
-            width: '100%',
-            transform: 'scaleX(-1)',
-            opacity: 0.5,
-          }}
-        />
-      </Flex>
-
       <Typography.Title
-        level={1}
+        level={2}
         style={{
           fontWeight: 900,
           position: 'relative',

@@ -3,12 +3,11 @@
 import {Button, Col, ConfigProvider, Flex, Row, Typography} from "antd";
 import {InstagramOutlined, XOutlined, YoutubeFilled} from "@ant-design/icons";
 import {useTranslations} from "next-intl";
-import Image from "next/image";
 import {useResponsive} from "../../../lib/hooks/useResponsive";
 import {darkTheme} from "../../../components/providers/AntDesignProvider";
-import {customColors} from "../../../config/colors";
 import {gameCraftSocialLinks} from "../../../config/socialLinks";
 import {TelegramIcon} from "../../../components/common/TelegramIcon";
+import { HomeParallaxArtwork } from "./HomeParallaxArtwork";
 
 interface GameCraftIntroProps {
     padding?: string;
@@ -20,6 +19,7 @@ export function GameCraftIntro({
                                    backgroundColor,
                                }: GameCraftIntroProps) {
     const t = useTranslations("app");
+    const tWorkshop = useTranslations("workshop");
     const screens = useResponsive();
 
     return (
@@ -33,6 +33,7 @@ export function GameCraftIntro({
                     padding: padding,
                     backgroundColor: backgroundColor,
                 }}
+                className="gc-home-intro"
             >
                 <Row
                     align="middle"
@@ -52,34 +53,9 @@ export function GameCraftIntro({
                             }}
                             gap="small"
                         >
-                            {/* Bubble Background - using the actual SVG from React project */}
-                            <Flex
-                                align="center"
-                                justify="center"
-                                style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    position: "absolute",
-                                    zIndex: -1,
-                                }}
-                            >
-                                <Image
-                                    src="/assets/svg/bubble-purple.svg"
-                                    alt="bubble-image"
-                                    width={500}
-                                    height={500}
-                                    style={{
-                                        width: "100%",
-                                        height: "100%",
-                                        transform: "scaleX(-1)",
-                                    }}
-                                />
-                            </Flex>
-
                             <Typography.Title
                                 level={1}
                                 style={{
-                                    color: customColors.colorAction,
                                     fontWeight: 1000,
                                     fontSize: screens.lg ? "5rem" : screens.md ? "4rem" : "3rem",
                                     marginBottom: "1rem",
@@ -89,7 +65,7 @@ export function GameCraftIntro({
                             </Typography.Title>
 
                             <Typography.Title
-                                level={3}
+                                level={2}
                                 style={{
                                     fontWeight: 900,
                                     margin: 0,
@@ -104,6 +80,15 @@ export function GameCraftIntro({
                             >
                                 {t("intro.description")}
                             </Typography.Paragraph>
+
+                            <Flex gap="middle" wrap>
+                                <Button type="primary" size="large" href="#workshops">
+                                    {tWorkshop("workshops")}
+                                </Button>
+                                <Button size="large" href="#game-jam">
+                                    {tWorkshop("competitions")}
+                                </Button>
+                            </Flex>
 
                             <Flex
                                 align="center"
@@ -120,6 +105,7 @@ export function GameCraftIntro({
                                     href={gameCraftSocialLinks.telegram}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label="GameCraft on Telegram"
                                 />
                                 <Button
                                     type="text"
@@ -129,6 +115,7 @@ export function GameCraftIntro({
                                     href={gameCraftSocialLinks.instagram}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label="GameCraft on Instagram"
                                 />
                                 <Button
                                     type="text"
@@ -138,6 +125,7 @@ export function GameCraftIntro({
                                     href={gameCraftSocialLinks.twitter}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label="GameCraft on X"
                                 />
                             </Flex>
                         </Flex>
@@ -145,13 +133,7 @@ export function GameCraftIntro({
 
                     <Col span={24} lg={12}>
                         <Flex align="center" justify="center" style={{width: "100%"}}>
-                            <Image
-                                src="/assets/svg/dark-3d-bulb.svg"
-                                alt="logo"
-                                width={300}
-                                height={300}
-                                style={{width: "50%", height: "auto"}}
-                            />
+                            <HomeParallaxArtwork />
                         </Flex>
                     </Col>
                 </Row>

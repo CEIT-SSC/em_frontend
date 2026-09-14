@@ -16,10 +16,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { MenuOutlined, MoonFilled, SunFilled } from "@ant-design/icons";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { useResponsive } from "../../lib/hooks/useResponsive";
 import AppDrawer from "../../components/layout/AppDrawer";
-import { customColors } from "../../config/colors";
-import { useSound } from "../providers/SoundProvider";
 import { useMainNavigations } from "../../lib/config/navigation";
 import { useAuth } from "lib/hooks/useAuth";
 import { useAppRouter } from "lib/hooks/useAppRouter";
@@ -27,7 +24,6 @@ import { signIn } from "next-auth/react";
 import { FaCircleUser } from "react-icons/fa6";
 import { MdGamepad } from "react-icons/md";
 import CartButton from "components/features/cart/CartButton";
-import StickyBar from "components/features/stickyBar/StickyBar";
 
 const { useToken } = theme;
 const { Header } = Layout;
@@ -40,9 +36,7 @@ export function AppHeader() {
   const locale = useLocale();
   const { token } = useToken();
   const t = useTranslations("app");
-  const screens = useResponsive();
   const { theme, setTheme } = useTheme();
-  const { playSound } = useSound();
   const mainNavigations = useMainNavigations();
   const { isLoading, isAuthenticated, user } = useAuth();
 
@@ -86,20 +80,20 @@ export function AppHeader() {
 
   return (
     <div style={{ position: "sticky", top: 0, left: 0, zIndex: 1000 }}>
-      <StickyBar />
       <Header
+        className="gc-header"
         style={{
           width: "100%",
           height: "10vh",
           minHeight: "60px",
           maxHeight: "100px",
-          background: token.colorPrimary,
+          background: "transparent",
           transition: "box-shadow 0.3s",
           boxShadow: shadow ? "0 10px 20px rgba(0, 0, 0, 0.5)" : "none",
-          padding: "0.5rem 2rem",
+          padding: "0.5rem clamp(1rem, 4vw, 4rem)",
         }}
       >
-        {screens.lg ? (
+        <div className="gc-header-desktop">
           <Flex
             align="center"
             justify="space-between"
@@ -123,15 +117,13 @@ export function AppHeader() {
                 {mainNavigations.map((item) => (
                   <Button
                     key={item.route}
-                    type="primary"
+                    type={isActive(item.route) ? "primary" : "text"}
+                    className={
+                      isActive(item.route)
+                        ? "gc-nav-item gc-nav-item--active"
+                        : "gc-nav-item"
+                    }
                     onClick={() => router.push(item.route)}
-                    onMouseEnter={() => playSound("jump")}
-                    style={{
-                      fontWeight: "bolder",
-                      ...(isActive(item.route)
-                        ? { color: customColors.colorAction }
-                        : {}),
-                    }}
                   >
                     {item.name}
                   </Button>
@@ -145,7 +137,8 @@ export function AppHeader() {
               style={{ height: "100%" }}
               gap="small"
             >
-              <Button
+              // disabled temporarily due to theme
+              {/* <Button
                 type="text"
                 shape="circle"
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -156,7 +149,7 @@ export function AppHeader() {
                 ) : (
                   <SunFilled style={{ color: "white" }} />
                 )}
-              </Button>
+              </Button> */}
               <Switch
                 checkedChildren="En"
                 unCheckedChildren="Fa"
@@ -176,19 +169,10 @@ export function AppHeader() {
                 {!isLoading ? (
                   !isAuthenticated ? (
                     <>
-                      {/*                    /!* <Button*/}
-                      {/*  type="primary"*/}
-                      {/*  style={{ fontWeight: "bolder" }}*/}
-                      {/*  onClick={() => router.push("/auth/signup")}*/}
-                      {/*  onMouseEnter={() => playSound("coin")}*/}
-                      {/*>*/}
-                      {/*  {t("auth.signUp")}*/}
-                      {/*</Button> *!/*/}
                       <Button
                         type="primary"
                         style={{ fontWeight: "bolder" }}
                         onClick={handleLoginClicked}
-                        onMouseEnter={() => playSound("coin")}
                       >
                         {t("auth.login")}
                       </Button>
@@ -206,7 +190,6 @@ export function AppHeader() {
                           justifyContent: "center",
                           gap: 8,
                         }}
-                        onMouseEnter={() => playSound("coin")}
                         onClick={() => router.push("/dashboard/events")}
                       >
                         <FaCircleUser
@@ -233,7 +216,8 @@ export function AppHeader() {
               </Space>
             </Flex>
           </Flex>
-        ) : (
+        </div>
+        <div className="gc-header-mobile">
           <Flex
             align="center"
             justify="space-between"
@@ -244,6 +228,7 @@ export function AppHeader() {
               type="primary"
               size="large"
               icon={<MenuOutlined />}
+              aria-label="Open navigation menu"
               onClick={() => toggleDrawerOpen()}
             />
             <Image
@@ -255,7 +240,7 @@ export function AppHeader() {
             />
             <AppDrawer open={drawerOpen} toggleDrawerOpen={toggleDrawerOpen} />
           </Flex>
-        )}
+        </div>
       </Header>
     </div>
   );

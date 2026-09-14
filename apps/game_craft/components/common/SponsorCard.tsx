@@ -6,7 +6,6 @@ import Image from "next/image";
 import {Sponsor, sponsors} from "../../config/sponsors";
 import {useResponsive} from "../../lib/hooks/useResponsive";
 import {useTranslations} from "next-intl";
-import {customColors} from "../../config/colors";
 
 const {Text, Title} = Typography;
 const {useToken} = theme;
@@ -28,7 +27,7 @@ export default function SponsorCard({sponsor, index}: SponsorCardProps) {
     };
 
     return (
-        <Flex vertical gap="large" style={{width: "100%"}}>
+        <Flex className="gc-sponsor-card" vertical gap="large" style={{width: "100%"}}>
             {/* Sponsor Content */}
             <Flex
                 vertical
@@ -45,13 +44,14 @@ export default function SponsorCard({sponsor, index}: SponsorCardProps) {
                 >
                     {/* Logo Section */}
                     <Flex
+                        className="gc-sponsor-mark"
                         justify="center"
                         align="center"
                         style={{
                             width: isMobile ? 100 : 120,
                             height: isMobile ? 100 : 120,
                             borderRadius: "50%",
-                            backgroundColor: customColors.colorAction,
+                            backgroundColor: "var(--gc-blue)",
                             boxShadow: `0 2px 8px ${token.colorFillQuaternary}`,
                             flexShrink: 0,
                         }}
@@ -122,16 +122,7 @@ export default function SponsorCard({sponsor, index}: SponsorCardProps) {
                         paddingBlock: token.paddingLG,
                     }}
                 >
-                    {[1, 2, 3].map((coinIndex) => (
-                        <Image
-                            key={coinIndex}
-                            src="/mario/giphy-coin.gif"
-                            alt="Coin animation"
-                            width={isMobile ? 30 : 40}
-                            height={isMobile ? 30 : 40}
-                            unoptimized
-                        />
-                    ))}
+                    <div aria-hidden="true" style={{ width: "min(180px, 45vw)", height: 1, background: "var(--gc-line)" }} />
                 </Flex>
             )}
         </Flex>

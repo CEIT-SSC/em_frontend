@@ -24,6 +24,16 @@ export default function EventsPage() {
     }
   };
 
+  const CredentialRow = ({ label, value }: { label: string; value?: string }) => (
+    <Flex className="gc-dashboard-credential" align="center" justify="space-between" gap="middle" style={{ width: "100%", padding: "1rem 1.25rem" }}>
+      <Flex vertical gap={2} style={{ minWidth: 0 }}>
+        <Typography.Text type="secondary">{label}</Typography.Text>
+        <Typography.Text strong ellipsis>{value || "-"}</Typography.Text>
+      </Flex>
+      <Button type="primary" aria-label={`Copy ${label}`} icon={<LuCopy />} onClick={() => handleCopyCode(value || "")} disabled={!value} />
+    </Flex>
+  );
+
   // If not authenticated, show message to login
   if (!isAuthenticated) {
     return (
@@ -47,6 +57,7 @@ export default function EventsPage() {
 
   return (
     <Flex
+      className="gc-dashboard-account"
       vertical
       align="center"
       justify="center"
@@ -58,7 +69,7 @@ export default function EventsPage() {
     >
       <ToastContainer />
       {/* Skyroom Account */}
-      <Flex
+      <Flex className="gc-dashboard-account-panel"
         vertical
         align="start"
         justify="center"
@@ -77,55 +88,8 @@ export default function EventsPage() {
           {t("dashboard.onlineAccount.description")}
         </Typography.Paragraph>
 
-        <Typography.Title
-          level={4}
-          style={{ fontWeight: 800, marginBottom: 0 }}
-        >
-          {t("dashboard.onlineAccount.username")}
-        </Typography.Title>
-        <Button
-          type="dashed"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "1rem",
-            width: "100%",
-            height: "fit-content",
-          }}
-        >
-          <Button
-            type="dashed"
-            onClick={() => handleCopyCode(session.data.skyUsername)}
-          >
-            <LuCopy size={24} />
-          </Button>
-          {session.data.skyUsername}
-        </Button>
-
-        <Typography.Title
-          level={4}
-          style={{ fontWeight: 800, marginBottom: 0 }}
-        >
-          {t("dashboard.onlineAccount.password")}
-        </Typography.Title>
-        <Button
-          type="dashed"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "1rem",
-            width: "100%",
-            height: "fit-content",
-          }}
-        >
-          <Button
-            type="dashed"
-            onClick={() => handleCopyCode(session.data.skyPassword)}
-          >
-            <LuCopy size={24} />
-          </Button>
-          {session.data.skyPassword}
-        </Button>
+        <CredentialRow label={t("dashboard.onlineAccount.username")} value={session.data?.skyUsername} />
+        <CredentialRow label={t("dashboard.onlineAccount.password")} value={session.data?.skyPassword} />
       </Flex>
     </Flex>
   );

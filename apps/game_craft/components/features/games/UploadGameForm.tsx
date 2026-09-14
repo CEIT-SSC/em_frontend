@@ -13,6 +13,7 @@ export const UploadGameForm: React.FC = () => {
 
   return (
     <Flex
+      className="gc-dashboard-upload-form"
       vertical
       align="center"
       justify="space-between"
@@ -22,6 +23,7 @@ export const UploadGameForm: React.FC = () => {
       gap="small"
     >
       <Upload
+        className="gc-dashboard-upload-dropzone"
         type="drag"
         listType="text"
         style={{

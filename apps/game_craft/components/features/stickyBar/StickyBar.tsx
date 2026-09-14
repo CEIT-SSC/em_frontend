@@ -101,7 +101,7 @@ const StickyBar = () => {
         gap="small"
         style={{ color: "white", fontWeight: "bold", fontSize: "14px" }}
       >
-        <span style={{ animation: "bounce 1s infinite" }}>🎮</span>
+        <span>🎮</span>
         <Typography.Text
           style={{
             color: "white",
@@ -165,7 +165,7 @@ const StickyBar = () => {
             </>
           )}
         </Typography.Text>
-        <span style={{ animation: "bounce 1s infinite 0.3s" }}>⚡</span>
+        <span>⚡</span>
         <Button
           size="small"
           type="default"

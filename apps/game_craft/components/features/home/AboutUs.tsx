@@ -1,11 +1,10 @@
 "use client";
 
 import { Button, Col, Flex, Row, Typography } from "antd";
-import Image from "next/image";
 import { useRouter as useNextIntlRouter } from "../../../lib/navigation";
 import { useTranslations } from "next-intl";
-import { customColors } from "../../../config/colors";
 import { useRouter } from "@bprogress/next";
+import { HomeArtworkSlot } from "./HomeArtworkSlot";
 
 interface AboutUsProps {
   padding?: string;
@@ -30,6 +29,7 @@ export function AboutUs({
         padding: padding,
         backgroundColor: backgroundColor,
       }}
+      className="gc-home-about"
     >
       <Row align="middle" justify="space-around" style={{ width: "100%" }}>
         <Col span={24} lg={12}>
@@ -47,7 +47,7 @@ export function AboutUs({
               style={{ width: "100%" }}
             >
               <Typography.Title
-                level={1}
+                level={2}
                 style={{
                   fontWeight: 900,
                 }}
@@ -61,7 +61,6 @@ export function AboutUs({
             <Button
               type="primary"
               size="large"
-              style={{ backgroundColor: customColors.colorAction }}
               onClick={() => router.push("/staffs")}
             >
               {t("buttons.staffs")}
@@ -70,13 +69,7 @@ export function AboutUs({
         </Col>
         <Col span={24} lg={12}>
           <Flex align="center" justify="center" style={{ width: "100%" }}>
-            <Image
-              src="/assets/images/folan.png"
-              alt="gamecraft-logo"
-              width={300}
-              height={200}
-              style={{ width: "50%", height: "auto" }}
-            />
+            <HomeArtworkSlot assetId="GC-ART-05" variant="community" />
           </Flex>
         </Col>
       </Row>

@@ -1,4 +1,5 @@
 import { PresentationOverview } from "../Presentation/presentation";
+import { Pack } from "../Pack/pack";
 
 export interface SoloCompetition {
   id: number;
@@ -37,6 +38,7 @@ export interface PurchaseItem {
   solo_competitions: SoloCompetition[];
   competition_teams: string;
   products: Product[];
+  packs: Pack[];
 }
 
 export interface PurchasesResponse {
@@ -44,4 +46,5 @@ export interface PurchasesResponse {
   solo_competitions: SoloCompetition[];
   competition_teams: unknown[];
   products: Product[];
+  packs: Pack[];
 }

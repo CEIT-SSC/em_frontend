@@ -62,7 +62,7 @@ export function WorkshopCard({
   const { formatNumberToMoney } = useFormatter();
   const dispatch = useAppDispatch();
   const itemInCart = useAppSelector(
-    itemInCartSelector(presentation.id, ItemType.PRESENTATION)
+    itemInCartSelector(presentation.id, ItemType.PRESENTATION),
   );
   const isPresentationPurchased = useIsPresentationPurchased(presentation.id);
   const buttonShouldBeDisabled = useAppSelector(cartLoadingSelector);
@@ -134,14 +134,14 @@ export function WorkshopCard({
 
     // since all the presentations are on one day
     return `${formatDateTime(presentation.start_time)} - ${formatTime(
-      presentation.end_time
+      presentation.end_time,
     )}`;
   };
 
   const handleAddToCart = () => {
     if (buttonShouldBeDisabled) {
       if (!isAuthenticated) {
-        toast.error("لطفا وارد حساب خود شوید");
+        toast.error(t("workshop.loginToContinue"));
       }
       return;
     }
@@ -150,7 +150,7 @@ export function WorkshopCard({
       addItemToCartThunk({
         item_type: ItemType.PRESENTATION,
         item_id: presentation.id,
-      })
+      }),
     )
       .unwrap()
       .catch()
@@ -164,7 +164,7 @@ export function WorkshopCard({
       removeItemFromCartThunk({
         item_id: itemInCart.id,
         item_type: ItemType.PRESENTATION,
-      })
+      }),
     )
       .unwrap()
       .catch()
@@ -254,17 +254,14 @@ export function WorkshopCard({
             }}
           >
             <AntButton
+              className="gc-card-details"
               onClick={() => setShowModal(true)}
               type="primary"
               icon={<EyeOutlined />}
               size="small"
-              style={{
-                borderRadius: token.borderRadiusLG,
-                backgroundColor: "rgba(0, 0, 0, 0.7)",
-                borderColor: "transparent",
-              }}
+              style={{ borderRadius: token.borderRadiusLG }}
             >
-              جزئیات بیشتر
+              {t("workshop.viewDetails")}
             </AntButton>
           </div>
         </div>
@@ -281,7 +278,7 @@ export function WorkshopCard({
           {/* Title and Badges */}
           <Flex vertical gap="small">
             <Typography.Title
-              level={4}
+              level={3}
               style={{
                 margin: 0,
                 fontSize: "18px",
@@ -345,7 +342,7 @@ export function WorkshopCard({
           {isPurchased && presentation.online_link && (
             <Flex vertical gap="small">
               <Typography.Title
-                level={4}
+                level={3}
                 style={{
                   margin: 0,
                   fontSize: "18px",
@@ -506,7 +503,7 @@ export function WorkshopCard({
                   color: "white",
                 }}
               >
-                خریداری شده
+                {t("workshop.purchased")}
               </AntButton>
             ) : (
               <AntButton
@@ -537,6 +534,7 @@ export function WorkshopCard({
 
       {/* Modal */}
       <Modal
+        className="gc-workshop-modal"
         open={showModal}
         onCancel={() => setShowModal(false)}
         footer={[
@@ -757,7 +755,7 @@ export function WorkshopCard({
                 >
                   {presentation.is_paid
                     ? `${formatNumberToMoney(presentation.price)} ${t(
-                        "common.currency"
+                        "common.currency",
                       )}`
                     : t("workshop.free")}
                 </Typography.Title>

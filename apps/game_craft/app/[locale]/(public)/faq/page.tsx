@@ -122,18 +122,19 @@ export default function FAQPage() {
         width: "100%",
       }}
     >
-      <Flex
+      <Flex className="gc-page gc-public-page gc-public-faq"
         align="center"
         justify="center"
         style={{
           width: "100%",
           backgroundSize: "fit",
           backgroundPosition: "center",
-          padding: faqViewPadding,
+          padding: 0,
           position: "relative",
         }}
       >
         <Card
+          className="gc-archive-panel"
           style={{
             backgroundColor: token.colorBgBase,
             width: "100%",
@@ -149,7 +150,7 @@ export default function FAQPage() {
                 level={1}
                 style={{
                   fontWeight: 900,
-                  color: token.colorPrimary,
+                  color: "var(--gc-blue)",
                   textAlign: "center",
                   margin: 0,
                 }}

@@ -25,22 +25,22 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
     const {token} = useToken();
     const dashboardNavigations = useDashboardNavigations();
     const pathname = usePathname();
-    const {isAuthenticated} = useAuth();
+    const {isAuthenticated, isLoading} = useAuth();
     const router = useRouter();
     const t = useTranslations();
 
     useEffect(() => {
-        if (!isAuthenticated) {
+        if (!isLoading && !isAuthenticated) {
             router.push("/");
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, isLoading, router]);
 
     const handleBackToHome = () => {
         router.push("/");
     };
 
     return (
-        <Flex
+        <Flex className="gc-dashboard gc-dashboard-world"
             vertical
             style={{
                 width: "100%",
@@ -51,20 +51,20 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
             <DashboardHeader/>
 
             <Flex
+                className="gc-dashboard-shell"
                 vertical
                 align="center"
                 justify="start"
                 flex={1}
                 style={{
                     width: "100%",
-                    backgroundColor: token.colorPrimary,
-                    backgroundImage: `url(/svg/pattern.svg)`,
-                    padding: "1rem",
+                    padding: "clamp(1rem, 3vw, 2rem)",
                 }}
                 gap="large"
             >
                 {screens.lg ? (
                     <Flex
+                        className="gc-dashboard-masthead"
                         align="center"
                         justify="space-between"
                         style={{width: "100%"}}
@@ -97,21 +97,20 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
                     gap="small"
                 >
                     {screens.lg ? (
-                        <Flex flex={1} style={{position: "sticky", top: ".5rem"}}>
+                        <Flex className="gc-dashboard-navigation-wrap" flex={1} style={{position: "sticky", top: ".5rem"}}>
                             <DashboardNavigationCard/>
                         </Flex>
                     ) : (
                         <></>
                     )}
                     <Flex
+                        className="gc-dashboard-content"
                         flex={3}
                         vertical
                         align="center"
                         justify="start"
                         style={{
-                            backgroundColor: token.colorBgBase,
                             height: "100%",
-                            borderRadius: token.borderRadius,
                         }}
                     >
                         <Flex
@@ -124,6 +123,7 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
                             }}
                         >
                             <Flex
+                                className="gc-dashboard-content-heading"
                                 vertical
                                 align="center"
                                 justify="center"
@@ -149,6 +149,7 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
                                 />
                             </Flex>
                             <Flex
+                                className="gc-dashboard-content-body"
                                 vertical
                                 flex={1}
                                 style={{

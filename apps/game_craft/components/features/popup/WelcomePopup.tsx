@@ -195,7 +195,7 @@ const WelcomePopup = () => {
         >
           {/* Welcome title */}
           <div style={{ marginBottom: "1rem" }}>
-            <span style={{ fontSize: "48px", animation: "bounce 2s infinite" }}>
+            <span style={{ fontSize: "48px" }}>
               🎮
             </span>
             <Typography.Title

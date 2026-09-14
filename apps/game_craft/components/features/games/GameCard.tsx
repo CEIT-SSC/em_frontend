@@ -24,6 +24,7 @@ export const GameCard: React.FC<GameCardProps> = ({
 
   return (
     <Flex
+      className="gc-dashboard-game-card"
       vertical
       align="center"
       justify="center"
@@ -31,9 +32,6 @@ export const GameCard: React.FC<GameCardProps> = ({
         width: "100%",
         height: "450px",
         padding: token.paddingXS,
-        borderRadius: token.borderRadius,
-        backgroundColor: token.colorBgContainer,
-        boxShadow: "0 0 10px rgba(0,0,0,0.1)",
       }}
     >
       <Flex

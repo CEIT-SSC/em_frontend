@@ -1,7 +1,7 @@
 "use client";
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Cart, Presentation } from "@ssc/core";
+import { Cart, Pack, Presentation } from "@ssc/core";
 import {
   addItemToCartThunk,
   applyBonusCodeThunk,
@@ -12,6 +12,7 @@ import {
 
 const initialState = {
   presentations: [] as Presentation[],
+  packs: [] as Pack[],
   count: 0,
   discountCode: null as string | null,
   discountAmount: 0,
@@ -33,7 +34,8 @@ const cartSlice = createSlice({
       },
       fulfilled: (state, action) => {
         state.presentations = action.payload.presentations;
-        state.count = action.payload.presentations.length;
+        state.packs = action.payload.packs ?? [];
+        state.count = state.presentations.length + state.packs.length;
         state.discountCode = action.payload.discount_code;
         state.discountAmount = action.payload.discount_amount || 0;
         // Handle both PriceObject and plain number formats
@@ -51,6 +53,7 @@ const cartSlice = createSlice({
 
       rejected: (state, action) => {
         state.presentations = [];
+        state.packs = [];
         state.count = 0;
         state.error = action.payload as string;
         state.loading = false;

@@ -10,7 +10,7 @@ interface TimelineLabelProps {
 export default function TimelineLabel({
   logo,
   alt = "Timeline step",
-  width = "30%",
+  width = "172px",
 }: TimelineLabelProps) {
   return (
     <Flex
@@ -20,12 +20,13 @@ export default function TimelineLabel({
       style={{ width: "100%", height: "auto" }}
     >
       <Image
+        className="gc-timeline-label-image"
         src={logo}
         alt={alt}
-        width={100}
-        height={100}
-        className="w-[65%] md:w-[30%]"
-        style={{ height: "auto" }}
+        width={1024}
+        height={1024}
+        sizes="(max-width: 768px) 0px, 152px"
+        style={{ width, height: "auto" }}
       />
     </Flex>
   );

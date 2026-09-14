@@ -47,6 +47,7 @@ export function DashboardHeader() {
     <></>
   ) : (
     <Header
+      className="gc-dashboard-mobile-header"
       style={{
         position: "sticky",
         top: 0,
@@ -56,7 +57,6 @@ export function DashboardHeader() {
         height: "10vh",
         minHeight: "60px",
         maxHeight: "100px",
-        background: token.colorPrimary,
         transition: "box-shadow 0.3s",
         boxShadow: shadow ? "0 10px 20px rgba(0, 0, 0, 0.5)" : "none",
         padding: "0.5rem 1rem",
@@ -78,8 +78,8 @@ export function DashboardHeader() {
 
         {/* Logo in center */}
         <Image
-          src="/svg/dark-3d.svg"
-          alt="gamecraft-logo"
+          src="/images/dark-3d.svg"
+          alt="GameCraft"
           width={60}
           height={40}
           style={{ height: "60%", width: "auto", maxHeight: "60px" }}

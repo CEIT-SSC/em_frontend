@@ -87,7 +87,7 @@ export function CompetitionCard({
   // }, [itemInCart]);
 
   // Color palette
-  const colorStripes = ["#4CAF50", "#2196F3", "#FFC107", "#F44336"];
+  const colorStripes = ["#9ddbf5", "#5b9fc1", "#8b7bae", "#f1ecdf"];
 
   // const buttonText = useMemo(() => {
   //   if (!isAuthenticated) return t("workshop.loginToContinue");
@@ -233,17 +233,14 @@ export function CompetitionCard({
             }}
           >
             <AntButton
+              className="gc-card-details"
               onClick={() => setShowModal(true)}
               type="primary"
               icon={<EyeOutlined />}
               size="small"
-              style={{
-                borderRadius: token.borderRadiusLG,
-                backgroundColor: "rgba(0, 0, 0, 0.7)",
-                borderColor: "transparent",
-              }}
+              style={{ borderRadius: token.borderRadiusLG }}
             >
-              جزئیات بیشتر
+              {t("workshop.viewDetails")}
             </AntButton>
           </div>
         </div>
@@ -260,7 +257,7 @@ export function CompetitionCard({
           {/* Title and Badges */}
           <Flex vertical gap="small">
             <Typography.Title
-              level={4}
+              level={3}
               style={{
                 margin: 0,
                 fontSize: "18px",
@@ -414,6 +411,7 @@ export function CompetitionCard({
 
       {/* Modal */}
       <Modal
+        className="gc-workshop-modal"
         open={showModal}
         onCancel={() => setShowModal(false)}
         footer={[

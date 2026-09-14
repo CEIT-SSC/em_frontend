@@ -42,7 +42,7 @@ export default function LogoWithText({
         alt="GameCraft Logo"
         width={size}
         height={size}
-        style={{ zIndex: 10 }}
+        style={{ zIndex: 10, width: "auto", height: "auto" }}
         priority
       />
 

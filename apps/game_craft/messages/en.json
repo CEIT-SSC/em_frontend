@@ -12,6 +12,7 @@
       "staffs": "Our Team",
       "gallery": "Gallery",
       "sponsors": "Sponsors",
+      "history": "Event Archive",
       "dashboard": "Dashboard"
     },
     "timeline": {
@@ -309,6 +310,7 @@
     "noOnlineWorkshops": "No online workshops are currently available",
     "noOfflineWorkshops": "No in-person workshops are currently available",
     "viewDetails": "View Details",
+    "purchased": "Purchased",
     "capacity": "Total Capacity",
     "teamsCapacity": "Teams Total Capacity",
     "remainingCapacity": "Remaining",
@@ -325,6 +327,18 @@
       "advanced": "Advanced"
     }
   },
+  "packs": {
+    "title": "Packs",
+    "description": "Bundle the sessions and extras you want in one purchase.",
+    "bundleBadge": "Bundle",
+    "includedCount": "{count} items included",
+    "save": "Save {amount}",
+    "viewContents": "View pack contents",
+    "contents": "Included in this pack",
+    "error": "Failed to load packs",
+    "emptyTitle": "No packs available",
+    "emptyDescription": "There are no purchasable packs for this event yet."
+  },
   "common": {
     "currency": "Toman",
     "retry": "Retry",
@@ -332,7 +346,7 @@
   },
   "notFound": {
     "title": "Oops! Page Not Found",
-    "description": "It looks like the page you're looking for doesn't exist. Mario couldn't find it in any of the castle levels!",
+    "description": "The route you requested is not on the current GameCraft map.",
     "goHome": "Go Home",
     "goBack": "Go Back"
   }

@@ -12,6 +12,7 @@ export default function TeamStatusPage() {
 
   return (
     <Flex
+      className="gc-dashboard-team"
       vertical
       align="center"
       justify="center"

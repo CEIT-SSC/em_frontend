@@ -23,22 +23,23 @@ export default function NewsPage() {
         minHeight: "100%",
       }}
     >
-      <Flex
+      <Flex className="gc-page gc-public-page gc-public-empty"
         vertical
         align="center"
         justify="center"
         style={{
           width: "100%",
-          padding: newsViewPadding,
+          padding: 0,
         }}
       >
-        <Typography.Title style={{ color: "white" }}>
+        <Typography.Title className="gc-public-title">
           {t("mainNavigation.news")}
         </Typography.Title>
         <Flex
           vertical
           align="center"
           justify="center"
+          className="gc-empty-route"
           style={{
             width: "100%",
             minHeight: "200px",

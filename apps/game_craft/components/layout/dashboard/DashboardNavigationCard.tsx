@@ -3,7 +3,6 @@
 import { Button, Card, Flex, Grid, Image, theme, Typography } from "antd";
 import { useLocale, useTranslations } from "next-intl";
 import { useDashboardNavigations } from "../../../lib/config/dashboard-navigation";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname, useRouter as nextIntlNavigation } from "lib/navigation";
 import { useRouter } from "@bprogress/next";
@@ -39,13 +38,12 @@ export function DashboardNavigationCard({
 
   return (
     <Flex
+      className="gc-dashboard-navigation"
       vertical
       align="center"
       justify="start"
       style={{
-        backgroundColor: token.colorBgBase,
         width: "100%",
-        borderRadius: token.borderRadius,
         padding: screens.lg ? token.padding : 0,
       }}
     >
@@ -64,6 +62,7 @@ export function DashboardNavigationCard({
           gap="small"
         >
           <div
+            className="gc-dashboard-avatar"
             style={{
               position: "relative",
               display: "flex",
@@ -86,28 +85,13 @@ export function DashboardNavigationCard({
               }}
             >
               <Image
-                src="/mario/giphy-1.gif"
+                src="/images/logo/default_prof.jpg"
                 width="100%"
                 height="auto"
                 alt="user-avatar"
-                fallback="/mario/giphy-1.gif"
+                fallback="/images/logo/default_prof.jpg"
               />
             </Flex>
-            <DotLottieReact
-              src={"/lottie/Fireworks.lottie"}
-              autoplay
-              loop
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: "250%",
-                height: "250%",
-                gridArea: "1 / 1",
-                zIndex: 0,
-              }}
-            />
           </div>
           <Typography.Title level={4} style={{ fontWeight: 800, margin: 0 }}>
             {session?.data?.user?.name}
@@ -123,6 +107,7 @@ export function DashboardNavigationCard({
         >
           {dashboardNavigations.map((item) => (
             <Button
+              className={isActiveRoute(item.route) ? "gc-dashboard-nav-item gc-dashboard-nav-item--active" : "gc-dashboard-nav-item"}
               key={item.route}
               type={isActiveRoute(item.route) ? "primary" : "dashed"}
               size="large"
@@ -139,6 +124,7 @@ export function DashboardNavigationCard({
             </Button>
           ))}
           <Button
+            className="gc-dashboard-nav-item gc-dashboard-nav-item--logout"
             danger
             type="dashed"
             size="large"

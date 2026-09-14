@@ -33,8 +33,9 @@ export function AppFooter() {
   return (
     <ConfigProvider theme={darkTheme}>
       <Layout.Footer
+        className="gc-footer"
         style={{
-          backgroundColor: token.colorPrimary,
+          backgroundColor: "transparent",
           textAlign: "center",
           width: "100%",
           padding: token.padding,
@@ -54,6 +55,7 @@ export function AppFooter() {
               <Flex align="center" justify="center" flex={1} gap="large">
                 <a
                   href={gameCraftSocialLinks.website}
+                  aria-label="GameCraft website"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -66,6 +68,7 @@ export function AppFooter() {
                 </a>
                 <a
                   href={sscSocialLinks.website}
+                  aria-label="AUT Computer Engineering website"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -78,6 +81,7 @@ export function AppFooter() {
                 </a>
                 <a
                   href={gameCraftSocialLinks.illustrationTehranUniInstagram}
+                  aria-label="Tehran University illustration Instagram"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -96,8 +100,9 @@ export function AppFooter() {
                     type="text"
                     shape="circle"
                     size="large"
-                    icon={<TelegramIcon color={"white"} />}
-                    href={gameCraftSocialLinks.telegram}
+                  icon={<TelegramIcon color={"white"} />}
+                  href={gameCraftSocialLinks.telegram}
+                  aria-label="GameCraft on Telegram"
                 />
                 <Button
                   type="text"
@@ -105,13 +110,15 @@ export function AppFooter() {
                   size="large"
                   icon={<InstagramOutlined style={{ color: "white" }} />}
                   href={gameCraftSocialLinks.instagram}
+                  aria-label="GameCraft on Instagram"
                 />
                 <Button
                     type="text"
                     shape="circle"
                     size="large"
-                    icon={<XOutlined style={{ color: "white" }} />}
-                    href={gameCraftSocialLinks.twitter}
+                  icon={<XOutlined style={{ color: "white" }} />}
+                  href={gameCraftSocialLinks.twitter}
+                  aria-label="GameCraft on X"
                 />
                 {/*<Button*/}
                 {/*    type="text"*/}

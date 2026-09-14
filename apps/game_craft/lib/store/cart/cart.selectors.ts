@@ -9,6 +9,31 @@ export const cartPresentationsSelector = createSelector(
   (cart) => cart.presentations
 );
 
+export type CartDisplayItem = {
+  id: number;
+  title: string;
+  price: string;
+  image?: string | null;
+  itemType: ItemType;
+};
+
+export const cartItemsSelector = createSelector([cartSelector], (cart): CartDisplayItem[] => [
+  ...cart.presentations.map((presentation) => ({
+    id: presentation.id,
+    title: presentation.title,
+    price: presentation.price,
+    image: presentation.poster,
+    itemType: ItemType.PRESENTATION,
+  })),
+  ...cart.packs.map((pack) => ({
+    id: pack.id,
+    title: pack.name,
+    price: pack.real_price,
+    image: pack.image,
+    itemType: ItemType.PACK,
+  })),
+]);
+
 export const cartPresentationsCountSelector = createSelector(
   [cartSelector],
   (cart) => cart.count
@@ -25,14 +50,16 @@ export const cartLoadingSelector = createSelector(
 );
 
 export const itemInCartSelector = (id: number, type: ItemType) =>
-  createSelector([cartPresentationsSelector], (presentation) => {
+  createSelector([cartSelector], (cart) => {
     switch (type) {
       case ItemType.PRESENTATION:
-        return presentation.find((item) => item.id === id);
+        return cart.presentations.find((item) => item.id === id);
       case ItemType.SOLO_COMPETITION:
         return false;
       case ItemType.COMPETITION_TEAM:
         return false;
+      case ItemType.PACK:
+        return cart.packs.find((item) => item.id === id);
       default:
         return false;
     }

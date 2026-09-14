@@ -4,8 +4,7 @@ import { Col, Flex, Row, theme, Typography } from "antd";
 import { StaffCard } from "./StaffCard";
 import { useStaffs } from "../../../config/staffs";
 import { useTranslations } from "next-intl";
-import { customColors } from "../../../config/colors";
-import Image from "next/image";
+import { HomeArtworkSlot } from "../home/HomeArtworkSlot";
 
 const { useToken } = theme;
 
@@ -16,6 +15,7 @@ export function StaffContainer() {
 
   return (
     <Flex
+      className="gc-staff-hall"
       vertical
       align="center"
       justify="center"
@@ -28,17 +28,12 @@ export function StaffContainer() {
       }}
     >
       <Flex vertical align={"center"} justify={"center"}>
-        <Image
-          src={"/mario/mario-friends.png"}
-          width={200}
-          height={200}
-          alt={"mario"}
-        />
+        <HomeArtworkSlot assetId="GC-ART-05" variant="community" />
         <Typography.Title
           level={1}
           style={{
             fontWeight: 900,
-            color: token.colorPrimary,
+                color: "var(--gc-ivory)",
           }}
         >
           {t("title")}
@@ -63,7 +58,7 @@ export function StaffContainer() {
             <Typography.Title
               level={2}
               style={{
-                color: customColors.colorAction,
+                color: "var(--gc-blue)",
                 fontWeight: 700,
               }}
             >

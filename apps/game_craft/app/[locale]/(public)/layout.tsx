@@ -1,26 +1,16 @@
 "use client";
 
-import { FloatButton, Layout, theme } from "antd";
+import { Layout } from "antd";
 import { AppHeader } from "../../../components/layout/AppHeader";
 import { AppFooter } from "../../../components/layout/AppFooter";
-import Wave from "../../../components/common/Wave";
-import { usePathname } from "next/navigation";
 
 interface MainLayoutProps {
   children: React.ReactNode;
 }
 
-const { useToken } = theme;
-
 export default function MainLayout({ children }: MainLayoutProps) {
-  const { token } = useToken();
-  const pathname = usePathname();
-
-  // if pathname == /[locale]/ --> home page
-  const isHomePage = pathname === "/" || /^\/[a-zA-Z-]+\/?$/.test(pathname);
-
   return (
-    <Layout
+    <Layout className="gc-public gc-public-world min-h-screen text-[var(--gc-ivory)]"
       style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
     >
       <AppHeader />
@@ -29,17 +19,11 @@ export default function MainLayout({ children }: MainLayoutProps) {
           flex: 1,
           display: "flex",
           flexDirection: "column",
-          backgroundColor: isHomePage ? token.colorBgBase : token.colorPrimary,
-          backgroundImage: isHomePage ? null : "url('/images/pattern.svg')",
+          backgroundColor: "transparent",
+          backgroundImage: "none",
         }}
       >
         {children}
-        <Wave
-          width="100%"
-          height="auto"
-          fill={token.colorPrimary}
-          style={{ transform: "scaleY(-1) translateY(-2px)" }}
-        />
       </Layout.Content>
       <AppFooter />
       {/*<FloatButton.BackTop style={{ insetInlineStart: 24 }} />*/}

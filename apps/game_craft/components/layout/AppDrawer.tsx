@@ -1,17 +1,13 @@
 "use client";
 
-import { Button, Drawer, Flex, Switch, theme } from "antd";
+import { Button, Drawer, Flex, Switch } from "antd";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
-import { MoonFilled, SunFilled } from "@ant-design/icons";
-import { useTheme } from "next-themes";
 import { useMainNavigations } from "../../lib/config/navigation";
 import { useAuth } from "../../lib/hooks/useAuth";
 import { useAppRouter } from "lib/hooks/useAppRouter";
 import { signIn } from "next-auth/react";
 import CartButton from "components/features/cart/CartButton";
-
-const { useToken } = theme;
 
 interface MainDrawerProps {
   open: boolean;
@@ -23,8 +19,6 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
   const locale = useLocale();
   const mainNavigations = useMainNavigations();
   const pathname = usePathname();
-  const { token } = useToken();
-  const { theme, setTheme } = useTheme();
   const { isAuthenticated, user, logout } = useAuth();
   const router = useAppRouter();
 
@@ -57,6 +51,7 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
 
   return (
     <Drawer
+      className="gc-public-drawer"
       placement={locale === "fa" ? "right" : "left"}
       open={open}
       width={300}
@@ -66,10 +61,6 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
       maskClosable={true}
       onClose={toggleDrawerOpen}
       zIndex={100000000}
-      style={{
-        backgroundColor: token.colorBgBase,
-        backdropFilter: "blur(10px)",
-      }}
     >
       <Flex
         vertical
@@ -97,13 +88,14 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
               width: "100%",
             }}
           >
-            <Button
+            {/* <Button
               type="text"
               shape="circle"
+              aria-label="Toggle color theme"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               size="large"
               icon={theme === "dark" ? <MoonFilled /> : <SunFilled />}
-            />
+            /> */}
             <Switch
               checkedChildren="En"
               unCheckedChildren="Fa"
@@ -116,6 +108,7 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
             <Button
               key={item.route}
               type={isActive(item.route) ? "primary" : "dashed"}
+              className={isActive(item.route) ? "gc-nav-item gc-nav-item--active" : "gc-nav-item"}
               size="large"
               onClick={() => handleNavigation(item.route)}
               style={{

@@ -9,13 +9,13 @@ export function StaffView() {
   const staffViewPadding = screens.lg ? "3rem 5rem" : "3rem 2rem";
 
   return (
-    <Flex
+    <Flex className="gc-page gc-public-page gc-public-staff"
       align="center"
       justify="center"
       style={{
         flex: 1,
         width: "100%",
-        padding: staffViewPadding,
+        padding: 0,
       }}
     >
       <StaffContainer />

@@ -76,7 +76,7 @@ export function CompetitionsList({
       ) : (
         <CompetitionsGrid
           competitions={competitions.data.results}
-          competitionImage="/images/Luigi.jpg"
+          competitionImage="/images/2025/staffs/hero.gif"
           dashboardMode={dashboardMode}
         />
       );
@@ -90,6 +90,7 @@ export function CompetitionsList({
       vertical
       align="center"
       justify="center"
+      className="gc-home-competitions"
       style={{
         width: "100%",
         backgroundColor: backgroundColor,

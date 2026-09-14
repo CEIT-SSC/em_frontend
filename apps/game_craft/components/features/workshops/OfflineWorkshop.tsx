@@ -81,7 +81,7 @@ export function OfflineWorkshop({
       ) : (
         <WorkshopGrid
           presentations={presentations.data.results}
-          workshopImage="/images/SuperMario.jpg" // Pass SuperMario image for offline workshops
+          workshopImage="/images/2025/staffs/hero.gif"
         />
       );
     }
@@ -92,6 +92,7 @@ export function OfflineWorkshop({
       vertical
       align="center"
       justify="center"
+      className="gc-home-workshops"
       style={{
         width: "100%",
         padding: padding,
