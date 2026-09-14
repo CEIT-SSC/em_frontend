@@ -5,7 +5,12 @@ export * from "./api/constants";
 export * from "./api/axiosInstances/serverApiService";
 export * from "./types/api/Shop/Shop";
 export * from "./types/api/Presentation/presentation";
-export type { PurchasesResponse, Product } from "./types/api/Purchases/Purchases";
+export * from "./types/api/Pack/pack";
+export type {
+  PurchasesResponse,
+  Product,
+  PurchaseItem,
+} from "./types/api/Purchases/Purchases";
 export * from "./types/api/general";
 export * from "./types/api/User/user";
 export type {

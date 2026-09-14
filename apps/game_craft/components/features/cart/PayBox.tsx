@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  cartPresentationsSelector,
+  cartItemsSelector,
   cartLoadingSelector,
   cartPaymentDataSelector,
 } from "lib/store/cart/cart.selectors";
@@ -32,7 +32,7 @@ const { useToken } = theme;
 
 export function PayBox() {
   const dispatch = useAppDispatch();
-  const cartItems = useAppSelector(cartPresentationsSelector);
+  const cartItems = useAppSelector(cartItemsSelector);
   const paymentData = useAppSelector(cartPaymentDataSelector);
   const loading = useAppSelector(cartLoadingSelector);
   const { token, theme } = useToken();

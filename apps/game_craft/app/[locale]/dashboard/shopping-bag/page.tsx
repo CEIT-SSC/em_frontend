@@ -4,7 +4,7 @@ import { PayBox } from "../../../../components/features/cart/PayBox";
 import ProductCart from "components/features/cart/ProductCart";
 import { useAppDispatch, useAppSelector } from "lib/store/store";
 import {
-  cartPresentationsSelector,
+  cartItemsSelector,
   cartLoadingSelector,
   cartErrorSelector,
 } from "lib/store/cart/cart.selectors";
@@ -22,7 +22,7 @@ const { useToken } = theme;
 
 export default function ShoppingBagPage() {
   const dispatch = useAppDispatch();
-  const cartItems = useAppSelector(cartPresentationsSelector);
+  const cartItems = useAppSelector(cartItemsSelector);
   const loading = useAppSelector(cartLoadingSelector);
   const error = useAppSelector(cartErrorSelector);
   const { token } = useToken();
@@ -91,10 +91,10 @@ export default function ShoppingBagPage() {
         {cartItems.map((item) => (
           <Col key={item.id} xs={24} sm={24} lg={24}>
             <ProductCart
-              imageUrl="/images/2025/staffs/hero.gif"
+              imageUrl={item.image || "/images/2025/staffs/hero.gif"}
               title={item.title}
               price={item.price}
-              onRemove={() => handleRemoveItem(item.id, ItemType.PRESENTATION)}
+              onRemove={() => handleRemoveItem(item.id, item.itemType)}
             />
           </Col>
         ))}

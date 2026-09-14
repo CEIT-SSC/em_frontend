@@ -327,6 +327,18 @@
       "advanced": "Advanced"
     }
   },
+  "packs": {
+    "title": "Packs",
+    "description": "Bundle the sessions and extras you want in one purchase.",
+    "bundleBadge": "Bundle",
+    "includedCount": "{count} items included",
+    "save": "Save {amount}",
+    "viewContents": "View pack contents",
+    "contents": "Included in this pack",
+    "error": "Failed to load packs",
+    "emptyTitle": "No packs available",
+    "emptyDescription": "There are no purchasable packs for this event yet."
+  },
   "common": {
     "currency": "Toman",
     "retry": "Retry",

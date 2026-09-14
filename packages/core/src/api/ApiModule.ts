@@ -8,6 +8,7 @@ import { PaymentApi } from "./Payment/payment.api";
 import { PurchasesApi } from "./Purchases/purchases.api";
 import { TeamsApi } from "./Teams/teams.api";
 import { CompetitionsApi } from "./Competitions/competitions.api";
+import { PacksApi } from "./Packs/packs.api";
 
 /**
  * Main API class that provides a centralized entry point for all API operations.
@@ -38,6 +39,7 @@ export class ApiModule {
   private _purchasesApi?: PurchasesApi;
   private _teamsApi?: TeamsApi;
   private _competitionsApi?: CompetitionsApi;
+  private _packs?: PacksApi;
   private apiInstance: AxiosInstance;
 
   constructor(apiInstance: AxiosInstance) {
@@ -105,6 +107,13 @@ export class ApiModule {
       this._competitionsApi = new CompetitionsApi(this.apiInstance)
     }
     return this._competitionsApi;
+  }
+
+  get packs(): PacksApi {
+    if (!this._packs) {
+      this._packs = new PacksApi(this.apiInstance);
+    }
+    return this._packs;
   }
 
   public isLoaded(apiName: "auth" | "shop"): boolean {

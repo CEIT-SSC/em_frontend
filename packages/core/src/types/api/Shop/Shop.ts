@@ -1,9 +1,11 @@
 import { Presentation } from "../Presentation/presentation";
+import { Pack } from "../Pack/pack";
 
 export enum ItemType {
   PRESENTATION = "presentation",
   SOLO_COMPETITION = "solo_competition",
   COMPETITION_TEAM = "competition_team",
+  PACK = "pack",
 }
 export interface PriceObject {
   source: string;
@@ -19,6 +21,7 @@ export interface Cart {
   solo_competitions: SoloCompetition[];
   competition_teams: CompetitionTeam[];
   products: unknown[];
+  packs: Pack[];
   subtotal_amount: PriceObject;
   discount_amount: number;
   total_amount: PriceObject;

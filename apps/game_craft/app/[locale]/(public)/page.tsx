@@ -8,6 +8,7 @@ import { Prizes } from "../../../components/features/home/Prizes";
 import { AboutUs } from "../../../components/features/home/AboutUs";
 import { OfflineWorkshop } from "../../../components/features/workshops/OfflineWorkshop";
 import { OnlineWorkshop } from "../../../components/features/workshops/OnlineWorkshop";
+import { Packs } from "../../../components/features/packs/Packs";
 import { Sponsors } from "../../../components/features/home/Sponsors";
 import { useResponsive } from "../../../lib/hooks/useResponsive";
 import { CompetitionsList } from "components/features/competitions/CompetitonsList";
@@ -67,6 +68,7 @@ export default function HomePage() {
         <div id="workshops" />
         <OfflineWorkshop padding={homeViewPadding} backgroundColor="#172640" />
         <OnlineWorkshop padding={homeViewPadding} backgroundColor="#0d1527" />
+        <Packs padding={homeViewPadding} backgroundColor="#111c31" />
 
         {/* Sponsors Section */}
         <Sponsors padding={homeViewPadding} backgroundColor="#101a30" />

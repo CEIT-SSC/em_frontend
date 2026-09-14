@@ -20,6 +20,9 @@ export enum ApiPath {
   PRESENTATIONS_GET_LIST = "/presentations/",
   PRESENTATIONS_GET_DETAILS = "/presentations/{id}/",
 
+  // Packs
+  PACKS_GET_LIST = "/packs/",
+
   // Shop
   SHOP_CART = "/cart/",
   SHOP_ADD_ITEM = "/cart/items/",
