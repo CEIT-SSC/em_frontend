@@ -20,11 +20,7 @@ export const createAndCheckoutThunk = createAppAsyncThunk(
       const response = await thunkAPI
         .dispatch(checkoutThunk(Number(process.env.GAME_CRAFT_SSC_EVENT_ID)))
         .unwrap();
-      const paymentRes = await thunkAPI.extra.Api.payment.initiatePayment(
-        response.order_id
-      );
-      const paymentData = paymentRes.data.data;
-      return thunkAPI.fulfillWithValue(paymentData);
+      return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

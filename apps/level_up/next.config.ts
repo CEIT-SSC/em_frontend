@@ -11,11 +11,6 @@ const nextConfig: NextConfig = {
     GAME_CRAFT_SSC_EVENT_ID: process.env.GAME_CRAFT_SSC_EVENT_ID,
   },
   transpilePackages: ["@ssc/ui", "@ssc/utils", "@ssc/core"],
-  modularizeImports: {
-    antd: {
-      transform: "antd/lib/{{member}}",
-    },
-  },
   images: {
     domains: ["api.ceit-ssc.ir"],
   },

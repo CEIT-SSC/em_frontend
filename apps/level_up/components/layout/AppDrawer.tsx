@@ -7,7 +7,7 @@ import { MoonFilled, SunFilled } from "@ant-design/icons";
 import { useTheme } from "next-themes";
 import { useMainNavigations } from "../../lib/config/navigation";
 import { useAuth } from "../../lib/hooks/useAuth";
-import { useAppRouter } from "lib/hooks/useAppRouter";
+import { useRouter } from "lib/navigation";
 import { signIn } from "next-auth/react";
 import CartButton from "components/features/cart/CartButton";
 
@@ -26,7 +26,7 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
   const { token } = useToken();
   const { theme, setTheme } = useTheme();
   const { isAuthenticated, user, logout } = useAuth();
-  const router = useAppRouter();
+  const router = useRouter();
 
   const isActive = (path: string) => {
     // Remove locale prefix from pathname for comparison
@@ -38,7 +38,7 @@ export default function AppDrawer({ open, toggleDrawerOpen }: MainDrawerProps) {
     const newLocale = locale === "fa" ? "en" : "fa";
     // Remove the current locale from the pathname and get the clean path
     const currentPath = pathname.replace(`/${locale}`, "") || "/";
-    router.replaceLocale(currentPath, newLocale);
+    router.replace(currentPath, { locale: newLocale });
   };
 
   const handleNavigation = (route: string) => {

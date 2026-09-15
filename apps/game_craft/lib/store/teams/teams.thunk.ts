@@ -1,4 +1,4 @@
-import { TeamDetails } from "@ssc/core/lib/types/api/Teams/teams";
+import { TeamDetails } from "@ssc/core";
 import { createAppAsyncThunk } from "../createAppAsyncThunk";
 
 export const fetchTeamsThunk = createAppAsyncThunk(

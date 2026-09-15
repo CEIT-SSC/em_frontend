@@ -19,7 +19,7 @@ import { useTheme } from "next-themes";
 import AppDrawer from "../../components/layout/AppDrawer";
 import { useMainNavigations } from "../../lib/config/navigation";
 import { useAuth } from "lib/hooks/useAuth";
-import { useAppRouter } from "lib/hooks/useAppRouter";
+import { useRouter } from "lib/navigation";
 import { signIn } from "next-auth/react";
 import { FaCircleUser } from "react-icons/fa6";
 import { MdGamepad } from "react-icons/md";
@@ -31,7 +31,7 @@ const { Header } = Layout;
 export function AppHeader() {
   const [shadow, setShadow] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const router = useAppRouter();
+  const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
   const { token } = useToken();
@@ -47,7 +47,7 @@ export function AppHeader() {
   const handleLanguageSwitch = () => {
     const newLocale = locale === "fa" ? "en" : "fa";
     const currentPath = pathname.replace(`/${locale}`, "") || "/";
-    router.replaceLocale(currentPath, newLocale);
+    router.replace(currentPath, { locale: newLocale });
   };
 
   const handleScroll = () => {
