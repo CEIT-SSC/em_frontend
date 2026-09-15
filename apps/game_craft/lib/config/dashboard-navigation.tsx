@@ -37,6 +37,10 @@ export const useDashboardNavigations = (): DashboardNavigationItem[] => {
       route: `/dashboard/shopping-bag`,
     },
     {
+      name: t("wallet.label"),
+      route: `/dashboard/wallet`,
+    },
+    {
       name: t("onlineAccount.label"),
       route: `/dashboard/online-account`,
     },

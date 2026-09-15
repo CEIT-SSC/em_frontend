@@ -32,7 +32,13 @@ export enum ApiPath {
 
   // Order
   ORDER_CREATE_PARTIAL_CHECKOUT = "/orders/checkout/",
-  ORDER_PAY_SINGLE_ORDER = "/orders/{id}/initiate-payment/",
+  ORDER_GET_BY_ID = "/orders/history/{id}/",
+
+  // Wallet
+  WALLET_BALANCE = "/wallet/",
+  WALLET_TOP_UPS = "/wallet/top-ups/",
+  WALLET_TOP_UP_STATUS = "/wallet/top-ups/{id}/",
+  WALLET_TRANSACTIONS = "/wallet/transactions/",
 
   // Purchases
   PURCHASES_GET_LIST = "/purchases/",

@@ -5,7 +5,7 @@ import { routing } from "./lib/routing";
 const intlMiddleware = createMiddleware(routing);
 
 // Protected routes that require authentication
-const protectedRoutes = ["/dashboard", "/profile", "/admin"];
+const protectedRoutes = ["/dashboard", "/wallet", "/profile", "/admin"];
 
 function isProtectedRoute(pathname: string) {
   const pathWithoutLocale = pathname.replace(/^\/(fa|en)/, "") || "/";

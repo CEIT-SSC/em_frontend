@@ -4,7 +4,7 @@ import { ShopApi } from "./Shopping/shop.api";
 import { ProfileApi } from "./Profile/profile.api";
 import { PresentationsApi } from "./Presentations/presentations.api";
 import { OrderApi } from "./Order/order.api";
-import { PaymentApi } from "./Payment/payment.api";
+import { WalletApi } from "./Wallet/wallet.api";
 import { PurchasesApi } from "./Purchases/purchases.api";
 import { TeamsApi } from "./Teams/teams.api";
 import { CompetitionsApi } from "./Competitions/competitions.api";
@@ -35,7 +35,7 @@ export class ApiModule {
   private _profile?: ProfileApi;
   private _presentations?: PresentationsApi;
   private _orderApi?: OrderApi;
-  private _paymentApi?: PaymentApi;
+  private _walletApi?: WalletApi;
   private _purchasesApi?: PurchasesApi;
   private _teamsApi?: TeamsApi;
   private _competitionsApi?: CompetitionsApi;
@@ -81,11 +81,11 @@ export class ApiModule {
     return this._orderApi;
   }
 
-  get payment(): PaymentApi {
-    if (!this._paymentApi) {
-      this._paymentApi = new PaymentApi(this.apiInstance);
+  get wallet(): WalletApi {
+    if (!this._walletApi) {
+      this._walletApi = new WalletApi(this.apiInstance);
     }
-    return this._paymentApi;
+    return this._walletApi;
   }
 
   get purchases(): PurchasesApi {

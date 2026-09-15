@@ -1,6 +1,7 @@
 export * from "./api/ApiModule";
 export * from "./api/Shopping/shop.api";
 export * from "./api/Purchases/purchases.api";
+export * from "./api/Wallet/wallet.api";
 export * from "./api/constants";
 export * from "./api/axiosInstances/serverApiService";
 export * from "./types/api/Shop/Shop";
@@ -12,6 +13,8 @@ export type {
   PurchaseItem,
 } from "./types/api/Purchases/Purchases";
 export * from "./types/api/general";
+export * from "./types/api/Order/Order";
+export * from "./types/api/Wallet/Wallet";
 export * from "./types/api/User/user";
 export type {
   TeamsList,

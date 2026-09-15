@@ -1,13 +1,13 @@
 "use client";
 
 import {
-  cartItemsSelector,
   cartLoadingSelector,
   cartPaymentDataSelector,
 } from "lib/store/cart/cart.selectors";
-import { createAndCheckoutThunk } from "lib/store/order/order.thunk";
+import { checkoutCartThunk } from "lib/store/order/order.thunk";
 import {
   applyBonusCodeThunk,
+  fetchCartThunk,
   removeBonusCodeThunk,
 } from "lib/store/cart/cart.thunk";
 import { useAppDispatch, useAppSelector } from "lib/store/store";
@@ -25,23 +25,27 @@ import {
 } from "antd";
 import { useFormatter } from "lib/hooks/useFormatter";
 import { toast, ToastContainer } from "react-toastify";
-import { FaCross } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
+import { eventId } from "lib/utils/constants";
+import { useRouter } from "lib/navigation";
+import { useTranslations } from "next-intl";
 
 const { useToken } = theme;
 
 export function PayBox() {
   const dispatch = useAppDispatch();
-  const cartItems = useAppSelector(cartItemsSelector);
   const paymentData = useAppSelector(cartPaymentDataSelector);
   const loading = useAppSelector(cartLoadingSelector);
   const { token, theme } = useToken();
   const { formatNumberToMoney } = useFormatter();
+  const router = useRouter();
+  const t = useTranslations("app.dashboard.checkout");
 
   // State for discount code modal and input
   const [isDiscountModalOpen, setIsDiscountModalOpen] = useState(false);
   const [discountCode, setDiscountCode] = useState("");
   const [discountLoading, setDiscountLoading] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
 
   const applyDiscount = () => {
     setIsDiscountModalOpen(true);
@@ -71,16 +75,27 @@ export function PayBox() {
     setDiscountCode("");
   };
 
-  const checkout = useCallback(() => {
-    dispatch(createAndCheckoutThunk(cartItems.map((item) => item.id)))
-      .unwrap()
-      .then((res) => {
-        window.open(res.payment_url, "_blank");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [cartItems, dispatch]);
+  const checkout = useCallback(async () => {
+    if (checkoutLoading) return;
+
+    setCheckoutLoading(true);
+    try {
+      const result = await dispatch(checkoutCartThunk(eventId)).unwrap();
+
+      if (result.payment_required) {
+        if (!result.payment_url) throw new Error("Missing payment URL");
+        window.location.assign(result.payment_url);
+        return;
+      }
+
+      await dispatch(fetchCartThunk());
+      toast.success(t("success"));
+      router.push("/dashboard/events");
+    } catch {
+      toast.error(t("error"));
+      setCheckoutLoading(false);
+    }
+  }, [checkoutLoading, dispatch, router, t]);
 
   if (loading) {
     return (
@@ -207,10 +222,12 @@ export function PayBox() {
           block
           style={{ marginTop: token.margin }}
           onClick={checkout}
+          loading={checkoutLoading}
+          disabled={checkoutLoading}
         >
           <Flex align="center" justify="center" gap="small">
             <Typography.Text style={{ fontWeight: 900, color: "white" }}>
-              پرداخت
+              {checkoutLoading ? t("processing") : t("pay")}
             </Typography.Text>
           </Flex>
         </AntButton>

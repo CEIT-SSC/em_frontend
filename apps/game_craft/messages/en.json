@@ -125,6 +125,85 @@
         "maxFileSize": "File size should not exceed 5MB"
       },
       "shoppingBag": "Shopping Cart",
+      "checkout": {
+        "pay": "Pay",
+        "processing": "Processing…",
+        "success": "Payment completed from your wallet.",
+        "error": "Payment could not be completed. Please try again."
+      },
+      "wallet": {
+        "label": "Wallet",
+        "availableBalance": "Available balance",
+        "currency": "toman",
+        "balanceHint": "Your wallet is used automatically when you check out.",
+        "balanceError": "Your balance could not be loaded.",
+        "retry": "Try again",
+        "topUpTitle": "Add money",
+        "topUpDescription": "Enter the amount you want to add, then continue to secure payment.",
+        "amountLabel": "Top-up amount",
+        "amountPlaceholder": "For example, 100,000",
+        "amountRequired": "Enter a top-up amount.",
+        "amountInvalid": "Enter an amount of at least 1 toman, with no more than two decimal places.",
+        "topUpAction": "Continue to payment",
+        "redirecting": "Opening payment…",
+        "topUpError": "The payment page could not be created. Please try again.",
+        "transactionsTitle": "Transactions",
+        "transactionsDescription": "Your latest wallet activity.",
+        "transactionsError": "Transactions could not be loaded.",
+        "transactionsEmpty": "No wallet transactions yet.",
+        "paginationLabel": "Wallet transaction pages",
+        "direction": {
+          "credit": "Money in",
+          "debit": "Money out"
+        },
+        "transactionType": {
+          "topup": "Wallet top-up",
+          "purchase": "Purchase",
+          "refund": "Refund",
+          "adjustment": "Balance adjustment"
+        },
+        "callback": {
+          "retry": "Check again",
+          "goToWallet": "Go to wallet",
+          "goToEvents": "View my events",
+          "goToCart": "Return to cart",
+          "topUpAmount": "Top-up amount: {amount} toman",
+          "currentBalance": "Current balance: {balance} toman",
+          "orderVerificationUnavailable": "The related order could not be verified yet.",
+          "manualSuccess": {
+            "title": "Wallet topped up",
+            "description": "The payment was verified and your new balance is ready to use."
+          },
+          "orderSuccess": {
+            "title": "Payment completed",
+            "description": "Your wallet was funded and the order was completed successfully."
+          },
+          "orderProcessing": {
+            "title": "Registration is being completed",
+            "description": "Payment is confirmed. We are still finalizing the items in your order."
+          },
+          "orderIncomplete": {
+            "title": "Wallet funded, order incomplete",
+            "description": "Your money is safe in the wallet, but the related order was not completed."
+          },
+          "paymentFailed": {
+            "title": "Payment was not completed",
+            "description": "The top-up was cancelled or rejected and your wallet was not charged."
+          },
+          "paymentProcessing": {
+            "title": "Payment is still being verified",
+            "description": "The payment provider has not finished confirming this top-up."
+          },
+          "invalid": {
+            "title": "Payment result is incomplete",
+            "description": "This return link does not include enough information to verify the top-up."
+          },
+          "unavailable": {
+            "title": "Payment could not be verified",
+            "description": "We could not load the current wallet state. Check again in a moment."
+          }
+        }
+      },
       "onlineAccount": {
         "label": "Online Account",
         "skyroom": "Skyroom Account",
