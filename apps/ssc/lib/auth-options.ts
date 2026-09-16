@@ -3,9 +3,7 @@ import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { serverApi } from "~/core/api/server/serverApi";
 import axios from "axios";
-import { BASE_URL } from "@ssc/core";
-import { UserProfileResponse } from "@ssc/core/lib/types/api/User/user";
-import { RequestResponse } from "@ssc/core/lib/types/api/general";
+import { BASE_URL, RequestResponse, UserProfileResponse } from "@ssc/core";
 
 declare module "next-auth" {
   interface Session {

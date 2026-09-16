@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TeamDetails } from "@ssc/core/lib/types/api/Teams/teams";
+import { TeamDetails } from "@ssc/core";
 import {
   fetchTeamsThunk,
   payTeamThunk,
