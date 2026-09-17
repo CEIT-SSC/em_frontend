@@ -21,11 +21,17 @@ RUN --mount=type=cache,id=frontend-pnpm-store,target=/pnpm/store,sharing=locked 
     pnpm install --frozen-lockfile
 
 FROM dependencies AS builder
+ARG GAME_CRAFT_SSC_EVENT_ID
+
 COPY turbo.json tsconfig.json ./
 COPY packages ./packages
 COPY apps/game_craft ./apps/game_craft
 RUN --mount=type=cache,id=frontend-turbo,target=/repo/.turbo \
     --mount=type=cache,id=frontend-next-game-craft,target=/repo/apps/game_craft/.next/cache,sharing=locked \
+    if ! echo "$GAME_CRAFT_SSC_EVENT_ID" | grep -Eq '^[1-9][0-9]*$'; then \
+      echo "GAME_CRAFT_SSC_EVENT_ID must be a positive integer" >&2; \
+      exit 1; \
+    fi && \
     pnpm turbo run build --filter="@ssc/game_craft..."
 
 FROM base AS runner

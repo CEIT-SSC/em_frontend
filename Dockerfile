@@ -38,6 +38,7 @@ FROM dependencies AS builder
 # these values for the other applications.
 ARG APP_PATH=apps/ssc
 ARG APP_FILTER=@ssc/web
+ARG GAME_CRAFT_SSC_EVENT_ID
 
 COPY turbo.json tsconfig.json ./
 COPY packages ./packages
@@ -49,6 +50,11 @@ RUN --mount=type=cache,id=frontend-turbo,target=/repo/.turbo \
     --mount=type=cache,id=frontend-next-ssc,target=/repo/apps/ssc/.next/cache,sharing=locked \
     --mount=type=cache,id=frontend-next-level-up,target=/repo/apps/level_up/.next/cache,sharing=locked \
     --mount=type=cache,id=frontend-next-game-craft,target=/repo/apps/game_craft/.next/cache,sharing=locked \
+    if { [ "$APP_PATH" = "apps/level_up" ] || [ "$APP_PATH" = "apps/game_craft" ]; } && \
+       ! echo "$GAME_CRAFT_SSC_EVENT_ID" | grep -Eq '^[1-9][0-9]*$'; then \
+      echo "GAME_CRAFT_SSC_EVENT_ID must be a positive integer for $APP_PATH" >&2; \
+      exit 1; \
+    fi && \
     pnpm turbo run build --filter="${APP_FILTER}..."
 
 

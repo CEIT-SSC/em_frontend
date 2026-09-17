@@ -22,7 +22,10 @@ jobs:
       - name: Build and push Docker image
         run: |
           IMAGE_NAME=ghcr.io/${{ secrets.GHCR_USERNAME }}/gamecraft:latest
-          docker build -t $IMAGE_NAME -f apps/game_craft/Dockerfile .
+          docker build \
+            --build-arg GAME_CRAFT_SSC_EVENT_ID=${{ vars.GAME_CRAFT_SSC_EVENT_ID }} \
+            -t $IMAGE_NAME \
+            -f apps/game_craft/Dockerfile .
           docker push $IMAGE_NAME
 
       # Deploy to server
