@@ -12,15 +12,16 @@ const { useToken } = theme;
 export default function EventsPage() {
   const { token } = useToken();
   const t = useTranslations("app");
+  const tc = useTranslations("common");
   const { isAuthenticated } = usePurchases();
   const session = useSession();
 
-  const handleCopyCode = async (text: string) => {
+  const handleCopyCode = async (text: string, label: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      toast.info("با موفقیت کپی شد");
+      toast.info(t("dashboard.onlineAccount.copied", { label }));
     } catch (err) {
-      console.error("Failed to copy code:", err);
+      toast.error(t("dashboard.onlineAccount.copyFailed"));
     }
   };
 
@@ -30,7 +31,7 @@ export default function EventsPage() {
         <Typography.Text type="secondary">{label}</Typography.Text>
         <Typography.Text strong ellipsis>{value || "-"}</Typography.Text>
       </Flex>
-      <Button type="primary" aria-label={`Copy ${label}`} icon={<LuCopy />} onClick={() => handleCopyCode(value || "")} disabled={!value} />
+      <Button type="primary" aria-label={t("dashboard.onlineAccount.copy", { label })} icon={<LuCopy />} onClick={() => handleCopyCode(value || "", label)} disabled={!value} />
     </Flex>
   );
 
@@ -46,8 +47,8 @@ export default function EventsPage() {
         }}
       >
         <Alert
-          message="دسترسی غیرمجاز"
-          description="لطفا وارد حساب کاربری خود شوید."
+          message={tc("accessDenied")}
+          description={t("dashboard.events.unauthorized")}
           type="warning"
           showIcon
         />

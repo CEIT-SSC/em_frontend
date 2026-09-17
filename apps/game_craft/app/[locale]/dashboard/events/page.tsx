@@ -13,6 +13,7 @@ const { useToken } = theme;
 export default function EventsPage() {
   const { token } = useToken();
   const t = useTranslations("app");
+  const tc = useTranslations("common");
   const { presentations, loading, error, isAuthenticated } = usePurchases();
   const screen = useResponsive();
 
@@ -41,7 +42,7 @@ export default function EventsPage() {
     if (error) {
       return (
         <Alert
-          message={`خطا در بارگذاری ${title}`}
+          message={t("dashboard.events.loadError", { section: title })}
           description={error}
           type="error"
           showIcon
@@ -61,7 +62,7 @@ export default function EventsPage() {
           }}
         >
           <Empty
-            description={`شما در هیچ ${title.toLowerCase()}ی ثبت‌نام نکرده‌اید`}
+            description={t("dashboard.events.emptyDescription")}
             image={Empty.PRESENTED_IMAGE_SIMPLE}
           />
         </Flex>
@@ -99,8 +100,8 @@ export default function EventsPage() {
         }}
       >
         <Alert
-          message="دسترسی غیرمجاز"
-          description="برای مشاهده رویدادهای خریداری شده، لطفا وارد حساب کاربری خود شوید."
+          message={tc("accessDenied")}
+          description={t("dashboard.events.unauthorized")}
           type="warning"
           showIcon
         />

@@ -1167,6 +1167,7 @@ body {
   opacity: 0;
 }
 .gc-dashboard-shell {
+  width: 100%;
   min-height: 100%;
   overflow: auto;
 }

@@ -1,0 +1,202 @@
+.workspace {
+  min-height: 100vh;
+}
+
+.shell {
+  width: min(1440px, 100%) !important;
+  min-height: 100vh !important;
+  margin: 0 auto;
+  overflow: visible !important;
+}
+
+.shell::before,
+.shell::after {
+  display: none;
+}
+
+.masthead {
+  height: 64px;
+  min-height: 64px;
+  max-height: 64px;
+  padding: 0.25rem 0.5rem;
+  overflow: hidden;
+}
+
+.masthead::after {
+  display: none;
+}
+
+.masthead :global(img) {
+  width: 56px !important;
+  height: 56px !important;
+}
+
+.masthead :global(.ant-typography) {
+  font-size: 1.1rem !important;
+}
+
+.navigationWrap {
+  max-width: 272px !important;
+}
+
+.content {
+  min-height: calc(100vh - 7rem) !important;
+  background: rgba(13, 21, 39, 0.92) !important;
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.18) !important;
+}
+
+.contentHeading {
+  align-items: flex-start !important;
+  min-height: 68px;
+  padding: 1.25rem 1.5rem !important;
+  border-bottom: 1px solid rgba(157, 219, 245, 0.18);
+}
+
+.contentHeading::before {
+  display: none;
+}
+
+.pageTitle {
+  margin: 0 !important;
+  color: var(--gc-dashboard-ivory) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.025em;
+}
+
+.contentBody {
+  padding: 0 !important;
+}
+
+/* Shared operating surface: keeps each route task-led without replacing its content. */
+.contentBody :global(.gc-dashboard-events),
+.contentBody :global(.gc-dashboard-account),
+.contentBody :global(.gc-dashboard-team),
+.contentBody :global(.gc-dashboard-games) {
+  padding: 1.5rem !important;
+}
+
+.contentBody :global(.gc-dashboard-event-section) {
+  padding-top: 0 !important;
+}
+
+.contentBody :global(.gc-dashboard-event-section::before) {
+  display: none;
+}
+
+.contentBody :global(.gc-dashboard-event-section > .ant-typography) {
+  width: 100%;
+  margin: 0 0 -0.35rem !important;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(157, 219, 245, 0.16);
+  font-weight: 800 !important;
+}
+
+.contentBody :global(.ant-empty) {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px dashed rgba(157, 219, 245, 0.24);
+  border-radius: 14px;
+}
+
+.contentBody :global(.ant-alert) {
+  color: var(--gc-dashboard-ivory) !important;
+  border-color: rgba(157, 219, 245, 0.28) !important;
+}
+
+.contentBody :global(.ant-alert-message),
+.contentBody :global(.ant-alert-description) {
+  color: inherit !important;
+}
+
+.contentBody :global(.ant-alert-info .ant-alert-icon) {
+  color: var(--gc-dashboard-blue) !important;
+}
+
+.contentBody :global(.gc-dashboard-team-members) {
+  min-height: 280px;
+  padding: 1.5rem !important;
+  border: 1px solid rgba(157, 219, 245, 0.16);
+  border-radius: 14px;
+  background: rgba(22, 36, 61, 0.48);
+}
+
+.contentBody :global(.gc-dashboard-team-members > .ant-row > .ant-alert) {
+  width: min(100%, 42rem);
+  margin: 1rem auto;
+}
+
+.contentBody :global(.gc-dashboard-bag-items) {
+  padding: 1.5rem !important;
+}
+
+.contentBody :global(.gc-dashboard-payment) {
+  padding: 1.25rem 1.5rem 1.5rem !important;
+  border-top-color: rgba(157, 219, 245, 0.28) !important;
+}
+
+.contentBody :global(.gc-dashboard-account-panel) {
+  width: min(100%, 46rem) !important;
+  margin: 0 auto;
+  padding: 1.5rem !important;
+  border: 1px solid rgba(157, 219, 245, 0.18);
+  border-radius: 14px;
+  background: rgba(22, 36, 61, 0.5);
+}
+
+.contentBody :global(.gc-dashboard-account-panel::before),
+.contentBody :global(.gc-dashboard-game-form::before) {
+  display: none;
+}
+
+.contentBody :global(.gc-dashboard-game-form),
+.contentBody :global(.gc-dashboard-game-preview) {
+  padding: 1.5rem !important;
+  border: 1px solid rgba(157, 219, 245, 0.16);
+  border-radius: 14px;
+  background: rgba(22, 36, 61, 0.46);
+}
+
+.contentBody :global(.gc-dashboard-game-card) {
+  min-height: 0 !important;
+}
+
+.contentBody :global(.ant-btn:focus-visible),
+.contentBody :global(.ant-input:focus-visible),
+.contentBody :global(.ant-input-affix-wrapper:focus-within) {
+  outline: 3px solid rgba(157, 219, 245, 0.78) !important;
+  outline-offset: 3px;
+}
+
+@media (max-width: 991px) {
+  .shell {
+    min-height: calc(100vh - 4rem) !important;
+    padding: 0.75rem !important;
+  }
+
+  .content {
+    min-height: calc(100vh - 5.5rem) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .shell { padding: 0.5rem !important; }
+  .contentHeading { min-height: 58px; padding: 1rem !important; }
+  .pageTitle { font-size: 1.25rem !important; }
+
+  .contentBody :global(.gc-dashboard-events),
+  .contentBody :global(.gc-dashboard-account),
+  .contentBody :global(.gc-dashboard-team),
+  .contentBody :global(.gc-dashboard-games),
+  .contentBody :global(.gc-dashboard-bag-items) {
+    padding: 1rem !important;
+  }
+
+  .contentBody :global(.gc-dashboard-team-members),
+  .contentBody :global(.gc-dashboard-account-panel),
+  .contentBody :global(.gc-dashboard-game-form),
+  .contentBody :global(.gc-dashboard-game-preview) {
+    padding: 1rem !important;
+  }
+}

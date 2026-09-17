@@ -84,16 +84,18 @@
         "workshops": "My Workshops",
         "talks": "My Talks",
         "loading": "Loading...",
-        "empty": "You haven't enrolled in any events",
-        "emptyDescription": "Browse available events and enroll to expand your skills"
+        "empty": "No registrations yet",
+        "emptyDescription": "Your registered events and workshops will appear here.",
+        "loadError": "We could not load {section}. Please try again.",
+        "unauthorized": "Sign in to view your registrations."
       },
       "teamStatus": {
         "label": "Teams Status",
         "teamName": "Team Name",
         "teamMembers": "Team Members",
         "addTeammate": "Add Teammate",
-        "noTeams": "You haven't enrolled in any competitions",
-        "noTeamsDescription": "There is no such a team that enrolled in a competition for you"
+        "noTeams": "No active team yet",
+        "noTeamsDescription": "Once you register for a competition with a team, its members and status will appear here."
       },
       "games": {
         "label": "Games",
@@ -125,11 +127,31 @@
         "maxFileSize": "File size should not exceed 5MB"
       },
       "shoppingBag": "Shopping Cart",
+      "shoppingBagPage": {
+        "removed": "Item removed from your cart.",
+        "removeError": "We could not remove this item. Please try again.",
+        "loadError": "We could not load your cart. Refresh the page and try again.",
+        "empty": "Your cart is empty.",
+        "unauthorized": "Sign in to view your cart."
+      },
       "checkout": {
         "pay": "Pay",
         "processing": "Processing…",
         "success": "Payment completed from your wallet.",
-        "error": "Payment could not be completed. Please try again."
+        "error": "Payment could not be completed. Please try again.",
+        "discountPrompt": "Have a discount code?",
+        "enterDiscount": "Enter code",
+        "discountApplied": "Discount code applied.",
+        "discountRequired": "Enter a discount code.",
+        "discountInvalid": "This discount code is not valid. Check the code or continue without it.",
+        "activeDiscount": "Active discount code",
+        "removeDiscount": "Remove discount code",
+        "subtotal": "Order subtotal",
+        "discount": "Discount",
+        "total": "Amount due",
+        "discountTitle": "Add a discount code",
+        "discountHelp": "Enter the code exactly as you received it.",
+        "discountPlaceholder": "Discount code"
       },
       "wallet": {
         "label": "Wallet",
@@ -207,9 +229,12 @@
       "onlineAccount": {
         "label": "Online Account",
         "skyroom": "Skyroom Account",
-        "description": "",
+        "description": "Use these details to join presentations hosted on Skyroom. Enter them only on the Skyroom sign-in page.",
         "username": "Username",
-        "password": "Password"
+        "password": "Password",
+        "copy": "Copy {label}",
+        "copied": "{label} copied.",
+        "copyFailed": "Could not copy. Please try again."
       }
     },
     "pages": {
@@ -413,7 +438,8 @@
   "common": {
     "currency": "Toman",
     "retry": "Retry",
-    "close": "Close"
+    "close": "Close",
+    "accessDenied": "Sign-in required"
   },
   "notFound": {
     "title": "Oops! Page Not Found",

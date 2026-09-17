@@ -1,0 +1,38 @@
+.navigation {
+  gap: 1.25rem;
+  padding: 1.25rem !important;
+  background: rgba(13, 21, 39, 0.94) !important;
+}
+
+.navigation::before { display: none; }
+
+.avatar {
+  width: 72px !important;
+  border-color: rgba(157, 219, 245, 0.52) !important;
+  box-shadow: 0 0 0 4px rgba(91, 159, 193, 0.1) !important;
+}
+
+.userName {
+  margin: 0 !important;
+  font-size: 1rem !important;
+  font-weight: 750 !important;
+}
+
+.navItem {
+  height: 42px !important;
+  border-style: solid !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease !important;
+}
+
+.navItem:hover {
+  transform: none !important;
+}
+
+.navItem:focus-visible {
+  outline: 2px solid var(--gc-dashboard-blue);
+  outline-offset: 2px;
+}
+
+.logout { margin-top: 0.25rem; }

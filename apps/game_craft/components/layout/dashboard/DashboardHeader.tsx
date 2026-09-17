@@ -54,9 +54,9 @@ export function DashboardHeader() {
         right: 0,
         zIndex: 10000,
         width: "100%",
-        height: "10vh",
-        minHeight: "60px",
-        maxHeight: "100px",
+        height: "64px",
+        minHeight: "64px",
+        maxHeight: "64px",
         transition: "box-shadow 0.3s",
         boxShadow: shadow ? "0 10px 20px rgba(0, 0, 0, 0.5)" : "none",
         padding: "0.5rem 1rem",
@@ -73,6 +73,7 @@ export function DashboardHeader() {
           type="primary"
           size="large"
           icon={<MenuOutlined />}
+          aria-label="باز کردن منوی داشبورد"
           onClick={() => toggleDrawerOpen()}
         />
 
@@ -91,6 +92,7 @@ export function DashboardHeader() {
           type="primary"
           size="large"
           icon={<ArrowLeftOutlined />}
+          aria-label="بازگشت به خانه"
           onClick={handleBackToHome}
         />
 

@@ -13,7 +13,6 @@ import {
   Row,
   Skeleton,
   Tag,
-  theme,
   Typography,
 } from "antd";
 import {
@@ -31,8 +30,8 @@ import { clientApi } from "lib/api/client/clientApi";
 import { useFormatter } from "lib/hooks/useFormatter";
 import { useLocale, useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import styles from "./page.module.css";
 
-const { useToken } = theme;
 const PAGE_SIZE = 20;
 
 const normalizeDigits = (value: string) =>
@@ -43,7 +42,6 @@ const normalizeDigits = (value: string) =>
     .replace("٫", ".");
 
 export default function WalletPage() {
-  const { token } = useToken();
   const t = useTranslations("app.dashboard.wallet");
   const locale = useLocale();
   const { formatNumberToMoney } = useFormatter();
@@ -65,7 +63,7 @@ export default function WalletPage() {
         dateStyle: "medium",
         timeStyle: "short",
       }),
-    [locale]
+    [locale],
   );
 
   const loadBalance = useCallback(async () => {
@@ -87,7 +85,7 @@ export default function WalletPage() {
     try {
       const response = await clientApi.wallet.getTransactions(
         nextPage,
-        PAGE_SIZE
+        PAGE_SIZE,
       );
       setTransactions(response.data.data);
     } catch {
@@ -127,32 +125,19 @@ export default function WalletPage() {
     const directionLabel = t(`direction.${transaction.direction}`);
 
     return (
-      <List.Item
-        style={{
-          paddingInline: 0,
-          alignItems: "center",
-          gap: token.marginSM,
-        }}
-      >
-        <Flex align="center" gap="middle" style={{ minWidth: 0 }}>
+      <List.Item className={styles.transaction}>
+        <Flex align="center" gap="middle" className={styles.transactionInfo}>
           <Flex
+            className={`${styles.transactionIcon} ${
+              isCredit ? styles.credit : styles.debit
+            }`}
             align="center"
             justify="center"
             aria-hidden="true"
-            style={{
-              width: 40,
-              height: 40,
-              flex: "0 0 40px",
-              borderRadius: token.borderRadius,
-              color: isCredit ? token.colorSuccess : token.colorError,
-              background: isCredit
-                ? token.colorSuccessBg
-                : token.colorErrorBg,
-            }}
           >
             {isCredit ? <PlusOutlined /> : <MinusOutlined />}
           </Flex>
-          <Flex vertical style={{ minWidth: 0 }}>
+          <Flex vertical className={styles.transactionCopy}>
             <Typography.Text strong>
               {t(`transactionType.${transaction.entry_type}`)}
             </Typography.Text>
@@ -162,22 +147,21 @@ export default function WalletPage() {
           </Flex>
         </Flex>
 
-        <Flex vertical align="end" gap={4}>
+        <Flex vertical align="end" gap={4} className={styles.transactionAmount}>
           <Typography.Text
             strong
             aria-label={`${directionLabel}: ${formatNumberToMoney(
-              transaction.amount
+              transaction.amount,
             )} ${t("currency")}`}
-            style={{
-              color: isCredit ? token.colorSuccess : token.colorError,
-              fontVariantNumeric: "tabular-nums",
-              whiteSpace: "nowrap",
-            }}
+            className={isCredit ? styles.creditText : styles.debitText}
           >
             {isCredit ? "+" : "−"}
             {formatNumberToMoney(transaction.amount)} {t("currency")}
           </Typography.Text>
-          <Tag color={isCredit ? "success" : "error"} bordered={false}>
+          <Tag
+            className={isCredit ? styles.creditTag : styles.debitTag}
+            bordered={false}
+          >
             {directionLabel}
           </Tag>
         </Flex>
@@ -186,41 +170,19 @@ export default function WalletPage() {
   };
 
   return (
-    <Flex
-      vertical
-      gap="large"
-      style={{ width: "100%", padding: token.padding }}
-    >
-      <Row gutter={[token.marginLG, token.marginLG]} align="stretch">
+    <Flex className={styles.wallet} vertical gap="large">
+      <Row gutter={[20, 20]} align="stretch">
         <Col xs={24} md={10}>
-          <Flex
-            vertical
-            justify="space-between"
-            style={{
-              minHeight: 230,
-              height: "100%",
-              padding: token.paddingLG,
-              borderRadius: token.borderRadiusLG,
-              color: token.colorWhite,
-              background: token.colorPrimary,
-              boxShadow: `0 14px 34px ${token.colorPrimaryBgHover}`,
-              overflow: "hidden",
-              position: "relative",
-            }}
-          >
-            <WalletOutlined
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                insetInlineEnd: -12,
-                bottom: -20,
-                fontSize: 150,
-                opacity: 0.1,
-              }}
-            />
-            <Typography.Text style={{ color: "rgba(255,255,255,.78)" }}>
-              {t("availableBalance")}
-            </Typography.Text>
+          <Flex className={styles.balanceCard} vertical justify="space-between">
+            <Flex gap="small" align="center" className={styles.balanceHeader}>
+              <WalletOutlined
+                aria-hidden="true"
+                className={styles.balanceWatermark}
+              />
+              <Typography.Text className={styles.balanceLabel}>
+                {t("availableBalance")}
+              </Typography.Text>
+            </Flex>
             {balanceLoading ? (
               <Skeleton active title paragraph={false} />
             ) : balanceError ? (
@@ -235,24 +197,14 @@ export default function WalletPage() {
                 }
               />
             ) : (
-              <Flex align="baseline" gap="small" wrap="wrap" aria-live="polite">
-                <Typography.Title
-                  level={1}
-                  style={{
-                    color: token.colorWhite,
-                    margin: 0,
-                    fontWeight: 900,
-                    fontVariantNumeric: "tabular-nums",
-                  }}
-                >
-                  {formatNumberToMoney(balance?.balance ?? "0")}
-                </Typography.Title>
-                <Typography.Text strong style={{ color: token.colorWhite }}>
+              <div className={styles.balanceAmount} aria-live="polite">
+                <span>{formatNumberToMoney(balance?.balance ?? "0")}</span>
+                <Typography.Text strong className={styles.balanceCurrency}>
                   {t("currency")}
                 </Typography.Text>
-              </Flex>
+              </div>
             )}
-            <Typography.Text style={{ color: "rgba(255,255,255,.78)" }}>
+            <Typography.Text className={styles.balanceHint}>
               {t("balanceHint")}
             </Typography.Text>
           </Flex>
@@ -260,22 +212,19 @@ export default function WalletPage() {
 
         <Col xs={24} md={14}>
           <Flex
+            className={styles.topUpPanel}
             vertical
             justify="center"
             gap="middle"
-            style={{
-              minHeight: 230,
-              height: "100%",
-              padding: token.paddingLG,
-              borderRadius: token.borderRadiusLG,
-              background: token.colorFillQuaternary,
-            }}
           >
             <div>
-              <Typography.Title level={4} style={{ marginBottom: 4 }}>
+              <Typography.Title level={4} className={styles.panelTitle}>
                 {t("topUpTitle")}
               </Typography.Title>
-              <Typography.Paragraph type="secondary" style={{ margin: 0 }}>
+              <Typography.Paragraph
+                type="secondary"
+                className={styles.panelDescription}
+              >
                 {t("topUpDescription")}
               </Typography.Paragraph>
             </div>
@@ -290,7 +239,12 @@ export default function WalletPage() {
               />
             )}
 
-            <Form form={form} layout="vertical" onFinish={startTopUp}>
+            <Form
+              className={styles.topUpForm}
+              form={form}
+              layout="vertical"
+              onFinish={startTopUp}
+            >
               <Form.Item
                 label={t("amountLabel")}
                 name="amount"
@@ -321,6 +275,7 @@ export default function WalletPage() {
                 />
               </Form.Item>
               <Button
+                className={styles.topUpButton}
                 htmlType="submit"
                 type="primary"
                 size="large"
@@ -335,18 +290,21 @@ export default function WalletPage() {
         </Col>
       </Row>
 
-      <section aria-labelledby="wallet-transactions-title">
+      <section
+        className={styles.ledger}
+        aria-labelledby="wallet-transactions-title"
+      >
         <Flex
+          className={styles.ledgerHeader}
           align="center"
           justify="space-between"
           gap="middle"
-          style={{ marginBottom: token.marginSM }}
         >
           <div>
             <Typography.Title
               id="wallet-transactions-title"
               level={4}
-              style={{ marginBottom: 4 }}
+              className={styles.ledgerTitle}
             >
               {t("transactionsTitle")}
             </Typography.Title>
@@ -371,12 +329,13 @@ export default function WalletPage() {
         ) : transactions?.results.length ? (
           <>
             <List
+              className={styles.transactionList}
               dataSource={transactions.results}
               renderItem={renderTransaction}
               split
             />
             {transactions.count > PAGE_SIZE && (
-              <Flex justify="center" style={{ marginTop: token.marginLG }}>
+              <Flex justify="center" className={styles.pagination}>
                 <Pagination
                   current={page}
                   pageSize={PAGE_SIZE}

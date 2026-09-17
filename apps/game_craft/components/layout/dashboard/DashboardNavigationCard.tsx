@@ -6,6 +6,7 @@ import { useDashboardNavigations } from "../../../lib/config/dashboard-navigatio
 import { signOut, useSession } from "next-auth/react";
 import { usePathname, useRouter as nextIntlNavigation } from "lib/navigation";
 import { useRouter } from "@bprogress/next";
+import styles from "./DashboardNavigationCard.module.css";
 // import fireworks from "../../../public/lottie/Fireworks.lottie";
 
 const { useToken } = theme;
@@ -38,7 +39,7 @@ export function DashboardNavigationCard({
 
   return (
     <Flex
-      className="gc-dashboard-navigation"
+      className={`gc-dashboard-navigation ${styles.navigation}`}
       vertical
       align="center"
       justify="start"
@@ -62,7 +63,7 @@ export function DashboardNavigationCard({
           gap="small"
         >
           <div
-            className="gc-dashboard-avatar"
+            className={`gc-dashboard-avatar ${styles.avatar}`}
             style={{
               position: "relative",
               display: "flex",
@@ -93,7 +94,7 @@ export function DashboardNavigationCard({
               />
             </Flex>
           </div>
-          <Typography.Title level={4} style={{ fontWeight: 800, margin: 0 }}>
+          <Typography.Title level={4} className={styles.userName}>
             {session?.data?.user?.name}
           </Typography.Title>
         </Flex>
@@ -107,7 +108,7 @@ export function DashboardNavigationCard({
         >
           {dashboardNavigations.map((item) => (
             <Button
-              className={isActiveRoute(item.route) ? "gc-dashboard-nav-item gc-dashboard-nav-item--active" : "gc-dashboard-nav-item"}
+              className={`gc-dashboard-nav-item ${styles.navItem} ${isActiveRoute(item.route) ? "gc-dashboard-nav-item--active" : ""}`}
               key={item.route}
               type={isActiveRoute(item.route) ? "primary" : "dashed"}
               size="large"
@@ -124,7 +125,7 @@ export function DashboardNavigationCard({
             </Button>
           ))}
           <Button
-            className="gc-dashboard-nav-item gc-dashboard-nav-item--logout"
+            className={`gc-dashboard-nav-item gc-dashboard-nav-item--logout ${styles.navItem} ${styles.logout}`}
             danger
             type="dashed"
             size="large"

@@ -17,17 +17,24 @@ export const TeamMemberContainer: React.FC = () => {
   const t = useTranslations("app.dashboard.teamStatus");
 
   const { data: teams } = useAppSelector((s) => s.teams);
-  const [filteredTeams, setFilteredTeams] = useState<TeamDetails[]>([]);
   const [competitions, setCompetitions] = useState<{
     loading: boolean;
     error?: string;
     data?: GroupCompetitionsList;
   }>({ loading: true });
 
-  const isValidTeam = (competitionId: number) =>
-    !!competitions.data?.results.find(
-      (competition) => competition.id == competitionId
-    );
+  const filteredTeams = useMemo(
+    () =>
+      teams.filter(
+        (team) =>
+          team.group_competition_details &&
+          competitions.data?.results.some(
+            (competition) => competition.id === team.group_competition_details?.id
+          ) &&
+          team.status === "active"
+      ),
+    [competitions.data, teams]
+  );
 
   useEffect(() => {
     clientApi.competitions
@@ -42,19 +49,10 @@ export const TeamMemberContainer: React.FC = () => {
           setCompetitions({ loading: false, error: "failed to fetch" });
         }
       })
-      .catch((err) => {
-        setCompetitions({ loading: false, error: err });
+      .catch(() => {
+        setCompetitions({ loading: false, error: t("workshop.error") });
       });
-
-    setFilteredTeams(
-      teams.filter(
-        (team) =>
-          team.group_competition_details &&
-          isValidTeam(team.group_competition_details.id) &&
-          team.status === "active"
-      )
-    );
-  }, [competitions, teams]);
+  }, [t]);
 
   const mapTeamMembers = (team: TeamDetails) =>
     team.memberships.map((member) => (
@@ -71,7 +69,7 @@ export const TeamMemberContainer: React.FC = () => {
 
   const mapTeams = () =>
     filteredTeams.map((team) => (
-      <>
+      <React.Fragment key={team.id}>
         <Col className="gc-dashboard-team-name" span={24}>
           <Typography.Title level={4} style={{ marginBottom: "1.5rem" }}>
             {team.group_competition_details.title}:
@@ -90,7 +88,7 @@ export const TeamMemberContainer: React.FC = () => {
           </Typography.Title>
         </Col>
         {mapTeamMembers(team)}
-      </>
+      </React.Fragment>
     ));
 
   const content = useMemo(() => {
@@ -121,7 +119,7 @@ export const TeamMemberContainer: React.FC = () => {
         mapTeams()
       );
     }
-  }, [competitions, t]);
+  }, [competitions, filteredTeams, t]);
 
   return (
     <Flex

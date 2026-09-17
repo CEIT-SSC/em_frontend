@@ -1,0 +1,191 @@
+.wallet {
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.balanceCard,
+.topUpPanel,
+.ledger {
+  min-height: 100%;
+  border: 1px solid rgba(157, 219, 245, 0.2);
+  border-radius: 14px;
+}
+
+.balanceCard {
+  min-height: 256px;
+  padding: 1.5rem !important;
+  gap: 1.75rem;
+  color: var(--gc-dashboard-ivory);
+  background: var(--gc-dashboard-surface-raised);
+}
+
+.balanceWatermark {
+  display: none;
+}
+
+.balanceLabel,
+.balanceHint,
+.balanceCurrency {
+  color: var(--gc-dashboard-ivory) !important;
+}
+
+.balanceLabel {
+  font-weight: 600;
+  color: var(--gc-dashboard-muted) !important;
+}
+
+.balanceAmount {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 3.5rem !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  color: var(--gc-dashboard-ivory);
+}
+
+.balanceAmount > span:first-child {
+  min-width: 1.25ch;
+}
+
+.balanceCurrency {
+  opacity: 0.84;
+}
+
+.balanceHint {
+  max-width: 34ch;
+  margin-top: auto;
+  line-height: 1.75;
+  color: var(--gc-dashboard-muted) !important;
+}
+
+.topUpPanel {
+  min-height: 256px;
+  padding: 1.5rem !important;
+  background: rgba(22, 36, 61, 0.5);
+}
+
+.panelTitle,
+.ledgerTitle {
+  margin: 0 0 0.25rem !important;
+  color: var(--gc-dashboard-ivory) !important;
+  font-weight: 750 !important;
+}
+
+.panelDescription {
+  margin: 0 !important;
+  line-height: 1.65;
+}
+
+.topUpForm :global(.ant-form-item) {
+  margin-bottom: 1rem;
+}
+
+.topUpForm :global(.ant-form-item-label > label) {
+  color: var(--gc-dashboard-muted) !important;
+  font-weight: 600;
+}
+
+.topUpButton {
+  height: 48px !important;
+  font-weight: 700;
+  transition: transform 180ms ease, box-shadow 180ms ease !important;
+}
+
+.topUpButton:hover:not(:disabled) {
+  box-shadow: 0 9px 18px rgba(157, 219, 245, 0.18);
+  transform: translateY(-1px);
+}
+
+.ledger {
+  padding: 1.5rem !important;
+  background: rgba(22, 36, 61, 0.34);
+}
+
+.ledgerHeader {
+  margin-bottom: 0.9rem;
+}
+
+.transactionList :global(.ant-list-items) {
+  border-top: 1px solid rgba(157, 219, 245, 0.14);
+}
+
+.transaction {
+  min-height: 76px;
+  padding: 0.85rem 0 !important;
+  gap: 1rem;
+  border-block-end-color: rgba(157, 219, 245, 0.14) !important;
+}
+
+.transactionInfo,
+.transactionCopy {
+  min-width: 0;
+}
+
+.transactionIcon {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border-radius: 12px;
+}
+
+.credit {
+  color: #9be2bd;
+  background: rgba(72, 173, 116, 0.16);
+}
+
+.debit {
+  color: #ffada8;
+  background: rgba(205, 90, 84, 0.14);
+}
+
+.transactionCopy :global(.ant-typography-secondary) {
+  font-size: 0.8125rem;
+}
+
+.transactionAmount {
+  margin-inline-start: auto;
+}
+
+.creditText,
+.debitText {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.creditText { color: #9be2bd !important; }
+.debitText { color: #ffada8 !important; }
+
+.creditTag,
+.debitTag {
+  margin: 0 !important;
+  border-radius: 999px !important;
+  font-size: 0.6875rem !important;
+  font-weight: 650;
+}
+
+.creditTag { color: #9be2bd !important; background: rgba(72, 173, 116, 0.16) !important; }
+.debitTag { color: #ffada8 !important; background: rgba(205, 90, 84, 0.14) !important; }
+
+.pagination {
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .wallet { padding: 1rem; }
+  .balanceCard, .topUpPanel, .ledger { padding: 1.1rem !important; }
+  .balanceCard { min-height: 220px; gap: 1.25rem; }
+  .balanceAmount { font-size: 2.75rem !important; }
+  .transaction { align-items: flex-start !important; }
+  .transactionInfo { gap: 0.65rem !important; }
+  .transactionAmount { gap: 0.3rem !important; }
+}
+
+@media (max-width: 420px) {
+  .ledgerHeader { align-items: flex-start !important; flex-direction: column; }
+  .transaction { gap: 0.6rem; }
+  .transactionInfo { align-items: flex-start !important; }
+  .transactionAmount :global(.ant-tag) { display: none; }
+}

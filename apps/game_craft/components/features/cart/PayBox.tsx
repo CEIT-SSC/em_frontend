@@ -53,18 +53,18 @@ export function PayBox() {
 
   const handleDiscountSubmit = async () => {
     if (!discountCode.trim()) {
-      toast.error("لطفاً کد تخفیف را وارد کنید");
+      toast.error(t("discountRequired"));
       return;
     }
 
     setDiscountLoading(true);
     try {
       await dispatch(applyBonusCodeThunk(discountCode.trim())).unwrap();
-      toast.success("کد تخفیف با موفقیت اعمال شد");
+      toast.success(t("discountApplied"));
       setIsDiscountModalOpen(false);
       setDiscountCode("");
     } catch (error) {
-      toast.error("کد تخفیف معتبر نمی باشد");
+      toast.error(t("discountInvalid"));
     } finally {
       setDiscountLoading(false);
     }
@@ -143,14 +143,14 @@ export function PayBox() {
       >
         {!paymentData.discountCode ? (
           <>
-            <Typography.Text>کد تخفیف دارید؟</Typography.Text>
+            <Typography.Text>{t("discountPrompt")}</Typography.Text>
             <AntButton type="dashed" onClick={applyDiscount}>
-              وارد کردن
+              {t("enterDiscount")}
             </AntButton>
           </>
         ) : (
           <>
-            <Typography.Text type="secondary">کد تخفیف شما:</Typography.Text>
+            <Typography.Text type="secondary">{t("activeDiscount")}</Typography.Text>
             <>
               <Flex align="top" gap="4px">
                 <Typography.Text type="secondary">
@@ -162,7 +162,7 @@ export function PayBox() {
                   icon={<MdCancel size={24} />}
                   onClick={() => dispatch(removeBonusCodeThunk())}
                   style={{ padding: 0, margin: 0 }}
-                  aria-label="حذف کد تخفیف"
+                  aria-label={t("removeDiscount")}
                 />
               </Flex>
             </>
@@ -180,7 +180,7 @@ export function PayBox() {
         gap="small"
       >
         <Flex align="center" justify="space-between" style={{ width: "100%" }}>
-          <Typography.Text>جمع کل:</Typography.Text>
+          <Typography.Text>{t("subtotal")}</Typography.Text>
           <Typography.Text strong>
             {formatNumberToMoney(paymentData.subTotal)} تومان
           </Typography.Text>
@@ -192,7 +192,7 @@ export function PayBox() {
             justify="space-between"
             style={{ width: "100%" }}
           >
-            <Typography.Text type="secondary">تخفیف:</Typography.Text>
+            <Typography.Text type="secondary">{t("discount")}</Typography.Text>
             <Typography.Text type="success">
               -{formatNumberToMoney(paymentData.discountAmount)} تومان
             </Typography.Text>
@@ -206,7 +206,7 @@ export function PayBox() {
 
         <Flex align="center" justify="space-between" style={{ width: "100%" }}>
           <Typography.Title level={5} style={{ margin: 0 }}>
-            مبلغ نهایی:
+            {t("total")}
           </Typography.Title>
           <Typography.Title
             level={5}
@@ -235,7 +235,7 @@ export function PayBox() {
 
       {/* Discount Code Modal */}
       <Modal
-        title="وارد کردن کد تخفیف"
+        title={t("discountTitle")}
         open={isDiscountModalOpen}
         onOk={handleDiscountSubmit}
         onCancel={handleDiscountCancel}
@@ -245,9 +245,9 @@ export function PayBox() {
         destroyOnHidden={true}
       >
         <Flex vertical gap="middle" style={{ padding: "16px 0" }}>
-          <Typography.Text>کد تخفیف خود را وارد کنید:</Typography.Text>
+          <Typography.Text>{t("discountHelp")}</Typography.Text>
           <Input
-            placeholder="کد تخفیف"
+            placeholder={t("discountPlaceholder")}
             value={discountCode}
             onChange={(e) => setDiscountCode(e.target.value)}
             onPressEnter={handleDiscountSubmit}

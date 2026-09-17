@@ -15,6 +15,7 @@ import {
 } from "lib/store/cart/cart.thunk";
 import { Flex, theme, Row, Col, Spin, Empty, Alert, message } from "antd";
 import {ItemType, PresentationType} from "@ssc/core";
+import { useTranslations } from "next-intl";
 
 const { useToken } = theme;
 
@@ -26,6 +27,7 @@ export default function ShoppingBagPage() {
   const loading = useAppSelector(cartLoadingSelector);
   const error = useAppSelector(cartErrorSelector);
   const { token } = useToken();
+  const t = useTranslations("app.dashboard.shoppingBagPage");
 
   useEffect(() => {
     dispatch(fetchCartThunk());
@@ -34,9 +36,9 @@ export default function ShoppingBagPage() {
   const handleRemoveItem = async (item_id: number, item_type: ItemType) => {
     try {
       await dispatch(removeItemFromCartThunk({ item_id, item_type })).unwrap();
-      message.success("محصول از سبد خرید حذف شد");
+      message.success(t("removed"));
     } catch (error) {
-      message.error("خطا در حذف محصول");
+      message.error(t("removeError"));
     }
   };
 
@@ -59,7 +61,7 @@ export default function ShoppingBagPage() {
     if (error) {
       return (
         <Alert
-          message="خطا در بارگذاری سبد خرید"
+          message={t("loadError")}
           description={error}
           type="error"
           showIcon
@@ -79,7 +81,7 @@ export default function ShoppingBagPage() {
           }}
         >
           <Empty
-            description="سبد خرید شما خالی است"
+            description={t("empty")}
             image={Empty.PRESENTED_IMAGE_SIMPLE}
           />
         </Flex>
