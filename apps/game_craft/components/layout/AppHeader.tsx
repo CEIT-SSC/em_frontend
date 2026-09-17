@@ -137,7 +137,7 @@ export function AppHeader() {
               style={{ height: "100%" }}
               gap="small"
             >
-              // disabled temporarily due to theme
+              {/* // disabled temporarily due to theme */}
               {/* <Button
                 type="text"
                 shape="circle"

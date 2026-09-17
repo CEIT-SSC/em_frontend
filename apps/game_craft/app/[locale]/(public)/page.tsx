@@ -16,6 +16,7 @@ import {
   HomeArtworkSlot,
   HomeVaultSeparator,
 } from "components/features/home/HomeArtworkSlot";
+import { GameJam } from "components/features/home/GameJam";
 
 export default function HomePage() {
   const screens = useResponsive();
@@ -56,7 +57,8 @@ export default function HomePage() {
           padding={homeViewPadding}
           backgroundColor="#0e1628"
         />
-        <Prizes padding={homeViewPadding} backgroundColor="#111c31" />
+        {/* <Prizes padding={homeViewPadding} backgroundColor="#111c31" /> */}
+        <GameJam padding={homeViewPadding} backgroundColor="#111c31" />
 
         {/* <HomeArtworkSlot assetId="GC-ART-03" variant="gateway" /> */}
         <div id="game-jam" style={{ width: "100%" }}>

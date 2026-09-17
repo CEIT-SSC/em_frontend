@@ -14,7 +14,9 @@ const nextConfig: NextConfig = {
   //   ];
   // },
   
-    images: {
+  images: {
+    // The SSC API resolves to the Docker host in our deployment environment.
+    dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
         protocol: "https",

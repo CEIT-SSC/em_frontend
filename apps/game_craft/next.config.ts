@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
   },
   transpilePackages: ["@ssc/ui", "@ssc/utils", "@ssc/core"],
   images: {
+    // The SSC API resolves to the Docker host in our deployment environment.
+    dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
         protocol: "https",

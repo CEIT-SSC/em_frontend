@@ -1,96 +1,96 @@
 "use client";
 
-import {Button, Col, ConfigProvider, Flex, Row, Typography} from "antd";
-import {InstagramOutlined, XOutlined, YoutubeFilled} from "@ant-design/icons";
-import {useTranslations} from "next-intl";
-import {useResponsive} from "../../../lib/hooks/useResponsive";
-import {darkTheme} from "../../../components/providers/AntDesignProvider";
-import {gameCraftSocialLinks} from "../../../config/socialLinks";
-import {TelegramIcon} from "../../../components/common/TelegramIcon";
+import { Button, Col, ConfigProvider, Flex, Row, Typography } from "antd";
+import { InstagramOutlined, XOutlined, YoutubeFilled } from "@ant-design/icons";
+import { useTranslations } from "next-intl";
+import { useResponsive } from "../../../lib/hooks/useResponsive";
+import { darkTheme } from "../../../components/providers/AntDesignProvider";
+import { gameCraftSocialLinks } from "../../../config/socialLinks";
+import { TelegramIcon } from "../../../components/common/TelegramIcon";
 import { HomeParallaxArtwork } from "./HomeParallaxArtwork";
 
 interface GameCraftIntroProps {
-    padding?: string;
-    backgroundColor?: string;
+  padding?: string;
+  backgroundColor?: string;
 }
 
 export function GameCraftIntro({
-                                   padding = "3rem 2rem",
-                                   backgroundColor,
-                               }: GameCraftIntroProps) {
-    const t = useTranslations("app");
-    const tWorkshop = useTranslations("workshop");
-    const screens = useResponsive();
+  padding = "3rem 2rem",
+  backgroundColor,
+}: GameCraftIntroProps) {
+  const t = useTranslations("app");
+  const tWorkshop = useTranslations("workshop");
+  const screens = useResponsive();
 
-    return (
-        <ConfigProvider theme={darkTheme}>
+  return (
+    <ConfigProvider theme={darkTheme}>
+      <Flex
+        vertical
+        align="center"
+        justify="center"
+        style={{
+          width: "100%",
+          padding: padding,
+          backgroundColor: backgroundColor,
+        }}
+        className="gc-home-intro"
+      >
+        <Row
+          align="middle"
+          justify="space-around"
+          gutter={[16, 16]}
+          style={{ width: "100%" }}
+        >
+          <Col span={24} lg={12}>
             <Flex
-                vertical
-                align="center"
-                justify="center"
-                style={{
-                    width: "100%",
-                    padding: padding,
-                    backgroundColor: backgroundColor,
-                }}
-                className="gc-home-intro"
+              vertical
+              align="start"
+              justify="start"
+              style={{
+                width: "100%",
+                position: "relative",
+                zIndex: 10,
+              }}
+              gap="small"
             >
-                <Row
-                    align="middle"
-                    justify="space-around"
-                    gutter={[16, 16]}
-                    style={{width: "100%"}}
-                >
-                    <Col span={24} lg={12}>
-                        <Flex
-                            vertical
-                            align="start"
-                            justify="start"
-                            style={{
-                                width: "100%",
-                                position: "relative",
-                                zIndex: 10,
-                            }}
-                            gap="small"
-                        >
-                            <Typography.Title
-                                level={1}
-                                style={{
-                                    fontWeight: 1000,
-                                    fontSize: screens.lg ? "5rem" : screens.md ? "4rem" : "3rem",
-                                    marginBottom: "1rem",
-                                }}
-                            >
-                                {t("intro.title")}
-                            </Typography.Title>
+              <Typography.Title
+                level={1}
+                style={{
+                  fontWeight: 1000,
+                  fontSize: screens.lg ? "5rem" : screens.md ? "4rem" : "3rem",
+                  marginBottom: "1rem",
+                }}
+              >
+                {t("intro.title")}
+              </Typography.Title>
 
-                            <Typography.Title
-                                level={2}
-                                style={{
-                                    fontWeight: 900,
-                                    margin: 0,
-                                    color: "white",
-                                }}
-                            >
-                                {t("intro.subtitle")}
-                            </Typography.Title>
+              <Typography.Title
+                level={2}
+                style={{
+                  fontWeight: 900,
+                  margin: 0,
+                  color: "white",
+                }}
+              >
+                {t("intro.subtitle")}
+              </Typography.Title>
 
-                            <Typography.Paragraph
-                                style={{color: "white", fontSize: "1rem"}}
-                            >
-                                {t("intro.description")}
-                            </Typography.Paragraph>
+              <Typography.Paragraph
+                style={{ color: "white", fontSize: "1rem" }}
+              >
+                {t("intro.description")}
+              </Typography.Paragraph>
 
-                            <Flex gap="middle" wrap>
-                                <Button type="primary" size="large" href="#workshops">
-                                    {tWorkshop("workshops")}
-                                </Button>
-                                <Button size="large" href="#game-jam">
-                                    {tWorkshop("competitions")}
-                                </Button>
-                            </Flex>
+              <Flex gap="middle" wrap>
+                <Button type="primary" size="large" href="#workshops">
+                  {tWorkshop("workshops")}
+                </Button>
+                <Button size="large" href="#game-jam">
+                  {tWorkshop("competitions")}
+                </Button>
+              </Flex>
 
-                            <Flex
+              {/* <Flex
                                 align="center"
                                 justify="start"
                                 style={{width: "100%"}}
@@ -127,17 +127,17 @@ export function GameCraftIntro({
                                     rel="noopener noreferrer"
                                     aria-label="GameCraft on X"
                                 />
-                            </Flex>
-                        </Flex>
-                    </Col>
-
-                    <Col span={24} lg={12}>
-                        <Flex align="center" justify="center" style={{width: "100%"}}>
-                            <HomeParallaxArtwork />
-                        </Flex>
-                    </Col>
-                </Row>
+                            </Flex> */}
             </Flex>
-        </ConfigProvider>
-    );
+          </Col>
+
+          <Col span={24} lg={12}>
+            <Flex align="center" justify="center" style={{ width: "100%" }}>
+              <HomeParallaxArtwork />
+            </Flex>
+          </Col>
+        </Row>
+      </Flex>
+    </ConfigProvider>
+  );
 }

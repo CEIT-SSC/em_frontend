@@ -277,6 +277,10 @@
         "prize": "۱۲ میلیون تومان"
       }
     },
+    "GameJam": {
+      "title": "گیم جم",
+      "description": "بزودی"
+    },
     "sponsors": {
       "title": "حامیان",
       "noSponsors": "هنوز حامی‌ای وجود ندارد",

@@ -271,6 +271,10 @@
         "prize": "12 Million Toman"
       }
     },
+    "GameJam": {
+      "title": "Game Jam",
+      "description": "Coming soon"
+    },
     "sponsors": {
       "title": "Sponsors",
       "noSponsors": "No sponsors yet",
