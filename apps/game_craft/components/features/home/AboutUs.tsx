@@ -4,7 +4,7 @@ import { Button, Col, Flex, Row, Typography } from "antd";
 import { useRouter as useNextIntlRouter } from "../../../lib/navigation";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@bprogress/next";
-import { HomeArtworkSlot } from "./HomeArtworkSlot";
+import Image from "next/image";
 
 interface AboutUsProps {
   padding?: string;
@@ -69,7 +69,15 @@ export function AboutUs({
         </Col>
         <Col span={24} lg={12}>
           <Flex align="center" justify="center" style={{ width: "100%" }}>
-            <HomeArtworkSlot assetId="GC-ART-05" variant="community" />
+            <Image
+              src="/assets/images/hollwo-knight/our-team/knight-at-bench.png"
+              alt="Knight sitting on bench"
+              width={320}
+              height={180}
+              sizes="(max-width: 768px) calc(100vw - 2rem), min(1200px, 100vw)"
+              className="h-auto w-auto max-w-full object-contain"
+              priority
+            />
           </Flex>
         </Col>
       </Row>

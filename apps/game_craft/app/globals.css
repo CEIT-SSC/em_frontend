@@ -731,12 +731,9 @@ body {
 .gc-home-sponsors {
   background: linear-gradient(160deg, #101a30, #070a12) !important;
 }
-.gc-home-sponsors .ant-btn {
+.gc-home-sponsors__logo {
   background: rgba(7, 10, 18, 0.42);
   border: 1px solid rgba(157, 219, 245, 0.15);
-}
-.gc-home-sponsors .ant-btn:hover {
-  border-color: rgba(157, 219, 245, 0.7);
 }
 .gc-home-about {
   color: var(--gc-ivory);
@@ -1038,13 +1035,32 @@ body {
 }
 .gc-sponsor-archive {
   border-radius: 16px;
+  padding: clamp(1rem, 3vw, 2rem) !important;
 }
 .gc-sponsor-card {
   position: relative;
   z-index: 1;
+  height: 100%;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  background: #111c31;
+  border: 1px solid rgba(157, 219, 245, 0.2);
+  border-radius: 14px;
 }
-.gc-sponsor-mark {
-  border: 1px solid rgba(157, 219, 245, 0.42);
+.gc-sponsor-logo-surface {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  background: var(--gc-ivory);
+  border-radius: 12px;
+}
+.gc-sponsor-logo {
+  object-fit: contain;
+  padding: clamp(0.5rem, 1.5vw, 1rem);
+  transform: scale(1.35);
+}
+.gc-sponsor-grid {
+  width: 100%;
 }
 .gc-staff-hall {
   padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem) !important;
@@ -1552,9 +1568,9 @@ body {
   min-width: 0;
 }
 
-.gc-public-page {
+/* .gc-public-page {
   width: min(1180px, calc(100% - 3rem)) !important;
-}
+} */
 
 .gc-gallery-image img {
   height: clamp(180px, 22vw, 300px) !important;

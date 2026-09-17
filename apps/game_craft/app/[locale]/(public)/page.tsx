@@ -4,7 +4,6 @@ import { Flex } from "antd";
 import Image from "next/image";
 import { GameCraftTimeline } from "../../../components/features/Timeline";
 import { GameCraftIntro } from "../../../components/features/home/GameCraftIntro";
-import { Prizes } from "../../../components/features/home/Prizes";
 import { AboutUs } from "../../../components/features/home/AboutUs";
 import { OfflineWorkshop } from "../../../components/features/workshops/OfflineWorkshop";
 import { OnlineWorkshop } from "../../../components/features/workshops/OnlineWorkshop";
@@ -12,10 +11,7 @@ import { Packs } from "../../../components/features/packs/Packs";
 import { Sponsors } from "../../../components/features/home/Sponsors";
 import { useResponsive } from "../../../lib/hooks/useResponsive";
 import { CompetitionsList } from "components/features/competitions/CompetitonsList";
-import {
-  HomeArtworkSlot,
-  HomeVaultSeparator,
-} from "components/features/home/HomeArtworkSlot";
+import { HomeVaultSeparator } from "components/features/home/HomeArtworkSlot";
 import { GameJam } from "components/features/home/GameJam";
 
 export default function HomePage() {

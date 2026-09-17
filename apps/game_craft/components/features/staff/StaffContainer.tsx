@@ -4,7 +4,6 @@ import { Col, Flex, Row, theme, Typography } from "antd";
 import { StaffCard } from "./StaffCard";
 import { useStaffs } from "../../../config/staffs";
 import { useTranslations } from "next-intl";
-import { HomeArtworkSlot } from "../home/HomeArtworkSlot";
 
 const { useToken } = theme;
 
@@ -28,12 +27,11 @@ export function StaffContainer() {
       }}
     >
       <Flex vertical align={"center"} justify={"center"}>
-        <HomeArtworkSlot assetId="GC-ART-05" variant="community" />
         <Typography.Title
           level={1}
           style={{
             fontWeight: 900,
-                color: "var(--gc-ivory)",
+            color: "var(--gc-ivory)",
           }}
         >
           {t("title")}
