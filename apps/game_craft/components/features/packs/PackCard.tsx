@@ -1,8 +1,9 @@
 "use client";
 
-import { CheckCircleOutlined, DeleteOutlined, EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Badge, Button, Card, Flex, Modal, Space, Typography } from "antd";
+import { AppstoreOutlined, CheckCircleOutlined, DeleteOutlined, EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { Badge, Button, Card, Flex, Modal, theme, Typography } from "antd";
 import { ItemType, Pack } from "@ssc/core";
+import Image from "next/image";
 import { useFormatter } from "lib/hooks/useFormatter";
 import { useAuth } from "lib/hooks/useAuth";
 import { cartLoadingSelector, itemInCartSelector } from "lib/store/cart/cart.selectors";
@@ -12,8 +13,32 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
+const { useToken } = theme;
+
 export function PackCard({ pack }: { pack: Pack }) {
   const t = useTranslations();
+  const { token } = useToken();
+  const bundleBadgeStyle = {
+    backgroundColor: "transparent",
+    color: token.colorWarning,
+    border: `1px solid ${token.colorWarning}`,
+    borderRadius: "4px",
+    padding: "0 8px",
+  };
+  const infoBadgeStyle = {
+    backgroundColor: "transparent",
+    color: token.colorInfo,
+    border: `1px solid ${token.colorInfo}`,
+    borderRadius: "4px",
+    padding: "0 8px",
+  };
+  const savingBadgeStyle = {
+    backgroundColor: "transparent",
+    color: token.colorSuccess,
+    border: `1px solid ${token.colorSuccess}`,
+    borderRadius: "4px",
+    padding: "0 8px",
+  };
   const { formatNumberToMoney } = useFormatter();
   const dispatch = useAppDispatch();
   const { isAuthenticated } = useAuth();
@@ -23,6 +48,7 @@ export function PackCard({ pack }: { pack: Pack }) {
   const cartLoading = useAppSelector(cartLoadingSelector);
   const isSelected = Boolean(inCart);
   const includedItems = [...pack.presentations.map((item) => item.title), ...pack.solo_competitions.map((item) => item.title), ...pack.products.map((item) => item.name)];
+  const packImage = pack.image ?? pack.presentations.find((item) => item.poster)?.poster ?? pack.products.find((item) => item.image)?.image ?? null;
   const savings = Math.max(0, Number(pack.calculated_price) - Number(pack.real_price));
   const buttonText = !isAuthenticated ? t("workshop.loginToContinue") : isSelected ? t("workshop.removeFromCart") : t("workshop.addToCart");
 
@@ -41,33 +67,186 @@ export function PackCard({ pack }: { pack: Pack }) {
 
   return (
     <>
-      <Card className="gc-pack-card" hoverable style={{ width: "100%", height: "100%" }} styles={{ body: { padding: 20, display: "flex", flexDirection: "column", gap: 16, height: "100%" } }}>
-        <Flex justify="space-between" align="start" gap="small">
-          <Typography.Title level={3} style={{ margin: 0 }}>{pack.name}</Typography.Title>
-          <Badge count={t("packs.bundleBadge")} className="gc-pack-card__badge" />
-        </Flex>
-        <Typography.Paragraph ellipsis={{ rows: 3 }} type="secondary" style={{ margin: 0 }}>{pack.description}</Typography.Paragraph>
-        <Space wrap size={[6, 6]}>
-          <Badge count={t("packs.includedCount", { count: includedItems.length })} className="gc-pack-card__count" />
-          {savings > 0 && <Badge count={t("packs.save", { amount: formatNumberToMoney(savings) })} className="gc-pack-card__saving" />}
-        </Space>
-        <Flex vertical gap={2} style={{ marginTop: "auto" }}>
-          {Number(pack.calculated_price) > Number(pack.real_price) && <Typography.Text delete type="secondary">{formatNumberToMoney(pack.calculated_price)} {t("common.currency")}</Typography.Text>}
-          <Typography.Title level={4} style={{ margin: 0 }}>{formatNumberToMoney(pack.real_price)} {t("common.currency")}</Typography.Title>
-        </Flex>
-        <Flex gap="small">
-          <Button icon={<EyeOutlined />} onClick={() => setDetailsOpen(true)} aria-label={t("packs.viewContents")} />
-          <Button type={isSelected ? "default" : "primary"} danger={isSelected} icon={isSelected ? <DeleteOutlined /> : <ShoppingCartOutlined />} loading={buttonLoading} onClick={toggleCart} block>
-            {buttonText}
+      <Card
+        className="gc-pack-card"
+        hoverable
+        style={{
+          width: "100%",
+          minWidth: "250px",
+          maxWidth: "100%",
+          borderRadius: token.borderRadiusLG,
+          overflow: "hidden",
+          border: "none",
+          backgroundColor: token.colorBgContainer,
+          boxShadow: token.boxShadow,
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
+        styles={{
+          body: {
+            padding: 0,
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+          },
+        }}
+      >
+        <div className="gc-pack-card__visual">
+          {packImage ? (
+            <Image
+              src={packImage}
+              alt=""
+              fill
+              loading="eager"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ objectFit: "cover" }}
+            />
+          ) : (
+            <div className="gc-pack-card__visual-fallback" aria-hidden="true">
+              <AppstoreOutlined />
+            </div>
+          )}
+          <div className="gc-pack-card__stripes" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+          <Button
+            className="gc-card-details gc-pack-card__visual-action"
+            type="primary"
+            size="small"
+            icon={<EyeOutlined />}
+            onClick={() => setDetailsOpen(true)}
+            style={{ borderRadius: token.borderRadiusLG }}
+          >
+            {t("packs.viewContents")}
           </Button>
+        </div>
+        <Flex
+          className="gc-pack-card__body"
+          vertical
+          style={{
+            padding: "16px",
+            flex: 1,
+            gap: "12px",
+          }}
+        >
+          <Flex vertical gap="small">
+            <Typography.Title
+              className="gc-pack-card__title"
+              level={3}
+              style={{ margin: 0, fontSize: "18px", lineHeight: 1.4 }}
+              ellipsis={{ rows: 2 }}
+            >
+              {pack.name}
+            </Typography.Title>
+            <Flex className="gc-pack-card__tags" gap="small" wrap>
+              <Badge
+                count={t("packs.bundleBadge")}
+                className="gc-pack-card__badge"
+                style={bundleBadgeStyle}
+              />
+              <Badge
+                count={t("packs.includedCount", { count: includedItems.length })}
+                className="gc-pack-card__count"
+                style={infoBadgeStyle}
+              />
+              {savings > 0 && (
+                <Badge
+                  count={t("packs.save", { amount: formatNumberToMoney(savings) })}
+                  className="gc-pack-card__saving"
+                  style={savingBadgeStyle}
+                />
+              )}
+            </Flex>
+          </Flex>
+
+          <Typography.Paragraph
+            className="gc-pack-card__description"
+            ellipsis={{ rows: 3 }}
+            style={{
+              color: token.colorTextSecondary,
+              margin: 0,
+              fontSize: "14px",
+              lineHeight: 1.6,
+            }}
+          >
+            {pack.description}
+          </Typography.Paragraph>
+
+          <Flex
+            className="gc-pack-card__footer"
+            justify="space-between"
+            align="center"
+            style={{
+              marginTop: "auto",
+              paddingTop: "12px",
+              borderTop: `1px solid ${token.colorBorder}`,
+            }}
+          >
+            <Typography.Title level={5} style={{ margin: 0, fontSize: "16px" }}>
+              {formatNumberToMoney(pack.real_price)} {t("common.currency")}
+            </Typography.Title>
+            <Button
+              type={isSelected ? "default" : "primary"}
+              danger={isSelected}
+              icon={isSelected ? <DeleteOutlined /> : <ShoppingCartOutlined />}
+              loading={buttonLoading}
+              onClick={toggleCart}
+              style={{ borderRadius: token.borderRadius, height: "36px" }}
+            >
+              {buttonText}
+            </Button>
+          </Flex>
         </Flex>
       </Card>
-      <Modal open={detailsOpen} footer={null} onCancel={() => setDetailsOpen(false)} title={pack.name}>
-        <Typography.Paragraph>{pack.description}</Typography.Paragraph>
-        <Typography.Title level={4}>{t("packs.contents")}</Typography.Title>
-        <Space direction="vertical" style={{ width: "100%" }}>
-          {includedItems.map((item, index) => <Flex key={`${item}-${index}`} gap="small" align="center"><CheckCircleOutlined /><Typography.Text>{item}</Typography.Text></Flex>)}
-        </Space>
+      <Modal
+        className="gc-pack-modal"
+        open={detailsOpen}
+        onCancel={() => setDetailsOpen(false)}
+        title={
+          <Flex className="gc-pack-modal__title" align="center" gap="small">
+            <Typography.Title level={3} style={{ margin: 0 }}>{pack.name}</Typography.Title>
+            <Badge
+              count={t("packs.bundleBadge")}
+              className="gc-pack-card__badge"
+              style={bundleBadgeStyle}
+            />
+          </Flex>
+        }
+        footer={
+          <Button
+            type={isSelected ? "default" : "primary"}
+            danger={isSelected}
+            icon={isSelected ? <DeleteOutlined /> : <ShoppingCartOutlined />}
+            loading={buttonLoading}
+            onClick={toggleCart}
+            style={{ borderRadius: token.borderRadius, height: "36px" }}
+          >
+            {buttonText}
+          </Button>
+        }
+      >
+        <Flex className="gc-pack-modal__content" vertical gap="large">
+          <Typography.Paragraph className="gc-pack-modal__description" style={{ margin: 0 }}>{pack.description}</Typography.Paragraph>
+          <Flex className="gc-pack-modal__price" align="center" justify="space-between" gap="middle" wrap>
+            <Typography.Text type="secondary">{t("packs.contents")}</Typography.Text>
+            <Flex vertical align="end" gap={2}>
+              {Number(pack.calculated_price) > Number(pack.real_price) && <Typography.Text delete type="secondary">{formatNumberToMoney(pack.calculated_price)} {t("common.currency")}</Typography.Text>}
+              <Typography.Title level={4} style={{ margin: 0 }}>{formatNumberToMoney(pack.real_price)} {t("common.currency")}</Typography.Title>
+            </Flex>
+          </Flex>
+          <Flex className="gc-pack-modal__items" vertical>
+            {includedItems.map((item, index) => (
+              <Flex className="gc-pack-modal__item" key={`${item}-${index}`} gap="small" align="center">
+                <CheckCircleOutlined aria-hidden="true" />
+                <Typography.Text>{item}</Typography.Text>
+              </Flex>
+            ))}
+          </Flex>
+        </Flex>
       </Modal>
     </>
   );

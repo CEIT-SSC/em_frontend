@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Flex, Result, Skeleton, theme, Typography } from "antd";
+import { Button, Flex, Result, Skeleton, Typography } from "antd";
 import type {
   CheckoutOrderSummary,
   WalletBalance,
@@ -13,8 +13,8 @@ import { eventId } from "lib/utils/constants";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useState } from "react";
-
-const { useToken } = theme;
+import LogoWithText from "components/common/LogoWithText";
+import styles from "./page.module.css";
 
 interface CallbackData {
   topUp: WalletTopUpResult;
@@ -32,7 +32,6 @@ type CallbackView =
   | "paymentProcessing";
 
 export default function WalletTopUpCallbackPage() {
-  const { token } = useToken();
   const t = useTranslations("app.dashboard.wallet.callback");
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -161,19 +160,19 @@ export default function WalletTopUpCallbackPage() {
   };
 
   const description = data ? (
-    <Flex vertical gap="small" align="center">
-      <Typography.Text type="secondary">
+    <Flex className={styles.summary} vertical gap="small" align="center">
+      <Typography.Text className={styles.summarySecondary}>
         {t("topUpAmount", {
           amount: formatNumberToMoney(data.topUp.amount),
         })}
       </Typography.Text>
-      <Typography.Text strong style={{ fontVariantNumeric: "tabular-nums" }}>
+      <Typography.Text strong className={styles.summaryBalance}>
         {t("currentBalance", {
           balance: formatNumberToMoney(data.balance.balance),
         })}
       </Typography.Text>
       {data.orderLookupFailed && (
-        <Typography.Text type="warning">
+        <Typography.Text type="warning" className={styles.summaryWarning}>
           {t("orderVerificationUnavailable")}
         </Typography.Text>
       )}
@@ -182,50 +181,47 @@ export default function WalletTopUpCallbackPage() {
 
   return (
     <Flex
+      className={`gc-dashboard-world ${styles.page}`}
       align="center"
       justify="center"
-      style={{
-        minHeight: "100vh",
-        padding: token.padding,
-        backgroundColor: token.colorPrimary,
-        backgroundImage: "url(/svg/pattern.svg)",
-      }}
     >
-      <Flex
-        vertical
-        align="center"
-        style={{
-          width: "min(100%, 680px)",
-          padding: token.paddingLG,
-          borderRadius: token.borderRadiusLG,
-          background: token.colorBgContainer,
-          boxShadow: "0 18px 50px rgba(0,0,0,.22)",
-        }}
-      >
-        {loading ? (
-          <Skeleton active paragraph={{ rows: 4 }} style={{ width: "100%" }} />
-        ) : error ? (
-          <Result
-            status="error"
-            title={t(`${error}.title`)}
-            subTitle={t(`${error}.description`)}
-            extra={actions()}
-          />
-        ) : view ? (
-          <Result
-            status={resultStatus}
-            title={t(`${view}.title`)}
-            subTitle={
-              <Flex vertical gap="middle" align="center">
-                <Typography.Text type="secondary">
-                  {t(`${view}.description`)}
-                </Typography.Text>
-                {description}
-              </Flex>
-            }
-            extra={actions()}
-          />
-        ) : null}
+      <Flex vertical align="center" gap="large" className={styles.frame}>
+        <LogoWithText variant="light" size={64} className={styles.brand} />
+        <Flex vertical align="center" className={styles.panel}>
+          {loading ? (
+            <Skeleton
+              active
+              paragraph={{ rows: 4 }}
+              className={styles.skeleton}
+            />
+          ) : error ? (
+            <Result
+              className={styles.result}
+              status="error"
+              title={t(`${error}.title`)}
+              subTitle={t(`${error}.description`)}
+              extra={actions()}
+            />
+          ) : view ? (
+            <Result
+              className={styles.result}
+              status={resultStatus}
+              title={t(`${view}.title`)}
+              subTitle={
+                <Flex
+                  className={styles.resultDescription}
+                  vertical
+                  gap="middle"
+                  align="center"
+                >
+                  <Typography.Text>{t(`${view}.description`)}</Typography.Text>
+                  {description}
+                </Flex>
+              }
+              extra={actions()}
+            />
+          ) : null}
+        </Flex>
       </Flex>
     </Flex>
   );

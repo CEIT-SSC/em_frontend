@@ -13,6 +13,7 @@ import { useResponsive } from "../../../lib/hooks/useResponsive";
 import { CompetitionsList } from "components/features/competitions/CompetitonsList";
 import { HomeVaultSeparator } from "components/features/home/HomeArtworkSlot";
 import { GameJam } from "components/features/home/GameJam";
+import { Separator } from "components/features/home/Separator";
 
 export default function HomePage() {
   const screens = useResponsive();
@@ -53,8 +54,11 @@ export default function HomePage() {
           padding={homeViewPadding}
           backgroundColor="#0e1628"
         />
+        <Separator />
         {/* <Prizes padding={homeViewPadding} backgroundColor="#111c31" /> */}
-        <GameJam padding={homeViewPadding} backgroundColor="#111c31" />
+        <GameJam padding={homeViewPadding} backgroundColor="#0e1628" />
+
+        <Packs padding={homeViewPadding} backgroundColor="#111c31" />
 
         {/* <HomeArtworkSlot assetId="GC-ART-03" variant="gateway" /> */}
         <div id="game-jam" style={{ width: "100%" }}>
@@ -66,11 +70,10 @@ export default function HomePage() {
         <div id="workshops" />
         <OfflineWorkshop padding={homeViewPadding} backgroundColor="#172640" />
         <OnlineWorkshop padding={homeViewPadding} backgroundColor="#0d1527" />
-        <Packs padding={homeViewPadding} backgroundColor="#111c31" />
 
         {/* Sponsors Section */}
         <Sponsors padding={homeViewPadding} backgroundColor="#101a30" />
-        <HomeVaultSeparator flip />
+        <Separator />
 
         {/* About Us Section */}
         <AboutUs padding={homeViewPadding} backgroundColor="#070a12" />

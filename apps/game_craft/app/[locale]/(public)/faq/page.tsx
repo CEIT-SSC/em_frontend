@@ -94,22 +94,6 @@ export default function FAQPage() {
         </Typography.Paragraph>
       ),
     },
-    {
-      key: "6",
-      label: (
-        <Space>
-          <QuestionCircleOutlined style={{ color: token.colorPrimary }} />
-          <Typography.Text strong style={{ fontSize: "16px" }}>
-            {t("faq.submissionDeadline.title")}
-          </Typography.Text>
-        </Space>
-      ),
-      children: (
-        <Typography.Paragraph style={{ fontSize: "16px", lineHeight: 1.6 }}>
-          {t("faq.submissionDeadline.content")}
-        </Typography.Paragraph>
-      ),
-    },
   ];
 
   return (
@@ -122,7 +106,8 @@ export default function FAQPage() {
         width: "100%",
       }}
     >
-      <Flex className="gc-page gc-public-page gc-public-faq"
+      <Flex
+        className="gc-page gc-public-page gc-public-faq"
         align="center"
         justify="center"
         style={{

@@ -15,7 +15,7 @@ interface GameCraftIntroProps {
 }
 
 export function GameCraftIntro({
-  padding = "3rem 2rem",
+  padding = "rem 2rem",
   backgroundColor,
 }: GameCraftIntroProps) {
   const t = useTranslations("app");
