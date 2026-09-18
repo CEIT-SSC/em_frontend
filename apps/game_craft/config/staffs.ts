@@ -29,7 +29,7 @@ export function useStaffs(): StaffTeam[] {
         linkedinUrl: "https://www.linkedin.com/in/amirabbas-entezari/",
       },
       {
-        imageUrl: "/images/logo/default_prof_2026.jpg",
+        imageUrl: "/images/2025/staffs/MohammadJavadAkbari.jpg",
         name: "محمدجواد اکبری",
         role: "دبیر انجمن علمی",
         githubUrl: "https://github.com/Javad-Ak",
@@ -43,7 +43,7 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t("technicalTeam.title"),
     teamMembers: [
       {
-        imageUrl: "/images/logo/default_prof_2026.jpg",
+        imageUrl: "/images/2025/staffs/MoeinEnayati.png",
         name: "معین عنایتی",
         role: "سرپرست تیم فنی",
         telegramUrl: "https://t.me/moein_enayati",
