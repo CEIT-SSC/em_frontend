@@ -93,7 +93,7 @@ export default function ShoppingBagPage() {
         {cartItems.map((item) => (
           <Col key={item.id} xs={24} sm={24} lg={24}>
             <ProductCart
-              imageUrl={item.image || "/images/2025/staffs/hero.gif"}
+              imageUrl={item.image || "/images/2026/hero.gif"}
               title={item.title}
               price={item.price}
               onRemove={() => handleRemoveItem(item.id, item.itemType)}
