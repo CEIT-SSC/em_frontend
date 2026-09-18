@@ -51,7 +51,7 @@ export function useStaffs(): StaffTeam[] {
         githubUrl: "https://github.com/moeinEN",
       },
       {
-        imageUrl: "/images/logo/default_prof_2026.jpg",
+        imageUrl: "/images/2025/staffs/MohammadJavadAkbari.jpg",
         name: "محمد جواد اکبری",
         role: "توسعه دهنده بک اند",
         githubUrl: "https://github.com/Javad-Ak",
@@ -59,7 +59,7 @@ export function useStaffs(): StaffTeam[] {
         telegramUrl: "",
       },
       {
-        imageUrl: "/images/logo/default_prof_2026.jpg",
+        imageUrl: "/images/2025/staffs/AmirhosseinAghighi.jpg",
         name: "امیرحسین عقیقی",
         role: "توسعه دهنده فرانت اند",
         telegramUrl: "https://t.me/Amirhosseinaghighii",
@@ -67,7 +67,7 @@ export function useStaffs(): StaffTeam[] {
         githubUrl: "https://github.com/AmirhosseinAghighi",
       },
       {
-        imageUrl: "/images/logo/default_prof_2026.jpg",
+        imageUrl: "/images/2025/staffs/AlirezaNikooei.jpg",
         name: "علیرضا نیکوئی",
         role: "دوآپس",
         githubUrl: "https://github.com/alirezanikooei",
@@ -75,7 +75,7 @@ export function useStaffs(): StaffTeam[] {
         telegramUrl: "https://t.me/Nikoooei",
       },
       {
-        imageUrl: "/images/logo/default_prof_2026.jpg",
+        imageUrl: "/images/2025/staffs/PouryaFahimi.jpg",
         name: "پوریا فهیمی",
         role: "توسعه دهنده فرانت اند",
         telegramUrl: "https://t.me/pouryaf289",
@@ -219,7 +219,7 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t("contentCreationTeam.title"),
     teamMembers: [
       {
-        imageUrl: "/images/logo/default_prof_2026.jpg",
+        imageUrl: "/images/2026/staffs/AshkanChaji.jpg",
         name: "اشکان چاجی",
         role: "سرپرست تیم رسانه",
         telegramUrl: "https://t.me/Ash2563",
