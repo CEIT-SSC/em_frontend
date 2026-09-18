@@ -76,7 +76,7 @@ export function CompetitionsList({
       ) : (
         <CompetitionsGrid
           competitions={competitions.data.results}
-          competitionImage="/images/2025/staffs/hero.gif"
+          competitionImage="/images/2026/hero.gif"
           dashboardMode={dashboardMode}
         />
       );

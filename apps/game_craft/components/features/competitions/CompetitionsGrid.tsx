@@ -23,7 +23,7 @@ export function CompetitionsGrid({
             <CompetitionCard
               competition={item}
               isPurchased={true}
-              competitionImage="/images/2025/staffs/hero.gif"
+              competitionImage="/images/2026/hero.gif"
               dashboardMode={true}
             />
           </Col>

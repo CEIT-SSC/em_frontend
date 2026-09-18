@@ -21,12 +21,12 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t("organizingTeam.title"),
     teamMembers: [
       {
-        imageUrl: "/images/2025/staffs/DelaraamRoohani.jpg",
-        name: "دلارام روحانی",
+        imageUrl: "/images/2025/staffs/AmirabbasEntezari.jpg",
+        name: "امیرعباس انتظاری",
         role: "دبیر رویداد",
-        githubUrl: "https://github.com/delaraamroohani",
-        linkedinUrl: "https://www.linkedin.com/in/delaraamroohani",
-        telegramUrl: "",
+        telegramUrl: "https://t.me/amirabbas_entezari",
+        githubUrl: "https://github.com/AmirabbasEntezari",
+        linkedinUrl: "https://www.linkedin.com/in/amirabbas-entezari/",
       },
       {
         imageUrl: "/images/2025/staffs/MohammadJavadAkbari.jpg",
@@ -92,6 +92,11 @@ export function useStaffs(): StaffTeam[] {
         name: "ماهان زواری",
         role: "توسعه دهنده بک اند",
       },
+      {
+        imageUrl: "/images/2026/staffs/ParsaExir.jpg",
+        name: "پارسا اکسیر",
+        role: "عضو تیم فنی",
+      },
     ],
   };
 
@@ -138,15 +143,15 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t("graphicTeam.title"),
     teamMembers: [
       {
-        imageUrl: "/images/2026/staffs/BehradHozouri.jpg",
-        name: "بهراد حضوری",
-        role: "سرپرست تیم گرافیک",
-        githubUrl: "https://github.com/BehradHZ",
-      },
-      {
         imageUrl: "/images/2024/staffs/baharRafinezhad.jpg",
         name: "بهار رفیع نژاد",
+        role: "سرپرست تیم گرافیک",
+      },
+      {
+        imageUrl: "/images/2026/staffs/BehradHozouri.jpg",
+        name: "بهراد حضوری",
         role: "طراح گرافیک",
+        githubUrl: "https://github.com/BehradHZ",
       },
       {
         imageUrl: "/images/2026/staffs/AvinMihanDoust.jpg",
@@ -165,6 +170,11 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t("marketingTeam.title"),
     teamMembers: [
       {
+        imageUrl: "/images/2026/staffs/AtaTorkmanizadeh.png",
+        name: "عطا ترکمانی‌زاده",
+        role: "سرپرست تیم مارکتینگ",
+      },
+      {
         imageUrl: "/images/2026/staffs/AlirezaAtharifard.png",
         name: "علیرضا اطهری‌فرد",
         role: "عضو تیم مارکتینگ",
@@ -175,11 +185,6 @@ export function useStaffs(): StaffTeam[] {
       {
         imageUrl: "/images/2026/staffs/MediaEidi.jpg",
         name: "مدیا عیدی",
-        role: "عضو تیم مارکتینگ",
-      },
-      {
-        imageUrl: "/images/2026/staffs/AtaTorkmanizadeh.png",
-        name: "عطا ترکمانی‌زاده",
         role: "عضو تیم مارکتینگ",
       },
       {
@@ -209,6 +214,14 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t("contentCreationTeam.title"),
     teamMembers: [
       {
+        imageUrl: "/images/2026/staffs/AshkanChaji.jpg",
+        name: "اشکان چاجی",
+        role: "سرپرست تیم رسانه",
+        telegramUrl: "https://t.me/Ash2563",
+        linkedinUrl: "https://www.linkedin.com/in/ashkan-chaji-71493434b",
+        githubUrl: "https://github.com/ashkanchaji",
+      },
+      {
         imageUrl: "/images/2026/staffs/HessamHosseinian.jpg",
         name: "حسام حسینیان",
         role: "عضو تیم رسانه",
@@ -223,13 +236,13 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t("operationsTeam.title"),
     teamMembers: [
       {
-        imageUrl: "/images/2026/staffs/ParsaEmadi.png",
-        name: "پارسا عمادی",
-        role: "عضو تیم اجرایی",
-      },
-      {
         imageUrl: "/images/2026/staffs/BitaGhiasvand.jpg",
         name: "بیتا قیاسوند",
+        role: "سرپرست تیم اجرایی",
+      },
+      {
+        imageUrl: "/images/2026/staffs/ParsaEmadi.png",
+        name: "پارسا عمادی",
         role: "عضو تیم اجرایی",
       },
       {
@@ -289,13 +302,13 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t("decorationTeam.title"),
     teamMembers: [
       {
-        imageUrl: "/images/2026/staffs/NeginNaderi.jpg",
-        name: "نگین نادری",
-        role: "عضو تیم تزئینات",
-      },
-      {
         imageUrl: "/images/2026/staffs/HastiMohammadzadeh.jpg",
         name: "هستی محمدزاده",
+        role: "سرپرست تیم تزئینات",
+      },
+      {
+        imageUrl: "/images/2026/staffs/NeginNaderi.jpg",
+        name: "نگین نادری",
         role: "عضو تیم تزئینات",
       },
       {

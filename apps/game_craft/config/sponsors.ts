@@ -12,14 +12,14 @@ export const sponsors: Sponsor[] = [
     id: "pasargad",
     name: "انرژی پاسارگاد",
     logo: "/assets/images/sponsors/Pasargad-energy.png",
-    link: "https://www.yektanet.com/",
+    link: "https://www.pedc.ir/fa",
     tier: "platinum",
   },
   {
     id: "tafahom",
     name: "تفاهم",
     logo: "/assets/images/sponsors/Tafahom.png",
-    link: "https://asiatech.ir",
+    link: "https://aitdco.com/fa/",
     tier: "platinum",
   },
 ];
