@@ -21,7 +21,7 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t("organizingTeam.title"),
     teamMembers: [
       {
-        imageUrl: "/images/2025/staffs/AmirabbasEntezari.jpg",
+        imageUrl: "/images/2026/staffs/AmirabbasEntezari.jpg",
         name: "امیرعباس انتظاری",
         role: "دبیر رویداد",
         telegramUrl: "https://t.me/amirabbas_entezari",
@@ -29,7 +29,7 @@ export function useStaffs(): StaffTeam[] {
         linkedinUrl: "https://www.linkedin.com/in/amirabbas-entezari/",
       },
       {
-        imageUrl: "/images/2025/staffs/MohammadJavadAkbari.jpg",
+        imageUrl: "/images/logo/default_prof_2026.jpg",
         name: "محمدجواد اکبری",
         role: "دبیر انجمن علمی",
         githubUrl: "https://github.com/Javad-Ak",
@@ -43,7 +43,7 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t("technicalTeam.title"),
     teamMembers: [
       {
-        imageUrl: "/images/2025/staffs/MoeinEnayati.png",
+        imageUrl: "/images/logo/default_prof_2026.jpg",
         name: "معین عنایتی",
         role: "سرپرست تیم فنی",
         telegramUrl: "https://t.me/moein_enayati",
@@ -51,7 +51,7 @@ export function useStaffs(): StaffTeam[] {
         githubUrl: "https://github.com/moeinEN",
       },
       {
-        imageUrl: "/images/2025/staffs/MohammadJavadAkbari.jpg",
+        imageUrl: "/images/logo/default_prof_2026.jpg",
         name: "محمد جواد اکبری",
         role: "توسعه دهنده بک اند",
         githubUrl: "https://github.com/Javad-Ak",
@@ -59,7 +59,7 @@ export function useStaffs(): StaffTeam[] {
         telegramUrl: "",
       },
       {
-        imageUrl: "/images/2025/staffs/AmirhosseinAghighi.jpg",
+        imageUrl: "/images/logo/default_prof_2026.jpg",
         name: "امیرحسین عقیقی",
         role: "توسعه دهنده فرانت اند",
         telegramUrl: "https://t.me/Amirhosseinaghighii",
@@ -67,7 +67,7 @@ export function useStaffs(): StaffTeam[] {
         githubUrl: "https://github.com/AmirhosseinAghighi",
       },
       {
-        imageUrl: "/images/2025/staffs/AlirezaNikooei.jpg",
+        imageUrl: "/images/logo/default_prof_2026.jpg",
         name: "علیرضا نیکوئی",
         role: "دوآپس",
         githubUrl: "https://github.com/alirezanikooei",
@@ -75,7 +75,7 @@ export function useStaffs(): StaffTeam[] {
         telegramUrl: "https://t.me/Nikoooei",
       },
       {
-        imageUrl: "/images/2025/staffs/PouryaFahimi.jpg",
+        imageUrl: "/images/logo/default_prof_2026.jpg",
         name: "پوریا فهیمی",
         role: "توسعه دهنده فرانت اند",
         telegramUrl: "https://t.me/pouryaf289",
@@ -95,7 +95,7 @@ export function useStaffs(): StaffTeam[] {
       {
         imageUrl: "/images/2026/staffs/ParsaExir.jpg",
         name: "پارسا اکسیر",
-        role: "عضو تیم فنی",
+        role: "توسعه دهنده بک اند",
       },
     ],
   };
@@ -104,9 +104,14 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t("scientificTeam.title"),
     teamMembers: [
       {
+        imageUrl: "/images/2026/staffs/MehrdadAbedi.jpg",
+        name: "مهرداد عابدی",
+        role: "سرپرست تیم علمی",
+      },
+      {
         imageUrl: "/images/2026/staffs/AlirezaAtharifard.png",
         name: "علیرضا اطهری‌فرد",
-        role: "سرپرست تیم علمی",
+        role: "عضو تیم علمی",
         telegramUrl: "https://t.me/araf8405",
         githubUrl: "https://github.com/Ar-Atharifard",
         linkedinUrl: "https://www.linkedin.com/in/alireza-atharifard-134b6830b",
@@ -143,7 +148,7 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t("graphicTeam.title"),
     teamMembers: [
       {
-        imageUrl: "/images/2024/staffs/baharRafinezhad.jpg",
+        imageUrl: "/images/logo/default_prof_2026.jpg",
         name: "بهار رفیع نژاد",
         role: "سرپرست تیم گرافیک",
       },
@@ -214,7 +219,7 @@ export function useStaffs(): StaffTeam[] {
     teamTitle: t("contentCreationTeam.title"),
     teamMembers: [
       {
-        imageUrl: "/images/2026/staffs/AshkanChaji.jpg",
+        imageUrl: "/images/logo/default_prof_2026.jpg",
         name: "اشکان چاجی",
         role: "سرپرست تیم رسانه",
         telegramUrl: "https://t.me/Ash2563",
