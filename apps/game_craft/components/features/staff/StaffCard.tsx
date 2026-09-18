@@ -48,7 +48,7 @@ export function StaffCard({ staff }: StaffCardProps) {
               }}
             >
               <Image
-                src="/images/logo/default_prof.jpg"
+                src="/images/logo/default_prof_2026.jpg"
                 alt="Default staff profile"
                 width={240}
                 height={240}

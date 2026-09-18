@@ -86,11 +86,11 @@ export function DashboardNavigationCard({
               }}
             >
               <Image
-                src="/images/logo/default_prof.jpg"
+                src="/images/logo/default_prof_2026.jpg"
                 width="100%"
                 height="auto"
                 alt="user-avatar"
-                fallback="/images/logo/default_prof.jpg"
+                fallback="/images/logo/default_prof_2026.jpg"
               />
             </Flex>
           </div>

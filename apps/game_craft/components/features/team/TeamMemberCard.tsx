@@ -16,7 +16,7 @@ interface TeamMemberCardProps {
 export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
   isHead = false,
   name = "",
-  avatar = "svg/avatar-1.svg",
+  avatar = "/images/logo/default_prof_2026.jpg",
 }) => {
   const { token } = useToken();
 
@@ -43,7 +43,7 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
         }}
       >
         <Image
-          src={avatar}
+          src={avatar || "/images/logo/default_prof_2026.jpg"}
           alt="user-image"
           width={60}
           height={60}
