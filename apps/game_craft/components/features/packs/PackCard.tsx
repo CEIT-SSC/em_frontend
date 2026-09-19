@@ -1,13 +1,25 @@
 "use client";
 
-import { AppstoreOutlined, CheckCircleOutlined, DeleteOutlined, EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import {
+  AppstoreOutlined,
+  CheckCircleOutlined,
+  DeleteOutlined,
+  EyeOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
 import { Badge, Button, Card, Flex, Modal, theme, Typography } from "antd";
 import { ItemType, Pack } from "@ssc/core";
 import Image from "next/image";
 import { useFormatter } from "lib/hooks/useFormatter";
 import { useAuth } from "lib/hooks/useAuth";
-import { cartLoadingSelector, itemInCartSelector } from "lib/store/cart/cart.selectors";
-import { addItemToCartThunk, removeItemFromCartThunk } from "lib/store/cart/cart.thunk";
+import {
+  cartLoadingSelector,
+  itemInCartSelector,
+} from "lib/store/cart/cart.selectors";
+import {
+  addItemToCartThunk,
+  removeItemFromCartThunk,
+} from "lib/store/cart/cart.thunk";
 import { useAppDispatch, useAppSelector } from "lib/store/store";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -47,10 +59,25 @@ export function PackCard({ pack }: { pack: Pack }) {
   const inCart = useAppSelector(itemInCartSelector(pack.id, ItemType.PACK));
   const cartLoading = useAppSelector(cartLoadingSelector);
   const isSelected = Boolean(inCart);
-  const includedItems = [...pack.presentations.map((item) => item.title), ...pack.solo_competitions.map((item) => item.title), ...pack.products.map((item) => item.name)];
-  const packImage = pack.image ?? pack.presentations.find((item) => item.poster)?.poster ?? pack.products.find((item) => item.image)?.image ?? null;
-  const savings = Math.max(0, Number(pack.calculated_price) - Number(pack.real_price));
-  const buttonText = !isAuthenticated ? t("workshop.loginToContinue") : isSelected ? t("workshop.removeFromCart") : t("workshop.addToCart");
+  const includedItems = [
+    ...pack.presentations.map((item) => item.title),
+    ...pack.solo_competitions.map((item) => item.title),
+    ...pack.products.map((item) => item.name),
+  ];
+  const packImage =
+    pack.image ??
+    pack.presentations.find((item) => item.poster)?.poster ??
+    pack.products.find((item) => item.image)?.image ??
+    null;
+  const savings = Math.max(
+    0,
+    Number(pack.calculated_price) - Number(pack.real_price),
+  );
+  const buttonText = !isAuthenticated
+    ? t("workshop.loginToContinue")
+    : isSelected
+      ? t("workshop.removeFromCart")
+      : t("workshop.addToCart");
 
   const toggleCart = () => {
     if (!isAuthenticated) {
@@ -62,7 +89,10 @@ export function PackCard({ pack }: { pack: Pack }) {
     const action = isSelected
       ? removeItemFromCartThunk({ item_id: pack.id, item_type: ItemType.PACK })
       : addItemToCartThunk({ item_id: pack.id, item_type: ItemType.PACK });
-    dispatch(action).unwrap().catch(() => undefined).finally(() => setButtonLoading(false));
+    dispatch(action)
+      .unwrap()
+      .catch(() => undefined)
+      .finally(() => setButtonLoading(false));
   };
 
   return (
@@ -149,13 +179,17 @@ export function PackCard({ pack }: { pack: Pack }) {
                 style={bundleBadgeStyle}
               />
               <Badge
-                count={t("packs.includedCount", { count: includedItems.length })}
+                count={t("packs.includedCount", {
+                  count: includedItems.length,
+                })}
                 className="gc-pack-card__count"
                 style={infoBadgeStyle}
               />
               {savings > 0 && (
                 <Badge
-                  count={t("packs.save", { amount: formatNumberToMoney(savings) })}
+                  count={t("packs.save", {
+                    amount: formatNumberToMoney(savings),
+                  })}
                   className="gc-pack-card__saving"
                   style={savingBadgeStyle}
                 />
@@ -190,6 +224,7 @@ export function PackCard({ pack }: { pack: Pack }) {
               {formatNumberToMoney(pack.real_price)} {t("common.currency")}
             </Typography.Title>
             <Button
+              className="gc-card-purchase"
               type={isSelected ? "default" : "primary"}
               danger={isSelected}
               icon={isSelected ? <DeleteOutlined /> : <ShoppingCartOutlined />}
@@ -207,8 +242,13 @@ export function PackCard({ pack }: { pack: Pack }) {
         open={detailsOpen}
         onCancel={() => setDetailsOpen(false)}
         title={
-          <Flex className="gc-pack-modal__title" align="center" gap="small">
-            <Typography.Title level={3} style={{ margin: 0 }}>{pack.name}</Typography.Title>
+          <Flex
+            className="gc-pack-modal__title"
+            align="center"
+            gap="small"
+            dir="auto"
+          >
+            <Typography.Title level={3}>{pack.name}</Typography.Title>
             <Badge
               count={t("packs.bundleBadge")}
               className="gc-pack-card__badge"
@@ -218,6 +258,7 @@ export function PackCard({ pack }: { pack: Pack }) {
         }
         footer={
           <Button
+            className="gc-card-purchase"
             type={isSelected ? "default" : "primary"}
             danger={isSelected}
             icon={isSelected ? <DeleteOutlined /> : <ShoppingCartOutlined />}
@@ -230,17 +271,44 @@ export function PackCard({ pack }: { pack: Pack }) {
         }
       >
         <Flex className="gc-pack-modal__content" vertical gap="large">
-          <Typography.Paragraph className="gc-pack-modal__description" style={{ margin: 0 }}>{pack.description}</Typography.Paragraph>
-          <Flex className="gc-pack-modal__price" align="center" justify="space-between" gap="middle" wrap>
-            <Typography.Text type="secondary">{t("packs.contents")}</Typography.Text>
-            <Flex vertical align="end" gap={2}>
-              {Number(pack.calculated_price) > Number(pack.real_price) && <Typography.Text delete type="secondary">{formatNumberToMoney(pack.calculated_price)} {t("common.currency")}</Typography.Text>}
-              <Typography.Title level={4} style={{ margin: 0 }}>{formatNumberToMoney(pack.real_price)} {t("common.currency")}</Typography.Title>
+          <Typography.Paragraph
+            className="gc-pack-modal__description"
+            dir="auto"
+            style={{ margin: 0 }}
+          >
+            {pack.description}
+          </Typography.Paragraph>
+          <Flex
+            className="gc-pack-modal__price"
+            align="center"
+            justify="space-between"
+            gap="middle"
+            wrap
+          >
+            <Typography.Text type="secondary">
+              {t("packs.contents")}
+            </Typography.Text>
+            <Flex vertical align="end" gap={2} style={{ margin: 8 }}>
+              {Number(pack.calculated_price) > Number(pack.real_price) && (
+                <Typography.Text delete type="secondary">
+                  {formatNumberToMoney(pack.calculated_price)}{" "}
+                  {t("common.currency")}
+                </Typography.Text>
+              )}
+              <Typography.Title level={4} style={{ margin: 0 }}>
+                {formatNumberToMoney(pack.real_price)} {t("common.currency")}
+              </Typography.Title>
             </Flex>
           </Flex>
           <Flex className="gc-pack-modal__items" vertical>
             {includedItems.map((item, index) => (
-              <Flex className="gc-pack-modal__item" key={`${item}-${index}`} gap="small" align="center">
+              <Flex
+                className="gc-pack-modal__item"
+                key={`${item}-${index}`}
+                gap="small"
+                align="center"
+                dir="auto"
+              >
                 <CheckCircleOutlined aria-hidden="true" />
                 <Typography.Text>{item}</Typography.Text>
               </Flex>

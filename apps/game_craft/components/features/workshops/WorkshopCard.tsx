@@ -226,25 +226,6 @@ export function WorkshopCard({
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
 
-          {/* Colored Stripes */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              display: "flex",
-              zIndex: 1,
-            }}
-          >
-            {colorStripes.map((color, index) => (
-              <div
-                key={index}
-                style={{ height: "4px", flex: 1, backgroundColor: color }}
-              />
-            ))}
-          </div>
-
           {/* View Details Button */}
           <div
             style={{
@@ -507,6 +488,7 @@ export function WorkshopCard({
               </AntButton>
             ) : (
               <AntButton
+                className="gc-card-purchase"
                 type={isSelected ? "default" : "primary"}
                 danger={isSelected}
                 icon={
@@ -543,6 +525,7 @@ export function WorkshopCard({
             ? [
                 <AntButton
                   key="action"
+                  className="gc-card-purchase"
                   type={isSelected ? "default" : "primary"}
                   danger={isSelected}
                   icon={

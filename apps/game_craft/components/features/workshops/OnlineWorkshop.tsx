@@ -32,13 +32,13 @@ export function OnlineWorkshop({
         eventId,
         undefined,
         undefined,
-        PresentationType.TALK
+        PresentationType.TALK,
       )
       .then((response) => {
         if (response.status === 200) {
           const filteredData = response.data.data;
           filteredData.results = filteredData.results.filter(
-            (presentation) => presentation.is_active
+            (presentation) => presentation.is_active,
           );
 
           setPresentations({
