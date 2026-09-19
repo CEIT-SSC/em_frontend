@@ -61,12 +61,12 @@ export default function HomePage() {
         <Packs padding={homeViewPadding} backgroundColor="#111c31" />
 
         {/* <HomeArtworkSlot assetId="GC-ART-03" variant="gateway" /> */}
-        <div id="game-jam" style={{ width: "100%" }}>
+        {/* <div id="game-jam" style={{ width: "100%" }}>
           <CompetitionsList
             padding={homeViewPadding}
             backgroundColor="#101a30"
           />
-        </div>
+        </div> */}
         <div id="workshops" />
         <OfflineWorkshop padding={homeViewPadding} backgroundColor="#172640" />
         <OnlineWorkshop padding={homeViewPadding} backgroundColor="#0d1527" />
