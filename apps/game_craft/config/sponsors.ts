@@ -9,13 +9,6 @@ export interface Sponsor {
 // name and description of sponsors comes from translation files using id
 export const sponsors: Sponsor[] = [
   {
-    id: "pasargad",
-    name: "انرژی پاسارگاد",
-    logo: "/assets/images/sponsors/Pasargad-energy.png",
-    link: "https://www.pedc.ir/fa",
-    tier: "platinum",
-  },
-  {
     id: "tafahom",
     name: "تفاهم",
     logo: "/assets/images/sponsors/Tafahom.png",

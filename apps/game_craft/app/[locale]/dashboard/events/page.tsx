@@ -78,7 +78,7 @@ export default function EventsPage() {
               isPurchased={true}
               workshopImage={
                 item.type === PresentationType.WORKSHOP
-                  ? "/images/2026/hero.gif"
+                  ? "/images/2026/workshop.gif"
                   : "/images/2026/hero.gif"
               }
             />
