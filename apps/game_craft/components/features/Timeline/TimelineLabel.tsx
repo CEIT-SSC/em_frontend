@@ -26,7 +26,7 @@ export default function TimelineLabel({
         width={1024}
         height={1024}
         sizes="(max-width: 768px) 0px, 152px"
-        style={{ width, height: "auto" }}
+        style={{ width, height: "auto", transform: "translateY(-50%)" }}
       />
     </Flex>
   );

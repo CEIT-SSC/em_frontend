@@ -18,32 +18,54 @@
     "timeline": {
       "title": "Event Timeline",
       "step1": {
-        "title": "Registration Begin",
-        "schedule": "September 20th"
+        "title": "Event & Workshops Begin",
+        "schedule": "September 26th – October 9th",
+        "description": "Specialized talks and workshops"
       },
       "step2": {
-        "title": "Presentations Begin",
-        "schedule": "September 24th"
+        "title": "Game Industry Commercialization & Internationalization Panel",
+        "schedule": "October 8th",
+        "description": "Discussion with industry experts"
       },
       "step3": {
-        "title": "Workshops Begin",
-        "schedule": "September 25th"
+        "title": "Game Jam Theme Reveal & Competition Begins",
+        "schedule": "Friday, October 9th",
+        "description": "Challenge introduction and game development begins"
       },
       "step4": {
-        "title": "Competition Begin",
-        "schedule": "October 3th"
+        "title": "Mentoring Session",
+        "schedule": "Thursday, October 14th",
+        "description": "Feedback from specialist mentors"
       },
       "step5": {
-        "title": "Game Jam",
-        "schedule": "October 9th"
+        "title": "Competition Submission Deadline",
+        "schedule": "Friday, October 16th",
+        "description": "Final project and documentation submission"
       },
       "step6": {
-        "title": "Judging",
-        "schedule": "October 10th"
+        "title": "Closing Ceremony & Recognition of Top Participants",
+        "schedule": "Friday, October 23rd",
+        "description": "Results announcement and prize presentation"
       },
       "step7": {
-        "title": "Results & Closing Ceremony",
-        "schedule": "October 17th"
+        "title": "Select",
+        "schedule": "Proposed sponsor milestone — if held at the faculty venue (Thursday or Friday)",
+        "description": ""
+      },
+      "step8": {
+        "title": "Improve",
+        "schedule": "Proposed sponsor milestone — if held at the faculty venue (Thursday or Friday)",
+        "description": ""
+      },
+      "step9": {
+        "title": "Validate",
+        "schedule": "Proposed sponsor milestone — if held at the faculty venue (Thursday or Friday)",
+        "description": ""
+      },
+      "step10": {
+        "title": "Demo",
+        "schedule": "Proposed sponsor milestone — if held at the faculty venue (Thursday or Friday)",
+        "description": ""
       }
     },
     "staffs": {

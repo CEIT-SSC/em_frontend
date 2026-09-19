@@ -19,92 +19,39 @@ export default function GameCraftTimeline({
   const t = useTranslations("app.timeline");
   const screens = useResponsive();
 
-  const items = [
-    {
-      dot: <TimelineDot />,
-      children: (
-        <TimelineChildren title={t("step1.title")} time={t("step1.schedule")} />
-      ),
-      label: (
-        <TimelineLabel
-          logo="/assets/images/hollwo-knight/timeline/01.png"
-          alt="Registration"
-        />
-      ),
-    },
-    {
-      dot: <TimelineDot />,
-      children: (
-        <TimelineChildren title={t("step2.title")} time={t("step2.schedule")} />
-      ),
-      label: (
-        <TimelineLabel
-          logo="/assets/images/hollwo-knight/timeline/02.png"
-          alt="Registration Deadline"
-        />
-      ),
-    },
-    {
-      dot: <TimelineDot />,
-      children: (
-        <TimelineChildren title={t("step3.title")} time={t("step3.schedule")} />
-      ),
-      label: (
-        <TimelineLabel
-          logo="/assets/images/hollwo-knight/timeline/03.png"
-          alt="Workshops Begin"
-        />
-      ),
-    },
-    {
-      dot: <TimelineDot />,
-      children: (
-        <TimelineChildren title={t("step4.title")} time={t("step4.schedule")} />
-      ),
-      label: (
-        <TimelineLabel
-          logo="/assets/images/hollwo-knight/timeline/04.PNG"
-          alt="Workshops End"
-        />
-      ),
-    },
-    {
-      dot: <TimelineDot />,
-      children: (
-        <TimelineChildren title={t("step5.title")} time={t("step5.schedule")} />
-      ),
-      label: (
-        <TimelineLabel
-          logo="/assets/images/hollwo-knight/timeline/05.PNG"
-          alt="Game Development"
-        />
-      ),
-    },
-    {
-      dot: <TimelineDot />,
-      children: (
-        <TimelineChildren title={t("step6.title")} time={t("step6.schedule")} />
-      ),
-      label: (
-        <TimelineLabel
-          logo="/assets/images/hollwo-knight/timeline/06.PNG"
-          alt="Judging"
-        />
-      ),
-    },
-    {
-      dot: <TimelineDot />,
-      children: (
-        <TimelineChildren title={t("step7.title")} time={t("step7.schedule")} />
-      ),
-      label: (
-        <TimelineLabel
-          logo="/assets/images/hollwo-knight/timeline/06.PNG"
-          alt="Results & Closing Ceremony"
-        />
-      ),
-    },
+  const timelineIcons = [
+    "/assets/images/hollwo-knight/timeline/01.png",
+    "/assets/images/hollwo-knight/timeline/02.png",
+    "/assets/images/hollwo-knight/timeline/03.png",
+    "/assets/images/hollwo-knight/timeline/04.PNG",
+    "/assets/images/hollwo-knight/timeline/05.PNG",
+    "/assets/images/hollwo-knight/timeline/06.PNG",
   ];
+
+  const items = Array.from({ length: 6 }, (_, index) => {
+    const step = `step${index + 1}`;
+
+    return {
+      dot: <TimelineDot />,
+      children: (
+        <TimelineChildren
+          title={t(`${step}.title`)}
+          time={t(`${step}.schedule`)}
+          description={t(`${step}.description`)}
+        />
+      ),
+      ...(timelineIcons[index]
+        ? {
+            label: (
+              <TimelineLabel
+                logo={timelineIcons[index]}
+                alt={t(`${step}.title`)}
+              />
+            ),
+          }
+        : {}),
+    };
+  });
 
   return (
     <Flex

@@ -3,6 +3,7 @@ import { Flex, Typography } from "antd";
 interface TimelineChildrenProps {
   title: string;
   time: string;
+  description?: string;
   titleLevel?: 1 | 2 | 3 | 4 | 5;
 }
 
