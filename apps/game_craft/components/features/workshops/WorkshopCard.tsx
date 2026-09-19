@@ -271,49 +271,25 @@ export function WorkshopCard({
               {presentation.title}
             </Typography.Title>
 
-            <Flex gap="small" wrap>
+            <Flex className="gc-card-tags" gap="small" wrap>
               {!presentation.is_online && (
                 <Badge
-                  style={{
-                    backgroundColor: "transparent",
-                    color: token.colorWarning,
-                    border: `1px solid ${token.colorWarning}`,
-                    borderRadius: "4px",
-                    padding: "0 8px",
-                  }}
+                  className="gc-card-tag gc-card-tag--warning"
                   count={t("workshop.inPerson")}
                 />
               )}
               {presentation.is_online && (
                 <Badge
-                  style={{
-                    backgroundColor: "transparent",
-                    color: token.colorSuccess,
-                    border: `1px solid ${token.colorSuccess}`,
-                    borderRadius: "4px",
-                    padding: "0 8px",
-                  }}
+                  className="gc-card-tag gc-card-tag--success"
                   count={t("workshop.online")}
                 />
               )}
               <Badge
-                style={{
-                  backgroundColor: "transparent",
-                  color: token.colorInfo,
-                  border: `1px solid ${token.colorInfo}`,
-                  borderRadius: "4px",
-                  padding: "0 8px",
-                }}
+                className="gc-card-tag gc-card-tag--info"
                 count={t(`workshop.type.${presentation.type}`)}
               />
               <Badge
-                style={{
-                  backgroundColor: "transparent",
-                  color: token.colorInfo,
-                  border: `1px solid ${token.colorInfo}`,
-                  borderRadius: "4px",
-                  padding: "0 8px",
-                }}
+                className="gc-card-tag gc-card-tag--neutral"
                 count={t(`workshop.level.${presentation.level}`)}
               />
             </Flex>

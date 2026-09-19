@@ -30,27 +30,6 @@ const { useToken } = theme;
 export function PackCard({ pack }: { pack: Pack }) {
   const t = useTranslations();
   const { token } = useToken();
-  const bundleBadgeStyle = {
-    backgroundColor: "transparent",
-    color: token.colorWarning,
-    border: `1px solid ${token.colorWarning}`,
-    borderRadius: "4px",
-    padding: "0 8px",
-  };
-  const infoBadgeStyle = {
-    backgroundColor: "transparent",
-    color: token.colorInfo,
-    border: `1px solid ${token.colorInfo}`,
-    borderRadius: "4px",
-    padding: "0 8px",
-  };
-  const savingBadgeStyle = {
-    backgroundColor: "transparent",
-    color: token.colorSuccess,
-    border: `1px solid ${token.colorSuccess}`,
-    borderRadius: "4px",
-    padding: "0 8px",
-  };
   const { formatNumberToMoney } = useFormatter();
   const dispatch = useAppDispatch();
   const { isAuthenticated } = useAuth();
@@ -172,26 +151,23 @@ export function PackCard({ pack }: { pack: Pack }) {
             >
               {pack.name}
             </Typography.Title>
-            <Flex className="gc-pack-card__tags" gap="small" wrap>
+            <Flex className="gc-card-tags gc-pack-card__tags" gap="small" wrap>
               <Badge
                 count={t("packs.bundleBadge")}
-                className="gc-pack-card__badge"
-                style={bundleBadgeStyle}
+                className="gc-card-tag gc-card-tag--warning gc-pack-card__badge"
               />
               <Badge
                 count={t("packs.includedCount", {
                   count: includedItems.length,
                 })}
-                className="gc-pack-card__count"
-                style={infoBadgeStyle}
+                className="gc-card-tag gc-card-tag--info gc-pack-card__count"
               />
               {savings > 0 && (
                 <Badge
                   count={t("packs.save", {
                     amount: formatNumberToMoney(savings),
                   })}
-                  className="gc-pack-card__saving"
-                  style={savingBadgeStyle}
+                  className="gc-card-tag gc-card-tag--success gc-pack-card__saving"
                 />
               )}
             </Flex>
@@ -251,8 +227,7 @@ export function PackCard({ pack }: { pack: Pack }) {
             <Typography.Title level={3}>{pack.name}</Typography.Title>
             <Badge
               count={t("packs.bundleBadge")}
-              className="gc-pack-card__badge"
-              style={bundleBadgeStyle}
+              className="gc-card-tag gc-card-tag--warning gc-pack-card__badge"
             />
           </Flex>
         }

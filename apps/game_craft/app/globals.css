@@ -732,6 +732,52 @@ body {
   left: auto !important;
   z-index: 1;
 }
+.gc-card-tags {
+  align-items: flex-start;
+  gap: 0.5rem !important;
+}
+.gc-card-tag {
+  max-width: 100%;
+}
+.gc-card-tag .ant-badge-count {
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 1.625rem !important;
+  max-width: 100% !important;
+  padding: 0.25rem 0.625rem !important;
+  overflow: hidden !important;
+  color: #f1ecdf !important;
+  font-size: 0.75rem !important;
+  font-weight: 750 !important;
+  line-height: 1.2 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  background: #16243d !important;
+  border: 1px solid #16243d !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+}
+.gc-card-tag--info .ant-badge-count {
+  color: #f1ecdf !important;
+  background: #4d82a3 !important;
+  border-color: #4d82a3 !important;
+}
+.gc-card-tag--success .ant-badge-count {
+  color: #f1ecdf !important;
+  background: #43785a !important;
+  border-color: #43785a !important;
+}
+.gc-card-tag--warning .ant-badge-count {
+  color: #10182b !important;
+  background: #d8b46c !important;
+  border-color: #d8b46c !important;
+}
+.gc-card-tag--neutral .ant-badge-count {
+  color: #f1ecdf !important;
+  background: #75628f !important;
+  border-color: #75628f !important;
+}
 .gc-card-details.ant-btn-primary .ant-btn-icon,
 .gc-card-details.ant-btn-primary .anticon {
   color: var(--deep) !important;
