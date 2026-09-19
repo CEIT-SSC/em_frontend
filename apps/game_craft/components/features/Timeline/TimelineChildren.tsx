@@ -5,12 +5,14 @@ interface TimelineChildrenProps {
   time: string;
   description?: string;
   titleLevel?: 1 | 2 | 3 | 4 | 5;
+  compactText?: boolean;
 }
 
 export default function TimelineChildren({
   title,
   time,
   titleLevel = 2,
+  compactText = false,
 }: TimelineChildrenProps) {
   return (
     <Flex
@@ -26,6 +28,7 @@ export default function TimelineChildren({
           margin: 0,
           fontWeight: 800,
           textAlign: "center",
+          fontSize: compactText ? "1.75rem" : undefined,
         }}
       >
         {title}
@@ -37,6 +40,7 @@ export default function TimelineChildren({
           margin: 0,
           fontFamily: "Vazirmatn",
           fontWeight: 400,
+          fontSize: compactText ? "1.375rem" : undefined,
         }}
       >
         {time}

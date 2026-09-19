@@ -1,5 +1,5 @@
 import { ConfigProvider, Flex, Timeline, Typography } from "antd";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import TimelineDot from "./TimelineDot";
 import TimelineLabel from "./TimelineLabel";
 import TimelineChildren from "./TimelineChildren";
@@ -17,6 +17,7 @@ export default function GameCraftTimeline({
   className = "",
 }: GameCraftTimelineProps) {
   const t = useTranslations("app.timeline");
+  const locale = useLocale();
   const screens = useResponsive();
 
   const timelineIcons = [
@@ -39,6 +40,7 @@ export default function GameCraftTimeline({
           title={t(`${step}.title`)}
           time={t(`${step}.schedule`)}
           description={t(`${step}.description`)}
+          compactText={locale === "en"}
         />
       ),
       ...(timelineIcons[index]

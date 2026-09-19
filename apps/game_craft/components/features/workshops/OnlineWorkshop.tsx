@@ -81,7 +81,7 @@ export function OnlineWorkshop({
       ) : (
         <WorkshopGrid
           presentations={presentations.data.results}
-          workshopImage="/images/2026/workshop.gif"
+          workshopImage="/images/2026/hero.gif"
         />
       );
     }
