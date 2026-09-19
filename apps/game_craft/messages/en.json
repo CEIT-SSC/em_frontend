@@ -18,38 +18,38 @@
     "timeline": {
       "title": "Event Timeline",
       "step1": {
-        "title": "Event & Workshops Begin",
-        "schedule": "September 26th – October 9th",
-        "description": "Specialized talks and workshops"
+        "title": "Registration Opens",
+        "schedule": "From September 20",
+        "description": ""
       },
       "step2": {
-        "title": "Game Industry Commercialization & Internationalization Panel",
-        "schedule": "October 8th",
-        "description": "Discussion with industry experts"
+        "title": "Presentations and Workshops Begin",
+        "schedule": "From September 26",
+        "description": ""
       },
       "step3": {
-        "title": "Game Jam Theme Reveal & Competition Begins",
-        "schedule": "Friday, October 9th",
-        "description": "Challenge introduction and game development begins"
+        "title": "Panel with Industry Leaders",
+        "schedule": "October 8",
+        "description": ""
       },
       "step4": {
-        "title": "Mentoring Session",
-        "schedule": "Thursday, October 14th",
-        "description": "Feedback from specialist mentors"
+        "title": "Presentations and Workshops End",
+        "schedule": "October 9",
+        "description": ""
       },
       "step5": {
-        "title": "Competition Submission Deadline",
-        "schedule": "Friday, October 16th",
-        "description": "Final project and documentation submission"
+        "title": "Game Development Begins and Theme Is Revealed",
+        "schedule": "October 9–16",
+        "description": ""
       },
       "step6": {
-        "title": "Closing Ceremony & Recognition of Top Participants",
-        "schedule": "Friday, October 23rd",
-        "description": "Results announcement and prize presentation"
+        "title": "Competition Ends and Judging Begins",
+        "schedule": "From October 16",
+        "description": ""
       },
       "step7": {
-        "title": "Select",
-        "schedule": "Proposed sponsor milestone — if held at the faculty venue (Thursday or Friday)",
+        "title": "Closing Ceremony and Participant Recognition",
+        "schedule": "October 23",
         "description": ""
       },
       "step8": {
@@ -296,7 +296,7 @@
     },
     "intro": {
       "title": "GameCraft",
-      "subtitle": "The 5th GameCraft event",
+      "subtitle": "The 6th GameCraft event",
       "description": "GameCraft is a game development event organized to inspire and nurture enthusiasm in those interested in game design and development. Hosted for the fifth time by Amirkabir University of Technology, this year's event aims to provide a platform for knowledge transfer and networking among game development experts and enthusiasts.\nThe event includes in-person workshops and presentations, and this year we are joined by speakers from some of the most prominent game development companies. After that, game creation and design will take place as a competition, and winners will be honored at the closing ceremony."
     },
     "aboutUs": {

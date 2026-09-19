@@ -300,6 +300,11 @@ export function useStaffs(): StaffTeam[] {
         name: "عرفان افتخاری",
         role: "عضو تیم اجرایی",
       },
+      {
+        imageUrl: "/images/logo/default_prof_2026.jpg",
+        name: "امیرپارسا مظفری",
+        role: "عضو تیم اجرایی",
+      },
     ],
   };
 
@@ -329,6 +334,11 @@ export function useStaffs(): StaffTeam[] {
       {
         imageUrl: "/images/2026/staffs/IlyaHamediBasir.jpg",
         name: "ایلیا حامدی بصیر",
+        role: "عضو تیم تزئینات",
+      },
+      {
+        imageUrl: "/images/logo/default_prof_2026.jpg",
+        name: "امیرپارسا مظفری",
         role: "عضو تیم تزئینات",
       },
     ],
