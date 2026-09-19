@@ -881,6 +881,13 @@ body {
   color: var(--gc-ink) !important;
   fill: currentColor !important;
 }
+.gc-home .gc-card-purchase.ant-btn-primary .ant-btn-icon,
+.gc-home .gc-card-purchase.ant-btn-primary .anticon,
+.gc-home .gc-card-purchase.ant-btn-primary .ant-btn-icon svg,
+.gc-home .gc-card-purchase.ant-btn-primary .ant-btn-icon svg path {
+  color: var(--gc-ink) !important;
+  fill: currentColor !important;
+}
 .gc-home .gc-card-purchase.ant-btn-primary:disabled {
   color: var(--gc-ink) !important;
   background: var(--gc-blue) !important;
