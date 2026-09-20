@@ -6,7 +6,7 @@ export function Separator() {
   return (
     <div className="w-full flex justify-center">
       <Image
-        src="/assets/images/hollwo-knight/Warning_Fleur0008.png"
+        src="/assets/images/hollow-knight/Warning_Fleur0008.png"
         alt="separator"
         width={959}
         height={80}

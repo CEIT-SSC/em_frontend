@@ -63,15 +63,23 @@ export function StaffContainer() {
               {team.teamTitle}
             </Typography.Title>
             <Row
-              align="middle"
               justify="center"
               gutter={[16, 16]}
               style={{
                 width: "100%",
+                alignItems: "stretch",
               }}
             >
               {team.teamMembers.map((staff, staffIndex) => (
-                <Col key={staffIndex} span={24} sm={12} md={8} lg={6} xxl={4}>
+                <Col
+                  key={staffIndex}
+                  span={24}
+                  sm={12}
+                  md={8}
+                  lg={6}
+                  xxl={4}
+                  style={{ display: "flex" }}
+                >
                   <StaffCard staff={staff} />
                 </Col>
               ))}

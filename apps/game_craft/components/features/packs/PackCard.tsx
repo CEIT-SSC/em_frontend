@@ -205,6 +205,7 @@ export function PackCard({ pack }: { pack: Pack }) {
               danger={isSelected}
               icon={isSelected ? <DeleteOutlined /> : <ShoppingCartOutlined />}
               loading={buttonLoading}
+              disabled={!isAuthenticated}
               onClick={toggleCart}
               style={{ borderRadius: token.borderRadius, height: "36px" }}
             >
@@ -238,6 +239,7 @@ export function PackCard({ pack }: { pack: Pack }) {
             danger={isSelected}
             icon={isSelected ? <DeleteOutlined /> : <ShoppingCartOutlined />}
             loading={buttonLoading}
+            disabled={!isAuthenticated}
             onClick={toggleCart}
             style={{ borderRadius: token.borderRadius, height: "36px" }}
           >

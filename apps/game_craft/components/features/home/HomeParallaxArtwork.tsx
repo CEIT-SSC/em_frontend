@@ -5,7 +5,7 @@ import { useEffect, useRef, type CSSProperties } from "react";
 const layers = [
   {
     className: "gc-home-parallax__layer--back",
-    src: "/assets/images/hollwo-knight/hero/hornet.png",
+    src: "/assets/images/hollow-knight/hero/hornet.png",
     alt: "Hornet from Hollow Knight",
     depth: 1,
   },
@@ -17,7 +17,7 @@ const layers = [
   },
   {
     className: "gc-home-parallax__layer--front",
-    src: "/assets/images/hollwo-knight/hero/knight.png",
+    src: "/assets/images/hollow-knight/hero/knight.png",
     alt: "The Knight from Hollow Knight",
     depth: 0.55,
   },
@@ -34,10 +34,11 @@ export function HomeParallaxArtwork() {
     const artwork = artworkRef.current;
     if (!artwork) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const interactionSurface = artwork.closest<HTMLElement>(".gc-home-intro") ?? artwork;
+    const interactionSurface =
+      artwork.closest<HTMLElement>(".gc-home-intro") ?? artwork;
 
     const layerElements = Array.from(
-      artwork.querySelectorAll<HTMLElement>("[data-parallax-depth]"),
+      artwork.querySelectorAll<HTMLElement>("[data-parallax-depth]")
     );
 
     const updateLayers = (timestamp: number) => {

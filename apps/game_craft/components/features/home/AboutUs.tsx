@@ -35,7 +35,7 @@ export function AboutUs({
         <Col span={24} lg={12}>
           <Flex
             vertical
-            align="center"
+            align="start"
             justify="center"
             style={{ width: "100%" }}
             gap="small"
@@ -70,7 +70,7 @@ export function AboutUs({
         <Col span={24} lg={12}>
           <Flex align="center" justify="center" style={{ width: "100%" }}>
             <Image
-              src="/assets/images/hollwo-knight/our-team/knight-at-bench.png"
+              src="/assets/images/hollow-knight/our-team/knight-at-bench.png"
               alt="Knight sitting on bench"
               width={320}
               height={180}

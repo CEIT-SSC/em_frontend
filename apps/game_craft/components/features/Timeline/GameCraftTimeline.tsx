@@ -21,13 +21,13 @@ export default function GameCraftTimeline({
   const screens = useResponsive();
 
   const timelineIcons = [
-    "/assets/images/hollwo-knight/timeline/01.png",
-    "/assets/images/hollwo-knight/timeline/02.png",
-    "/assets/images/hollwo-knight/timeline/03.png",
-    "/assets/images/hollwo-knight/timeline/04.PNG",
-    "/assets/images/hollwo-knight/timeline/05.PNG",
-    "/assets/images/hollwo-knight/timeline/06.PNG",
-    "/assets/images/hollwo-knight/timeline/07.png",
+    "/assets/images/hollow-knight/timeline/01.png",
+    "/assets/images/hollow-knight/timeline/02.png",
+    "/assets/images/hollow-knight/timeline/03.png",
+    "/assets/images/hollow-knight/timeline/04.png",
+    "/assets/images/hollow-knight/timeline/05.png",
+    "/assets/images/hollow-knight/timeline/06.png",
+    "/assets/images/hollow-knight/timeline/07.png",
   ];
 
   const items = Array.from({ length: 7 }, (_, index) => {

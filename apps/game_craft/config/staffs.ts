@@ -78,7 +78,7 @@ export function useStaffs(): StaffTeam[] {
         imageUrl: "/images/2025/staffs/PouryaFahimi.jpg",
         name: "پوریا فهیمی",
         role: "توسعه دهنده فرانت اند",
-        telegramUrl: "https://t.me/pouryaf289",
+        telegramUrl: "https://t.me/pourito",
         linkedinUrl: "https://www.linkedin.com/in/pourya-fahimi/",
         githubUrl: "https://github.com/PouryaFahimi",
       },
