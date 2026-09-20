@@ -41,7 +41,7 @@ export default function HomePage() {
             aria-hidden="true"
           />
           <Image
-            src="/assets/images/hollwo-knight/knight-and-hornet-playing-game.png"
+            src="/assets/images/hollow-knight/knight-and-hornet-playing-game.png"
             alt="Knight and Hornet playing a game together"
             width={512}
             height={225}

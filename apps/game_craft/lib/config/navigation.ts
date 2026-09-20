@@ -27,6 +27,10 @@ export const useMainNavigations = (): NavigationItem[] => {
       route: "/staffs",
     },
     {
+      name: t("presenters"),
+      route: "/presenters",
+    },
+    {
       name: t("gallery"),
       route: "/gallery",
     },

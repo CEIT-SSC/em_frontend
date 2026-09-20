@@ -78,7 +78,7 @@ export function useStaffs(): StaffTeam[] {
         imageUrl: "/images/2025/staffs/PouryaFahimi.jpg",
         name: "پوریا فهیمی",
         role: "توسعه دهنده فرانت اند",
-        telegramUrl: "https://t.me/pouryaf289",
+        telegramUrl: "https://t.me/pourito",
         linkedinUrl: "https://www.linkedin.com/in/pourya-fahimi/",
         githubUrl: "https://github.com/PouryaFahimi",
       },
@@ -96,7 +96,7 @@ export function useStaffs(): StaffTeam[] {
   const scientificTeam: StaffTeam = {
     teamTitle: t("scientificTeam.title"),
     teamMembers: [
-        {
+      {
         imageUrl: "/images/2025/staffs/AmirabbasEntezari.jpg",
         name: "امیرعباس انتظاری",
         role: "سرپرست تیم علمی",
@@ -123,9 +123,5 @@ export function useStaffs(): StaffTeam[] {
     ],
   };
 
-  return [
-    organizingTeam,
-    technicalTeam,
-    scientificTeam,
-  ];
+  return [organizingTeam, technicalTeam, scientificTeam];
 }
