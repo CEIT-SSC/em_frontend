@@ -344,7 +344,7 @@ export function useStaffs(): StaffTeam[] {
         role: "عضو تیم تزئینات",
       },
       {
-        imageUrl: "/images/2026/staffs/MohammadMehdiGhorbi.png",
+        imageUrl: "/images/2026/staffs/MohammadMehdiGhorbi.jpg",
         name: "محمدمهدی قربی",
         role: "عضو تیم تزئینات",
       },
