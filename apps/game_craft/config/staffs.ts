@@ -134,6 +134,11 @@ export function useStaffs(): StaffTeam[] {
         role: "عضو تیم علمی",
       },
       {
+        imageUrl: "/images/2026/staffs/ErfanRajabi.jpg",
+        name: "عرفان رجبی",
+        role: "عضو تیم علمی",
+      },
+      {
         imageUrl: "/images/2026/staffs/AliMoghaddam.jpg",
         name: "علی مقدم",
         role: "عضو تیم علمی",
@@ -190,6 +195,11 @@ export function useStaffs(): StaffTeam[] {
       {
         imageUrl: "/images/2026/staffs/MediaEidi.jpg",
         name: "مدیا عیدی",
+        role: "عضو تیم مارکتینگ",
+      },
+      {
+        imageUrl: "/images/2026/staffs/ParsaAsadi.jpg",
+        name: "پارسا اسدی",
         role: "عضو تیم مارکتینگ",
       },
       {
@@ -266,6 +276,11 @@ export function useStaffs(): StaffTeam[] {
         role: "عضو تیم اجرایی",
       },
       {
+        imageUrl: "/images/2026/staffs/MohammadMehdiGhorbi.png",
+        name: "محمدمهدی قربی",
+        role: "عضو تیم اجرایی",
+      },
+      {
         imageUrl: "/images/2026/staffs/AliMahdipourGanji.jpg",
         name: "علی مهدی‌پور گنجی",
         role: "عضو تیم اجرایی",
@@ -305,6 +320,11 @@ export function useStaffs(): StaffTeam[] {
         name: "امیرپارسا مظفری",
         role: "عضو تیم اجرایی",
       },
+      {
+        imageUrl: "/images/2026/staffs/MohammadHassanZeighami.jpg",
+        name: "محمدحسن ضیغمی",
+        role: "عضو تیم اجرایی",
+      },
     ],
   };
 
@@ -322,13 +342,18 @@ export function useStaffs(): StaffTeam[] {
         role: "عضو تیم تزئینات",
       },
       {
-        imageUrl: "",
+        imageUrl: "/images/2026/staffs/YaldaVasheghani.jpg",
         name: "یلدا واشقانی فراهانی",
         role: "عضو تیم تزئینات",
       },
       {
         imageUrl: "/images/2026/staffs/MasihMahdavinia.png",
         name: "مسیح مهدوی نیا",
+        role: "عضو تیم تزئینات",
+      },
+      {
+        imageUrl: "/images/2026/staffs/MohammadMehdiGhorbi.png",
+        name: "محمدمهدی قربی",
         role: "عضو تیم تزئینات",
       },
       {
@@ -339,6 +364,16 @@ export function useStaffs(): StaffTeam[] {
       {
         imageUrl: "/images/logo/default_prof_2026.jpg",
         name: "امیرپارسا مظفری",
+        role: "عضو تیم تزئینات",
+      },
+      {
+        imageUrl: "/images/logo/default_prof_2026.jpg",
+        name: "زهرا شفاعی",
+        role: "عضو تیم تزئینات",
+      },
+      {
+        imageUrl: "/images/logo/default_prof_2026.jpg",
+        name: "ریحانه مرادی",
         role: "عضو تیم تزئینات",
       },
     ],
