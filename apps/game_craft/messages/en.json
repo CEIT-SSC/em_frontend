@@ -336,14 +336,6 @@
         "silver": "SILVER",
         "sponsor": "SPONSOR"
       },
-      "pasargad": {
-        "name": "Pasargad Energy",
-        "description": "Pasargad Energy Development Company (PEDC) is a leading, reputable company that offers competitive products and services in the energy sector through intelligent investment and effective management of its asset portfolio. Established in 2008 with entirely private-sector investment, the company is distinguished by its effective and continuous presence across the entire energy value chain."
-      },
-      "tafahom": {
-        "name": "Tafahom",
-        "description": "Tafahom Artificial Intelligence Technology Development Company specializes in digital transformation, artificial intelligence, and enterprise platform development. By combining industry expertise, data, and modern technologies, we help organizations turn data into insight, insight into decisions, and decisions into sustainable value."
-      }
     },
     "footer": {
       "autGameCraft": "Amirkabir GameCraft",
