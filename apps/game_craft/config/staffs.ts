@@ -325,6 +325,11 @@ export function useStaffs(): StaffTeam[] {
         name: "محمدحسن ضیغمی",
         role: "عضو تیم اجرایی",
       },
+      {
+        imageUrl: "/images/logo/default_prof_2026.jpg",
+        name: "نگار مدقق",
+        role: "عضو تیم اجرایی",
+      },
     ],
   };
 
