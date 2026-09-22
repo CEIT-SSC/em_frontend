@@ -22,11 +22,6 @@ export const presenters: StaffMember[] = [
     role: "Character designer & concept artist",
   },
   {
-    imageUrl: "/images/2026/presenters/Foadian.jpg",
-    name: "Ehsan Foadian",
-    role: "Experienced video game programmer with over 10 years of experience in Unity & .NET. Proficient in gameplay programming, tool development, and network programming.",
-  },
-  {
     imageUrl: "/images/2026/presenters/Mousavi.jpg",
     name: "SeyedMohammadTaghi Mousavi",
     role: "Sound Designer, Music Producer",
@@ -35,11 +30,6 @@ export const presenters: StaffMember[] = [
     imageUrl: "/images/2026/presenters/Rasouli.jpg",
     name: "طاها رسولی",
     role: "من طاها رسولی هستم و نزدیک به 20 سال در صنعت بازی های رایانه ای در ایران فعالیت دارم. کارمو به عنوان نویسنده شروع کردم و بعد تبدیل به طراح بازی تو تعداد زیادی پروژه شدم. در سال 1391 کمک کردم تا انستیتو ملی بازی سازی تاسیس بشه و خودم به مدت یک سال مدیر انستیتو بودم. از همون سال تا امروز سابقه تدریس مباحث گیم دیزاین و بازیسازی دارم. از سال 1396 همبنیانگذار شرکت سرمایه گذاری و نشر آواگیمز هستم و به یه عالمه تیم مستقل بازی سازی کمک کردم تا پروژه هاشونو به نتیجه برسونن.تا امروز در بیش تر از 50 پروژه بازی سازی روی پلتفرم های مختلف نقش داشتم و بازی هایی که ساختم روی موبایل، PC، پلی استیشن، ایکس باکس و نینتندو سوویچ منتشر شده. در کنار اینا، در هیات مدیره بزرگ ترین انجمن بازی سازی دنیا یعنی IGDA فعالیت کردم و الان در هیات مدیره بنیاد IGDA هستم که کارش کمک به بازی سازای سراسر دنیاست.",
-  },
-  {
-    imageUrl: "/images/2026/presenters/Mazdeh.jpg",
-    name: "Ashkan Saeidi Mazdeh",
-    role: "I'm the founder of a small studio and a Network multiplayer and core systems programmer with experience mostly in C# and C++ in games and tools development. I worked on several released projects as a part of our consulting for other companies and released multiple plugins for Unity and Unreal Engine. My main focus is making high performance and high quality software, weather it is a system in our game or an automation module for a backend in a client's game project, I take pride in trying my best to solve the problem as best as I can with the highest quality in terms of speed and correctness.",
   },
   {
     imageUrl: "/images/2026/presenters/Montazeri.jpg",
@@ -57,16 +47,6 @@ export const presenters: StaffMember[] = [
     role: "I’m Alireza Taringo, a 3D Environment Artist and Co-Founder of Paladin Studio. I’ve been working in the game development industry for nearly 10 years, contributing to projects such as Call of Duty: Mobile, Diablo Immortal, and Ready or Not. Currently, I’m fully focused on developing my own game, where I’m taking on the roles of Writer and Director.",
   },
   {
-    imageUrl: "/images/2026/presenters/Davoodabadi.png",
-    name: "Abolfazl Davoodabadi",
-    role: "Technical lead in Little Guardians: The Last Hope project. Currently working on an unannounced project.",
-  },
-  {
-    imageUrl: "/images/2026/presenters/Alizadeh.jpg",
-    name: "Ehsan Alizadeh",
-    role: "I’m a game and concept artist with 5+ years of experience in videogame industry, working across character, environment, visual design and art direction. I enjoy turning ideas into clear, engaging visuals and collaborating with teams to bring game worlds to life. My background in architecture also shapes the way I approach design and problem-solving.",
-  },
-  {
     imageUrl: "/images/2026/presenters/Askarzade.jpeg",
     name: "Shaqayeq askarzade",
     role: "I’m a Game Artist focused on UI/UX, and I’ve worked on projects like Domino Royale, NavCraft, and Pesarkhande. I’ve also had several international collaborations with companies around the world, and I genuinely love what I do.",
@@ -80,11 +60,6 @@ export const presenters: StaffMember[] = [
     imageUrl: "/images/2026/presenters/Tavakoli.webp",
     name: "ستاره توکلی",
     role: "فارغ‌التحصیل رشته مهندسی کامپیوتر، توسعه دهنده واقعیت مجازی و افزوده و بازی سازی، دانشجوی ارشد رشته معماری کامپیوتر دانشگاه علم و صنعت ایران",
-  },
-  {
-    imageUrl: "/images/2026/presenters/Ahmadvand.jpeg",
-    name: "Vahab Ahmadvand",
-    role: "I am a Technical Game Designer with over a decade of experience in the gaming industry, specializing in Unreal Engine, editor tooling, and gameplay mechanics. Currently, I’m a Technical Designer at Embark Studios, working on The Finals. I contributed to various projects and Unreal Engine training initiatives. As a certified Unreal Engine instructor for Unreal Engine 4/5, I share my expertise through open-source projects and educational content with the game development community.",
   },
   {
     imageUrl: "/images/2026/presenters/Asadi.jpg",
