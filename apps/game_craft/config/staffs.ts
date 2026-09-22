@@ -208,14 +208,6 @@ export function useStaffs(): StaffTeam[] {
         role: "عضو تیم مارکتینگ",
       },
       {
-        imageUrl: "/images/2026/staffs/HessamHosseinian.jpg",
-        name: "حسام حسینیان",
-        role: "عضو تیم مارکتینگ",
-        telegramUrl: "https://t.me/WasHessam",
-        githubUrl: "https://github.com/Hessam-Hosseinian",
-        linkedinUrl: "https://www.linkedin.com/in/hessam-hosseinian",
-      },
-      {
         imageUrl: "/images/2026/staffs/MohammadrafiHajiliDoji.jpg",
         name: "محمدرفیع حاجیلی دوجی",
         role: "عضو تیم مارکتینگ",
@@ -276,7 +268,7 @@ export function useStaffs(): StaffTeam[] {
         role: "عضو تیم اجرایی",
       },
       {
-        imageUrl: "/images/2026/staffs/MohammadMehdiGhorbi.png",
+        imageUrl: "/images/2026/staffs/MohammadMehdiGhorbi.jpg",
         name: "محمدمهدی قربی",
         role: "عضو تیم اجرایی",
       },
@@ -323,11 +315,6 @@ export function useStaffs(): StaffTeam[] {
       {
         imageUrl: "/images/2026/staffs/MohammadHassanZeighami.jpg",
         name: "محمدحسن ضیغمی",
-        role: "عضو تیم اجرایی",
-      },
-      {
-        imageUrl: "/images/logo/default_prof_2026.jpg",
-        name: "نگار مدقق",
         role: "عضو تیم اجرایی",
       },
     ],
@@ -379,6 +366,11 @@ export function useStaffs(): StaffTeam[] {
       {
         imageUrl: "/images/logo/default_prof_2026.jpg",
         name: "ریحانه مرادی",
+        role: "عضو تیم تزئینات",
+      },
+      {
+        imageUrl: "/images/logo/default_prof_2026.jpg",
+        name: "نگار مدقق",
         role: "عضو تیم تزئینات",
       },
     ],
