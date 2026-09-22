@@ -335,7 +335,7 @@
         "gold": "GOLD",
         "silver": "SILVER",
         "sponsor": "SPONSOR"
-      },
+      }
     },
     "footer": {
       "autGameCraft": "Amirkabir GameCraft",
