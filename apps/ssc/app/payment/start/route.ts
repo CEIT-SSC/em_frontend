@@ -26,13 +26,14 @@ export async function GET(request: Request) {
   return new Response(`<!doctype html>
 <html lang="fa" dir="rtl"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="referrer" content="origin"><title>ادامه پرداخت | انجمن علمی</title>
+<meta name="referrer" content="origin"><meta http-equiv="refresh" content="0; URL=${gateway.href}">
+<title>در حال انتقال به درگاه پرداخت | انجمن علمی</title>
 <style>
 *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#101827;color:#f8fafc;font-family:Tahoma,sans-serif;padding:24px}
 main{width:100%;max-width:440px;padding:32px;background:#1e293b;border-radius:24px;text-align:center}h1{font-size:24px}p{line-height:2;color:#cbd5e1}a{display:block;padding:16px;margin-top:24px;border-radius:12px;background:#38bdf8;color:#082f49;font-weight:bold;text-decoration:none}a:focus-visible{outline:3px solid white;outline-offset:4px}
 </style></head><body><main>
-<h1>ادامه پرداخت</h1>
-<p>برای ورود به درگاه امن زرین‌پال، دکمه زیر را بزنید. پس از پرداخت به سایت بازمی‌گردید.</p>
-<a href="${gateway.href}" referrerpolicy="origin">ورود به درگاه پرداخت</a>
+<h1>در حال انتقال به درگاه پرداخت</h1>
+<p>لطفاً چند لحظه صبر کنید. اگر انتقال خودکار انجام نشد، دکمه زیر را بزنید.</p>
+<a href="${gateway.href}" referrerpolicy="origin">ادامه پرداخت</a>
 </main></body></html>`, { headers });
 }

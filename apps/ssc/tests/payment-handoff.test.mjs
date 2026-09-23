@@ -3,7 +3,7 @@ import test from "node:test";
 import { GET as start } from "../app/payment/start/route.ts";
 import { GET as callback } from "../app/payment/zarinpal/callback/route.ts";
 
-test("handoff loads a document and sends the merchant origin to Zarinpal", async () => {
+test("handoff loads a document, automatically navigates, and sends the merchant origin to Zarinpal", async () => {
   for (const host of ["payment.zarinpal.com", "sandbox.zarinpal.com"]) {
     const gateway = `https://${host}/pg/StartPay/A123`;
     const response = await start(new Request(`https://ceit-ssc.ir/payment/start?${new URLSearchParams({ gateway })}`));
@@ -11,7 +11,9 @@ test("handoff loads a document and sends the merchant origin to Zarinpal", async
     assert.equal(response.headers.get("Location"), null);
     assert.equal(response.headers.get("Referrer-Policy"), "origin");
     assert.equal(response.headers.get("Cache-Control"), "no-store");
-    assert.match(await response.text(), new RegExp(`href="${gateway}" referrerpolicy="origin"`));
+    const body = await response.text();
+    assert.match(body, new RegExp(`http-equiv="refresh" content="0; URL=${gateway}"`));
+    assert.match(body, new RegExp(`href="${gateway}" referrerpolicy="origin"`));
   }
 });
 
