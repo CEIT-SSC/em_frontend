@@ -28,9 +28,11 @@ export default function GameCraftTimeline({
     "/assets/images/hollow-knight/timeline/05.png",
     "/assets/images/hollow-knight/timeline/06.png",
     "/assets/images/hollow-knight/timeline/07.png",
+    "/assets/images/hollow-knight/timeline/08.png",
+    "/assets/images/hollow-knight/timeline/09.png",
   ];
 
-  const items = Array.from({ length: 7 }, (_, index) => {
+  const items = Array.from({ length: 9 }, (_, index) => {
     const step = `step${index + 1}`;
 
     return {

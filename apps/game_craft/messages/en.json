@@ -39,31 +39,41 @@
         "description": ""
       },
       "step5": {
-        "title": "Game Development Begins and Theme Is Revealed",
-        "schedule": "October 9–16",
+        "title": "Theme Reveal",
+        "schedule": "October 9",
         "description": ""
       },
       "step6": {
-        "title": "Competition Ends and Judging Begins",
-        "schedule": "From October 16",
+        "title": "Game Development Begins",
+        "schedule": "October 9–16",
         "description": ""
       },
       "step7": {
+        "title": "Competition Ends",
+        "schedule": "October 16",
+        "description": ""
+      },
+      "step8": {
+        "title": "Judging Begins",
+        "schedule": "From October 16",
+        "description": ""
+      },
+      "step9": {
         "title": "Closing Ceremony and Participant Recognition",
         "schedule": "October 23",
         "description": ""
       },
-      "step8": {
+      "step10": {
         "title": "Improve",
         "schedule": "Proposed sponsor milestone — if held at the faculty venue (Thursday or Friday)",
         "description": ""
       },
-      "step9": {
+      "step11": {
         "title": "Validate",
         "schedule": "Proposed sponsor milestone — if held at the faculty venue (Thursday or Friday)",
         "description": ""
       },
-      "step10": {
+      "step12": {
         "title": "Demo",
         "schedule": "Proposed sponsor milestone — if held at the faculty venue (Thursday or Friday)",
         "description": ""

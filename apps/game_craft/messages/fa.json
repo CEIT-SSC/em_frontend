@@ -39,31 +39,41 @@
         "description": ""
       },
       "step5": {
-        "title": "شروع توسعه بازی و مشخص شدن تم",
-        "schedule": "از ۱۷ مهر تا ۲۴ مهر",
+        "title": "تم ریویل مسابقه",
+        "schedule": "۱۷ مهر",
         "description": ""
       },
       "step6": {
-        "title": "پایان مسابقه و آغاز داوری",
-        "schedule": "از ۲۴ مهر",
+        "title": "شروع توسعه بازی",
+        "schedule": "از ۱۷ مهر تا ۲۴ مهر",
         "description": ""
       },
       "step7": {
+        "title": "پایان مهلت مسابقه",
+        "schedule": "۲۴ مهر",
+        "description": ""
+      },
+      "step8": {
+        "title": "آغاز داوری",
+        "schedule": "از ۲۴ مهر",
+        "description": ""
+      },
+      "step9": {
         "title": "اختتامیه و تقدیر از شرکت‌کنندگان",
         "schedule": "۱ آبان",
         "description": ""
       },
-      "step8": {
+      "step10": {
         "title": "Improve",
         "schedule": "پیشنهادی اسپانسر — در صورت برگزاری در فضای دانشکده (پنج‌شنبه یا جمعه)",
         "description": ""
       },
-      "step9": {
+      "step11": {
         "title": "Validate",
         "schedule": "پیشنهادی اسپانسر — در صورت برگزاری در فضای دانشکده (پنج‌شنبه یا جمعه)",
         "description": ""
       },
-      "step10": {
+      "step12": {
         "title": "Demo",
         "schedule": "پیشنهادی اسپانسر — در صورت برگزاری در فضای دانشکده (پنج‌شنبه یا جمعه)",
         "description": ""
