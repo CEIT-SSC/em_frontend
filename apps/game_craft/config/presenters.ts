@@ -22,9 +22,19 @@ export const presenters: StaffMember[] = [
     role: "Character designer & concept artist",
   },
   {
+    imageUrl: "/images/2026/presenters/Foadian.jpg",
+    name: "Ehsan Foadian",
+    role: "Experienced video game programmer with over 10 years of experience in Unity & .NET. Proficient in gameplay programming, tool development, and network programming.",
+  },
+  {
+    imageUrl: "/images/2026/presenters/Alizadeh.jpg",
+    name: "Ehsan Alizadeh",
+    role: "I’m a game and concept artist with 5+ years of experience in videogame industry, working across character, environment, visual design and art direction. I enjoy turning ideas into clear, engaging visuals and collaborating with teams to bring game worlds to life. My background in architecture also shapes the way I approach design and problem-solving.",
+  },
+  {
     imageUrl: "/images/2026/presenters/Mousavi.jpg",
-    name: "SeyedMohammadTaghi Mousavi",
-    role: "Sound Designer, Music Producer",
+    name: "سید محمدتقی موسوی",
+    role: "طراح صدا، آهنگساز",
   },
   {
     imageUrl: "/images/2026/presenters/Rasouli.jpg",
