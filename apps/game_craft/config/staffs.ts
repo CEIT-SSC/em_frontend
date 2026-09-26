@@ -198,6 +198,16 @@ export function useStaffs(): StaffTeam[] {
         role: "عضو تیم مارکتینگ",
       },
       {
+        imageUrl: "/images/2026/staffs/RominaGhaderAhmadi.jpg",
+        name: "رومینا قادراحمدی",
+        role: "عضو تیم مارکتینگ",
+      },
+      {
+        imageUrl: "/images/2026/staffs/AryaSahraei.jpg",
+        name: "آریا صحرایی",
+        role: "عضو تیم مارکتینگ",
+      },
+      {
         imageUrl: "/images/2026/staffs/ParsaAsadi.jpg",
         name: "پارسا اسدی",
         role: "عضو تیم مارکتینگ",
