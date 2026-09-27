@@ -57,6 +57,21 @@ export const presenters: StaffMember[] = [
     role: "I’m Alireza Taringo, a 3D Environment Artist and Co-Founder of Paladin Studio. I’ve been working in the game development industry for nearly 10 years, contributing to projects such as Call of Duty: Mobile, Diablo Immortal, and Ready or Not. Currently, I’m fully focused on developing my own game, where I’m taking on the roles of Writer and Director.",
   },
   {
+    imageUrl: "/images/2026/presenters/Khavari.jpg",
+    name: "Amir Khavari",
+    role: "I'm a Game Developer and a Game Project Manager with 8+ years of experience in mobile game development. I have studied at Khaje Nasir Toosi University, Bachelor's degree in software programming and dropped out of AI in Master's degree. I have been lead client developer of Pesarkhande and I'm now client developer at Kimdi Football. I also have my own startup named Hezartoo, where we have created Eureka, a successful mobile game with 3+ million downloads on Google Play.",
+  },
+  {
+    imageUrl: "/images/2026/presenters/Mostafavi.jpg",
+    name: "MohammadReza Mostafavi Raad",
+    role: "MohamadReza Mostafavi Raad is a Game Designer, Product Owner, and Game Director with experience in designing and leading the development of original game projects. He is the Co-founder of ADURAN Studio, where he works on game design, production decisions, team coordination, and building original IPs. He has also worked with studios such as Permanent Way and Paeezan, contributing to game development and creative production. His interests focus on game systems, player experience, and the process of turning creative ideas into focused, buildable games.",
+  },
+  {
+    imageUrl: "/images/2026/presenters/Shahbazi.jpg",
+    name: "سروش شهبازی",
+    role: "هم بنیان گذار استودیو بازی سازی بلوط گیمز",
+  },
+  {
     imageUrl: "/images/2026/presenters/Askarzade.jpeg",
     name: "Shaqayeq askarzade",
     role: "I’m a Game Artist focused on UI/UX, and I’ve worked on projects like Domino Royale, NavCraft, and Pesarkhande. I’ve also had several international collaborations with companies around the world, and I genuinely love what I do.",
