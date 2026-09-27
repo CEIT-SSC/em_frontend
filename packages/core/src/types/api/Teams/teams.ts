@@ -11,6 +11,7 @@ export interface TeamDetails {
   id: number;
   name: string;
   leader_details: LeaderDetails;
+  /** Deprecated single-competition projection; use registrations. */
   group_competition_details: GroupCompetitionDetails;
   status: string;
   is_approved_by_admin: boolean;
@@ -18,6 +19,26 @@ export interface TeamDetails {
   memberships: Membership[];
   content_submission: ContentSubmission;
   created_at: string;
+  management_status: "forming";
+  accepted_member_count: number;
+  registrations: TeamCompetitionRegistration[];
+}
+
+export type TeamRegistrationStatus = "pending_approval" | "pending_payment" | "active" | "rejected" | "cancelled";
+
+export interface TeamCompetitionRegistration {
+  id: number;
+  competition_details: GroupCompetitionDetails;
+  status: TeamRegistrationStatus;
+  price: string;
+  member_ids: number[];
+  order_item: number | null;
+  reviewed_by: number | null;
+  reviewed_at: string | null;
+  admin_remarks: string;
+  activated_at: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface LeaderDetails {
@@ -31,8 +52,11 @@ export interface LeaderDetails {
 export interface Membership {
   id: number;
   user_details: UserDetails;
-  status: string;
+  status: "pending" | "accepted" | "rejected" | "expired";
   joined_at: string;
+  invited_by: number | null;
+  expires_at: string | null;
+  responded_at: string | null;
 }
 
 export interface UserDetails {
@@ -152,6 +176,8 @@ export interface TeamPaymentResponse {
   data: PaymentData;
 }
 export interface PaymentData {
-  payment_url: string;
-  authority: string;
+  payment_url: string | null;
+  payment_required: boolean;
+  topup_id: string | null;
+  wallet_balance: string;
 }

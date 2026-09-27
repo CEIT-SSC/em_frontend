@@ -176,7 +176,18 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
             </div>
 
             {/* Competition Details */}
-            {teamDetails.group_competition_details && (
+            {teamDetails.registrations.map((registration) => (
+              <div key={registration.id} className="bg-[#43434340] p-6 rounded-2xl">
+                <h5 className="text-lg font-semibold text-whiteText mb-3">{registration.competition_details.title}</h5>
+                <p className="text-whiteText">وضعیت: {{
+                  pending_approval: "در انتظار تایید", pending_payment: "در انتظار پرداخت",
+                  active: "ثبت نام شده", rejected: "رد شده", cancelled: "لغو شده",
+                }[registration.status]}</p>
+                <p className="text-gray-400">اعضای ثبت نام شده: {registration.member_ids.length} — هزینه کل: {registration.price} تومان</p>
+                {registration.admin_remarks && <p className="text-gray-400">{registration.admin_remarks}</p>}
+              </div>
+            ))}
+            {!teamDetails.registrations.length && teamDetails.group_competition_details && (
               <div className="bg-[#43434340] p-6 rounded-2xl">
                 <h5 className="text-lg font-semibold text-whiteText mb-4 flex items-center gap-2">
                   <HiOfficeBuilding className="w-5 h-5" />

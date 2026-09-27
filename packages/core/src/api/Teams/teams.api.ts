@@ -141,10 +141,10 @@ export class TeamsApi extends ApiClient {
     );
   }
 
-  async teamPayment(id: number): Promise<RequestResponse<PaymentData>> {
+  async teamPayment(id: number, competitionId?: number): Promise<RequestResponse<PaymentData>> {
     return await this.Api.post<PaymentData, RequestResponse<PaymentData>>(
       apiPath(ApiPath.TEAMS_PAYMENT, { id }),
-      {},
+      competitionId === undefined ? {} : { competition_id: competitionId },
       {
         requiresAuth: true,
       }

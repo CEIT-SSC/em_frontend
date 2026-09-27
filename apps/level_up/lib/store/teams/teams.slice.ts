@@ -37,18 +37,11 @@ const teamsSlice = createSlice({
         state.error = action.error.message ?? "Failed to fetch teams";
       })
 
-      .addCase(payTeamThunk.fulfilled, (state, action) => {
-        const team = state.data.find((t) => t.id === action.payload.teamId);
-        if (team) team.status = "awaiting_payment_confirmation";
+      .addCase(payTeamThunk.fulfilled, () => {
+        // The thunk refreshes authoritative registration statuses from the API.
       })
-
-      .addCase(registerTeamThunk.fulfilled, (state, action) => {
-        const { teamId, details } = action.payload;
-        const team = state.data.find((t) => t.id === teamId);
-        if (team) {
-          //   team.group_competition_details = details;
-          team.status = "pending_admin_verification"; // update according to backend
-        }
+      .addCase(registerTeamThunk.fulfilled, () => {
+        // Registration can activate a free entry or await approval/payment.
       });
   },
 });

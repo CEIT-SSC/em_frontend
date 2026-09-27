@@ -23,19 +23,6 @@ export const TeamMemberContainer: React.FC = () => {
     data?: GroupCompetitionsList;
   }>({ loading: true });
 
-  const filteredTeams = useMemo(
-    () =>
-      teams.filter(
-        (team) =>
-          team.group_competition_details &&
-          competitions.data?.results.some(
-            (competition) => competition.id === team.group_competition_details?.id
-          ) &&
-          team.status === "active"
-      ),
-    [competitions.data, teams]
-  );
-
   useEffect(() => {
     clientApi.competitions
       .getGroupCompetitionsList(eventId, undefined)
@@ -54,8 +41,14 @@ export const TeamMemberContainer: React.FC = () => {
       });
   }, [t]);
 
-  const mapTeamMembers = (team: TeamDetails) =>
-    team.memberships.map((member) => (
+  const registeredTeams = useMemo(() => teams.flatMap((team) =>
+    team.registrations.filter((registration) => registration.status === "active" &&
+      competitions.data?.results.some((competition) => competition.id === registration.competition_details.id)
+    ).map((registration) => ({ team, registration }))
+  ), [teams, competitions.data]);
+
+  const mapTeamMembers = (team: TeamDetails, memberIds: number[]) =>
+    team.memberships.filter((member) => memberIds.includes(member.user_details.id)).map((member) => (
       <Col key={member.id} span={24} sm={12} lg={8}>
         <TeamMemberCard
           isHead={member.user_details.email === team.leader_details.email}
@@ -68,11 +61,11 @@ export const TeamMemberContainer: React.FC = () => {
     ));
 
   const mapTeams = () =>
-    filteredTeams.map((team) => (
-      <React.Fragment key={team.id}>
+    registeredTeams.map(({ team, registration }) => (
+      <React.Fragment key={registration.id}>
         <Col className="gc-dashboard-team-name" span={24}>
           <Typography.Title level={4} style={{ marginBottom: "1.5rem" }}>
-            {team.group_competition_details.title}:
+            {registration.competition_details.title}:
           </Typography.Title>
           <Typography.Title
             level={3}
@@ -87,7 +80,7 @@ export const TeamMemberContainer: React.FC = () => {
             {team.name}
           </Typography.Title>
         </Col>
-        {mapTeamMembers(team)}
+        {mapTeamMembers(team, registration.member_ids)}
       </React.Fragment>
     ));
 
@@ -108,7 +101,7 @@ export const TeamMemberContainer: React.FC = () => {
         />
       );
     } else {
-      return filteredTeams.length === 0 ? (
+      return registeredTeams.length === 0 ? (
         <Alert
           message={t("noTeams")}
           description={t("noTeamsDescription")}
@@ -119,7 +112,7 @@ export const TeamMemberContainer: React.FC = () => {
         mapTeams()
       );
     }
-  }, [competitions, filteredTeams, t]);
+  }, [competitions, registeredTeams, t]);
 
   return (
     <Flex

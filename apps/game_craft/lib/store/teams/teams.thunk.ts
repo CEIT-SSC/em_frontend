@@ -11,9 +11,11 @@ export const fetchTeamsThunk = createAppAsyncThunk(
 
 export const payTeamThunk = createAppAsyncThunk(
   "teams/payTeam",
-  async (teamId: number, { extra: { Api }, rejectWithValue }) => {
+  async ({ teamId, competitionId }: { teamId: number; competitionId: number },
+    { extra: { Api }, rejectWithValue, dispatch }) => {
     try {
-      const res = await Api.teams.teamPayment(teamId);
+      const res = await Api.teams.teamPayment(teamId, competitionId);
+      await dispatch(fetchTeamsThunk());
 
       if (res.status === 200) {
         return { teamId, paymentUrl: res.data.data.payment_url };
