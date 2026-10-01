@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { GET as start } from "../app/payment/start/route.ts";
 import { GET as callback } from "../app/payment/zarinpal/callback/route.ts";
+import { GET as linuxfestCallback } from "../app/payment/linuxfest/zarinpal/callback/route.ts";
 
 test("handoff loads a document, automatically navigates, and sends the merchant origin to Zarinpal", async () => {
   for (const host of ["payment.zarinpal.com", "sandbox.zarinpal.com"]) {
@@ -47,5 +48,24 @@ test("callback forwards only provider fields to the configured verification endp
   } finally {
     if (previous === undefined) delete process.env.PAYMENT_BACKEND_ORIGIN;
     else process.env.PAYMENT_BACKEND_ORIGIN = previous;
+  }
+});
+
+test("LinuxFest callback forwards only provider fields to LinuxFest verification", async () => {
+  const previous = process.env.LINUXFEST_PAYMENT_BACKEND_ORIGIN;
+  process.env.LINUXFEST_PAYMENT_BACKEND_ORIGIN = "https://linuxfest.ceit-ssc.ir";
+  try {
+    const response = await linuxfestCallback(new Request(
+      "https://ceit-ssc.ir/payment/linuxfest/zarinpal/callback?Authority=LNX123&Status=OK&return_url=https://evil.example",
+    ));
+    assert.equal(response.status, 303);
+    assert.equal(
+      response.headers.get("Location"),
+      "https://linuxfest.ceit-ssc.ir/api/payments/provider-callback/?Authority=LNX123&Status=OK",
+    );
+    assert.equal(response.headers.get("Cache-Control"), "no-store");
+  } finally {
+    if (previous === undefined) delete process.env.LINUXFEST_PAYMENT_BACKEND_ORIGIN;
+    else process.env.LINUXFEST_PAYMENT_BACKEND_ORIGIN = previous;
   }
 });
