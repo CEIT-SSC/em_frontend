@@ -34,10 +34,10 @@ export const useMainNavigations = (): NavigationItem[] => {
       name: t("gallery"),
       route: "/gallery",
     },
-    {
-      name: t("sponsors"),
-      route: "/sponsor",
-    },
+    // {
+    //   name: t("sponsors"),
+    //   route: "/sponsor",
+    // },
     // {
     //   name: t("dashboard"),
     //   route: "/dashboard/shopping-bag",
