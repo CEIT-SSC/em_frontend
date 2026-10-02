@@ -32,6 +32,7 @@ export interface TeamCompetitionRegistration {
   status: TeamRegistrationStatus;
   price: string;
   member_ids: number[];
+  content_submission: ContentSubmission | null;
   order_item: number | null;
   reviewed_by: number | null;
   reviewed_at: string | null;

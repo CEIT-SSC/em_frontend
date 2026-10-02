@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import type { TeamContentSubmission } from "@ssc/core";
 import { Button, ButtonSize, ButtonVariant } from "@ssc/ui";
 import {
   HiX,
@@ -94,6 +95,87 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
     }
   };
 
+  const renderContentSubmission = (content: TeamContentSubmission | null | undefined) => content?.id ? (
+    <div className="mt-4 border-t border-gray-600 pt-4">
+      <h5 className="text-lg font-semibold text-whiteText mb-4 flex items-center gap-2">
+        <HiDocumentText className="w-5 h-5" />
+        محتوای ارسالی
+      </h5>
+      <div className="space-y-4">
+        {content.description && (
+          <div>
+            <p className="text-gray-400 text-sm mb-2">توضیحات</p>
+            <p className="text-whiteText leading-relaxed">
+              {content.description}
+            </p>
+          </div>
+        )}
+
+        {content.file_link && (
+          <div>
+            <p className="text-gray-400 text-sm mb-2">فایل</p>
+            <a
+              href={content.file_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#ff715b] hover:text-[#cb48b7] transition-colors"
+            >
+              مشاهده فایل
+            </a>
+          </div>
+        )}
+
+        {content.images &&
+          content.images.length > 0 && (
+            <div>
+              <p className="text-gray-400 text-sm mb-3">تصاویر</p>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {content.images.map(
+                  (image) => (
+                    <div key={image.id} className="relative group">
+                      <img
+                        src={image.image}
+                        alt={image.caption || "تصویر محتوا"}
+                        className="w-full h-24 object-cover rounded-lg"
+                      />
+                      {image.caption && (
+                        <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                          <p className="text-white text-xs text-center px-2">
+                            {image.caption}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+          )}
+
+        <div className="flex items-center gap-6 pt-4 border-t border-gray-600">
+          <div className="flex items-center gap-2">
+            <HiThumbUp className="w-4 h-4 text-green-400" />
+            <span className="text-whiteText text-sm">
+              {content.likes_count} لایک
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <HiChatAlt className="w-4 h-4 text-blue-400" />
+            <span className="text-whiteText text-sm">
+              {content.comments_count} کامنت
+            </span>
+          </div>
+          <div className="flex items-center gap-2 ml-auto">
+            <HiCalendar className="w-4 h-4 text-gray-400" />
+            <span className="text-gray-400 text-sm">
+              {formatDate(content.created_at)}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  ) : null;
+
   if (!isOpen) return null;
 
   return (
@@ -185,6 +267,7 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
                 }[registration.status]}</p>
                 <p className="text-gray-400">اعضای ثبت نام شده: {registration.member_ids.length} — هزینه کل: {registration.price} تومان</p>
                 {registration.admin_remarks && <p className="text-gray-400">{registration.admin_remarks}</p>}
+                {renderContentSubmission(registration.content_submission)}
               </div>
             ))}
             {!teamDetails.registrations.length && teamDetails.group_competition_details && (
@@ -313,91 +396,6 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
                 ))}
               </div>
             </div>
-
-            {/* Content Submission */}
-            {teamDetails.content_submission &&
-              teamDetails.content_submission.id && (
-                <div className="bg-[#43434340] p-6 rounded-2xl">
-                  <h5 className="text-lg font-semibold text-whiteText mb-4 flex items-center gap-2">
-                    <HiDocumentText className="w-5 h-5" />
-                    محتوای ارسالی
-                  </h5>
-                  <div className="space-y-4">
-                    {teamDetails.content_submission.description && (
-                      <div>
-                        <p className="text-gray-400 text-sm mb-2">توضیحات</p>
-                        <p className="text-whiteText leading-relaxed">
-                          {teamDetails.content_submission.description}
-                        </p>
-                      </div>
-                    )}
-
-                    {teamDetails.content_submission.file_link && (
-                      <div>
-                        <p className="text-gray-400 text-sm mb-2">فایل</p>
-                        <a
-                          href={teamDetails.content_submission.file_link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#ff715b] hover:text-[#cb48b7] transition-colors"
-                        >
-                          مشاهده فایل
-                        </a>
-                      </div>
-                    )}
-
-                    {teamDetails.content_submission.images &&
-                      teamDetails.content_submission.images.length > 0 && (
-                        <div>
-                          <p className="text-gray-400 text-sm mb-3">تصاویر</p>
-                          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                            {teamDetails.content_submission.images.map(
-                              (image) => (
-                                <div key={image.id} className="relative group">
-                                  <img
-                                    src={image.image}
-                                    alt={image.caption || "تصویر محتوا"}
-                                    className="w-full h-24 object-cover rounded-lg"
-                                  />
-                                  {image.caption && (
-                                    <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
-                                      <p className="text-white text-xs text-center px-2">
-                                        {image.caption}
-                                      </p>
-                                    </div>
-                                  )}
-                                </div>
-                              )
-                            )}
-                          </div>
-                        </div>
-                      )}
-
-                    <div className="flex items-center gap-6 pt-4 border-t border-gray-600">
-                      <div className="flex items-center gap-2">
-                        <HiThumbUp className="w-4 h-4 text-green-400" />
-                        <span className="text-whiteText text-sm">
-                          {teamDetails.content_submission.likes_count} لایک
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <HiChatAlt className="w-4 h-4 text-blue-400" />
-                        <span className="text-whiteText text-sm">
-                          {teamDetails.content_submission.comments_count} کامنت
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2 ml-auto">
-                        <HiCalendar className="w-4 h-4 text-gray-400" />
-                        <span className="text-gray-400 text-sm">
-                          {formatDate(
-                            teamDetails.content_submission.created_at
-                          )}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
 
             {/* Admin Remarks */}
             {teamDetails.admin_remarks && (
