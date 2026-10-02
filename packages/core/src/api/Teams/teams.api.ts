@@ -132,12 +132,9 @@ export class TeamsApi extends ApiClient {
       SubmitContentResponse,
       RequestResponse<SubmitContentResponse>
     >(
-      apiPath(ApiPath.TEAMS_SUBMIT_CONTENT, {
-        id: teamId,
-        competition_pk: competitionId,
-      }),
+      apiPath(ApiPath.TEAMS_SUBMIT_CONTENT, { id: teamId }),
       contentData,
-      { requiresAuth: true }
+      { requiresAuth: true, params: { competition_id: competitionId } }
     );
   }
 
