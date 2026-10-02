@@ -35,6 +35,9 @@ export function GameCraftIntro({
         }}
         className="gc-home-intro"
       >
+        <div className="gc-home-intro__mobile-artwork">
+          <HomeParallaxArtwork />
+        </div>
         <Row
           align="middle"
           justify="space-around"
@@ -131,7 +134,7 @@ export function GameCraftIntro({
             </Flex>
           </Col>
 
-          <Col span={24} lg={12}>
+          <Col span={24} lg={12} className="gc-home-intro__desktop-artwork">
             <Flex align="center" justify="center" style={{ width: "100%" }}>
               <HomeParallaxArtwork />
             </Flex>
