@@ -70,7 +70,8 @@ export function CompetitionCard({
 
   if (
     dashboardMode &&
-    !teams.find((team) => team.group_competition_details?.id == competition.id)
+    !teams.some((team) => team.registrations.some((registration) =>
+      registration.competition_details.id === competition.id))
   )
     return;
 

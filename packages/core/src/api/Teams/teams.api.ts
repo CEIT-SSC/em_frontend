@@ -132,19 +132,16 @@ export class TeamsApi extends ApiClient {
       SubmitContentResponse,
       RequestResponse<SubmitContentResponse>
     >(
-      apiPath(ApiPath.TEAMS_SUBMIT_CONTENT, {
-        id: teamId,
-        competition_pk: competitionId,
-      }),
+      apiPath(ApiPath.TEAMS_SUBMIT_CONTENT, { id: teamId }),
       contentData,
-      { requiresAuth: true }
+      { requiresAuth: true, params: { competition_id: competitionId } }
     );
   }
 
-  async teamPayment(id: number): Promise<RequestResponse<PaymentData>> {
+  async teamPayment(id: number, competitionId?: number): Promise<RequestResponse<PaymentData>> {
     return await this.Api.post<PaymentData, RequestResponse<PaymentData>>(
       apiPath(ApiPath.TEAMS_PAYMENT, { id }),
-      {},
+      competitionId === undefined ? {} : { competition_id: competitionId },
       {
         requiresAuth: true,
       }

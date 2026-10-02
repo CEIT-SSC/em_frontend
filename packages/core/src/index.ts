@@ -19,6 +19,8 @@ export * from "./types/api/User/user";
 export type {
   TeamsList,
   TeamDetails,
+  TeamCompetitionRegistration,
+  TeamRegistrationStatus,
   LeaderDetails,
   CreateTeamRequest,
   CreateTeamResponse,

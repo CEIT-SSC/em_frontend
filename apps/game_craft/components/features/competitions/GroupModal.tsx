@@ -1,20 +1,15 @@
-import { Alert, Button, Flex, Modal, Spin, theme, Typography } from "antd";
-import { clientApi } from "lib/api/client/clientApi";
-import { eventId } from "lib/utils/constants";
+"use client";
+
+import { Alert, Button, Flex, Modal, Spin, Typography } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
 import { TeamDetails } from "@ssc/core";
-import { useTranslations } from "next-intl";
 import { digitsToHindi } from "@ssc/utils";
 import { useAuth } from "lib/hooks/useAuth";
 import { HiCash, HiCheck, HiPlus } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { MdOutlineWatch } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "lib/store/store";
-import {
-  fetchTeamsThunk,
-  payTeamThunk,
-  registerTeamThunk,
-} from "lib/store/teams/teams.thunk";
+import { fetchTeamsThunk, payTeamThunk, registerTeamThunk } from "lib/store/teams/teams.thunk";
 
 interface Props {
   isRTL: boolean;
@@ -25,341 +20,96 @@ interface Props {
   registered?: (isRegistered: boolean) => void;
 }
 
-const GroupModal = ({
-  isRTL,
-  competitionId,
-  registered,
-  minTeamSize,
-  maxTeamSize,
-  disable,
-}: Props) => {
-  const [showGroupModal, setShowGroupModal] = useState(false);
-  const t = useTranslations();
-  const { isAuthenticated } = useAuth();
-  const { useToken } = theme;
-  const { token } = useToken();
-  const [filteredTeams, setFilteredTeams] = useState<TeamDetails[]>([]);
-
+const GroupModal = ({ isRTL, competitionId, registered, minTeamSize, maxTeamSize, disable }: Props) => {
+  const [open, setOpen] = useState(false);
+  const { isAuthenticated, user } = useAuth();
   const dispatch = useAppDispatch();
-  const { data: teams, loading, error } = useAppSelector((s) => s.teams);
-
-  const isTeamSizeValid = (teamSize: number) => {
-    if (teamSize < minTeamSize || teamSize > maxTeamSize) return false;
-    return true;
-  };
-
-  const isRegistered = !!teams.find(
-    (team) =>
-      team.group_competition_details?.id == competitionId &&
-      team.status === "active"
+  const { data: teams, loading, error } = useAppSelector((state) => state.teams);
+  const registrationFor = (team: TeamDetails) => team.registrations.find(
+    (registration) => registration.competition_details.id === competitionId
   );
-
-  const inPaymentProgress = !!teams.find(
-    (team) =>
-      team.group_competition_details?.id == competitionId &&
-      (team.status === "approved_awaiting_payment" ||
-        team.status === "awaiting_payment_confirmation")
-  );
-
-  if (registered) registered(isRegistered);
-
-  const buttonText = () =>
-    isAuthenticated
-      ? inPaymentProgress
-        ? "در انتظار پرداخت"
-        : isRegistered
-        ? "ثبت نام شده"
-        : "ثبت نام"
-      : "ابتدا وارد شوید";
-
-  // const buttonText = useMemo(() => {
-  //   if (!isAuthenticated) return t("workshop.loginToContinue");
-  //   if (isSelected) {
-  //     return t("workshop.removeFromCart");
-  //   } else {
-  //     return presentation.is_paid
-  //       ? t("workshop.addToCart")
-  //       : t("workshop.enroll");
-  //   }
-  // }, [isSelected, presentation, t, isAuthenticated]);
-
-  const statusButton = (status: string, teamId: number) => {
-    switch (status) {
-      case "pending_admin_verification":
-        return (
-          <Button type="primary" disabled icon={<MdOutlineWatch />}>
-            در انتظار تایید
-          </Button>
-        );
-      case "approved_awaiting_payment":
-        return (
-          <Button
-            type="primary"
-            icon={<HiCash />}
-            onClick={() => handlePayment(teamId)}
-          >
-            پرداخت
-          </Button>
-        );
-      case "awaiting_payment_confirmation":
-        return (
-          <Button
-            type="primary"
-            icon={<HiCash />}
-            onClick={() => handlePayment(teamId)}
-          >
-            پرداخت
-          </Button>
-        );
-      case "active":
-        return (
-          <Button type="primary" disabled icon={<HiCheck />}>
-            ثبت نام شده
-          </Button>
-        );
-      default:
-        break;
-    }
-  };
+  const acceptedSize = (team: TeamDetails) => team.memberships.filter((member) => member.status === "accepted").length;
+  const isLeader = (team: TeamDetails) => team.leader_details.email.toLowerCase() === user?.email?.toLowerCase();
+  const isRegistered = teams.some((team) => registrationFor(team)?.status === "active");
+  const hasRegistration = teams.some((team) => registrationFor(team));
+  const inPaymentProgress = teams.some((team) => registrationFor(team)?.status === "pending_payment");
+  const filteredTeams = useMemo(() => teams.filter((team) =>
+    team.registrations.some((registration) => registration.competition_details.id === competitionId) ||
+    (acceptedSize(team) >= minTeamSize && acceptedSize(team) <= maxTeamSize)
+  ), [teams, competitionId, minTeamSize, maxTeamSize]);
 
   useEffect(() => {
-    if (isAuthenticated)
-      dispatch(fetchTeamsThunk())
-        .unwrap()
-        .catch((err) => {
-          toast.error(err.message);
-        });
+    registered?.(isRegistered);
+  }, [registered, isRegistered]);
 
-    setFilteredTeams(
-      teams.filter(
-        (team) =>
-          isTeamSizeValid(team.memberships.length) &&
-          (!team.group_competition_details ||
-            team.group_competition_details.id == competitionId)
-      )
-    );
-  }, [isAuthenticated, showGroupModal]);
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(fetchTeamsThunk()).unwrap().catch((error) => toast.error(error.message));
+    }
+  }, [isAuthenticated, open, dispatch]);
 
-  const handlePayment = (teamId: number) => {
-    dispatch(payTeamThunk(teamId))
-      .unwrap()
-      .then((res) => {
-        if (res.paymentUrl) {
-          window.open(res.paymentUrl, "_blank");
-        } else {
-          // free
-          toast.success("پرداخت با موفقیت انجام شد");
-        }
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
+  const handlePayment = async (teamId: number) => {
+    try {
+      const result = await dispatch(payTeamThunk({ teamId, competitionId })).unwrap();
+      if (result.paymentUrl) window.location.assign(result.paymentUrl);
+      else toast.success("پرداخت با موفقیت انجام شد");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
-  const handleRegisterCompetition = (team: TeamDetails) => {
-    const pending = team.memberships.some(
-      (member) => member.status === "pending"
-    );
-    if (pending) {
-      toast.error("تمامی اعضای تیم باید درخواست عضویت خود را تایید کنند");
-      return;
+  const handleRegister = async (team: TeamDetails) => {
+    try {
+      await dispatch(registerTeamThunk({ teamId: team.id, competitionId })).unwrap();
+      toast.success("وضعیت ثبت نام تیم به‌روزرسانی شد");
+    } catch (error) {
+      toast.error(error.message);
     }
-
-    dispatch(registerTeamThunk({ teamId: team.id, competitionId }))
-      .unwrap()
-      .then((res) => {
-        toast.success(res.message);
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
   };
 
-  const content = useMemo(() => {
-    if (loading) {
-      return (
-        <Flex justify="center" align="center" style={{ minHeight: "200px" }}>
-          <Spin size="large" />
-        </Flex>
-      );
-    } else if (error) {
-      return (
-        <Alert
-          message={t("workshop.error")}
-          description={error}
-          type="error"
-          showIcon
-        />
-      );
-    } else {
-      return filteredTeams.length === 0 ? (
-        <Alert
-          message={
-            "تیم واجد شرایطی که در مسابقه ای شرکت نکرده باشد ندارید!"
-          }
-          description={
-            <span>
-              با هر تیمی تنها یک ثبت نام ممکن است، با مراجعه به
-              داشبورد{" "}
-              <a href="https://ceit-ssc.ir/dashboard/teams" target="_blank">
-                سایت انجمن (ceit-ssc.ir)
-              </a>{" "}
-              میتوانید تیم جدید با اعضای دلخواه بسازید
-            </span>
-          }
-          type="info"
-          showIcon
-        />
-      ) : (
-        filteredTeams.map((team) => {
-          return (
-            <Button
-              key={team.id}
-              type="dashed"
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "100%",
-                padding: "1rem",
-                height: "fit-content",
-              }}
-            >
-              <Flex
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.5rem",
-                  alignItems: "start",
-                }}
-              >
-                <Typography.Title
-                  level={3}
-                  style={{
-                    direction: isRTL ? "rtl" : "ltr",
-                    margin: 0,
-                  }}
-                >
-                  {team.name}
-                </Typography.Title>
-                <Typography.Paragraph
-                  style={{
-                    direction: isRTL ? "rtl" : "ltr",
-                    margin: 0,
-                  }}
-                >
-                  سرگروه:{" "}
-                  {team.leader_details.first_name +
-                    " " +
-                    team.leader_details.last_name}
-                </Typography.Paragraph>
-                <Typography.Paragraph
-                  style={{
-                    direction: isRTL ? "rtl" : "ltr",
-                    margin: 0,
-                  }}
-                >
-                  تعداد اعضا: {digitsToHindi(team.memberships.length)}
-                </Typography.Paragraph>
-              </Flex>
-
-              {team.group_competition_details ? (
-                statusButton(team.status, team.id)
-              ) : (
-                <Button
-                  type="primary"
-                  onClick={() => handleRegisterCompetition(team)}
-                  icon={<HiPlus />}
-                >
-                  ثبت تیم
-                </Button>
-              )}
-            </Button>
-          );
-        })
-      );
+  const actionFor = (team: TeamDetails) => {
+    const registration = registrationFor(team);
+    switch (registration?.status) {
+      case "pending_approval":
+        return <Button disabled icon={<MdOutlineWatch />}>در انتظار تایید</Button>;
+      case "pending_payment":
+        return <Button type="primary" disabled={!isLeader(team)} icon={<HiCash />} onClick={() => handlePayment(team.id)}>پرداخت</Button>;
+      case "active":
+        return <Button disabled icon={<HiCheck />}>ثبت نام شده</Button>;
+      case "rejected":
+        return <Typography.Text type="danger">رد شده: {registration.admin_remarks}</Typography.Text>;
+      case "cancelled":
+        return <Typography.Text>ثبت نام لغو شده</Typography.Text>;
+      default:
+        return <Button type="primary" disabled={!isLeader(team) || disable} icon={<HiPlus />} onClick={() => handleRegister(team)}>ثبت تیم</Button>;
     }
-  }, [teams, filteredTeams, t, loading]);
+  };
 
-  const cardButton = () => (
-    <Button
-      onClick={() => setShowGroupModal(true)}
-      type="primary"
-      size="middle"
-      style={{
-        borderRadius: token.borderRadius,
-        height: "36px",
-      }}
-      disabled={!isAuthenticated || isRegistered || disable}
-      icon={isRegistered ? <HiCheck /> : <HiPlus />}
-    >
-      {buttonText()}
+  return <>
+    <Button type="primary" onClick={() => setOpen(true)}
+      disabled={!isAuthenticated || (disable && !hasRegistration)}
+      icon={isRegistered ? <HiCheck /> : <HiPlus />}>
+      {!isAuthenticated ? "ابتدا وارد شوید" : isRegistered ? "ثبت نام شده" : inPaymentProgress ? "در انتظار پرداخت" : "ثبت نام"}
     </Button>
-  );
-
-  return (
-    <>
-      {cardButton()}
-      <Modal
-        open={showGroupModal}
-        onCancel={() => setShowGroupModal(false)}
-        footer={
-          [
-            // Only show action button if not purchased
-            //   ...(!isPurchased
-            //     ? [
-            //         <AntButton
-            //           key="action"
-            //           type={isSelected ? "default" : "primary"}
-            //           danger={isSelected}
-            //           icon={
-            //             isSelected ? <DeleteOutlined /> : <ShoppingCartOutlined />
-            //           }
-            //           onClick={() => {
-            //             if (isSelected) {
-            //               removeFromCart();
-            //             } else {
-            //               handleAddToCart();
-            //             }
-            //             setShowModal(false);
-            //           }}
-            //           disabled={
-            //             !competition.is_active ||
-            //             buttonShouldBeDisabled ||
-            //             competition.capacity <= 0 ||
-            //             !isAuthenticated
-            //           }
-            //           loading={buttonLoading}
-            //         >
-            //           {buttonText}
-            //         </AntButton>,
-            //       ]
-            //     : []),
-          ]
-        }
-        width={700}
-        style={{ top: 50, zIndex: 200 }}
-        styles={{
-          body: { maxHeight: "70vh", overflowY: "auto" },
-        }}
-      >
-        <Typography.Title
-          level={2}
-          style={{
-            direction: isRTL ? "rtl" : "ltr",
-            marginBottom: "24px",
-          }}
-        >
-          انتخاب تیم برای ثبت نام
-        </Typography.Title>
-        <Flex
-          style={{ flexDirection: "column", alignItems: "center", gap: "1rem" }}
-        >
-          {isAuthenticated && content}
-        </Flex>
-      </Modal>
-    </>
-  );
+    <Modal open={open} onCancel={() => setOpen(false)} footer={null} width={700}
+      styles={{ body: { maxHeight: "70vh", overflowY: "auto", direction: isRTL ? "rtl" : "ltr" } }}>
+      <Typography.Title level={2}>انتخاب تیم برای ثبت نام</Typography.Title>
+      {loading ? <Flex justify="center"><Spin /></Flex> : error ? <Alert type="error" message={error} showIcon /> :
+        filteredTeams.length === 0 ? <Alert type="info" showIcon
+          message="تیمی با تعداد اعضای پذیرفته‌شده مناسب ندارید."
+          description={<>یک تیم می‌تواند در چند مسابقه ثبت نام کند. برای مدیریت اعضا به <a href="https://ceit-ssc.ir/dashboard/teams" target="_blank" rel="noreferrer">داشبورد تیم‌ها</a> مراجعه کنید.</>} /> :
+        <Flex vertical gap="middle">
+          {filteredTeams.map((team) => <Flex key={team.id} justify="space-between" align="center" gap="small">
+            <div>
+              <Typography.Title level={4}>{team.name}</Typography.Title>
+              <Typography.Text>تعداد اعضا: {digitsToHindi(registrationFor(team)?.member_ids.length ?? acceptedSize(team))}</Typography.Text>
+              {!isLeader(team) && <Typography.Paragraph>ثبت نام و پرداخت توسط سرگروه انجام می‌شود.</Typography.Paragraph>}
+            </div>
+            {actionFor(team)}
+          </Flex>)}
+        </Flex>}
+    </Modal>
+  </>;
 };
 
 export default GroupModal;
