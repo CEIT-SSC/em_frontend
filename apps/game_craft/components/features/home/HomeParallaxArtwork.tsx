@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type CSSProperties } from "react";
+import styles from "./HomeParallaxArtwork.module.css";
 
 const layers = [
   {
@@ -97,7 +98,7 @@ export function HomeParallaxArtwork() {
   return (
     <div
       ref={artworkRef}
-      className="gc-home-parallax"
+      className={`gc-home-parallax ${styles.artwork}`}
       aria-label="GameCraft and Hollow Knight artwork"
       role="img"
     >

@@ -379,6 +379,9 @@ body {
 .gc-home-intro .ant-btn {
   min-height: 46px;
 }
+.gc-home-intro__mobile-artwork {
+  display: none;
+}
 
 .gc-home-parallax {
   position: relative;
@@ -931,7 +934,7 @@ body {
 @media (max-width: 768px) {
   .gc-home-intro {
     min-height: auto;
-    padding-top: 3.5rem !important;
+    padding-top: 1rem !important;
   }
   .gc-home-intro .ant-row {
     gap: 2.5rem 0;
@@ -952,19 +955,6 @@ body {
   }
   .gc-artwork-slot--gateway {
     margin-top: 2.5rem;
-  }
-  .gc-home-parallax__layer--back {
-    width: 68%;
-    left: -3%;
-  }
-  .gc-home-parallax__layer--logo {
-    width: 47%;
-    top: 28%;
-    left: 26%;
-  }
-  .gc-home-parallax__layer--front {
-    width: 66%;
-    right: -3%;
   }
   .gc-artwork-slot figcaption {
     inset-inline: 0.8rem;
@@ -1699,8 +1689,18 @@ body {
     inset: auto -40vw -8vw;
   }
 
-  .gc-home-parallax {
-    display: none;
+  .gc-home-intro {
+    min-height: auto;
+    padding-top: 1rem !important;
+  }
+  .gc-home-intro__mobile-artwork {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  .gc-home-intro__desktop-artwork {
+    display: none !important;
   }
 }
 @media (max-width: 600px) {

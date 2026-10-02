@@ -17,7 +17,7 @@ import { Separator } from "components/features/home/Separator";
 
 export default function HomePage() {
   const screens = useResponsive();
-  const homeViewPadding = screens.lg ? "3rem 5rem" : "3rem 2rem";
+  const homeViewPadding = screens.lg ? "3rem 5rem" : "3rem 1rem";
 
   return (
     <>

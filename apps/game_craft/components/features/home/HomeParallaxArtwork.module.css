@@ -1,0 +1,30 @@
+@media (max-width: 991px) {
+  .artwork.artwork {
+    width: min(100%, 480px);
+    aspect-ratio: 1 / 0.65;
+  }
+
+  .artwork :global(.gc-home-parallax__layer--front) {
+    width: 30%;
+    height: auto;
+    left: 5%;
+    right: auto;
+    bottom: 18%;
+  }
+
+  .artwork :global(.gc-home-parallax__layer--back) {
+    width: 36%;
+    height: auto;
+    left: auto;
+    right: 3%;
+    bottom: 16%;
+  }
+
+  .artwork :global(.gc-home-parallax__layer--logo) {
+    width: 28%;
+    height: auto;
+    left: 36%;
+    top: auto;
+    bottom: 36%;
+  }
+}
