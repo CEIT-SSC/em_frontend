@@ -133,7 +133,10 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const title = locale === "fa" ? "گیم‌کرفت" : "GameCraft";
-  const description = locale === "fa" ? "رویداد بازی‌سازی گیم‌کرفت" : "GameCraft game development event";
+  const description =
+    locale === "fa"
+      ? "رویداد بازی‌سازی گیم‌کرفت"
+      : "GameCraft game development event";
 
   return {
     title,
@@ -173,7 +176,7 @@ export default async function LocaleLayout({
               <NextIntlClientProvider messages={messages}>
                 <AuthProvider>
                   <AntDesignProvider direction={direction}>
-                    <GoftinoProvider />
+                    {/* <GoftinoProvider /> */}
                     <Providers>{children}</Providers>
                   </AntDesignProvider>
                 </AuthProvider>
