@@ -3,7 +3,7 @@
 import { Alert, Button, Flex, Modal, Spin, theme, Typography } from "antd";
 import React, { useMemo, useState } from "react";
 import { TeamDetails } from "@ssc/core";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { digitsToHindi } from "@ssc/utils";
 import { useAuth } from "lib/hooks/useAuth";
 import { HiCash, HiCheck, HiPlus } from "react-icons/hi";
@@ -14,7 +14,6 @@ import { useAppDispatch, useAppSelector } from "lib/store/store";
 import { payTeamThunk, registerTeamThunk } from "lib/store/teams/teams.thunk";
 
 interface Props {
-  isRTL: boolean;
   competitionId: number;
   minTeamSize: number;
   maxTeamSize: number;
@@ -22,7 +21,6 @@ interface Props {
 }
 
 const GroupModal = ({
-  isRTL,
   competitionId,
   minTeamSize,
   maxTeamSize,
@@ -34,6 +32,7 @@ const GroupModal = ({
   );
   const [payingTeamId, setPayingTeamId] = useState<number | null>(null);
   const t = useTranslations();
+  const isRTL = useLocale() === "fa";
   const { isAuthenticated, user } = useAuth();
   const { useToken } = theme;
   const { token } = useToken();
@@ -52,10 +51,16 @@ const GroupModal = ({
     team.memberships.filter((member) => member.status === "accepted").length;
   const isLeader = (team: TeamDetails) =>
     team.leader_details.email.toLowerCase() === user?.email?.toLowerCase();
-  const isRegistered = validTeams.some((team) => registrationFor(team)?.status === "active");
+  const isRegistered = validTeams.some(
+    (team) => registrationFor(team)?.status === "active"
+  );
   const hasRegistration = validTeams.some((team) => registrationFor(team));
-  const inPaymentProgress = validTeams.some((team) => registrationFor(team)?.status === "pending_payment");
-  const registrationPending = validTeams.some((team) => registrationFor(team)?.status === "pending_approval");
+  const inPaymentProgress = validTeams.some(
+    (team) => registrationFor(team)?.status === "pending_payment"
+  );
+  const registrationPending = validTeams.some(
+    (team) => registrationFor(team)?.status === "pending_approval"
+  );
 
   const buttonText = () => {
     if (!isAuthenticated) return t("workshop.loginToContinue");
@@ -111,10 +116,13 @@ const GroupModal = ({
   };
 
   const filteredTeams = useMemo(
-    () => validTeams.filter((team) =>
-      registrationFor(team) ||
-      (acceptedSize(team) >= minTeamSize && acceptedSize(team) <= maxTeamSize)
-    ),
+    () =>
+      validTeams.filter(
+        (team) =>
+          registrationFor(team) ||
+          (acceptedSize(team) >= minTeamSize &&
+            acceptedSize(team) <= maxTeamSize)
+      ),
     [validTeams, minTeamSize, maxTeamSize, competitionId]
   );
 
@@ -237,7 +245,10 @@ const GroupModal = ({
                   }}
                 >
                   {t("workshop.memberCount", {
-                    count: digitsToHindi(registrationFor(team)?.member_ids.length ?? acceptedSize(team)),
+                    count: digitsToHindi(
+                      registrationFor(team)?.member_ids.length ??
+                        acceptedSize(team)
+                    ),
                   })}
                 </Typography.Paragraph>
               </Flex>
@@ -248,7 +259,9 @@ const GroupModal = ({
                 <Button
                   type="primary"
                   loading={registeringTeamId === team.id}
-                  disabled={!isLeader(team) || disable || registeringTeamId !== null}
+                  disabled={
+                    !isLeader(team) || disable || registeringTeamId !== null
+                  }
                   onClick={() => handleRegisterCompetition(team)}
                   icon={<HiPlus />}
                 >
@@ -262,7 +275,18 @@ const GroupModal = ({
         })
       );
     }
-  }, [validTeams, filteredTeams, t, loading, error, isRTL, user, registeringTeamId, payingTeamId, disable]);
+  }, [
+    validTeams,
+    filteredTeams,
+    t,
+    loading,
+    error,
+    isRTL,
+    user,
+    registeringTeamId,
+    payingTeamId,
+    disable,
+  ]);
 
   const cardButton = () => (
     <Button

@@ -379,7 +379,6 @@ export function CompetitionCard({
             )} */}
 
               <GroupModal
-                isRTL={titleIsRTL}
                 competitionId={competition.id}
                 minTeamSize={competition.min_group_size}
                 maxTeamSize={competition.max_group_size}
@@ -428,7 +427,6 @@ export function CompetitionCard({
           //     : []),
           <GroupModal
             key="group-modal"
-            isRTL={titleIsRTL}
             competitionId={competition.id}
             minTeamSize={competition.min_group_size}
             maxTeamSize={competition.max_group_size}
