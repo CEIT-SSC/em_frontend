@@ -49,11 +49,17 @@ export const registerTeamThunk = createAppAsyncThunk(
   ) => {
     try {
       const res = await Api.teams.registerCompetition(teamId, competitionId);
-      dispatch(fetchTeamsThunk());
+      const responseData = res.data.data;
+      await dispatch(fetchTeamsThunk());
+
       return {
         teamId,
-        details: res.data,
-        message: "تیم در مسابقه ثبت شد و آماده پرداخت است",
+        message:
+          (responseData && typeof responseData === "object" && "message" in responseData
+            ? String(responseData.message)
+            : undefined) ||
+          res.data.message ||
+          "Team registered successfully",
       };
     } catch (err) {
       if (err.response?.status === 403) {

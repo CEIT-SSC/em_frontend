@@ -87,9 +87,6 @@ export function CompetitionCard({
   //   return itemInCart !== undefined;
   // }, [itemInCart]);
 
-  // Color palette
-  const colorStripes = ["#9ddbf5", "#5b9fc1", "#8b7bae", "#f1ecdf"];
-
   // const buttonText = useMemo(() => {
   //   if (!isAuthenticated) return t("workshop.loginToContinue");
   //   if (isSelected) {
@@ -152,6 +149,7 @@ export function CompetitionCard({
 
   const titleIsRTL = isRTL(competition.title);
   const descriptionIsRTL = isRTL(competition.description);
+  const colorStripes = ["#9ddbf5", "#5b9fc1", "#8b7bae", "#f1ecdf"];
 
   const formatPrice = () => {
     return competition.is_paid
@@ -186,8 +184,9 @@ export function CompetitionCard({
             flexDirection: "column",
           },
         }}
+        hoverable
       >
-        {/* Header Image with Stripes */}
+        {/* Header Image */}
         <div
           style={{
             position: "relative",
@@ -205,25 +204,6 @@ export function CompetitionCard({
             }}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-
-          {/* Colored Stripes */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              display: "flex",
-              zIndex: 1,
-            }}
-          >
-            {colorStripes.map((color, index) => (
-              <div
-                key={index}
-                style={{ height: "4px", flex: 1, backgroundColor: color }}
-              />
-            ))}
-          </div>
 
           {/* View Details Button */}
           <div
@@ -399,7 +379,6 @@ export function CompetitionCard({
             )} */}
 
               <GroupModal
-                isRTL={titleIsRTL}
                 competitionId={competition.id}
                 minTeamSize={competition.min_group_size}
                 maxTeamSize={competition.max_group_size}
@@ -448,7 +427,6 @@ export function CompetitionCard({
           //     : []),
           <GroupModal
             key="group-modal"
-            isRTL={titleIsRTL}
             competitionId={competition.id}
             minTeamSize={competition.min_group_size}
             maxTeamSize={competition.max_group_size}
@@ -539,7 +517,7 @@ export function CompetitionCard({
                 </Typography.Title>
                 <Flex align="center" gap="small">
                   <ClockCircleOutlined
-                    style={{ color: token.colorPrimary, fontSize: "20px" }}
+                    style={{ color: "var(--gc-blue)", fontSize: "20px" }}
                   />
                   <Typography.Text style={{ color: token.colorTextSecondary }}>
                     {formatDateTimeRange()}
@@ -559,7 +537,7 @@ export function CompetitionCard({
                 </Typography.Title>
                 <Flex align="center" gap="small">
                   <TeamOutlined
-                    style={{ color: token.colorPrimary, fontSize: "20px" }}
+                    style={{ color: "var(--gc-blue)", fontSize: "20px" }}
                   />
                   <Typography.Text
                     style={{
