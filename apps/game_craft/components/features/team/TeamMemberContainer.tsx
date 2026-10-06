@@ -4,7 +4,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Alert, Col, Flex, Row, Spin, theme, Typography } from "antd";
 import { useTranslations } from "next-intl";
 import { TeamMemberCard } from "./TeamMemberCard";
-import { useAppSelector } from "lib/store/store";
+import { useAppDispatch, useAppSelector } from "lib/store/store";
+import { fetchTeamsThunk } from "lib/store/teams/teams.thunk";
 import { TeamDetails } from "@ssc/core";
 import { clientApi } from "lib/api/client/clientApi";
 import { eventId } from "lib/utils/constants";
@@ -16,12 +17,35 @@ export const TeamMemberContainer: React.FC = () => {
   const { token } = useToken();
   const t = useTranslations("app.dashboard.teamStatus");
 
-  const { data: teams } = useAppSelector((s) => s.teams);
+  const dispatch = useAppDispatch();
+  const {
+    data: teams,
+    loading: teamsLoading,
+    error: teamsError,
+  } = useAppSelector((s) => s.teams);
   const [competitions, setCompetitions] = useState<{
     loading: boolean;
     error?: string;
     data?: GroupCompetitionsList;
   }>({ loading: true });
+
+  useEffect(() => {
+    dispatch(fetchTeamsThunk());
+  }, [dispatch]);
+
+  const registeredTeams = useMemo(
+    () => teams.flatMap((team) =>
+      team.registrations
+        .filter((registration) =>
+          registration.status === "active" &&
+          competitions.data?.results.some(
+            (competition) => competition.id === registration.competition_details.id
+          )
+        )
+        .map((registration) => ({ team, registration }))
+    ),
+    [competitions.data, teams]
+  );
 
   useEffect(() => {
     clientApi.competitions
@@ -41,24 +65,27 @@ export const TeamMemberContainer: React.FC = () => {
       });
   }, [t]);
 
-  const registeredTeams = useMemo(() => teams.flatMap((team) =>
-    team.registrations.filter((registration) => registration.status === "active" &&
-      competitions.data?.results.some((competition) => competition.id === registration.competition_details.id)
-    ).map((registration) => ({ team, registration }))
-  ), [teams, competitions.data]);
-
   const mapTeamMembers = (team: TeamDetails, memberIds: number[]) =>
-    team.memberships.filter((member) => memberIds.includes(member.user_details.id)).map((member) => (
-      <Col key={member.id} span={24} sm={12} lg={8}>
-        <TeamMemberCard
-          isHead={member.user_details.email === team.leader_details.email}
-          name={
-            member.user_details.first_name + " " + member.user_details.last_name
-          }
-          avatar={member.user_details.profile_picture}
-        />
-      </Col>
-    ));
+    team.memberships
+      .filter((member) => memberIds.includes(member.user_details.id))
+      .sort(
+        (a, b) =>
+          Number(b.user_details.id === team.leader_details.id) -
+          Number(a.user_details.id === team.leader_details.id)
+      )
+      .map((member) => (
+        <Col key={member.id} span={24} sm={12} lg={8}>
+          <TeamMemberCard
+            isHead={member.user_details.id === team.leader_details.id}
+            name={
+              member.user_details.first_name +
+              " " +
+              member.user_details.last_name
+            }
+            avatar={member.user_details.profile_picture}
+          />
+        </Col>
+      ));
 
   const mapTeams = () =>
     registeredTeams.map(({ team, registration }) => (
@@ -85,17 +112,17 @@ export const TeamMemberContainer: React.FC = () => {
     ));
 
   const content = useMemo(() => {
-    if (competitions.loading) {
+    if (competitions.loading || teamsLoading) {
       return (
         <Flex justify="center" align="center" style={{ minHeight: "200px" }}>
           <Spin size="large" />
         </Flex>
       );
-    } else if (competitions.error) {
+    } else if (competitions.error || teamsError) {
       return (
         <Alert
           message={t("workshop.error")}
-          description={competitions.error}
+          description={competitions.error ?? teamsError}
           type="error"
           showIcon
         />
@@ -112,7 +139,7 @@ export const TeamMemberContainer: React.FC = () => {
         mapTeams()
       );
     }
-  }, [competitions, registeredTeams, t]);
+  }, [competitions, registeredTeams, t, teamsLoading, teamsError]);
 
   return (
     <Flex
@@ -127,7 +154,7 @@ export const TeamMemberContainer: React.FC = () => {
     >
       <Row
         align="middle"
-        justify="center"
+        justify="start"
         style={{ width: "100%" }}
         gutter={[16, 16]}
       >

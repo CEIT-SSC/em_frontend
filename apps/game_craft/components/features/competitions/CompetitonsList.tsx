@@ -8,6 +8,9 @@ import { useEffect, useMemo, useState } from "react";
 import { clientApi } from "lib/api/client/clientApi";
 import { eventId } from "lib/utils/constants";
 import { GroupCompetitionsList } from "@ssc/core";
+import { useAuth } from "lib/hooks/useAuth";
+import { useAppDispatch } from "lib/store/store";
+import { fetchTeamsThunk } from "lib/store/teams/teams.thunk";
 
 const { useToken } = theme;
 
@@ -25,6 +28,8 @@ export function CompetitionsList({
   const { token } = useToken();
   const screens = useResponsive();
   const t = useTranslations();
+  const dispatch = useAppDispatch();
+  const { isAuthenticated } = useAuth();
   const [competitions, setCompetitions] = useState<{
     loading: boolean;
     error?: string;
@@ -48,6 +53,10 @@ export function CompetitionsList({
         setCompetitions({ loading: false, error: "failed to fetch" });
       });
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) dispatch(fetchTeamsThunk());
+  }, [dispatch, isAuthenticated]);
 
   const content = useMemo(() => {
     if (competitions.loading) {
@@ -75,7 +84,9 @@ export function CompetitionsList({
         />
       ) : (
         <CompetitionsGrid
-          competitions={competitions.data.results}
+          competitions={competitions.data.results.filter(
+            (competition) => competition.is_active
+          )}
           competitionImage="/images/2026/hero.gif"
           dashboardMode={dashboardMode}
         />
@@ -93,7 +104,7 @@ export function CompetitionsList({
       className="gc-home-competitions"
       style={{
         width: "100%",
-        backgroundColor: backgroundColor,
+        backgroundColor,
       }}
     >
       {/* <Wave width="100%" height="auto" fill="#4F7B79" /> */}

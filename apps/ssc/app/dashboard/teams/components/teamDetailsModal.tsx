@@ -9,7 +9,6 @@ import {
   HiDocumentText,
   HiThumbUp,
   HiChatAlt,
-  HiPlus,
 } from "react-icons/hi";
 import Modal from "~/components/Modal";
 import { RootState, useAppDispatch, useAppSelector } from "~/core/store/store";
