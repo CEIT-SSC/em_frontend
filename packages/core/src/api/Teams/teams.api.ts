@@ -3,6 +3,7 @@ import { apiPath, ApiPath } from "../../types/ApiPaths";
 import { RequestResponse } from "../../types/api/general";
 import {
   TeamDetails,
+  TeamCompetitionRegistration,
   TeamsList,
   CreateTeamRequest,
   CreateTeamResponse,
@@ -117,6 +118,23 @@ export class TeamsApi extends ApiClient {
         competition_pk: competitionId,
       }),
       registerData || {},
+      { requiresAuth: true }
+    );
+  }
+
+  async cancelRegistration(
+    teamId: number,
+    competitionId: number
+  ): Promise<RequestResponse<TeamCompetitionRegistration>> {
+    return await this.Api.post<
+      TeamCompetitionRegistration,
+      RequestResponse<TeamCompetitionRegistration>
+    >(
+      apiPath(ApiPath.TEAMS_CANCEL_REGISTRATION, {
+        id: teamId,
+        competition_pk: competitionId,
+      }),
+      {},
       { requiresAuth: true }
     );
   }

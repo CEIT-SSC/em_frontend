@@ -1,6 +1,6 @@
 "use client";
 
-import { Alert, Button, Flex, Modal, Spin, Typography } from "antd";
+import { Alert, Button, Flex, Modal, Popconfirm, Spin, Typography } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
 import { TeamDetails } from "@ssc/core";
 import { digitsToHindi } from "@ssc/utils";
@@ -9,7 +9,7 @@ import { HiCash, HiCheck, HiPlus } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { MdOutlineWatch } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "lib/store/store";
-import { fetchTeamsThunk, payTeamThunk, registerTeamThunk } from "lib/store/teams/teams.thunk";
+import { cancelTeamRegistrationThunk, fetchTeamsThunk, payTeamThunk, registerTeamThunk } from "lib/store/teams/teams.thunk";
 
 interface Props {
   isRTL: boolean;
@@ -22,6 +22,7 @@ interface Props {
 
 const GroupModal = ({ isRTL, competitionId, registered, minTeamSize, maxTeamSize, disable }: Props) => {
   const [open, setOpen] = useState(false);
+  const [cancellingTeamId, setCancellingTeamId] = useState<number | null>(null);
   const { isAuthenticated, user } = useAuth();
   const dispatch = useAppDispatch();
   const { data: teams, loading, error } = useAppSelector((state) => state.teams);
@@ -67,13 +68,44 @@ const GroupModal = ({ isRTL, competitionId, registered, minTeamSize, maxTeamSize
     }
   };
 
+  const handleCancel = async (teamId: number) => {
+    setCancellingTeamId(teamId);
+    try {
+      await dispatch(cancelTeamRegistrationThunk({ teamId, competitionId })).unwrap();
+      toast.success("ثبت‌نام تیم لغو شد");
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setCancellingTeamId(null);
+    }
+  };
+
+  const cancelAction = (team: TeamDetails) => <Popconfirm
+    title="لغو ثبت‌نام تیم"
+    description="آیا از لغو ثبت‌نام این تیم مطمئن هستید؟"
+    okText="بله، لغو شود"
+    cancelText="انصراف"
+    onConfirm={() => handleCancel(team.id)}
+    disabled={!isLeader(team) || cancellingTeamId !== null}
+  >
+    <Button danger disabled={!isLeader(team) || cancellingTeamId !== null}
+      loading={cancellingTeamId === team.id}>لغو ثبت‌نام</Button>
+  </Popconfirm>;
+
   const actionFor = (team: TeamDetails) => {
     const registration = registrationFor(team);
     switch (registration?.status) {
       case "pending_approval":
-        return <Button disabled icon={<MdOutlineWatch />}>در انتظار تایید</Button>;
+        return <Flex gap="small" wrap>
+          <Button disabled icon={<MdOutlineWatch />}>در انتظار تایید</Button>
+          {cancelAction(team)}
+        </Flex>;
       case "pending_payment":
-        return <Button type="primary" disabled={!isLeader(team)} icon={<HiCash />} onClick={() => handlePayment(team.id)}>پرداخت</Button>;
+        return <Flex gap="small" wrap>
+          <Button type="primary" disabled={!isLeader(team) || cancellingTeamId !== null}
+            icon={<HiCash />} onClick={() => handlePayment(team.id)}>پرداخت</Button>
+          {cancelAction(team)}
+        </Flex>;
       case "active":
         return <Button disabled icon={<HiCheck />}>ثبت نام شده</Button>;
       case "rejected":

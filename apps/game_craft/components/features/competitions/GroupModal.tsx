@@ -1,6 +1,6 @@
 "use client";
 
-import { Alert, Button, Flex, Modal, Spin, theme, Typography } from "antd";
+import { Alert, Button, Flex, Modal, Popconfirm, Spin, theme, Typography } from "antd";
 import React, { useMemo, useState } from "react";
 import { TeamDetails } from "@ssc/core";
 import { useLocale, useTranslations } from "next-intl";
@@ -11,7 +11,7 @@ import { RxCross2 } from "react-icons/rx";
 import { toast } from "react-toastify";
 import { MdOutlineWatch } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "lib/store/store";
-import { payTeamThunk, registerTeamThunk } from "lib/store/teams/teams.thunk";
+import { cancelTeamRegistrationThunk, payTeamThunk, registerTeamThunk } from "lib/store/teams/teams.thunk";
 
 interface Props {
   competitionId: number;
@@ -31,6 +31,7 @@ const GroupModal = ({
     null
   );
   const [payingTeamId, setPayingTeamId] = useState<number | null>(null);
+  const [cancellingTeamId, setCancellingTeamId] = useState<number | null>(null);
   const t = useTranslations();
   const isRTL = useLocale() === "fa";
   const { isAuthenticated, user } = useAuth();
@@ -72,25 +73,50 @@ const GroupModal = ({
     return t("workshop.register");
   };
 
+  const cancelAction = (team: TeamDetails) => (
+    <Popconfirm
+      title={t("workshop.cancelRegistrationTitle")}
+      description={t("workshop.cancelRegistrationConfirm")}
+      okText={t("workshop.confirmCancelRegistration")}
+      cancelText={t("button.cancel")}
+      onConfirm={() => handleCancel(team.id)}
+      disabled={!isLeader(team) || cancellingTeamId !== null}
+    >
+      <Button
+        danger
+        disabled={!isLeader(team) || cancellingTeamId !== null}
+        loading={cancellingTeamId === team.id}
+      >
+        {t("workshop.cancelRegistration")}
+      </Button>
+    </Popconfirm>
+  );
+
   const statusButton = (status: string, team: TeamDetails) => {
     switch (status) {
       case "pending_approval":
         return (
-          <Button type="primary" disabled icon={<MdOutlineWatch />}>
-            {t("workshop.registrationPending")}
-          </Button>
+          <Flex gap="small" wrap>
+            <Button type="primary" disabled icon={<MdOutlineWatch />}>
+              {t("workshop.registrationPending")}
+            </Button>
+            {cancelAction(team)}
+          </Flex>
         );
       case "pending_payment":
         return (
-          <Button
-            type="primary"
-            icon={<HiCash />}
-            loading={payingTeamId === team.id}
-            disabled={!isLeader(team) || payingTeamId !== null}
-            onClick={() => handlePayment(team.id)}
-          >
-            {t("workshop.pay")}
-          </Button>
+          <Flex gap="small" wrap>
+            <Button
+              type="primary"
+              icon={<HiCash />}
+              loading={payingTeamId === team.id}
+              disabled={!isLeader(team) || payingTeamId !== null || cancellingTeamId !== null}
+              onClick={() => handlePayment(team.id)}
+            >
+              {t("workshop.pay")}
+            </Button>
+            {cancelAction(team)}
+          </Flex>
         );
       case "active":
         return (
@@ -155,6 +181,15 @@ const GroupModal = ({
         toast.error(err.message);
       })
       .finally(() => setRegisteringTeamId(null));
+  };
+
+  const handleCancel = (teamId: number) => {
+    setCancellingTeamId(teamId);
+    dispatch(cancelTeamRegistrationThunk({ teamId, competitionId }))
+      .unwrap()
+      .then(() => toast.success(t("workshop.cancelRegistrationSucceeded")))
+      .catch((err) => toast.error(err.message || t("workshop.cancelRegistrationFailed")))
+      .finally(() => setCancellingTeamId(null));
   };
 
   const content = useMemo(() => {
@@ -285,6 +320,7 @@ const GroupModal = ({
     user,
     registeringTeamId,
     payingTeamId,
+    cancellingTeamId,
     disable,
   ]);
 

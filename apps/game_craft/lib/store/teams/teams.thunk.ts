@@ -9,6 +9,22 @@ export const fetchTeamsThunk = createAppAsyncThunk(
   }
 );
 
+export const cancelTeamRegistrationThunk = createAppAsyncThunk(
+  "teams/cancelRegistration",
+  async ({ teamId, competitionId }: { teamId: number; competitionId: number },
+    { extra: { Api }, rejectWithValue, dispatch }) => {
+    try {
+      await Api.teams.cancelRegistration(teamId, competitionId);
+      await dispatch(fetchTeamsThunk()).unwrap();
+      return { teamId, competitionId };
+    } catch (err) {
+      return rejectWithValue({
+        message: err.response?.data?.message || "لغو ثبت‌نام انجام نشد",
+      });
+    }
+  }
+);
+
 export const payTeamThunk = createAppAsyncThunk(
   "teams/payTeam",
   async ({ teamId, competitionId }: { teamId: number; competitionId: number },

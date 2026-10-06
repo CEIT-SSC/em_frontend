@@ -45,6 +45,19 @@ export const fetchTeamDetailsThunk = createAppAsyncThunk(
   }
 );
 
+export const cancelTeamRegistrationThunk = createAppAsyncThunk(
+  "teams/cancelRegistration",
+  async ({ teamId, competitionId }: { teamId: number; competitionId: number },
+    { extra, rejectWithValue }) => {
+    try {
+      await extra.Api.teams.cancelRegistration(teamId, competitionId);
+      return { teamId, competitionId };
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const deleteTeamThunk = createAppAsyncThunk(
   "teams/delete",
   async (teamId: number, { extra, fulfillWithValue, rejectWithValue }) => {

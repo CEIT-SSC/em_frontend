@@ -12,7 +12,7 @@ import {
 } from "react-icons/hi";
 import Modal from "~/components/Modal";
 import { RootState, useAppDispatch, useAppSelector } from "~/core/store/store";
-import { fetchTeamDetailsThunk } from "~/core/store/teams/teams.thunk";
+import { cancelTeamRegistrationThunk, fetchTeamDetailsThunk } from "~/core/store/teams/teams.thunk";
 import { toast } from "react-toastify";
 import AddMemberModal from "./addMemberModal";
 import DeleteTeamModal from "./deleteTeamModal";
@@ -35,6 +35,7 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
 }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isAddMemberModalOpen, setIsAddMemberModalOpen] = useState(false);
+  const [cancellingRegistrationId, setCancellingRegistrationId] = useState<number | null>(null);
   const dispatch = useAppDispatch();
   const teamDetails = useAppSelector(teamDetailsSelector(teamId));
   const isLoading = useAppSelector(
@@ -51,6 +52,21 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
       onClose();
     }
   }, [dispatch, teamId]);
+
+  const handleCancelRegistration = async (registrationId: number, competitionId: number) => {
+    if (!window.confirm("آیا از لغو ثبت‌نام این تیم مطمئن هستید؟")) return;
+    setCancellingRegistrationId(registrationId);
+    try {
+      await dispatch(cancelTeamRegistrationThunk({ teamId, competitionId })).unwrap();
+      await dispatch(fetchTeamDetailsThunk(teamId)).unwrap();
+      onTeamUpdated();
+      toast.success("ثبت‌نام تیم لغو شد");
+    } catch (_error) {
+      toast.error("لغو ثبت‌نام انجام نشد");
+    } finally {
+      setCancellingRegistrationId(null);
+    }
+  };
 
   useEffect(() => {
     if (isOpen && teamId) {
@@ -266,6 +282,13 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
                 }[registration.status]}</p>
                 <p className="text-gray-400">اعضای ثبت نام شده: {registration.member_ids.length} — هزینه کل: {registration.price} تومان</p>
                 {registration.admin_remarks && <p className="text-gray-400">{registration.admin_remarks}</p>}
+                {isUserLeader && (registration.status === "pending_approval" || registration.status === "pending_payment") && (
+                  <button type="button" className="mt-4 rounded-lg border border-red-400 px-4 py-2 text-red-400 disabled:opacity-50"
+                    disabled={cancellingRegistrationId !== null}
+                    onClick={() => handleCancelRegistration(registration.id, registration.competition_details.id)}>
+                    {cancellingRegistrationId === registration.id ? "در حال لغو..." : "لغو ثبت‌نام"}
+                  </button>
+                )}
                 {renderContentSubmission(registration.content_submission)}
               </div>
             ))}

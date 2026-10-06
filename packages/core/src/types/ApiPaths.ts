@@ -50,6 +50,7 @@ export enum ApiPath {
   TEAMS_REMOVE = "/my-teams/{id}/",
   TEAMS_ADD_MEMBER = "/my-teams/{id}/add-member/",
   TEAMS_REGISTER_COMPETITION = "/my-teams/{id}/register-competition/{competition_pk}/",
+  TEAMS_CANCEL_REGISTRATION = "/my-teams/{id}/cancel-registration/{competition_pk}/",
   TEAMS_SUBMIT_CONTENT = "/my-teams/{id}/submit-content/",
   TEAMS_PAYMENT = "/api/teams/{id}/initiate-payment/",
 
