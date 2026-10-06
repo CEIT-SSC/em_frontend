@@ -132,8 +132,16 @@ const GroupModal = ({
         );
       case "cancelled":
         return (
-          <Button disabled icon={<RxCross2 />}>
-            {t("workshop.registrationCancelled")}
+          <Button
+            type="primary"
+            loading={registeringTeamId === team.id}
+            disabled={!isLeader(team) || disable || registeringTeamId !== null}
+            onClick={() => handleRegisterCompetition(team)}
+            icon={<HiPlus />}
+          >
+            {registeringTeamId === team.id
+              ? t("workshop.registeringTeam")
+              : t("workshop.registerTeam")}
           </Button>
         );
       default:

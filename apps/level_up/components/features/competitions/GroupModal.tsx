@@ -111,7 +111,6 @@ const GroupModal = ({ isRTL, competitionId, registered, minTeamSize, maxTeamSize
       case "rejected":
         return <Typography.Text type="danger">رد شده: {registration.admin_remarks}</Typography.Text>;
       case "cancelled":
-        return <Typography.Text>ثبت نام لغو شده</Typography.Text>;
       default:
         return <Button type="primary" disabled={!isLeader(team) || disable} icon={<HiPlus />} onClick={() => handleRegister(team)}>ثبت تیم</Button>;
     }
