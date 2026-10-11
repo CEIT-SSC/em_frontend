@@ -65,9 +65,11 @@ export const TeamMemberContainer: React.FC = () => {
       });
   }, [t]);
 
-  const mapTeamMembers = (team: TeamDetails, memberIds: number[]) =>
+  // Admin roster edits do not change the paid registration's member snapshot.
+  // This view shows the team's current accepted members, as the main dashboard does.
+  const mapTeamMembers = (team: TeamDetails) =>
     team.memberships
-      .filter((member) => memberIds.includes(member.user_details.id))
+      .filter((member) => member.status === "accepted")
       .sort(
         (a, b) =>
           Number(b.user_details.id === team.leader_details.id) -
@@ -107,7 +109,7 @@ export const TeamMemberContainer: React.FC = () => {
             {team.name}
           </Typography.Title>
         </Col>
-        {mapTeamMembers(team, registration.member_ids)}
+        {mapTeamMembers(team)}
       </React.Fragment>
     ));
 
