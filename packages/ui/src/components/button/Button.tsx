@@ -4,7 +4,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
 
-export interface ButtonProps {
+export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "prefix" | "onClick"> {
   label?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
@@ -12,7 +12,7 @@ export interface ButtonProps {
   className?: string;
   prefixIcon?: IconType;
   suffixIcon?: IconType;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit" | "reset";
   disable?: boolean;
 }
@@ -39,7 +39,7 @@ export enum ButtonVariant {
 const variantClasses = {
   [ButtonVariant.PRIMARY]: "default-gradient",
   [ButtonVariant.SECONDARY]: "",
-  [ButtonVariant.OUTLINE]: "text-transparent bg-clip-text",
+  [ButtonVariant.OUTLINE]: "",
 };
 
 export const Button = ({
@@ -53,24 +53,28 @@ export const Button = ({
   onClick,
   type,
   disable = false,
+  disabled = false,
+  ...props
 }: ButtonProps) => {
-  const isSecondary = variant === ButtonVariant.SECONDARY;
   const isText = variant === ButtonVariant.TEXT;
-  const isOutline = variant === ButtonVariant.OUTLINE;
 
   const radiusClass =
     className.match(/\brounded(?:-[^\s]+)?\b/) || "rounded-lg";
 
   return (
     <button
+      {...props}
+      disabled={disable || disabled || loading}
+      aria-busy={loading || undefined}
+      data-variant={ButtonVariant[variant].toLowerCase()}
+      data-size={ButtonSize[size].toLowerCase()}
       className={twMerge(
         clsx(
-          "relative cursor-pointer",
+          "ssc-button relative cursor-pointer disabled:cursor-not-allowed disabled:opacity-50",
           "overflow-hidden p-px",
-          "text-bold",
+          "font-semibold",
           "flex justify-center items-center",
           {
-            "bg-black border-1 border-whiteText": isOutline,
             "px-3 py-2": !isText,
             "!bg-none bg-gray-500 text-gray-300": disable,
             "!cursor-not-allowed": disable,
@@ -81,21 +85,21 @@ export const Button = ({
           className
         )
       )}
-      type={type}
+      type={type ?? "button"}
       onClick={onClick}
     >
       {loading && (
-        <AiOutlineLoading className="absolute top-1/2 left-1/2 -translate-1/2 animate-spin" />
+        <AiOutlineLoading aria-hidden="true" className="absolute top-1/2 left-1/2 -translate-1/2 animate-spin" />
       )}
-      <div
+      <span
         className={clsx("flex gap-2 justify-center items-center", {
           ["opacity-0"]: loading,
         })}
       >
-        {PrefixIcon && <PrefixIcon />}
+        {PrefixIcon && <PrefixIcon aria-hidden="true" />}
         {label}
-        {SuffixIcon && <SuffixIcon />}
-      </div>
+        {SuffixIcon && <SuffixIcon aria-hidden="true" />}
+      </span>
     </button>
   );
 };

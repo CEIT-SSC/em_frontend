@@ -1,45 +1,18 @@
-import React from "react";
 import Event, { EventProps } from "./Event";
-import clsx from "clsx";
 
-const EventList = async () => {
-  const request = await fetch("https://api.ceit-ssc.ir/api/events/", {
-    cache: "no-store",
-  });
-  const results = await request.json();
-  const events: EventProps[] = results.data.results;
-
-  // const events: EventProps[] = [
-  //   {
-  //     id: 1,
-  //     title: "ACPC",
-  //     start_date: new Date().toISOString(),
-  //     end_date: new Date(new Date().getTime() + 1000000).toISOString(),
-  //     poster: "/event.png",
-  //     is_active: false,
-  //     landing_url: "acpc",
-  //     description: "alaki",
-  //     manager: "ssc",
-  //   },
-  // ];
-
-  return (
-    <div
-      className={clsx("flex justify-evenly flex-wrap gap-4", {
-        ["flex-col items-center"]: events.length === 0,
-      })}
-    >
-      {events.length === 0 ? (
-        <>
-          <h4 className="text-2xl font-bold text-gray-100 opacity-60">
-            فعلا رویدادی نداریم!
-          </h4>
-        </>
-      ) : (
-        events.map((event) => <Event key={event.id} event={event} />)
-      )}
-    </div>
-  );
-};
-
-export default EventList;
+export default async function EventList() {
+  let events: EventProps[] = [];
+  let unavailable = false;
+  try {
+    const response = await fetch("https://api.ceit-ssc.ir/api/events/", { cache: "no-store", signal: AbortSignal.timeout(10000) });
+    if (!response.ok) throw new Error(`Events request failed: ${response.status}`);
+    const results = await response.json();
+    if (!Array.isArray(results?.data?.results)) throw new Error("Invalid events response");
+    events = results.data.results;
+  } catch {
+    unavailable = true;
+  }
+  if (unavailable) return <div className="ssc-empty"><h3 className="text-lg font-semibold">دریافت رویدادها ممکن نشد</h3><p className="mt-2 text-sm text-muted">لطفاً کمی بعد دوباره تلاش کنید.</p><a href="/#events" className="ssc-action ssc-action-secondary mt-5">تلاش دوباره</a></div>;
+  if (!events.length) return <div className="ssc-empty"><h3 className="text-lg font-semibold">فعلا رویدادی نداریم!</h3><p className="mt-2 text-sm text-muted">برای اطلاع از برنامه‌های بعدی، ما را در <a className="ssc-inline-link" href="https://t.me/ceit_ssc">تلگرام</a> دنبال کنید.</p></div>;
+  return <div className="ssc-event-grid">{events.map(event => <Event key={event.id} event={event} />)}</div>;
+}

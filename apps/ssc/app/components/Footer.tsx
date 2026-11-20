@@ -3,17 +3,10 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="w-full border-t border-[#292F36] p-9 flex flex-col gap-8 sm:gap-0 sm:flex-row justify-between">
-      {/* <div className="flex flex-col gap-4">
-        <h3 className="text-3xl font-bold">زبان</h3>
-        <div className="flex flex-col gap-2">
-          <p>فارسی</p>
-          <p>English</p>
-          <p>Arabic</p>
-        </div>
-      </div> */}
-      <div className="w-full flex-col gap-4 flex">
-        <h3 className="text-3xl font-bold">ارتباط با ما</h3>
+    <footer className="ssc-footer border-t border-border bg-surface">
+      <div className="ssc-container grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col gap-4 text-sm leading-7">
+        <h3 className="text-base font-semibold">ارتباط با ما</h3>
         <div className="flex flex-col gap-2">
           <a href="https://t.me/ceit_ssc">تلگرام</a>
           {/* <a href="">یوتیوب</a> */}
@@ -24,8 +17,8 @@ const Footer = () => {
           <a href="mailto:ssc.ce.aut@gmail.com">ssc.ce.aut@gmail.com</a>
         </div>
       </div>
-      <div className="w-full flex-col gap-4 flex">
-        <h3 className="text-3xl font-bold">رویداد ها</h3>
+      <div className="flex flex-col gap-4 text-sm leading-7">
+        <h3 className="text-base font-semibold">رویداد ها</h3>
         <div className="flex flex-col gap-2">
           <p>مسابقات ACPC</p>
           <p>گیم کرفت (Game Craft)</p>
@@ -34,26 +27,28 @@ const Footer = () => {
           <p>لینوکس فست (Linux Fest)</p>
         </div>
       </div>
-      <div className="w-full flex justify-center items-center gap-8">
+      <div className="flex items-center gap-8">
         <Image
           width={100}
           height={120}
           src="/logo.png"
           alt="ssc logo"
-          className="w-25 h-30"
+          className="h-24 w-20"
         />
         <a
           referrerPolicy="origin"
           target="_blank"
+          rel="noopener noreferrer"
           href="https://trustseal.enamad.ir/?id=646452&Code=uXSQCvKAnSeeLLUoP1E49sAEwGKLDzq4"
         >
           <img
             referrerPolicy="origin"
             src="https://trustseal.enamad.ir/logo.aspx?id=646452&Code=uXSQCvKAnSeeLLUoP1E49sAEwGKLDzq4"
-            alt=""
+            alt="نماد اعتماد الکترونیکی"
             className="cursor-pointer"
           />
         </a>
+      </div>
       </div>
     </footer>
   );

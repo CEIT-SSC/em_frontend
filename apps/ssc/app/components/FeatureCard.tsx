@@ -8,10 +8,10 @@ interface Props {
 
 const FeatureCard = ({ icon: Icon, title, description }: Props) => {
   return (
-    <div className="w-full p-2 flex flex-col justify-between items-center gap-4 overflow-hidden">
-      <Icon size={48} />
-      <h3 className="text-3xl font-bold text-center">{title}</h3>
-      <p className="text-2xl text-whiteText text-center">{description}</p>
+    <div className="flex min-w-0 flex-col items-start gap-4">
+      <Icon size={28} className="text-muted" aria-hidden="true" />
+      <h3 className="text-xl font-semibold">{title}</h3>
+      <p className="text-base leading-8 text-muted">{description}</p>
     </div>
   );
 };

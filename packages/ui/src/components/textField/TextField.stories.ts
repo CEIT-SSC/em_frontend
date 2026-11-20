@@ -18,6 +18,18 @@ export const Default: Story = {
     label: "Text input",
     id: "story-input",
     name: "story",
-    errorText: "guidance",
+    placeholder: "Enter your name",
   },
+};
+
+export const WithGuidance: Story = {
+  args: { label: "Email", id: "email-help", name: "email", type: "email", guidance: "Use the email associated with your account." },
+};
+
+export const WithError: Story = {
+  args: { label: "Email", id: "email-error-story", name: "email", type: "email", errorText: "Enter a valid email address." },
+};
+
+export const Disabled: Story = {
+  args: { label: "Name", id: "disabled-name", name: "name", disabled: true, value: "SSC member" },
 };

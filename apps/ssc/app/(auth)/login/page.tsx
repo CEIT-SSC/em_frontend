@@ -153,7 +153,7 @@ const LoginContent = () => {
     <>
       <div className="w-full flex justify-end">
         <Button
-          className="flex justify-end bg-none !rounded-full text-whiteText"
+          className="mb-6 text-whiteText"
           size={ButtonSize.SMALL}
           variant={ButtonVariant.OUTLINE}
           label="صفحه اصلی"
@@ -161,17 +161,17 @@ const LoginContent = () => {
           onClick={() => router.push("/")}
         />
       </div>
-      <div className="flex flex-col gap-4 h-max">
+      <form className="flex flex-col gap-5 h-max" noValidate onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
-          <h3 className="text-4xl font-bold">ورود</h3>
-          <p className="text-[20px]/[150%] font-bold">
+          <h1 className="text-3xl font-bold">ورود</h1>
+          <p className="text-sm leading-7 text-muted">
             حساب کاربری ندارید؟{" "}
             <Link
               href={{
                 pathname: "/register",
                 query: Object.fromEntries(params.entries()),
               }}
-              className="default-gradient text-transparent bg-clip-text"
+              className="ssc-inline-link"
             >
               ثبت نام
             </Link>{" "}
@@ -183,6 +183,8 @@ const LoginContent = () => {
           name="email"
           id="email"
           type="email"
+          autoComplete="email"
+          dir="ltr"
           label="ایمیل"
           placeholder="ایمیل خود را وارد کنید"
           errorText={errors.email?.message}
@@ -195,6 +197,7 @@ const LoginContent = () => {
           name="password"
           id="password"
           type="password"
+          autoComplete="current-password"
           label="رمز عبور"
           placeholder="رمز عبور خود را وارد کنید"
           errorText={errors.password?.message}
@@ -202,23 +205,23 @@ const LoginContent = () => {
           required
           {...register("password")}
         />
-        <div className="flex flex-col items-center py-6 px-9 gap-2.5">
+        <div className="flex flex-col gap-5 pt-2">
           <p className="text-whiteText">
             رمز عبور خود را فراموش کرده اید؟{" "}
             <Link
-              className="default-gradient text-transparent bg-clip-text"
+              className="ssc-inline-link"
               href="/forget-password"
             >
               بازیابی رمز عبور
             </Link>
           </p>
-          <div className="w-full md:w-3/4 flex flex-col items-center gap-4">
+          <div className="w-full flex flex-col gap-4">
             <Button
               className="w-full"
               variant={ButtonVariant.PRIMARY}
               label="ورود"
               loading={isLoading}
-              onClick={handleSubmit(onSubmit)}
+              type="submit"
             />
             <div className="w-full flex gap-3.5">
               {/* <Button
@@ -230,7 +233,7 @@ const LoginContent = () => {
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </>
   );
 };

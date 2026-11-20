@@ -79,7 +79,7 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <Modal>
+    <Modal onClose={handleClose} label="افزودن عضو">
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-xl font-bold text-whiteText">اضافه کردن عضو</h3>
         <Button
@@ -87,6 +87,7 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
           className="text-whiteText p-1"
           onClick={handleClose}
           suffixIcon={HiX}
+          aria-label="بستن"
         />
       </div>
 

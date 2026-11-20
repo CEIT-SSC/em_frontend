@@ -10,7 +10,7 @@ const page = async () => {
 
   return (
     <div className="flex flex-col gap-2.5">
-      <h2 className="text-5xl font-bold">اطلاعات من</h2>
+      <h2 className="text-3xl font-bold">اطلاعات من</h2>
       <div className="py-8 md:px-4 flex flex-col gap-4">
         <div className="flex flex-col items-center gap-2.5">
           <Image

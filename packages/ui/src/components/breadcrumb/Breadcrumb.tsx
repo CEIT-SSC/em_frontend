@@ -21,7 +21,7 @@ export interface BreadcrumbProps {
 
 // Persian digit conversion function
 const toPersianDigits = (num: number): string => {
-  const persianDigits = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
+  const persianDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
   return num
     .toString()
     .replace(/\d/g, (digit) => persianDigits[parseInt(digit)]);
@@ -50,15 +50,16 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
           <div className="flex flex-col items-center">
             {/* Step Circle */}
             <div
+              aria-current={step.isActive ? "step" : undefined}
               className={clsx(
-                "relative flex items-center justify-center rounded-full border-2 font-bold transition-all duration-300",
+                "relative flex items-center justify-center rounded-full border font-semibold transition-colors duration-200",
                 sizeClasses[size],
                 {
-                  "bg-gray-700 border-gray-600 text-gray-400":
+                  "bg-[var(--surface-raised,#292b2e)] border-[var(--border-strong,#656970)] text-[var(--muted,#b4b7bc)]":
                     !step.isActive && !step.isCompleted,
-                  "bg-gradient-to-r from-[#ff715b] to-[#cb48b7] border-transparent text-white shadow-lg":
+                  "bg-[var(--accent,#f28ba8)] border-transparent text-[var(--accent-ink,#22151e)]":
                     step.isActive,
-                  "bg-green-600 border-green-600 text-white": step.isCompleted,
+                  "bg-[var(--success,#9dd6b2)] border-transparent text-[var(--accent-ink,#22151e)]": step.isCompleted,
                 },
                 step.isActive
                   ? activeStepClassName
@@ -88,9 +89,9 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
             <div className="mt-2 text-center">
               <div
                 className={clsx("text-xs font-medium transition-colors", {
-                  "text-gray-400": !step.isActive && !step.isCompleted,
-                  "text-white": step.isActive,
-                  "text-green-400": step.isCompleted,
+                  "text-[var(--muted,#b4b7bc)]": !step.isActive && !step.isCompleted,
+                  "text-[var(--foreground,#f3f4ef)]": step.isActive,
+                  "text-[var(--success,#9dd6b2)]": step.isCompleted,
                 })}
               >
                 {step.label}
@@ -98,9 +99,8 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
               {step.description && (
                 <div
                   className={clsx("text-xs mt-1 transition-colors", {
-                    "text-gray-500": !step.isActive && !step.isCompleted,
-                    "text-gray-300": step.isActive,
-                    "text-green-300": step.isCompleted,
+                    "text-[var(--muted,#b4b7bc)]": !step.isCompleted,
+                    "text-[var(--success,#9dd6b2)]": step.isCompleted,
                   })}
                 >
                   {step.description}
@@ -115,8 +115,8 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
               className={clsx(
                 "flex-1 h-0.5 mx-4 transition-colors duration-300",
                 {
-                  "bg-gray-600": !steps[index + 1]?.isCompleted,
-                  "bg-green-600": steps[index + 1]?.isCompleted,
+                  "bg-[var(--border-strong,#656970)]": !steps[index + 1]?.isCompleted,
+                  "bg-[var(--success,#9dd6b2)]": steps[index + 1]?.isCompleted,
                 },
                 connectorClassName
               )}

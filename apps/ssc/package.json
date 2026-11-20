@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test:design": "node tests/design-controls.test.mjs"
   },
   "dependencies": {
     "@auth/core": "^0.34.2",

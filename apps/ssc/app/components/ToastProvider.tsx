@@ -22,28 +22,31 @@ export function ToastProvider() {
         gap: "1rem",
       }}
       toastStyle={{
-        borderRadius: "999px",
-        background: "#1B1B1B",
+        borderRadius: "var(--radius-panel)",
+        background: "var(--surface-raised)",
         width: "fit-content",
-        padding: "6px 10px",
+        padding: "12px 16px",
         display: "flex",
-        gap: "32px",
-        color: "var(--TextWhite)",
+        gap: "12px",
+        color: "var(--foreground)",
+        fontFamily: "var(--font-vazirmatn), sans-serif",
       }}
       icon={({ type }) => {
         switch (type) {
           case "error":
             return (
               <HiX
-                className="overflow-visible bg-gradient rounded-full text-[#1B1B1B]"
-                size={50}
+                className="shrink-0 text-danger"
+                aria-hidden="true"
+                size={22}
               />
             );
           case "success":
             return (
               <HiCheck
-                className="overflow-visible bg-gradient rounded-full text-[#1B1B1B]"
-                size={50}
+                className="shrink-0 text-success"
+                aria-hidden="true"
+                size={22}
               />
             );
           default:

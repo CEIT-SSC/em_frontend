@@ -1,25 +1,24 @@
+"use client";
 import clsx from "clsx";
-import React from "react";
+import { ReactNode, useEffect, useRef } from "react";
 
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
+  onClose: () => void;
+  label: string;
 }
 
-const Modal = ({ className, children }: Props) => {
+export default function Modal({ className, children, onClose, label }: Props) {
+  const dialog = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const element = dialog.current;
+    element?.showModal();
+    return () => element?.close();
+  }, []);
   return (
-    <div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="absolute top-0 left-0 bottom-0 right-0 backdrop-blur-sm"></div>
-      <div
-        className={clsx(
-          "bg-mainGray rounded-xl p-6 w-full max-w-md mx-4 overflow-y-auto z-99 max-h-[90vh]",
-          className
-        )}
-      >
-        {children}
-      </div>
-    </div>
+    <dialog ref={dialog} aria-label={label} onCancel={event => { event.preventDefault(); event.stopPropagation(); onClose(); }} className={clsx("fixed inset-0 m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-md overflow-y-auto rounded-2xl border border-border bg-surface p-6 text-foreground backdrop:bg-black/70", className)}>
+      {children}
+    </dialog>
   );
-};
-
-export default Modal;
+}

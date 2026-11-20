@@ -1,31 +1,18 @@
-import portal from "~/assets/portal.png";
 import Image from "next/image";
+import Link from "next/link";
+import portal from "~/assets/portal.png";
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function AuthLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="h-[100vh] md:px-9 flex items-center justify-center">
-      <div className="hidden absolute top-0 left-0 w-9/16 h-full py-4 px-6 md:block -z-1">
-        <video
-          className="h-full object-cover object-center rounded-2xl"
-          autoPlay
-          muted
-          loop
-        >
-          <source src="/events/acpc.mp4" />
-        </video>
+    <main className="ssc-container grid min-h-dvh items-center gap-12 py-8 lg:grid-cols-2 lg:py-12">
+      <section className="ssc-auth-panel mx-auto w-full max-w-lg rounded-2xl border border-border bg-surface p-6 sm:p-8">
+        <Link href="/" aria-label="صفحه اصلی انجمن علمی" className="mb-6 inline-flex items-center gap-3"><Image src="/logo.png" alt="" width={32} height={40} /><span className="text-sm text-muted">انجمن علمی مهندسی کامپیوتر</span></Link>
+        {children}
+      </section>
+      <div className="hidden lg:block" aria-hidden="true">
+        <Image src={portal} alt="" className="mx-auto h-auto w-full max-w-lg" />
+        <p className="mt-6 text-center text-2xl font-semibold">جایی برای رشد، همکاری و یادگیری</p>
       </div>
-      <div className="relative w-full h-full md:max-w-[600px] max-h-[100vh] overflow-auto md:h-max bg-secondary-background md:rounded-3xl p-6 flex flex-col gap-4">
-        <Image
-          src={portal}
-          alt="portal"
-          className="top-0 left-0 w-d h-full absolute opacity-15 z-0 object-cover pt-4"
-        />
-        <div className="h-full w-full z-1">{children}</div>
-      </div>
-    </div>
+    </main>
   );
 }

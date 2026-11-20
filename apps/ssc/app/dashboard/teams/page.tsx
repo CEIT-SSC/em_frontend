@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { Button, ButtonSize } from "@ssc/ui";
-import { HiPlus } from "react-icons/hi";
+import { HiPlus, HiUserGroup } from "react-icons/hi";
 import Team from "../components/teams/Team";
 import CreateTeamModal from "./components/createTeamModal";
 import { useAppDispatch, useAppSelector } from "~/core/store/store";
@@ -30,7 +30,7 @@ const Page = () => {
     <>
       <div className="flex justify-between">
         <Button
-          className="bg-[#4A4A4A]"
+
           size={ButtonSize.SMALL}
           label="تیم جدید"
           prefixIcon={HiPlus}
@@ -57,14 +57,14 @@ const Page = () => {
             </div>
           ))
         ) : teamsList.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-12 text-center">
-            <div className="text-6xl mb-4">👥</div>
+          <div className="ssc-empty flex flex-col items-center justify-center">
+            <HiUserGroup size={36} className="mb-4 text-muted" aria-hidden="true" />
             <h3 className="text-xl font-bold text-whiteText mb-2">
               هیچ تیمی یافت نشد
             </h3>
             <p className="text-gray-400 mb-6">اولین تیم خود را ایجاد کنید</p>
             <Button
-              className="bg-[#4A4A4A]"
+
               size={ButtonSize.SMALL}
               label="ایجاد تیم جدید"
               prefixIcon={HiPlus}

@@ -30,42 +30,15 @@ const ActiveTab = ({ href, children, onClick }: Props) => {
   const isActive = useMemo(() => path.includes(href), [path, href]);
 
   return (
-    <div
-      className={clsx("p-px w-full rounded-3xl overflow-hidden", {
-        "bg-gradient": isActive,
-      })}
+    <Link
+      href={href}
+      onClick={onClick}
+      aria-current={isActive ? "page" : undefined}
+      className={clsx("flex min-h-12 items-center gap-3 rounded-lg border px-3 py-2 text-sm font-medium transition-colors", isActive ? "border-border bg-surface-raised text-accent" : "border-transparent text-muted hover:bg-surface-raised hover:text-foreground")}
     >
-      <div className="bg-(--background) rounded-3xl">
-        <Link
-          href={href}
-          onClick={onClick}
-          className={clsx("flex items-center h-full p-2.5 gap-2.5 text-2xl", {
-            ["text-gradient"]: isActive,
-          })}
-        >
-          <GradientSvg />
-          <TabIcon
-            style={{
-              fill: isActive ? `url(#blue-gradient)` : "",
-              stroke: isActive ? `url(#blue-gradient)` : "",
-            }}
-          />
-          <p>{children}</p>
-        </Link>
-      </div>
-    </div>
-  );
-};
-
-// to have icons gradient
-const GradientSvg = () => {
-  return (
-    <svg width="0" height="0" aria-hidden>
-      <linearGradient id="blue-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
-        <stop stopColor="#ff715b" offset="-15%" />
-        <stop stopColor="#cb48b7" offset="100%" />
-      </linearGradient>
-    </svg>
+      <TabIcon size={20} aria-hidden="true" />
+      <span>{children}</span>
+    </Link>
   );
 };
 

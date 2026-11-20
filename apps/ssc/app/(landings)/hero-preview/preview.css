@@ -1,0 +1,7 @@
+.ssc-hero-preview-controls { padding-block: 1.25rem; border-bottom: 1px solid var(--border); background: var(--surface); }
+.ssc-hero-preview-options { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.ssc-hero-preview-options button { min-height: 2.75rem; padding: 0.5rem 1rem; border: 1px solid var(--border-strong); border-radius: var(--radius-control); color: var(--foreground); background: var(--background); cursor: pointer; }
+.ssc-hero-preview-options button:hover { background: var(--surface-hover); }
+.ssc-hero-preview-options button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.ssc-hero-preview-controls p { margin-top: 0.75rem; color: var(--muted); font-size: 0.875rem; }
+.ssc-hero-preview-note { padding-block: 1.5rem; color: var(--muted); font-size: 0.875rem; }

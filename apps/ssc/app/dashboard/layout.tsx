@@ -15,11 +15,13 @@ export default async function RootLayout({
   const { user } = session;
 
   return (
-    <div className="flex flex-col md:flex-row min-h-[100vh]">
+    <div className="ssc-dashboard flex min-h-dvh flex-col md:flex-row">
       <HamburgerSidebar user={user} />
-      <div className="w-full px-4 pt-20 pb-100 md:pt-12 md:p-12 md:pb-12">
+      <main className="min-w-0 flex-1 px-5 pb-12 pt-24 md:p-10 lg:p-12">
+        <div className="mx-auto max-w-5xl">
         {children}
-      </div>
+        </div>
+      </main>
     </div>
   );
 }

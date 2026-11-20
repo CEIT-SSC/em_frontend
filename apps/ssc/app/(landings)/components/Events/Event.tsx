@@ -1,7 +1,6 @@
-import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { HiArrowUpLeft } from "react-icons/hi2";
 
 export interface EventProps {
   id: number;
@@ -15,58 +14,24 @@ export interface EventProps {
   manager: string;
 }
 
-const Event = ({ event }: { event: EventProps }) => {
-  const isOver = new Date(event.end_date).getTime() - new Date().getTime() <= 0;
-  const localDate = new Date(event.start_date).toLocaleDateString("fa-IR", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-  });
-  const [weekday, date, month] = localDate.split(" ");
-
+export default function Event({ event }: { event: EventProps }) {
+  const isOver = new Date(event.end_date).getTime() <= Date.now();
+  const date = new Date(event.start_date).toLocaleDateString("fa-IR", { day: "numeric", month: "long", year: "numeric" });
   return (
-    <div className="w-100 min-h-110 flex flex-col border rounded-3xl justify-between overflow-hidden">
-      <Image
-        width={400}
-        height={160}
-        src={event.poster}
-        alt="event photo"
-        className="aspect-square object-cover"
-      />
-      <div className="h-full flex flex-col gap-4 justify-between p-4">
-        <div className="flex flex-col gap-1">
-          <div className="flex gap-4 justify-center">
-            <h4 className="text-2xl font-bold">{event.title}</h4>
-            {isOver && (
-              <span className="rounded-full bg-mainRed h-fit py-1 px-2 text-mainWhite text-md font-semibold">
-                اتمام یافت
-              </span>
-            )}
-          </div>
-          <p className="text-sm text-center">{event.manager}</p>
+    <article className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-surface">
+      <Image width={600} height={600} src={event.poster} alt={`پوستر ${event.title}`} className="aspect-square w-full object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+      <div className="flex flex-1 flex-col gap-4 p-5">
+        <div className="flex flex-wrap items-start justify-between gap-2">
+          <h3 className="min-w-0 break-words text-xl font-semibold" dir="auto">{event.title}</h3>
+          {isOver && <span className="shrink-0 rounded-full border border-border bg-surface-raised px-2.5 py-1 text-xs text-muted">اتمام یافت</span>}
         </div>
-        <p className="text-whiteText line-clamp-3 text-center">
-          {event.description}
-        </p>
-        <div className="w-full flex justify-between items-center">
-          <Link
-            className={clsx("border rounded-full px-3 py-2", {
-              "pointer-events-none opacity-25": !event.is_active,
-            })}
-            href={event.landing_url}
-            target="_blank"
-          >
-            اطلاعات بیشتر
-          </Link>
-          <div className="flex items-center gap-1.5">
-            <p>{weekday}</p>
-            <h3 className="text-[32px] font-bold">{date}</h3>
-            <p>{month}</p>
-          </div>
+        <p className="text-sm text-muted">{event.manager}</p>
+        <p className="line-clamp-3 text-sm leading-7 text-muted">{event.description}</p>
+        <div className="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
+          {event.is_active && event.landing_url ? <Link className="ssc-action ssc-action-secondary" href={event.landing_url} target="_blank" rel="noopener noreferrer" aria-label={`اطلاعات بیشتر درباره ${event.title}`}>اطلاعات بیشتر<HiArrowUpLeft aria-hidden="true" /></Link> : <span className="text-sm text-muted">ثبت‌نام بسته است</span>}
+          <time dateTime={event.start_date} className="text-xs text-muted">{date}</time>
         </div>
       </div>
-    </div>
+    </article>
   );
-};
-
-export default Event;
+}

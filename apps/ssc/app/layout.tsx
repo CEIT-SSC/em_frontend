@@ -6,6 +6,8 @@ import Providers from "./components/Provicers/Providers";
 
 const vazirmatn = localFont({
   src: "../public/Vazirmatn.ttf",
+  variable: "--font-vazirmatn",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -19,9 +21,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fa">
+    <html lang="fa" dir="rtl">
       <meta name="enamad" content="65758640" />
-      <body className={clsx("antialiased", vazirmatn.className)} dir="rtl">
+      <body className={clsx("antialiased", vazirmatn.variable)} dir="rtl">
         <Providers>{children}</Providers>
       </body>
     </html>

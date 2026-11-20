@@ -62,15 +62,15 @@ export const RegisterStepTwo = ({ nextStep, email: mail }: Props) => {
   return (
     <form className="flex flex-col gap-4 h-max" noValidate onSubmit={onSubmit}>
       <div className="flex flex-col gap-2">
-        <h3 className="text-4xl font-bold">تایید ایمیل</h3>
-        <p className="text-[20px]/[150%] font-bold text-whiteText">
+        <h1 className="text-3xl font-bold">تایید ایمیل</h1>
+        <p className="text-sm leading-7 text-muted text-whiteText">
           کد تایید به ایمیل شما به آدرس{" "}
-          <span className="default-gradient text-transparent bg-clip-text">
+          <span className="ssc-inline-link">
             {mail}
           </span>{" "}
           ارسال شده است.
         </p>
-        <p className="text-[20px]/[150%] font-bold text-whiteText">
+        <p className="text-sm leading-7 text-muted text-whiteText">
           پوشه اسپم ایمیل خود را نیز چک کنید.
         </p>
       </div>
@@ -80,7 +80,7 @@ export const RegisterStepTwo = ({ nextStep, email: mail }: Props) => {
         onChange={setOtp}
         numInputs={OTP_LENGTH}
         containerStyle="flex flex-row-reverse gap-4 justify-center px-4 sm:px-24"
-        inputStyle="border-b-2 w-48 gradient-border !w-full outline-none text-4xl font-bold"
+        inputStyle="border-b-2 w-48 gradient-border !w-full outline-none text-3xl font-bold"
         shouldAutoFocus
         inputType="text"
         renderInput={(props) => <input {...props} />}
@@ -89,7 +89,7 @@ export const RegisterStepTwo = ({ nextStep, email: mail }: Props) => {
       <div className="flex flex-col items-center py-4 md:py-6 md:px-9 gap-2.5">
         <div className="w-full flex flex-col items-center gap-2.5">
           <p
-            className="default-gradient text-transparent bg-clip-text font-medium text-lg cursor-pointer"
+            className="ssc-inline-link font-medium text-lg cursor-pointer"
             onClick={remainingTime <= 0 ? resendOtp : undefined}
           >
             {remainingTime > 0 ? digitsToHindi(remainingTime) : "ارسال مجدد"}

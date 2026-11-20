@@ -194,7 +194,7 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <Modal className="sm:!max-w-3/4">
+    <Modal onClose={onClose} label="اطلاعات تیم" className="sm:!max-w-3/4">
       <div className="w-full">
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-xl font-bold text-whiteText">جزئیات تیم</h3>
@@ -203,6 +203,7 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
             className="text-whiteText p-1"
             onClick={onClose}
             suffixIcon={HiX}
+          aria-label="بستن"
           />
         </div>
 

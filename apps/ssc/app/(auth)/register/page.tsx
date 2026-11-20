@@ -28,7 +28,7 @@ const RegisterContent = () => {
     <>
       <div className="w-full flex justify-end">
         <Button
-          className="flex justify-end bg-none !rounded-full text-whiteText"
+          className="mb-6 text-whiteText"
           size={ButtonSize.SMALL}
           variant={ButtonVariant.OUTLINE}
           label={step > 0 ? "مرحله قبل" : "صفحه اصلی"}

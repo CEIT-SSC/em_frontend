@@ -125,7 +125,7 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <Modal>
+    <Modal onClose={handleClose} label="ایجاد تیم جدید">
       <>
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-xl font-bold text-whiteText">ایجاد تیم جدید</h3>
@@ -134,6 +134,7 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
             className="text-whiteText p-1"
             onClick={handleClose}
             suffixIcon={HiX}
+          aria-label="بستن"
           />
         </div>
 

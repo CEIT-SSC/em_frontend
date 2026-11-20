@@ -61,3 +61,11 @@ export const Outline: Story = {
     label: "Button",
   },
 };
+
+export const Disabled: Story = {
+  args: { variant: ButtonVariant.PRIMARY, label: "Save", disabled: true },
+};
+
+export const Loading: Story = {
+  args: { variant: ButtonVariant.PRIMARY, label: "Save", loading: true },
+};

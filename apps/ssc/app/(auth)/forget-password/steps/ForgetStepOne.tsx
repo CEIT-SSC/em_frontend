@@ -47,8 +47,8 @@ export const ForgetStepOne = ({ nextStep }: Props) => {
       noValidate
     >
       <div className="flex flex-col gap-2">
-        <h3 className="text-4xl font-bold">فراموشی رمز عبور</h3>
-        <p className="text-lg opacity-870 font-bold mt-2">
+        <h1 className="text-3xl font-bold">فراموشی رمز عبور</h1>
+        <p className="mt-2 text-sm leading-7 text-muted">
           ایمیل حساب کاربری خود را وارد کنید
         </p>
       </div>

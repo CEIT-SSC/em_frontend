@@ -10,54 +10,16 @@ interface TeamMemberCardProps {
   linkedinUrl?: string;
 }
 
-const TeamMemberCard = ({
-  name,
-  position,
-  photoUrl,
-  githubUrl,
-  linkedinUrl,
-}: TeamMemberCardProps) => {
+export default function TeamMemberCard({ name, position, photoUrl, githubUrl, linkedinUrl }: TeamMemberCardProps) {
   return (
-    <div className="w-78 border rounded-3xl overflow-hidden">
-      <div className="relative h-1/2 min-h-44">
-        <div className="h-3/4 default-gradient flex justify-center items-end" />
-        <Image
-          width={200}
-          height={200}
-          src={photoUrl}
-          alt="member photo"
-          className="absolute top-1/2 left-1/2 translate-[-50%] w-36 h-36 rounded-full object-cover border-2 border-mainWhite"
-        />
+    <article className="flex min-w-0 flex-col rounded-2xl border border-border bg-surface p-5">
+      <Image width={96} height={96} src={photoUrl} alt={name} className="mb-5 h-24 w-24 rounded-full object-cover" />
+      <h3 className="text-lg font-semibold">{name}</h3>
+      <p className="mt-1 text-sm text-muted">{position}</p>
+      <div className="mt-auto flex gap-2 pt-5">
+        {githubUrl && <Link href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`گیت‌هاب ${name}`} className="ssc-action ssc-action-secondary px-3"><FaGithub size={19} aria-hidden="true" /></Link>}
+        {linkedinUrl && <Link href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={`لینکدین ${name}`} className="ssc-action ssc-action-secondary px-3"><FaLinkedin size={19} aria-hidden="true" /></Link>}
       </div>
-      <div className="flex flex-col gap-2.5 py-4 px-4">
-        <div className="flex flex-col justify-between items-center gap-4">
-          <h4 className="text-4xl font-semibold text-mainWhite">{name}</h4>
-          <p className="text-whiteText font-semibold">{position}</p>
-        </div>
-        <div className="relative flex justify-center gap-4 text-2xl py-4">
-          <div className="absolute w-full h-0.5 bg-whiteText opacity-20 top-1/2 -translate-y-1/2 -z-1"></div>
-          {githubUrl && (
-            <Link
-              href={githubUrl}
-              target="_blank"
-              className="bg-background p-2 border-1 border-white rounded-full flex"
-            >
-              <FaGithub />
-            </Link>
-          )}
-          {linkedinUrl && (
-            <Link
-              href={linkedinUrl}
-              target="_blank"
-              className="bg-background p-2 border-1 border-white rounded-full flex"
-            >
-              <FaLinkedin />
-            </Link>
-          )}
-        </div>
-      </div>
-    </div>
+    </article>
   );
-};
-
-export default TeamMemberCard;
+}

@@ -107,11 +107,11 @@ export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
       noValidate
     >
       <div className="flex flex-col gap-2">
-        <h3 className="text-4xl font-bold">ثبت نام</h3>
-        <p className="text-[20px]/[150%] font-bold">
+        <h1 className="text-3xl font-bold">ثبت نام</h1>
+        <p className="text-sm leading-7 text-muted">
           حساب کاربری دارید؟{" "}
           <Link
-            className="default-gradient text-transparent bg-clip-text"
+            className="ssc-inline-link"
             href={{
               pathname: "/login",
               query: Object.fromEntries(params.entries()),
@@ -149,6 +149,8 @@ export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
         name="email"
         id="email"
         type="email"
+        autoComplete="email"
+        dir="ltr"
         label="ایمیل"
         placeholder="ایمیل خود را وارد کنید"
         errorText={errors.email?.message}
@@ -173,6 +175,7 @@ export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
         name="password"
         id="password"
         type="password"
+        autoComplete="new-password"
         label="رمز عبور"
         guidance="رمز عبور باید شامل حروف بزرگ، حروف کوچک و عدد باشد"
         placeholder="رمز عبور خود را وارد کنید"
@@ -186,6 +189,7 @@ export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
         name="confirmPassword"
         id="confirmPassword"
         type="password"
+        autoComplete="new-password"
         label="تکرار رمز عبور"
         placeholder="رمز عبور خود را تکرار کنید"
         errorText={errors.confirmPassword?.message}

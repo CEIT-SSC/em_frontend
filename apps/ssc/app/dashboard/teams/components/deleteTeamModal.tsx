@@ -42,7 +42,7 @@ const DeleteTeamModal: React.FC<DeleteTeamModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <Modal>
+    <Modal onClose={onClose} label="حذف تیم">
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-xl font-bold text-whiteText">حذف تیم</h3>
         <Button
@@ -50,6 +50,7 @@ const DeleteTeamModal: React.FC<DeleteTeamModalProps> = ({
           className="text-whiteText p-1"
           onClick={onClose}
           suffixIcon={HiX}
+          aria-label="بستن"
         />
       </div>
 

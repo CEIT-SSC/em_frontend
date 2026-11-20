@@ -1,70 +1,40 @@
-import React, { ChangeEventHandler, forwardRef } from "react";
+import React, { forwardRef } from "react";
+import clsx from "clsx";
 import { HiOutlineExclamation } from "react-icons/hi";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 
-export interface phoneNumberFieldProps {
+export interface phoneNumberFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
   label: string;
   id: string;
   name: string;
   errorText?: string;
   guidance?: string;
-  placeholder?: string;
-  onChange?: ChangeEventHandler;
-  onBlur?: ChangeEventHandler;
-  min?: string | number;
-  max?: string | number;
-  maxLength?: number;
-  minLength?: number;
-  pattern?: string;
-  required?: boolean;
-  disabled?: boolean;
 }
 
-export const PhoneNumberField = forwardRef<
-  HTMLInputElement,
-  phoneNumberFieldProps
->(
-  (
-    { label, id, name, errorText, guidance, placeholder = "", ...props },
-    ref
-  ) => {
-    return (
-      <div>
-        <fieldset className="relative rounded-xl p-px border-gray-400 border-1 group focus-within:border-white">
-          <legend className="mr-4 px-1 group-focus-within:px-2 transition-all transition-1s">
-            {label}
-          </legend>
-          <div className="flex flex-row-reverse pl-4 justify-center, items-center">
-            <span className="mb-2 border-r-1 pr-2 leading-6" dir="ltr">
-              +98
-            </span>
-            <input
-              className="w-full h-full pt-1 pb-3 px-2 rounded-xl text-left caret-[#CB48B7] focus-visible:outline-none"
-              id={id}
-              name={name}
-              type="tel"
-              placeholder={placeholder}
-              ref={ref}
-              maxLength={props.maxLength}
-              {...props}
-            />
-          </div>
-        </fieldset>
-        {errorText && (
-          <p className="flex items-center gap-1 text-[#B42D43] mt-2">
-            <HiOutlineExclamation size={20} />
-            {errorText}
-          </p>
-        )}
-        {guidance && (
-          <p className="flex items-center gap-1 text-[#7d8186] mt-2">
-            <IoMdHelpCircleOutline size={20} />
-            {guidance}
-          </p>
-        )}
+export const PhoneNumberField = forwardRef<HTMLInputElement, phoneNumberFieldProps>(
+  ({ label, id, name, errorText, guidance, className,
+     "aria-describedby": describedBy, ...props }, ref) => (
+    <div className={clsx("ssc-field w-full min-w-0 flex flex-col gap-2", className)}>
+      <label className="ssc-field-label text-sm font-medium" htmlFor={id}>{label}</label>
+      <div className="ssc-phone-control flex items-center rounded-lg border border-[var(--border-strong,#4F5154)]" dir="ltr" data-invalid={!!errorText} data-disabled={!!props.disabled}>
+        <span className="ssc-phone-prefix border-e border-[#4F5154] px-3 text-sm">+98</span>
+        <input
+          {...props}
+          ref={ref}
+          id={id}
+          name={name}
+          type="tel"
+          inputMode="numeric"
+          autoComplete={props.autoComplete ?? "tel-national"}
+          dir="ltr"
+          aria-invalid={errorText ? true : undefined}
+          aria-describedby={[describedBy, errorText && `${id}-error`, guidance && `${id}-guidance`].filter(Boolean).join(" ") || undefined}
+          className="ssc-phone-input min-w-0 w-full min-h-12 bg-transparent px-3 py-3 text-left focus-visible:outline-none"
+        />
       </div>
-    );
-  }
+      {errorText && <p id={`${id}-error`} aria-live="polite" className="ssc-field-error flex items-start gap-1.5 text-sm leading-6 text-[#ff9da9]"><HiOutlineExclamation aria-hidden="true" className="mt-1 shrink-0" />{errorText}</p>}
+      {guidance && <p id={`${id}-guidance`} className="ssc-field-guidance flex items-start gap-1.5 text-sm leading-6 text-[#b2b6bd]"><IoMdHelpCircleOutline aria-hidden="true" className="mt-1 shrink-0" />{guidance}</p>}
+    </div>
+  )
 );
-
 PhoneNumberField.displayName = "PhoneNumberField";
