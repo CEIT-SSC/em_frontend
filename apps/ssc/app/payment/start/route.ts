@@ -19,7 +19,7 @@ export async function GET(request: Request) {
       !/^\/pg\/StartPay\/[A-Za-z0-9]{1,128}$/.test(gateway.pathname)
     ) throw new Error("Invalid gateway");
   } catch {
-    return new Response("لینک پرداخت معتبر نیست. لطفاً از صفحه سفارش دوباره اقدام کنید.", { status: 400, headers });
+    return new Response("لینک پرداخت معتبر نیست. از صفحه سفارش دوباره وارد پرداخت شوید.", { status: 400, headers });
   }
 
   // The origin and path allowlists above exclude HTML metacharacters.
@@ -33,7 +33,7 @@ export async function GET(request: Request) {
 main{width:100%;max-width:440px;padding:32px;background:#1e293b;border-radius:24px;text-align:center}h1{font-size:24px}p{line-height:2;color:#cbd5e1}a{display:block;padding:16px;margin-top:24px;border-radius:12px;background:#38bdf8;color:#082f49;font-weight:bold;text-decoration:none}a:focus-visible{outline:3px solid white;outline-offset:4px}
 </style></head><body><main>
 <h1>در حال انتقال به درگاه پرداخت</h1>
-<p>لطفاً چند لحظه صبر کنید. اگر انتقال خودکار انجام نشد، دکمه زیر را بزنید.</p>
+<p>چند لحظه صبر کنید. اگر به درگاه نرفتید، «ادامه پرداخت» را بزنید.</p>
 <a href="${gateway.href}" referrerpolicy="origin">ادامه پرداخت</a>
 </main></body></html>`, { headers });
 }

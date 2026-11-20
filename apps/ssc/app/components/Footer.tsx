@@ -18,13 +18,13 @@ const Footer = () => {
         </div>
       </div>
       <div className="flex flex-col gap-4 text-sm leading-7">
-        <h3 className="text-base font-semibold">رویداد ها</h3>
+        <h3 className="text-base font-semibold">رویدادها</h3>
         <div className="flex flex-col gap-2">
           <p>مسابقات ACPC</p>
-          <p>گیم کرفت (Game Craft)</p>
-          <p>دوره های AAISS</p>
+          <p>گیم‌کرفت (GameCraft)</p>
+          <p>دوره‌های AAISS</p>
           <p>امیت (EMIT)</p>
-          <p>لینوکس فست (Linux Fest)</p>
+          <p>لینوکس‌فست (LinuxFest)</p>
         </div>
       </div>
       <div className="flex items-center gap-8">

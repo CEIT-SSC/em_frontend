@@ -33,7 +33,7 @@ export const RegisterStepTwo = ({ nextStep, email: mail }: Props) => {
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     if (otp.length < OTP_LENGTH) {
-      toast.error("کد تایید را به درستی وارد کنید");
+      toast.error("کد تأیید ۶ رقمی را کامل وارد کنید");
       return;
     }
 
@@ -42,9 +42,9 @@ export const RegisterStepTwo = ({ nextStep, email: mail }: Props) => {
       nextStep();
     } catch (error: any) {
       if (error.response?.status === 400) {
-        toast.error("کد تایید اشتباه است");
+        toast.error("کد تأیید درست نیست. دوباره بررسی کنید.");
       } else {
-        toast.error("خطایی در تایید ایمیل رخ داد. لطفاً دوباره تلاش کنید.");
+        toast.error("ایمیل تأیید نشد. دوباره تلاش کنید.");
       }
     }
   };
@@ -52,26 +52,26 @@ export const RegisterStepTwo = ({ nextStep, email: mail }: Props) => {
   const resendOtp = async () => {
     try {
       await clientApi.auth.resendOtp(mail);
-      toast.success("کد تایید مجددا ارسال شد");
+      toast.success("کد تأیید را دوباره فرستادیم");
       setRemainingTime(120);
     } catch {
-      toast.error("خطا در ارسال مجدد کد تایید");
+      toast.error("کد تأیید ارسال نشد. دوباره تلاش کنید.");
     }
   };
 
   return (
     <form className="flex flex-col gap-4 h-max" noValidate onSubmit={onSubmit}>
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold">تایید ایمیل</h1>
+        <h1 className="text-3xl font-bold">تأیید ایمیل</h1>
         <p className="text-sm leading-7 text-muted text-whiteText">
-          کد تایید به ایمیل شما به آدرس{" "}
+          کد تأیید را به{" "}
           <span className="ssc-inline-link">
             {mail}
           </span>{" "}
-          ارسال شده است.
+          فرستادیم.
         </p>
         <p className="text-sm leading-7 text-muted text-whiteText">
-          پوشه اسپم ایمیل خود را نیز چک کنید.
+          ایمیل را پیدا نکردید؟ پوشه اسپم را هم ببینید.
         </p>
       </div>
 
@@ -92,12 +92,12 @@ export const RegisterStepTwo = ({ nextStep, email: mail }: Props) => {
             className="ssc-inline-link font-medium text-lg cursor-pointer"
             onClick={remainingTime <= 0 ? resendOtp : undefined}
           >
-            {remainingTime > 0 ? digitsToHindi(remainingTime) : "ارسال مجدد"}
+            {remainingTime > 0 ? digitsToHindi(remainingTime) : "ارسال دوباره کد"}
           </p>
           <Button
             className="w-full"
             variant={ButtonVariant.PRIMARY}
-            label="ثبت نام"
+            label="تأیید ایمیل"
             type="submit"
             loading={isLoading}
             disable={otp.length < OTP_LENGTH}

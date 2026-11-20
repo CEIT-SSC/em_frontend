@@ -23,7 +23,7 @@ export default function Event({ event }: { event: EventProps }) {
       <div className="flex flex-1 flex-col gap-4 p-5">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <h3 className="min-w-0 break-words text-xl font-semibold" dir="auto">{event.title}</h3>
-          {isOver && <span className="shrink-0 rounded-full border border-border bg-surface-raised px-2.5 py-1 text-xs text-muted">اتمام یافت</span>}
+          {isOver && <span className="shrink-0 rounded-full border border-border bg-surface-raised px-2.5 py-1 text-xs text-muted">برگزار شده</span>}
         </div>
         <p className="text-sm text-muted">{event.manager}</p>
         <p className="line-clamp-3 text-sm leading-7 text-muted">{event.description}</p>

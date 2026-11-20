@@ -71,7 +71,7 @@ function SidebarContent({ user, onLinkClick }: SidebarContentProps) {
         <div className="text-xs leading-6 text-muted">
           <p>انجمن علمی</p>
           <p>مهندسی کامپیوتر</p>
-          <p>دانشگاه پلی تکنیک تهران</p>
+          <p>دانشگاه صنعتی امیرکبیر</p>
         </div>
       </Link>
 

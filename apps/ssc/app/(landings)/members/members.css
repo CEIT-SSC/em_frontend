@@ -1,0 +1,11 @@
+.ssc-members-back { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; color: var(--muted); }
+.ssc-members-back:hover { color: var(--accent); }
+.ssc-members-archive-intro { margin-block: 2rem 3rem; }
+.ssc-members-archive-intro h1 { font-size: clamp(1.875rem, 4vw, 2.75rem); font-weight: 750; margin-bottom: 1rem; }
+.ssc-members-archive-intro p { max-width: 60ch; color: var(--muted); line-height: 2; }
+.ssc-members-generation-nav { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2.5rem; }
+.ssc-members-generation { padding-block: 2.5rem; border-top: 1px solid var(--border); }
+.ssc-members-generation-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+.ssc-members-generation-heading h2 { font-size: 1.875rem; font-weight: 700; }
+.ssc-members-generation-heading h2 span { color: var(--accent); }
+.ssc-members-generation-heading p { color: var(--muted); }

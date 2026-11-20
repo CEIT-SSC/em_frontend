@@ -29,11 +29,11 @@ const DeleteTeamModal: React.FC<DeleteTeamModalProps> = ({
     try {
       await dispatch(deleteTeamThunk(teamId));
 
-      toast.success("تیم با موفقیت حذف شد");
+      toast.success("تیم حذف شد");
       onTeamDeleted?.();
       onClose();
     } catch (error) {
-      toast.error((error as Error)?.message || "خطا در حذف تیم");
+      toast.error((error as Error)?.message || "تیم حذف نشد. دوباره تلاش کنید.");
     } finally {
       setIsLoading(false);
     }
@@ -60,15 +60,14 @@ const DeleteTeamModal: React.FC<DeleteTeamModalProps> = ({
             <HiExclamation className="w-6 h-6 text-red-400" />
           </div>
           <div className="flex-1">
-            <h4 className="text-red-400 font-semibold mb-1">هشدار حذف</h4>
+            <h4 className="text-red-400 font-semibold mb-1">این تیم حذف شود؟</h4>
             <p className="text-whiteText text-sm">
-              آیا مطمئن هستید که می‌خواهید تیم{" "}
+              تیم{" "}
               <span className="font-semibold">&quot;{teamName}&quot;</span> را
               حذف کنید؟
             </p>
             <p className="text-gray-400 text-xs mt-2">
-              این عملیات قابل بازگشت نیست و تمام اطلاعات تیم از سابقه تیم خواهد
-              بود
+              با حذف تیم، اطلاعات آن هم حذف می‌شود. این کار قابل برگشت نیست.
             </p>
           </div>
         </div>

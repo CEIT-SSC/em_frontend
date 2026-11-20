@@ -13,6 +13,17 @@ export const homepageContent: {
   roadmap: { source: "backend" | "custom"; events: PlannedEvent[] };
   sponsorship: { telegramUsername: string | null };
 } = {
-  roadmap: { source: "backend", events: [] },
+  roadmap: {
+    source: "custom",
+    events: [
+      { title: "ACM (ICPC)", visual: "competition", date: { label: "۲۰ آذر" } },
+      { title: "رویداد کامپیوتر کوانتومی", visual: "ai" },
+      { title: "AAISS", visual: "ai" },
+      { title: "CTF", visual: "competition" },
+      { title: "لینوکس‌فست", visual: "terminal" },
+      { title: "EMIT", visual: "community" },
+      { title: "رویداد نرم‌افزارهای ایجنتیک", visual: "levels" },
+    ],
+  },
   sponsorship: { telegramUsername: "ceitssc" },
 };

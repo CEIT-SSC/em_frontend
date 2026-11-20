@@ -27,18 +27,18 @@ const editAccountSchema = z
   .object({
     email: z
       .string()
-      .min(1, { message: "ایمیل الزامی است" })
-      .email({ message: "فرمت ایمیل صحیح نیست" }),
+      .min(1, { message: "ایمیلتان را وارد کنید" })
+      .email({ message: "یک آدرس ایمیل معتبر وارد کنید" }),
     firstName: z
       .string()
-      .min(1, { message: "نام الزامی است" })
-      .min(2, { message: "نام باید حداقل 2 کاراکتر باشد" })
-      .max(150, { message: "نام باید حداکثر 150 کاراکتر باشد" }),
+      .min(1, { message: "نامتان را وارد کنید" })
+      .min(2, { message: "نام باید دست‌کم ۲ حرف وارد کنید" })
+      .max(150, { message: "نام باید حداکثر ۱۵۰ کاراکتر وارد کنید" }),
     lastName: z
       .string()
-      .min(1, { message: "نام خانوادگی الزامی است" })
-      .min(2, { message: "نام خانوادگی باید حداقل 2 کاراکتر باشد" })
-      .max(150, { message: "نام خانوادگی باید حداکثر 150 کاراکتر باشد" }),
+      .min(1, { message: "نام خانوادگی‌تان را وارد کنید" })
+      .min(2, { message: "نام خانوادگی باید دست‌کم ۲ حرف وارد کنید" })
+      .max(150, { message: "نام خانوادگی باید حداکثر ۱۵۰ کاراکتر وارد کنید" }),
     oldPassword: z.string().optional().or(z.literal("")),
     newPassword: z.string().optional().or(z.literal("")),
   })
@@ -74,7 +74,7 @@ const editAccountSchema = z
       return true;
     },
     {
-      message: "رمز عبور جدید باید حداقل 6 کاراکتر باشد",
+      message: "رمز عبور جدید باید دست‌کم ۶ کاراکتر داشته باشد",
       path: ["newPassword"],
     }
   )
@@ -148,7 +148,7 @@ const Page = () => {
   }, [user, setValue, profileImage]);
 
   if (session.status !== "authenticated") {
-    return <div>Loading...</div>;
+    return <div>در حال بارگذاری…</div>;
   }
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -159,7 +159,7 @@ const Page = () => {
         toast.error(
           <CustomToast
             title="خطا"
-            message="حجم فایل نباید از 5 مگابایت بیشتر باشد"
+            message="یک عکس با حجم حداکثر ۵ مگابایت انتخاب کنید"
           />
         );
         return;
@@ -176,7 +176,7 @@ const Page = () => {
 
   const handleCropComplete = (croppedImageUrl: string) => {
     setProfileImage(croppedImageUrl);
-    toast.error(<CustomToast title="خطا" message="خطا هنگام آپلود عکس" />);
+    toast.error(<CustomToast title="خطا" message="عکس بارگذاری نشد. دوباره تلاش کنید." />);
     // toast.success(<CustomToast title="موفق" message="عکس پروفایل آپدیت شد" />);
   };
 
@@ -222,7 +222,7 @@ const Page = () => {
         toast.success(
           <CustomToast
             title="موفق"
-            message="رمز عبور با موفقیت تغییر یافت. در حال خروج از حساب کاربری..."
+            message="رمز عبورتان تغییر کرد. برای ورود دوباره از حساب خارج می‌شوید."
           />
         );
 
@@ -237,7 +237,7 @@ const Page = () => {
       toast.success(
         <CustomToast
           title="موفق"
-          message="اطلاعات حساب کاربری با موفقیت آپدیت شد"
+          message="اطلاعات حسابتان ذخیره شد"
         />
       );
 
@@ -248,7 +248,7 @@ const Page = () => {
       toast.error(
         <CustomToast
           title="خطا"
-          message="خطا در آپدیت اطلاعات. لطفا دوباره تلاش کنید"
+          message="اطلاعات ذخیره نشد. دوباره تلاش کنید."
         />
       );
     } finally {
@@ -309,7 +309,7 @@ const Page = () => {
           type="email"
           dir={dirtyFields.email ? "ltr" : "rtl"}
           label="ایمیل"
-          placeholder="ایمیل خود را وارد کنید"
+          placeholder="ایمیلتان را وارد کنید"
           errorText={errors.email?.message}
           disabled={isSubmitting}
           required
@@ -322,7 +322,7 @@ const Page = () => {
             name="firstName"
             type="text"
             label="نام"
-            placeholder="نام خود را وارد کنید"
+            placeholder="نامتان را وارد کنید"
             errorText={errors.firstName?.message}
             disabled={isSubmitting}
             required
@@ -333,7 +333,7 @@ const Page = () => {
             name="lastName"
             type="text"
             label="نام خانوادگی"
-            placeholder="نام خانوادگی خود را وارد کنید"
+            placeholder="نام خانوادگی‌تان را وارد کنید"
             errorText={errors.lastName?.message}
             disabled={isSubmitting}
             required
@@ -359,7 +359,7 @@ const Page = () => {
             type="password"
             label="رمز جدید"
             dir={dirtyFields.newPassword ? "ltr" : "rtl"}
-            placeholder="رمز جدید (حداقل 6 کاراکتر)"
+            placeholder="رمز جدید، دست‌کم ۶ کاراکتر"
             errorText={errors.newPassword?.message}
             disabled={isSubmitting || !oldPassword || oldPassword.length === 0}
             className={clsx({
@@ -375,7 +375,7 @@ const Page = () => {
             className=" w-full"
             size={ButtonSize.SMALL}
             variant={ButtonVariant.PRIMARY}
-            label={isSubmitting ? "در حال آپدیت..." : "ویرایش اطلاعات"}
+            label={isSubmitting ? "در حال ذخیره…" : "ذخیره تغییرات"}
             type="submit"
             disable={isSubmitting}
             loading={isSubmitting}

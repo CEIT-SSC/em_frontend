@@ -7,11 +7,11 @@ export default function RootLayout({
 }>) {
   return (
     <div className="flex flex-col gap-2.5">
-      <h2 className="text-3xl font-bold">تیم های من</h2>
+      <h2 className="text-3xl font-bold">تیم‌های من</h2>
       <div className="flex flex-col gap-2.5 py-6 md:px-9">
         <div className="flex justify-center gap-3 pb-2 border-b border-[#C7C7C71A]">
-          <ActiveLink href="/dashboard/teams">تیم ها</ActiveLink>
-          <ActiveLink href="/dashboard/teams/requests">درخواست ها</ActiveLink>
+          <ActiveLink href="/dashboard/teams">تیم‌ها</ActiveLink>
+          <ActiveLink href="/dashboard/teams/requests">درخواست‌ها</ActiveLink>
         </div>
         {children}
       </div>

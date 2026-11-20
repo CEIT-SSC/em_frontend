@@ -3,12 +3,12 @@ import ActiveTab from "./ActiveTab";
 
 const tabItems = [
   { label: "اطلاعات من", href: "/dashboard/info" },
-  { label: "تیم های من", href: "/dashboard/teams" },
-  // { label: "گواهی های من", href: "/dashboard/certificates" },
-  // { label: "پرداخت ها", href: "/dashboard/payments" },
-  // { label: "تیم های من", href: "/dashboard/soon" },
-  // { label: "گواهی های من", href: "/dashboard/soon" },
-  // { label: "پرداخت ها", href: "/dashboard/soon" },
+  { label: "تیم‌های من", href: "/dashboard/teams" },
+  // { label: "گواهی‌های من", href: "/dashboard/certificates" },
+  // { label: "پرداخت‌ها", href: "/dashboard/payments" },
+  // { label: "تیم‌های من", href: "/dashboard/soon" },
+  // { label: "گواهی‌های من", href: "/dashboard/soon" },
+  // { label: "پرداخت‌ها", href: "/dashboard/soon" },
   { label: "کلاس آنلاین من", href: "/dashboard/classes" },
 ];
 

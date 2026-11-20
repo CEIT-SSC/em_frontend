@@ -35,7 +35,7 @@ const RequestsPage = () => {
     return (
       <div className="flex flex-col gap-2.5 md:p-2.5">
         <div className="text-center py-12">
-          <p className="text-gray-400">درخواستی برای نمایش وجود ندارد</p>
+          <p className="text-gray-400">هنوز درخواست عضویتی ندارید.</p>
         </div>
       </div>
     );

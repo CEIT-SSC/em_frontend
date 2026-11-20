@@ -6,8 +6,8 @@ import HamburgerMenu from "./HamburgerMenu";
 
 export const navbarItems = [
   { label: "خانه", href: "/" },
-  { label: "رویداد ها", href: "/#events" },
-  { label: "درباره ما", href: "/about" },
+  { label: "رویدادها", href: "/#events" },
+  { label: "تیم فنی", href: "/about" },
   { label: "داشبورد", href: "/dashboard" },
 ];
 

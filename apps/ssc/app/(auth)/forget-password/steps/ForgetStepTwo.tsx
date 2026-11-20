@@ -10,10 +10,10 @@ export const ForgetStepTwo = () => {
     <div className="flex flex-col justify-center items-center gap-4 h-max">
       <GradientCheckIcon />
       <p className="w-max max-w-full text-2xl font-bold text-white text-center pt-8">
-        در صورت صحت کد وارد شده، رمز عبور جدید به ایمیل شما ارسال خواهد شد
+        اگر اطلاعات واردشده درست باشد، رمز موقت را به ایمیلتان می‌فرستیم.
       </p>
       <p className="w-max max-w-full text-lg text-mainRed">
-        لطفا بعد از ورود به حساب کاربری اقدام به تغییر رمز عبور خود نمایید
+        بعد از ورود، رمز موقت را در تنظیمات حساب تغییر دهید.
       </p>
       <div className="w-full flex flex-col items-center gap-2.5 px-8 py-4">
         <Link

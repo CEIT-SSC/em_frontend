@@ -77,8 +77,8 @@ const PaymentCallbackContent = () => {
         <div className="bg-background rounded-lg p-4 mb-8 border border-whiteText/10">
           <p className="text-whiteText/80 text-sm leading-relaxed">
             {success
-              ? "پرداخت شما با موفقیت انجام شد. اطلاعات تراکنش برای شما ارسال خواهد شد."
-              : "متأسفانه پرداخت شما انجام نشد. در صورت کسر وجه از حساب، مبلغ ظرف ۴۸ ساعت بازگردانده خواهد شد."}
+              ? "پرداختتان انجام شد. اطلاعات تراکنش را برایتان می‌فرستیم."
+              : "پرداخت انجام نشد. اگر مبلغ از حسابتان کم شده، تا ۴۸ ساعت به حسابتان برمی‌گردد."}
           </p>
         </div>
 

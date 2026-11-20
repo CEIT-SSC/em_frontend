@@ -10,7 +10,7 @@ type Inputs = {
 };
 
 const forgetPasswordSchema = z.object({
-  email: z.string().email({ message: "ایمیل وارد شده معتبر نیست" }),
+  email: z.string().email({ message: "یک آدرس ایمیل معتبر وارد کنید" }),
 });
 
 interface Props {
@@ -47,9 +47,9 @@ export const ForgetStepOne = ({ nextStep }: Props) => {
       noValidate
     >
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold">فراموشی رمز عبور</h1>
+        <h1 className="text-3xl font-bold">بازیابی رمز عبور</h1>
         <p className="mt-2 text-sm leading-7 text-muted">
-          ایمیل حساب کاربری خود را وارد کنید
+          ایمیل حسابتان را بنویسید تا رمز موقت بگیرید.
         </p>
       </div>
       <TextField
@@ -57,7 +57,7 @@ export const ForgetStepOne = ({ nextStep }: Props) => {
         id="email"
         type="email"
         label="ایمیل"
-        placeholder="ایمیل خود را وارد کنید"
+        placeholder="ایمیلتان را وارد کنید"
         errorText={errors.email?.message}
         disabled={isLoading}
         required

@@ -112,7 +112,7 @@ const StickyBar = () => {
         >
           {locale === "fa" ? (
             <>
-              🔥 تخفیف ویژهٔ ثبت‌نام! {digitsToHindi("50")}٪ تخفیف برای
+              🔥 تخفیف ویژه ثبت‌نام! {digitsToHindi("50")}٪ تخفیف برای
               کارگاه‌های ساخت بازی با کد{" "}
               <span
                 onClick={handleCopyCode}

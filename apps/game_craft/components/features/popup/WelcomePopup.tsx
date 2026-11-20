@@ -226,7 +226,7 @@ const WelcomePopup = () => {
           >
             {locale === "fa" ? (
               <>
-                🔥 پیشنهاد ویژهٔ ثبت‌نام! {digitsToHindi("50")}٪ تخفیف برای
+                🔥 پیشنهاد ویژه ثبت‌نام! {digitsToHindi("50")}٪ تخفیف برای
                 کارگاه‌های ساخت بازی با کد{" "}
                 <span
                   onClick={handleCopyCode}

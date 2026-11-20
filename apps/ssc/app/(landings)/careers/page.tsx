@@ -24,21 +24,21 @@ const page = () => {
             width={400}
             height={400}
             src={circle}
-            alt="circle behind"
+            alt=""
           />
           <Image
             className="absolute z-2 scale-125 -mb-60 -mr-20 sm:scale-100 sm:-mb-55 sm:-mr-30"
             width={506}
             height={576}
             src={ashkan}
-            alt="ashkan"
+            alt="اشکان چاجی"
           />
           <div
             className={
               featureStyle + " top-15 left-2 sm:left-[unset] sm:right-5"
             }
           >
-            تیم یابی برای انجام پروژه
+            هم‌تیمی برای پروژه‌ها
             <HiLightBulb size={32} />
           </div>
           <div
@@ -47,7 +47,7 @@ const page = () => {
               " top-58 right-3 sm:right-[unset] sm:top-40 sm:left-20"
             }
           >
-            استخدام در شرکت ها
+            فرصت‌های کار در شرکت‌ها
             <HiClipboardList size={32} />
           </div>
           <div
@@ -56,7 +56,7 @@ const page = () => {
               " -bottom-6 left-6 sm:left-[unset] sm:bottom-20 sm:right-10"
             }
           >
-            یافتن فضای رشد
+            فرصت یاد گرفتن و تجربه کردن
             <HiPresentationChartLine size={32} />
           </div>
         </div>
@@ -66,14 +66,14 @@ const page = () => {
             width={0}
             height={0}
             src={shape1}
-            alt="corner shape"
+            alt=""
           />
           <div className="absolute z-10 flex-col gap-2.5 text-center justify-center">
             <h2 className="text-5xl/[150%] font-bold">
-              اینجا جاییه که رشد می کنی!
+              قدم بعدی‌تون رو پیدا کنید
             </h2>
             <p className="text-4xl/[150%] font-bold text-whiteText">
-              تیم سازی - استخدام - بوتکمپ
+              از پیدا کردن هم‌تیمی تا کار و بوت‌کمپ
             </p>
           </div>
           <Image
@@ -81,7 +81,7 @@ const page = () => {
             width={0}
             height={0}
             src={shape2}
-            alt="bottom shape"
+            alt=""
           />
         </div>
       </div>

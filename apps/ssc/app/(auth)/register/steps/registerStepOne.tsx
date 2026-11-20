@@ -19,31 +19,31 @@ type Inputs = {
 
 const userSchema = z
   .object({
-    email: z.string().email({ message: "ایمیل وارد شده معتبر نیست" }),
+    email: z.string().email({ message: "یک آدرس ایمیل معتبر وارد کنید" }),
     phoneNumber: z
       .string()
-      .min(10, { message: "شماره تلفن باید 11 رقم باشد" })
-      .max(10, { message: "شماره تلفن باید 11 رقم باشد" })
-      .regex(/^9[0-9]{9}$/, { message: "شماره تلفن وارد شده معتبر نیست" }),
+      .min(10, { message: "شماره موبایل را در ۱۰ رقم و بدون صفر اول وارد کنید" })
+      .max(10, { message: "شماره موبایل را در ۱۰ رقم و بدون صفر اول وارد کنید" })
+      .regex(/^9[0-9]{9}$/, { message: "شماره موبایل را با ۹ و بدون صفر اول وارد کنید" }),
     password: z
       .string()
-      .min(8, { message: "رمز عبور باید حداقل 8 کاراکتر باشد" })
-      .max(32, { message: "رمز عبور باید حداکثر 32 کاراکتر باشد" })
-      .regex(/[A-Z]/, { message: "رمز عبور باید شامل حداقل یک حرف بزرگ باشد" })
-      .regex(/[a-z]/, { message: "رمز عبور باید شامل حداقل یک حرف کوچک باشد" })
-      .regex(/[0-9]/, { message: "رمز عبور باید شامل حداقل یک عدد باشد" }),
+      .min(8, { message: "رمز عبور باید دست‌کم ۸ کاراکتر داشته باشد" })
+      .max(32, { message: "رمز عبور باید حداکثر ۳۲ کاراکتر داشته باشد" })
+      .regex(/[A-Z]/, { message: "یک حرف بزرگ انگلیسی به رمز عبور اضافه کنید" })
+      .regex(/[a-z]/, { message: "یک حرف کوچک انگلیسی به رمز عبور اضافه کنید" })
+      .regex(/[0-9]/, { message: "یک عدد به رمز عبور اضافه کنید" }),
     confirmPassword: z.string(),
     firstName: z
       .string()
-      .min(2, { message: "حداقل 2 کاراکتر باشد" })
-      .max(150, { message: "حداکثر 150 کاراکتر باشد" }),
+      .min(2, { message: "دست‌کم ۲ حرف وارد کنید" })
+      .max(150, { message: "حداکثر ۱۵۰ کاراکتر وارد کنید" }),
     lastName: z
       .string()
-      .min(2, { message: "حداقل 2 کاراکتر باشد" })
-      .max(150, { message: "حداکثر 150 کاراکتر باشد" }),
+      .min(2, { message: "دست‌کم ۲ حرف وارد کنید" })
+      .max(150, { message: "حداکثر ۱۵۰ کاراکتر وارد کنید" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "رمزهای عبور مطابقت ندارند",
+    message: "تکرار رمز عبور با رمز اول یکی نیست",
     path: ["confirmPassword"],
   });
 
@@ -89,11 +89,11 @@ export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
       if (error.response?.data?.message) {
         toast.error(error.response.data.message);
       } else if (error.response?.data?.email) {
-        toast.error("این ایمیل قبلاً ثبت شده است");
+        toast.error("با این ایمیل قبلاً ثبت‌نام کرده‌اید. وارد حسابتان شوید.");
       } else if (error.response?.data?.phone_number) {
-        toast.error("این شماره تلفن قبلاً ثبت شده است");
+        toast.error("با این شماره موبایل قبلاً ثبت‌نام کرده‌اید.");
       } else {
-        toast.error("خطایی در ثبت نام رخ داد. لطفاً دوباره تلاش کنید.");
+        toast.error("ثبت‌نام انجام نشد. دوباره تلاش کنید.");
       }
     } finally {
       setIsLoading(false);
@@ -107,7 +107,7 @@ export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
       noValidate
     >
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold">ثبت نام</h1>
+        <h1 className="text-3xl font-bold">ثبت‌نام</h1>
         <p className="text-sm leading-7 text-muted">
           حساب کاربری دارید؟{" "}
           <Link
@@ -127,7 +127,7 @@ export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
           name="firstName"
           id="firstName"
           label="نام"
-          placeholder="نام خود را وارد کنید"
+          placeholder="نامتان را وارد کنید"
           errorText={errors.firstName?.message}
           disabled={isLoading}
           required
@@ -137,7 +137,7 @@ export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
           name="lastName"
           id="lastName"
           label="نام خانوادگی"
-          placeholder="نام خانوادگی خود را وارد کنید"
+          placeholder="نام خانوادگی‌تان را وارد کنید"
           errorText={errors.lastName?.message}
           disabled={isLoading}
           required
@@ -152,7 +152,7 @@ export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
         autoComplete="email"
         dir="ltr"
         label="ایمیل"
-        placeholder="ایمیل خود را وارد کنید"
+        placeholder="ایمیلتان را وارد کنید"
         errorText={errors.email?.message}
         disabled={isLoading}
         required
@@ -177,8 +177,8 @@ export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
         type="password"
         autoComplete="new-password"
         label="رمز عبور"
-        guidance="رمز عبور باید شامل حروف بزرگ، حروف کوچک و عدد باشد"
-        placeholder="رمز عبور خود را وارد کنید"
+        guidance="رمز عبور: ۸ تا ۳۲ کاراکتر، با حرف بزرگ و کوچک انگلیسی و عدد"
+        placeholder="رمز عبورتان را وارد کنید"
         errorText={errors.password?.message}
         disabled={isLoading}
         required
@@ -191,7 +191,7 @@ export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
         type="password"
         autoComplete="new-password"
         label="تکرار رمز عبور"
-        placeholder="رمز عبور خود را تکرار کنید"
+        placeholder="همان رمز عبور را دوباره وارد کنید"
         errorText={errors.confirmPassword?.message}
         disabled={isLoading}
         required
@@ -203,7 +203,7 @@ export const RegisterStepOne = ({ nextStep, submitCallback }: Props) => {
           <Button
             className="w-full"
             variant={ButtonVariant.PRIMARY}
-            label="ثبت نام"
+            label="ثبت‌نام"
             type="submit"
             loading={isLoading}
           />

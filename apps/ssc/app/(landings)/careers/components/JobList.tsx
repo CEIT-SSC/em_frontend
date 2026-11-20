@@ -49,13 +49,13 @@ const JobList = () => {
                         className="w-full outline-none"
                         id="job-filter"
                         type="text"
-                        placeholder="جستجو بر اساس تگ، عنوان، دسته بندی..."
+                        placeholder="جست‌وجو با عنوان، دسته یا برچسب"
                     />
                 </div>
             </div>
             <div className="flex w-full flex-col gap-9 py-6 sm:px-8">
                 <h4 className="text-2xl font-bold text-center text-gray-100 opacity-60">
-                    فعلا آگهی شغلی نداریم!
+                    هنوز آگهی شغلی نداریم. کمی بعد دوباره سر بزنید.
                 </h4>
                 {/* <JobOffer offer={sampleOffer} type="job" /> */}
             </div>

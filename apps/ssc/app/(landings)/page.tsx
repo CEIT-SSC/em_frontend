@@ -6,13 +6,9 @@ import EventList from "./components/Events/EventList";
 import ImagesCarousel from "./components/ImagesCarousel/ImagesCarousel";
 import HeroSection from "./components/Hero/HeroSection";
 import TeamMemberCard from "~/app/components/TeamMemberCard";
-import abbas from "~/assets/members/abbas.jpg";
-import ashkan from "~/assets/members/ashkan.jpg";
-import delaraam from "~/assets/members/delaraam.png";
-import javad from "~/assets/members/javad.jpg";
-import alireza from "~/assets/members/alireza.png";
-import behrad from "~/assets/members/behrad.jpg";
-import saba from "~/assets/members/saba.jpg";
+import Link from "next/link";
+import { HiArrowLeft } from "react-icons/hi2";
+import { getHomepageGeneration } from "~/content/team";
 
 const imagesCarousel1: string[] = [
   "/events/acpc/2.JPG",
@@ -41,6 +37,7 @@ const imagesCarousel2: string[] = [
 ];
 
 export default function Home() {
+  const generation = getHomepageGeneration();
   return (
     <main>
       <HeroSection />
@@ -65,62 +62,21 @@ export default function Home() {
       </div>
       <AssociationSection />
       <section className="ssc-container ssc-section ssc-events-section" id="events" aria-labelledby="events-heading">
-        <h2 id="events-heading" className="ssc-section-heading">رویداد ها</h2>
+        <h2 id="events-heading" className="ssc-section-heading">رویدادها</h2>
         <EventList />
       </section>
       <EventRoadmap />
 
-      <section className="ssc-container ssc-section border-t border-border" aria-labelledby="team-heading">
-        <h2 id="team-heading" className="ssc-section-heading">تیم ما</h2>
+      <section id="team" className="ssc-container ssc-section border-t border-border" aria-labelledby="team-heading">
+        <div className="ssc-team-section-heading">
+          <h2 id="team-heading" className="ssc-section-heading">تیم ما</h2>
+          <Link href="/members" className="ssc-team-archive-link">اعضای دوره‌های پیشین<HiArrowLeft aria-hidden="true" /></Link>
+        </div>
         <p className="ssc-section-description">
-          منتخب انتخابات دور 19ام انجمن علمی مهندسی کامپیوتر امیرکبیر
+          اعضای دوره {generation.number.toLocaleString("fa-IR")} انجمن علمی مهندسی کامپیوتر امیرکبیر
         </p>
         <div className="ssc-team-grid">
-          <TeamMemberCard
-            name="محمدجواد اکبری"
-            position="دبیر انجمن"
-            photoUrl={javad.src}
-            githubUrl="https://github.com/Javad-Ak"
-            linkedinUrl="https://www.linkedin.com/in/mo-ja-akbari/"
-          />
-          <TeamMemberCard
-            name="صبا سیدطبایی"
-            position="مسئول مالی"
-            photoUrl={saba.src}
-            linkedinUrl="https://www.linkedin.com/in/saba-seyed-tabaei"
-          />
-          <TeamMemberCard
-            name="امیرعباس انتظاری"
-            position="مسئول ارتباط با صنعت"
-            photoUrl={abbas.src}
-            githubUrl="https://github.com/AmirabbasEntezari"
-          />
-          <TeamMemberCard
-            name="دلارام روحانی"
-            position="مسئول آموزشی"
-            photoUrl={delaraam.src}
-            linkedinUrl="https://www.linkedin.com/in/delaraamroohani"
-          />
-          <TeamMemberCard
-            name="اشکان چاجی"
-            position="مسئول مسابقات"
-            photoUrl={ashkan.src}
-            githubUrl="https://github.com/ashkanchaji"
-            linkedinUrl="https://www.linkedin.com/in/ashkan-chaji-71493434b/"
-          />
-          <TeamMemberCard
-            name="علیرضا صفری"
-            position="مسئول انفورماتیک"
-            photoUrl={alireza.src}
-            githubUrl="https://github.com/Alireza12ss"
-            linkedinUrl="https://www.linkedin.com/in/alireza-safari-3ba3942b8/"
-          />
-          <TeamMemberCard
-            name="بهراد حضوری"
-            position="مسئول روابط عمومی"
-            photoUrl={behrad.src}
-            githubUrl="https://github.com/BehradHZ"
-          />
+          {generation.members.map(member => <TeamMemberCard key={member.name} {...member} />)}
         </div>
       </section>
       <PartnersSection />

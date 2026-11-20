@@ -48,13 +48,13 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
     try {
       await dispatch(fetchTeamDetailsThunk(teamId));
     } catch (_error) {
-      toast.error("خطا در دریافت جزئیات تیم");
+      toast.error("اطلاعات تیم بارگذاری نشد. دوباره تلاش کنید.");
       onClose();
     }
   }, [dispatch, teamId]);
 
   const handleCancelRegistration = async (registrationId: number, competitionId: number) => {
-    if (!window.confirm("آیا از لغو ثبت‌نام این تیم مطمئن هستید؟")) return;
+    if (!window.confirm("ثبت‌نام این تیم لغو شود؟")) return;
     setCancellingRegistrationId(registrationId);
     try {
       await dispatch(cancelTeamRegistrationThunk({ teamId, competitionId })).unwrap();
@@ -62,7 +62,7 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
       onTeamUpdated();
       toast.success("ثبت‌نام تیم لغو شد");
     } catch (_error) {
-      toast.error("لغو ثبت‌نام انجام نشد");
+      toast.error("ثبت‌نام لغو نشد. دوباره تلاش کنید.");
     } finally {
       setCancellingRegistrationId(null);
     }
@@ -135,7 +135,7 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
               rel="noopener noreferrer"
               className="text-[#ff715b] hover:text-[#cb48b7] transition-colors"
             >
-              مشاهده فایل
+              دیدن فایل
             </a>
           </div>
         )}
@@ -235,9 +235,9 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
                         : teamDetails.status === "active"
                         ? "فعال"
                         : teamDetails.status === "completed"
-                        ? "تکمیل شده"
+                        ? "تکمیل‌شده"
                         : teamDetails.status === "cancelled"
-                        ? "لغو شده"
+                        ? "لغوشده"
                         : teamDetails.status}
                     </span>
                     <span className="text-gray-400 text-sm">
@@ -250,7 +250,7 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
               {/* Leader Info */}
               <div className="border-t border-gray-600 pt-4">
                 <h5 className="text-lg font-semibold text-whiteText mb-3">
-                  رهبر تیم
+                  سرگروه
                 </h5>
                 <div className="flex items-center gap-3">
                   {teamDetails.leader_details.profile_picture && (
@@ -278,10 +278,10 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
               <div key={registration.id} className="bg-[#43434340] p-6 rounded-2xl">
                 <h5 className="text-lg font-semibold text-whiteText mb-3">{registration.competition_details.title}</h5>
                 <p className="text-whiteText">وضعیت: {{
-                  pending_approval: "در انتظار تایید", pending_payment: "در انتظار پرداخت",
-                  active: "ثبت نام شده", rejected: "رد شده", cancelled: "لغو شده",
+                  pending_approval: "در انتظار تأیید", pending_payment: "در انتظار پرداخت",
+                  active: "ثبت‌نام شده", rejected: "ردشده", cancelled: "لغوشده",
                 }[registration.status]}</p>
-                <p className="text-gray-400">اعضای ثبت نام شده: {registration.member_ids.length} — هزینه کل: {registration.price} تومان</p>
+                <p className="text-gray-400">اعضای ثبت‌نام شده: {registration.member_ids.length} — هزینه کل: {registration.price} تومان</p>
                 {registration.admin_remarks && <p className="text-gray-400">{registration.admin_remarks}</p>}
                 {isUserLeader && (registration.status === "pending_approval" || registration.status === "pending_payment") && (
                   <button type="button" className="mt-4 rounded-lg border border-red-400 px-4 py-2 text-red-400 disabled:opacity-50"
@@ -366,7 +366,7 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
                   <Button
                     variant={ButtonVariant.PRIMARY}
                     size={ButtonSize.SMALL}
-                    label="اضافه کردن عضو"
+                    label="افزودن عضو"
                     prefixIcon={HiPlus}
                     onClick={() => setIsAddMemberModalOpen(true)}
                     className="text-sm"
@@ -406,9 +406,9 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
                         {membership.status === "pending"
                           ? "در انتظار"
                           : membership.status === "accepted"
-                          ? "تایید شده"
+                          ? "تأییدشده"
                           : membership.status === "rejected"
-                          ? "رد شده"
+                          ? "ردشده"
                           : membership.status}
                       </span>
                       <p className="text-gray-400 text-xs mt-1">
@@ -424,7 +424,7 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
             {teamDetails.admin_remarks && (
               <div className="bg-[#43434340] p-6 rounded-2xl">
                 <h5 className="text-lg font-semibold text-whiteText mb-3">
-                  توضیحات ادمین
+                  توضیحات مدیر
                 </h5>
                 <p className="text-whiteText leading-relaxed">
                   {teamDetails.admin_remarks}
@@ -434,7 +434,7 @@ const TeamDetailsModal: React.FC<TeamDetailsModalProps> = ({
           </div>
         ) : (
           <div className="text-center py-12">
-            <p className="text-gray-400">خطا در دریافت اطلاعات تیم</p>
+            <p className="text-gray-400">اطلاعات تیم بارگذاری نشد. دوباره تلاش کنید.</p>
           </div>
         )}
 

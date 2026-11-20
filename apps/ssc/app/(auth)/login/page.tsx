@@ -19,8 +19,8 @@ type Inputs = {
 };
 
 const loginSchema = z.object({
-  email: z.string().email({ message: "ایمیل وارد شده معتبر نیست" }),
-  password: z.string().min(1, { message: "رمز عبور الزامی است" }),
+  email: z.string().email({ message: "یک آدرس ایمیل معتبر وارد کنید" }),
+  password: z.string().min(1, { message: "رمز عبورتان را وارد کنید" }),
 });
 
 const LoginContent = () => {
@@ -40,7 +40,7 @@ const LoginContent = () => {
 
   useEffect(() => {
     if (params.get("error")) {
-      toast.error("خطا در فرایند ورود");
+      toast.error("ورود انجام نشد. دوباره تلاش کنید.");
     }
   }, [params]);
 
@@ -65,15 +65,15 @@ const LoginContent = () => {
         // Get the session to access the tokens
         const session = await getSession();
         if (session?.user) {
-          toast.success("ورود با گیتهاب موفقیت‌آمیز بود");
+          toast.success("با حساب گیت‌هاب وارد شدید. خوش آمدید!");
           router.push("/");
         }
       } else if (result?.error) {
-        toast.error("خطا در ورود با گیتهاب");
+        toast.error("ورود با گیت‌هاب انجام نشد. دوباره تلاش کنید.");
       }
     } catch (error) {
       console.error("github sign-in error:", error);
-      toast.error("خطا در ورود با گیتهاب");
+      toast.error("ورود با گیت‌هاب انجام نشد. دوباره تلاش کنید.");
     } finally {
       setIsGoogleLoading(false);
     }
@@ -96,16 +96,16 @@ const LoginContent = () => {
         callbackUrl: "/",
       });
       if (res.status === 200) {
-        toast.success("ورود موفقیت‌آمیز بود");
+        toast.success("خوش آمدید!");
         Authenticated();
       } else if (res.status === 401) {
-        toast.error("ایمیل یا رمز عبور اشتباه است");
+        toast.error("ایمیل یا رمز عبور درست نیست. هر دو را بررسی کنید.");
       } else {
-        toast.error("خطا در هنگام ورود");
+        toast.error("ورود انجام نشد. دوباره تلاش کنید.");
       }
     } catch (error) {
       console.log("Login error:", error);
-      toast.error("خطا در ورود");
+      toast.error("ورود انجام نشد. دوباره تلاش کنید.");
     } finally {
       setIsLoading(false);
     }
@@ -133,14 +133,14 @@ const LoginContent = () => {
                   }&handshake_token=${data.handshakeToken}`
                 );
               } else {
-                toast.error("خطا در دریافت توکن تأیید هویت");
+                toast.error("تأیید هویت انجام نشد. دوباره وارد شوید.");
               }
             } else {
-              toast.error("خطا در فرآیند تأیید هویت");
+              toast.error("تأیید هویت انجام نشد. دوباره وارد شوید.");
             }
           } catch (error) {
             console.error("Error handling OAuth redirect:", error);
-            toast.error("خطا در فرآیند تأیید هویت");
+            toast.error("تأیید هویت انجام نشد. دوباره وارد شوید.");
           }
         }
       }
@@ -173,9 +173,8 @@ const LoginContent = () => {
               }}
               className="ssc-inline-link"
             >
-              ثبت نام
-            </Link>{" "}
-            کنید
+              ثبت‌نام کنید
+            </Link>
           </p>
         </div>
 
@@ -186,7 +185,7 @@ const LoginContent = () => {
           autoComplete="email"
           dir="ltr"
           label="ایمیل"
-          placeholder="ایمیل خود را وارد کنید"
+          placeholder="ایمیلتان را وارد کنید"
           errorText={errors.email?.message}
           disabled={isLoading}
           required
@@ -199,7 +198,7 @@ const LoginContent = () => {
           type="password"
           autoComplete="current-password"
           label="رمز عبور"
-          placeholder="رمز عبور خود را وارد کنید"
+          placeholder="رمز عبورتان را وارد کنید"
           errorText={errors.password?.message}
           disabled={isLoading}
           required
@@ -207,7 +206,7 @@ const LoginContent = () => {
         />
         <div className="flex flex-col gap-5 pt-2">
           <p className="text-whiteText">
-            رمز عبور خود را فراموش کرده اید؟{" "}
+            رمزتان را فراموش کرده‌اید؟{" "}
             <Link
               className="ssc-inline-link"
               href="/forget-password"
@@ -227,7 +226,7 @@ const LoginContent = () => {
               {/* <Button
                 className="w-full bg-secondary-background text-whiteText bg-secondary-background text-whiteText"
                 variant={ButtonVariant.OUTLINE}
-                label="ورود با گیتهاب"
+                label="ورود با گیت‌هاب"
                 onClick={handleGithubSignIn}
               /> */}
             </div>

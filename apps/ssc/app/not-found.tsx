@@ -12,9 +12,9 @@ export default function NotFound() {
             ۴۰۴
           </span>
         </div>
-        <h2 className="text-4xl font-bold text-whiteText">صفحه پیدا نشد!</h2>
+        <h2 className="text-4xl font-bold text-whiteText">این صفحه را پیدا نکردیم</h2>
         <Link className="text-2xl text-gradient font-bold" href="/">
-          برگشت به خانه
+          برگردیم به خانه
         </Link>
       </div>
     </div>

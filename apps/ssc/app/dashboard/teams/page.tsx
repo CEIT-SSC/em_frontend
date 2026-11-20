@@ -60,13 +60,13 @@ const Page = () => {
           <div className="ssc-empty flex flex-col items-center justify-center">
             <HiUserGroup size={36} className="mb-4 text-muted" aria-hidden="true" />
             <h3 className="text-xl font-bold text-whiteText mb-2">
-              هیچ تیمی یافت نشد
+              هنوز تیمی ندارید
             </h3>
-            <p className="text-gray-400 mb-6">اولین تیم خود را ایجاد کنید</p>
+            <p className="text-gray-400 mb-6">یک تیم بسازید و هم‌تیمی‌هایتان را دعوت کنید.</p>
             <Button
 
               size={ButtonSize.SMALL}
-              label="ایجاد تیم جدید"
+              label="ساخت تیم جدید"
               prefixIcon={HiPlus}
               onClick={() => setIsCreateModalOpen(true)}
             />

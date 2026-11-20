@@ -11,7 +11,7 @@ export default function AuthLayout({ children }: Readonly<{ children: React.Reac
       </section>
       <div className="hidden lg:block" aria-hidden="true">
         <Image src={portal} alt="" className="mx-auto h-auto w-full max-w-lg" />
-        <p className="mt-6 text-center text-2xl font-semibold">جایی برای رشد، همکاری و یادگیری</p>
+        <p className="mt-6 text-center text-2xl font-semibold">از یک آشنایی شروع می‌شه</p>
       </div>
     </main>
   );

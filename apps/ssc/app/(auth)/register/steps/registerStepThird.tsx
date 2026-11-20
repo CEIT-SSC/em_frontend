@@ -9,7 +9,7 @@ export const RegisterStepThird = () => {
     <div className="flex flex-col justify-center items-center gap-4 h-max">
       <FaCheckCircle className="text-success" size={56} aria-hidden="true" />
       <p className="w-full text-2xl font-bold text-white text-center pt-8">
-        ثبت نام شما با موفقیت انجام شد
+        حسابتان آماده است. خوش آمدید!
       </p>
       <div className="w-full flex flex-col items-center gap-2.5 px-8 py-4">
         <Link

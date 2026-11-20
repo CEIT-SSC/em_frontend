@@ -10,22 +10,19 @@ import mahdi from "~/assets/members/MahdiHaeri.jpg";
 const page = () => {
   return (
     <main className="ssc-container ssc-section">
-      <h1 className="ssc-section-heading">درباره ما</h1>
+      <h1 className="ssc-section-heading">تیم پشت این سایت</h1>
       <div className="max-w-prose py-4">
         <p className="text-base leading-8 text-muted mb-4">
-          ما جمعی از دانشجویان علاقه‌مند به فناوری در دانشگاه صنعتی امیرکبیر
-          هستیم که در بخش فنی انجمن علمی مهندسی کامپیوتر کنار هم کار می‌کنیم.
-          هدف ما ساخت سامانه‌هایی است که هم کارهای دانشجویی امروز را ساده‌تر و
-          منسجم‌تر کند و هم امکان رشد و گسترش در آینده داشته باشد.
+          ما بچه‌های تیم فنی انجمنیم. این سایت رو درست کردیم تا پیدا کردن
+          رویدادها، ثبت‌نام و کارهای تیم‌ها راحت‌تر بشه. با هر برنامه هم
+          سعی می‌کنیم سایت رو بهتر کنیم.
         </p>
         <p className="text-base leading-8 text-muted mb-8">
-          انجمن علمی برای ما جایی است که می‌توانیم با هم یاد بگیریم،
-          تجربه‌هایمان را به اشتراک بگذاریم و مسیر نوآوری و همکاری را کنار هم
-          ادامه دهیم؛ جایی که دانشجویان تازه‌وارد سریع‌تر مسیر خود را پیدا
-          می‌کنند و همه فرصت ارتباط با صنعت و تجربه‌های تازه را به دست می‌آوریم.
+          خودمون هم توی همین مسیر یاد می‌گیریم؛ کد می‌زنیم، ایده‌هامون رو
+          امتحان می‌کنیم و هر جا به مشکلی می‌خوریم، از هم کمک می‌گیریم.
         </p>
         <p className="text-base leading-8 font-semibold text-foreground mb-12">
-          از همه تیممون برای این همه انرژی و وقتی که می‌ذارن ممنونیم!
+          ممنون از همه بچه‌های تیم که برای این سایت وقت و انرژی گذاشتن.
         </p>
       </div>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -38,14 +35,14 @@ const page = () => {
         />
         <TeamMemberCard
           name="امیرحسین عقیقی"
-          position="دیزاینر و توسعه دهنده فرانت اند"
+          position="دیزاینر و توسعه‌دهنده فرانت‌اند"
           photoUrl={amirhossein.src}
           githubUrl="https://github.com/AmirhosseinAghighi"
           linkedinUrl="https://www.linkedin.com/in/amirhossein-aghighi/"
         />
         <TeamMemberCard
           name="معین عنایتی"
-          position="توسعه دهنده بک اند و دوآپس"
+          position="توسعه‌دهنده بک‌اند و دوآپس"
           photoUrl={moein.src}
           githubUrl="https://github.com/moeinEN"
           linkedinUrl="https://www.linkedin.com/in/moein-enayati"
@@ -59,14 +56,14 @@ const page = () => {
         />
         <TeamMemberCard
           name="پوریا فهیمی"
-          position="توسعه دهنده فرانت اند"
+          position="توسعه‌دهنده فرانت‌اند"
           photoUrl={pourya.src}
           githubUrl="https://github.com/PouryaFahimi"
           linkedinUrl="https://www.linkedin.com/in/pourya-fahimi/"
         />
         <TeamMemberCard
           name="مهدی حائری"
-          position="توسعه دهنده فرانت اند"
+          position="توسعه‌دهنده فرانت‌اند"
           photoUrl={mahdi.src}
           githubUrl="https://github.com/MahdiHaeri"
           linkedinUrl="https://www.linkedin.com/in/mahdi-haeri-4406861b9/"

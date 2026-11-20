@@ -2,16 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import "./team-member.css";
+import type { TeamMember } from "~/content/team";
 
-interface TeamMemberCardProps {
-  name: string;
-  position: string;
-  photoUrl: string;
-  githubUrl?: string;
-  linkedinUrl?: string;
-}
-
-export default function TeamMemberCard({ name, position, photoUrl, githubUrl, linkedinUrl }: TeamMemberCardProps) {
+export default function TeamMemberCard({ name, position, photoUrl, githubUrl, linkedinUrl }: TeamMember) {
   return (
     <article className="ssc-member">
       <Image width={128} height={128} src={photoUrl} alt={name} className="ssc-member-portrait" />

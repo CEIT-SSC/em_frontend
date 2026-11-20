@@ -41,14 +41,14 @@ export const PasswordChangeModal: React.FC<PasswordChangeModalProps> = ({
             <div>
               <p className="text-whiteText text-lg font-medium mb-2">هشدار</p>
               <p className="text-gray-300 text-sm leading-relaxed">
-                با تغییر رمز عبور، از حساب کاربری خود خارج خواهید شد و باید
-                مجدداً وارد شوید.
+                بعد از تغییر رمز، از حسابتان خارج می‌شوید. برای ورود دوباره از
+                رمز جدید استفاده کنید.
               </p>
             </div>
           </div>
 
           <p className="text-gray-400 text-sm">
-            آیا مطمئن هستید که می‌خواهید رمز عبور خود را تغییر دهید؟
+            رمز عبورتان را تغییر دهیم؟
           </p>
         </div>
 
@@ -64,7 +64,7 @@ export const PasswordChangeModal: React.FC<PasswordChangeModalProps> = ({
           <Button
             variant={ButtonVariant.PRIMARY}
             size={ButtonSize.SMALL}
-            label="تأیید و تغییر رمز"
+            label="تغییر رمز عبور"
             onClick={onConfirm}
             className="flex-1"
             loading={isLoading}

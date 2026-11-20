@@ -7,6 +7,10 @@
 .ssc-member-social:hover { color: var(--accent); background: var(--surface); }
 .ssc-team-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem 1.5rem; }
 .ssc-team-grid > .ssc-member { width: 100%; max-width: 22rem; }
+.ssc-team-section-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .5rem 1.5rem; margin-bottom: 1.5rem; }
+.ssc-team-section-heading .ssc-section-heading { margin-bottom: 0; }
+.ssc-team-archive-link { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; color: var(--accent); font-size: .9375rem; text-decoration: underline; }
+.ssc-team-archive-link:hover { color: var(--accent-strong); }
 @media (min-width: 480px) {
   .ssc-team-grid > .ssc-member { width: calc(50% - .75rem); }
 }

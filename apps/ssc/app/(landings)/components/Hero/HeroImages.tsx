@@ -19,7 +19,7 @@ function Photo({ photo, priority = false, sizes = "(min-width: 900px) 28vw, 65vw
   sizes?: string;
 }) {
   // Hidden mobile artwork stays lazy; visible featured photos get higher fetch priority.
-  return <Image {...photos[photo]} fill loading="lazy" fetchPriority={priority ? "high" : "auto"} sizes={sizes} className="object-cover" />;
+  return <Image {...photos[photo]} fill quality={90} loading="lazy" fetchPriority={priority ? "high" : "auto"} sizes={sizes} className="object-cover" />;
 }
 
 export default function HeroImages({ variant = "original" }: { variant?: HeroImageVariant }) {
@@ -60,19 +60,23 @@ export default function HeroImages({ variant = "original" }: { variant?: HeroIma
   }
 
   if (variant === "triptych") {
+    // object-cover scales these landscape photos to the column's height.
+    // Request their width before cropping: column width / 0.47 × source aspect ratio.
+    const standardSizes = "(min-width: 1280px) 540px, (min-width: 768px) 43vw, 1px";
+    const wideSizes = "(min-width: 1280px) 610px, (min-width: 768px) 48vw, 1px";
     return (
       <figure className="ssc-hero-visual ssc-hero-triptych">
         <TriptychMotion>
           <div className="ssc-hero-triptych-column">
-            <div className="ssc-hero-triptych-photo"><Photo photo="maker" priority sizes="(min-width: 1280px) 190px, (min-width: 768px) 15vw, 30vw" /></div>
+            <div className="ssc-hero-triptych-photo"><Photo photo="maker" priority sizes={standardSizes} /></div>
             <span>می‌سازیم</span><bdi lang="en">GameCraft</bdi>
           </div>
           <div className="ssc-hero-triptych-column">
-            <div className="ssc-hero-triptych-photo"><Photo photo="contest" sizes="(min-width: 1280px) 190px, (min-width: 768px) 15vw, 30vw" /></div>
+            <div className="ssc-hero-triptych-photo"><Photo photo="contest" sizes={standardSizes} /></div>
             <span>حل می‌کنیم</span><bdi lang="en">ACPC</bdi>
           </div>
           <div className="ssc-hero-triptych-column">
-            <div className="ssc-hero-triptych-photo"><Photo photo="community" sizes="(min-width: 1280px) 190px, (min-width: 768px) 15vw, 30vw" /></div>
+            <div className="ssc-hero-triptych-photo"><Photo photo="community" sizes={wideSizes} /></div>
             <span>کنار همیم</span><bdi lang="en">LinuxFest</bdi>
           </div>
         </TriptychMotion>

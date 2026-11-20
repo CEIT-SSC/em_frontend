@@ -8,11 +8,11 @@ const page = async () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="text-3xl font-bold">اکانت اسکای روم</h2>
+      <h2 className="text-3xl font-bold">حساب اسکای‌روم</h2>
       <div className="flex flex-col gap-2.5">
         <p className="text-[20px]/[150%] font-bold opacity-60">
-          از این اکانت جهت شرکت در کلاس ها و ارائه هایی که در بستر اسکای روم
-          تشکیل می شوند استفاده نمایید.
+          برای شرکت در کلاس‌ها و ارائه‌های آنلاین در اسکای‌روم، با این
+          نام کاربری و رمز عبور وارد شوید.
         </p>
         <TextField
           id="sky_username"

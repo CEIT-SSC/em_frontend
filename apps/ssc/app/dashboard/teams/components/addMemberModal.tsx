@@ -18,7 +18,7 @@ interface AddMemberModalProps {
 }
 
 const emailSchema = z.object({
-  email: z.string().email({ message: "ایمیل وارد شده معتبر نیست" }),
+  email: z.string().email({ message: "یک آدرس ایمیل معتبر وارد کنید" }),
 });
 
 type EmailForm = z.infer<typeof emailSchema>;
@@ -59,12 +59,12 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
         })
       );
 
-      toast.success("عضو با موفقیت اضافه شد");
+      toast.success("عضو جدید به تیم اضافه شد");
       onMemberAdded?.();
       reset();
       onClose();
     } catch (error) {
-      toast.error((error as Error)?.message || "خطا در اضافه کردن عضو");
+      toast.error((error as Error)?.message || "عضو جدید اضافه نشد. دوباره تلاش کنید.");
     } finally {
       setIsLoading(false);
     }
@@ -81,7 +81,7 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
   return (
     <Modal onClose={handleClose} label="افزودن عضو">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-bold text-whiteText">اضافه کردن عضو</h3>
+        <h3 className="text-xl font-bold text-whiteText">افزودن عضو</h3>
         <Button
           variant={ButtonVariant.TEXT}
           className="text-whiteText p-1"
@@ -104,7 +104,7 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
             id="memberEmail"
             name="email"
             type="email"
-            placeholder="ایمیل کاربر را وارد کنید"
+            placeholder="ایمیل هم‌تیمی‌تان را وارد کنید"
             errorText={errors.email?.message}
             {...register("email")}
           />
@@ -123,7 +123,7 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
         <Button
           variant={ButtonVariant.PRIMARY}
           size={ButtonSize.SMALL}
-          label={isLoading ? "در حال اضافه کردن..." : "اضافه کردن عضو"}
+          label={isLoading ? "در حال افزودن…" : "افزودن عضو"}
           prefixIcon={HiPlus}
           onClick={handleAddMember}
           className="flex-1"

@@ -2,6 +2,10 @@
 
 This documents the existing SSC identity and the consistency improvements made to it. The app stays Persian, right to left, dark, and uses its existing logo, portal illustration, event photography, and coral-to-orchid accent. Product content, member details, and event data remain authoritative in their existing sources.
 
+## Writing
+
+[VOICE.md](./VOICE.md) defines SSC's Persian tone and spelling. Use the approved hero as the voice reference across public pages, forms, dashboard messages, metadata, and accessible labels. Write directly in Persian, keep the student voice warm and clear, and use plain «ه» without a combining hamza or the precomposed alternative.
+
 ## Foundations
 
 `app/globals.css` owns SSC tokens. `packages/ui` owns shared control behavior and exposes semantic component classes and data attributes; SSC supplies their visual treatment. Do not introduce a second component library or copy these controls into the app.

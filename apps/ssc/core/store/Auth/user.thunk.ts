@@ -16,10 +16,10 @@ export const fetchUserData = createAsyncThunk<
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         if (error.status !== 401) {
-          toast.error(error.response?.data?.message || "خطایی رخ داده است");
+          toast.error(error.response?.data?.message || "این بار انجام نشد. دوباره تلاش کنید.");
         }
       } else {
-        toast.error("خطایی رخ داده است");
+        toast.error("این بار انجام نشد. دوباره تلاش کنید.");
       }
       return rejectWithValue(error);
     }

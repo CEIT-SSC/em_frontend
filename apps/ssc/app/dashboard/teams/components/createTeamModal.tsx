@@ -23,7 +23,7 @@ interface CreateTeamModalProps {
 }
 
 const emailSchema = z.object({
-  email: z.string().email({ message: "ایمیل وارد شده معتبر نیست" }),
+  email: z.string().email({ message: "یک آدرس ایمیل معتبر وارد کنید" }),
 });
 
 type EmailForm = z.infer<typeof emailSchema>;
@@ -79,7 +79,7 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
 
   const handleSubmit = async () => {
     if (invitedEmails.length === 0) {
-      toast.error("لطفا حداقل یک عضو برای تیم دعوت کنید");
+      toast.error("دست‌کم یک هم‌تیمی دعوت کنید");
       return;
     }
     if (teamName.trim()) {
@@ -91,21 +91,21 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
           })
         ).unwrap();
 
-        toast.success("گروه با موفقیت ساخته شده");
+        toast.success("تیم ساخته شد");
         onTeamCreated();
         handleClose();
       } catch (error) {
         if (error.status === 400) {
           console.log(error);
           if (teamNames?.includes(teamName))
-            toast.error("تیم با این نام قبلا ایجاد شده است");
+            toast.error("این نام قبلاً برای یک تیم انتخاب شده. نام دیگری بنویسید.");
           else
             toast.error(
-              "اعضا باید در سایت اکانت داشته باشند و نام تیم تکراری نباشد"
+              "هم‌تیمی‌ها باید در سایت حساب داشته باشند. نام تیم هم باید تکراری نباشد."
             );
           return;
         }
-        toast.error(error.response.data?.message || "خطا در ایجاد تیم");
+        toast.error(error.response.data?.message || "تیم ساخته نشد. دوباره تلاش کنید.");
       }
     }
   };
@@ -125,10 +125,10 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <Modal onClose={handleClose} label="ایجاد تیم جدید">
+    <Modal onClose={handleClose} label="ساخت تیم جدید">
       <>
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-xl font-bold text-whiteText">ایجاد تیم جدید</h3>
+          <h3 className="text-xl font-bold text-whiteText">ساخت تیم جدید</h3>
           <Button
             variant={ButtonVariant.TEXT}
             className="text-whiteText p-1"
@@ -168,7 +168,7 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setTeamName(e.target.value)
               }
-              placeholder="نام تیم خود را وارد کنید"
+              placeholder="یک نام برای تیمتان بنویسید"
               required
             />
           </div>
@@ -182,7 +182,7 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
               </p>
             </div>
             <div className="bg-yellow-100 text-yellow-800 rounded p-2 mb-2 text-sm">
-              توجه: پس از ایجاد تیم، امکان افزودن عضو جدید وجود ندارد.
+              بعد از ساخت تیم نمی‌توانید عضو تازه‌ای اضافه کنید. قبل از ادامه، فهرست اعضا را بررسی کنید.
             </div>
 
             <div className="space-y-2">
@@ -193,7 +193,7 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
                   id="inviteEmail"
                   name="email"
                   type="email"
-                  placeholder="ایمیل کاربر را وارد کنید"
+                  placeholder="ایمیل هم‌تیمی‌تان را وارد کنید"
                   errorText={errors.email?.message}
                   className="flex-1"
                   {...register("email")}
@@ -209,7 +209,7 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
               </div>
               {invitedEmails.length > 0 && (
                 <div className="space-y-1">
-                  <p className="text-whiteText text-sm">کاربران دعوت شده:</p>
+                  <p className="text-whiteText text-sm">هم‌تیمی‌های دعوت‌شده:</p>
                   {invitedEmails.map((email) => (
                     <div
                       key={email}
@@ -254,7 +254,7 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
               <Button
                 variant={ButtonVariant.PRIMARY}
                 size={ButtonSize.SMALL}
-                label="مرحله بعدی"
+                label="مرحله بعد"
                 suffixIcon={HiChevronLeft}
                 onClick={handleNext}
                 className="flex-1"
@@ -267,7 +267,7 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
               <Button
                 variant={ButtonVariant.OUTLINE}
                 size={ButtonSize.SMALL}
-                label="مرحله قبلی"
+                label="مرحله قبل"
                 prefixIcon={HiChevronLeft}
                 onClick={handleBack}
                 className="flex-1 text-white"
@@ -275,7 +275,7 @@ const CreateTeamModal: React.FC<CreateTeamModalProps> = ({
               <Button
                 variant={ButtonVariant.PRIMARY}
                 size={ButtonSize.SMALL}
-                label="ایجاد تیم"
+                label="ساخت تیم"
                 disable={invitedEmails.length === 0}
                 onClick={handleSubmit}
                 className="flex-1"

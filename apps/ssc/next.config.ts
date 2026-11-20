@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
   // },
   
   images: {
+    qualities: [75, 90],
     // The SSC API resolves to the Docker host in our deployment environment.
     dangerouslyAllowLocalIP: true,
     remotePatterns: [

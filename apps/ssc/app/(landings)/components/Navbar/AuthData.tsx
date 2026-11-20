@@ -23,7 +23,7 @@ const AuthData = () => {
     return (
       <div className="flex items-center gap-2">
         <Link href="/login" className="ssc-action text-muted hover:text-foreground">ورود</Link>
-        <Link href="/register" className="ssc-action ssc-action-primary">ثبت نام</Link>
+        <Link href="/register" className="ssc-action ssc-action-primary">ثبت‌نام</Link>
       </div>
     );
   } else {

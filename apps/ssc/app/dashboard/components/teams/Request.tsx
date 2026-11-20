@@ -22,10 +22,10 @@ const Request = ({ request, onRequestHandled }: Props) => {
   const handleAccept = async () => {
     try {
       await dispatch(acceptMembershipThunk(request.id));
-      toast.success("درخواست عضویت تایید شد");
+      toast.success("درخواست عضویت تأیید شد");
       onRequestHandled?.();
     } catch (_error) {
-      toast.error("خطا در تایید درخواست عضویت");
+      toast.error("درخواست تأیید نشد. دوباره تلاش کنید.");
     }
   };
 
@@ -35,7 +35,7 @@ const Request = ({ request, onRequestHandled }: Props) => {
       toast.success("درخواست عضویت رد شد");
       onRequestHandled?.();
     } catch (_error) {
-      toast.error("خطا در رد درخواست عضویت");
+      toast.error("درخواست رد نشد. دوباره تلاش کنید.");
     }
   };
 
@@ -45,7 +45,7 @@ const Request = ({ request, onRequestHandled }: Props) => {
         <h4 className="text-2xl/[150%] font-bold">{request.name}</h4>
         <div className="flex flex-col gap-1">
           <p className="text-whiteText font-bold">
-            درخواست دهنده: {request.leader_details.first_name}{" "}
+            فرستنده درخواست: {request.leader_details.first_name}{" "}
             {request.leader_details.last_name}
           </p>
           <p className="text-gray-400 text-sm">
