@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Image from "next/image";
 import { HiArrowLeft } from "react-icons/hi";
 import HeroImages, { type HeroImageVariant } from "./HeroImages";
 
@@ -20,19 +20,29 @@ export default function HeroSection({ imageVariant = "triptych" }: { imageVarian
               رویدادها را ببینید
               <HiArrowLeft aria-hidden="true" />
             </a>
-            <Link href="/about" className="ssc-hero-about">
+            <a href="#association" className="ssc-hero-about">
               با ما آشنا شوید
               <HiArrowLeft aria-hidden="true" />
-            </Link>
+            </a>
           </div>
-          <ul className="ssc-hero-events" aria-label="از رویدادهای انجمن">
-            <li><bdi lang="en">LinuxFest</bdi><span>دنیای متن‌باز</span></li>
-            <li><bdi lang="en">GameCraft</bdi><span>بازی‌سازی</span></li>
-            <li><bdi lang="en">AAISS</bdi><span>هوش مصنوعی</span></li>
-            <li><bdi lang="en">ACPC</bdi><span>برنامه‌نویسی</span></li>
-          </ul>
+          <div className="ssc-hero-community">
+            <div className="ssc-hero-community-symbol" aria-hidden="true">
+              <svg viewBox="0 0 360 160" preserveAspectRatio="none" focusable="false">
+                <path d="M180 80H216V35H240M180 80H144V35H120M216 80V125H240M144 80V125H120" />
+              </svg>
+              <Image src="/logo.png" alt="" width={56} height={68} sizes="56px" />
+            </div>
+            <ul className="ssc-hero-events" aria-label="از رویدادهای انجمن">
+              <li><bdi lang="en">LinuxFest</bdi><span>دنیای متن‌باز</span></li>
+              <li><bdi lang="en">GameCraft</bdi><span>بازی‌سازی</span></li>
+              <li><bdi lang="en">AAISS</bdi><span>هوش مصنوعی</span></li>
+              <li><bdi lang="en">ACPC</bdi><span>برنامه‌نویسی</span></li>
+            </ul>
+          </div>
         </div>
-        <HeroImages variant={imageVariant} />
+        <div className="ssc-hero-artwork">
+          <HeroImages variant={imageVariant} />
+        </div>
       </section>
   );
 }

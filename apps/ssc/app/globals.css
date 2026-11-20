@@ -107,14 +107,17 @@
   .ssc-footer a:hover { color: var(--accent); }
   .ssc-empty { padding: 3rem 1.5rem; border: 1px dashed var(--border-strong); border-radius: var(--radius-panel); text-align: center; }
   .ssc-event-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 1.5rem; }
+  .ssc-events-section { padding-top: 2.5rem; }
   .ssc-hero { display: grid; align-items: center; gap: 2rem; padding-block: 2rem; }
   .ssc-hero-copy { min-width: 0; }
-  .ssc-hero-heading { margin: 0; font-size: 2.25rem; font-weight: 800; line-height: 1.5; }
+  .ssc-hero-artwork { display: none; min-width: 0; }
+  .ssc-hero-heading { margin: 0; font-size: clamp(1.75rem, 9vw, 2.25rem); font-weight: 800; line-height: 1.5; }
   .ssc-hero-heading span { display: block; color: var(--accent); }
   .ssc-hero-description { max-width: 34rem; margin-top: 1.5rem; color: var(--muted); font-size: 1rem; line-height: 2; }
   .ssc-hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem 1.5rem; margin-top: 1.5rem; }
   .ssc-hero-about { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; font-size: 0.9375rem; text-decoration: none; }
   .ssc-hero-about:hover { color: var(--accent); }
+  .ssc-hero-community-symbol { display: none; }
   .ssc-hero-events { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); list-style: none; }
   .ssc-hero-events li { display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem; }
   .ssc-hero-events bdi { font-size: 0.875rem; font-weight: 600; }
@@ -127,6 +130,32 @@
   .ssc-hero-photo-contest { border-end-end-radius: var(--radius-panel); }
   .ssc-hero-caption { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.25rem 1rem; padding-top: 0.5rem; font-size: 0.75rem; }
   .ssc-hero-caption span + span { color: var(--muted); }
+}
+
+@media (max-width: 767px) {
+  .ssc-hero-community { position: relative; max-width: 34rem; margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+  .ssc-hero-community-symbol { display: block; position: absolute; inset: 1.25rem 0 0; pointer-events: none; }
+  .ssc-hero-community-symbol svg { width: 100%; height: 100%; fill: none; stroke: var(--border-strong); stroke-width: 1; }
+  .ssc-hero-community-symbol path { vector-effect: non-scaling-stroke; }
+  .ssc-hero-community-symbol img { position: absolute; top: 50%; left: 50%; width: 4.5rem; height: auto; padding: 0.5rem; background: var(--background); transform: translate(-50%, -50%); }
+  .ssc-hero-events { position: relative; grid-template-columns: minmax(0, 1fr) 3.5rem minmax(0, 1fr); grid-template-rows: 1fr 1fr; gap: 1.25rem 0.75rem; min-height: 10rem; margin: 0; padding: 0; border: 0; }
+  .ssc-hero-events li { align-items: center; justify-content: center; text-align: center; }
+  .ssc-hero-events li:nth-child(odd) { grid-column: 1; }
+  .ssc-hero-events li:nth-child(even) { grid-column: 3; }
+  .ssc-hero-events li:nth-child(-n + 2) { grid-row: 1; }
+  .ssc-hero-events li:nth-child(n + 3) { grid-row: 2; }
+  .ssc-hero-events bdi { font-size: 1rem; }
+}
+
+@media (max-width: 359px) {
+  .ssc-hero-actions { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+  .ssc-hero-about { justify-content: center; }
+}
+
+@media (min-width: 768px) {
+  .ssc-events-section { padding-top: 3rem; }
+  .ssc-hero { grid-template-columns: 1fr 1fr; padding-block: 3rem; }
+  .ssc-hero-artwork { display: block; }
 }
 
 @media (min-width: 900px) {

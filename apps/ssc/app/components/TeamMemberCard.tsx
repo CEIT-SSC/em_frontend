@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import "./team-member.css";
 
 interface TeamMemberCardProps {
   name: string;
@@ -12,14 +13,14 @@ interface TeamMemberCardProps {
 
 export default function TeamMemberCard({ name, position, photoUrl, githubUrl, linkedinUrl }: TeamMemberCardProps) {
   return (
-    <article className="flex min-w-0 flex-col rounded-2xl border border-border bg-surface p-5">
-      <Image width={96} height={96} src={photoUrl} alt={name} className="mb-5 h-24 w-24 rounded-full object-cover" />
-      <h3 className="text-lg font-semibold">{name}</h3>
-      <p className="mt-1 text-sm text-muted">{position}</p>
-      <div className="mt-auto flex gap-2 pt-5">
-        {githubUrl && <Link href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`گیت‌هاب ${name}`} className="ssc-action ssc-action-secondary px-3"><FaGithub size={19} aria-hidden="true" /></Link>}
-        {linkedinUrl && <Link href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={`لینکدین ${name}`} className="ssc-action ssc-action-secondary px-3"><FaLinkedin size={19} aria-hidden="true" /></Link>}
-      </div>
+    <article className="ssc-member">
+      <Image width={128} height={128} src={photoUrl} alt={name} className="ssc-member-portrait" />
+      <h3>{name}</h3>
+      <p className="ssc-member-role">{position}</p>
+      {(githubUrl || linkedinUrl) && <div className="ssc-member-socials">
+        {githubUrl && <Link href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`گیت‌هاب ${name}`} className="ssc-member-social"><FaGithub size={20} aria-hidden="true" /></Link>}
+        {linkedinUrl && <Link href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={`لینکدین ${name}`} className="ssc-member-social"><FaLinkedin size={20} aria-hidden="true" /></Link>}
+      </div>}
     </article>
   );
 }

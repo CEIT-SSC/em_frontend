@@ -18,7 +18,8 @@ function Photo({ photo, priority = false, sizes = "(min-width: 900px) 28vw, 65vw
   priority?: boolean;
   sizes?: string;
 }) {
-  return <Image {...photos[photo]} fill priority={priority} sizes={sizes} className="object-cover" />;
+  // Hidden mobile artwork stays lazy; visible featured photos get higher fetch priority.
+  return <Image {...photos[photo]} fill loading="lazy" fetchPriority={priority ? "high" : "auto"} sizes={sizes} className="object-cover" />;
 }
 
 export default function HeroImages({ variant = "original" }: { variant?: HeroImageVariant }) {
@@ -63,15 +64,15 @@ export default function HeroImages({ variant = "original" }: { variant?: HeroIma
       <figure className="ssc-hero-visual ssc-hero-triptych">
         <TriptychMotion>
           <div className="ssc-hero-triptych-column">
-            <div className="ssc-hero-triptych-photo"><Photo photo="maker" priority sizes="(min-width: 1280px) 190px, (min-width: 900px) 15vw, 30vw" /></div>
+            <div className="ssc-hero-triptych-photo"><Photo photo="maker" priority sizes="(min-width: 1280px) 190px, (min-width: 768px) 15vw, 30vw" /></div>
             <span>می‌سازیم</span><bdi lang="en">GameCraft</bdi>
           </div>
           <div className="ssc-hero-triptych-column">
-            <div className="ssc-hero-triptych-photo"><Photo photo="contest" sizes="(min-width: 1280px) 190px, (min-width: 900px) 15vw, 30vw" /></div>
+            <div className="ssc-hero-triptych-photo"><Photo photo="contest" sizes="(min-width: 1280px) 190px, (min-width: 768px) 15vw, 30vw" /></div>
             <span>حل می‌کنیم</span><bdi lang="en">ACPC</bdi>
           </div>
           <div className="ssc-hero-triptych-column">
-            <div className="ssc-hero-triptych-photo"><Photo photo="community" sizes="(min-width: 1280px) 190px, (min-width: 900px) 15vw, 30vw" /></div>
+            <div className="ssc-hero-triptych-photo"><Photo photo="community" sizes="(min-width: 1280px) 190px, (min-width: 768px) 15vw, 30vw" /></div>
             <span>کنار همیم</span><bdi lang="en">LinuxFest</bdi>
           </div>
         </TriptychMotion>

@@ -1,0 +1,46 @@
+.ssc-association { border-bottom: 1px solid var(--border); }
+.ssc-association-intro { display: grid; gap: 1.75rem; margin-bottom: 3rem; }
+.ssc-association h2, .ssc-partners h2 { font-size: clamp(1.875rem, 4vw, 2.75rem); font-weight: 750; line-height: 1.6; }
+.ssc-association h2 span, .ssc-partners h2 span { color: var(--accent); }
+.ssc-association-intro p { max-width: 65ch; color: var(--muted); line-height: 2.1; }
+.ssc-association-intro p + p { margin-top: 1rem; }
+.ssc-association-work { display: grid; gap: 2rem; align-items: center; }
+.ssc-association-photo { position: relative; min-height: 21rem; overflow: hidden; border-radius: var(--radius-panel); background: var(--surface); }
+.ssc-association-photo img { object-fit: cover; }
+.ssc-association-photo figcaption { position: absolute; inset-inline: 1rem; bottom: 1rem; width: fit-content; padding: .5rem .75rem; background: var(--background); color: var(--foreground); font-size: .8125rem; border-radius: .625rem; }
+.ssc-association-process h3 { font-size: 1.5rem; font-weight: 650; margin-bottom: 1.5rem; }
+.ssc-association-process ol { list-style: none; }
+.ssc-association-process li { position: relative; display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; padding-bottom: 1.5rem; }
+.ssc-association-process li:last-child { padding-bottom: 0; }
+.ssc-association-process li:not(:last-child)::after { content: ""; position: absolute; inset-inline-start: 1rem; top: 2rem; bottom: 0; border-inline-start: 1px solid var(--border); }
+.ssc-association-process li > span { display: grid; place-items: center; width: 2rem; height: 2rem; border: 1px solid var(--border-strong); border-radius: 50%; color: var(--accent); font-variant-numeric: tabular-nums; }
+.ssc-association-process h4 { font-size: 1.0625rem; font-weight: 650; margin-bottom: .375rem; }
+.ssc-association-process p { color: var(--muted); max-width: 45ch; font-size: .9375rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .ssc-association-work[data-scroll-motion] .ssc-association-process li:not(:last-child)::before { content: ""; position: absolute; z-index: 1; inset-inline-start: 1rem; top: 2rem; bottom: 0; border-inline-start: 1px solid var(--accent); transform: scaleY(var(--connection-progress, 0)); transform-origin: top; }
+  .ssc-association-work[data-scroll-motion] .ssc-association-process li > span { transition: background-color 240ms ease-out, color 240ms ease-out, border-color 240ms ease-out; }
+  .ssc-association-work[data-scroll-motion] .ssc-association-process li[data-reached="true"] > span { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+}
+.ssc-partners { display: grid; gap: 3rem; border-top: 1px solid var(--border); }
+.ssc-partner-invitation > p { max-width: 54ch; color: var(--muted); margin-block: 1.25rem 1.5rem; line-height: 2; }
+.ssc-partner-invitation .ssc-sponsor-contact-pending { font-size: .875rem; color: var(--accent); }
+.ssc-current-partners { align-self: center; padding-top: 2rem; border-top: 1px solid var(--border); }
+.ssc-current-partners h3 { font-size: 1.25rem; font-weight: 650; margin-bottom: 1.5rem; }
+.ssc-partner-logo { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; padding: 2rem; background: var(--surface); border-radius: var(--radius-panel); }
+.ssc-partner-logo img { width: 9rem; height: 4.5rem; object-fit: contain; }
+.ssc-partner-logo span { display: inline-flex; align-items: center; gap: .75rem; }
+.ssc-partner-logo:hover { background: var(--surface-raised); }
+.ssc-current-partners > p { color: var(--muted); font-size: .875rem; margin-top: 1rem; }
+@media (min-width: 768px) {
+  .ssc-association-intro { grid-template-columns: 1fr 1.2fr; gap: 3rem; margin-bottom: 3.5rem; }
+  .ssc-community-section-head { grid-template-columns: 1fr 1.2fr; gap: 3rem; }
+}
+@media (min-width: 900px) {
+  .ssc-association-work { grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; }
+  .ssc-association-photo { min-height: 26rem; position: sticky; top: 7rem; }
+  .ssc-association-process { padding-top: 1rem; }
+  .ssc-association-process li:not(:last-child) { padding-bottom: 3.5rem; }
+  .ssc-association-process p { line-height: 2; }
+  .ssc-partners { grid-template-columns: 1.2fr 1fr; gap: 5rem; }
+  .ssc-current-partners { border-top: 0; border-inline-start: 1px solid var(--border); padding-block: 1rem; padding-inline-start: 3rem; }
+}

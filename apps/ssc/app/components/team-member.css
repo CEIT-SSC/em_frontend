@@ -1,0 +1,18 @@
+.ssc-member { display: flex; flex-direction: column; align-items: center; min-width: 0; padding: 1rem .5rem; text-align: center; }
+.ssc-member-portrait { width: 8rem; height: 8rem; border-radius: 50%; object-fit: cover; margin-bottom: 1.25rem; background: var(--surface); }
+.ssc-member h3 { font-size: 1.125rem; font-weight: 650; line-height: 1.6; }
+.ssc-member-role { color: var(--muted); font-size: .875rem; line-height: 1.8; margin-top: .375rem; max-width: 28ch; }
+.ssc-member-socials { display: flex; justify-content: center; gap: .375rem; margin-top: auto; padding-top: .75rem; }
+.ssc-member-social { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; color: var(--muted); }
+.ssc-member-social:hover { color: var(--accent); background: var(--surface); }
+.ssc-team-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem 1.5rem; }
+.ssc-team-grid > .ssc-member { width: 100%; max-width: 22rem; }
+@media (min-width: 480px) {
+  .ssc-team-grid > .ssc-member { width: calc(50% - .75rem); }
+}
+@media (min-width: 900px) {
+  .ssc-team-grid > .ssc-member { width: calc(33.333333% - 1rem); }
+}
+@media (min-width: 1200px) {
+  .ssc-team-grid > .ssc-member { width: calc(25% - 1.125rem); }
+}

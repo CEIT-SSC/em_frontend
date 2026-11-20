@@ -37,7 +37,7 @@ Use the local Vazirmatn font through `--font-vazirmatn`. Body text is 16px with 
 - Navigation uses a solid accent and quiet selected surface or underline. Mobile navigation uses native dialogs for focus containment, Escape, and focus restoration. Closed menus are absent from keyboard navigation.
 - Task dialogs use `components/Modal.tsx` with a meaningful label and close handler. Native dialogs keep nested overlays above their parent and contain keyboard focus.
 - Event cards use a responsive grid, square uncropped-layout poster frames, quiet ended badges, and a readable complete Persian date. Unavailable registrations render as text instead of a visually disabled link. Event loading failures and an empty event list have distinct recovery guidance.
-- Member cards keep identical portrait, type, spacing, and social-link treatment on the homepage and About page.
+- Member profiles use a borderless, centered composition with 128px circular portraits, names, muted roles, and unboxed social links with 44px touch targets. The homepage centers incomplete rows. Keep portrait, type, spacing, and social-link treatment consistent on the homepage and About page.
 - Photo strips have an explicit pause control and pause on hover/focus. Reduced-motion users see static strips. No page entrance choreography.
 
 ## Checks
