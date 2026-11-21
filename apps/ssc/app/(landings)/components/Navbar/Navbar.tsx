@@ -1,15 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import ActiveLink from "./ActiveLink";
+import NavbarLinks from "./NavbarLinks";
 import AuthData from "./AuthData";
 import HamburgerMenu from "./HamburgerMenu";
-
-export const navbarItems = [
-  { label: "خانه", href: "/" },
-  { label: "رویدادها", href: "/#events" },
-  { label: "تیم فنی", href: "/about" },
-  { label: "داشبورد", href: "/dashboard" },
-];
 
 export default function Navbar() {
   return (
@@ -20,7 +13,7 @@ export default function Navbar() {
             <Image src="/logo.png" alt="" width={40} height={48} className="h-12 w-10" />
             <span className="text-sm leading-6">انجمن علمی مهندسی کامپیوتر<span className="block text-xs text-muted">دانشگاه صنعتی امیرکبیر</span></span>
           </Link>
-          <div className="hidden items-center gap-6 lg:flex">{navbarItems.map(item => <ActiveLink href={item.href} key={item.href}>{item.label}</ActiveLink>)}</div>
+          <div className="hidden items-center gap-6 lg:flex"><NavbarLinks /></div>
         </div>
         <div className="hidden lg:block"><AuthData /></div>
         <HamburgerMenu />

@@ -1,6 +1,6 @@
 # SSC design system
 
-This documents the existing SSC identity and the consistency improvements made to it. The app stays Persian, right to left, dark, and uses its existing logo, portal illustration, event photography, and coral-to-orchid accent. Product content, member details, and event data remain authoritative in their existing sources.
+This documents the existing SSC identity and the consistency improvements made to it. The app stays Persian, right to left, dark, and uses its existing logo, event photography, and coral-to-orchid accent. Product content, member details, and event data remain authoritative in their existing sources.
 
 ## Writing
 
@@ -42,6 +42,7 @@ Use the local Vazirmatn font through `--font-vazirmatn`. Body text is 16px with 
 - Task dialogs use `components/Modal.tsx` with a meaningful label and close handler. Native dialogs keep nested overlays above their parent and contain keyboard focus.
 - Event cards use a responsive grid, square uncropped-layout poster frames, quiet ended badges, and a readable complete Persian date. Unavailable registrations render as text instead of a visually disabled link. Event loading failures and an empty event list have distinct recovery guidance.
 - Member profiles use a borderless, centered composition with 128px circular portraits, names, muted roles, and unboxed social links with 44px touch targets. The homepage centers incomplete rows. Keep portrait, type, spacing, and social-link treatment consistent on the homepage and About page.
+- Authentication places the official SSC logo outside the form card. At desktop widths (1024px and above), static geometric SVG connections lead to LinuxFest, AAISS, ACPC, and GameCraft icon-label endpoints, with the institution name and welcome caption below. Below 1024px, use a compact logo and institution-name header above the form; hide the connection diagram and welcome caption. Keep the existing dark, right-to-left form treatment and semantic tokens.
 - Photo strips have an explicit pause control and pause on hover/focus. Reduced-motion users see static strips. No page entrance choreography.
 
 ## Checks
