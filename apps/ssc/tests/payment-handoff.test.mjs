@@ -3,6 +3,7 @@ import test from "node:test";
 import { GET as start } from "../app/payment/start/route.ts";
 import { GET as callback } from "../app/payment/zarinpal/callback/route.ts";
 import { GET as linuxfestCallback } from "../app/payment/linuxfest/zarinpal/callback/route.ts";
+import { GET as acpcCallback } from "../app/payment/acpc/zarinpal/callback/route.ts";
 
 test("handoff loads a document, automatically navigates, and sends the merchant origin to Zarinpal", async () => {
   for (const host of ["payment.zarinpal.com", "sandbox.zarinpal.com"]) {
@@ -67,5 +68,25 @@ test("LinuxFest callback forwards only provider fields to LinuxFest verification
   } finally {
     if (previous === undefined) delete process.env.LINUXFEST_PAYMENT_BACKEND_ORIGIN;
     else process.env.LINUXFEST_PAYMENT_BACKEND_ORIGIN = previous;
+  }
+});
+
+test("ACPC callback forwards only provider fields to ACPC verification", async () => {
+  const previous = process.env.ACPC_PAYMENT_BACKEND_ORIGIN;
+  process.env.ACPC_PAYMENT_BACKEND_ORIGIN = "https://acpc-api.example";
+  try {
+    const response = await acpcCallback(new Request(
+      "https://ceit-ssc.ir/payment/acpc/zarinpal/callback?Authority=ACPC123&Status=OK&return_url=https://evil.example",
+    ));
+    assert.equal(response.status, 303);
+    assert.equal(
+      response.headers.get("Location"),
+      "https://acpc-api.example/api/payment/callback/?Authority=ACPC123&Status=OK",
+    );
+    assert.equal(response.headers.get("Cache-Control"), "no-store");
+    assert.equal(response.headers.get("Referrer-Policy"), "no-referrer");
+  } finally {
+    if (previous === undefined) delete process.env.ACPC_PAYMENT_BACKEND_ORIGIN;
+    else process.env.ACPC_PAYMENT_BACKEND_ORIGIN = previous;
   }
 });
